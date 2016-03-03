@@ -1128,9 +1128,9 @@ xmlDocument.setData("reportC_Campaign_ID","liststructure", comboTableData.select
 comboTableData = null;
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
-xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("buttonWithholdingamount", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
+xmlDocument.setParameter("buttonWithholdingamount", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("LastCalculatedOnDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       ex.printStackTrace();

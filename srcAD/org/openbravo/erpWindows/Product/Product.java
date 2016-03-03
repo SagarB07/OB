@@ -977,6 +977,8 @@ String strParamC_TaxCategory_ID = vars.getSessionValue(tabId + "|paramC_TaxCateg
    
     try {
       ComboTableData comboTableData = null;
+xmlDocument.setParameter("ManageVariants_BTNname", Utility.getButtonName(this, vars, "2999A4E0F8294157A874789D70AA1F46", "ManageVariants_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalManageVariants = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
+xmlDocument.setParameter("ManageVariants_Modal", modalManageVariants?"true":"false");
 String userOrgList = "";
 if (editableTab) 
   userOrgList=Utility.getContext(this, vars, "#User_Org", windowId, accesslevel); //editable record 
@@ -986,8 +988,6 @@ comboTableData = new ComboTableData(vars, this, "19", "AD_Org_ID", "", "", userO
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("adOrgId"):dataField.getField("adOrgId")));
 xmlDocument.setData("reportAD_Org_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
-xmlDocument.setParameter("ManageVariants_BTNname", Utility.getButtonName(this, vars, "2999A4E0F8294157A874789D70AA1F46", "ManageVariants_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalManageVariants = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
-xmlDocument.setParameter("ManageVariants_Modal", modalManageVariants?"true":"false");
 String strCurrentImageURLAD_Image_ID = (dataField==null?data[0].getField("adImageId"):dataField.getField("adImageId"));
 if (strCurrentImageURLAD_Image_ID==null || strCurrentImageURLAD_Image_ID.equals("")){
   xmlDocument.setParameter("AD_Image_IDClass", "Image_NotAvailable_medium");

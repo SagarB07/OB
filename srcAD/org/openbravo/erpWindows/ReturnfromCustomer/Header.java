@@ -1079,10 +1079,10 @@ String strParamGrandTotal_f = vars.getSessionValue(tabId + "|paramGrandTotal_f")
       ComboTableData comboTableData = null;
 xmlDocument.setParameter("DocAction_BTNname", Utility.getButtonName(this, vars, "FF80818130217A35013021A672400035", (dataField==null?data[0].getField("docaction"):dataField.getField("docaction")), "DocAction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocAction = org.openbravo.erpCommon.utility.Utility.isModalProcess("104"); 
 xmlDocument.setParameter("DocAction_Modal", modalDocAction?"true":"false");
-xmlDocument.setParameter("RM_PickFromShipment_BTNname", Utility.getButtonName(this, vars, "AF4090093D431431E040007F010048A5", "RM_PickFromShipment_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_PickFromShipment = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
-xmlDocument.setParameter("RM_PickFromShipment_Modal", modalRM_PickFromShipment?"true":"false");
 xmlDocument.setParameter("RM_AddOrphanLine_BTNname", Utility.getButtonName(this, vars, "3059B4926EEA40D98D222B41C27336B0", "RM_AddOrphanLine_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_AddOrphanLine = org.openbravo.erpCommon.utility.Utility.isModalProcess("23D1B163EC0B41F790CE39BF01DA320E"); 
 xmlDocument.setParameter("RM_AddOrphanLine_Modal", modalRM_AddOrphanLine?"true":"false");
+xmlDocument.setParameter("RM_PickFromShipment_BTNname", Utility.getButtonName(this, vars, "AF4090093D431431E040007F010048A5", "RM_PickFromShipment_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_PickFromShipment = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
+xmlDocument.setParameter("RM_PickFromShipment_Modal", modalRM_PickFromShipment?"true":"false");
 xmlDocument.setParameter("RM_CreateInvoice_BTNname", Utility.getButtonName(this, vars, "AF4090093D461431E040007F010048A5", "RM_CreateInvoice_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_CreateInvoice = org.openbravo.erpCommon.utility.Utility.isModalProcess("FF80808133362F6A013336781FCE0066"); 
 xmlDocument.setParameter("RM_CreateInvoice_Modal", modalRM_CreateInvoice?"true":"false");
 String userOrgList = "";
@@ -1094,11 +1094,11 @@ comboTableData = new ComboTableData(vars, this, "19", "AD_Org_ID", "", "49DC1D6F
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("adOrgId"):dataField.getField("adOrgId")));
 xmlDocument.setData("reportAD_Org_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
-xmlDocument.setParameter("buttonGrandTotal", Utility.messageBD(this, "Calc", vars.getLanguage()));
 comboTableData = new ComboTableData(vars, this, "18", "C_DocTypeTarget_ID", "22F546D49D3A48E1B2B4F50446A8DE58", "133", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("cDoctypetargetId"):dataField.getField("cDoctypetargetId")));
 xmlDocument.setData("reportC_DocTypeTarget_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
+xmlDocument.setParameter("buttonGrandTotal", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonTotalLines", Utility.messageBD(this, "Calc", vars.getLanguage()));
 comboTableData = new ComboTableData(vars, this, "19", "C_Return_Reason_ID", "", "88C0B1F928434B4EAAA9D07B2D2F63E1", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("cReturnReasonId"):dataField.getField("cReturnReasonId")));
@@ -1135,11 +1135,11 @@ xmlDocument.setData("reportC_Campaign_ID","liststructure", comboTableData.select
 comboTableData = null;
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
-xmlDocument.setParameter("DatePromised_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonChargeAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonFreightAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("DateAcct_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("DatePromised_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ServletException(ex);

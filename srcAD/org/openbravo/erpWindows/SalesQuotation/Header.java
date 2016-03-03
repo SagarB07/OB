@@ -1004,8 +1004,8 @@ comboTableData = new ComboTableData(vars, this, "19", "M_PriceList_ID", "", "DB8
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("mPricelistId"):dataField.getField("mPricelistId")));
 xmlDocument.setData("reportM_PriceList_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
-xmlDocument.setParameter("validuntil_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("DatePromised_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("validuntil_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 comboTableData = new ComboTableData(vars, this, "19", "FIN_Paymentmethod_ID", "", "FF80808130B107670130B1115F22000D", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("finPaymentmethodId"):dataField.getField("finPaymentmethodId")));
 xmlDocument.setData("reportFIN_Paymentmethod_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));

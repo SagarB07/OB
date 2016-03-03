@@ -750,7 +750,7 @@ static Logger log4j = Logger.getLogger(ImportBPartnerData.class);
       "            'Y',now(),CreatedBy,now(),UpdatedBy,Value,Name,Name2," +
       "            Description,DUNS,TaxID,NAICS,C_BP_Group_ID,'N'" +
       "			  	  FROM I_BPartner" +
-      "				     WHERE I_BPartner_ID=?";
+      "				    WHERE I_BPartner_ID=?";
 
     int updateCount = 0;
     PreparedStatement st = null;

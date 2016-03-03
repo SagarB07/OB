@@ -997,11 +997,11 @@ Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), combo
 xmlDocument.setData("reportC_Currency_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
 xmlDocument.setParameter("buttonCurrencyRate", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttonControlAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonTotalDr", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttonTotalCr", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("buttonControlAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("DocAction_BTNname", Utility.getButtonName(this, vars, "135", (dataField==null?data[0].getField("docaction"):dataField.getField("docaction")), "DocAction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocAction = org.openbravo.erpCommon.utility.Utility.isModalProcess("5BE14AA10165490A9ADEFB7532F7FA94"); 
 xmlDocument.setParameter("DocAction_Modal", modalDocAction?"true":"false");
+xmlDocument.setParameter("buttonTotalCr", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Posted_BTNname", Utility.getButtonName(this, vars, "234", (dataField==null?data[0].getField("posted"):dataField.getField("posted")), "Posted_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalPosted = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
 xmlDocument.setParameter("Posted_Modal", modalPosted?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
