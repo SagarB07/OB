@@ -14,13 +14,13 @@ package com.openbravo.db;
 
 import org.apache.ddlutils.platform.ExcludeFilter;
 
-@Deprecated
+
 /**
  * @Deprecated This class has been replaced by the new excludeFilter functionality. If you need to extend the list, you can check this document: http://wiki.openbravo.com/wiki/ERP/2.50/Developers_Guide/How_To_Exclude_Database_Physical_Objects_From_Model
  */
 public class OpenbravoExcludeFilter extends ExcludeFilter {
 
-  @Override
+  
   public String[] getExcludedTables() {
     return new String[] { "PLAN_TABLE", "AD_SYSTEM_MODEL", "C_TEMP_SELECTION", "C_TEMP_SELECTION2", "AD_CONTEXT_INFO" };
   }
