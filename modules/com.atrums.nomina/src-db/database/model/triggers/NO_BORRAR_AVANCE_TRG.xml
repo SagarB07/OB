@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_BORRAR_AVANCE_TRG">
+    <trigger name="NO_BORRAR_AVANCE_TRG" table="NO_REGISTRA_QUINC_LINE" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+BEGIN
+    
+
+    IF DELETING THEN
+       
+        select docstatus into v_docstatus from no_registra_quinc_line
+        where no_registra_quinc_line_id = :old.no_registra_quinc_line_id;
+
+        IF(v_docstatus='CO' OR v_docstatus='AN')then
+            v_mensaje='@NO_PERMITE_BORRA_DATOS@';
+            RAISE exception '%',v_mensaje;
+
+        END IF;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_BORRAR_AVANCE_TRG
+]]></body>
+    </trigger>
+  </database>

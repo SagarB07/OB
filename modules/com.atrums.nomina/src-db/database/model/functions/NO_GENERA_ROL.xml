@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_GENERA_ROL">
+    <function name="NO_GENERA_ROL" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+    v_Message VARCHAR(2000):='';
+    v_Result NUMBER:=1;
+    v_Record_ID VARCHAR(32);
+
+    Cur_Parameter RECORD;
+    Cur_Empleado RECORD;
+    Cur_Rubro_Rol RECORD;
+    Cur_Calcula_Robro_L RECORD;
+
+    v_co_genera_rol_id VARCHAR(32);
+    v_Client_ID VARCHAR(32);
+    v_Org_ID VARCHAR(32);
+    v_Org_Emp_ID VARCHAR(32);
+    v_User_ID VARCHAR(32);
+
+    v_rol_pago_provision_id VARCHAR(32);
+    v_rol_pago_prov_line_id VARCHAR(32);
+    v_line NUMBER;
+
+    v_doctype_id VARCHAR(32);
+    v_documentno VARCHAR;
+    v_period_id VARCHAR;
+
+    v_qry varchar;
+    v_valor_rubro NUMBER:=0;
+    v_valor_aux NUMBER:=0;
+    v_salario NUMBER:=0;
+    
+    v_anio_inicio NUMBER:=0;
+    v_mes_inicio NUMBER:=0;
+    v_dia_inicio NUMBER:=0;
+    
+    v_anio_fin NUMBER:=0;
+    v_mes_fin NUMBER:=0;
+    v_dia_fin NUMBER:=0;
+    
+    v_anio_actual NUMBER:=0;
+    v_mes_actual NUMBER:=0;
+    
+    v_dias_mes NUMBER:=0;
+    v_dias_div NUMBER:=0;
+    v_dias_trabajo NUMBER:=0;
+    v_dias_trabajo_fin NUMBER:=0;
+    v_date_acct DATE;
+    
+    v_suma_valor NUMBER:= 0;
+
+BEGIN
+
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN
+
+
+        FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  i.AD_Client_ID,
+                  i.ad_org_id,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_PInstance_ID
+            ORDER BY p.SeqNo)
+        LOOP
+            v_co_genera_rol_id:=Cur_Parameter.Record_ID;
+            v_User_ID:=Cur_Parameter.AD_User_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+	    v_period_ID:=Cur_Parameter.P_String; 
+        END LOOP;
+
+
+        FOR Cur_Empleado IN
+        (select bp.c_bpartner_id, 
+                ce.fecha_inicio, 
+                ce.fecha_fin,
+                ce.ad_org_id
+           from c_bpartner bp,
+                no_contrato_empleado ce
+          where bp.c_bpartner_id = ce.c_bpartner_id
+            and bp.isemployee = 'Y'
+            and bp.isactive = 'Y'
+            and bp.AD_Client_ID=v_Client_ID
+            and bp.em_no_fechasalida is null
+            and ce.isactive='Y'
+            and (date_trunc('month', ce.fecha_fin::DATE) >= date_trunc('month',now()::DATE)
+                or
+                date_trunc('month', ce.fecha_fin::DATE) >= date_trunc('month',TO_DATE((now()::DATE - interval '1 month'))::DATE)
+                )
+            )
+        LOOP
+            v_Org_Emp_ID:=Cur_Empleado.ad_org_id;
+
+            select get_uuid() into v_rol_pago_provision_id;
+
+            select dt.c_doctype_id into v_doctype_id
+              from c_doctype dt
+             where dt.docbasetype = 'NO_NRP';
+
+
+	    v_date_acct := (select enddate from c_period where c_period_id = v_period_id);
+
+            IF NOT EXISTS (select * from no_rol_pago_provision where ispago='Y' and docstatus<>'AN' and c_period_id=v_period_id and c_bpartner_id=Cur_Empleado.c_bpartner_id) THEN
+
+                ad_sequence_doctype(v_doctype_id, '', 'Y', v_documentno);
+
+                INSERT INTO no_rol_pago_provision
+                            (no_rol_pago_provision_id,   ad_client_id,       ad_org_id,          isactive,
+                             created,                    createdby,          updated,            updatedby,
+                             c_bpartner_id,              c_period_id,        c_doctype_id,       documentno,
+                             total_ingreso,              total_egreso,       total_neto,         docstatus,
+                             ispago,                     processed,          docaccionno,        dateacct, 
+                             processing,                 posted)
+                      VALUES(v_rol_pago_provision_id,    v_Client_ID,        v_Org_Emp_ID,           'Y',
+                             current_timestamp,          v_User_ID,          current_timestamp,  v_User_ID,
+                             Cur_Empleado.c_bpartner_id, v_period_id,        v_doctype_id,       v_documentno,
+                             0,                          0,                  0,                  'BR',
+                             'Y',                        'N',                'CO',       		 v_date_acct,
+                             'N',                        'N');
+
+                FOR Cur_Rubro_Rol IN
+                   (select cr.no_calcula_rubro_id,
+                           eie.no_tipo_ingreso_egreso_id,
+                           tie.isavance,
+                           tie.suma_ingreso
+                      from no_empleado_ing_egr eie,
+                           no_tipo_ingreso_egreso tie,
+                           no_calcula_rubro cr
+                     where eie.c_bpartner_id = Cur_Empleado.c_bpartner_id
+                       and tie.no_tipo_ingreso_egreso_id = eie.no_tipo_ingreso_egreso_id
+                       and cr.no_calcula_rubro_id = tie.no_calcula_rubro_id
+                       and tie.isactive ='Y'
+                       and eie.isactive = 'Y'
+                       and cr.isactive = 'Y'
+                       and tie.isprovision = 'N'
+                       order by suma_ingreso desc, tie.isingreso asc)
+                LOOP
+
+                select get_uuid() into v_rol_pago_prov_line_id;
+
+                select coalesce(max(line),0)+10 into v_line
+                  from no_rol_pago_provision_line
+                 where no_rol_pago_provision_id = v_rol_pago_provision_id;
+
+                v_valor_rubro:=0;
+
+                IF Cur_Rubro_Rol.isavance = 'Y' THEN
+                    select coalesce(sum(rql.valor),0) into v_valor_rubro
+                      from no_registra_quincena rq, 
+                           no_registra_quinc_line rql
+                     where rq.no_registra_quincena_id = rql.no_registra_quincena_id
+                       and rql.docstatus='CO'
+                       and rq.c_period_id = v_period_id
+                       and rql.c_bpartner_id = Cur_Empleado.c_bpartner_id
+                       and rql.no_tipo_ingreso_egreso_id = Cur_Rubro_Rol.no_tipo_ingreso_egreso_id
+                       and rql.processed = 'Y';
+                       
+                
+                    update no_registra_quinc_line
+                       set include_rol_pago = 'Y'
+                     where c_bpartner_id = Cur_Empleado.c_bpartner_id
+                       and processed = 'Y'
+                       and no_tipo_ingreso_egreso_id = Cur_Rubro_Rol.no_tipo_ingreso_egreso_id;
+                ELSE
+
+                    FOR Cur_Calcula_Robro_L IN
+                    (select cr.nombre,
+                            crl.isprocedure,
+                            crl.issalario,
+                            crl.isporcentaje,
+                            crl.valor,
+                            crl.procedure
+                       from no_calcula_rubro cr,
+                            no_calcula_rubro_line crl
+                      where cr.no_calcula_rubro_id = crl.no_calcula_rubro_id
+                        and cr.no_calcula_rubro_id = Cur_Rubro_Rol.no_calcula_rubro_id
+                      order by crl.line)
+                    LOOP
+
+                        IF Cur_Calcula_Robro_L.isprocedure = 'Y' THEN
+                            IF Cur_Calcula_Robro_L.procedure is null OR Cur_Calcula_Robro_L.procedure = '' THEN
+                                v_Message:='@NO_NoExistProcedure@' || Cur_Calcula_Robro_L.nombre;
+                                RAISE v_Message;
+                            END IF;
+                            v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| Cur_Empleado.c_bpartner_id ||''' ,'''||Cur_Rubro_Rol.no_tipo_ingreso_egreso_id || ''',' || v_suma_valor||','''||v_period_id || ''');';
+                            EXECUTE IMMEDIATE v_qry into v_valor_aux;
+                            v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
+                        
+                        ELSE
+                            IF Cur_Calcula_Robro_L.issalario = 'Y' THEN
+                                select salario into v_salario
+                                  from no_contrato_empleado
+                                 where c_bpartner_id is not null
+                                   and isactive = 'Y'
+                                   and (date_trunc('month', fecha_fin) >= date_trunc('month', statement_timestamp())
+					or
+					date_trunc('month', fecha_fin::DATE) >= date_trunc('month',TO_DATE((now()::DATE - interval '1 month'))::DATE)
+					)
+                                   and c_bpartner_id=Cur_Empleado.c_bpartner_id;
+
+                                
+                                select extract(year from (Cur_Empleado.fecha_inicio)) into v_anio_inicio;
+                                select extract(month from (Cur_Empleado.fecha_inicio)) into v_mes_inicio;
+                                select extract(day from (Cur_Empleado.fecha_inicio)) into v_dia_inicio;
+
+                                select extract(year from (Cur_Empleado.fecha_fin)) into v_anio_fin;
+                                select extract(month from (Cur_Empleado.fecha_fin)) into v_mes_fin;
+                                select extract(day from (Cur_Empleado.fecha_fin)) into v_dia_fin;
+
+                                select extract(year from (now())) into v_anio_actual;
+                                select extract(month from (now())) into v_mes_actual;
+
+                                IF(v_anio_inicio = v_anio_actual AND (v_mes_inicio = v_mes_actual or v_mes_inicio = (v_mes_actual - 1))) THEN 
+                                                                        v_dias_mes := 30;
+                                    v_dias_trabajo:= v_dias_mes - (v_dia_inicio - 1);
+                                    v_salario:= (v_salario / v_dias_mes) * v_dias_trabajo;
+
+                                    
+                                    IF(v_anio_fin = v_anio_actual AND (v_mes_fin = v_mes_actual or v_mes_fin = (v_mes_actual - 1))) THEN 
+                                                                                v_dias_mes := 30;
+                                        v_dias_trabajo_fin:= v_dia_fin - v_dia_inicio;
+                                        v_salario := (v_salario/v_dias_trabajo)*v_dias_mes;
+                                        v_salario:= (v_salario / v_dias_mes) * v_dias_trabajo_fin;
+                                    END IF;
+                                    
+                                
+                                ELSIF(v_anio_fin = v_anio_actual AND (v_mes_fin = v_mes_actual or v_mes_fin = (v_mes_actual - 1))) THEN 
+                                                                        v_dias_mes := 30;
+                                    v_dias_trabajo:= v_dia_fin;
+                                    v_salario:= (v_salario / v_dias_mes) * v_dias_trabajo;
+                                    
+                                END IF;
+                                
+                                   
+                                IF Cur_Calcula_Robro_L.isporcentaje = 'Y' THEN
+                                    v_valor_rubro := v_valor_rubro + (COALESCE(v_salario,0) * COALESCE(Cur_Calcula_Robro_L.valor,0)) / 100;
+                                ELSE
+                                    v_valor_rubro := COALESCE(v_salario,0);
+                                END IF;
+                            ELSE
+                                v_valor_rubro := v_valor_rubro + COALESCE(Cur_Calcula_Robro_L.valor,0);
+                            END IF;
+                        END IF;
+                        
+                    END LOOP;
+                END IF;
+
+                INSERT INTO no_rol_pago_provision_line
+                            (no_rol_pago_provision_line_id,        ad_client_id,       ad_org_id,                                  isactive,
+                             created,                              createdby,          updated,                                    updatedby,
+                             no_rol_pago_provision_id,             line,               no_tipo_ingreso_egreso_id,                  valor)
+                      VALUES(v_rol_pago_prov_line_id,              v_Client_ID,        v_Org_Emp_ID,                                   'Y',
+                             current_timestamp,                    v_User_ID,          current_timestamp,                          v_User_ID,
+                             v_rol_pago_provision_id,              v_line,             Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    round(v_valor_rubro,2));
+
+            IF Cur_Rubro_Rol.suma_ingreso = 'Y' THEN
+                v_suma_valor := round(v_suma_valor,2) + v_valor_rubro;
+            END IF;
+
+            END LOOP;
+            END IF;
+            v_suma_valor :=0;
+        END LOOP;
+
+        v_Message:='@NO_EjecucionCorrecta@';
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END NO_GENERA_ROL
+]]></body>
+    </function>
+  </database>

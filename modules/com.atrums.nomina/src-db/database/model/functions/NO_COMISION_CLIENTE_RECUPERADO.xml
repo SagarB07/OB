@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_COMISION_CLIENTE_RECUPERADO">
+    <function name="NO_COMISION_CLIENTE_RECUPERADO" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_commission NUMBER:=0;
+
+BEGIN
+	select ca.commissionamt
+	  into v_commission
+	  from c_commission c
+	  left join c_commissionrun cr on c.c_commission_id = cr.c_commission_id
+	  left join c_commissionamt ca on cr.c_commissionrun_id = ca.c_commissionrun_id,
+		   c_period pe
+	 where pe.c_period_id = p_period_id
+	   and cr.startdate+10 >=  pe.startdate+0
+	   and cr.startdate+10 <= pe.enddate+0
+	   and c.c_bpartner_id = p_empleado_id
+	   and ca.em_vc_tipocomision = 'CCR'; 
+    
+	RETURN coalesce(v_commission, 0);
+END NO_COMISION_CLIENTE_RECUPERADO
+]]></body>
+    </function>
+  </database>

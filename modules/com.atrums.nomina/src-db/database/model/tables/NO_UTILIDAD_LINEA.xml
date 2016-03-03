@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+  <database name="TABLE NO_UTILIDAD_LINEA">
+    <table name="NO_UTILIDAD_LINEA" primaryKey="NO_UTILIDAD_LINEA_KEY">
+      <column name="NO_UTILIDAD_LINEA_ID" primaryKey="true" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_CLIENT_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_ORG_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ISACTIVE" primaryKey="false" required="true" type="CHAR" size="1" autoIncrement="false">
+        <default><![CDATA[Y]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default><![CDATA[SYSDATE]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default><![CDATA[SYSDATE]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NO_UTILIDAD_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="C_BPARTNER_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DIAS_LABORADOS" primaryKey="false" required="false" type="DECIMAL" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UTILIDAD_10" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="CARGAS_FAMILIARES" primaryKey="false" required="false" type="DECIMAL" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DIAS_POR_CARGA" primaryKey="false" required="false" type="DECIMAL" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UTILIDAD_5" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="TOTAL_UTILIDAD" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="C_BPARTNER" name="NO_SDIGNO_LINE_PARTNER">
+        <reference local="C_BPARTNER_ID" foreign="C_BPARTNER_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="NO_UTILIDAD" name="NO_UTIL_LINE_NO_UTILIDAD">
+        <reference local="NO_UTILIDAD_ID" foreign="NO_UTILIDAD_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="C_BPARTNER" name="NO_UTILIDAD_LINE_C_BP">
+        <reference local="C_BPARTNER_ID" foreign="C_BPARTNER_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_CLIENT" name="NO_UTILIDAD_LINEA_AD_CLIENT">
+        <reference local="AD_CLIENT_ID" foreign="AD_CLIENT_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_ORG" name="NO_UTILIDAD_LINEA_AD_ORG">
+        <reference local="AD_ORG_ID" foreign="AD_ORG_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_USER" name="NO_UTILIDAD_LINEA_CREATED">
+        <reference local="CREATEDBY" foreign="AD_USER_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_USER" name="NO_UTILIDAD_LINEA_UPDATED">
+        <reference local="UPDATEDBY" foreign="AD_USER_ID"/>
+      </foreign-key>
+      <check name="NO_UTILIDAD_LINEA_ISACTIVE_CHK"><![CDATA[ISACTIVE IN ('Y', 'N')]]></check>
+    </table>
+  </database>

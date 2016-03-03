@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_NOVEDAD">
+    <function name="NO_NOVEDAD" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_total NUMBER:=0;
+BEGIN
+   
+
+    select COALESCE(sum(nl.valor),0)
+      into v_total
+      from no_novedad n,
+           no_novedad_linea nl,
+           c_period p
+     where n.c_period_id = p.c_period_id
+       and n.no_novedad_id = nl.no_novedad_id
+       and nl.c_bpartner_id = p_empleado_id
+       and n.no_tipo_ingreso_egreso_id = p_tipo_ingreso_egreso_id
+       and p.c_period_id = p_period_id;
+
+    return v_total;
+END NO_NOVEDAD
+]]></body>
+    </function>
+  </database>

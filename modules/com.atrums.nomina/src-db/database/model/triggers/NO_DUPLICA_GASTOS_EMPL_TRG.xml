@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_DUPLICA_GASTOS_EMPL_TRG">
+    <trigger name="NO_DUPLICA_GASTOS_EMPL_TRG" table="NO_GASTOS_EMPLEADO_LINE" fires="before" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+BEGIN
+    IF (UPDATING) THEN
+            IF(:new.no_gastos_empleado_line_id <> :old.no_gastos_empleado_line_id)then
+                 IF(to_char(:new.tipo_gastos) in(select tipo_gastos
+                                      from no_gastos_empleado_line
+                                      where no_gastos_empleado_id = :new.no_gastos_empleado_id))then
+                RAISE EXCEPTION '@NO_Gastos_Duplicados@';
+                END IF;
+            END IF;    
+
+        RETURN NEW;
+
+    ELSE
+        IF(INSERTING)THEN
+                IF(to_char(:new.tipo_gastos) in(select tipo_gastos
+                                          from no_gastos_empleado_line
+                                          where no_gastos_empleado_id = :new.no_gastos_empleado_id))then
+                    RAISE EXCEPTION '@NO_Gastos_Duplicados@';
+                 END IF;   
+            RETURN NEW;
+        ELSE
+             RETURN OLD;
+        END IF;
+    END IF;
+
+    
+
+
+END NO_DUPLICA_GASTOS_EMPL_TRG
+]]></body>
+    </trigger>
+  </database>

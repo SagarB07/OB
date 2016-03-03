@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VALIDA_ESTADO_RE_PAG_TRG">
+    <trigger name="NO_VALIDA_ESTADO_RE_PAG_TRG" table="FIN_PAYMENT" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+  v_em_no_pago_line_id varchar(32);
+  v_status varchar(60);
+ 
+BEGIN
+    IF(UPDATING)THEN
+            
+            select em_no_pago_line_id
+            into v_em_no_pago_line_id
+            from fin_payment_detail where fin_payment_id=:old.fin_payment_id;
+
+            if(v_em_no_pago_line_id is null)THEN
+                return old;
+            end if;
+                select status 
+                into   v_status 
+                from fin_payment where fin_payment_id=:old.fin_payment_id;
+            
+            
+
+            IF(v_status='RPAP')THEN
+                UPDATE no_pago_line SET estado='RE'
+                WHERE no_pago_line_id=v_em_no_pago_line_id;
+            END IF;
+        
+        return new;
+    END IF;
+
+END NO_VALIDA_ESTADO_RE_PAG_TRG
+]]></body>
+    </trigger>
+  </database>

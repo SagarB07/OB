@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_FIELD" version="">
+  <row id="03B2F00428414A86B1B9D14E65AC96A8" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+  <row id="041630C0C687415D8096AA3664D3E82A" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+  <row id="06F5D368B1CD4ED1A26102294D2BCC08" trl="N">
+    <value column="Name" isTrl="Y" original="Haber">Cuenta del Ingreso</value>
+    <value column="Description" isTrl="N" original="Cuenta donde se pondrá el ingreso del empleado">Cuenta donde se pondrá el ingreso del empleado</value>
+    <value column="Help" isTrl="N" original="Cuenta donde se pondrá el ingreso del empleado">Cuenta donde se pondrá el ingreso del empleado</value>
+  </row>
+  <row id="44A0B15FFE444102B90612160958BC0F" trl="N">
+    <value column="Name" isTrl="N" original="Procesa Liquidación">Procesa Liquidación</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Procesa la liquidación y la pone en Curso">Procesa la liquidación y la pone en Curso</value>
+  </row>
+  <row id="5759E9BD4EE947168A192206D215EDE0" trl="N">
+    <value column="Name" isTrl="N" original="Empleado">Empleado</value>
+    <value column="Description" isTrl="N" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Anyone who takes part in daily business operations by acting as a customer, employee, etc.</value>
+    <value column="Help" isTrl="N" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.</value>
+  </row>
+  <row id="60EC662D65694AAA98069ED236320AC3" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+  <row id="6FC2DD3182674CFFA5E4ED9DD12963C5" trl="N">
+    <value column="Name" isTrl="N" original="Empleado">Empleado</value>
+    <value column="Description" isTrl="N" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Anyone who takes part in daily business operations by acting as a customer, employee, etc.</value>
+    <value column="Help" isTrl="N" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.</value>
+  </row>
+  <row id="7E8AD2C22A71405E8770B36050BC5D56" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+  <row id="83095F3511C2451898C67573DD982D37" trl="N">
+    <value column="Name" isTrl="N" original="Tipo  de Carga">Tipo  de Carga</value>
+    <value column="Description" isTrl="N" original="Seleccione el tipo de carga para el empleado">Seleccione el tipo de carga para el empleado</value>
+    <value column="Help" isTrl="N" original="Seleccione el tipo de carga para el empleado">Seleccione el tipo de carga para el empleado</value>
+  </row>
+  <row id="8F9C6C0E83264C79BC918A88A0A4007B" trl="Y">
+    <value column="Name" isTrl="N" original="Empleado">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+  <row id="95A6C828F04D4475B7B887738D38E107" trl="N">
+    <value column="Name" isTrl="N" original="Cuenta de Pago">Cuenta de Pago</value>
+    <value column="Description" isTrl="N" original="Se ingresa la cuenta por pagar (Sueldos y Avances)">Se ingresa la cuenta por pagar (Sueldos y Avances)</value>
+    <value column="Help" isTrl="N" original="Se ingresa la cuenta por pagar (Sueldos y Avances)">Se ingresa la cuenta por pagar (Sueldos y Avances)</value>
+  </row>
+  <row id="ABC811E9C66141AC84668941921CD056" trl="Y">
+    <value column="Name" isTrl="Y" original="C_Bpartner_ID">Empleado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B8BDD02534A1405E9F83D441B9400E5B" trl="N">
+    <value column="Name" isTrl="N" original="Procesar Pago">Procesar Pago</value>
+    <value column="Description" isTrl="N" original="Proceso del Pago para el Rol Pago">Proceso del Pago para el Rol Pago</value>
+    <value column="Help" isTrl="N" original="Proceso del Pago para el Rol Pago">Proceso del Pago para el Rol Pago</value>
+  </row>
+  <row id="C790818337404A3B80B7574AEA63C3D6" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+  <row id="E017A81296A94B7BB7007336714EABA6" trl="N">
+    <value column="Name" isTrl="Y" original="Debe">Cuenta del Egreso</value>
+    <value column="Description" isTrl="N" original="Cuenta donde se pondrá el egreso del empleado">Cuenta donde se pondrá el egreso del empleado</value>
+    <value column="Help" isTrl="N" original="Cuenta donde se pondrá el egreso del empleado">Cuenta donde se pondrá el egreso del empleado</value>
+  </row>
+  <row id="E61A0C6AFCFA415084C83CA8C6E19643" trl="N">
+    <value column="Name" isTrl="Y" original="Nombre Carga Familiar">Nombre de la Carga Familiar</value>
+    <value column="Description" isTrl="N" original="Ingresar el nombre del rubro">Ingresar el nombre del rubro</value>
+    <value column="Help" isTrl="N" original="Ingresar el nombre del rubro">Ingresar el nombre del rubro</value>
+  </row>
+  <row id="F8FFA8E78527415FA9EBA7F15BD36EA5" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Empleado</value>
+    <value column="Description" isTrl="Y" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Persona que participa en operaciones diarias de negocios, como cliente, empleado, etc.</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">Un tercero es cualquier entidad, organización o particular&amp;nbsp;con&amp;nbsp;quien se realizan operaciones y&amp;nbsp;transacciones. Esto incluye proveedores, clientes y empleados. </value>
+  </row>
+</compiereTrl>

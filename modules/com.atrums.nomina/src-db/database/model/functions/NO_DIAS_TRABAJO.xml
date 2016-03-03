@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_DIAS_TRABAJO">
+    <function name="NO_DIAS_TRABAJO" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[Declare
+v_dias_laborados NUMBER:= 0;
+
+
+v_dia_contrato_inicio NUMBER;
+v_dia_contrato_fin NUMBER;
+v_mes_contrato_inicio NUMBER;
+v_mes_contrato_fin NUMBER;
+v_anio_contrato_inicio NUMBER;
+v_anio_contrato_fin NUMBER;
+
+
+v_dia_periodo_inicio NUMBER;
+v_dia_periodo_fin NUMBER;
+v_mes_periodo_inicio NUMBER;
+v_mes_periodo_fin NUMBER;
+v_anio_periodo_inicio NUMBER;
+v_anio_periodo_fin NUMBER;
+
+v_message Varchar;
+Begin
+
+    Select extract(Day From fecha_inicio), extract(Day From fecha_fin), extract(Month From fecha_inicio), extract(Month From fecha_fin), extract(Year From fecha_inicio), extract(Year From fecha_fin)
+    Into v_dia_contrato_inicio, v_dia_contrato_fin, v_mes_contrato_inicio, v_mes_contrato_fin, v_anio_contrato_inicio, v_anio_contrato_fin
+    From no_contrato_empleado nce
+    Where nce.c_bpartner_id = p_empleado_id;
+
+    Select extract(Day From startdate), extract(Day From enddate), extract(Month From startdate), extract(Month From enddate), extract(Year From startdate), extract(Year From enddate)
+    Into v_dia_periodo_inicio, v_dia_periodo_fin, v_mes_periodo_inicio, v_mes_periodo_fin, v_anio_periodo_inicio, v_anio_periodo_fin
+    From c_period cp
+    Where cp.c_period_id = p_period_id;
+
+    If (v_mes_periodo_inicio = v_mes_contrato_inicio) and (v_anio_periodo_inicio = v_anio_contrato_inicio) Then
+        v_dias_laborados := v_dia_periodo_fin - v_dia_contrato_inicio;
+    Elseif (v_mes_periodo_fin = v_mes_contrato_fin) and (v_anio_periodo_fin = v_anio_contrato_fin) Then
+        v_dias_laborados := v_dia_contrato_fin;
+    Else
+        v_dias_laborados := v_dia_periodo_fin;
+    End If;
+
+    return v_dias_laborados;
+
+End
+]]></body>
+    </function>
+  </database>

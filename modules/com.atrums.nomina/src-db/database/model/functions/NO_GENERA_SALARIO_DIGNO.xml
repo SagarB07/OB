@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_GENERA_SALARIO_DIGNO">
+    <function name="NO_GENERA_SALARIO_DIGNO" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+    v_Message VARCHAR(2000):='';
+    v_Result NUMBER:=1;
+    v_Record_ID VARCHAR(32);
+
+    Cur_Parameter RECORD;
+    Cur_Empleado RECORD;
+    
+    v_Client_ID VARCHAR(32);
+    v_Org_ID VARCHAR(32);
+    v_User_ID VARCHAR(32);
+    v_salario_digno_linea_id VARCHAR(32);
+    v_year_id VARCHAR(32);
+    v_year NUMBER:=0;
+    v_year_old_id VARCHAR(32);
+    v_year_old NUMBER:=0;
+    v_salario_digno_mensual NUMBER:=0;
+    v_dias_laborados NUMBER:=0;
+    v_sueldos               NUMBER;
+	v_decimocuarto          NUMBER;
+    v_comisiones            NUMBER;
+	v_utilidades            NUMBER;
+	v_adicionales NUMBER:=0;
+	v_fondo_reserva         NUMBER;
+    v_decimotercero         NUMBER;
+    v_sum_ingresos          NUMBER;
+    v_jornada_parcial       NUMBER;
+    v_horas_parciales       NUMBER;
+    v_salario_digno_anual   NUMBER;
+	v_total                 NUMBER;
+
+    v_dias_mes NUMBER:=30;
+    v_mes_fin NUMBER;
+    v_dia_fin NUMBER;
+    v_mes_inicio NUMBER;
+    v_dia_inicio NUMBER;
+
+BEGIN
+
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN
+
+
+        FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  i.AD_Client_ID,
+                  i.ad_org_id,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_PInstance_ID
+            ORDER BY p.SeqNo)
+        LOOP
+            v_Record_ID:=Cur_Parameter.Record_ID;
+            v_User_ID:=Cur_Parameter.AD_User_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+        END LOOP;
+
+        select to_number(y.year), s.c_year_id, s.salario_digno_mensual
+        into v_year, v_year_id, v_salario_digno_mensual
+        from c_year y, no_salario_digno s
+        where s.no_salario_digno_id = v_Record_ID
+        and s.c_year_id = y.c_year_id;
+
+        select to_number(v_year)-1
+        into v_year_old;
+
+        select c_year_id
+        into v_year_old_id
+        from c_year where to_number(year)=v_year_old;
+
+        delete from no_salario_digno_linea where no_salario_digno_id = v_Record_ID;
+
+        FOR Cur_Empleado IN
+        (select bp.c_bpartner_id, 
+                ce.fecha_inicio, 
+                ce.fecha_fin,
+                ce.ad_org_id
+           from c_bpartner bp,
+                no_contrato_empleado ce
+          where bp.c_bpartner_id = ce.c_bpartner_id
+            and bp.isemployee = 'Y'
+            and bp.AD_Client_ID=v_Client_ID
+            and date_part('year', ce.fecha_inicio::DATE) <= v_year
+            and date_part('year', ce.fecha_fin::DATE) >= v_year
+            order by 1,2
+            )
+        LOOP
+            
+            IF ((select date_part('year',Cur_Empleado.fecha_inicio)) = v_year AND 
+                    (select date_part('year',Cur_Empleado.fecha_fin)) = v_year) THEN
+                
+                v_mes_inicio := date_part('month', Cur_Empleado.fecha_inicio);
+                v_dia_inicio := date_part('day', Cur_Empleado.fecha_inicio);
+                v_mes_fin := date_part('month', Cur_Empleado.fecha_fin);
+                v_dia_fin := date_part('day', Cur_Empleado.fecha_fin);
+
+            ELSIF ((select date_part('year',Cur_Empleado.fecha_inicio)) = v_year AND 
+                    (select date_part('year',Cur_Empleado.fecha_fin)) > v_year) THEN
+
+                v_mes_inicio := date_part('month', Cur_Empleado.fecha_inicio);
+                v_dia_inicio := date_part('day', Cur_Empleado.fecha_inicio);
+                v_mes_fin := 12;
+                v_dia_fin := 30;
+                IF(v_dia_inicio > 30) THEN v_dia_inicio := 30; END IF;
+
+            ELSIF ((select date_part('year',Cur_Empleado.fecha_inicio)) < v_year AND 
+                    (select date_part('year',Cur_Empleado.fecha_fin)) = v_year) THEN
+
+                v_mes_inicio := 1;
+                v_dia_inicio := 1;
+                v_mes_fin := date_part('month', Cur_Empleado.fecha_fin);
+                v_dia_fin := date_part('day', Cur_Empleado.fecha_fin);
+                IF(v_dia_fin > 30) THEN v_dia_fin := 30; END IF;
+                IF(v_mes_fin = 2 AND v_dia_fin >= 28) THEN v_dia_fin := 30; END IF;
+
+            ELSIF ((select date_part('year',Cur_Empleado.fecha_inicio)) < v_year AND 
+                        (select date_part('year',Cur_Empleado.fecha_fin)) > v_year) THEN
+
+                v_mes_inicio := 1;
+                v_dia_inicio := 1;
+                v_mes_fin := 12;
+                v_dia_fin := 30;
+
+            END IF;
+            
+            v_dias_laborados := v_dias_mes-(v_dia_inicio-1);
+            v_dias_laborados := v_dias_laborados + (((v_mes_fin-1)-v_mes_inicio)* v_dias_mes);
+            v_dias_laborados := v_dias_laborados + v_dia_fin;
+            
+            
+            
+            select coalesce(sum(rpl.valor),0)
+            into v_sueldos
+            from no_rol_pago_provision_line rpl,
+                 no_rol_pago_provision rp,
+                 no_tipo_ingreso_egreso tie
+            where rpl.no_rol_pago_provision_id = rp.no_rol_pago_provision_id
+              and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+              and rp.c_period_id IN (select c_period_id from c_period where c_year_id = v_year_id)
+              and rp.c_bpartner_id = Cur_Empleado.c_bpartner_id
+              and rp.processed = 'Y'
+              and tie.issueldo = 'Y';
+
+            
+            select coalesce(sum(rpl.valor),0)
+            into v_comisiones
+            from no_rol_pago_provision_line rpl,
+                 no_rol_pago_provision rp,
+                 no_tipo_ingreso_egreso tie
+            where rpl.no_rol_pago_provision_id = rp.no_rol_pago_provision_id
+              and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+              and rp.c_period_id IN (select c_period_id from c_period where c_year_id = v_year_id)
+              and rp.c_bpartner_id = Cur_Empleado.c_bpartner_id
+              and rp.processed = 'Y'
+              and tie.isvariable = 'Y';
+            
+            
+            select coalesce(sum(rplm.valor),0)
+            into v_decimocuarto
+            from no_rol_pago_provision rp,
+                no_rol_pago_provision_line rpl,
+                no_rol_provision_line_mes rplm,
+                no_tipo_ingreso_egreso tie
+            where rp.no_rol_pago_provision_id = rpl.no_rol_pago_provision_id
+            and rpl.no_rol_pago_provision_line_id = rplm.no_rol_pago_provision_line_id
+            and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+            and rplm.c_period_id IN (select c_period_id from c_period where (c_year_id = v_year_id and periodno < 8) or (c_year_id = v_year_old_id and periodno > 7))
+            and rp.c_bpartner_id = Cur_Empleado.c_bpartner_id
+            and rp.processed = 'Y'
+            and tie.isdecimocuarto = 'Y';
+
+            select coalesce(sum(rplm.valor),0)
+            into v_decimotercero
+            from no_rol_pago_provision rp,
+                no_rol_pago_provision_line rpl,
+                no_rol_provision_line_mes rplm,
+                no_tipo_ingreso_egreso tie
+            where rp.no_rol_pago_provision_id = rpl.no_rol_pago_provision_id
+            and rpl.no_rol_pago_provision_line_id = rplm.no_rol_pago_provision_line_id
+            and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+            and rplm.c_period_id IN (select c_period_id from c_period where (c_year_id = v_year_id and periodno < 12) or (c_year_id = v_year_old_id and periodno > 11))
+            and rp.c_bpartner_id = Cur_Empleado.c_bpartner_id
+            and rp.processed = 'Y'
+            and tie.isdecimotercero = 'Y';
+
+            
+            select coalesce(sum(ul.total_utilidad),0)
+            into v_utilidades
+            from no_utilidad u, no_utilidad_linea ul
+            where u.c_year_id = v_year_old_id
+            and ul.c_bpartner_id = Cur_Empleado.c_bpartner_id;
+
+            
+            select coalesce(sum(rpl.valor),0)
+            into v_fondo_reserva
+            from no_rol_pago_provision_line rpl,
+                 no_rol_pago_provision rp,
+                 no_tipo_ingreso_egreso tie
+            where rpl.no_rol_pago_provision_id = rp.no_rol_pago_provision_id
+              and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+              and rp.c_period_id IN (select c_period_id from c_period where c_year_id = v_year_id)
+              and rp.c_bpartner_id = Cur_Empleado.c_bpartner_id
+              and rp.processed = 'Y'
+              and tie.isfondoreserva = 'Y';
+
+
+            v_sum_ingresos := v_sueldos + v_comisiones + v_decimocuarto + v_decimotercero + v_utilidades + v_fondo_reserva;
+            v_salario_digno_anual := round((v_salario_digno_mensual / 30 ) * v_dias_laborados , 2);
+            v_total := v_salario_digno_anual - v_sum_ingresos;
+
+            IF EXISTS (select 1 from no_salario_digno_linea where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_salario_digno_id = v_Record_ID) then
+                
+                v_dias_laborados := v_dias_laborados + (select dias_laborados from no_salario_digno_linea where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_salario_digno_id = v_Record_ID);
+
+                update no_salario_digno_linea 
+                set dias_laborados = v_dias_laborados,
+                    salario_digno_anual = round((v_salario_digno_mensual / 30 ) * v_dias_laborados ,2)
+                where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_salario_digno_id = v_Record_ID;
+
+                update no_salario_digno_linea
+                set total = salario_digno_anual - sum_ingresos
+                where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_salario_digno_id = v_Record_ID;
+
+            ELSE
+
+                v_salario_digno_linea_id := get_uuid();
+
+                INSERT INTO no_salario_digno_linea (
+                    no_salario_digno_linea_id,      ad_client_id,       ad_org_id,          isactive,
+                    created,                        createdby,          updated,            updatedby,
+                    no_salario_digno_id,            c_bpartner_id,      sueldos,            decimocuarto,
+                    comisiones,                     utilidades,         adicionales,        fondo_reserva,
+                    decimotercero,                  sum_ingresos,       dias_laborados,     jornada_parcial,
+                    horas_parciales,                salario_digno_anual,    total)
+                VALUES (
+                    v_salario_digno_linea_id,       v_Client_ID,        v_Org_ID,           'Y',              
+                    now(),                          v_User_ID,          now(),              v_User_ID,
+                    v_Record_ID,            Cur_Empleado.c_bpartner_id, v_sueldos,          v_decimocuarto,       
+                    v_comisiones,                   v_utilidades,       v_adicionales,      v_fondo_reserva,
+                    v_decimotercero,                v_sum_ingresos,     v_dias_laborados,   0,
+                    0,                              v_salario_digno_anual,v_total);
+
+            END IF;
+
+        END LOOP;
+
+       
+
+        v_Message:='@NO_EjecucionCorrecta@';
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END NO_GENERA_SALARIO_DIGNO
+]]></body>
+    </function>
+  </database>

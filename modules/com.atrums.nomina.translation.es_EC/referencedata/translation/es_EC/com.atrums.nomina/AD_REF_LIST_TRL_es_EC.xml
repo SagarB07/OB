@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_REF_LIST" version="">
+  <row id="04FB52BFE33446548E5DA8B9280F73C3" trl="N">
+    <value column="Name" isTrl="N" original="Abril">Abril</value>
+    <value column="Description" isTrl="N" original="Abril">Abril</value>
+  </row>
+  <row id="06840695071A4E97AB9CD44CE1638129" trl="N">
+    <value column="Name" isTrl="N" original="Gastos Vivienda">Gastos Vivienda</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="089CF4CD5D1E4F8CA664E98D5591F79A" trl="N">
+    <value column="Name" isTrl="N" original="Inicio de Mes">Inicio de Mes</value>
+    <value column="Description" isTrl="N" original="Inicio de Mes">Inicio de Mes</value>
+  </row>
+  <row id="09F67D4FDFA64F38BBDF53E975E46691" trl="N">
+    <value column="Name" isTrl="N" original="Renuncia">Renuncia</value>
+    <value column="Description" isTrl="N" original="Renuncia">Renuncia</value>
+  </row>
+  <row id="0A2F628ABE5E474FB97601BA55E40749" trl="N">
+    <value column="Name" isTrl="N" original="Diciembre">Diciembre</value>
+    <value column="Description" isTrl="N" original="Diciembre">Diciembre</value>
+  </row>
+  <row id="0B224D604CF94B27A14DA9AB6E1678CB" trl="N">
+    <value column="Name" isTrl="N" original="En Curso">En Curso</value>
+    <value column="Description" isTrl="N" original="En Curso">En Curso</value>
+  </row>
+  <row id="0BD07232D55D4FD5B82830BD601F9EC1" trl="N">
+    <value column="Name" isTrl="N" original="Tramites Personales">Tramites Personales</value>
+    <value column="Description" isTrl="N" original="Tramites Personales">Tramites Personales</value>
+  </row>
+  <row id="0CF20C3D45D64FF3878E75769BFE22EE" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Rol Provision Mes">Nomina Rol Provision Mes</value>
+    <value column="Description" isTrl="N" original="Nomina Rol Provision Mes">Nomina Rol Provision Mes</value>
+  </row>
+  <row id="1120C9EB55C7406BA83B3F403354330F" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Contrato">Nomina Contrato</value>
+    <value column="Description" isTrl="N" original="Nomina Contrato">Nomina Contrato</value>
+  </row>
+  <row id="15CEB5B3D0F2466E9F2A83E8A49BBE7E" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Rol Provisiones">Nomina Rol Provisiones</value>
+    <value column="Description" isTrl="N" original="Nomina Rol Pago Provisiones">Nomina Rol Pago Provisiones</value>
+  </row>
+  <row id="1632C59850B54D9895349F15ADFE94AD" trl="N">
+    <value column="Name" isTrl="N" original="Mayo">Mayo</value>
+    <value column="Description" isTrl="N" original="Mayo">Mayo</value>
+  </row>
+  <row id="1D2EE0B20BB345A7AC2A3EB7FD91A40B" trl="N">
+    <value column="Name" isTrl="N" original="Pendiente">Pendiente</value>
+    <value column="Description" isTrl="N" original="Pendiente">Pendiente</value>
+  </row>
+  <row id="22FD289B9F2F4111856A1646AFE55D46" trl="N">
+    <value column="Name" isTrl="Y" original="Reactivar">En Curso</value>
+    <value column="Description" isTrl="Y" original="Reactivar">En Curso</value>
+  </row>
+  <row id="27769BEEB76B4A0290577856ECB32279" trl="N">
+    <value column="Name" isTrl="N" original="Septiembre">Septiembre</value>
+    <value column="Description" isTrl="N" original="Septiembre">Septiembre</value>
+  </row>
+  <row id="2C685FB995F9479098E83ACEFB79BC4C" trl="N">
+    <value column="Name" isTrl="N" original="Horas Extras Suplementarias">Horas Extras Suplementarias</value>
+    <value column="Description" isTrl="N" original="Horas Extras Suplementarias">Horas Extras Suplementarias</value>
+  </row>
+  <row id="2D41341CC77D449082F45307E046786D" trl="N">
+    <value column="Name" isTrl="N" original="2014">2014</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="36B80E0D4377427BB49A813CEA021390" trl="N">
+    <value column="Name" isTrl="N" original="Aprobado">Aprobado</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="375ACE5F970D40EE9B010BF86B041CAE" trl="N">
+    <value column="Name" isTrl="N" original="Anular">Anular</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="3BB4E9B204BF4C019DD00B75EAD86DA7" trl="N">
+    <value column="Name" isTrl="N" original="Agosto">Agosto</value>
+    <value column="Description" isTrl="N" original="Agosto">Agosto</value>
+  </row>
+  <row id="3DA56C6A3CD840E294A4DB2C87342DC3" trl="N">
+    <value column="Name" isTrl="N" original="Supervisor">Supervisor</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="4026C92E99DC45EAAD3265144E13BBEE" trl="N">
+    <value column="Name" isTrl="N" original="Completar">Completar</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="443E90C273754F2D8B47C550427533C4" trl="N">
+    <value column="Name" isTrl="N" original="2012">2012</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="454655DF0C094766817735A6C72464E6" trl="N">
+    <value column="Name" isTrl="N" original="Julio">Julio</value>
+    <value column="Description" isTrl="N" original="Julio">Julio</value>
+  </row>
+  <row id="45E2D592F6E742F88F37405FABC0C1F7" trl="N">
+    <value column="Name" isTrl="N" original="Renuncia">Renuncia</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="4667623255A34F25B337B7F949A3377E" trl="N">
+    <value column="Name" isTrl="N" original="Operativo">Operativo</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="4A65A78BC6CE4A4C9991113C0E522152" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Rol Pago">Nomina Rol Pago</value>
+    <value column="Description" isTrl="N" original="Nomina Rol Pago">Nomina Rol Pago</value>
+  </row>
+  <row id="518D17181191433C8F73A09EBB6B72A6" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Rol Pago">Nomina Rol Pago</value>
+    <value column="Description" isTrl="N" original="Nomina Rol Pago">Nomina Rol Pago</value>
+  </row>
+  <row id="5194F2E66EC2496C8D40ACBF72EF032C" trl="N">
+    <value column="Name" isTrl="N" original="Chofer">Chofer</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="51EDC65293E149898C1F5459ADC34BC6" trl="N">
+    <value column="Name" isTrl="N" original="Horas de Atrasos">Horas de Atrasos</value>
+    <value column="Description" isTrl="N" original="Horas de Atrasos">Horas de Atrasos</value>
+  </row>
+  <row id="558BCD745D3949BE99BBF1F0DD709B80" trl="N">
+    <value column="Name" isTrl="N" original="Tecnico">Tecnico</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="56EBB58787EE4581A88AB87C85A78184" trl="N">
+    <value column="Name" isTrl="N" original="Despido">Despido</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="57B7C56749EC4C62800218BA18C01451" trl="N">
+    <value column="Name" isTrl="N" original="Cancelado">Cancelado</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="59C4A2378AC64CD0831A5BBE821620F5" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Liquidación">Nomina Liquidación</value>
+    <value column="Description" isTrl="N" original="Nomina Liquidación">Nomina Liquidación</value>
+  </row>
+  <row id="59DE4784A7FF47928C6DEFE0733A9152" trl="N">
+    <value column="Name" isTrl="N" original="Temporada">Temporada</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="5B7BEC17A305414D9DFF50E367849B6F" trl="N">
+    <value column="Name" isTrl="N" original="Semanal">Semanal</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="5DEC4EA72B8C4BE5BE8AEF15245FF154" trl="N">
+    <value column="Name" isTrl="N" original="Quincenal">Quincenal</value>
+    <value column="Description" isTrl="N" original="Quincenal">Quincenal</value>
+  </row>
+  <row id="5EC0670ABB1941368D9D13EFF94BDB51" trl="N">
+    <value column="Name" isTrl="N" original="Despido">Despido</value>
+    <value column="Description" isTrl="N" original="Despido">Despido</value>
+  </row>
+  <row id="62C6867EFA4E4927AE87F4C44184AA8E" trl="N">
+    <value column="Name" isTrl="N" original="Borrador">Borrador</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="6487C7BF0EA441A790DEDF61EBAEE3EF" trl="N">
+    <value column="Name" isTrl="N" original="2018">2018</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="657DE913B5F4491E9C3E2E95C524AB36" trl="N">
+    <value column="Name" isTrl="N" original="Vendedor">Vendedor</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="676E4CDCE84640A68306AE3E344075D0" trl="N">
+    <value column="Name" isTrl="N" original="Mensual">Mensual</value>
+    <value column="Description" isTrl="N" original="Pago mensual">Pago mensual</value>
+  </row>
+  <row id="68C25D1D3B0746EA95E2B407810EFC69" trl="N">
+    <value column="Name" isTrl="N" original="Horas Extras Extraordinarias">Horas Extras Extraordinarias</value>
+    <value column="Description" isTrl="N" original="Horas Extras Extraordinarias">Horas Extras Extraordinarias</value>
+  </row>
+  <row id="68E022A199444C91868B2C72F9C10A0E" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Avance">Nomina Avance</value>
+    <value column="Description" isTrl="N" original="Nomina Avance">Nomina Avance</value>
+  </row>
+  <row id="6A83E345AE6949CC88C35644127131D9" trl="N">
+    <value column="Name" isTrl="N" original="Aprobado">Aprobado</value>
+    <value column="Description" isTrl="N" original="Aprobado">Aprobado</value>
+  </row>
+  <row id="6CC0F1CC62DF490E90A442C27D523005" trl="N">
+    <value column="Name" isTrl="N" original="Borrador">Borrador</value>
+    <value column="Description" isTrl="N" original="Borrador">Borrador</value>
+  </row>
+  <row id="738954F9695B48DCB0DB8EF29B23BACE" trl="N">
+    <value column="Name" isTrl="N" original="Mensual">Mensual</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="77047E7785C84CFC8B1FF5F2BED05F2E" trl="N">
+    <value column="Name" isTrl="N" original="Octubre">Octubre</value>
+    <value column="Description" isTrl="N" original="Octubre">Octubre</value>
+  </row>
+  <row id="7C2E057120C24C3FB2B0BD4B3469D17F" trl="N">
+    <value column="Name" isTrl="N" original="2015">2015</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="7D1DBF01C45948F090B712681F3D12EE" trl="N">
+    <value column="Name" isTrl="N" original="Hijo">Hijo</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="7F0E47E8450D414099A738C5C001F6A4" trl="N">
+    <value column="Name" isTrl="N" original="Tiempo Indefinido">Tiempo Indefinido</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="80BCA57612FF46EC956AD05C2CA11F74" trl="N">
+    <value column="Name" isTrl="N" original="Ocasional">Ocasional</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="8161744C0CB44DF1BFBED4F8AB353194" trl="N">
+    <value column="Name" isTrl="Y" original="Completar">Completado</value>
+    <value column="Description" isTrl="Y" original="Completar">Completado</value>
+  </row>
+  <row id="826A17E2D75045D1992821D405696A33" trl="N">
+    <value column="Name" isTrl="N" original="Desaucio">Desaucio</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="86709AFEFB0A4AEDB9C7D9D30F5C29FD" trl="N">
+    <value column="Name" isTrl="N" original="2020">2020</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="8BA08ADF454A4AAEA4879622A4D63959" trl="N">
+    <value column="Name" isTrl="N" original="Borrador">Borrador</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="8BC159C6EA984926A03685959B2CF5F6" trl="N">
+    <value column="Name" isTrl="N" original="Liquidar">Liquidar</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="8CC59CD955934296B9C04AE22C444CAA" trl="N">
+    <value column="Name" isTrl="N" original="Abandono">Abandono</value>
+    <value column="Description" isTrl="N" original="Abandono">Abandono</value>
+  </row>
+  <row id="8E9F14E74BAF433DA60A8DD350FF512A" trl="N">
+    <value column="Name" isTrl="N" original="Marzo">Marzo</value>
+    <value column="Description" isTrl="N" original="Marzo">Marzo</value>
+  </row>
+  <row id="8F17FD15C7844694AE7C7222AAFB4818" trl="N">
+    <value column="Name" isTrl="N" original="Gastos Vestimenta">Gastos Vestimenta</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="8F7AF689FF2F485AB57437CC343C081C" trl="N">
+    <value column="Name" isTrl="N" original="Cancelado">Cancelado</value>
+    <value column="Description" isTrl="N" original="Cancelado">Cancelado</value>
+  </row>
+  <row id="95CE0FF2DE0045F3AD70F87BADDC834B" trl="N">
+    <value column="Name" isTrl="N" original="Reactivar">Reactivar</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="98D29A4D5B424A02899387D3520B1A11" trl="N">
+    <value column="Name" isTrl="N" original="Tiempo Fijo">Tiempo Fijo</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="999A741E1E1146F3B4D7E0B1358BE754" trl="N">
+    <value column="Name" isTrl="N" original="Médico">Médico</value>
+    <value column="Description" isTrl="N" original="Permiso Médico">Permiso Médico</value>
+  </row>
+  <row id="9C56674E42F94F039C9188FCAC0012F6" trl="N">
+    <value column="Name" isTrl="N" original="2013">2013</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="A02774182C544B5EB40F6C6C22C7C9D8" trl="N">
+    <value column="Name" isTrl="N" original="Eventual">Eventual</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="A394FDB9204F48DBB48E07C5FFD87EC0" trl="N">
+    <value column="Name" isTrl="N" original="Jornada Parcial">Jornada Parcial</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="A3E8FA448F9641F78D0FFDB433C87C24" trl="N">
+    <value column="Name" isTrl="N" original="Reactivado">Reactivado</value>
+    <value column="Description" isTrl="N" original="Reactivado">Reactivado</value>
+  </row>
+  <row id="A493E998C8864DA39A271319539F86C8" trl="N">
+    <value column="Name" isTrl="N" original="2019">2019</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="A60522472ACC469FA01631F97D5AAC2A" trl="N">
+    <value column="Name" isTrl="N" original="Permiso Medico">Permiso Medico</value>
+    <value column="Description" isTrl="N" original="Permiso Medico">Permiso Medico</value>
+  </row>
+  <row id="A6063DA1A54C4DD78C729B148349C0A2" trl="N">
+    <value column="Name" isTrl="N" original="Administrativo">Administrativo</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="A9BA3206A83146949E9B8E054D262158" trl="N">
+    <value column="Name" isTrl="N" original="Trámites Personales">Trámites Personales</value>
+    <value column="Description" isTrl="N" original="Trámites Personales">Trámites Personales</value>
+  </row>
+  <row id="AAF96AFB04CE46A3980E2B58121FA038" trl="N">
+    <value column="Name" isTrl="N" original="Pagado">Pagado</value>
+    <value column="Description" isTrl="N" original="Pagado">Pagado</value>
+  </row>
+  <row id="AF0B97C35EAF4562A638DE575B5C1FFF" trl="N">
+    <value column="Name" isTrl="N" original="Febrero">Febrero</value>
+    <value column="Description" isTrl="N" original="Febrero">Febrero</value>
+  </row>
+  <row id="AFB912D2369046DCA290BB1FE7903B87" trl="N">
+    <value column="Name" isTrl="N" original="SIN sistema de salario neto">SIN sistema de salario neto</value>
+    <value column="Description" isTrl="N" original="SIN sistema de salario neto">SIN sistema de salario neto</value>
+  </row>
+  <row id="B48EFAD567D343FEBCE5391A673C0D3E" trl="N">
+    <value column="Name" isTrl="N" original="Fin de Mes">Fin de Mes</value>
+    <value column="Description" isTrl="N" original="Fin de Mes">Fin de Mes</value>
+  </row>
+  <row id="B63798E610EE43E3A6F7BCAB87FE7E4A" trl="N">
+    <value column="Name" isTrl="Y" original="Anular">Cancelado</value>
+    <value column="Description" isTrl="Y" original="Anular">Cancelado</value>
+  </row>
+  <row id="BBE208F1464F41BFBB47126152DF6465" trl="N">
+    <value column="Name" isTrl="N" original="Cónyuge">Cónyuge</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="BBEE1D4346BE406F9F0A29CC0A7A267C" trl="N">
+    <value column="Name" isTrl="N" original="Masculino">Masculino</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="BC9DF019135E4CE6831E796D5FD1CF49" trl="N">
+    <value column="Name" isTrl="N" original="Capacitación">Capacitación</value>
+    <value column="Description" isTrl="N" original="Capacitación">Capacitación</value>
+  </row>
+  <row id="C1389F8990764B6186C21106C14DBCBA" trl="N">
+    <value column="Name" isTrl="N" original="Femenino">Femenino</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="C92824F39B2846B48701A8DCE3F6E121" trl="N">
+    <value column="Name" isTrl="N" original="Gastos Educacion">Gastos Educacion</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="CC0E99A4E1784125B369BB0A39FD95F8" trl="N">
+    <value column="Name" isTrl="N" original="Anular">Anular</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="D000E20A96BE4A9C92AAE488144D0BAF" trl="N">
+    <value column="Name" isTrl="N" original="Union Libre">Union Libre</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="D1846ADB2EF34BE1814201593A71F232" trl="N">
+    <value column="Name" isTrl="N" original="Horas Extras">Horas Extras</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="D52EF661A5014FC18E264EED4F060771" trl="N">
+    <value column="Name" isTrl="N" original="Jornada Nocturna">Jornada Nocturna</value>
+    <value column="Description" isTrl="N" original="Jornada Nocturna">Jornada Nocturna</value>
+  </row>
+  <row id="D7476A704443493F920D8A7BED1B303E" trl="N">
+    <value column="Name" isTrl="N" original="Diario">Diario</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="DD8598A670234B75A5978D8245692852" trl="N">
+    <value column="Name" isTrl="N" original="Soltero(a)">Soltero(a)</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="DD999A31FF8046B98B5CCB6A94F481E0" trl="N">
+    <value column="Name" isTrl="N" original="Quincenal">Quincenal</value>
+    <value column="Description" isTrl="N" original="Quincenal">Quincenal</value>
+  </row>
+  <row id="E2B9C7AC47D148B9870E3D88EC10964B" trl="N">
+    <value column="Name" isTrl="N" original="Borrador">Borrador</value>
+    <value column="Description" isTrl="N" original="Borrador">Borrador</value>
+  </row>
+  <row id="E40A67AA6F33462D81457D4D967A14EC" trl="N">
+    <value column="Name" isTrl="N" original="Gastos Salud">Gastos Salud</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="E6DF049D67524839A7E4AACE9235FE88" trl="N">
+    <value column="Name" isTrl="N" original="Borrador">Borrador</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="E8BC67C2A0134E288BDA9DFD27B2AF1D" trl="N">
+    <value column="Name" isTrl="N" original="2017">2017</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="E9D2223426DB498A92CA2E5C9FE0901D" trl="N">
+    <value column="Name" isTrl="N" original="Viudo(a)">Viudo(a)</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="E9F4D96ED83B456EA5D42C260080F08A" trl="N">
+    <value column="Name" isTrl="N" original="Junio">Junio</value>
+    <value column="Description" isTrl="N" original="Junio">Junio</value>
+  </row>
+  <row id="EBD2FB81C27D4EDCB29D3B6EC49EB132" trl="N">
+    <value column="Name" isTrl="N" original="Reactivar">Reactivar</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="EBD33685A5FF48FF8F3A0AD23A1BE4E0" trl="N">
+    <value column="Name" isTrl="N" original="CON sistema de salario neto">CON sistema de salario neto</value>
+    <value column="Description" isTrl="N" original="CON sistema de salario neto">CON sistema de salario neto</value>
+  </row>
+  <row id="EECE17ABAFAD40E8BE9E5F1A5D185F09" trl="N">
+    <value column="Name" isTrl="N" original="Gastos Alimentación">Gastos Alimentación</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="F19D8B5EC1204BF3BEFDE4AA51E2BA75" trl="N">
+    <value column="Name" isTrl="N" original="Calamidad Domestica">Calamidad Domestica</value>
+    <value column="Description" isTrl="N" original="Calamidad Domestica">Calamidad Domestica</value>
+  </row>
+  <row id="F6864CAC5C8D451A95E93BBF18B503FE" trl="N">
+    <value column="Name" isTrl="N" original="Calamidad Doméstica">Calamidad Doméstica</value>
+    <value column="Description" isTrl="N" original="Calamidad Doméstica">Calamidad Doméstica</value>
+  </row>
+  <row id="F742EBF7DFC64116A6F7BE484906A659" trl="N">
+    <value column="Name" isTrl="N" original="Enero">Enero</value>
+    <value column="Description" isTrl="N" original="Enero">Enero</value>
+  </row>
+  <row id="F7719384E82C4732B638ABCC951EA2DE" trl="N">
+    <value column="Name" isTrl="N" original="Casado(a)">Casado(a)</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="F808A9628A75437FBC22D200EE863FBA" trl="N">
+    <value column="Name" isTrl="N" original="Completar">Completar</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="F86EB308A64C4B6AB1CB1C42DF4CC2DD" trl="N">
+    <value column="Name" isTrl="N" original="Divorciado(a)">Divorciado(a)</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="F9D8DB390953448C985EB82E2434B575" trl="N">
+    <value column="Name" isTrl="N" original="2016">2016</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="FAF01C6F91994DC6898E780357C7D90E" trl="N">
+    <value column="Name" isTrl="N" original="Quincenal">Quincenal</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="FB9C2B61FE584D73858ADD7A19EF259E" trl="N">
+    <value column="Name" isTrl="N" original="Nomina Liquidación">Nomina Liquidación</value>
+    <value column="Description" isTrl="N" original="Nomina Liquidación">Nomina Liquidación</value>
+  </row>
+  <row id="FCA4A640B8E44AAAB765003E926B8595" trl="N">
+    <value column="Name" isTrl="N" original="Gerente">Gerente</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+  <row id="FDD35A39B75A4EC2AE6460E1F9F13A3F" trl="N">
+    <value column="Name" isTrl="N" original="Noviembre">Noviembre</value>
+    <value column="Description" isTrl="N" original="Noviembre">Noviembre</value>
+  </row>
+</compiereTrl>

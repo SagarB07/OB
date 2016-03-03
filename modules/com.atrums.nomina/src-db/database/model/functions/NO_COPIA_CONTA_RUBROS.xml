@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_COPIA_CONTA_RUBROS">
+    <function name="NO_COPIA_CONTA_RUBROS" type="NULL">
+      <body><![CDATA[v_bpartner_id varchar(32); 
+		v_result varchar(1000); 
+        v_n_debe_acct varchar(32);
+        v_n_haber_acct varchar(32);
+        v_acctschema_id varchar(32);
+		Cur_Rubros RECORD;
+	BEGIN
+		
+		delete from no_cb_empleado_acct;
+			
+			FOR Cur_Rubros IN (
+				SELECT ad_client_id,   ad_org_id,      created,        createdby,
+                       updated,        updatedby,      c_bpartner_id,  no_tipo_ingreso_egreso_id
+                  FROM no_empleado_ing_egr 
+                
+			) LOOP
+
+                select c_acctschema_id,n_debe_acct,n_haber_acct
+                    into v_acctschema_id, v_n_debe_acct, v_n_haber_acct   
+                      from no_tipo_ing_egr_acct
+                     where no_tipo_ingreso_egreso_id = Cur_Rubros.no_tipo_ingreso_egreso_id;
+				
+				INSERT INTO no_cb_empleado_acct (no_cb_empleado_acct_id,        ad_client_id,               ad_org_id,              isactive,
+                                                 created,                       createdby,                  updated,                updatedby,
+                                                 c_bpartner_id,                 c_acctschema_id,            no_cuenta_ingreso_acct, no_tipo_ingreso_egreso_id,
+                                                 no_cuenta_egreso_acct)
+                                        VALUES  (get_uuid(),                    Cur_Rubros.ad_client_id,    Cur_Rubros.ad_org_id,   'Y',
+                                                now(),                 Cur_Rubros.createdby,       now(),         Cur_Rubros.updatedby,
+                                                Cur_Rubros.c_bpartner_id,       v_acctschema_id,            v_n_debe_acct,          Cur_Rubros.no_tipo_ingreso_egreso_id,
+                                                v_n_haber_acct);
+													
+													
+													
+			END LOOP;
+		
+		Return;
+END NO_COPIA_CONTA_RUBROS
+]]></body>
+    </function>
+  </database>

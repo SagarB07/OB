@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_BORRAR_LIQ_EMP_TRG">
+    <trigger name="NO_BORRAR_LIQ_EMP_TRG" table="NO_LIQUIDA_EMPLEADO_LINE" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+BEGIN
+    
+
+    IF DELETING THEN
+       
+        select docstatus into v_docstatus from no_liquidacion_empleado
+        where no_liquidacion_empleado_id=:old.no_liquidacion_empleado_id;
+
+        IF(v_docstatus='CO' OR v_docstatus='AN')then
+            v_mensaje='@NO_PERMITE_BORRA_DATOS@';
+            RAISE exception '%',v_mensaje;
+
+        END IF;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_BORRAR_LIQ_EMP_TRG
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VACACIONES_TRG">
+    <trigger name="NO_VACACIONES_TRG" table="NO_VACACION_LINEA" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+fecha_ini DATE;
+fecha_fi DATE;
+v_mensaje VARCHAR;
+
+
+BEGIN
+				
+	select fecha_inicio INTO fecha_ini 
+									FROM no_vacacion_linea
+									where no_vacacion_linea_id=:new.no_vacacion_linea_id;	
+									
+	select fecha_fin INTO fecha_fi
+									FROM no_vacacion_linea
+									where no_vacacion_linea_id=:new.no_vacacion_linea_id;	
+									
+    IF (UPDATING OR INSERTING) THEN	
+	
+        IF(fecha_fi<fecha_ini)THEN
+            	v_mensaje:='@NO_VACACION_FECHA@';
+			RAISE v_mensaje;
+		END IF;
+    
+    END IF;
+    RETURN NEW; 
+END NO_VACACIONES_TRG
+]]></body>
+    </trigger>
+  </database>

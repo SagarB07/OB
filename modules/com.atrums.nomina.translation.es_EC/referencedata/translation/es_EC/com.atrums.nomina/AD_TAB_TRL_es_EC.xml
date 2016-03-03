@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_TAB" version="">
+  <row id="00E24D4D2F074977B69197B0A12B8189" trl="N">
+    <value column="Name" isTrl="N" original="Linea">Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Detalle del rol de provisiones">Detalle del rol de provisiones</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Detalle del rol de provisiones">Detalle del rol de provisiones</value>
+  </row>
+  <row id="0173A7D3F29E4369B67FEB376EE6FFEA" trl="N">
+    <value column="Name" isTrl="N" original="Cabecera Descuento">Cabecera Descuento</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="030D19C3A2434EC5A02B5113AF75FB84" trl="N">
+    <value column="Name" isTrl="N" original="Linea">Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ingresa la linea de las vacaciones">Ingresa la linea de las vacaciones</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ingresa la linea de las vacaciones">Ingresa la linea de las vacaciones</value>
+  </row>
+  <row id="0C51ECCEBC5F448FA60FF1A7DE775ED9" trl="N">
+    <value column="Name" isTrl="N" original="Contrato Empleado">Contrato Empleado</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="0CF9CC9DC8A94A1195AC506347BA3455" trl="N">
+    <value column="Name" isTrl="Y" original="Registro Gastos Deducibles">Registro de gastos deducibles anuales del empleado</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1233721A9756424EA0F9F757F1F30B45" trl="N">
+    <value column="Name" isTrl="N" original="Utilidades Linea">Utilidades Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1A494514BE7F40F8B690F93F3EB6D760" trl="N">
+    <value column="Name" isTrl="Y" original="Configuración Hora">Configuración Hora Extras</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="Y" original="Configuración Hora Extras y Atrasos">Configuración de horas extras</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Configuración Hora Extras y Atrasos">Configuración de horas extras</value>
+  </row>
+  <row id="2407AED87B05460DBD174C5F8EF29677" trl="N">
+    <value column="Name" isTrl="N" original="Rol de Provisiones">Rol de Provisiones</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Registra las provisiones de los empleados">Registra las provisiones de los empleados</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Registra las provisiones de los empleados">Registra las provisiones de los empleados</value>
+  </row>
+  <row id="2A421C303A5643C695DCD5FE1CD10328" trl="N">
+    <value column="Name" isTrl="N" original="Linea">Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Almacena las lineas de la tabla calcula rubro">Almacena las lineas de la tabla calcula rubro</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Almacena las lineas de la tabla calcula rubro">Almacena las lineas de la tabla calcula rubro</value>
+  </row>
+  <row id="2DFF6685FE164389AAAF76B4C450CEF5" trl="N">
+    <value column="Name" isTrl="N" original="Reporte Cargas Familiares">Reporte Cargas Familiares</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="375F8A61F52D41D6A72639CE12A97ED7" trl="N">
+    <value column="Name" isTrl="N" original="Permiso de Empleados">Permiso de Empleados</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Pantalla donde se solicitan y se aprueban los permisos de un Empleado">Pantalla donde se solicitan y se aprueban los permisos de un Empleado</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Pantalla donde se solicitan y se aprueban los permisos de un Empleado">Pantalla donde se solicitan y se aprueban los permisos de un Empleado</value>
+  </row>
+  <row id="401ADBB66C4E481593DCD119E04451E8" trl="N">
+    <value column="Name" isTrl="N" original="Cuenta Empleado Rubro">Cuenta Empleado Rubro</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Configuración de Cuenta Contable del empleado por cada rubro del rol de pago y provisión">Configuración de Cuenta Contable del empleado por cada rubro del rol de pago y provisión</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Configuración de Cuenta Contable del empleado por cada rubro del rol de pago y provisión.">Configuración de Cuenta Contable del empleado por cada rubro del rol de pago y provisión.</value>
+  </row>
+  <row id="424295FE162A4CF88B993BD228C47679" trl="N">
+    <value column="Name" isTrl="N" original="Pago Nomina Cabecera">Pago Nomina Cabecera</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Es una pestaña que permite los pagos de nomina">Es una pestaña que permite los pagos de nomina</value>
+  </row>
+  <row id="55D81228F99B47F8AAC41D1DE0175DFC" trl="N">
+    <value column="Name" isTrl="N" original="Liquidación Empleado">Liquidación Empleado</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Muestra la ventana de Liquidacion Empleado">Muestra la ventana de Liquidacion Empleado</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Muestra la ventana de Liquidacion Empleado">Muestra la ventana de Liquidacion Empleado</value>
+  </row>
+  <row id="6E8EDEC4D2C24B338CE13621D4DB3A00" trl="N">
+    <value column="Name" isTrl="N" original="Linea">Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Detalle del Rol de pagos">Detalle del Rol de pagos</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Detalle del Rol de pagos">Detalle del Rol de pagos</value>
+  </row>
+  <row id="6FF22921D16B4043A16ACDCD4C751290" trl="N">
+    <value column="Name" isTrl="N" original="Provisión Mensual">Provisión Mensual</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="73F13903850E4045BB1933F61EB7C133" trl="N">
+    <value column="Name" isTrl="N" original="Pago Nomina Linea">Pago Nomina Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="780D8D8AED8D4D05B740E02687292A1C" trl="N">
+    <value column="Name" isTrl="N" original="Utilidades">Utilidades</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="805123D0D0EA4763B4FFE1F49D5EC958" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Rubro Contabilidad">Tipo Rubro Contabilidad</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Configuración de la contabilidad de los tipos de rubros para la liquidación">Configuración de la contabilidad de los tipos de rubros para la liquidación</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Configuración de la contabilidad de los tipos de rubros para la liquidación">Configuración de la contabilidad de los tipos de rubros para la liquidación</value>
+  </row>
+  <row id="842CC2DF626D478498EF81923785A8F5" trl="N">
+    <value column="Name" isTrl="N" original="Vacaciones">Vacaciones</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Muestra la ventana de vacaciones">Muestra la ventana de vacaciones</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Muestra la ventana de vacaciones">Muestra la ventana de vacaciones</value>
+  </row>
+  <row id="896E50C8AF744624B8BA94C83B2461AD" trl="N">
+    <value column="Name" isTrl="N" original="Periodo de Comisión">Periodo de Comisión</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Periodo al que se le aplicara la comisión en el rol de pagos">Periodo al que se le aplicara la comisión en el rol de pagos</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Periodo al que se le aplicara la comisión en el rol de pagos">Periodo al que se le aplicara la comisión en el rol de pagos</value>
+  </row>
+  <row id="91DA68647D2441E39E114E62A7EFAFE5" trl="N">
+    <value column="Name" isTrl="N" original="Contabilidad">Contabilidad</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="9627836015B94CF6ACD14D0E16F4627B" trl="N">
+    <value column="Name" isTrl="N" original="Rol de Pagos">Rol de Pagos</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Genera los datos de la cabecera de los roles de pagos de los empleados">Genera los datos de la cabecera de los roles de pagos de los empleados</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Genera los datos de la cabecera de los roles de pagos de los empleados">Genera los datos de la cabecera de los roles de pagos de los empleados</value>
+  </row>
+  <row id="98D331B7C9484CB1A3EBEEA0B4F6F7A6" trl="N">
+    <value column="Name" isTrl="N" original="Carga/Empleado">Carga/Empleado</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ventana que recopila la informacion de la carga del empleado">Ventana que recopila la informacion de la carga del empleado</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ventana que recopila la informacion de la carga del empleado">Ventana que recopila la informacion de la carga del empleado</value>
+  </row>
+  <row id="A75D1A21DB9948F5B30F09B507C0AB22" trl="N">
+    <value column="Name" isTrl="N" original="Gastos Linea">Gastos Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B4377E05C536464A9DF25A5BF61449F0" trl="N">
+    <value column="Name" isTrl="N" original="Plan de Pagos">Plan de Pagos</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Registra los planes de pagos de salarios para los empleados">Registra los planes de pagos de salarios para los empleados</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Registra los planes de pagos de salarios para los empleados">Registra los planes de pagos de salarios para los empleados</value>
+  </row>
+  <row id="B95F4298774847A38BDF5274B1ECBA3B" trl="N">
+    <value column="Name" isTrl="N" original="Linea">Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Registra la linea de liquidación del impuesto a la renta">Registra la linea de liquidación del impuesto a la renta</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Registra la linea de liquidación del impuesto a la renta">Registra la linea de liquidación del impuesto a la renta</value>
+  </row>
+  <row id="BBBECA2FF2624A3895B76400CC11BE52" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Rubro Liquidación">Tipo Rubro Liquidación</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Muestra el tipo de rubro de liquidacion">Muestra el tipo de rubro de liquidacion</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Muestra el tipo de rubro de liquidacion">Muestra el tipo de rubro de liquidacion</value>
+  </row>
+  <row id="C018CCAD1E4F435EB18BF1CCA45604CC" trl="N">
+    <value column="Name" isTrl="N" original="Registrar Avances Line">Registrar Avances Line</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ingresa las lineas de la tabla registra avance">Ingresa las lineas de la tabla registra avance</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ingresa las lineas de la tabla registra avance">Ingresa las lineas de la tabla registra avance</value>
+  </row>
+  <row id="C44BEC2E9C3A42D095E937A9E24A587D" trl="N">
+    <value column="Name" isTrl="N" original="Tipo de Ingresos o Egresos">Tipo de Ingresos o Egresos</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Determina el tipo de Ingreso o Egreso">Determina el tipo de Ingreso o Egreso</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Determina el tipo de Ingreso o Egreso">Determina el tipo de Ingreso o Egreso</value>
+  </row>
+  <row id="C4FF5202C0C843FA8F8E11400B0F67C1" trl="N">
+    <value column="Name" isTrl="N" original="Ingreso o Egreso Empleado">Ingreso o Egreso Empleado</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Asociación de Ingreso o Egreso al Empleado">Asociación de Ingreso o Egreso al Empleado</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Asociación de Ingreso o Egreso al Empleado.">Asociación de Ingreso o Egreso al Empleado.</value>
+  </row>
+  <row id="CF85116453E34E9496A39B480BE8D642" trl="N">
+    <value column="Name" isTrl="N" original="Area">Area</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ingresa el Area de la Empresa">Ingresa el Area de la Empresa</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ingresa el Area de la Empresa">Ingresa el Area de la Empresa</value>
+  </row>
+  <row id="D6E6846C2564435F9B297860CB950D31" trl="N">
+    <value column="Name" isTrl="N" original="Registrar Anticipos">Registrar Anticipos</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ventana que Registra el avance">Ventana que Registra el avance</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ventana que Registra el avance">Ventana que Registra el avance</value>
+  </row>
+  <row id="D8586816A3AA4674A33A40384A799085" trl="N">
+    <value column="Name" isTrl="N" original="Liquidación del Impuesto a la Renta">Liquidación del Impuesto a la Renta</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Registra la liquidación del impuesto a la renta">Registra la liquidación del impuesto a la renta</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Registra la liquidación del impuesto a la renta">Registra la liquidación del impuesto a la renta</value>
+  </row>
+  <row id="DE198F030B0041AD81E64862316912F0" trl="N">
+    <value column="Name" isTrl="Y" original="Registro de Horas">Registro Horas Extras</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="Y" original="Registro de Horas Extras y Atrasos">Registro Horas Extras</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Registro de Horas Extras y Atrasos">Registro Horas Extras</value>
+  </row>
+  <row id="E43E851CFD244FB78F49AF1E096E89B7" trl="N">
+    <value column="Name" isTrl="N" original="Detalle Descuento">Detalle Descuento</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="E60C1C6FAA1441FE86E703C8C8C67FC1" trl="N">
+    <value column="Name" isTrl="N" original="Calcula Rubro">Calcula Rubro</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ventana que permite ingresar los rubros ">Ventana que permite ingresar los rubros </value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ventana que permite ingresar los rubros ">Ventana que permite ingresar los rubros </value>
+  </row>
+  <row id="F5C6F94A9B664D5FA67D17E8CB2A7F4A" trl="N">
+    <value column="Name" isTrl="N" original="Registro Comisión">Registro Comisión</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Registro del vendedor y el valor de comisión que le corresponde">Registro del vendedor y el valor de comisión que le corresponde</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Registro del vendedor y el valor de comisión que le corresponde">Registro del vendedor y el valor de comisión que le corresponde</value>
+  </row>
+  <row id="F8373147C38C4E07A75D0BCB473968DD" trl="N">
+    <value column="Name" isTrl="N" original="Linea">Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original="Ingresa las lineas de la tbla liquidacion empleado">Ingresa las lineas de la tbla liquidacion empleado</value>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Ingresa las lineas de la tabla liquidacion empleado">Ingresa las lineas de la tabla liquidacion empleado</value>
+  </row>
+</compiereTrl>

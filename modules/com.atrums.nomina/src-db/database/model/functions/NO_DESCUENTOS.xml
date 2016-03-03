@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_DESCUENTOS">
+    <function name="NO_DESCUENTOS" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_valor_calculo NUMBER:=0;
+
+BEGIN
+
+select round(sum(rgl.valor),2)
+into v_valor_calculo
+from no_registro_gasto rg, no_registro_gasto_line rgl
+where rg.no_registro_gasto_id = rgl.no_registro_gasto_id
+and rg.c_period_id = p_period_id
+and rg.c_bpartner_id = p_empleado_id 
+and rgl.no_tipo_ingreso_egreso_id = p_tipo_ingreso_egreso_id;
+
+return v_valor_calculo;
+END NO_DESCUENTOS
+]]></body>
+    </function>
+  </database>

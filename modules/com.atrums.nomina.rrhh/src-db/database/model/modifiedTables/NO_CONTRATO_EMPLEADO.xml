@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE NO_CONTRATO_EMPLEADO">
+    <table name="NO_CONTRATO_EMPLEADO" primaryKey="NO_CONTRATO_EMPLEADO_KEY">
+      <column name="EM_ATNORH_CARGO_ID" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

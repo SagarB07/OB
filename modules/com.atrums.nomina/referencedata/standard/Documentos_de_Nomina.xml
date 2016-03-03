@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ADSequence id="00D5F9EA28A545F1BC6ED0C71B38B970" identifier="NO_LiquidaEmpleado">
+    <id>00D5F9EA28A545F1BC6ED0C71B38B970</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-29T00:32:08.71Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:32:08.71Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>NO_LiquidaEmpleado</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1000000</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+  <ADSequence id="1DBCFF3117C5407B8A801B4F6EFD5116" identifier="NO_RolPago">
+    <id>1DBCFF3117C5407B8A801B4F6EFD5116</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-29T00:26:51.386Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:26:51.386Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>NO_RolPago</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1000000</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+  <ADSequence id="5044A26030704556B48BE69AB8429F8D" identifier="No_ContratoLaboral">
+    <id>5044A26030704556B48BE69AB8429F8D</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-28T23:45:19.809Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:24:00.214Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>No_ContratoLaboral</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1000000</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+  <ADSequence id="DC335F69E566438882D99E44F46461E9" identifier="NO_RolProvision">
+    <id>DC335F69E566438882D99E44F46461E9</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-29T00:28:44.585Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:28:44.585Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>NO_RolProvision</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1000000</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+  <DocumentType id="2DA7EAA1394846FA9516AF96319BD933" identifier="Rol de Provision">
+    <id>2DA7EAA1394846FA9516AF96319BD933</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-29T00:28:21.474Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:30:11.725Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>Rol de Provision</name>
+    <printText>Rol de Provision</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>---</documentCategory>
+    <salesTransaction>false</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="DC335F69E566438882D99E44F46461E9" entity-name="ADSequence" identifier="NO_RolProvision"/>
+    <gLCategory id="FF8080812C2ABFC6012C2B3BE4980098" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="F5057A2680BB43149D7C57B1224A7653" entity-name="ADTable" identifier="no_rol_pago_provision"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <noDocbasetExterno>NPP</noDocbasetExterno>
+  </DocumentType>
+  <DocumentType id="76196ADC01214E4283660A9DF18AFB93" identifier="Rol de Pago">
+    <id>76196ADC01214E4283660A9DF18AFB93</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-29T00:27:06.610Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:27:06.610Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>Rol de Pago</name>
+    <printText>Rol de Pago</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>---</documentCategory>
+    <salesTransaction>true</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="1DBCFF3117C5407B8A801B4F6EFD5116" entity-name="ADSequence" identifier="NO_RolPago"/>
+    <gLCategory id="FF8080812C2ABFC6012C2B3BE4980098" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="F5057A2680BB43149D7C57B1224A7653" entity-name="ADTable" identifier="no_rol_pago_provision"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <noDocbasetExterno>NRP</noDocbasetExterno>
+  </DocumentType>
+  <DocumentType id="AACF03A176BA42CFBEEB0D660CACBB54" identifier="Contrato Laboral">
+    <id>AACF03A176BA42CFBEEB0D660CACBB54</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-28T23:45:24.604Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-28T23:52:57.625Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>Contrato Laboral</name>
+    <printText>Contrato Laboral</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>---</documentCategory>
+    <salesTransaction>true</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="5044A26030704556B48BE69AB8429F8D" entity-name="ADSequence" identifier="No_ContratoLaboral"/>
+    <gLCategory id="FF8080812C2ABFC6012C2B3BE4980098" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="1B6DA178D9C743D5AF4C717B1DAEB8F3" entity-name="ADTable" identifier="no_contrato_empleado"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <noDocbasetExterno>NC</noDocbasetExterno>
+  </DocumentType>
+  <DocumentType id="C296BD43E07A4F0BB5B9D36CD9414378" identifier="Liquidación de Empleado">
+    <id>C296BD43E07A4F0BB5B9D36CD9414378</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-29T00:31:25.17Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-29T00:32:27.158Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>Liquidación de Empleado</name>
+    <printText>Liquidación de Empleado</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>---</documentCategory>
+    <salesTransaction>false</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="00D5F9EA28A545F1BC6ED0C71B38B970" entity-name="ADSequence" identifier="NO_LiquidaEmpleado"/>
+    <gLCategory id="FF8080812C2ABFC6012C2B3BE4980098" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="793C7712020D4F629A9F2131D534700D" entity-name="ADTable" identifier="no_liquidacion_empleado"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <noDocbasetExterno>NL</noDocbasetExterno>
+  </DocumentType>
+</ob:Openbravo>

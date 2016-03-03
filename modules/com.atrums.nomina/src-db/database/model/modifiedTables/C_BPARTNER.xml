@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE C_BPARTNER">
+    <table name="C_BPARTNER" primaryKey="C_BPARTNER_KEY">
+      <column name="EM_NO_FECHAINGRESO" primaryKey="false" required="false" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_FECHASALIDA" primaryKey="false" required="false" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_ESTADOCIVIL" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_GENERO" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_FECHANACIMIENTO" primaryKey="false" required="false" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_AREA_EMPRESA_ID" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_MOTIVO_SALIDA" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_SISSALNET" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_ISDISCAPACITADO" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_ISTERCERA_EDAD" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NO_PAGO_ACCT" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="NO_AREA_EMPRESA" name="EM_NO_AREA_EMPRESA">
+        <reference local="EM_NO_AREA_EMPRESA_ID" foreign="NO_AREA_EMPRESA_ID"/>
+      </foreign-key>
+    </table>
+  </database>

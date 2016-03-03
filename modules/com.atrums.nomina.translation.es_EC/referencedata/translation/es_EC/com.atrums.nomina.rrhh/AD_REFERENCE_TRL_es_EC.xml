@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_REFERENCE" version="">
+  <row id="D3ABDF451DE343F592A72DF0B8238870" trl="N">
+    <value column="Name" isTrl="N" original="Referencia_Cargo_Empleado">Referencia_Cargo_Empleado</value>
+    <value column="Description" isTrl="N" original="Referencia_Cargo_Empleado">Referencia_Cargo_Empleado</value>
+    <value column="Help" isTrl="N" original="Referencia_Cargo_Empleado">Referencia_Cargo_Empleado</value>
+  </row>
+</compiereTrl>

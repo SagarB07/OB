@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_GENERA_VALOR_RPROVISION">
+    <function name="NO_GENERA_VALOR_RPROVISION" type="NULL">
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_org_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_client_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_usuario" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_dateacct" type="TIMESTAMP" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):=''; 
+    v_Message VARCHAR(2000):=''; 
+    v_Result NUMBER:=1; 
+   
+    Cur_Rol_Provision_L RECORD;
+    Cur_Calcula_Robro_L RECORD;
+    
+    v_rol_prov_line_mes_id VARCHAR(32); 
+    v_org_id VARCHAR(32); 
+    v_client_id VARCHAR(32); 
+    
+    v_doctype_id VARCHAR(32); 
+    v_documentno VARCHAR; 
+   
+    v_qry varchar;
+    v_valor_rubro_mes NUMBER:=0;
+    v_valor_aux NUMBER:=0;
+    v_salario NUMBER:=0;
+
+    v_mesProvision VARCHAR;
+    v_ultimo_dia_mes NUMBER:=0;
+    v_dias_trabajo NUMBER:=0;
+    v_tipo_ingreso_egreso_id VARCHAR(32); 
+    v_no_rol_pago_prov_line_id VARCHAR(32); 
+    v_no_rol_pago_provision_id VARCHAR(32);
+
+    v_currency_orig_id VARCHAR(32); 
+    v_fechafin DATE;
+    v_esMes CHAR(1);
+
+    v_process_id VARCHAR(32);
+    v_pinstance_id VARCHAR(32);
+    v_client VARCHAR(32);
+    v_org VARCHAR(32);
+
+BEGIN
+
+    BEGIN 
+    
+        DBMS_OUTPUT.PUT_LINE('Inicio ejecucion');
+        DBMS_OUTPUT.PUT_LINE(p_bpartner_id);
+        DBMS_OUTPUT.PUT_LINE(p_period_id);
+        DBMS_OUTPUT.PUT_LINE(p_org_id||' Organizacion');
+        DBMS_OUTPUT.PUT_LINE(p_client_id||' Cliente');
+
+        select ad_client_id, ad_org_id into v_client, v_org from c_bpartner where c_bpartner_id = p_bpartner_id;
+        
+
+        select get_uuid() into v_pinstance_id;
+        select ad_process_id into v_process_id from ad_process where upper(procedurename) = upper('no_genera_rol_provision');
+
+        insert into ad_pinstance(ad_pinstance_id, ad_process_id, record_id, isprocessing, created, 
+                 ad_user_id, updated, result, errormsg, ad_client_id, 
+                 ad_org_id, createdby, updatedby, isactive)
+             values (v_pinstance_id, v_process_id, get_uuid(), 'N', now(), 
+                 p_usuario, now(), 0, ' ', v_client, 
+                 v_org, p_usuario, p_usuario, 'Y');
+
+        NO_GENERA_ROL_PROVISION(v_pinstance_id);
+
+
+                select no_rol_pago_provision_id, ad_org_id, ad_client_id
+                into v_no_rol_pago_provision_id, v_org_id, v_client_id
+                 from no_rol_pago_provision
+                where c_bpartner_id = p_bpartner_id
+                  and ispago = 'N'
+                  and docstatus='CO'
+                  and processed = 'Y'
+                  and isactive='Y';
+
+              
+            DBMS_OUTPUT.PUT_LINE(v_no_rol_pago_provision_id);
+                FOR Cur_Rol_Provision_L IN
+                (select rpl.no_rol_pago_provision_line_id,
+                        tie.no_tipo_ingreso_egreso_id,
+                        tie.no_calcula_rubro_id,
+                        tie.isprovmes,
+                        rpl.fechainicio,
+                        rpl.fechafin,
+                        rpl.c_currency_id,
+                        rpl.line
+                  from no_rol_pago_provision rp,
+                        no_rol_pago_provision_line rpl,
+                        no_tipo_ingreso_egreso tie
+                  where rp.no_rol_pago_provision_id = v_no_rol_pago_provision_id
+                    and rp.no_rol_pago_provision_id = rpl.no_rol_pago_provision_id
+                    and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+                    and rpl.processed = 'Y'
+                    and rp.ispago = 'N'
+                    and date_trunc('Month', rpl.fechafin)::DATE - date_trunc('Month', now())::DATE >= 0
+                    and date_trunc('Month', now())::DATE - date_trunc('Month', rpl.fechainicio)::DATE >= 0)
+
+ 
+                 LOOP
+ 
+raise notice '%','Dentro del cursor provision linea';
+                    v_fechafin:=Cur_Rol_Provision_L.fechafin;
+                    v_tipo_ingreso_egreso_id := Cur_Rol_Provision_L.no_tipo_ingreso_egreso_id;
+                    v_no_rol_pago_prov_line_id:=Cur_Rol_Provision_L.no_rol_pago_provision_line_id;
+                    v_currency_orig_id:=Cur_Rol_Provision_L.c_currency_id;
+
+                    v_valor_rubro_mes:=0;
+                    
+                    select CASE WHEN Cur_Rol_Provision_L.isprovmes = 'Y' then 'N' ELSE 'Y' END
+                      into v_esMes;
+    
+                                     
+                    
+                    IF NOT EXISTS(SELECT * FROM no_rol_provision_line_mes
+                                   WHERE no_rol_pago_provision_line_id=Cur_Rol_Provision_L.no_rol_pago_provision_line_id
+                                     AND c_period_id=p_period_id) THEN
+
+                        
+                        FOR Cur_Calcula_Robro_L IN
+                        (select cr.nombre,
+                                crl.isprocedure,
+                                crl.issalario,
+                                crl.isporcentaje,
+                                crl.valor,
+                                crl.procedure
+                           from no_calcula_rubro cr,
+                                no_calcula_rubro_line crl
+                          where cr.no_calcula_rubro_id = crl.no_calcula_rubro_id
+                            and cr.no_calcula_rubro_id = Cur_Rol_Provision_L.no_calcula_rubro_id
+                          order by crl.line)
+                        LOOP
+                            raise notice '%','Dentro del cursor calcular rubro';
+                            IF Cur_Calcula_Robro_L.isprocedure = 'Y' THEN 
+                                IF Cur_Calcula_Robro_L.procedure is null OR Cur_Calcula_Robro_L.procedure = '' THEN
+                                    v_Message:='@NO_NoExistProcedure@' || Cur_Calcula_Robro_L.nombre;
+                                    RAISE v_Message;
+                                END IF;
+                                v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| p_bpartner_id || ''', '''|| p_period_id ||''');';
+
+                                EXECUTE IMMEDIATE v_qry into v_valor_aux;
+                                v_valor_rubro_mes := v_valor_rubro_mes + COALESCE(v_valor_aux,0);
+                            
+                            ELSIF Cur_Calcula_Robro_L.issalario = 'Y' THEN 
+
+                                    select COALESCE(sum(ppl.valor),0)
+                                      into v_salario
+                                      from no_rol_pago_provision pp,
+                                           no_rol_pago_provision_line ppl,
+                                           no_tipo_ingreso_egreso ie
+                                     where ispago = 'Y'
+                                       and pp.docstatus = 'CO'
+                                       and ppl.no_tipo_ingreso_egreso_id = ie.no_tipo_ingreso_egreso_id
+                                       and ie.suma_ingreso = 'Y'
+                                       and pp.no_rol_pago_provision_id = ppl.no_rol_pago_provision_id
+                                       and pp.c_period_id = p_period_id
+                                       and pp.c_bpartner_id = p_bpartner_id;
+
+
+                                    IF Cur_Calcula_Robro_L.isporcentaje = 'Y' THEN
+                                        v_valor_rubro_mes := v_valor_rubro_mes + (COALESCE(v_salario,0) * COALESCE(Cur_Calcula_Robro_L.valor,0)) / 100;
+                                    ELSE
+                                        v_valor_rubro_mes := COALESCE(v_salario/12,0);
+                                    END IF;
+                                
+                            ELSE 
+                                v_valor_rubro_mes := v_valor_rubro_mes + COALESCE(Cur_Calcula_Robro_L.valor,0)/12;
+
+                            END IF;
+
+                        END LOOP;
+                        
+                        
+                        select extract(day from ((date_trunc('month', now()) + interval '1 month') - interval '1 day')::date)
+                          into v_ultimo_dia_mes;
+
+                        select ((date_trunc('month', now()) + interval '1 month') - interval '1 day')::date - Cur_Rol_Provision_L.fechainicio::Date + 1
+                          into v_dias_trabajo;
+
+                        if v_dias_trabajo < v_ultimo_dia_mes then 
+                            v_valor_rubro_mes := (v_valor_rubro_mes/30) * abs(v_dias_trabajo);
+                        end if;
+
+
+
+
+                        SELECT get_uuid() INTO v_rol_prov_line_mes_id;
+
+                        select c_doctype_id 
+                        into v_doctype_id
+                        from c_doctype where ad_table_id in ('B39EEBB236864717A9F7F6F4A11DCB9C');
+                        
+                        Ad_Sequence_Doctype(v_doctype_id, p_client_id, 'Y', v_documentno);
+                        raise notice '%','Antes de insertar';
+                        INSERT INTO no_rol_provision_line_mes
+                                   (no_rol_provision_line_mes_id,           ad_client_id,       ad_org_id,
+                                    isactive,                               created,            createdby,
+                                    updated,                                updatedby,          no_rol_pago_provision_line_id,
+                                    c_period_id,                            valor,              processed, 
+                                    pago,                                   c_doctype_id,       documentno,
+                                    docstatus,                              docaccionno,         dateacct, 
+                                    processing,                             posted)
+                             VALUES(v_rol_prov_line_mes_id,                 v_client_id,        v_org_id,
+                                    'Y',                                    current_timestamp,  p_usuario,
+                                    current_timestamp,                      p_usuario,          Cur_Rol_Provision_L.no_rol_pago_provision_line_id,
+                                    p_period_id,                            round(v_valor_rubro_mes,2),  'Y',
+                                    v_esMes,                                v_doctype_id,        v_documentno,
+                                    'CO',                                   'RE',                p_dateacct,
+                                    'N',                                    'N');
+                 raise notice '%','Despues de insertar';
+                        IF (date_trunc('Month', v_fechafin)::DATE - date_trunc('Month', now())::DATE) =0 THEN
+                            
+                        END IF;
+
+                    END IF;
+
+                 END LOOP;
+   
+        v_Message:='@NO_EjecucionCorrecta@';
+        DBMS_OUTPUT.PUT_LINE('Finished' || v_Message) ;
+
+        RETURN;
+
+    
+    END;
+
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr);
+
+        RETURN;
+END NO_GENERA_VALOR_RPROVISION
+]]></body>
+    </function>
+  </database>

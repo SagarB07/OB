@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_ALIMENTOS">
+    <function name="NO_ALIMENTOS" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN
+
+return round( 20 * 1.75,2);
+END NO_ALIMENTOS
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="NOValidafondosdereservaData" package="com.atrums.nomina.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+	
+	select MIN(fecha_inicio)
+	from no_contrato_empleado 
+	where c_bpartner_id=?
+	group by c_bpartner_id
+		    
+      ]]>
+    </Sql>
+    <Parameter name="cBpartnerId"/> 
+	
+  </SqlMethod>
+</SqlClass>

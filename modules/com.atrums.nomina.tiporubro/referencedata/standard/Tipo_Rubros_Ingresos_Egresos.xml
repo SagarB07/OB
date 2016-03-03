@@ -1,0 +1,1299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <no_calcula_rubro id="088561AF29CA4CB18EF5A96177D41108" identifier="Calcular Multas">
+    <id>088561AF29CA4CB18EF5A96177D41108</id>
+    <active>true</active>
+    <nombre>Calcular Multas</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="09B0C2FA4E4348ECA5F50CE2F3AE149E" identifier="Compras A Crédito ">
+    <id>09B0C2FA4E4348ECA5F50CE2F3AE149E</id>
+    <active>true</active>
+    <nombre>Compras A Crédito </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="1364F0A9C5EB4A2F9453FFCF1FBB189E" identifier="Descuento Supermaxi ">
+    <id>1364F0A9C5EB4A2F9453FFCF1FBB189E</id>
+    <active>true</active>
+    <nombre>Descuento Supermaxi </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="1452C5525B8B478BA76D9EDA67A77500" identifier="Seguro Médico Voluntario ">
+    <id>1452C5525B8B478BA76D9EDA67A77500</id>
+    <active>true</active>
+    <nombre>Seguro Médico Voluntario </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="17253EE11D5A461694C8297A31DC33CD" identifier="Horas Extraordinarias">
+    <id>17253EE11D5A461694C8297A31DC33CD</id>
+    <active>true</active>
+    <nombre>Horas Extraordinarias</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="1CCF5F3E4EC44413A6E7CBBC7D349631" identifier="Impuesto Renta">
+    <id>1CCF5F3E4EC44413A6E7CBBC7D349631</id>
+    <active>true</active>
+    <nombre>Impuesto Renta</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="20882DC066F244968FFCAFA4A162E07F" identifier="Otros Descuentos  ">
+    <id>20882DC066F244968FFCAFA4A162E07F</id>
+    <active>true</active>
+    <nombre>Otros Descuentos  </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="28822C52F5B74DB79D399FECADD871D9" identifier="Anticipo De Sueldo ">
+    <id>28822C52F5B74DB79D399FECADD871D9</id>
+    <active>true</active>
+    <nombre>Anticipo De Sueldo </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="2C8D9254A5CF4559B7D262489936FAFD" identifier="Icentivos ">
+    <id>2C8D9254A5CF4559B7D262489936FAFD</id>
+    <active>true</active>
+    <nombre>Icentivos </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="30434600731F4D73BDFEDF99B8F86E80" identifier="Prestamos Quirografarios ">
+    <id>30434600731F4D73BDFEDF99B8F86E80</id>
+    <active>true</active>
+    <nombre>Prestamos Quirografarios </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="35ED15722FF2410CB101B48DF8A667CC" identifier="Sueldo">
+    <id>35ED15722FF2410CB101B48DF8A667CC</id>
+    <active>true</active>
+    <nombre>Sueldo</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="3AB483CE64654E598D801EB119D5D691" identifier="Hora Suplementaria">
+    <id>3AB483CE64654E598D801EB119D5D691</id>
+    <active>true</active>
+    <nombre>Hora Suplementaria</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="49F69927847C44B1A088A1FD207FEEE5" identifier="Seguro Vehíclo ">
+    <id>49F69927847C44B1A088A1FD207FEEE5</id>
+    <active>true</active>
+    <nombre>Seguro Vehíclo </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="53B09FFE62554DAFB6F8A8F63D26B986" identifier="Quincenas ">
+    <id>53B09FFE62554DAFB6F8A8F63D26B986</id>
+    <active>true</active>
+    <nombre>Quincenas </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="55613EC8BCFC49BF8705E83FDCA6B314" identifier="Descuento Librería  ">
+    <id>55613EC8BCFC49BF8705E83FDCA6B314</id>
+    <active>true</active>
+    <nombre>Descuento Librería  </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="5D6310A45DD746A09BDA6BBFB33F074D" identifier="Prestamo Hipotecario ">
+    <id>5D6310A45DD746A09BDA6BBFB33F074D</id>
+    <active>true</active>
+    <nombre>Prestamo Hipotecario </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="7C93D2510EDE4CC99C9BE5B0D4E67300" identifier="Bono">
+    <id>7C93D2510EDE4CC99C9BE5B0D4E67300</id>
+    <active>true</active>
+    <nombre>Bono</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="7CE5E633A2EE477CA65DE9EA7D06A3EA" identifier="Subsidio Por Maternidad ">
+    <id>7CE5E633A2EE477CA65DE9EA7D06A3EA</id>
+    <active>true</active>
+    <nombre>Subsidio Por Maternidad </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="860AAF9F56424D0FAA0FFEEE91E4C8CE" identifier="Fondo De Reserva Provisión">
+    <id>860AAF9F56424D0FAA0FFEEE91E4C8CE</id>
+    <active>true</active>
+    <nombre>Fondo De Reserva Provisión</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="9A5BAD0AEBB04B409AB94AABC6C78140" identifier="Prestamo ">
+    <id>9A5BAD0AEBB04B409AB94AABC6C78140</id>
+    <active>true</active>
+    <nombre>Prestamo </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="9BE8CD1D2389403A8284298AD200EF65" identifier="IESS">
+    <id>9BE8CD1D2389403A8284298AD200EF65</id>
+    <active>true</active>
+    <nombre>IESS</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="9BFEBF7305F84696AD15FBF820BEBAD1" identifier="Descuento Celular ">
+    <id>9BFEBF7305F84696AD15FBF820BEBAD1</id>
+    <active>true</active>
+    <nombre>Descuento Celular </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="A23569C125AE45F8A657B055B56CD066" identifier="Comisiones  ">
+    <id>A23569C125AE45F8A657B055B56CD066</id>
+    <active>true</active>
+    <nombre>Comisiones  </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="A2CBF374B5884EB79DB6AB17142B8799" identifier="Descuento Facturas Productos ">
+    <id>A2CBF374B5884EB79DB6AB17142B8799</id>
+    <active>true</active>
+    <nombre>Descuento Facturas Productos </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="A3EC46B30AEB4739BB8DAE281CDC80C1" identifier="Hora Atraso">
+    <id>A3EC46B30AEB4739BB8DAE281CDC80C1</id>
+    <active>true</active>
+    <nombre>Hora Atraso</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="A76E235587294F50B1E346B5A3FFA15E" identifier="Descuento Vehículo ">
+    <id>A76E235587294F50B1E346B5A3FFA15E</id>
+    <active>true</active>
+    <nombre>Descuento Vehículo </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="A86A9654C94945EBABBB834558D140E3" identifier="Alimentación  ">
+    <id>A86A9654C94945EBABBB834558D140E3</id>
+    <active>true</active>
+    <nombre>Alimentación  </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="BBDEEDC43D5C45CF891CAE96AAD5D3C6" identifier="Vacaciones ">
+    <id>BBDEEDC43D5C45CF891CAE96AAD5D3C6</id>
+    <active>true</active>
+    <nombre>Vacaciones </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="C0197F5DD06C480FBE383CF73A733C7B" identifier="Decimo Cuarto ">
+    <id>C0197F5DD06C480FBE383CF73A733C7B</id>
+    <active>true</active>
+    <nombre>Decimo Cuarto </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="CC85C9149E664A988F9C030151E8BF5F" identifier="Movilización Varios ">
+    <id>CC85C9149E664A988F9C030151E8BF5F</id>
+    <active>true</active>
+    <nombre>Movilización Varios </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="D29C74A828DF42709F1A4C0E722AEFD5" identifier="Multa ">
+    <id>D29C74A828DF42709F1A4C0E722AEFD5</id>
+    <active>true</active>
+    <nombre>Multa </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="DA7C4C9F03EC4FE493E05FEC416B3894" identifier="Jornada Nocturna 25%">
+    <id>DA7C4C9F03EC4FE493E05FEC416B3894</id>
+    <active>true</active>
+    <nombre>Jornada Nocturna 25%</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="DCAC87F0F23D4A4A9DA307216488E2EF" identifier="Aporte Patronal 12.15%">
+    <id>DCAC87F0F23D4A4A9DA307216488E2EF</id>
+    <active>true</active>
+    <nombre>Aporte Patronal 12.15%</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="E465FE08FEEA49268CB84399D11591CA" identifier="Descuento Uniformes ">
+    <id>E465FE08FEEA49268CB84399D11591CA</id>
+    <active>true</active>
+    <nombre>Descuento Uniformes </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="E578202277724AB38F9312D97EB837D4" identifier="Fondos De Reserva ">
+    <id>E578202277724AB38F9312D97EB837D4</id>
+    <active>true</active>
+    <nombre>Fondos De Reserva </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="E70994C3E0DA48179826132D391AA9FE" identifier="Donaciones Voluntarias ">
+    <id>E70994C3E0DA48179826132D391AA9FE</id>
+    <active>true</active>
+    <nombre>Donaciones Voluntarias </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="EC24909EC6834A07BA39FB6095B793E5" identifier="Decimo Tercero ">
+    <id>EC24909EC6834A07BA39FB6095B793E5</id>
+    <active>true</active>
+    <nombre>Decimo Tercero </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="ED76B34654E3478C894C3D20DF2323B2" identifier="Refrigerios ">
+    <id>ED76B34654E3478C894C3D20DF2323B2</id>
+    <active>true</active>
+    <nombre>Refrigerios </nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="F454FF13404848AB94E9DA344E389F34" identifier="Descuentos Voluntarios Comité">
+    <id>F454FF13404848AB94E9DA344E389F34</id>
+    <active>true</active>
+    <nombre>Descuentos Voluntarios Comité</nombre>
+  </no_calcula_rubro>
+  <no_calcula_rubro id="FD3678D8FD0E410592E07EB7E721CA35" identifier="Subsidio Enfermedad ">
+    <id>FD3678D8FD0E410592E07EB7E721CA35</id>
+    <active>true</active>
+    <nombre>Subsidio Enfermedad </nombre>
+  </no_calcula_rubro>
+  <No_TipoIngresoEgreso id="02FF67BA62E442428C11CE1B418FDFC3" identifier="Anticipo de sueldo ">
+    <id>02FF67BA62E442428C11CE1B418FDFC3</id>
+    <active>true</active>
+    <calculoDeRubro id="28822C52F5B74DB79D399FECADD871D9" entity-name="no_calcula_rubro" identifier="Anticipo De Sueldo "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Anticipo de sueldo </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>true</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="048D62EFD75F4B2A920BE89079CF2070" identifier="Bono">
+    <id>048D62EFD75F4B2A920BE89079CF2070</id>
+    <active>true</active>
+    <calculoDeRubro id="7C93D2510EDE4CC99C9BE5B0D4E67300" entity-name="no_calcula_rubro" identifier="Bono"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Bono</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="0AC414CB9CB64B1F85EE9DFB8BF8899C" identifier="Fondos de Reserva Provisión">
+    <id>0AC414CB9CB64B1F85EE9DFB8BF8899C</id>
+    <active>true</active>
+    <calculoDeRubro id="860AAF9F56424D0FAA0FFEEE91E4C8CE" entity-name="no_calcula_rubro" identifier="Fondo De Reserva Provisión"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Fondos de Reserva Provisión</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>true</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo>01</mesDeCalculo>
+    <mesDelPago>01</mesDelPago>
+    <daDePago>1</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>true</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="0E02636ADB784BA8BAE01BA4153C4F58" identifier="Donaciones voluntarias ">
+    <id>0E02636ADB784BA8BAE01BA4153C4F58</id>
+    <active>true</active>
+    <calculoDeRubro id="E70994C3E0DA48179826132D391AA9FE" entity-name="no_calcula_rubro" identifier="Donaciones Voluntarias "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Donaciones voluntarias </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="10C371CD21E24A04BE55F360573667A2" identifier="Comisiones ">
+    <id>10C371CD21E24A04BE55F360573667A2</id>
+    <active>true</active>
+    <calculoDeRubro id="A23569C125AE45F8A657B055B56CD066" entity-name="no_calcula_rubro" identifier="Comisiones  "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Comisiones </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="1260771573F345BD84F645A770066065" identifier="Subsidio por maternidad ">
+    <id>1260771573F345BD84F645A770066065</id>
+    <active>true</active>
+    <calculoDeRubro id="7CE5E633A2EE477CA65DE9EA7D06A3EA" entity-name="no_calcula_rubro" identifier="Subsidio Por Maternidad "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Subsidio por maternidad </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="128659D0FC454666B926D6F519162AB8" identifier="Descuento facturas productos ">
+    <id>128659D0FC454666B926D6F519162AB8</id>
+    <active>true</active>
+    <calculoDeRubro id="A2CBF374B5884EB79DB6AB17142B8799" entity-name="no_calcula_rubro" identifier="Descuento Facturas Productos "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuento facturas productos </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="16E9DD992A4541BC88B3E9EE7326C984" identifier="Incentivos ">
+    <id>16E9DD992A4541BC88B3E9EE7326C984</id>
+    <active>true</active>
+    <calculoDeRubro id="2C8D9254A5CF4559B7D262489936FAFD" entity-name="no_calcula_rubro" identifier="Icentivos "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Incentivos </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="188A8912BA65481DBF2E8FF8DE15FB8B" identifier="Alimentación ">
+    <id>188A8912BA65481DBF2E8FF8DE15FB8B</id>
+    <active>true</active>
+    <calculoDeRubro id="A86A9654C94945EBABBB834558D140E3" entity-name="no_calcula_rubro" identifier="Alimentación  "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Alimentación </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="20AF5BA5F96545A1A50FE5A3FE839534" identifier="Atrasos">
+    <id>20AF5BA5F96545A1A50FE5A3FE839534</id>
+    <active>true</active>
+    <calculoDeRubro id="A3EC46B30AEB4739BB8DAE281CDC80C1" entity-name="no_calcula_rubro" identifier="Hora Atraso"/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Atrasos</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="238A3F9D118D4C40BB3AF42762BCDF20" identifier="Fondos de Reserva ">
+    <id>238A3F9D118D4C40BB3AF42762BCDF20</id>
+    <active>true</active>
+    <calculoDeRubro id="E578202277724AB38F9312D97EB837D4" entity-name="no_calcula_rubro" identifier="Fondos De Reserva "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Fondos de Reserva </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="28883855F52D4C58A33DD6A76D0A2435" identifier="Compras a crédito ">
+    <id>28883855F52D4C58A33DD6A76D0A2435</id>
+    <active>true</active>
+    <calculoDeRubro id="09B0C2FA4E4348ECA5F50CE2F3AE149E" entity-name="no_calcula_rubro" identifier="Compras A Crédito "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Compras a crédito </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="3CA470A848E646A19484FE5C901228E7" identifier="Seguro vehículo ">
+    <id>3CA470A848E646A19484FE5C901228E7</id>
+    <active>true</active>
+    <calculoDeRubro id="49F69927847C44B1A088A1FD207FEEE5" entity-name="no_calcula_rubro" identifier="Seguro Vehíclo "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Seguro vehículo </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="420785CD07174F2784C5177C66429B31" identifier="Fondos de Reserva  por pagar ">
+    <id>420785CD07174F2784C5177C66429B31</id>
+    <active>false</active>
+    <calculoDeRubro id="E578202277724AB38F9312D97EB837D4" entity-name="no_calcula_rubro" identifier="Fondos De Reserva "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Fondos de Reserva  por pagar </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>true</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>30</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="43154121295F44689A27501FC67A618D" identifier="Otros descuentos ">
+    <id>43154121295F44689A27501FC67A618D</id>
+    <active>true</active>
+    <calculoDeRubro id="20882DC066F244968FFCAFA4A162E07F" entity-name="no_calcula_rubro" identifier="Otros Descuentos  "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Otros descuentos </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="4553FFE0BEF44C4299429AE3FA0442B1" identifier="Seguro médico voluntario ">
+    <id>4553FFE0BEF44C4299429AE3FA0442B1</id>
+    <active>true</active>
+    <calculoDeRubro id="1452C5525B8B478BA76D9EDA67A77500" entity-name="no_calcula_rubro" identifier="Seguro Médico Voluntario "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Seguro médico voluntario </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="506256A33FB54CCD91DB2CAFC81798BD" identifier="Descuento uniformes ">
+    <id>506256A33FB54CCD91DB2CAFC81798BD</id>
+    <active>true</active>
+    <calculoDeRubro id="E465FE08FEEA49268CB84399D11591CA" entity-name="no_calcula_rubro" identifier="Descuento Uniformes "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuento uniformes </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="52B280FAD5D6410C89DEAA61A0053A0E" identifier="Descuentos voluntarios Comité Responsabilidad">
+    <id>52B280FAD5D6410C89DEAA61A0053A0E</id>
+    <active>true</active>
+    <calculoDeRubro id="F454FF13404848AB94E9DA344E389F34" entity-name="no_calcula_rubro" identifier="Descuentos Voluntarios Comité"/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuentos voluntarios Comité Responsabilidad</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="537A46C6CFCC4416906A6A72A824F0D5" identifier="Impuesto a la Renta">
+    <id>537A46C6CFCC4416906A6A72A824F0D5</id>
+    <active>true</active>
+    <calculoDeRubro id="1CCF5F3E4EC44413A6E7CBBC7D349631" entity-name="no_calcula_rubro" identifier="Impuesto Renta"/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Impuesto a la Renta</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="65AC100FEAE94B4F86A492A1CB702265" identifier="Aporte Patronal 12.15%">
+    <id>65AC100FEAE94B4F86A492A1CB702265</id>
+    <active>true</active>
+    <calculoDeRubro id="DCAC87F0F23D4A4A9DA307216488E2EF" entity-name="no_calcula_rubro" identifier="Aporte Patronal 12.15%"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Aporte Patronal 12.15%</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>true</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo>01</mesDeCalculo>
+    <mesDelPago>01</mesDelPago>
+    <daDePago>1</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>true</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="7F95B018F7BA42EC9B9999582800B875" identifier="Descuento celular">
+    <id>7F95B018F7BA42EC9B9999582800B875</id>
+    <active>true</active>
+    <calculoDeRubro id="9BFEBF7305F84696AD15FBF820BEBAD1" entity-name="no_calcula_rubro" identifier="Descuento Celular "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuento celular</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="8105B470E44741228EDCD8B4D9DAFE8E" identifier="Décimo Cuarto ">
+    <id>8105B470E44741228EDCD8B4D9DAFE8E</id>
+    <active>true</active>
+    <calculoDeRubro id="C0197F5DD06C480FBE383CF73A733C7B" entity-name="no_calcula_rubro" identifier="Decimo Cuarto "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Décimo Cuarto </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>true</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo>08</mesDeCalculo>
+    <mesDelPago>08</mesDelPago>
+    <daDePago>15</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="94F0704965C24A96826C6F3DF225D12C" identifier="Prestamo ">
+    <id>94F0704965C24A96826C6F3DF225D12C</id>
+    <active>true</active>
+    <calculoDeRubro id="9A5BAD0AEBB04B409AB94AABC6C78140" entity-name="no_calcula_rubro" identifier="Prestamo "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Prestamo </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="98FB3F53CE274B9494878ED1B00D5ABC" identifier="Multas">
+    <id>98FB3F53CE274B9494878ED1B00D5ABC</id>
+    <active>true</active>
+    <calculoDeRubro id="D29C74A828DF42709F1A4C0E722AEFD5" entity-name="no_calcula_rubro" identifier="Multa "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Multas</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="991398DD5DDF46F5B79EAFCAF88728B4" identifier="Descuento librería ">
+    <id>991398DD5DDF46F5B79EAFCAF88728B4</id>
+    <active>true</active>
+    <calculoDeRubro id="55613EC8BCFC49BF8705E83FDCA6B314" entity-name="no_calcula_rubro" identifier="Descuento Librería  "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuento librería </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="9D77A546E6944B798EE6CFF0A8515931" identifier="Refrigerios ">
+    <id>9D77A546E6944B798EE6CFF0A8515931</id>
+    <active>true</active>
+    <calculoDeRubro id="ED76B34654E3478C894C3D20DF2323B2" entity-name="no_calcula_rubro" identifier="Refrigerios "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Refrigerios </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="A01F7278D74B423CBBD627E53195909E" identifier="Prestamos Quirografarios ">
+    <id>A01F7278D74B423CBBD627E53195909E</id>
+    <active>true</active>
+    <calculoDeRubro id="30434600731F4D73BDFEDF99B8F86E80" entity-name="no_calcula_rubro" identifier="Prestamos Quirografarios "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Prestamos Quirografarios </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="A450AAD5481D4B79B3A91A912BA79C9C" identifier="Horas Extras (Extraordinarias)">
+    <id>A450AAD5481D4B79B3A91A912BA79C9C</id>
+    <active>true</active>
+    <calculoDeRubro id="17253EE11D5A461694C8297A31DC33CD" entity-name="no_calcula_rubro" identifier="Horas Extraordinarias"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Horas Extras (Extraordinarias)</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro>HE</tipoRubro>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra>0</mAXHExtra>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="AB2BD6FC57D64BEF91A6C702179B74BD" identifier="Sueldo">
+    <id>AB2BD6FC57D64BEF91A6C702179B74BD</id>
+    <active>true</active>
+    <calculoDeRubro id="35ED15722FF2410CB101B48DF8A667CC" entity-name="no_calcula_rubro" identifier="Sueldo"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Sueldo</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="AC79B4EB2F5546B2895C290C21F53931" identifier="Aportes IESS">
+    <id>AC79B4EB2F5546B2895C290C21F53931</id>
+    <active>true</active>
+    <calculoDeRubro id="9BE8CD1D2389403A8284298AD200EF65" entity-name="no_calcula_rubro" identifier="IESS"/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Aportes IESS</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="B820B2D7AD86476FAFFA1C53AA216881" identifier="Décimo tercero ">
+    <id>B820B2D7AD86476FAFFA1C53AA216881</id>
+    <active>true</active>
+    <calculoDeRubro id="EC24909EC6834A07BA39FB6095B793E5" entity-name="no_calcula_rubro" identifier="Decimo Tercero "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Décimo tercero </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>true</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo>12</mesDeCalculo>
+    <mesDelPago>12</mesDelPago>
+    <daDePago>15</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="B87ACD7F233F486AB0E76AC6F5924682" identifier="Descuento vehículo ">
+    <id>B87ACD7F233F486AB0E76AC6F5924682</id>
+    <active>true</active>
+    <calculoDeRubro id="A76E235587294F50B1E346B5A3FFA15E" entity-name="no_calcula_rubro" identifier="Descuento Vehículo "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuento vehículo </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="CB4990AF038A450EB919F6EB30AA069E" identifier="Anticipos">
+    <id>CB4990AF038A450EB919F6EB30AA069E</id>
+    <active>true</active>
+    <calculoDeRubro id="35ED15722FF2410CB101B48DF8A667CC" entity-name="no_calcula_rubro" identifier="Sueldo"/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Anticipos</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>true</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="CD26C466BE6746869E29DE21E0610A45" identifier="Quincenas ">
+    <id>CD26C466BE6746869E29DE21E0610A45</id>
+    <active>true</active>
+    <calculoDeRubro id="53B09FFE62554DAFB6F8A8F63D26B986" entity-name="no_calcula_rubro" identifier="Quincenas "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Quincenas </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>true</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="CF0CBDDD719B40BAA207734924ED7527" identifier="Descuento Supermaxi">
+    <id>CF0CBDDD719B40BAA207734924ED7527</id>
+    <active>true</active>
+    <calculoDeRubro id="1364F0A9C5EB4A2F9453FFCF1FBB189E" entity-name="no_calcula_rubro" identifier="Descuento Supermaxi "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Descuento Supermaxi</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="D55E97A8D50C40549791F93D7FC3F1E6" identifier="Subsidio Enfermedad">
+    <id>D55E97A8D50C40549791F93D7FC3F1E6</id>
+    <active>true</active>
+    <calculoDeRubro id="FD3678D8FD0E410592E07EB7E721CA35" entity-name="no_calcula_rubro" identifier="Subsidio Enfermedad "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Subsidio Enfermedad</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="D7574A61337B450884F6DFCC225CB272" identifier="Horas Extras (Suplementarias)">
+    <id>D7574A61337B450884F6DFCC225CB272</id>
+    <active>true</active>
+    <calculoDeRubro id="3AB483CE64654E598D801EB119D5D691" entity-name="no_calcula_rubro" identifier="Hora Suplementaria"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Horas Extras (Suplementarias)</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro>HE</tipoRubro>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra>0</mAXHExtra>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="DEFEED633A084DAAB2ED2FB2F8BE28A0" identifier="Vacaciones ">
+    <id>DEFEED633A084DAAB2ED2FB2F8BE28A0</id>
+    <active>true</active>
+    <calculoDeRubro id="BBDEEDC43D5C45CF891CAE96AAD5D3C6" entity-name="no_calcula_rubro" identifier="Vacaciones "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Vacaciones </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="E48CD6CD55884472A5F14F1255806245" identifier="Movilización varios">
+    <id>E48CD6CD55884472A5F14F1255806245</id>
+    <active>true</active>
+    <calculoDeRubro id="CC85C9149E664A988F9C030151E8BF5F" entity-name="no_calcula_rubro" identifier="Movilización Varios "/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Movilización varios</nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="EF5EA181C7A8415082C8FAB05F1A3D0A" identifier="Prestamo Hipotecario ">
+    <id>EF5EA181C7A8415082C8FAB05F1A3D0A</id>
+    <active>true</active>
+    <calculoDeRubro id="5D6310A45DD746A09BDA6BBFB33F074D" entity-name="no_calcula_rubro" identifier="Prestamo Hipotecario "/>
+    <esIngreso>false</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Prestamo Hipotecario </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>false</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro xsi:nil="true"/>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra xsi:nil="true"/>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <No_TipoIngresoEgreso id="F6505DDD0C7B4912B391C1A880CA80A0" identifier="Jornada nocturna 25% ">
+    <id>F6505DDD0C7B4912B391C1A880CA80A0</id>
+    <active>true</active>
+    <calculoDeRubro id="DA7C4C9F03EC4FE493E05FEC416B3894" entity-name="no_calcula_rubro" identifier="Jornada Nocturna 25%"/>
+    <esIngreso>true</esIngreso>
+    <nombreDelTipoDeIngresoEgreso>Jornada nocturna 25% </nombreDelTipoDeIngresoEgreso>
+    <sumaAlIngreso>true</sumaAlIngreso>
+    <esParaProvisin>false</esParaProvisin>
+    <tipoRubro>HE</tipoRubro>
+    <mesDeCalculo xsi:nil="true"/>
+    <mesDelPago xsi:nil="true"/>
+    <daDePago>0</daDePago>
+    <mAXHExtra>0</mAXHExtra>
+    <avance>false</avance>
+    <provisinMensual>false</provisinMensual>
+  </No_TipoIngresoEgreso>
+  <no_calcula_rubro_line id="007CE02FC5F348A3AA9D1E807B6E43E9" identifier="10">
+    <id>007CE02FC5F348A3AA9D1E807B6E43E9</id>
+    <active>true</active>
+    <iDCalculaRubro id="A86A9654C94945EBABBB834558D140E3" entity-name="no_calcula_rubro" identifier="Alimentación  "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>50</valor>
+    <procedure>no_alimentos</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="05B6859706E84A0FB286FED5493B185C" identifier="10">
+    <id>05B6859706E84A0FB286FED5493B185C</id>
+    <active>true</active>
+    <iDCalculaRubro id="1CCF5F3E4EC44413A6E7CBBC7D349631" entity-name="no_calcula_rubro" identifier="Impuesto Renta"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_calcula_impuesto_renta</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="0760AC1FC4004110B6BD074BBCA35727" identifier="10">
+    <id>0760AC1FC4004110B6BD074BBCA35727</id>
+    <active>true</active>
+    <iDCalculaRubro id="ED76B34654E3478C894C3D20DF2323B2" entity-name="no_calcula_rubro" identifier="Refrigerios "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_refrigerios</procedure>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="0CEC7E882B224F23ABD10DBB8907576E" identifier="10">
+    <id>0CEC7E882B224F23ABD10DBB8907576E</id>
+    <active>true</active>
+    <iDCalculaRubro id="3AB483CE64654E598D801EB119D5D691" entity-name="no_calcula_rubro" identifier="Hora Suplementaria"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_horas_extras_SM</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="0F4E8740F3F84040AE8F1D2817D15BDB" identifier="10">
+    <id>0F4E8740F3F84040AE8F1D2817D15BDB</id>
+    <active>true</active>
+    <iDCalculaRubro id="CC85C9149E664A988F9C030151E8BF5F" entity-name="no_calcula_rubro" identifier="Movilización Varios "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="14B2D032A4864B7FA7DADB0D3099A8E7" identifier="10">
+    <id>14B2D032A4864B7FA7DADB0D3099A8E7</id>
+    <active>true</active>
+    <iDCalculaRubro id="FD3678D8FD0E410592E07EB7E721CA35" entity-name="no_calcula_rubro" identifier="Subsidio Enfermedad "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="1730F234E0DA44D5AE30E6F6B85F83D2" identifier="10">
+    <id>1730F234E0DA44D5AE30E6F6B85F83D2</id>
+    <active>true</active>
+    <iDCalculaRubro id="9A5BAD0AEBB04B409AB94AABC6C78140" entity-name="no_calcula_rubro" identifier="Prestamo "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="18465BCB995A48B698E6149067E8699F" identifier="10">
+    <id>18465BCB995A48B698E6149067E8699F</id>
+    <active>true</active>
+    <iDCalculaRubro id="17253EE11D5A461694C8297A31DC33CD" entity-name="no_calcula_rubro" identifier="Horas Extraordinarias"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_horas_extras_EO</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="1BBADB1B04C14467B6BA67D1C9460D98" identifier="10">
+    <id>1BBADB1B04C14467B6BA67D1C9460D98</id>
+    <active>true</active>
+    <iDCalculaRubro id="DA7C4C9F03EC4FE493E05FEC416B3894" entity-name="no_calcula_rubro" identifier="Jornada Nocturna 25%"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_jornada_25</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="2445A71248704B918D68E25A31365EBC" identifier="10">
+    <id>2445A71248704B918D68E25A31365EBC</id>
+    <active>true</active>
+    <iDCalculaRubro id="1364F0A9C5EB4A2F9453FFCF1FBB189E" entity-name="no_calcula_rubro" identifier="Descuento Supermaxi "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="2B1DA75D19E04FF294F4598726063B1C" identifier="10">
+    <id>2B1DA75D19E04FF294F4598726063B1C</id>
+    <active>true</active>
+    <iDCalculaRubro id="BBDEEDC43D5C45CF891CAE96AAD5D3C6" entity-name="no_calcula_rubro" identifier="Vacaciones "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="375B6EC263A64E5D9A2C5E6D93F31894" identifier="10">
+    <id>375B6EC263A64E5D9A2C5E6D93F31894</id>
+    <active>true</active>
+    <iDCalculaRubro id="09B0C2FA4E4348ECA5F50CE2F3AE149E" entity-name="no_calcula_rubro" identifier="Compras A Crédito "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="3CC0F44D7C8F474F9AD45FD34C2B15F6" identifier="10">
+    <id>3CC0F44D7C8F474F9AD45FD34C2B15F6</id>
+    <active>true</active>
+    <iDCalculaRubro id="9BE8CD1D2389403A8284298AD200EF65" entity-name="no_calcula_rubro" identifier="IESS"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_calcula_iess</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="3E5B22C48AF7402DBB2E9A570A433DA9" identifier="10">
+    <id>3E5B22C48AF7402DBB2E9A570A433DA9</id>
+    <active>true</active>
+    <iDCalculaRubro id="A2CBF374B5884EB79DB6AB17142B8799" entity-name="no_calcula_rubro" identifier="Descuento Facturas Productos "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="3EDA5C08621D4CD0AE218061D690854C" identifier="10">
+    <id>3EDA5C08621D4CD0AE218061D690854C</id>
+    <active>true</active>
+    <iDCalculaRubro id="D29C74A828DF42709F1A4C0E722AEFD5" entity-name="no_calcula_rubro" identifier="Multa "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="41139D34DB424D01A023BE22DB4233C3" identifier="10">
+    <id>41139D34DB424D01A023BE22DB4233C3</id>
+    <active>true</active>
+    <iDCalculaRubro id="7C93D2510EDE4CC99C9BE5B0D4E67300" entity-name="no_calcula_rubro" identifier="Bono"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="43BF66FCE08A4DE5BD3FA5EE8ADB87C0" identifier="10">
+    <id>43BF66FCE08A4DE5BD3FA5EE8ADB87C0</id>
+    <active>true</active>
+    <iDCalculaRubro id="E70994C3E0DA48179826132D391AA9FE" entity-name="no_calcula_rubro" identifier="Donaciones Voluntarias "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="61C4C9AAC84E4282A9054DE9FFEF9C77" identifier="10">
+    <id>61C4C9AAC84E4282A9054DE9FFEF9C77</id>
+    <active>true</active>
+    <iDCalculaRubro id="20882DC066F244968FFCAFA4A162E07F" entity-name="no_calcula_rubro" identifier="Otros Descuentos  "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="66B5FF9B78804C7DA5525FDE430F585D" identifier="10">
+    <id>66B5FF9B78804C7DA5525FDE430F585D</id>
+    <active>true</active>
+    <iDCalculaRubro id="A76E235587294F50B1E346B5A3FFA15E" entity-name="no_calcula_rubro" identifier="Descuento Vehículo "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="6826E6BA089B4646A9C3D9EDAB753635" identifier="10">
+    <id>6826E6BA089B4646A9C3D9EDAB753635</id>
+    <active>true</active>
+    <iDCalculaRubro id="1452C5525B8B478BA76D9EDA67A77500" entity-name="no_calcula_rubro" identifier="Seguro Médico Voluntario "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="892A07071B9347A09AD3FFF657BE647A" identifier="10">
+    <id>892A07071B9347A09AD3FFF657BE647A</id>
+    <active>true</active>
+    <iDCalculaRubro id="A23569C125AE45F8A657B055B56CD066" entity-name="no_calcula_rubro" identifier="Comisiones  "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure>no_comision</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="8F21A0C5A82444669A05790D798AA9EB" identifier="10">
+    <id>8F21A0C5A82444669A05790D798AA9EB</id>
+    <active>true</active>
+    <iDCalculaRubro id="5D6310A45DD746A09BDA6BBFB33F074D" entity-name="no_calcula_rubro" identifier="Prestamo Hipotecario "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="93E6D433EB454B2D88C2F80774151260" identifier="10">
+    <id>93E6D433EB454B2D88C2F80774151260</id>
+    <active>true</active>
+    <iDCalculaRubro id="2C8D9254A5CF4559B7D262489936FAFD" entity-name="no_calcula_rubro" identifier="Icentivos "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_re_comision</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="9A354436218B4B9E8AF9D4DCB0A8C351" identifier="10">
+    <id>9A354436218B4B9E8AF9D4DCB0A8C351</id>
+    <active>true</active>
+    <iDCalculaRubro id="C0197F5DD06C480FBE383CF73A733C7B" entity-name="no_calcula_rubro" identifier="Decimo Cuarto "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>318</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="A21B7D1CF4194F3C8C38A473519C0C12" identifier="10">
+    <id>A21B7D1CF4194F3C8C38A473519C0C12</id>
+    <active>true</active>
+    <iDCalculaRubro id="9BFEBF7305F84696AD15FBF820BEBAD1" entity-name="no_calcula_rubro" identifier="Descuento Celular "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="A76143C4DC2944E0AFDC094A658CD5CC" identifier="10">
+    <id>A76143C4DC2944E0AFDC094A658CD5CC</id>
+    <active>true</active>
+    <iDCalculaRubro id="DCAC87F0F23D4A4A9DA307216488E2EF" entity-name="no_calcula_rubro" identifier="Aporte Patronal 12.15%"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_aporte_patronal</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="A92339EFED604ABF99748D2AAEC1933C" identifier="10">
+    <id>A92339EFED604ABF99748D2AAEC1933C</id>
+    <active>true</active>
+    <iDCalculaRubro id="55613EC8BCFC49BF8705E83FDCA6B314" entity-name="no_calcula_rubro" identifier="Descuento Librería  "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="B5E5BA5DD13740EBB9E9CB7AF7E57EFA" identifier="10">
+    <id>B5E5BA5DD13740EBB9E9CB7AF7E57EFA</id>
+    <active>true</active>
+    <iDCalculaRubro id="E465FE08FEEA49268CB84399D11591CA" entity-name="no_calcula_rubro" identifier="Descuento Uniformes "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="B721908B319A47E2A80C1B9B9C3132F3" identifier="10">
+    <id>B721908B319A47E2A80C1B9B9C3132F3</id>
+    <active>true</active>
+    <iDCalculaRubro id="EC24909EC6834A07BA39FB6095B793E5" entity-name="no_calcula_rubro" identifier="Decimo Tercero "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure>no_decimo_tercero</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="BB7DD95A1B324D95AE0A28656E14DE18" identifier="10">
+    <id>BB7DD95A1B324D95AE0A28656E14DE18</id>
+    <active>true</active>
+    <iDCalculaRubro id="860AAF9F56424D0FAA0FFEEE91E4C8CE" entity-name="no_calcula_rubro" identifier="Fondo De Reserva Provisión"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_fondo_reserva_prov</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="C1855595BF8D4221ADE291E42303F4ED" identifier="10">
+    <id>C1855595BF8D4221ADE291E42303F4ED</id>
+    <active>true</active>
+    <iDCalculaRubro id="53B09FFE62554DAFB6F8A8F63D26B986" entity-name="no_calcula_rubro" identifier="Quincenas "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>80</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="CCFC8526B2814EFE8A275297D5601216" identifier="10">
+    <id>CCFC8526B2814EFE8A275297D5601216</id>
+    <active>true</active>
+    <iDCalculaRubro id="7CE5E633A2EE477CA65DE9EA7D06A3EA" entity-name="no_calcula_rubro" identifier="Subsidio Por Maternidad "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="CD231C29FED74104BE60085D1D992A33" identifier="10">
+    <id>CD231C29FED74104BE60085D1D992A33</id>
+    <active>true</active>
+    <iDCalculaRubro id="E578202277724AB38F9312D97EB837D4" entity-name="no_calcula_rubro" identifier="Fondos De Reserva "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure>no_fondo_reserva</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="DF7A0CC84A434DEA898EFA2527B77F17" identifier="10">
+    <id>DF7A0CC84A434DEA898EFA2527B77F17</id>
+    <active>true</active>
+    <iDCalculaRubro id="30434600731F4D73BDFEDF99B8F86E80" entity-name="no_calcula_rubro" identifier="Prestamos Quirografarios "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="E194A72A1EEA42A088027FBF9EE5B12B" identifier="10">
+    <id>E194A72A1EEA42A088027FBF9EE5B12B</id>
+    <active>true</active>
+    <iDCalculaRubro id="49F69927847C44B1A088A1FD207FEEE5" entity-name="no_calcula_rubro" identifier="Seguro Vehíclo "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="E45159C47CB645EFABF358B4E76C4B94" identifier="10">
+    <id>E45159C47CB645EFABF358B4E76C4B94</id>
+    <active>true</active>
+    <iDCalculaRubro id="088561AF29CA4CB18EF5A96177D41108" entity-name="no_calcula_rubro" identifier="Calcular Multas"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="F7A8891F0B284431A58A89CF05EBCCE2" identifier="10">
+    <id>F7A8891F0B284431A58A89CF05EBCCE2</id>
+    <active>true</active>
+    <iDCalculaRubro id="A3EC46B30AEB4739BB8DAE281CDC80C1" entity-name="no_calcula_rubro" identifier="Hora Atraso"/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure>no_horas_atrasos</procedure>
+    <calcularConProcedure>true</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="F985D7B0B4C4426CAD67204C4C46E633" identifier="10">
+    <id>F985D7B0B4C4426CAD67204C4C46E633</id>
+    <active>true</active>
+    <iDCalculaRubro id="28822C52F5B74DB79D399FECADD871D9" entity-name="no_calcula_rubro" identifier="Anticipo De Sueldo "/>
+    <lineNo>10</lineNo>
+    <salario>false</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="F9C037A9D54B48F19B780A00FD60333B" identifier="10">
+    <id>F9C037A9D54B48F19B780A00FD60333B</id>
+    <active>true</active>
+    <iDCalculaRubro id="F454FF13404848AB94E9DA344E389F34" entity-name="no_calcula_rubro" identifier="Descuentos Voluntarios Comité"/>
+    <lineNo>10</lineNo>
+    <salario>true</salario>
+    <porcentaje>true</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+  <no_calcula_rubro_line id="FC3FB5D5884241C5B572A63DFAC617E5" identifier="10">
+    <id>FC3FB5D5884241C5B572A63DFAC617E5</id>
+    <active>true</active>
+    <iDCalculaRubro id="35ED15722FF2410CB101B48DF8A667CC" entity-name="no_calcula_rubro" identifier="Sueldo"/>
+    <lineNo>10</lineNo>
+    <salario>true</salario>
+    <porcentaje>false</porcentaje>
+    <valor>0</valor>
+    <procedure xsi:nil="true"/>
+    <calcularConProcedure>false</calcularConProcedure>
+  </no_calcula_rubro_line>
+</ob:Openbravo>

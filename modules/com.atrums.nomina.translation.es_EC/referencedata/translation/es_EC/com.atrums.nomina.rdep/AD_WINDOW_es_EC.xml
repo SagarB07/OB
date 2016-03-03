@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_WINDOW" version="">
+  <row id="398BEF7F60E24FE1A1A5534AE0696489" trl="N">
+    <value column="Name" isTrl="N" original="Retenciones Empleado">Retenciones Empleado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

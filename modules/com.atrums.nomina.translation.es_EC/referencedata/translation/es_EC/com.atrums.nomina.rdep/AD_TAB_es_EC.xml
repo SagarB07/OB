@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_TAB" version="">
+  <row id="00F6EA0904664744B181CEEDA53A75B2" trl="N">
+    <value column="Name" isTrl="N" original="Retenciones Linea">Retenciones Linea</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="8982CE6EA9E8433E8FA23C11DEED4D6C" trl="N">
+    <value column="Name" isTrl="N" original="Retenciones Cabecera">Retenciones Cabecera</value>
+    <value column="CommitWarning" isTrl="N" original=""/>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Filtername" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

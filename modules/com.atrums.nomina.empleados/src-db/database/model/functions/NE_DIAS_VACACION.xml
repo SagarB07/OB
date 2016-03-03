@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NE_DIAS_VACACION">
+    <function name="NE_DIAS_VACACION" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_cursor record;
+	v_cursor_1 record;
+	v_dias NUMBER(10);
+	v_vacacion NUMBER(10, 2);
+	v_div NUMBER(10, 2);
+	v_total_dias decimal(10) := 0;
+BEGIN
+	for v_cursor in (
+		select ce.* 
+		from no_contrato_empleado ce
+		where ce.isactive = 'Y'
+		)
+	loop
+		select (DATE_PART('day', now()::timestamp - v_cursor.fecha_inicio::timestamp))
+		into v_dias;
+
+		v_div := (select (v_dias / 365));
+		v_vacacion := 15 * v_div;
+
+		v_div := v_div - 5;
+
+		if v_div > 1 then
+			v_vacacion := v_vacacion + floor(v_div);
+			if v_div > 15 then
+				v_vacacion := 30;
+			end if;
+		end if;
+
+		for v_cursor_1 in (
+			select * 
+			from no_vacacion
+			where no_contrato_empleado_id = v_cursor.no_contrato_empleado_id
+			)
+		loop
+			if v_cursor_1.em_ne_estado = '1' and 
+					date(v_cursor_1.em_ne_fecha_inicio) < now() then
+				v_total_dias := v_total_dias + v_cursor_1.em_ne_total_dias;
+			end if;
+		end loop;
+
+		update no_contrato_empleado
+		set em_ne_vacacion_prop = v_vacacion,
+			em_ne_vacacion_tom = v_total_dias,
+			em_ne_vacacion_res = v_vacacion - v_total_dias
+		where no_contrato_empleado_id = v_cursor.no_contrato_empleado_id;
+
+		v_total_dias := 0;
+	end loop;
+
+	RETURN;
+END NE_DIAS_VACACION
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_TEXTINTERFACES" version="">
+  <row id="39EA1DF2789E452A8D91541A5D601BAC" trl="N">
+    <value column="Text" isTrl="N" original="Rubro Ingreso">Rubro Ingreso</value>
+  </row>
+  <row id="4DC7C010182D41CE9740ACA77A4719D6" trl="N">
+    <value column="Text" isTrl="N" original="PERIODO:">PERIODO:</value>
+  </row>
+  <row id="5E20CD4B3B5B4440AE173B773B41286D" trl="N">
+    <value column="Text" isTrl="N" original="Total nombrearea">Total nombrearea</value>
+  </row>
+  <row id="6B698AFB307D4F9497609881A338D9D0" trl="N">
+    <value column="Text" isTrl="N" original="NOMBRE:">NOMBRE:</value>
+  </row>
+  <row id="6DE7B0F824AF48A0A99EE77715F62D4E" trl="N">
+    <value column="Text" isTrl="N" original="CEDULA:">CEDULA:</value>
+  </row>
+  <row id="77969A09328A4DF391B1602E42A71A6D" trl="N">
+    <value column="Text" isTrl="N" original="Total Area">Total Area</value>
+  </row>
+  <row id="7838F46174B14794B9E7441B40999F5D" trl="N">
+    <value column="Text" isTrl="N" original="Valor">Valor</value>
+  </row>
+  <row id="794880A698464F899CC40F597FADA7CA" trl="N">
+    <value column="Text" isTrl="N" original="AREA:">AREA:</value>
+  </row>
+  <row id="84C705B34FA240CEADAEE850DC54D82B" trl="N">
+    <value column="Text" isTrl="N" original="Total Egresos:">Total Egresos:</value>
+  </row>
+  <row id="86024B56882A4062943FF16153BA5CBE" trl="N">
+    <value column="Text" isTrl="N" original="ROL DE PAGOS">ROL DE PAGOS</value>
+  </row>
+  <row id="8FF1A819B9BF4E8BB9279C9FDE3A2AC1" trl="N">
+    <value column="Text" isTrl="N" original="Total Ingresos:">Total Ingresos:</value>
+  </row>
+  <row id="914022DE1D7B4764B0A37F180B0625BD" trl="N">
+    <value column="Text" isTrl="N" original="FECHA GENERADO:">FECHA GENERADO:</value>
+  </row>
+  <row id="9A285C2BDC084AD8A51124C57C43C4FB" trl="N">
+    <value column="Text" isTrl="N" original="Valor">Valor</value>
+  </row>
+  <row id="9B746E5D65C9488CB658B43BA83437DD" trl="N">
+    <value column="Text" isTrl="N" original="Rubro Egresos">Rubro Egresos</value>
+  </row>
+  <row id="A643F7916A42405BB0B1CFEC3B152C17" trl="N">
+    <value column="Text" isTrl="N" original="CODIGO EMPLEADO:">CODIGO EMPLEADO:</value>
+  </row>
+  <row id="B007B4D7C8DA43C7AC69B348963C18EF" trl="N">
+    <value column="Text" isTrl="N" original="Call out response page">Call out response page</value>
+  </row>
+  <row id="B12A02CC549B4CEEA40D4515B715B6AA" trl="N">
+    <value column="Text" isTrl="N" original="CC.">CC.</value>
+  </row>
+  <row id="B38BA64040AA49AA958ED78108A9C14A" trl="N">
+    <value column="Text" isTrl="N" original="NÚMERO ROL:">NÚMERO ROL:</value>
+  </row>
+  <row id="E5097CDAD2A64FA09496591C7B8B4546" trl="N">
+    <value column="Text" isTrl="N" original="Total ingreso">Total ingreso</value>
+  </row>
+  <row id="F66EC70925B5474A8854E0064410FBB8" trl="N">
+    <value column="Text" isTrl="N" original="TOTAL NETO:">TOTAL NETO:</value>
+  </row>
+  <row id="F8111314934F4D75B373C0E6BDF9C7CF" trl="N">
+    <value column="Text" isTrl="N" original="Total rubro">Total rubro</value>
+  </row>
+  <row id="FFF01C45D709434D9701C80F2920C869" trl="N">
+    <value column="Text" isTrl="N" original="Recibi Conforme">Recibi Conforme</value>
+  </row>
+</compiereTrl>

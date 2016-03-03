@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+  <database name="TABLE NO_CB_EMPLEADO_ACCT">
+    <table name="NO_CB_EMPLEADO_ACCT" primaryKey="NO_CB_EMPLEADO_ACCT_KEY">
+      <column name="NO_CB_EMPLEADO_ACCT_ID" primaryKey="true" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_CLIENT_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_ORG_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ISACTIVE" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default><![CDATA[Y]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default><![CDATA[SYSDATE]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default><![CDATA[SYSDATE]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="C_BPARTNER_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="C_ACCTSCHEMA_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NO_CUENTA_INGRESO_ACCT" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NO_TIPO_INGRESO_EGRESO_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NO_CUENTA_EGRESO_ACCT" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="C_VALIDCOMBINATION" name="NO_CB_EMP_ACCT_CUENT_EGR_ACCT">
+        <reference local="NO_CUENTA_EGRESO_ACCT" foreign="C_VALIDCOMBINATION_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="C_ACCTSCHEMA" name="NO_CB_EMPL_ACCT_C_ACCTSCH">
+        <reference local="C_ACCTSCHEMA_ID" foreign="C_ACCTSCHEMA_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="C_BPARTNER" name="NO_CB_EMPL_ACCT_C_BPARTNER">
+        <reference local="C_BPARTNER_ID" foreign="C_BPARTNER_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="C_VALIDCOMBINATION" name="NO_CB_EMPL_ACCT_NO_CUENT_ACCT">
+        <reference local="NO_CUENTA_INGRESO_ACCT" foreign="C_VALIDCOMBINATION_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="NO_TIPO_INGRESO_EGRESO" name="NO_CB_EMPL_ACCT_NO_T_ING_EGR">
+        <reference local="NO_TIPO_INGRESO_EGRESO_ID" foreign="NO_TIPO_INGRESO_EGRESO_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_CLIENT" name="NO_CB_EMPLEADO_ACCT_AD_CLIENT">
+        <reference local="AD_CLIENT_ID" foreign="AD_CLIENT_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_ORG" name="NO_CB_EMPLEADO_ACCT_AD_ORG">
+        <reference local="AD_ORG_ID" foreign="AD_ORG_ID"/>
+      </foreign-key>
+      <check name="NO_CB_EMPL_ACCT_ISACTIVE_CHK"><![CDATA[ISACTIVE IN ('Y', 'N')]]></check>
+    </table>
+  </database>

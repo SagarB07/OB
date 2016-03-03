@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VALIDA_ESTADO_PAG_TRG">
+    <trigger name="NO_VALIDA_ESTADO_PAG_TRG" table="FIN_PAYMENT_DETAIL" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+  v_mensaje varchar(60);
+  v_status varchar(60);
+  v_no_pago_line_id varchar(32);
+BEGIN
+    IF DELETING THEN
+        IF(:old.em_no_pago_line_id is null)THEN
+            RETURN OLD;
+        end If;
+
+        select status 
+        into   v_status 
+        from fin_payment where fin_payment_id=:old.fin_payment_id;
+
+        IF(v_status='RPAP')THEN
+            UPDATE no_pago_line SET estado='BR'
+            WHERE no_pago_line_id=:old.em_no_pago_line_id;
+        END IF;
+            RETURN OLD;
+        ELSE
+            return new;
+    END IF;
+
+END NO_VALIDA_ESTADO_PAG_TRG
+]]></body>
+    </trigger>
+  </database>

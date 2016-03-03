@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_BORRAR_REGISTRO_TRG">
+    <trigger name="NO_BORRAR_REGISTRO_TRG" table="NO_ROL_PAGO_PROVISION_LINE" fires="after" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+fecha_inicio_contr DATE;
+v_mensaje VARCHAR;
+v_ispago VARCHAR;
+v_docstatus varchar;
+BEGIN
+
+
+ select ispago, docstatus   
+    into v_ispago, v_docstatus 
+    from no_rol_pago_provision 
+    where no_rol_pago_provision_id = :OLD.no_rol_pago_provision_id;
+
+
+ if(v_ispago = 'Y') then
+        IF(DELETING) THEN
+
+           IF(v_docstatus <> 'BR') THEN
+                v_mensaje:='@NO_NOBORRAR@';
+                RAISE v_mensaje;
+           END IF;
+
+           RETURN OLD;
+        ELSE 
+             IF(v_docstatus <> 'BR') THEN
+                v_mensaje:='@NO_DOCUMENTOPROCESADO@';
+                RAISE v_mensaje;
+           END IF;
+            RETURN NEW; 
+        END IF; 
+    end if;
+END NO_BORRAR_REGISTRO_TRG
+]]></body>
+    </trigger>
+  </database>

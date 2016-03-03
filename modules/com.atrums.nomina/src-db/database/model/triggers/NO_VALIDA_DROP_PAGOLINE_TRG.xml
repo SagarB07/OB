@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VALIDA_DROP_PAGOLINE_TRG">
+    <trigger name="NO_VALIDA_DROP_PAGOLINE_TRG" table="NO_PAGO_LINE" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+    v_estado varchar(60);
+  
+BEGIN
+    IF DELETING THEN
+            
+            select estado
+            into v_estado
+            from no_pago_line where no_pago_line_id=:old.no_pago_line_id;
+            IF(v_estado <>'BR')THEN
+                RAISE EXCEPTION '@NO_Borra_Pago_Lineas@';
+            END IF;
+            RETURN OLD;
+        ELSE
+            return new;
+    END IF;
+
+END NO_VALIDA_DROP_PAGOLINE_TRG
+]]></body>
+    </trigger>
+  </database>

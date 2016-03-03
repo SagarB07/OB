@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+  <database name="TABLE NO_REGISTRO_GASTO_LINE">
+    <table name="NO_REGISTRO_GASTO_LINE" primaryKey="NO_REGISTRO_GASTO_LINE_KEY">
+      <column name="NO_REGISTRO_GASTO_LINE_ID" primaryKey="true" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_CLIENT_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_ORG_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ISACTIVE" primaryKey="false" required="true" type="CHAR" size="1" autoIncrement="false">
+        <default><![CDATA[Y]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NO_REGISTRO_GASTO_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NO_TIPO_INGRESO_EGRESO_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="VALOR" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="NO_TIPO_INGRESO_EGRESO" name="NO_REG_GASTO_LINE_NO_TIP_I_E">
+        <reference local="NO_TIPO_INGRESO_EGRESO_ID" foreign="NO_TIPO_INGRESO_EGRESO_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_CLIENT" name="NO_REGISTRO_GASTO_LINE_AD_CLI">
+        <reference local="AD_CLIENT_ID" foreign="AD_CLIENT_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_ORG" name="NO_REGISTRO_GASTO_LINE_AD_ORG">
+        <reference local="AD_ORG_ID" foreign="AD_ORG_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="NO_REGISTRO_GASTO" name="NO_REGISTRO_GASTO_LINE_NO_R_G">
+        <reference local="NO_REGISTRO_GASTO_ID" foreign="NO_REGISTRO_GASTO_ID"/>
+      </foreign-key>
+      <check name="NO_REG_GAS_LINE_ISACTIVE_CHK"><![CDATA[ISACTIVE IN ('Y', 'N')]]></check>
+    </table>
+  </database>

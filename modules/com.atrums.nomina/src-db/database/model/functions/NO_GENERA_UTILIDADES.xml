@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_GENERA_UTILIDADES">
+    <function name="NO_GENERA_UTILIDADES" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+    v_Message VARCHAR(2000):='';
+    v_Result NUMBER:=1;
+    v_Record_ID VARCHAR(32);
+
+    Cur_Parameter RECORD;
+    Cur_Empleado RECORD;
+    Cur_Utilidad RECORD;
+    
+    v_Client_ID VARCHAR(32);
+    v_Org_ID VARCHAR(32);
+    v_User_ID VARCHAR(32);
+    v_utilidad_linea_id VARCHAR(32);
+    v_year_id VARCHAR(32);
+    v_utilidad NUMBER;
+    v_sum_dias NUMBER;
+    v_sum_dias_carga NUMBER;
+
+    v_year NUMBER:=0;
+    v_dias_laborados NUMBER:=0;
+    v_utilidad_10 NUMBER:=0;
+    v_cargas NUMBER:=0;
+    v_dias_x_carga NUMBER:=0;
+    v_utilidad_5 NUMBER:=0;
+    v_neto_utilidad NUMBER:=0;
+    
+    v_dias_mes NUMBER:=30;
+    v_mes_fin NUMBER;
+    v_dia_fin NUMBER;
+    v_mes_inicio NUMBER;
+    v_dia_inicio NUMBER;
+
+BEGIN
+
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN
+
+
+        FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  i.AD_Client_ID,
+                  i.ad_org_id,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_PInstance_ID
+            ORDER BY p.SeqNo)
+        LOOP
+            v_Record_ID:=Cur_Parameter.Record_ID;
+            v_User_ID:=Cur_Parameter.AD_User_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+        END LOOP;
+
+        select to_number(y.year), u.c_year_id 
+        into v_year, v_year_id
+        from c_year y, no_utilidad u
+        where u.no_utilidad_id = v_Record_ID
+        and u.c_year_id = y.c_year_id;
+
+        delete from no_utilidad_linea where no_utilidad_id = v_Record_ID;
+
+        FOR Cur_Empleado IN
+        (select bp.c_bpartner_id, 
+                ce.fecha_inicio, 
+                ce.fecha_fin,
+                ce.ad_org_id
+           from c_bpartner bp,
+                no_contrato_empleado ce
+          where bp.c_bpartner_id = ce.c_bpartner_id
+            and bp.isemployee = 'Y'
+            and bp.AD_Client_ID=v_Client_ID
+            and date_part('year', ce.fecha_inicio::DATE) <= v_year
+            and date_part('year', ce.fecha_fin::DATE) >= v_year
+            and ce.aplica_utilidad='Y'
+            order by 1,2
+            )
+        LOOP
+            
+            IF ((select date_part('year',Cur_Empleado.fecha_inicio)) = v_year AND 
+                    (select date_part('year',Cur_Empleado.fecha_fin)) = v_year) THEN
+                
+                v_mes_inicio := date_part('month', Cur_Empleado.fecha_inicio);
+                v_dia_inicio := date_part('day', Cur_Empleado.fecha_inicio);
+                v_mes_fin := date_part('month', Cur_Empleado.fecha_fin);
+                v_dia_fin := date_part('day', Cur_Empleado.fecha_fin);
+
+            ELSIF ((select date_part('year',Cur_Empleado.fecha_inicio)) = v_year AND 
+                    (select date_part('year',Cur_Empleado.fecha_fin)) > v_year) THEN
+
+                v_mes_inicio := date_part('month', Cur_Empleado.fecha_inicio);
+                v_dia_inicio := date_part('day', Cur_Empleado.fecha_inicio);
+                v_mes_fin := 12;
+                v_dia_fin := 30;
+                IF(v_dia_inicio > 30) THEN v_dia_inicio := 30; END IF;
+
+            ELSIF ((select date_part('year',Cur_Empleado.fecha_inicio)) < v_year AND 
+                    (select date_part('year',Cur_Empleado.fecha_fin)) = v_year) THEN
+
+                v_mes_inicio := 1;
+                v_dia_inicio := 1;
+                v_mes_fin := date_part('month', Cur_Empleado.fecha_fin);
+                v_dia_fin := date_part('day', Cur_Empleado.fecha_fin);
+                IF(v_dia_fin > 30) THEN v_dia_fin := 30; END IF;
+                IF(v_mes_fin = 2 AND v_dia_fin >= 28) THEN v_dia_fin := 30; END IF;
+
+            ELSIF ((select date_part('year',Cur_Empleado.fecha_inicio)) < v_year AND 
+                        (select date_part('year',Cur_Empleado.fecha_fin)) > v_year) THEN
+
+                v_mes_inicio := 1;
+                v_dia_inicio := 1;
+                v_mes_fin := 12;
+                v_dia_fin := 30;
+
+            END IF;
+                                
+           
+            
+
+            v_dias_laborados := v_dias_mes-(v_dia_inicio-1);
+            v_dias_laborados := v_dias_laborados + (((v_mes_fin-1)-v_mes_inicio)* v_dias_mes);
+            v_dias_laborados := v_dias_laborados + v_dia_fin;
+            
+            
+            
+            select coalesce(count(*),0) 
+            into v_cargas
+            from no_carga_empleado
+            where c_bpartner_id = Cur_Empleado.c_bpartner_id
+            and (tipo_carga = 'CO'
+            OR extract (YEAR from age((select max(enddate) from c_period where c_year_id = v_year_id), fecha_nacimiento)) <= 18
+            OR discapacitado='Y');
+
+            v_dias_x_carga := v_dias_laborados * v_cargas;
+
+            IF EXISTS (select 1 from no_utilidad_linea where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_utilidad_id = v_Record_ID) then
+                
+                v_dias_laborados := v_dias_laborados + (select dias_laborados from no_utilidad_linea where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_utilidad_id = v_Record_ID);
+                v_dias_x_carga := v_dias_laborados * v_cargas;
+
+                update no_utilidad_linea set
+                dias_laborados = v_dias_laborados,
+                dias_por_carga = v_dias_x_carga
+                where c_bpartner_id = Cur_Empleado.c_bpartner_id and no_utilidad_id = v_Record_ID;
+
+            ELSE
+
+                v_utilidad_linea_id := get_uuid();
+
+                INSERT INTO no_utilidad_linea VALUES 
+                (v_utilidad_linea_id,  v_Client_ID,    v_Org_ID,         'Y',              now(),
+                 v_User_ID,            now(),          v_User_ID,        v_Record_ID,      Cur_Empleado.c_bpartner_id,
+                 v_dias_laborados,     0,              v_cargas,         v_dias_x_carga,   0,             
+                 0);
+            END IF;
+
+        END LOOP;
+
+        FOR Cur_Utilidad IN
+        (select no_utilidad_linea_id,
+                dias_laborados,
+                dias_por_carga
+           from no_utilidad_linea
+          where no_utilidad_id = v_Record_ID
+            )
+        LOOP
+
+            select sum(dias_laborados), sum(dias_por_carga)
+            into v_sum_dias, v_sum_dias_carga
+            from no_utilidad_linea 
+            where no_utilidad_id = v_Record_ID;
+
+            select utilidad_empleados 
+            into v_utilidad
+            from no_utilidad
+            where no_utilidad_id = v_Record_ID;
+            
+            IF(v_sum_dias = 0) then v_sum_dias := 1; END IF;
+            IF(v_sum_dias_carga = 0) then v_sum_dias_carga := 1; END IF;
+
+            v_utilidad_10 := round((((v_utilidad * 0.666667) *  Cur_Utilidad.dias_laborados ) / v_sum_dias),2);
+
+            v_utilidad_5 := round((((v_utilidad * 0.333333) *  Cur_Utilidad.dias_por_carga ) / v_sum_dias_carga),2);
+
+            v_neto_utilidad := v_utilidad_10 + v_utilidad_5;
+
+            update no_utilidad_linea set
+            utilidad_10 = v_utilidad_10, 
+            utilidad_5 = v_utilidad_5, 
+            total_utilidad = v_neto_utilidad
+            where no_utilidad_linea_id = Cur_Utilidad.no_utilidad_linea_id;
+
+        END LOOP;
+
+        v_Message:='@NO_EjecucionCorrecta@';
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END NO_GENERA_UTILIDADES
+]]></body>
+    </function>
+  </database>

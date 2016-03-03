@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="Linea00E24D4D2F074977B69197B0A12B8189Data" package="org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(no_rol_pago_provision_line.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_rol_pago_provision_line.CreatedBy) as CreatedByR, 
+        to_char(no_rol_pago_provision_line.Updated, ?) as updated, 
+        to_char(no_rol_pago_provision_line.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        no_rol_pago_provision_line.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_rol_pago_provision_line.UpdatedBy) as UpdatedByR,
+        no_rol_pago_provision_line.Line, 
+no_rol_pago_provision_line.NO_Tipo_Ingreso_Egreso_ID, 
+(CASE WHEN no_rol_pago_provision_line.NO_Tipo_Ingreso_Egreso_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS NO_Tipo_Ingreso_Egreso_IDR, 
+no_rol_pago_provision_line.Fechainicio, 
+no_rol_pago_provision_line.Fechafin, 
+no_rol_pago_provision_line.Valor, 
+no_rol_pago_provision_line.C_Currency_ID, 
+(CASE WHEN no_rol_pago_provision_line.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
+COALESCE(no_rol_pago_provision_line.Isactive, 'N') AS Isactive, 
+no_rol_pago_provision_line.Docstatus, 
+no_rol_pago_provision_line.C_Doctype_ID, 
+no_rol_pago_provision_line.Documentno, 
+no_rol_pago_provision_line.Docaccionno, 
+list1.name as Docaccionno_BTN, 
+no_rol_pago_provision_line.AD_Org_ID, 
+no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID, 
+no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID, 
+no_rol_pago_provision_line.AD_Client_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM no_rol_pago_provision_line left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table1 on (no_rol_pago_provision_line.NO_Tipo_Ingreso_Egreso_ID = table1.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (no_rol_pago_provision_line.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list1.ad_language = ?  AND no_rol_pago_provision_line.Docaccionno = TO_CHAR(list1.value))
+        WHERE 2=2 
+
+        AND 1=1 
+        AND no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ? 
+        AND no_rol_pago_provision_line.AD_Client_ID IN ('1') 
+           AND no_rol_pago_provision_line.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+
+    <Parameter name="noRolPagoProvisionId" optional="true" after="AND 1=1 " id="paramKeyParent"> AND no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID = ? </Parameter>
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_rol_pago_provision_line.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_rol_pago_provision_line.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+    <Parameter name="noRolPagoProvisionId" id="paramKeyParent"></Parameter>
+<Parameter name="valor"></Parameter><Parameter name="documentno"></Parameter><Parameter name="docstatus"></Parameter><Parameter name="cDoctypeId"></Parameter><Parameter name="fechafin"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="isactive"></Parameter><Parameter name="docaccionno"></Parameter><Parameter name="docaccionnoBtn"></Parameter><Parameter name="noTipoIngresoEgresoId"></Parameter><Parameter name="cCurrencyId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="noRolPagoProvisionLineId"></Parameter><Parameter name="fechainicio"></Parameter><Parameter name="line"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="adOrgId"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef40740A56F8384F0DA75AB6D39B6D410D_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefC75F6017E9C344518FD90992C7DA7F6F" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT COALESCE(MAX(LINE),0)+10 AS DefaultValue FROM NO_ROL_PAGO_PROVISION_LINE WHERE NO_ROL_PAGO_PROVISION_ID=? 
+    ]]></Sql>
+
+<Parameter name="NO_Rol_Pago_Provision_ID"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefE2830DC1366F4D0297CB8B1DED23CF0C_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+
+
+  <SqlMethod name="selectParentID" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>return the parent ID</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID AS NAME
+        FROM no_rol_pago_provision_line
+        WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ?
+    ]]></Sql>
+    <Parameter name="key"></Parameter>
+  </SqlMethod>
+
+   <SqlMethod name="selectParent" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.Documentno), ''))) AS NAME FROM no_rol_pago_provision left join (select NO_Rol_Pago_Provision_ID, Documentno from NO_Rol_Pago_Provision) table1 on (no_rol_pago_provision.NO_Rol_Pago_Provision_ID = table1.NO_Rol_Pago_Provision_ID) WHERE no_rol_pago_provision.NO_Rol_Pago_Provision_ID = ?  
+    ]]></Sql>
+<Parameter name="noRolPagoProvisionId"/>
+
+  </SqlMethod>
+
+
+
+
+   <SqlMethod name="selectParentTrl" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.Documentno), ''))) AS NAME FROM no_rol_pago_provision left join (select NO_Rol_Pago_Provision_ID, Documentno from NO_Rol_Pago_Provision) table1 on (no_rol_pago_provision.NO_Rol_Pago_Provision_ID = table1.NO_Rol_Pago_Provision_ID) WHERE no_rol_pago_provision.NO_Rol_Pago_Provision_ID = ?  
+    ]]></Sql>
+<Parameter name="noRolPagoProvisionId"/>
+
+  </SqlMethod>
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE no_rol_pago_provision_line
+        SET Line = TO_NUMBER(?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Fechainicio = TO_DATE(?) , Fechafin = TO_DATE(?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Docstatus = (?) , C_Doctype_ID = (?) , Documentno = (?) , Docaccionno = (?) , AD_Org_ID = (?) , NO_Rol_Pago_Provision_Line_ID = (?) , NO_Rol_Pago_Provision_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ? 
+                 AND no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID = ? 
+        AND no_rol_pago_provision_line.AD_Client_ID IN ('1') 
+        AND no_rol_pago_provision_line.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="line"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="fechainicio"></Parameter> <Parameter name="fechafin"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="noRolPagoProvisionLineId"></Parameter>
+    
+    <Parameter name="noRolPagoProvisionId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_rol_pago_provision_line.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_rol_pago_provision_line.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO no_rol_pago_provision_line 
+        (Line, NO_Tipo_Ingreso_Egreso_ID, Fechainicio, Fechafin, Valor, C_Currency_ID, Isactive, Docstatus, C_Doctype_ID, Documentno, Docaccionno, AD_Org_ID, NO_Rol_Pago_Provision_Line_ID, NO_Rol_Pago_Provision_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES (TO_NUMBER(?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="line"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="fechainicio"></Parameter> <Parameter name="fechafin"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM no_rol_pago_provision_line
+        WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ? 
+                 AND no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID = ? 
+        AND no_rol_pago_provision_line.AD_Client_ID IN ('1') 
+        AND no_rol_pago_provision_line.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+        <Parameter name="noRolPagoProvisionId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_rol_pago_provision_line.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_rol_pago_provision_line.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM no_rol_pago_provision_line
+         WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM no_rol_pago_provision_line
+         WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

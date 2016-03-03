@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NE_CON_EMP_CONTROLS_TRG">
+    <function name="NE_CON_EMP_CONTROLS_TRG" type="VARCHAR">
+      <body><![CDATA[fecha_inicio_cont DATE;
+	v_fecha_inicio DATE;
+	v_fecha_fin DATE;
+	v_cursor record;
+BEGIN
+	if new.salario < 0 then
+		raise exception '%', '@NE_SALARIO_NEG_EXCEPTION@';
+	end if;
+
+	if new.em_ne_num_horas_parciales < 0 then
+		raise exception '%', '@NE_HORA_PARCIAL_EXCEPTION@';
+	end if;
+
+	IF date(NEW.fecha_fin) < date(new.fecha_inicio) THEN
+		RAISE NO_DATA_FOUND;
+	END IF;
+
+	return new;
+END NE_CON_EMP_CONTROLS_TRG
+]]></body>
+    </function>
+  </database>

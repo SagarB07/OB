@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_COPIA_CUENTA_INGR_EGR_TRG">
+    <trigger name="NO_COPIA_CUENTA_INGR_EGR_TRG" table="NO_EMPLEADO_ING_EGR" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[  v_acctschema_id character varying(32);
+  v_n_debe_acct character varying(32);
+  v_n_haber_acct character varying(32);
+  v_mensaje character varying;
+BEGIN
+    IF (INSERTING) THEN
+
+         if not exists (select count(*) from no_tipo_ing_egr_acct
+                                    where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id) then
+              v_mensaje:='No se a configurado la cuenta contable del rubro';
+              RAISE v_mensaje;
+         end if;
+           
+        select c_acctschema_id,n_debe_acct,n_haber_acct
+        into v_acctschema_id, v_n_debe_acct, v_n_haber_acct   
+          from no_tipo_ing_egr_acct
+         where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id;
+
+         if (select count(*) from no_cb_empleado_acct
+                        where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id and c_bpartner_id = :new.c_bpartner_id ) then
+              v_mensaje:='Ya existe el rubro descrito anteriormente';
+              RAISE v_mensaje;
+         end if;
+
+		INSERT INTO no_cb_empleado_acct
+		VALUES(get_uuid(),          :new.ad_client_id,           :new.ad_org_id,          'Y',
+               now(),               :new.createdby,              now(),                  :new.updatedby,
+               :new.c_bpartner_id,   v_acctschema_id,            v_n_debe_acct,         :new.no_tipo_ingreso_egreso_id,
+               v_n_haber_acct);
+
+        RETURN NEW;
+    END IF;
+    IF (UPDATING) THEN
+
+         if not exists (select count(*) from no_tipo_ing_egr_acct
+                                    where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id) then
+              v_mensaje:='No se a configurado la cuenta contable del rubro';
+              RAISE v_mensaje;
+         end if;
+           
+        select c_acctschema_id,n_debe_acct,n_haber_acct
+        into v_acctschema_id, v_n_debe_acct, v_n_haber_acct   
+          from no_tipo_ing_egr_acct
+         where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id;
+
+         if (0=(select count(*) from no_cb_empleado_acct
+                        where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id and c_bpartner_id = :new.c_bpartner_id)) then
+                        INSERT INTO no_cb_empleado_acct
+                        VALUES(get_uuid(),          :new.ad_client_id,           :new.ad_org_id,          :new.isactive,
+                               now(),               :new.createdby,              now(),                  :new.updatedby,
+                               :new.c_bpartner_id,   v_acctschema_id,            v_n_debe_acct,         :new.no_tipo_ingreso_egreso_id,
+                               v_n_haber_acct);
+         else
+                        UPDATE no_cb_empleado_acct set isactive = :new.isactive, no_cuenta_ingreso_acct = v_n_debe_acct, no_cuenta_egreso_acct = v_n_haber_acct
+                        where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id and c_bpartner_id = :new.c_bpartner_id;
+         end if;
+        RETURN NEW;
+    END IF;
+
+    IF DELETING THEN
+
+    DELETE FROM no_cb_empleado_acct  
+	WHERE no_tipo_ingreso_egreso_id= :old.no_tipo_ingreso_egreso_id; 
+
+        RETURN OLD;
+    END IF;
+
+END NO_COPIA_CUENTA_INGR_EGR_TRG
+]]></body>
+    </trigger>
+  </database>

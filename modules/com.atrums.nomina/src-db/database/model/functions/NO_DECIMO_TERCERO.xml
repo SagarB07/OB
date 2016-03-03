@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_DECIMO_TERCERO">
+    <function name="NO_DECIMO_TERCERO" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_total NUMBER:=0;
+v_Message varchar;
+BEGIN
+    if ((select count(*) 
+          from no_rol_pago_provision 
+         where c_period_id = p_period_id
+           and c_bpartner_id = p_empleado_id) = 0) then
+        
+        v_Message:='No se ha generado el rol de pagos para calcular los ingresos';
+        RAISE v_Message;
+    end if;
+
+
+    select COALESCE(sum(ppl.valor),0)
+      into v_total
+      from no_rol_pago_provision pp,
+           no_rol_pago_provision_line ppl,
+           no_tipo_ingreso_egreso ie
+     where ispago = 'Y'
+       and ppl.no_tipo_ingreso_egreso_id = ie.no_tipo_ingreso_egreso_id
+       and ie.suma_ingreso = 'Y'
+       and pp.no_rol_pago_provision_id = ppl.no_rol_pago_provision_id
+       and pp.c_period_id = p_period_id
+       and pp.c_bpartner_id = p_empleado_id;
+       return v_total/12;
+
+    return 0;
+END NO_DECIMO_TERCERO
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_UNICO_DATO_TRG">
+    <trigger name="NO_UNICO_DATO_TRG" table="NO_NOVEDAD" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje 	varchar(255);	  
+BEGIN
+    
+    IF (UPDATING OR INSERTING) THEN
+        IF (SELECT count(*) > 0 FROM no_novedad n 
+            WHERE n.ad_org_id = :NEW.ad_org_id
+                  AND n.c_period_id = :NEW.c_period_id 
+                  AND n.no_tipo_ingreso_egreso_id = :NEW.no_tipo_ingreso_egreso_id) THEN
+			v_mensaje:='@No se permite ingresar el mismo rubro en el mismo periodo y sucursal@';
+			RAISE v_mensaje;
+        ELSE
+            RETURN NEW;
+        END IF;
+    END IF;
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_UNICO_DATO_TRG
+]]></body>
+    </trigger>
+  </database>

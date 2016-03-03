@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE FIN_PAYMENT_DETAIL">
+    <table name="FIN_PAYMENT_DETAIL" primaryKey="FIN_PAYMENT_DETAIL_KEY">
+      <column name="EM_NO_PAGO_LINE_ID" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

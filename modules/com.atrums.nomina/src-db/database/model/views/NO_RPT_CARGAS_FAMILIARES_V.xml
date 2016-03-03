@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+  <database name="VIEW NO_RPT_CARGAS_FAMILIARES_V">
+    <view name="NO_RPT_CARGAS_FAMILIARES_V"><![CDATA[SELECT ce.no_carga_empleado_id AS no_rpt_cargas_familiares_v_id, cbp.c_bpartner_id, cbp.ad_client_id, cbp.ad_org_id, cbp.isactive, cbp.created, cbp.createdby, cbp.updated, cbp.updatedby, ce.nombre, ce.tipo_carga, ce.genero, date_part('year', age(now(), ce.fecha_nacimiento)) AS edad FROM no_carga_empleado ce, c_bpartner cbp WHERE ce.c_bpartner_id = cbp.c_bpartner_id AND cbp.isemployee = 'Y']]></view>
+  </database>

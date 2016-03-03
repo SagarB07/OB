@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_FIELD" version="">
+  <row id="09FF5ED1AE3C47DFB880060024B02105" trl="N">
+    <value column="Name" isTrl="N" original="Cargo">Cargo</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="4E6CA2CEB678417A95C0ACE73038E39D" trl="N">
+    <value column="Name" isTrl="N" original="Experiencia">Experiencia</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="65F04C2BBC6F4548A518621D6BC0F9FA" trl="N">
+    <value column="Name" isTrl="N" original="Perito">Perito</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="8F600CD9335D4C0C9D9AB4A7F006100C" trl="N">
+    <value column="Name" isTrl="N" original="Name">Name</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B2360E66D791465583C4196A33CA914B" trl="N">
+    <value column="Name" isTrl="N" original="Req">Req</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="D1575117C02A4335A9FBE1F21B87DFCF" trl="N">
+    <value column="Name" isTrl="N" original="Formacion">Formacion</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="EB11F64EE0AF4D3B9C8488B7A1755461" trl="N">
+    <value column="Name" isTrl="N" original="Habilidad">Habilidad</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="EC517A6032CE4FC48A6B6598DC548B5B" trl="N">
+    <value column="Name" isTrl="N" original="Instruccion_Formal">Instruccion_Formal</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

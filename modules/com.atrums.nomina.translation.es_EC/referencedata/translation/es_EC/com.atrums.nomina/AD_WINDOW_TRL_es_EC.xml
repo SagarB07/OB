@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_WINDOW" version="">
+  <row id="0C9CD26E32C54DBDA4897AA721B544A1" trl="N">
+    <value column="Name" isTrl="N" original="Calcula rubro">Calcula rubro</value>
+    <value column="Description" isTrl="N" original="Ventana que permite ingresar los rubros ">Ventana que permite ingresar los rubros </value>
+    <value column="Help" isTrl="N" original="Ventana que permite ingresar los rubros">Ventana que permite ingresar los rubros</value>
+  </row>
+  <row id="17C72A2EF0E949919DAF8586CF358322" trl="N">
+    <value column="Name" isTrl="N" original="Plan de Pago">Plan de Pago</value>
+    <value column="Description" isTrl="N" original="Se registran las condiciones de un contrato de un empleado">Se registran las condiciones de un contrato de un empleado</value>
+    <value column="Help" isTrl="N" original="Se registran las condiciones de un contrato de un empleado">Se registran las condiciones de un contrato de un empleado</value>
+  </row>
+  <row id="303C4496800E4F97BAF1F99001EE6589" trl="N">
+    <value column="Name" isTrl="N" original="Utilidades Empleado">Utilidades Empleado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="3495F12FBAF2431684B32FDFE1A13375" trl="N">
+    <value column="Name" isTrl="N" original="Registro Descuentos">Registro Descuentos</value>
+    <value column="Description" isTrl="N" original="Registra los descuentos de un Tercero">Registra los descuentos de un Tercero</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="3FD9306328864C069763CE11FB311A7B" trl="N">
+    <value column="Name" isTrl="N" original="Tipo de Ingresos o Egresos">Tipo de Ingresos o Egresos</value>
+    <value column="Description" isTrl="N" original="Definición de Ingresos Egreso que se utilizaran para la generación de Roles de Pagos y provisiones del empleado.">Definición de Ingresos Egreso que se utilizaran para la generación de Roles de Pagos y provisiones del empleado.</value>
+    <value column="Help" isTrl="N" original="Definición de Ingresos Egreso que se utilizaran para la generación de Roles de Pagos y provisiones del empleado.">Definición de Ingresos Egreso que se utilizaran para la generación de Roles de Pagos y provisiones del empleado.</value>
+  </row>
+  <row id="413BE1E8FC3C4DE797D65A672ACAA234" trl="N">
+    <value column="Name" isTrl="N" original="Vacaciones">Vacaciones</value>
+    <value column="Description" isTrl="N" original="Muestra la ventana de vacaciones">Muestra la ventana de vacaciones</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="41844ED4F6D346868D4B5D5F1D4AA14D" trl="N">
+    <value column="Name" isTrl="N" original="Rol de Provisiones">Rol de Provisiones</value>
+    <value column="Description" isTrl="N" original="Registra las provisiones de los empleados">Registra las provisiones de los empleados</value>
+    <value column="Help" isTrl="N" original="Registra las provisiones de los empleados">Registra las provisiones de los empleados</value>
+  </row>
+  <row id="49994E51AC29466FAEF2F122E3654438" trl="N">
+    <value column="Name" isTrl="N" original="Contrato Empleado">Contrato Empleado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="4B4FF3A4845B407A9B7967055583E867" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Rubro Liquidación">Tipo Rubro Liquidación</value>
+    <value column="Description" isTrl="N" original="Muestra el tipo de rubro de liquidación">Muestra el tipo de rubro de liquidación</value>
+    <value column="Help" isTrl="N" original="Muestra el tipo de rubro de liquidación">Muestra el tipo de rubro de liquidación</value>
+  </row>
+  <row id="51DEFEE2D89847AC9EF8692D59691860" trl="N">
+    <value column="Name" isTrl="N" original="Registro Gastos Deducibles">Registro Gastos Deducibles</value>
+    <value column="Description" isTrl="N" original="Registro de gastos deducibles anuales del empleado">Registro de gastos deducibles anuales del empleado</value>
+    <value column="Help" isTrl="N" original="Registro de gastos deducibles anuales del empleado">Registro de gastos deducibles anuales del empleado</value>
+  </row>
+  <row id="8002680D189A4CB397E63CBEA7FAA18F" trl="N">
+    <value column="Name" isTrl="N" original="Rol de Pagos">Rol de Pagos</value>
+    <value column="Description" isTrl="N" original="Genera los roles de pagos de los empleados">Genera los roles de pagos de los empleados</value>
+    <value column="Help" isTrl="N" original="Genera los roles de pagos de los empleados">Genera los roles de pagos de los empleados</value>
+  </row>
+  <row id="867DFFDCDE62469A800012B69B511A16" trl="N">
+    <value column="Name" isTrl="N" original="Registrar Anticipos">Registrar Anticipos</value>
+    <value column="Description" isTrl="N" original="Ventana que Registra el avance">Ventana que Registra el avance</value>
+    <value column="Help" isTrl="N" original="Ventana que Registra el avance">Ventana que Registra el avance</value>
+  </row>
+  <row id="874A715145A748438A10019CD8D8A952" trl="N">
+    <value column="Name" isTrl="Y" original="Configuración de Horas">Configuración Horas</value>
+    <value column="Description" isTrl="N" original="Configuración Hora Extras y Atrasos">Configuración Hora Extras y Atrasos</value>
+    <value column="Help" isTrl="N" original="Configuración Hora Extras y Atrasos">Configuración Hora Extras y Atrasos</value>
+  </row>
+  <row id="89D4BCC3D0C64D10AA5A8E192898E702" trl="N">
+    <value column="Name" isTrl="N" original="Liquidacion Empleado">Liquidacion Empleado</value>
+    <value column="Description" isTrl="N" original="Registro de la liquidación de un empleado">Registro de la liquidación de un empleado</value>
+    <value column="Help" isTrl="N" original="Registro de la liquidación de un empleado.">Registro de la liquidación de un empleado.</value>
+  </row>
+  <row id="A37FDCC392E144FDB7C7D814CE472C06" trl="N">
+    <value column="Name" isTrl="N" original="Permiso de Empleados">Permiso de Empleados</value>
+    <value column="Description" isTrl="N" original="Pantalla donde se solicitan y se aprueban los permisos de un Empleado">Pantalla donde se solicitan y se aprueban los permisos de un Empleado</value>
+    <value column="Help" isTrl="N" original="Pantalla donde se solicitan y se aprueban los permisos de un Empleado">Pantalla donde se solicitan y se aprueban los permisos de un Empleado</value>
+  </row>
+  <row id="A52B830CC604468EB53123E08F882C64" trl="N">
+    <value column="Name" isTrl="N" original="Registro de Horas">Registro de Horas</value>
+    <value column="Description" isTrl="N" original="Registro de Horas Extras y Atrasos">Registro de Horas Extras y Atrasos</value>
+    <value column="Help" isTrl="N" original="Registro de Horas Extras y Atrasos">Registro de Horas Extras y Atrasos</value>
+  </row>
+  <row id="AB9ECDF902AF4B64ABAE55D4F10ED0BE" trl="N">
+    <value column="Name" isTrl="N" original="Area">Area</value>
+    <value column="Description" isTrl="N" original="Ingresa el Area de la Empresa">Ingresa el Area de la Empresa</value>
+    <value column="Help" isTrl="N" original="Ingresa el Area de la Empresa">Ingresa el Area de la Empresa</value>
+  </row>
+  <row id="C8DC5F42B78D4B47B8A80A0CCD35AA60" trl="N">
+    <value column="Name" isTrl="N" original="Liquidación del Impuesto a la Renta">Liquidación del Impuesto a la Renta</value>
+    <value column="Description" isTrl="N" original="Registra la liquidación del impuesto a la renta">Registra la liquidación del impuesto a la renta</value>
+    <value column="Help" isTrl="N" original="Registra la liquidación del impuesto a la renta">Registra la liquidación del impuesto a la renta</value>
+  </row>
+  <row id="CF9A4FD7D9CA4D00926BAFACB8D09D03" trl="N">
+    <value column="Name" isTrl="N" original="Reporte Cargas Familiares">Reporte Cargas Familiares</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="D0D299381AA24D9BA60B966279591A3E" trl="N">
+    <value column="Name" isTrl="N" original="Registro de Comisiones">Registro de Comisiones</value>
+    <value column="Description" isTrl="N" original="Registro de comisiones de los vendedores">Registro de comisiones de los vendedores</value>
+    <value column="Help" isTrl="N" original="Registro de comisiones de los vendedores">Registro de comisiones de los vendedores</value>
+  </row>
+  <row id="F091BA3BE3694596961D3D3070583CBC" trl="N">
+    <value column="Name" isTrl="N" original="Generador Pagos Nomina">Generador Pagos Nomina</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

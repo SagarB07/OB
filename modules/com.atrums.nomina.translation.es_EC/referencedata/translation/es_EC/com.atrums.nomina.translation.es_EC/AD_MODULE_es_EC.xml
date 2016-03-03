@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_MODULE" version="">
+  <row id="B0929F48AD3E4A91A6B6007029C28B00" trl="N">
+    <value column="Description" isTrl="N" original="Módulo de traducción de lenguaje al español ecuatoriano">Módulo de traducción de lenguaje al español ecuatoriano</value>
+    <value column="Help" isTrl="N" original="Módulo de traducción de lenguaje al español ecuatoriano">Módulo de traducción de lenguaje al español ecuatoriano</value>
+    <value column="License" isTrl="N" original="Términos de la licencia comercial de Openbravo">Términos de la licencia comercial de Openbravo</value>
+    <value column="Updateinfo" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

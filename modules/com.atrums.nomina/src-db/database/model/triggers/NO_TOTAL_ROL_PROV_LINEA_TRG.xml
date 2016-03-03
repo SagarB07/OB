@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_TOTAL_ROL_PROV_LINEA_TRG">
+    <trigger name="NO_TOTAL_ROL_PROV_LINEA_TRG" table="NO_ROL_PROVISION_LINE_MES" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+
+v_val_ingreso NUMBER;
+
+BEGIN
+    IF (UPDATING OR INSERTING) THEN
+
+        select coalesce(sum(valor),0)
+          into v_val_ingreso
+          from no_rol_provision_line_mes
+         where no_rol_pago_provision_line_id=:new.no_rol_pago_provision_line_id;
+
+        UPDATE no_rol_pago_provision_line
+           SET valor=v_val_ingreso
+         WHERE no_rol_pago_provision_line_id=:new.no_rol_pago_provision_line_id;
+
+        RETURN NEW;
+    END IF;
+
+    IF DELETING THEN
+        select coalesce(sum(valor),0)
+          into v_val_ingreso
+          from no_rol_provision_line_mes
+         where no_rol_pago_provision_line_id=:old.no_rol_pago_provision_line_id;
+
+        UPDATE no_rol_pago_provision_line
+           SET valor=v_val_ingreso
+         WHERE no_rol_pago_provision_line_id=:old.no_rol_pago_provision_line_id;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_TOTAL_ROL_PROV_LINEA_TRG
+]]></body>
+    </trigger>
+  </database>

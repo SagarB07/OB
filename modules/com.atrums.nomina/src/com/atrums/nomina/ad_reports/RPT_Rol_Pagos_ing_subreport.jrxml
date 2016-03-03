@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Rol_Pagos_ing_subreport" pageWidth="278" pageHeight="802" columnWidth="278" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="no_rol_pago_provision_id" class="java.lang.String"/>
+	<parameter name="total_ingreso" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[select ie.name,
+       rpl.valor
+  from no_rol_pago_provision_line rpl,
+       no_tipo_ingreso_egreso ie
+ where ie.no_tipo_ingreso_egreso_id = rpl.no_tipo_ingreso_egreso_id
+   and ie.isingreso = 'Y'
+   and rpl.valor > 0
+   and no_rol_pago_provision_id =$P{no_rol_pago_provision_id}
+order by 2 desc]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<detail>
+		<band height="12" splitType="Immediate">
+			<textField>
+				<reportElement x="14" y="0" width="177" height="12"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="228" y="0" width="37" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

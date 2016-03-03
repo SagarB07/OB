@@ -1,0 +1,466 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATRDEP_GENERA_DATOS_ARCHIVO">
+    <function name="ATRDEP_GENERA_DATOS_ARCHIVO" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+    v_Message VARCHAR(2000):='';
+    v_Record_ID VARCHAR(32);
+    v_Result NUMBER:=1;
+    v_msg1 VARCHAR(2000):='Prueba';
+
+    Cur_Parameter RECORD;
+	Cur_Empleado RECORD;
+    Cur_Periodo RECORD;
+
+    v_atrdep_cabecera_reten_id VARCHAR(32);
+	v_Client_ID VARCHAR(32);
+    v_Org_ID VARCHAR(32);
+    v_User_ID VARCHAR(32);
+    v_period_id  VARCHAR(32);
+	v_area_empresa_id VARCHAR(32);
+	v_doctype_id VARCHAR(32);
+    v_table_id VARCHAR(32);
+	v_campo_valor VARCHAR(32):='';
+    v_where varchar(500);
+    v_completado varchar(500);
+	qry VARCHAR(2000);
+	qry1 VARCHAR(2000);
+    v_bpartner_id varchar;
+    v_ParameterName VARCHAR(32);
+    v_atrdep_reten_line_id varchar(32);
+    v_fecha_inicio DATE;
+    v_fecha_fin DATE;
+    v_ruc_agente varchar(20);
+    v_tipo_identificacion varchar(60);
+    v_idret varchar(10);
+    v_dircal varchar(60);
+    v_em_no_num_dir varchar(10);
+    v_location_id varchar(32);
+    v_dirciu varchar(32);
+    v_dirprov varchar(32);
+    v_phone1 varchar(40);
+    v_phone2 varchar(40);
+    v_tel varchar(40);
+    v_sissalnet varchar(60);
+    v_suelsal NUMBER;
+    v_no_rol_pago_provision_id varchar(32);
+    v_sobsuelcomremu NUMBER;
+    v_decimter NUMBER;
+    v_fondoreserva NUMBER;
+    v_salariodigno NUMBER;
+    v_partutil NUMBER;
+    v_apoperiess NUMBER;
+    v_no_gastos_empleado_id varchar(32);
+    v_deducvivienda NUMBER;
+    v_deducsalud NUMBER;
+    v_deduceduca NUMBER;
+    v_deducaliement NUMBER;
+    v_deducvestim NUMBER;
+    v_anio_redep varchar(60);
+    v_rebespdiscap NUMBER;
+    v_rebesptered NUMBER;
+    v_subtotal NUMBER;
+    v_numret NUMBER;
+    v_nummesemplead NUMBER;
+    v_total_ingresos NUMBER;
+    v_total_aportes_iess NUMBER;
+    v_basimp NUMBER;
+    v_imprentcaus NUMBER;
+    v_total_ingresos_renta NUMBER;
+    v_valret NUMBER;
+    v_decimcuar NUMBER;
+    v_ani_fecha_inicio NUMBER;
+    v_ani_fecha_fin NUMBER;
+    v_deduccgastosotrempl NUMBER;
+    v_tipo_ident char(1);
+    v_anio_linerdep NUMBER;
+    v_estab varchar(3);
+    v_total_total_ingr NUMBER:=0;
+    v_total_total_imp NUMBER:=0;
+    v_total_sobrsuel_com_rem NUMBER:=0;
+    v_total_dec_ter NUMBER:=0;
+    v_total_dec_cuar NUMBER:=0;
+    v_total_fondos_reserv NUMBER:=0;
+    v_total_to_sueldo NUMBER:=0;
+    
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN
+        FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date,
+                  i.AD_Org_ID,
+                  i.AD_Client_ID
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_PInstance_ID
+            ORDER BY p.SeqNo)
+        LOOP
+            v_atrdep_cabecera_reten_id:=Cur_Parameter.Record_ID;
+            v_User_ID:=Cur_Parameter.AD_User_ID;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            v_ParameterName:=Cur_Parameter.ParameterName;
+        END LOOP;
+        
+                select em_co_nro_estab into v_estab  from ad_org where ad_org_id =v_Org_ID;
+                
+                select fecha_inicio, fecha_fin, anios into v_fecha_inicio, v_fecha_fin, v_anio_redep from atrdep_cabecera_reten 
+                where atrdep_cabecera_reten_id=v_atrdep_cabecera_reten_id;
+
+                    FOR Cur_Empleado IN
+                    (select cp.c_bpartner_id from c_bpartner cp, no_contrato_empleado ce
+                     where isemployee='Y' 
+                     and (em_no_fechasalida between v_fecha_inicio and v_fecha_fin
+                     or em_no_fechasalida is null)
+                     and ce.fecha_fin>v_fecha_inicio
+                     and cp.ad_org_id='0'
+                    and cp.c_bpartner_id=ce.c_bpartner_id
+                    and not exists(select rdep.c_bpartner_id from atrdep_cabecera_reten_line rdep
+                                    where rdep.atrdep_cabecera_reten_id= v_atrdep_cabecera_reten_id
+                                    and rdep.c_bpartner_id=cp.c_bpartner_id))
+                LOOP
+                    
+                    
+                    v_bpartner_id:=Cur_Empleado.c_bpartner_id;
+                    v_atrdep_reten_line_id:=get_uuid();
+
+                   
+                        
+                    select taxid into v_ruc_agente from ad_orginfo where ad_org_id= v_Org_ID;
+
+                    select em_co_tipo_identificacion, taxid , em_no_sissalnet
+                    into   v_tipo_identificacion, v_idret, v_sissalnet from c_bpartner
+                    where c_bpartner_id = v_bpartner_id;
+
+                    v_tipo_ident:= substr(v_tipo_identificacion,2,2);
+
+
+                    select name, em_no_num_dir, c_location_id, phone, phone2
+                    into v_dircal, v_em_no_num_dir, v_location_id, v_phone1, v_phone2 
+                    from c_bpartner_location 
+                    where c_bpartner_id = v_bpartner_id;
+
+                    if(v_phone1 is null and v_phone2 is null)then
+                        raise Exception 'Se necesita un numero telefonico para el empleado';
+                        else
+                            if(v_phone1 is not null and v_phone2 is not null)then
+
+                               v_tel=v_phone1;
+                             end if;   
+                    end if;
+
+                    select c_city_id, substring (c_region_id,2,4) into v_dirciu, v_dirprov from c_location where c_location_id=v_location_id;
+
+                    
+
+                    select total_neto
+                    into v_partutil
+                    from no_utilidad_linea where c_bpartner_id=v_bpartner_id;
+
+
+                   select no_gastos_empleado_id 
+                   into v_no_gastos_empleado_id
+                   from no_gastos_empleado where c_bpartner_id =v_bpartner_id
+                   and anio = v_anio_redep;
+
+
+                   select valor 
+                   into  v_deducvivienda
+                   from no_gastos_empleado_line 
+                   where no_gastos_empleado_id = v_no_gastos_empleado_id and tipo_gastos='VIV';
+
+                   select valor 
+                   into  v_deducsalud
+                   from no_gastos_empleado_line 
+                   where no_gastos_empleado_id = v_no_gastos_empleado_id and tipo_gastos='SAL';
+
+                   select valor 
+                   into  v_deduceduca
+                   from no_gastos_empleado_line 
+                   where no_gastos_empleado_id = v_no_gastos_empleado_id and tipo_gastos='EDU';
+
+                   select valor 
+                   into  v_deducaliement
+                   from no_gastos_empleado_line 
+                   where no_gastos_empleado_id = v_no_gastos_empleado_id and tipo_gastos='ALI';
+
+                   select valor 
+                   into  v_deducvestim
+                   from no_gastos_empleado_line 
+                   where no_gastos_empleado_id = v_no_gastos_empleado_id and tipo_gastos='VES';
+
+
+                   select valor 
+                    into v_rebespdiscap
+                    from no_rol_pago_provision_line 
+                    where no_tipo_ingreso_egreso_id='F9866C55692942B8884FB66528347A3C' 
+                    and no_rol_pago_provision_id in (select no_rol_pago_provision_id
+                    from no_rol_pago_provision where c_bpartner_id in (select c_bpartner_id from c_bpartner where em_no_isdiscapacitado ='Y')
+                    and isPago='Y' and docstatus ='CO'); 
+
+                    select valor 
+                    into v_rebesptered
+                    from no_rol_pago_provision_line 
+                    where no_tipo_ingreso_egreso_id='78A2022BF8C748EAB38D85424973AEC8' 
+                    and no_rol_pago_provision_id in (select no_rol_pago_provision_id
+                    from no_rol_pago_provision where c_bpartner_id in (select c_bpartner_id from c_bpartner where em_no_istercera_edad ='Y')
+                    and isPago='Y' and docstatus ='CO');
+
+
+                    select total_gastos 
+                    into v_subtotal
+                    from no_gastos_empleado where c_bpartner_id = v_bpartner_id and anio = v_anio_redep;
+
+
+
+        
+
+
+                    select count(nrp.no_rol_pago_provision_id) 
+                    into v_numret
+                    from no_rol_pago_provision nrp, no_rol_pago_provision_line nrl, c_period cp
+                    where nrp.no_rol_pago_provision_id=nrl.no_rol_pago_provision_id
+                    and cp.startdate>=v_fecha_inicio
+                    and cp.enddate <=v_fecha_fin
+                    and nrp.ispago='Y'
+                    and nrp.docstatus ='CO'
+                    and nrp.c_period_id=cp.c_period_id
+                    and nrp.c_bpartner_id = v_bpartner_id
+                    and nrl.no_tipo_ingreso_egreso_id ='448CC74D446E4273A589FACDCA4D263C';   
+
+
+                    select count(nrp.no_rol_pago_provision_id) 
+                    into v_nummesemplead
+                    from no_rol_pago_provision nrp, c_period cp 
+                    where nrp.c_period_id = cp.c_period_id
+                    and nrp.c_bpartner_id = v_bpartner_id
+                    and cp.startdate>=v_fecha_inicio
+                    and cp.enddate <=v_fecha_fin
+                    and nrp.ispago='Y'
+                    and nrp.docstatus ='CO';
+
+                    select coalesce(sum(nrl.valor),0)
+                    into v_total_aportes_iess
+                    from no_rol_pago_provision nrp, no_rol_pago_provision_line nrl, no_tipo_ingreso_egreso ntie, c_period cp
+                    where cp.c_period_id = nrp.c_period_id
+                    and nrp.c_bpartner_id = v_bpartner_id
+                    and nrp.no_rol_pago_provision_id = nrl.no_rol_pago_provision_id
+                    and nrl.no_tipo_ingreso_egreso_id = ntie.no_tipo_ingreso_egreso_id 
+                     and cp.startdate>=v_fecha_inicio
+                    and cp.enddate <=v_fecha_fin
+                    and nrp.ispago='Y'
+                    and nrp.docstatus ='CO'
+                    and nrl.no_tipo_ingreso_egreso_id='AC79B4EB2F5546B2895C290C21F53931';
+
+
+
+                    select sum(nrl.valor) 
+                    into v_total_ingresos
+                    from no_rol_pago_provision nrp, no_rol_pago_provision_line nrl, no_tipo_ingreso_egreso ntie, c_period cp
+                    where cp.c_period_id = nrp.c_period_id
+                    and nrp.no_rol_pago_provision_id = nrl.no_rol_pago_provision_id
+                    and nrl.no_tipo_ingreso_egreso_id = ntie.no_tipo_ingreso_egreso_id 
+                    and ntie.suma_ingreso='Y'
+                    and cp.startdate>=v_fecha_inicio
+                    and cp.enddate <=v_fecha_fin
+                    and nrp.ispago='Y'
+                    and nrp.docstatus ='CO';
+
+
+                    v_basimp := v_total_ingresos - v_total_aportes_iess;
+
+                    FOR Cur_Periodo IN
+                    (select cp.c_period_id, nrp.no_rol_pago_provision_id from no_rol_pago_provision nrp, c_period cp
+                    where cp.c_period_id = nrp.c_period_id
+                    and cp.startdate>=v_fecha_inicio
+                    and cp.enddate <=v_fecha_fin
+                    and nrp.ispago='Y'
+                    and nrp.docstatus ='CO'
+                    and nrp.c_bpartner_id = v_bpartner_id)
+                LOOP
+
+               
+                
+
+                
+
+                select sum(valor)
+                    into v_suelsal
+                    from no_rol_pago_provision_line 
+                    where no_rol_pago_provision_id=Cur_Periodo.no_rol_pago_provision_id
+                    and no_tipo_ingreso_egreso_id='AB2BD6FC57D64BEF91A6C702179B74BD';
+            
+                v_total_to_sueldo:=v_total_to_sueldo+v_suelsal;
+
+
+                
+
+                    select sum(valor) 
+                    into v_fondoreserva
+                    from no_rol_pago_provision_line 
+                    where no_tipo_ingreso_egreso_id='238A3F9D118D4C40BB3AF42762BCDF20'
+                    and no_rol_pago_provision_id in (select no_rol_pago_provision_id
+                    from no_rol_pago_provision where c_bpartner_id =v_bpartner_id
+                    and isPago='Y' and docstatus ='CO');
+
+                    v_total_fondos_reserv:=v_total_fondos_reserv+v_fondoreserva;
+
+              
+                   
+                    select sum(valor) 
+                    into v_sobsuelcomremu
+                    from no_rol_pago_provision_line nrl 
+                    where nrl.no_rol_pago_provision_id=Cur_Periodo.no_rol_pago_provision_id
+                    and  no_tipo_ingreso_egreso_id in
+                   (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where suma_ingreso='Y');
+
+                    v_total_sobrsuel_com_rem:=v_total_sobrsuel_com_rem + v_sobsuelcomremu;
+
+                  
+
+                    select valor 
+                    into v_decimter
+                    from no_rol_pago_provision_line 
+                    where no_tipo_ingreso_egreso_id='B820B2D7AD86476FAFFA1C53AA216881'  
+                    and fechainicio >=v_fecha_inicio
+                    and fechafin >=v_fecha_fin
+                    and no_rol_pago_provision_id in (select no_rol_pago_provision_id
+                    from no_rol_pago_provision where c_bpartner_id =v_bpartner_id
+                    and isPago='N' and docstatus ='CO');
+
+
+                    v_total_dec_ter:=v_total_dec_ter + v_decimter;
+
+               
+
+                    select SUM(valor)
+                    into v_decimcuar
+                    from no_rol_pago_provision_line 
+                    where no_tipo_ingreso_egreso_id='8105B470E44741228EDCD8B4D9DAFE8E'  
+                    and fechainicio >=v_fecha_inicio
+                    and fechafin >=v_fecha_fin
+                    and no_rol_pago_provision_id in (select no_rol_pago_provision_id
+                    from no_rol_pago_provision where c_bpartner_id =v_bpartner_id
+                    and isPago='N' and docstatus ='CO');
+                    
+                    v_total_dec_cuar:=v_total_dec_cuar + v_decimcuar;
+
+               
+
+                    select sum(nrl.valor) 
+                    into v_total_ingresos_renta
+                    from no_rol_pago_provision_line nrl, no_tipo_ingreso_egreso ntie 
+                    where nrl.no_rol_pago_provision_id = Cur_Periodo.no_rol_pago_provision_id
+                    and nrl.no_tipo_ingreso_egreso_id = ntie.no_tipo_ingreso_egreso_id 
+                    and ntie.suma_ingreso='Y';
+
+                    v_total_total_ingr:=v_total_total_ingr+v_total_ingresos_renta;
+                    
+                    
+
+                    select no_calcula_impuesto_renta(v_bpartner_id, null, v_total_ingresos_renta, Cur_Periodo.c_period_id)
+                    into v_imprentcaus;
+
+                    v_total_total_imp:=v_total_total_imp+v_imprentcaus;
+
+                  END LOOP;  
+                  
+                
+                    v_total_sobrsuel_com_rem:=v_total_sobrsuel_com_rem-v_total_to_sueldo;
+                    v_total_total_ingr:=v_total_total_ingr+coalesce(v_partutil,0);
+
+
+                  select coalesce(sum(nrl.valor),0)
+                    into v_valret
+                    from no_rol_pago_provision nrp, no_rol_pago_provision_line nrl, no_tipo_ingreso_egreso ntie, c_period cp
+                    where cp.c_period_id = nrp.c_period_id
+                    and nrp.c_bpartner_id = v_bpartner_id
+                    and nrp.no_rol_pago_provision_id = nrl.no_rol_pago_provision_id
+                    and nrl.no_tipo_ingreso_egreso_id = ntie.no_tipo_ingreso_egreso_id 
+                    and cp.startdate>=v_fecha_inicio
+                    and cp.enddate <=v_fecha_fin
+                    and nrp.ispago='Y'
+                    and nrp.docstatus ='CO'
+                    and nrl.no_tipo_ingreso_egreso_id='537A46C6CFCC4416906A6A72A824F0D5';
+
+
+
+
+
+                    v_salariodigno:=((v_decimter)/12 + (v_decimcuar)/12 + (v_partutil)/12 + v_fondoreserva);
+
+                    select total_gastos 
+                    into v_deduccgastosotrempl from no_gastos_empleado 
+                    where c_bpartner_id = v_bpartner_id and anio = v_anio_redep;
+
+                    select extract(year from (v_fecha_fin)) into v_ani_fecha_fin;
+
+                    INSERT INTO     atrdep_cabecera_reten_line
+                                    (atrdep_cabecera_reten_line_id,             ad_client_id,           ad_org_id,              isactive,
+                                     created,                                   createdby,              updated,                updatedby, 
+                                     atrdep_cabecera_reten_id,                  c_bpartner_id,          numruc,                 tipidret,       
+                                     idret,                                     dircal,                 dirnum,                 dirciu,
+                                     dirprov,                                   tel,                    sissalnet,              suelsal,
+                                     sobsuelcomremu,                            decimter,               decimcuar,              fondoreserva,
+                                     salariodigno,                              partutil,               desauotras,             apoperiess,
+                                     deducvivienda,                             deducsalud,             deduceduca,             deducaliement,
+                                     deducvestim,                               rebespdiscap,           rebesptered,            imprentempl,
+                                     subtotal,                                  numret,                 nummesemplead,          intgrabgen,
+                                     deduccgastosotrempl,                       otrrebjotrempl,         basimp,                 imprentcaus,
+                                     valret,                                    valorimpempanter,       anio,                   anioret,
+                                     valimpasuesteempl,                         estab,                  otrosingrengrav,        inggravconesteempl,
+                                     aporperiessconotrosempls)
+                               VALUES(v_atrdep_reten_line_id,                   v_Client_ID,            v_Org_ID,               'Y',
+                                      now(),                                    v_User_ID,              now(),                  v_User_ID, 
+                                      v_atrdep_cabecera_reten_id,               v_bpartner_id,          v_ruc_agente,           v_tipo_ident,
+                                      v_idret,                                  v_dircal,               v_em_no_num_dir,        v_dirciu,    
+                                      v_dirprov,                                v_tel,                  v_sissalnet,            v_total_to_sueldo,
+                                      coalesce(v_total_sobrsuel_com_rem,0),                coalesce(v_total_dec_ter,0), coalesce(v_total_dec_cuar,0), coalesce(v_total_fondos_reserv,0),
+                                      coalesce(v_salariodigno,0),              coalesce(v_partutil,0),    0,                      v_total_aportes_iess,
+                                      coalesce(v_deducvivienda,0),             coalesce(v_deducsalud,0),coalesce(v_deduceduca,0),coalesce(v_deducaliement,0),
+                                      coalesce(v_deducvestim,0),               coalesce(v_rebespdiscap,0),coalesce(v_rebesptered,0),0,
+                                      coalesce(v_subtotal,0),                  v_numret,               v_nummesemplead,             0,
+                                      coalesce(v_deduccgastosotrempl,0),        0,                      v_basimp,               v_total_total_imp,
+                                      v_valret,                                 0,                      v_anio_redep,           v_anio_redep,
+                                      0,                                        v_estab,                0,                      v_total_total_ingr,
+                                      0);
+                
+                     v_total_to_sueldo:=0;
+                     v_total_fondos_reserv:=0;
+                     v_total_sobrsuel_com_rem:=0;
+                     v_total_dec_ter:=0;
+                     v_total_dec_cuar:=0;
+                     v_total_total_ingr:=0;
+                     v_total_total_imp:=0;
+
+                END LOOP;
+			
+        v_Message:='@EjecucionCorrecta@';
+        
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+		
+	END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+                AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END ATRDEP_GENERA_DATOS_ARCHIVO
+]]></body>
+    </function>
+  </database>

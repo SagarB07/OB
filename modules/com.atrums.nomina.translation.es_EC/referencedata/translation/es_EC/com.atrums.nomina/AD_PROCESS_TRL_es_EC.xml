@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_PROCESS" version="">
+  <row id="128325E030774501A825C3AAD37C75B7" trl="N">
+    <value column="Name" isTrl="N" original="Generar Pago Provisión">Generar Pago Provisión</value>
+    <value column="Description" isTrl="N" original="Proceso que genera el pago de la provisión">Proceso que genera el pago de la provisión</value>
+    <value column="Help" isTrl="N" original="Proceso que genera el pago de la provisión">Proceso que genera el pago de la provisión</value>
+  </row>
+  <row id="1C658BA1A8E54D8C839ACE408BC9CBED" trl="N">
+    <value column="Name" isTrl="N" original="no_procesa_liquidacion_pago">no_procesa_liquidacion_pago</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Procesa el pago en las cuentas contable">Procesa el pago en las cuentas contable</value>
+  </row>
+  <row id="2A6B08C238B24CC1A483C84AB02DFBC2" trl="N">
+    <value column="Name" isTrl="N" original="Genera Rol de Provisiones">Genera Rol de Provisiones</value>
+    <value column="Description" isTrl="N" original="Genera Rol de Provisiones">Genera Rol de Provisiones</value>
+    <value column="Help" isTrl="N" original="Proceso para generar el Rol de Provisiones según los contratos de los empleados.">Proceso para generar el Rol de Provisiones según los contratos de los empleados.</value>
+  </row>
+  <row id="391DE834C5634644A16593B0286EFB64" trl="N">
+    <value column="Name" isTrl="N" original="Procesar Vacaciones">Procesar Vacaciones</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Procesar los días de vacaciones selecionados">Procesar los días de vacaciones selecionados</value>
+  </row>
+  <row id="48433D8674BA4CD5B8A856693D37FB3F" trl="N">
+    <value column="Name" isTrl="N" original="Procesar Avance">Procesar Avance</value>
+    <value column="Description" isTrl="N" original="Procesar Avance">Procesar Avance</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="535686AFC88E475383664770714ABE0E" trl="N">
+    <value column="Name" isTrl="N" original="no_procesa_rol_pro_linea">no_procesa_rol_pro_linea</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="56AE2A396133446AA53F621EBC581937" trl="N">
+    <value column="Name" isTrl="N" original="Generar Valor Mes Rol de Provisión">Generar Valor Mes Rol de Provisión</value>
+    <value column="Description" isTrl="N" original="Generar Valor Mes Rol de Provisión">Generar Valor Mes Rol de Provisión</value>
+    <value column="Help" isTrl="N" original="Generar Valor Mes Rol de Provisión">Generar Valor Mes Rol de Provisión</value>
+  </row>
+  <row id="576C49557DE645F9A9140791958683AD" trl="N">
+    <value column="Name" isTrl="N" original="generar registros">generar registros</value>
+    <value column="Description" isTrl="N" original="generar registros">generar registros</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="6B354B0B3B9A4512B81C77FBA5E553DF" trl="N">
+    <value column="Name" isTrl="N" original="Generar Pago Avance">Generar Pago Avance</value>
+    <value column="Description" isTrl="N" original="Generar el pago del avance">Generar el pago del avance</value>
+    <value column="Help" isTrl="N" original="Generar el pago del avance">Generar el pago del avance</value>
+  </row>
+  <row id="6E4252763C694A5BADCEB67B1F53D0E0" trl="N">
+    <value column="Name" isTrl="N" original="Procesar Utilidades">Procesar Utilidades</value>
+    <value column="Description" isTrl="N" original="Procesar Utilidades">Procesar Utilidades</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="701A7295E2B7474C8552F21BAC63A34E" trl="N">
+    <value column="Name" isTrl="N" original="Procesar liquidacion">Procesar liquidacion</value>
+    <value column="Description" isTrl="N" original="Permite cambiar el estado, generar aientos contables y crear pagos">Permite cambiar el estado, generar aientos contables y crear pagos</value>
+    <value column="Help" isTrl="N" original="Permite cambiar el estado, generar aientos contables y crear pagos">Permite cambiar el estado, generar aientos contables y crear pagos</value>
+  </row>
+  <row id="7D59984E9BC24E2D931DC4869560F7A5" trl="N">
+    <value column="Name" isTrl="N" original="Proceso del Pago para el Rol Pago">Proceso del Pago para el Rol Pago</value>
+    <value column="Description" isTrl="N" original="Proceso del Pago para el Rol Pago">Proceso del Pago para el Rol Pago</value>
+    <value column="Help" isTrl="N" original="Proceso del Pago para el Rol Pago">Proceso del Pago para el Rol Pago</value>
+  </row>
+  <row id="A164779BCCA640BC9D5B201574C8B8D2" trl="N">
+    <value column="Name" isTrl="N" original="no_procesa_liquidacion">no_procesa_liquidacion</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Procesa la liquidación y la pone en curso para poder procesar el Pago">Procesa la liquidación y la pone en curso para poder procesar el Pago</value>
+  </row>
+  <row id="A44D94CE20024981922580D9053FF944" trl="N">
+    <value column="Name" isTrl="N" original="Permiso Empleado">Permiso Empleado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Permiso que se otirga el Empleado">Permiso que se otirga el Empleado</value>
+  </row>
+  <row id="B670ED126EC0470A966FB31C6EEB8647" trl="N">
+    <value column="Name" isTrl="N" original="Reporte de Excel Nomina">Reporte de Excel Nomina</value>
+    <value column="Description" isTrl="N" original="Reporte de Excel Nomina">Reporte de Excel Nomina</value>
+    <value column="Help" isTrl="N" original="Reporte de Excel Nomina">Reporte de Excel Nomina</value>
+  </row>
+  <row id="BB3C25ED65BC4816A097E6F4E6E179B8" trl="N">
+    <value column="Name" isTrl="Y" original="Rol General de Pagos">Rol de Pagos</value>
+    <value column="Description" isTrl="N" original="Rol General de Pagos">Rol General de Pagos</value>
+    <value column="Help" isTrl="N" original="Rol General de Pagos">Rol General de Pagos</value>
+  </row>
+  <row id="D2999B81B4E84547B24948C424867738" trl="N">
+    <value column="Name" isTrl="N" original="no_procesa_rol_pro_mes">no_procesa_rol_pro_mes</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Procesa la linea mes de la pantalla Rol de Provision">Procesa la linea mes de la pantalla Rol de Provision</value>
+  </row>
+  <row id="EE9ACE0D59E147A89A400680EFDBED65" trl="N">
+    <value column="Name" isTrl="N" original="Procesar Rol">Procesar Rol</value>
+    <value column="Description" isTrl="N" original="Procesar Rol">Procesar Rol</value>
+    <value column="Help" isTrl="N" original="Cambia de Estado el Rol de Pago o Provisiones">Cambia de Estado el Rol de Pago o Provisiones</value>
+  </row>
+  <row id="F03D64524CD642EFA6DDC11150EDC498" trl="N">
+    <value column="Name" isTrl="N" original="Generar Rol de Pagos">Generar Rol de Pagos</value>
+    <value column="Description" isTrl="N" original="Proceso para generar el Rol de Pagos">Proceso para generar el Rol de Pagos</value>
+    <value column="Help" isTrl="N" original="Proceso para generar el Rol de Pagos según los contratos de los empleados.">Proceso para generar el Rol de Pagos según los contratos de los empleados.</value>
+  </row>
+  <row id="F30F5A5BE2784756BB8EBF625E482CF4" trl="N">
+    <value column="Name" isTrl="N" original="Genera Pago Rol Mes">Genera Pago Rol Mes</value>
+    <value column="Description" isTrl="N" original="Genera Pago Rol Mes">Genera Pago Rol Mes</value>
+    <value column="Help" isTrl="N" original="Genera Pago Rol Mes">Genera Pago Rol Mes</value>
+  </row>
+  <row id="F9AE3E9FC50A4669AF6D2C7129AACAC3" trl="N">
+    <value column="Name" isTrl="N" original="no_procesa_rol_pro_cabecera">no_procesa_rol_pro_cabecera</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Procesa la cabecera del rol de pagos provision">Procesa la cabecera del rol de pagos provision</value>
+  </row>
+</compiereTrl>

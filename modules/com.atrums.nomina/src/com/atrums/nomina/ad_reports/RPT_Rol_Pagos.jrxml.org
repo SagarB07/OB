@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Rol_Pagos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4019755979255695"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Thu Jul 19 14:42:08 COT 2012"/>
+	<style name="Detail_Line" vAlign="Middle" fontName="Serif" fontSize="8">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{ingreso_COUNT}.intValue()%2==1)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#CCCCCC" vAlign="Middle" fontName="Serif" fontSize="8"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="c_period_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select bp.name as NOMBRE,
+       bpg.name as GRUPO_NOMBRE,
+       bp.taxid as CEDULA,
+       lin.valor as VALOR,
+       ie.name AS RUBRO,
+       bp.value as CODIGO,
+       pr.name as PERIODO,
+        (SELECT CASE WHEN egr1.isingreso='N' THEN 'EGRESO'  ELSE 'INGRESO' END
+           FROM no_tipo_ingreso_egreso egr1
+          where egr1.no_tipo_ingreso_egreso_id = ie.no_tipo_ingreso_egreso_id) as INGRESO,
+      rpp.total_neto as TOTAL_NETO
+from no_rol_pago_provision rpp,
+     c_bpartner bp,
+     c_bp_group bpg,
+     no_rol_pago_provision_line lin,
+     no_tipo_ingreso_egreso ie,
+     c_period pr
+where ispago = 'Y'
+and bp.c_bpartner_id = rpp.c_bpartner_id
+and bp.c_bp_group_id = bpg.c_bp_group_id
+and rpp.no_rol_pago_provision_id = lin.no_rol_pago_provision_id
+and lin.no_tipo_ingreso_egreso_id = ie.no_tipo_ingreso_egreso_id
+and rpp.c_period_id = pr.c_period_id
+and rpp.c_period_id = $P{c_period_id}
+order by  bp.name, INGRESO, RUBRO]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="ingreso" class="java.lang.String"/>
+	<field name="VALOR" class="java.math.BigDecimal"/>
+	<field name="RUBRO" class="java.lang.String"/>
+	<field name="TOTAL_NETO" class="java.math.BigDecimal"/>
+	<field name="CEDULA" class="java.lang.String"/>
+	<field name="CODIGO" class="java.lang.String"/>
+	<field name="PERIODO" class="java.lang.String"/>
+	<variable name="total_reporte" class="java.math.BigDecimal" incrementType="Group" incrementGroup="nombre" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_NETO}]]></variableExpression>
+	</variable>
+	<group name="nombre" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="53">
+				<textField pattern="">
+					<reportElement mode="Transparent" x="73" y="21" width="197" height="14" forecolor="#000000" backcolor="#999999"/>
+					<textElement>
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CEDULA}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="1" y="0" width="92" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+					<textElement>
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="25" y="21" width="48" height="14" forecolor="#000000" backcolor="#999999"/>
+					<textElement>
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cédula:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="181" y="37" width="178" height="15" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement textAlignment="Center">
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RUBRO]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="0" width="1" height="53" forecolor="#666666"/>
+				</line>
+				<line>
+					<reportElement x="25" y="37" width="1" height="15" forecolor="#999999"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="53" forecolor="#666666"/>
+				</line>
+				<staticText>
+					<reportElement mode="Opaque" x="26" y="37" width="154" height="15" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement>
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[INGRESO/EGRESO]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="93" y="0" width="461" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+					<textElement>
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="360" y="37" width="194" height="15" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement textAlignment="Center">
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VALOR]]></text>
+				</staticText>
+				<line>
+					<reportElement x="25" y="34" width="530" height="1" forecolor="#999999"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="96">
+				<staticText>
+					<reportElement x="28" y="4" width="100" height="15"/>
+					<textElement>
+						<font fontName="Serif" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="25" y="0" width="529" height="1" forecolor="#999999"/>
+				</line>
+				<staticText>
+					<reportElement x="428" y="4" width="23" height="15"/>
+					<textElement>
+						<font fontName="Serif" size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[$]]></text>
+				</staticText>
+				<line>
+					<reportElement x="554" y="0" width="1" height="23" forecolor="#666666"/>
+				</line>
+				<textField pattern="###0.00">
+					<reportElement x="451" y="4" width="90" height="15"/>
+					<textElement textAlignment="Left">
+						<font fontName="Serif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TOTAL_NETO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="1" height="23" forecolor="#666666"/>
+				</line>
+				<line>
+					<reportElement x="0" y="22" width="555" height="1" forecolor="#666666"/>
+				</line>
+				<line>
+					<reportElement x="160" y="65" width="251" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="215" y="66" width="143" height="13"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Recibi Conforme]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="215" y="79" width="100" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CC.]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="ingreso">
+		<groupExpression><![CDATA[$F{ingreso}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<line>
+					<reportElement x="180" y="0" width="1" height="15" forecolor="#999999"/>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="1" height="15" forecolor="#666666"/>
+				</line>
+				<line>
+					<reportElement x="25" y="0" width="1" height="15" forecolor="#999999"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="15" forecolor="#666666"/>
+				</line>
+				<textField>
+					<reportElement x="28" y="1" width="149" height="14"/>
+					<textElement>
+						<font fontName="Serif" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ingreso}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement x="370" y="3" width="78" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[Para Periodo: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="451" y="3" width="100" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PERIODO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="177" y="3" width="152" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROL DE PAGOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="152" height="17"/>
+				<textElement>
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REMICA CIA. LTDA.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<line>
+				<reportElement x="180" y="0" width="1" height="14" forecolor="#999999"/>
+			</line>
+			<line>
+				<reportElement x="359" y="0" width="1" height="14" forecolor="#000000"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="14" forecolor="#666666"/>
+			</line>
+			<line>
+				<reportElement x="25" y="0" width="1" height="14" forecolor="#999999"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="14" forecolor="#666666"/>
+			</line>
+			<textField pattern="###0.00">
+				<reportElement style="Detail_Line" x="360" y="0" width="191" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VALOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail_Line" x="181" y="0" width="177" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RUBRO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="2"/>
+	</lastPageFooter>
+	<summary>
+		<band height="2"/>
+	</summary>
+</jasperReport>

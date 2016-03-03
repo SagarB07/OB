@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_VAL_FECHA_FINAL_TRG">
+    <trigger name="NE_VAL_FECHA_FINAL_TRG" table="NO_CONTRATO_EMPLEADO" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	fecha_inicio_cont DATE;
+	v_fecha_inicio DATE;
+	v_fecha_fin DATE;
+	v_cursor record;
+BEGIN
+	if :new.salario <= 0 then
+		raise exception '%', '@NE_SALARIO_NEG_EXCEPTION@';
+	end if;
+
+	if :new.em_ne_num_horas_parciales <= 0 then
+		raise exception '%', '@NE_HORA_PARCIAL_EXCEPTION@';
+	end if;
+
+	IF date(:NEW.fecha_fin) > date(:new.fecha_inicio) THEN
+		select fecha_inicio 
+		into v_fecha_inicio
+		from no_contrato_empleado
+		where c_bpartner_id = :new.c_bpartner_id;
+
+		select fecha_fin 
+		into v_fecha_fin
+		from no_contrato_empleado
+		where c_bpartner_id = :new.c_bpartner_id;
+		
+		for v_cursor in (
+			select * 
+			from no_contrato_empleado 
+			where c_bpartner_id = :new.c_bpartner_id
+			)
+		loop
+			if date(v_cursor.fecha_inicio) < date(v_fecha_inicio) then
+				v_fecha_inicio := v_cursor.fecha_inicio;
+			end if;
+		end loop;
+
+		for v_cursor in (
+			select * 
+			from no_contrato_empleado 
+			where c_bpartner_id = :new.c_bpartner_id
+			)
+		loop
+			if date(v_cursor.fecha_fin) > date(v_fecha_fin) then
+				v_fecha_fin := v_cursor.fecha_fin;
+			end if;
+		end loop;
+
+		if v_fecha_inicio is null or v_fecha_fin is null then
+			UPDATE c_bpartner 
+			SET em_no_fechaingreso = :new.fecha_inicio 
+			WHERE c_bpartner_id = :new.c_bpartner_id;
+			
+			UPDATE c_bpartner
+			SET em_no_fechasalida = :new.fecha_fin
+			WHERE c_bpartner_id = :new.c_bpartner_id;
+		else
+			UPDATE c_bpartner 
+			SET em_no_fechaingreso = v_fecha_inicio 
+			WHERE c_bpartner_id = :new.c_bpartner_id;
+			
+			UPDATE c_bpartner
+			SET em_no_fechasalida = v_fecha_fin
+			WHERE c_bpartner_id = :new.c_bpartner_id;
+		end if;
+
+		return new;
+	ELSE 
+		RAISE NO_DATA_FOUND;
+	END IF;
+
+END NE_VAL_FECHA_FINAL_TRG
+]]></body>
+    </trigger>
+  </database>

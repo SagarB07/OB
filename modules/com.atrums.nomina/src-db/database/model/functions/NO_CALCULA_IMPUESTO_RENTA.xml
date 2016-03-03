@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_CALCULA_IMPUESTO_RENTA">
+    <function name="NO_CALCULA_IMPUESTO_RENTA" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_base_imponible_anual NUMBER:=0;
+v_fraccionbasica NUMBER:=0;
+v_impfraccionbasica NUMBER:=0;
+v_impfraccionexcedente NUMBER:=0;
+
+v_fecha_inicio DATE;
+v_anio_inicio NUMBER:=0;
+v_mes_inicio NUMBER:=0;
+v_anio_actual NUMBER:=0;
+
+v_mes_div NUMBER:=0;
+v_total_deduccion_gastos NUMBER:=0;
+
+BEGIN
+
+    select fecha_inicio
+      into v_fecha_inicio
+      from no_contrato_empleado
+     where c_bpartner_id = p_empleado_id
+       and isactive = 'Y';
+
+    select extract(year from (v_fecha_inicio)) into v_anio_inicio;
+    select extract(month from (v_fecha_inicio)) into v_mes_inicio;
+                                
+    select extract(year from (now())) into v_anio_actual;
+    
+    IF(v_anio_inicio = v_anio_actual) THEN
+        v_mes_div = 12 - (v_mes_inicio -1);
+    ELSE
+        v_mes_div = 12;
+    END IF;
+   
+    select total_gastos
+      into v_total_deduccion_gastos
+      from no_gastos_empleado
+     where COALESCE(trim(anio)::Numeric,0) = v_anio_actual
+       and c_bpartner_id = p_empleado_id;
+    
+    v_base_imponible_anual := ((to_number(p_valor) - round( (to_number(p_valor) * to_number(9.45)/to_number(100)),2)) * to_number(v_mes_div)) - to_number(COALESCE(v_total_deduccion_gastos,0));
+    
+    select irl.fraccionbasica, 
+           irl.impfraccionbasica, 
+           irl.impfraccionexcedente
+      into v_fraccionbasica,
+           v_impfraccionbasica,
+           v_impfraccionexcedente
+      from no_impuesto_renta_cab ir, 
+           no_impuesto_renta irl
+     where ir.no_impuesto_renta_cab_id = irl.no_impuesto_renta_cab_id
+       and ir.isactive = 'Y'
+       and irl.isactive='Y'
+       and v_base_imponible_anual between irl.fraccionbasica and irl.excesohasta
+       and ir.nombre::numeric = v_anio_actual;
+       
+    RETURN (((to_number(v_base_imponible_anual)-to_number(v_fraccionbasica))* to_number((v_impfraccionexcedente/100))) + to_number(v_impfraccionbasica))/ to_number(v_mes_div);
+END NO_CALCULA_IMPUESTO_RENTA
+]]></body>
+    </function>
+  </database>

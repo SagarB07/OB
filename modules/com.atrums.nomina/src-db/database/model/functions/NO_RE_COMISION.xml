@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_RE_COMISION">
+    <function name="NO_RE_COMISION" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_total_comision NUMBER:=0;
+BEGIN
+
+    select COALESCE(sum(cd.valor),0)
+      into v_total_comision
+      from no_re_comision rc,
+           no_re_comision_detalle cd,
+           c_period p
+     where rc.c_period_id = p.c_period_id
+       and rc.no_re_comision_id = cd.no_re_comision_id
+       and cd.c_bpartner_id = p_empleado_id
+       and rc.name NOT IN ('BONO')
+       and p.c_period_id =p_period_id;
+
+    return v_total_comision;
+END NO_RE_COMISION
+]]></body>
+    </function>
+  </database>

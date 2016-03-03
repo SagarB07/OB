@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_FIELDGROUP" version="">
+  <row id="7B136BB0EDA943A2B5BA3E99916B0B9C" trl="N">
+    <value column="Name" isTrl="N" original="Datos para realizar Pagos">Datos para realizar Pagos</value>
+  </row>
+  <row id="E4EBC09DA11A4C8FA1ABCAA40756B900" trl="N">
+    <value column="Name" isTrl="N" original="Filtro para Generación de Pagos">Filtro para Generación de Pagos</value>
+  </row>
+</compiereTrl>

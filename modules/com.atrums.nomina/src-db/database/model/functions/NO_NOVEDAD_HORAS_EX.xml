@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_NOVEDAD_HORAS_EX">
+    <function name="NO_NOVEDAD_HORAS_EX" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_factor NUMBER:=0;
+v_pu_hora NUMBER:=0;
+v_total NUMBER:=0;
+
+BEGIN
+
+    select crl.valor / 100
+    into v_factor
+    from no_calcula_rubro_line crl,
+         no_calcula_rubro cr
+    where cr.no_calcula_rubro_id = crl.no_calcula_rubro_id
+    and cr.no_calcula_rubro_id IN (select no_calcula_rubro_id 
+        from no_tipo_ingreso_egreso where no_tipo_ingreso_egreso_id = p_tipo_ingreso_egreso_id);
+
+    select salario / 30
+    into v_pu_hora
+    from no_contrato_empleado 
+    where c_bpartner_id = p_empleado_id
+    order by fecha_inicio desc limit 1;
+
+    select COALESCE(sum(nl.valor),0)
+      into v_total
+      from no_novedad n,
+           no_novedad_linea nl,
+           c_period p
+     where n.c_period_id = p.c_period_id
+       and n.no_novedad_id = nl.no_novedad_id
+       and nl.c_bpartner_id = p_empleado_id
+       and n.no_tipo_ingreso_egreso_id = p_tipo_ingreso_egreso_id
+       and p.c_period_id = p_period_id;
+
+    return v_total*(v_factor*v_pu_hora);
+END NO_NOVEDAD_HORAS_EX
+]]></body>
+    </function>
+  </database>

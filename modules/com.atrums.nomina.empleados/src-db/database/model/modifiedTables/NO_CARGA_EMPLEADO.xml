@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE NO_CARGA_EMPLEADO">
+    <table name="NO_CARGA_EMPLEADO" primaryKey="NO_CARGA_EMPLEADO_KEY">
+      <column name="EM_NE_EDAD" primaryKey="false" required="false" type="DECIMAL" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NE_NUMERO_CARNET" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

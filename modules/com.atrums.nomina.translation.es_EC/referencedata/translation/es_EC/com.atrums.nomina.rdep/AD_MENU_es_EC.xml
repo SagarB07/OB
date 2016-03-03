@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_MENU" version="">
+  <row id="73310B7074554810BDE7612C0A8C1E19" trl="N">
+    <value column="Name" isTrl="N" original="RDEP">RDEP</value>
+    <value column="Description" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

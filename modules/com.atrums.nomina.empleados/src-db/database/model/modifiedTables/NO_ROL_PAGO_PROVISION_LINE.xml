@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE NO_ROL_PAGO_PROVISION_LINE">
+    <table name="NO_ROL_PAGO_PROVISION_LINE" primaryKey="NO_ROL_PAGO_PROV_LN_KEY">
+      <column name="EM_NE_TIPO_RUBRO" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NE_OBSERVACION" primaryKey="false" required="false" type="VARCHAR" size="255" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

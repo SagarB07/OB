@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_PROCESA_ROL_PROVISION">
+    <function name="NO_PROCESA_ROL_PROVISION" type="NULL">
+      <parameter name="p_no_rol_pago_provision_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_usuario" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):=''; 
+    v_Message VARCHAR(2000):=''; 
+    v_Result NUMBER:=1; 
+
+    Cur_ProvLineas record;
+    
+    
+	
+	
+	v_fin_payment_id					VARCHAR(32);
+	v_fin_payment_detail_id				VARCHAR(32);
+	v_fin_payment_scheduledetail_id		VARCHAR(32);
+	v_fin_finacc_transaction_id			VARCHAR(32);
+	v_bpartner_id						VARCHAR(32);
+    v_ad_client_id                      VARCHAR(32);
+    v_ad_org_id                         VARCHAR(32);
+    v_c_currency_id                     VARCHAR(32);
+    v_valor                             NUMBER;
+    v_c_doctype_id                      VARCHAR(32);
+    v_documentno                        VARCHAR(30);
+    v_name_doctype                      VARCHAR(60);
+    v_name_bpartner                     VARCHAR(60);
+    v_fin_paymentmethod_id              VARCHAR(32);
+    v_fin_financial_account_id          VARCHAR(32);
+    v_no_rol_pago_prov_line_id          VARCHAR(32);
+    v_doctype_payment_id                VARCHAR(32);
+    v_period_id                         VARCHAR(32);
+BEGIN   
+   
+		v_fin_payment_id := get_uuid();
+        v_fin_payment_detail_id := get_uuid();
+        v_fin_payment_scheduledetail_id:= get_uuid();
+        v_fin_finacc_transaction_id:= get_uuid();
+
+    
+			select ad_client_id,
+                   ad_org_id,
+                   c_bpartner_id
+            into   v_ad_client_id,
+                   v_ad_org_id,
+                   v_bpartner_id
+            from no_rol_pago_provision 
+            where no_rol_pago_provision=p_no_rol_pago_provision_id;
+        
+            FOR Cur_ProvLineas IN
+          (select   no_rol_pago_provision_line_id,
+                    c_currency_id,
+                    valor,
+                    c_doctype_id,
+                    fin_paymentmethod_id,
+                    fin_financial_account_id
+            from no_rol_pago_provision_line
+            where no_rol_pago_provision=p_no_rol_pago_provision_id)
+        loop
+            
+                    v_no_rol_pago_prov_line_id:=Cur_ProvLineas.no_rol_pago_provision_line_id;
+                    v_c_currency_id:=Cur_ProvLineas.c_currency_id;
+                    v_valor:=Cur_ProvLineas.valor;
+                    v_doctype_payment_id:=Cur_ProvLineas.c_doctype_id;
+                    v_fin_paymentmethod_id:=Cur_ProvLineas.fin_paymentmethod_id;
+                    v_fin_financial_account_id:=Cur_ProvLineas.fin_financial_account_id;
+
+    
+            select name 
+            into   v_name_doctype
+            from c_doctype where c_doctype_id = v_c_doctype_id;
+
+            select name
+            into   v_name_bpartner  
+            from c_bpartner where c_bpartner_id=v_bpartner_id;
+
+       
+            select p.c_period_id
+              into v_period_id
+              from c_period p
+             where exists (select *
+                             from c_periodcontrol pc
+                            where p.c_period_id=pc.c_period_id
+                              and upper(pc.periodstatus)='O')
+               and exists(select *
+                            from c_calendar c, c_year y
+                           where y.c_calendar_id=c.c_calendar_id
+                             and p.c_year_id=y.c_year_id
+                            AND AD_ISORGINCLUDED( v_Org_ID, c.ad_org_id, v_Client_ID) <> '-1')
+               and now() between startdate and enddate;
+               
+            
+            SELECT * INTO  v_documentno
+              FROM Ad_Sequence_Doctype(v_doctype_payment_id, v_ad_client_id, 'Y');
+            
+            
+                
+
+               
+
+            update no_rol_pago_provision_line
+               set processed = 'Y'
+             where no_rol_pago_provision_line_id = v_no_rol_pago_prov_line_id;
+            
+
+            
+            insert into fin_payment(fin_payment_id,             ad_client_id,               ad_org_id,                      created,                                                        createdby,                      updated,
+                                    updatedby,                  isactive,                   isreceipt,                      c_bpartner_id,                                                  paymentdate,                    c_currency_id,
+                                    amount,                     writeoffamt,                fin_paymentmethod_id,           documentno,                                                     referenceno,                    status,
+                                    processed,                  processing,                 posted,                         description,                                                    fin_financial_account_id,       c_doctype_id,
+                                    c_project_id,               c_campaign_id,              c_activity_id,                  user1_id,                                                       user2_id,                       generated_credit,
+                                    used_credit,                createdbyalgorithm,         finacc_txn_convert_rate,        finacc_txn_amount,                                              
+                                    em_aprm_process_payment,    em_aprm_reconcile_payment,  em_aprm_add_scheduledpayments,  em_aprm_executepayment)
+                            values (v_fin_payment_id,          v_ad_client_id,              v_ad_org_id,                       current_timestamp,                                              v_User_ID,                      current_timestamp,
+                                    p_usuario,                  'Y',                        'N',                            v_bpartner_id,                                                  current_timestamp,              v_currency_id,
+                                    v_valor,                    0,                          v_fin_paymentmethod_id,         v_documentno,                                                   null,                           'RPAP',
+                                    'N',                        'N',                        'N',                            'Rol de Provisiones No.:' || v_name_doctype || ' - ' || v_name_partner,  v_fin_financial_account_id,     v_doctype_payment_id,
+                                    null,                       null,                       null,                           null,                                                           null,                           null,
+                                    0,                          'N',                        1,                              v_valor,                                                  
+                                    'R',                        'N',                        'N',                            'N');
+            
+
+            
+            
+            INSERT INTO fin_payment_detail(fin_payment_detail_id,       ad_client_id,       ad_org_id,          created,            createdby,
+                                           updated,                     updatedby,          fin_payment_id,     amount,             refund,
+                                           isactive,                    writeoffamt,        c_glitem_id,        isprepayment)
+                                    VALUES(v_fin_payment_detail_id,     v_ad_client_id,        v_ad_org_id,           current_timestamp,  p_usuario,
+                                           current_timestamp,           p_usuario,          v_fin_payment_id,  v_valor,      'N',
+                                           'Y',                         0,                  null,               'N');
+            
+
+            
+            
+
+            INSERT INTO fin_payment_scheduledetail(fin_payment_scheduledetail_id,     ad_client_id,                     ad_org_id,             created,
+                                                   createdby,                         updated,                          updatedby,             fin_payment_detail_id,
+                                                   fin_payment_schedule_order,        fin_payment_schedule_invoice,     amount,                isactive,
+                                                   writeoffamt,                       iscanceled,                       c_bpartner_id,         c_activity_id,
+                                                   m_product_id,                      c_campaign_id,                    c_project_id,          c_salesregion_id)
+                                           VALUES (v_fin_payment_scheduledetail_id,   v_ad_client_id,                      v_ad_org_id,              current_timestamp,
+                                                   p_usuario,                         current_timestamp,                p_usuario,             v_fin_payment_detail_id,
+                                                   null,                              null,                             v_valor,         'Y',
+                                                   0,                                 'N',                              v_bpartner_id,         null,
+                                                   null,                              null,                             null,                  null);
+             
+            update fin_payment 
+          set status = 'PWNC',
+              processed = 'Y'
+        where fin_payment_id = v_fin_payment_id;
+        
+        
+        UPDATE no_rol_pago_provision_line SET processed = 'Y' WHERE no_rol_pago_provision_line_id = v_no_rol_pago_prov_line_id;
+
+    end loop;
+        v_Message:='@NO_EjecucionCorrecta@';
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message) ;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+   
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+        
+        
+        RETURN;
+END NO_PROCESA_ROL_PROVISION
+]]></body>
+    </function>
+  </database>

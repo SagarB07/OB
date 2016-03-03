@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VALID_PAYMENT_LINE_MES_TRG">
+    <trigger name="NO_VALID_PAYMENT_LINE_MES_TRG" table="NO_ROL_PROVISION_LINE_MES" fires="before" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+  v_mensaje varchar(60);
+  v_startdate DATE;
+  v_enddate DATE;
+  v_fechafin DATE;
+BEGIN
+    
+
+    IF UPDATING THEN
+
+        
+        if(:new.docstatus='CO' and :new.pago='N' )then
+                
+        select fechafin 
+        into v_fechafin
+        from no_rol_pago_provision_line
+        where no_rol_pago_provision_line_id = :old.no_rol_pago_provision_line_id;
+        
+                   if exists (select * from c_period 
+                    where c_period_id = :new.c_period_id
+                    and startdate + 0 <= v_fechafin + 0
+                    and enddate + 0 >= v_fechafin + 0) then
+
+                        update no_rol_pago_provision_line set pago ='Y'
+                        where  no_rol_pago_provision_line_id = :old.no_rol_pago_provision_line_id;
+                    end if;
+        end if;
+        RETURN NEW;
+    ELSE
+        RETURN OLD;
+    END IF;
+
+END NO_VALID_PAYMENT_LINE_MES_TRG
+]]></body>
+    </trigger>
+  </database>

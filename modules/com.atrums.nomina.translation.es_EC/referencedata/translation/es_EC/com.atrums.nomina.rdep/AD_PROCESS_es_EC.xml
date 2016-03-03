@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_PROCESS" version="">
+  <row id="A4D405AB75F240B1ABFFA4E62E073C5A" trl="N">
+    <value column="Name" isTrl="N" original="Generar Xml">Generar Xml</value>
+    <value column="Description" isTrl="N" original="Genera el archivo Xml para el RDEP">Genera el archivo Xml para el RDEP</value>
+    <value column="Help" isTrl="N" original="Genera el archivo Xml para el RDEP">Genera el archivo Xml para el RDEP</value>
+  </row>
+  <row id="EA45639BE50E404D81AA25A44581A38D" trl="N">
+    <value column="Name" isTrl="N" original="atrdep_genera_datos_archivo">atrdep_genera_datos_archivo</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Se generarán automáticamente los campos para la tabla de retenciones linea">Se generarán automáticamente los campos para la tabla de retenciones linea</value>
+  </row>
+</compiereTrl>

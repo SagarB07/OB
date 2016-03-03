@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NE_FECHA_INGRESO_SALIDA_TRG">
+    <function name="NE_FECHA_INGRESO_SALIDA_TRG" type="VARCHAR">
+      <body><![CDATA[DECLARE
+
+BEGIN
+	update c_bpartner
+	set em_no_fechaingreso = new.fecha_inicio, em_no_fechasalida = new.fecha_fin
+	where c_bpartner_id = new.c_bpartner_id;
+
+	return new;
+END NE_FECHA_INGRESO_SALIDA_TRG
+]]></body>
+    </function>
+  </database>

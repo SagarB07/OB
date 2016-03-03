@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="RetencionesCabecera8982CE6EA9E8433E8FA23C11DEED4D6CData" package="org.openbravo.erpWindows.com.atrums.nomina.rdep.RetencionesEmpleado">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(atrdep_cabecera_reten.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = atrdep_cabecera_reten.CreatedBy) as CreatedByR, 
+        to_char(atrdep_cabecera_reten.Updated, ?) as updated, 
+        to_char(atrdep_cabecera_reten.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        atrdep_cabecera_reten.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = atrdep_cabecera_reten.UpdatedBy) as UpdatedByR,
+        atrdep_cabecera_reten.AD_Org_ID, 
+(CASE WHEN atrdep_cabecera_reten.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
+COALESCE(atrdep_cabecera_reten.Isactive, 'N') AS Isactive, 
+atrdep_cabecera_reten.Anios, 
+(CASE WHEN atrdep_cabecera_reten.Anios IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS AniosR, 
+atrdep_cabecera_reten.Generar, 
+atrdep_cabecera_reten.Fecha_Inicio, 
+atrdep_cabecera_reten.Fecha_Fin, 
+atrdep_cabecera_reten.Generar_Xml, 
+atrdep_cabecera_reten.Nombrerdep, 
+atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID, 
+atrdep_cabecera_reten.AD_Client_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM atrdep_cabecera_reten left join (select AD_Org_ID, Name from AD_Org) table1 on (atrdep_cabecera_reten.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (atrdep_cabecera_reten.Anios = list1.value and list1.ad_reference_id = 'DBE0CE97929A4EB3A2093E35875EA82B' and list1.ad_language = ?) 
+        WHERE 2=2 
+
+        AND 1=1 
+        AND atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID = ? 
+        AND atrdep_cabecera_reten.AD_Client_ID IN ('1') 
+           AND atrdep_cabecera_reten.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+
+
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="atrdep_cabecera_reten.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="atrdep_cabecera_reten.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+
+<Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="generar"></Parameter><Parameter name="fechaInicio"></Parameter><Parameter name="fechaFin"></Parameter><Parameter name="nombrerdep"></Parameter><Parameter name="generarXml"></Parameter><Parameter name="anios"></Parameter><Parameter name="isactive"></Parameter><Parameter name="atrdepCabeceraRetenId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="adClientId"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef006C6816E5C04A05A81566B85E2117B1_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef148001D503F14A828878D763A65B76D2_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE atrdep_cabecera_reten
+        SET AD_Org_ID = (?) , Isactive = (?) , Anios = (?) , Generar = (?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Generar_Xml = (?) , Nombrerdep = (?) , Atrdep_Cabecera_Reten_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        WHERE atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID = ? 
+        
+        AND atrdep_cabecera_reten.AD_Client_ID IN ('1') 
+        AND atrdep_cabecera_reten.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="anios"></Parameter> <Parameter name="generar"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="generarXml"></Parameter> <Parameter name="nombrerdep"></Parameter> <Parameter name="atrdepCabeceraRetenId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="atrdepCabeceraRetenId"></Parameter>
+    
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="atrdep_cabecera_reten.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="atrdep_cabecera_reten.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO atrdep_cabecera_reten 
+        (AD_Org_ID, Isactive, Anios, Generar, Fecha_Inicio, Fecha_Fin, Generar_Xml, Nombrerdep, Atrdep_Cabecera_Reten_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="anios"></Parameter> <Parameter name="generar"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="generarXml"></Parameter> <Parameter name="nombrerdep"></Parameter> <Parameter name="atrdepCabeceraRetenId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM atrdep_cabecera_reten
+        WHERE atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID = ? 
+        
+        AND atrdep_cabecera_reten.AD_Client_ID IN ('1') 
+        AND atrdep_cabecera_reten.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="atrdep_cabecera_reten.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="atrdep_cabecera_reten.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM atrdep_cabecera_reten
+         WHERE atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM atrdep_cabecera_reten
+         WHERE atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

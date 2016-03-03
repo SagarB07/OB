@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VALID_ROL_PROV_COMPLETE_TRG">
+    <trigger name="NO_VALID_ROL_PROV_COMPLETE_TRG" table="NO_ROL_PAGO_PROVISION" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+  v_num_provisiones NUMBER;
+BEGIN
+    
+
+    IF UPDATING THEN
+        
+       if(:old.docstatus='BR' AND :new.docstatus='CO' and :old.ispago='N')then
+       select count(*)
+       into v_num_provisiones
+       from no_rol_pago_provision
+       where c_bpartner_id = :new.c_bpartner_id and docstatus=:new.docstatus and :new.docstatus='CO'
+       and ispago='N';
+          
+            if(v_num_provisiones > 1)then
+                RAISE NO_DATA_FOUND;
+
+            end if;
+       end if;    
+        RETURN NEW;
+    ELSE
+        RETURN OLD;
+    END IF;
+
+END NO_VALID_ROL_PROV_COMPLETE_TRG
+]]></body>
+    </trigger>
+  </database>

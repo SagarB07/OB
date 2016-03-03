@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+  <database name="TABLE ATRDEP_CABECERA_RETEN_LINE">
+    <table name="ATRDEP_CABECERA_RETEN_LINE" primaryKey="ATRDEP_CAB_RET_LINE_KEY">
+      <column name="ATRDEP_CABECERA_RETEN_LINE_ID" primaryKey="true" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_CLIENT_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="AD_ORG_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ISACTIVE" primaryKey="false" required="true" type="CHAR" size="1" autoIncrement="false">
+        <default><![CDATA[Y]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="CREATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATED" primaryKey="false" required="true" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="UPDATEDBY" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ATRDEP_CABECERA_RETEN_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="C_BPARTNER_ID" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NUMRUC" primaryKey="false" required="true" type="VARCHAR" size="13" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="TIPIDRET" primaryKey="false" required="true" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="IDRET" primaryKey="false" required="true" type="VARCHAR" size="10" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DIRCAL" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DIRNUM" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DIRCIU" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DIRPROV" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="TEL" primaryKey="false" required="false" type="VARCHAR" size="9" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="SISSALNET" primaryKey="false" required="true" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="SUELSAL" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="SOBSUELCOMREMU" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DECIMTER" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DECIMCUAR" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="FONDORESERVA" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="SALARIODIGNO" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="PARTUTIL" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DESAUOTRAS" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="APOPERIESS" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DEDUCVIVIENDA" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DEDUCSALUD" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DEDUCEDUCA" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DEDUCALIEMENT" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="DEDUCVESTIM" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="REBESPDISCAP" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="REBESPTERED" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="IMPRENTEMPL" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="SUBTOTAL" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="NUMRET" primaryKey="false" required="false" type="DECIMAL" size="10,0" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="NUMMESEMPLEAD" primaryKey="false" required="false" type="DECIMAL" size="10,0" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="INTGRABGEN" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="DEDUCCGASTOSOTREMPL" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="OTRREBJOTREMPL" primaryKey="false" required="false" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="BASIMP" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="IMPRENTCAUS" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="VALRET" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="VALORIMPEMPANTER" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ANIO" primaryKey="false" required="true" type="VARCHAR" size="10" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ANIORET" primaryKey="false" required="true" type="VARCHAR" size="10" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="VALIMPASUESTEEMPL" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ESTAB" primaryKey="false" required="true" type="VARCHAR" size="3" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="OTROSINGRENGRAV" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="INGGRAVCONESTEEMPL" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="APORPERIESSCONOTROSEMPLS" primaryKey="false" required="true" type="DECIMAL" size="10,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="AD_CLIENT" name="ATRDEP_CAB_RET_LINE_AD_CLIENT">
+        <reference local="AD_CLIENT_ID" foreign="AD_CLIENT_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="AD_ORG" name="ATRDEP_CAB_RET_LINE_AD_ORG">
+        <reference local="AD_ORG_ID" foreign="AD_ORG_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="C_BPARTNER" name="ATRDEP_CAB_RET_LINE_C_BPARTNER">
+        <reference local="C_BPARTNER_ID" foreign="C_BPARTNER_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="ATRDEP_CABECERA_RETEN" name="ATRDEP_RET_LINE_ATRDEP_CAB_RET">
+        <reference local="ATRDEP_CABECERA_RETEN_ID" foreign="ATRDEP_CABECERA_RETEN_ID"/>
+      </foreign-key>
+      <check name="ATRDEP_CAB_RET_LINE_ISACT_CHK"><![CDATA[ISACTIVE IN ('Y', 'N')]]></check>
+    </table>
+  </database>

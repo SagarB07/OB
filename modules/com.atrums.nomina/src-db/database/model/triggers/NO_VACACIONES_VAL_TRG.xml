@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VACACIONES_VAL_TRG">
+    <trigger name="NO_VACACIONES_VAL_TRG" table="NO_VACACION_LINEA" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+days NUMBER;
+v_mensaje VARCHAR;
+
+
+BEGIN
+				
+	select SUM(EXTRACT(day from :new.fecha_fin)-EXTRACT(day from :new.fecha_inicio)) as dias INTO days;
+
+
+    IF (UPDATING OR INSERTING) THEN	
+	
+        :new.dias:=SUM(EXTRACT(day from :new.fecha_fin)-EXTRACT(day from :new.fecha_inicio));
+
+        IF(days>45)THEN
+            	v_mensaje:='@NO_VACACION_MAX@';
+			RAISE v_mensaje;
+		END IF;
+    
+    END IF;
+    RETURN NEW; 
+END NO_VACACIONES_VAL_TRG
+]]></body>
+    </trigger>
+  </database>

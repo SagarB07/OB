@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_EMPLEADO_EDAD_TRG">
+    <trigger name="NE_EMPLEADO_EDAD_TRG" table="C_BPARTNER" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	v_edad NUMBER;
+
+BEGIN
+	if :NEW.em_no_fechanacimiento is not null then
+		IF date(:NEW.em_no_fechanacimiento) < date(now()) THEN
+			v_edad := date_part('year', age(:new.em_no_fechanacimiento))::numeric;
+			:new.em_ne_edad := v_edad;
+			if v_edad >= 65 then
+				:new.em_no_istercera_edad := 'Y';
+			else
+				:new.em_no_istercera_edad := 'N';
+			end if;
+			:new.em_ne_c_acctschema_id := '392B29E2D71F4D4196C1C7EE2BE86824';
+			return new;
+		ELSE 
+		 RAISE NO_DATA_FOUND;
+		END IF;
+	end if;
+	return new;
+END NE_EMPLEADO_EDAD_TRG
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="PagoNominaCabecera424295FE162A4CF88B993BD228C47679Data" package="org.openbravo.erpWindows.com.atrums.nomina.GeneradorPagosNomina">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(no_pago_cabecera.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_pago_cabecera.CreatedBy) as CreatedByR, 
+        to_char(no_pago_cabecera.Updated, ?) as updated, 
+        to_char(no_pago_cabecera.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        no_pago_cabecera.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_pago_cabecera.UpdatedBy) as UpdatedByR,
+        no_pago_cabecera.AD_Org_ID, 
+(CASE WHEN no_pago_cabecera.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
+COALESCE(no_pago_cabecera.Isactive, 'N') AS Isactive, 
+no_pago_cabecera.C_Period_ID, 
+(CASE WHEN no_pago_cabecera.C_Period_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS C_Period_IDR, 
+no_pago_cabecera.NO_Area_Empresa_ID, 
+(CASE WHEN no_pago_cabecera.NO_Area_Empresa_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Nombre), ''))),'') ) END) AS NO_Area_Empresa_IDR, 
+no_pago_cabecera.C_Doctype_ID, 
+(CASE WHEN no_pago_cabecera.C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
+no_pago_cabecera.Generar_Registro, 
+no_pago_cabecera.FIN_Financial_Account_ID, 
+(CASE WHEN no_pago_cabecera.FIN_Financial_Account_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.ISO_Code), ''))),'') ) END) AS FIN_Financial_Account_IDR, 
+no_pago_cabecera.FIN_Paymentmethod_ID, 
+(CASE WHEN no_pago_cabecera.FIN_Paymentmethod_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.Name), ''))),'') ) END) AS FIN_Paymentmethod_IDR, 
+no_pago_cabecera.C_Currency_ID, 
+(CASE WHEN no_pago_cabecera.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
+no_pago_cabecera.C_Glitem_ID, 
+(CASE WHEN no_pago_cabecera.C_Glitem_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table10.Name), ''))),'') ) END) AS C_Glitem_IDR, 
+no_pago_cabecera.Fecha_Pago, 
+no_pago_cabecera.Pago_C_Doctype_ID, 
+(CASE WHEN no_pago_cabecera.Pago_C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL11.Name IS NULL THEN TO_CHAR(table11.Name) ELSE TO_CHAR(tableTRL11.Name) END)), ''))),'') ) END) AS Pago_C_Doctype_IDR, 
+no_pago_cabecera.AD_Client_ID, 
+no_pago_cabecera.NO_Pago_Cabecera_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM no_pago_cabecera left join (select AD_Org_ID, Name from AD_Org) table1 on (no_pago_cabecera.AD_Org_ID = table1.AD_Org_ID) left join (select C_Period_ID, Name from C_Period) table2 on (no_pago_cabecera.C_Period_ID =  table2.C_Period_ID) left join (select NO_Area_Empresa_ID, Nombre from NO_Area_Empresa) table3 on (no_pago_cabecera.NO_Area_Empresa_ID = table3.NO_Area_Empresa_ID) left join (select C_DocType_ID, Name from C_DocType) table4 on (no_pago_cabecera.C_Doctype_ID =  table4.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL4 on (table4.C_DocType_ID = tableTRL4.C_DocType_ID and tableTRL4.AD_Language = ?)  left join (select FIN_Financial_Account_ID, Name, C_Currency_ID from FIN_Financial_Account) table6 on (no_pago_cabecera.FIN_Financial_Account_ID = table6.FIN_Financial_Account_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table7 on (table6.C_Currency_ID = table7.C_Currency_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table8 on (no_pago_cabecera.FIN_Paymentmethod_ID = table8.FIN_Paymentmethod_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table9 on (no_pago_cabecera.C_Currency_ID = table9.C_Currency_ID) left join (select C_Glitem_ID, Name from C_Glitem) table10 on (no_pago_cabecera.C_Glitem_ID =  table10.C_Glitem_ID) left join (select C_DocType_ID, Name from C_DocType) table11 on (no_pago_cabecera.Pago_C_Doctype_ID =  table11.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL11 on (table11.C_DocType_ID = tableTRL11.C_DocType_ID and tableTRL11.AD_Language = ?) 
+        WHERE 2=2 
+
+        AND 1=1 
+        AND no_pago_cabecera.NO_Pago_Cabecera_ID = ? 
+        AND no_pago_cabecera.AD_Client_ID IN ('1') 
+           AND no_pago_cabecera.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+
+
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_pago_cabecera.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_pago_cabecera.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+
+<Parameter name="adClientId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="noAreaEmpresaId"></Parameter><Parameter name="cDoctypeId"></Parameter><Parameter name="generarRegistro"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="cCurrencyId"></Parameter><Parameter name="noPagoCabeceraId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="cGlitemId"></Parameter><Parameter name="pagoCDoctypeId"></Parameter><Parameter name="cPeriodId"></Parameter><Parameter name="finPaymentmethodId"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="fechaPago"></Parameter><Parameter name="finFinancialAccountId"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef618E58A86E0D4E6E87F07302539C06E5_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefCD014305841349FA8DAD07A5AFAF0944" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT P.C_PERIOD_ID AS DEFAULTVALUE FROM C_PERIOD P WHERE EXISTS (SELECT * FROM C_PERIODCONTROL PC WHERE P.C_PERIOD_ID=PC.C_PERIOD_ID AND UPPER(PC.PERIODSTATUS)='0') AND EXISTS(SELECT * FROM C_CALENDAR C, C_YEAR Y WHERE Y.C_CALENDAR_ID=C.C_CALENDAR_ID AND P.C_YEAR_ID=Y.C_YEAR_ID AND AD_ISORGINCLUDED(?, C.AD_ORG_ID, ?)<> -1) AND P.AD_CLIENT_ID=? AND NOW() BETWEEN STARTDATE AND ENDDATE 
+    ]]></Sql>
+
+<Parameter name="AD_ORG_ID"/>
+<Parameter name="AD_CLIENT_ID"/>
+<Parameter name="AD_CLIENT_ID"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefF93FB5F7508946B4BBECAB20D41294B8_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE no_pago_cabecera
+        SET AD_Org_ID = (?) , Isactive = (?) , C_Period_ID = (?) , NO_Area_Empresa_ID = (?) , C_Doctype_ID = (?) , Generar_Registro = (?) , FIN_Financial_Account_ID = (?) , FIN_Paymentmethod_ID = (?) , C_Currency_ID = (?) , C_Glitem_ID = (?) , Fecha_Pago = TO_DATE(?) , Pago_C_Doctype_ID = (?) , AD_Client_ID = (?) , NO_Pago_Cabecera_ID = (?) , updated = now(), updatedby = ? 
+        WHERE no_pago_cabecera.NO_Pago_Cabecera_ID = ? 
+        
+        AND no_pago_cabecera.AD_Client_ID IN ('1') 
+        AND no_pago_cabecera.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="generarRegistro"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="fechaPago"></Parameter> <Parameter name="pagoCDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noPagoCabeceraId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="noPagoCabeceraId"></Parameter>
+    
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_pago_cabecera.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_pago_cabecera.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO no_pago_cabecera 
+        (AD_Org_ID, Isactive, C_Period_ID, NO_Area_Empresa_ID, C_Doctype_ID, Generar_Registro, FIN_Financial_Account_ID, FIN_Paymentmethod_ID, C_Currency_ID, C_Glitem_ID, Fecha_Pago, Pago_C_Doctype_ID, AD_Client_ID, NO_Pago_Cabecera_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="generarRegistro"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="fechaPago"></Parameter> <Parameter name="pagoCDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noPagoCabeceraId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM no_pago_cabecera
+        WHERE no_pago_cabecera.NO_Pago_Cabecera_ID = ? 
+        
+        AND no_pago_cabecera.AD_Client_ID IN ('1') 
+        AND no_pago_cabecera.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_pago_cabecera.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_pago_cabecera.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM no_pago_cabecera
+         WHERE no_pago_cabecera.NO_Pago_Cabecera_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM no_pago_cabecera
+         WHERE no_pago_cabecera.NO_Pago_Cabecera_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

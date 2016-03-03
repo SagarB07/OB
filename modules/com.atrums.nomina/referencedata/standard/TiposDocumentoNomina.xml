@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <DocumentType id="042C0D9E0BEF42E7B5F2B6E122031D38" identifier="Rol de Pagos">
+    <id>042C0D9E0BEF42E7B5F2B6E122031D38</id>
+    <active>true</active>
+    <name>Rol de Pagos</name>
+    <printText>Rol de Pagos</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>NO_NRP</documentCategory>
+    <salesTransaction>false</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="C4194359BB0E4E5B80C105147C1DC10D" entity-name="ADSequence" identifier="Rol de Pagos"/>
+    <gLCategory id="FC670B83E59C4E7CBD6B999D3F28B251" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="F5057A2680BB43149D7C57B1224A7653" entity-name="ADTable" identifier="no_rol_pago_provision"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <documentTypeForOrder xsi:nil="true"/>
+    <coTipoComprobanteAutorizadorSRI>0</coTipoComprobanteAutorizadorSRI>
+  </DocumentType>
+  <DocumentType id="61F948ADEECD4A2399B5B0A614F82763" identifier="Contrato">
+    <id>61F948ADEECD4A2399B5B0A614F82763</id>
+    <active>true</active>
+    <name>Contrato</name>
+    <printText>Contrato</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>---</documentCategory>
+    <salesTransaction>false</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="47FB32ACC7C44659B8C503CB9FD0BE21" entity-name="ADSequence" identifier="Contrato"/>
+    <gLCategory id="FC670B83E59C4E7CBD6B999D3F28B251" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="1B6DA178D9C743D5AF4C717B1DAEB8F3" entity-name="ADTable" identifier="no_contrato_empleado"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <documentTypeForOrder xsi:nil="true"/>
+    <coTipoComprobanteAutorizadorSRI>0</coTipoComprobanteAutorizadorSRI>
+  </DocumentType>
+  <DocumentType id="E7EC0B4879C04A9EA2807C3209E7363B" identifier="Rol de Provisiones">
+    <id>E7EC0B4879C04A9EA2807C3209E7363B</id>
+    <active>true</active>
+    <name>Rol de Provisiones</name>
+    <printText>Rol de Provisiones</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>NO_RPLM</documentCategory>
+    <salesTransaction>false</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>true</sequencedDocument>
+    <documentSequence id="6C6C434E75614C65AFE848F4F5AFFE6C" entity-name="ADSequence" identifier="Rol de Provisiones"/>
+    <gLCategory id="FC670B83E59C4E7CBD6B999D3F28B251" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="B39EEBB236864717A9F7F6F4A11DCB9C" entity-name="ADTable" identifier="no_rol_provision_line_mes"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <documentTypeForOrder xsi:nil="true"/>
+    <coTipoComprobanteAutorizadorSRI>0</coTipoComprobanteAutorizadorSRI>
+  </DocumentType>
+  <ADSequence id="47FB32ACC7C44659B8C503CB9FD0BE21" identifier="Contrato">
+    <id>47FB32ACC7C44659B8C503CB9FD0BE21</id>
+    <active>true</active>
+    <name>Contrato</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+  <ADSequence id="6C6C434E75614C65AFE848F4F5AFFE6C" identifier="Rol de Provisiones">
+    <id>6C6C434E75614C65AFE848F4F5AFFE6C</id>
+    <active>true</active>
+    <name>Rol de Provisiones</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+  <ADSequence id="C4194359BB0E4E5B80C105147C1DC10D" identifier="Rol de Pagos">
+    <id>C4194359BB0E4E5B80C105147C1DC10D</id>
+    <active>true</active>
+    <name>Rol de Pagos</name>
+    <description xsi:nil="true"/>
+    <valueFormat xsi:nil="true"/>
+    <autoNumbering>true</autoNumbering>
+    <incrementBy>1</incrementBy>
+    <startingNo>1</startingNo>
+    <nextAssignedNumber>1</nextAssignedNumber>
+    <currentNextSystem>100</currentNextSystem>
+    <usedForRecordID>false</usedForRecordID>
+    <prefix xsi:nil="true"/>
+    <suffix xsi:nil="true"/>
+    <restartSequenceEveryYear>false</restartSequenceEveryYear>
+  </ADSequence>
+</ob:Openbravo>

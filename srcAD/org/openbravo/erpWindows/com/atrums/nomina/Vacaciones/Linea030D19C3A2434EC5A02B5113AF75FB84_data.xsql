@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="Linea030D19C3A2434EC5A02B5113AF75FB84Data" package="org.openbravo.erpWindows.com.atrums.nomina.Vacaciones">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(no_vacacion_linea.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_vacacion_linea.CreatedBy) as CreatedByR, 
+        to_char(no_vacacion_linea.Updated, ?) as updated, 
+        to_char(no_vacacion_linea.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        no_vacacion_linea.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_vacacion_linea.UpdatedBy) as UpdatedByR,
+        no_vacacion_linea.AD_Org_ID, 
+no_vacacion_linea.NO_Vacacion_ID, 
+no_vacacion_linea.Procesar, 
+no_vacacion_linea.Line, 
+no_vacacion_linea.Fecha_Inicio, 
+no_vacacion_linea.Fecha_Fin, 
+no_vacacion_linea.Estado, 
+(CASE WHEN no_vacacion_linea.Estado IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS EstadoR, 
+COALESCE(no_vacacion_linea.Isactive, 'N') AS Isactive, 
+no_vacacion_linea.dias, 
+no_vacacion_linea.NO_Vacacion_Linea_ID, 
+no_vacacion_linea.AD_Client_ID, 
+COALESCE(no_vacacion_linea.Procesado, 'N') AS Procesado, 
+ 
+        ? AS LANGUAGE 
+        FROM no_vacacion_linea left join ad_ref_list_v list1 on (no_vacacion_linea.Estado = list1.value and list1.ad_reference_id = '6EE3EA7321544309803D4992D165F316' and list1.ad_language = ?) 
+        WHERE 2=2 
+
+        AND 1=1 
+        AND no_vacacion_linea.NO_Vacacion_Linea_ID = ? 
+        AND no_vacacion_linea.AD_Client_ID IN ('1') 
+           AND no_vacacion_linea.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+
+    <Parameter name="noVacacionId" optional="true" after="AND 1=1 " id="paramKeyParent"> AND no_vacacion_linea.NO_Vacacion_ID = ? </Parameter>
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_vacacion_linea.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_vacacion_linea.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+    <Parameter name="noVacacionId" id="paramKeyParent"></Parameter>
+<Parameter name="adOrgId"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="isactive"></Parameter><Parameter name="fechaInicio"></Parameter><Parameter name="procesar"></Parameter><Parameter name="estado"></Parameter><Parameter name="procesado"></Parameter><Parameter name="dias"></Parameter><Parameter name="line"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="fechaFin"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="noVacacionLineaId"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef09C643311F614718AEB45A28A675F87E_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef55746681A916405D852E21D517F300E3" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT COALESCE(MAX(LINE),0)+10 AS DefaultValue FROM NO_VACACION_LINEA WHERE NO_VACACION_ID=? 
+    ]]></Sql>
+
+<Parameter name="NO_Vacacion_ID"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefA546C38F45AF4DED94271CC975163646_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+
+
+  <SqlMethod name="selectParentID" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>return the parent ID</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT no_vacacion_linea.NO_Vacacion_ID AS NAME
+        FROM no_vacacion_linea
+        WHERE no_vacacion_linea.NO_Vacacion_Linea_ID = ?
+    ]]></Sql>
+    <Parameter name="key"></Parameter>
+  </SqlMethod>
+
+   <SqlMethod name="selectParent" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (list1.name || ' - ' || TO_CHAR(COALESCE(TO_CHAR(table2.Name), '')) || ' - ' || TO_CHAR(table1.em_ne_fecha_inicio, 'DD-MM-YYYY')) AS NAME FROM no_vacacion left join (select NO_Vacacion_ID, Anio, C_Bpartner_ID, em_ne_fecha_inicio from NO_Vacacion) table1 on (no_vacacion.NO_Vacacion_ID = table1.NO_Vacacion_ID) left join ad_ref_list_v list1 on (table1.Anio = list1.value and list1.ad_reference_id = 'DBE0CE97929A4EB3A2093E35875EA82B' and list1.ad_language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table2 on (table1.C_Bpartner_ID = table2.C_BPartner_ID) WHERE no_vacacion.NO_Vacacion_ID = ?  
+    ]]></Sql>
+<Parameter name="paramLanguage"/>
+<Parameter name="noVacacionId"/>
+
+  </SqlMethod>
+
+
+
+
+   <SqlMethod name="selectParentTrl" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (list1.name || ' - ' || TO_CHAR(COALESCE(TO_CHAR(table2.Name), '')) || ' - ' || TO_CHAR(table1.em_ne_fecha_inicio, 'DD-MM-YYYY')) AS NAME FROM no_vacacion left join (select NO_Vacacion_ID, Anio, C_Bpartner_ID, em_ne_fecha_inicio from NO_Vacacion) table1 on (no_vacacion.NO_Vacacion_ID = table1.NO_Vacacion_ID) left join ad_ref_list_v list1 on (table1.Anio = list1.value and list1.ad_reference_id = 'DBE0CE97929A4EB3A2093E35875EA82B' and list1.ad_language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table2 on (table1.C_Bpartner_ID = table2.C_BPartner_ID) WHERE no_vacacion.NO_Vacacion_ID = ?  
+    ]]></Sql>
+<Parameter name="paramLanguage"/>
+<Parameter name="noVacacionId"/>
+
+  </SqlMethod>
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE no_vacacion_linea
+        SET AD_Org_ID = (?) , NO_Vacacion_ID = (?) , Procesar = (?) , Line = TO_NUMBER(?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Estado = (?) , Isactive = (?) , dias = TO_NUMBER(?) , NO_Vacacion_Linea_ID = (?) , AD_Client_ID = (?) , Procesado = (?) , updated = now(), updatedby = ? 
+        WHERE no_vacacion_linea.NO_Vacacion_Linea_ID = ? 
+                 AND no_vacacion_linea.NO_Vacacion_ID = ? 
+        AND no_vacacion_linea.AD_Client_ID IN ('1') 
+        AND no_vacacion_linea.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="line"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="noVacacionLineaId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="noVacacionLineaId"></Parameter>
+    
+    <Parameter name="noVacacionId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_vacacion_linea.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_vacacion_linea.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO no_vacacion_linea 
+        (AD_Org_ID, NO_Vacacion_ID, Procesar, Line, Fecha_Inicio, Fecha_Fin, Estado, Isactive, dias, NO_Vacacion_Linea_ID, AD_Client_ID, Procesado, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), (?), (?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="line"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="noVacacionLineaId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM no_vacacion_linea
+        WHERE no_vacacion_linea.NO_Vacacion_Linea_ID = ? 
+                 AND no_vacacion_linea.NO_Vacacion_ID = ? 
+        AND no_vacacion_linea.AD_Client_ID IN ('1') 
+        AND no_vacacion_linea.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+        <Parameter name="noVacacionId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_vacacion_linea.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_vacacion_linea.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM no_vacacion_linea
+         WHERE no_vacacion_linea.NO_Vacacion_Linea_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM no_vacacion_linea
+         WHERE no_vacacion_linea.NO_Vacacion_Linea_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_PRESTAMO_TRG">
+    <trigger name="NO_PRESTAMO_TRG" table="NO_PRESTAMO" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+v_ResultStr VARCHAR2(2000):='';
+v_Message VARCHAR2(2000):='';
+
+BEGIN
+  IF(DELETING) THEN
+   IF(:OLD.processed='Y') THEN
+     v_Message:='@No se puede borrar, prestamo procesado@';
+     RAISE v_Message;
+     ELSE
+     RETURN OLD;
+   END IF;
+  END IF;
+
+END NO_PRESTAMO_TRG
+]]></body>
+    </trigger>
+  </database>

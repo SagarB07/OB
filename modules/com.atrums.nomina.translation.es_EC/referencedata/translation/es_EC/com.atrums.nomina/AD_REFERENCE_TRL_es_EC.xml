@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_REFERENCE" version="">
+  <row id="0728B80415774EA1919926E55C3D4ACB" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Rubro Liquidación">Tipo Rubro Liquidación</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="07F0779771DA475F8C7D5696F4B30072" trl="N">
+    <value column="Name" isTrl="N" original="TipoRubro">TipoRubro</value>
+    <value column="Description" isTrl="N" original="TipoRubro">TipoRubro</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="15B7F4E83CFF4593923719B7B335EB4D" trl="N">
+    <value column="Name" isTrl="N" original="NO_Config_Hora_Extra_nombre">NO_Config_Hora_Extra_nombre</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="2457000D1DDF495AADF4F3211370FB7B" trl="N">
+    <value column="Name" isTrl="N" original="Forma Pago">Forma Pago</value>
+    <value column="Description" isTrl="N" original="Indica la forma de pago del contrato">Indica la forma de pago del contrato</value>
+    <value column="Help" isTrl="N" original="Indica la forma de pago del contrato">Indica la forma de pago del contrato</value>
+  </row>
+  <row id="26C900F41851449C8907E56534D0206B" trl="N">
+    <value column="Name" isTrl="N" original="C_DocType_Trx_No">C_DocType_Trx_No</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="31D050E5C2D843B99AD7E9470D9E8579" trl="N">
+    <value column="Name" isTrl="N" original="Estado Liquidacion">Estado Liquidacion</value>
+    <value column="Description" isTrl="N" original="Muestra el estado de la liquidación del empleado">Muestra el estado de la liquidación del empleado</value>
+    <value column="Help" isTrl="N" original="Muestra el estado de la liquidación del empleado">Muestra el estado de la liquidación del empleado</value>
+  </row>
+  <row id="357176BB709540878100C255063176EB" trl="N">
+    <value column="Name" isTrl="N" original="C_Doc_type Nomina">C_Doc_type Nomina</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="3791E45CC96445919F0992FB85EC360A" trl="N">
+    <value column="Name" isTrl="N" original="Dias de pagos">Dias de pagos</value>
+    <value column="Description" isTrl="N" original="Dias de pagos">Dias de pagos</value>
+    <value column="Help" isTrl="N" original="Dias de pagos">Dias de pagos</value>
+  </row>
+  <row id="4553302DFEF34EBE891E0907EC364E42" trl="N">
+    <value column="Name" isTrl="N" original="DocumentoBaseExternos">DocumentoBaseExternos</value>
+    <value column="Description" isTrl="N" original="Documentos Base de modulos externos">Documentos Base de modulos externos</value>
+    <value column="Help" isTrl="N" original="Documentos Base de modulos externos">Documentos Base de modulos externos</value>
+  </row>
+  <row id="46C76320911F4085B2CE2E3504166517" trl="N">
+    <value column="Name" isTrl="N" original="Lista Meses">Lista Meses</value>
+    <value column="Description" isTrl="N" original="Lista de los mes del año">Lista de los mes del año</value>
+    <value column="Help" isTrl="N" original="Lista de los mes del año">Lista de los mes del año</value>
+  </row>
+  <row id="486FE08DA0E547FDAD04256CB130EB22" trl="N">
+    <value column="Name" isTrl="N" original="C_Doc_type Prov Linea">C_Doc_type Prov Linea</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="49D090F3259F438696D291D4C3BCB27C" trl="N">
+    <value column="Name" isTrl="N" original="estados pago linea">estados pago linea</value>
+    <value column="Description" isTrl="N" original="estados pago linea">estados pago linea</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="5172465775754728829C327A8CF6CDED" trl="N">
+    <value column="Name" isTrl="N" original="Frecuencia Pagos">Frecuencia Pagos</value>
+    <value column="Description" isTrl="N" original="Frecuencia de Pagos por rol de pago">Frecuencia de Pagos por rol de pago</value>
+    <value column="Help" isTrl="N" original="Registra la frecuencia de los pagos por rol de pago">Registra la frecuencia de los pagos por rol de pago</value>
+  </row>
+  <row id="54C2C06B49414368A7ED6D06B67719AA" trl="N">
+    <value column="Name" isTrl="Y" original="Estado Documentos Nomina">Estado Rol</value>
+    <value column="Description" isTrl="N" original="Estado del rol de pago y provisiones">Estado del rol de pago y provisiones</value>
+    <value column="Help" isTrl="N" original="Estado del rol de pago y provisiones">Estado del rol de pago y provisiones</value>
+  </row>
+  <row id="5BCEFDAAF41642E5BA3E334D4C810E6D" trl="N">
+    <value column="Name" isTrl="N" original="Lista Motivos Permiso Empleado">Lista Motivos Permiso Empleado</value>
+    <value column="Description" isTrl="N" original="Lista Motivos Permiso Empleado">Lista Motivos Permiso Empleado</value>
+    <value column="Help" isTrl="N" original="Lista Motivos Permiso Empleado">Lista Motivos Permiso Empleado</value>
+  </row>
+  <row id="6EE3EA7321544309803D4992D165F316" trl="N">
+    <value column="Name" isTrl="N" original="Estado Vacaciones">Estado Vacaciones</value>
+    <value column="Description" isTrl="N" original="Muestra los estados que puedetomar las vacaciones tomadas por el empleado">Muestra los estados que puedetomar las vacaciones tomadas por el empleado</value>
+    <value column="Help" isTrl="N" original="Muestra los estados que puedetomar las vacaciones tomadas por el empleado">Muestra los estados que puedetomar las vacaciones tomadas por el empleado</value>
+  </row>
+  <row id="727B9E7086D647E2AD6F386DD9A16C5F" trl="N">
+    <value column="Name" isTrl="N" original="C_Doc_type Prov Cabecera">C_Doc_type Prov Cabecera</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="75810C8F12474BE1B5A7FF2356AB39C3" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Empleado">Tipo Empleado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="77430223925D4C0BB79EF1C68B7BBC5F" trl="N">
+    <value column="Name" isTrl="N" original="Tipo de Hora">Tipo de Hora</value>
+    <value column="Description" isTrl="N" original="Lista de Tipos de Horas">Lista de Tipos de Horas</value>
+    <value column="Help" isTrl="N" original="Lista de Tipos de Horas (Extraordinaria,Suplementaria,Atrasos)">Lista de Tipos de Horas (Extraordinaria,Suplementaria,Atrasos)</value>
+  </row>
+  <row id="7A4D156C7DD94868A3D05363B9EF1AB1" trl="N">
+    <value column="Name" isTrl="N" original="Estado Avances">Estado Avances</value>
+    <value column="Description" isTrl="N" original="Estado Avances">Estado Avances</value>
+    <value column="Help" isTrl="N" original="Muestra los estados para cambiar el estado del documento de un avance">Muestra los estados para cambiar el estado del documento de un avance</value>
+  </row>
+  <row id="7FB5608D7ED64B0DA88308BE0234600A" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Permiso">Tipo Permiso</value>
+    <value column="Description" isTrl="N" original="Tipo de permisos">Tipo de permisos</value>
+    <value column="Help" isTrl="N" original="Tipo de permisos">Tipo de permisos</value>
+  </row>
+  <row id="86EEA87DADD7440E98D1F36D6BC73569" trl="N">
+    <value column="Name" isTrl="N" original="TiposIngresosEgreso">TiposIngresosEgreso</value>
+    <value column="Description" isTrl="N" original="Lista del Tipo de Ingreso y Egreso">Lista del Tipo de Ingreso y Egreso</value>
+    <value column="Help" isTrl="N" original="Lista del Tipo de Ingreso y Egreso">Lista del Tipo de Ingreso y Egreso</value>
+  </row>
+  <row id="8B9C763C0ACC48C98A80AC7408A0B4D8" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Ingresos Egreso Asignados">Tipo Ingresos Egreso Asignados</value>
+    <value column="Description" isTrl="N" original="Tipo Ingresos Egreso Asignados">Tipo Ingresos Egreso Asignados</value>
+    <value column="Help" isTrl="N" original="Tipo Ingresos Egreso Asignados">Tipo Ingresos Egreso Asignados</value>
+  </row>
+  <row id="8E02C49C87DE4E799EF875ED6F1B2E3E" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Carga">Tipo Carga</value>
+    <value column="Description" isTrl="N" original="Seleccione el tipo de carga para el empleado">Seleccione el tipo de carga para el empleado</value>
+    <value column="Help" isTrl="N" original="Seleccione el tipo de carga para el empleado">Seleccione el tipo de carga para el empleado</value>
+  </row>
+  <row id="90EA0BD7E85A48658E5D61638510842B" trl="N">
+    <value column="Name" isTrl="Y" original="Business Partner Empleado">Empleado</value>
+    <value column="Description" isTrl="N" original="Búsqueda de Empleados">Búsqueda de Empleados</value>
+    <value column="Help" isTrl="N" original="Búsqueda de Empleados">Búsqueda de Empleados</value>
+  </row>
+  <row id="9A3725A8049E4409B39AA3F54BF379A7" trl="N">
+    <value column="Name" isTrl="N" original="Estado Civil Empleado">Estado Civil Empleado</value>
+    <value column="Description" isTrl="N" original="Indica el estado civil del empleado">Indica el estado civil del empleado</value>
+    <value column="Help" isTrl="N" original="Indica el estado civil del empleado">Indica el estado civil del empleado</value>
+  </row>
+  <row id="9C5B12FF0D424C638816FA7BC8E17B9B" trl="N">
+    <value column="Name" isTrl="N" original="Estado Permiso">Estado Permiso</value>
+    <value column="Description" isTrl="N" original="Estados del permiso">Estados del permiso</value>
+    <value column="Help" isTrl="N" original="Estados del permiso">Estados del permiso</value>
+  </row>
+  <row id="A280DA82215C4D9496EA39289951608C" trl="N">
+    <value column="Name" isTrl="N" original="Utilidad">Utilidad</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="AB875664BA4A4F88817B38A4E0C6D1A6" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Ingreso Egreso">Tipo Ingreso Egreso</value>
+    <value column="Description" isTrl="N" original="Tipo Ingreso Egreso">Tipo Ingreso Egreso</value>
+    <value column="Help" isTrl="N" original="Lista los Tipos Ingreso o Egreso">Lista los Tipos Ingreso o Egreso</value>
+  </row>
+  <row id="B08E1E7FC07F46AEB9CF7301EE8ACD50" trl="N">
+    <value column="Name" isTrl="N" original="Lista Motivos Salida Empleado">Lista Motivos Salida Empleado</value>
+    <value column="Description" isTrl="N" original="Lista Motivos Salida Empleado">Lista Motivos Salida Empleado</value>
+    <value column="Help" isTrl="N" original="Lista Motivos Salida Empleado">Lista Motivos Salida Empleado</value>
+  </row>
+  <row id="B80AAAE24FC1451A8AB1363F3A325699" trl="N">
+    <value column="Name" isTrl="N" original="Tabla Vacacion">Tabla Vacacion</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="BCB384A80DDA4E64BF1DF6CC9B049AC0" trl="N">
+    <value column="Name" isTrl="N" original="tipo doc avance">tipo doc avance</value>
+    <value column="Description" isTrl="N" original="tipo doc avance">tipo doc avance</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="BF8938658DFD4AF8A5F876EFF603BB53" trl="N">
+    <value column="Name" isTrl="N" original="Tipo Contrato">Tipo Contrato</value>
+    <value column="Description" isTrl="N" original="Indica el tipo de contrato">Indica el tipo de contrato</value>
+    <value column="Help" isTrl="N" original="Indica el tipo de contrato">Indica el tipo de contrato</value>
+  </row>
+  <row id="C3D96AF9E9BA410FB45333086B6AD567" trl="N">
+    <value column="Name" isTrl="N" original="Genero">Genero</value>
+    <value column="Description" isTrl="N" original="Despliega el género del empleado">Despliega el género del empleado</value>
+    <value column="Help" isTrl="N" original="Despliega el género del empleado">Despliega el género del empleado</value>
+  </row>
+  <row id="D703D674FF7247DB9DCEC1B0F8B21396" trl="N">
+    <value column="Name" isTrl="N" original="Sistema de Salario Neto">Sistema de Salario Neto</value>
+    <value column="Description" isTrl="N" original="Sistema de Salario Neto">Sistema de Salario Neto</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="D7DDAF2DB75A4A0A9B158D907798518F" trl="N">
+    <value column="Name" isTrl="N" original="Calcula Rubro">Calcula Rubro</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Tabla de cálculos de rubros">Tabla de cálculos de rubros</value>
+  </row>
+  <row id="DAC4875A281747C7B62C82779269C07B" trl="N">
+    <value column="Name" isTrl="N" original="Lista Tipos de Gastos">Lista Tipos de Gastos</value>
+    <value column="Description" isTrl="N" original="Lista Tipos de Gastos">Lista Tipos de Gastos</value>
+    <value column="Help" isTrl="N" original="Lista Tipos de Gastos">Lista Tipos de Gastos</value>
+  </row>
+  <row id="DBE0CE97929A4EB3A2093E35875EA82B" trl="N">
+    <value column="Name" isTrl="N" original="Anio">Anio</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="E1D9BFAEDABA4F81837C68E0F67F6C5E" trl="N">
+    <value column="Name" isTrl="N" original="C_Doc_type Prov Mes">C_Doc_type Prov Mes</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="EECE3B7B82874108B0F72EA85059C57A" trl="N">
+    <value column="Name" isTrl="N" original="Area Empresa">Area Empresa</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="F73D4D2BFC084F93AD6EC37BE5857EE4" trl="N">
+    <value column="Name" isTrl="N" original="Tipo de Liquidacion">Tipo de Liquidacion</value>
+    <value column="Description" isTrl="N" original="Muesatra una lista con los tipos de liquidacion">Muesatra una lista con los tipos de liquidacion</value>
+    <value column="Help" isTrl="N" original="Muesatra una lista con los tipos de liquidacion">Muesatra una lista con los tipos de liquidacion</value>
+  </row>
+</compiereTrl>

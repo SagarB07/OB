@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="ProvisionMensual6FF22921D16B4043A16ACDCD4C751290Data" package="org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(no_rol_provision_line_mes.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_rol_provision_line_mes.CreatedBy) as CreatedByR, 
+        to_char(no_rol_provision_line_mes.Updated, ?) as updated, 
+        to_char(no_rol_provision_line_mes.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        no_rol_provision_line_mes.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_rol_provision_line_mes.UpdatedBy) as UpdatedByR,
+        no_rol_provision_line_mes.Documentno, 
+no_rol_provision_line_mes.C_Period_ID, 
+(CASE WHEN no_rol_provision_line_mes.C_Period_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS C_Period_IDR, 
+no_rol_provision_line_mes.Valor, 
+COALESCE(no_rol_provision_line_mes.Processed, 'N') AS Processed, 
+no_rol_provision_line_mes.Docstatus, 
+(CASE WHEN no_rol_provision_line_mes.Docstatus IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS DocstatusR, 
+no_rol_provision_line_mes.Dateacct, 
+COALESCE(no_rol_provision_line_mes.Pago, 'N') AS Pago, 
+no_rol_provision_line_mes.C_Doctype_ID, 
+(CASE WHEN no_rol_provision_line_mes.C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
+no_rol_provision_line_mes.Docaccionno, 
+list2.name as Docaccionno_BTN, 
+no_rol_provision_line_mes.Processing, 
+no_rol_provision_line_mes.Posted, 
+list3.name as Posted_BTN, 
+COALESCE(no_rol_provision_line_mes.Isactive, 'N') AS Isactive, 
+no_rol_provision_line_mes.AD_Org_ID, 
+no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID, 
+no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID, 
+no_rol_provision_line_mes.AD_Client_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM no_rol_provision_line_mes left join (select C_Period_ID, Name from C_Period) table1 on (no_rol_provision_line_mes.C_Period_ID =  table1.C_Period_ID) left join ad_ref_list_v list1 on (no_rol_provision_line_mes.Docstatus = list1.value and list1.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list1.ad_language = ?)  left join (select C_DocType_ID, Name from C_DocType) table2 on (no_rol_provision_line_mes.C_Doctype_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join ad_ref_list_v list2 on (list2.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list2.ad_language = ?  AND no_rol_provision_line_mes.Docaccionno = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = '234' and list3.ad_language = ?  AND no_rol_provision_line_mes.Posted = TO_CHAR(list3.value))
+        WHERE 2=2 
+
+        AND 1=1 
+        AND no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ? 
+        AND no_rol_provision_line_mes.AD_Client_ID IN ('1') 
+           AND no_rol_provision_line_mes.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+
+    <Parameter name="noRolPagoProvisionLineId" optional="true" after="AND 1=1 " id="paramKeyParent"> AND no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID = ? </Parameter>
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_rol_provision_line_mes.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_rol_provision_line_mes.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+    <Parameter name="noRolPagoProvisionLineId" id="paramKeyParent"></Parameter>
+<Parameter name="docstatus"></Parameter><Parameter name="docaccionno"></Parameter><Parameter name="docaccionnoBtn"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="valor"></Parameter><Parameter name="dateacct"></Parameter><Parameter name="posted"></Parameter><Parameter name="postedBtn"></Parameter><Parameter name="documentno"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="isactive"></Parameter><Parameter name="processing"></Parameter><Parameter name="cPeriodId"></Parameter><Parameter name="pago"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="processed"></Parameter><Parameter name="noRolProvisionLineMesId"></Parameter><Parameter name="cDoctypeId"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef5BB1F33113644BD8A7AB5D6E0602BEA7_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef5F8F9A93A9464997BCE42F6C3ACF2319_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef8E284351C635427393E35181D5A89179" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT P.C_PERIOD_ID AS DEFAULTVALUE FROM C_PERIOD P WHERE EXISTS (SELECT * FROM C_PERIODCONTROL PC WHERE P.C_PERIOD_ID=PC.C_PERIOD_ID AND UPPER(PC.PERIODSTATUS)='0') AND EXISTS(SELECT * FROM C_CALENDAR C, C_YEAR Y WHERE Y.C_CALENDAR_ID=C.C_CALENDAR_ID AND P.C_YEAR_ID=Y.C_YEAR_ID AND AD_ISORGINCLUDED(?, C.AD_ORG_ID, ?)<> -1) AND P.AD_CLIENT_ID=? AND NOW() BETWEEN STARTDATE AND ENDDATE 
+    ]]></Sql>
+
+<Parameter name="AD_ORG_ID"/>
+<Parameter name="AD_CLIENT_ID"/>
+<Parameter name="AD_CLIENT_ID"/>
+  </SqlMethod>
+
+
+
+  <SqlMethod name="selectParentID" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>return the parent ID</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID AS NAME
+        FROM no_rol_provision_line_mes
+        WHERE no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ?
+    ]]></Sql>
+    <Parameter name="key"></Parameter>
+  </SqlMethod>
+
+   <SqlMethod name="selectParent" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.Line), '')) || ' - ' || TO_CHAR(COALESCE(TO_CHAR(table1.Valor), ''))) AS NAME FROM no_rol_pago_provision_line left join (select NO_Rol_Pago_Provision_Line_ID, Line, Valor from NO_Rol_Pago_Provision_Line) table1 on (no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = table1.NO_Rol_Pago_Provision_Line_ID) WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ?  
+    ]]></Sql>
+<Parameter name="noRolPagoProvisionLineId"/>
+
+  </SqlMethod>
+
+
+
+
+   <SqlMethod name="selectParentTrl" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.Line), '')) || ' - ' || TO_CHAR(COALESCE(TO_CHAR(table1.Valor), ''))) AS NAME FROM no_rol_pago_provision_line left join (select NO_Rol_Pago_Provision_Line_ID, Line, Valor from NO_Rol_Pago_Provision_Line) table1 on (no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = table1.NO_Rol_Pago_Provision_Line_ID) WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ?  
+    ]]></Sql>
+<Parameter name="noRolPagoProvisionLineId"/>
+
+  </SqlMethod>
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE no_rol_provision_line_mes
+        SET Documentno = (?) , C_Period_ID = (?) , Valor = TO_NUMBER(?) , Processed = (?) , Docstatus = (?) , Dateacct = TO_DATE(?) , Pago = (?) , C_Doctype_ID = (?) , Docaccionno = (?) , Processing = (?) , Posted = (?) , Isactive = (?) , AD_Org_ID = (?) , NO_Rol_Provision_Line_Mes_ID = (?) , NO_Rol_Pago_Provision_Line_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        WHERE no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ? 
+                 AND no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID = ? 
+        AND no_rol_provision_line_mes.AD_Client_ID IN ('1') 
+        AND no_rol_provision_line_mes.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="documentno"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="pago"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRolProvisionLineMesId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="noRolProvisionLineMesId"></Parameter>
+    
+    <Parameter name="noRolPagoProvisionLineId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_rol_provision_line_mes.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_rol_provision_line_mes.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO no_rol_provision_line_mes 
+        (Documentno, C_Period_ID, Valor, Processed, Docstatus, Dateacct, Pago, C_Doctype_ID, Docaccionno, Processing, Posted, Isactive, AD_Org_ID, NO_Rol_Provision_Line_Mes_ID, NO_Rol_Pago_Provision_Line_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), TO_NUMBER(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="documentno"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="pago"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRolProvisionLineMesId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM no_rol_provision_line_mes
+        WHERE no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ? 
+                 AND no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID = ? 
+        AND no_rol_provision_line_mes.AD_Client_ID IN ('1') 
+        AND no_rol_provision_line_mes.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+        <Parameter name="noRolPagoProvisionLineId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_rol_provision_line_mes.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_rol_provision_line_mes.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM no_rol_provision_line_mes
+         WHERE no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM no_rol_provision_line_mes
+         WHERE no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_MESSAGE" version="">
+  <row id="0ABC3558F5CA49D0A029D88143B72A70" trl="N">
+    <value column="MsgText" isTrl="N" original="El proceso de pagos ha sido exitoso">El proceso de pagos ha sido exitoso</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="0F4E6BE2A3D145BB8F3CB40641E8FD3D" trl="N">
+    <value column="MsgText" isTrl="N" original="Desea completar los roles seleccionados?">Desea completar los roles seleccionados?</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="1024045811D14D29AA982883D6FC76EF" trl="N">
+    <value column="MsgText" isTrl="N" original="No valor a procesar datos ">No valor a procesar datos </value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="28125403BB5143C1B26082C5936E2A43" trl="N">
+    <value column="MsgText" isTrl="N" original="No se ha seleccionado ninguna Liquidacion">No se ha seleccionado ninguna Liquidacion</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="2BF93AA272BC41E08DB57E995A357CF7" trl="N">
+    <value column="MsgText" isTrl="N" original="No se ha configurado una cuenta para el rubro de ingreso.">No se ha configurado una cuenta para el rubro de ingreso.</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="2DA2380307BD47699B063131EC82F499" trl="N">
+    <value column="MsgText" isTrl="N" original="No puede borrar los pagos que se encuentran en estado Pagado">No puede borrar los pagos que se encuentran en estado Pagado</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="300F98AAAFA24FBDB4AEB94F49A63C22" trl="N">
+    <value column="MsgText" isTrl="N" original="Seleccione una liquidacion">Seleccione una liquidacion</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="39B3745498744353A6FF60B468BC01E0" trl="N">
+    <value column="MsgText" isTrl="N" original="Ingrese correctamente la fecha final, esta no puede ser menor que la fecha de inicio.">Ingrese correctamente la fecha final, esta no puede ser menor que la fecha de inicio.</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="3A7471FB0FFF4404BBC5B5A008CE65CD" trl="N">
+    <value column="MsgText" isTrl="N" original="No se puede insertar una linea más al pago">No se puede insertar una linea más al pago</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="44421913735D4E31B9E719C92401058D" trl="N">
+    <value column="MsgText" isTrl="N" original="No existe cuenta configurada">No existe cuenta configurada</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="4C64CD67832B494FAA64FA2DAF6ED7DC" trl="N">
+    <value column="MsgText" isTrl="N" original="No se pueden ingresar gastos duplicados">No se pueden ingresar gastos duplicados</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="55102BFDCD054F619C7CB7EF62FDF640" trl="N">
+    <value column="MsgText" isTrl="N" original="No se ha seleccionado ningún avance para completar">No se ha seleccionado ningún avance para completar</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="5D22588BE9EC40ADB01C22CD7DE1A5FA" trl="N">
+    <value column="MsgText" isTrl="N" original="No se puede realizar modificaciones a documentos que ya han sido procesados">No se puede realizar modificaciones a documentos que ya han sido procesados</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="6166C64D2FF741FDBFFEEBD38F10DB08" trl="N">
+    <value column="MsgText" isTrl="N" original="Desea completar los avances seleccionados?">Desea completar los avances seleccionados?</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="64281BFFE81D4BD5A86E3282672671CC" trl="N">
+    <value column="MsgText" isTrl="N" original="Desea completar las liquidaciones seleccionadas?">Desea completar las liquidaciones seleccionadas?</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="6EE250C488C14C698565C904AB8D04A7" trl="N">
+    <value column="MsgText" isTrl="N" original="Desea realizar el pago de las lineas seleccionadas?">Desea realizar el pago de las lineas seleccionadas?</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="75C626586C0D4A48BEF125B1D9AE0B56" trl="N">
+    <value column="MsgText" isTrl="N" original="El proceso de completar los avances a sido exitoso">El proceso de completar los avances a sido exitoso</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="7B105A2EA4C848D28E964E797CC0F3D2" trl="N">
+    <value column="MsgText" isTrl="N" original="El proceso de completar los roles ha sido exitoso">El proceso de completar los roles ha sido exitoso</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="7C1D9CD5853D4EFC8A0933A6B6B066E4" trl="N">
+    <value column="MsgText" isTrl="N" original="El proceso se ha ejecutado con éxito.">El proceso se ha ejecutado con éxito.</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="84B2BE7A744F4021B0254113DAB81C61" trl="N">
+    <value column="MsgText" isTrl="N" original="La configuración de las cuentas y esquemas contables es incorrecta en el tipo de ingreso y egresos.">La configuración de las cuentas y esquemas contables es incorrecta en el tipo de ingreso y egresos.</value>
+    <value column="MsgTip" isTrl="N" original="Revisar la configuración de las cuentas de Tipos de Ingresos o Egresos y en Cuenta Empleado Rubros.">Revisar la configuración de las cuentas de Tipos de Ingresos o Egresos y en Cuenta Empleado Rubros.</value>
+  </row>
+  <row id="84DFD246A2EE48C2AA635DA1F6427C91" trl="N">
+    <value column="MsgText" isTrl="N" original="No se ha configurado una cuenta para el rubro de egreso.">No se ha configurado una cuenta para el rubro de egreso.</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="8C61EB3BF79E45239EE1988E11D3FE7A" trl="N">
+    <value column="MsgText" isTrl="N" original="No se han seleccionado roles para completar">No se han seleccionado roles para completar</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="9484DB23E2CF4FC39F7CB1376819AE8F" trl="N">
+    <value column="MsgText" isTrl="N" original="Seleccione una o varias lineas para realizar el pago">Seleccione una o varias lineas para realizar el pago</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="9541EC9EC63648DBA491F6AA43BDC0A0" trl="N">
+    <value column="MsgText" isTrl="N" original="No puede borrar registros procesados">No puede borrar registros procesados</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="9ACEDC1ACF394C31889C993D6225211C" trl="N">
+    <value column="MsgText" isTrl="N" original="El proceso de completar ha sido exitoso">El proceso de completar ha sido exitoso</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="A614513EB1444E429648C46AF42EA68F" trl="N">
+    <value column="MsgText" isTrl="N" original="No se ha asignado cuentas del rubro para el empleado en el esquema contable: ">No se ha asignado cuentas del rubro para el empleado en el esquema contable: </value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="B39CC95CDAAC459686F9B6EA9748818A" trl="N">
+    <value column="MsgText" isTrl="N" original="No se pueden entregar un avances mayor o igual que el sueldo.">No se pueden entregar un avances mayor o igual que el sueldo.</value>
+    <value column="MsgTip" isTrl="N" original="Cambie el valor del avance a un valor menor al del sueldo.">Cambie el valor del avance a un valor menor al del sueldo.</value>
+  </row>
+  <row id="BD6BD7F7A3634BC09ED926AFF319CB01" trl="N">
+    <value column="MsgText" isTrl="N" original="No puede tener vacaciones mas de 15 días.">No puede tener vacaciones mas de 15 días.</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="C2F4B3B00D44463DB8EFB4D1ED1B1D41" trl="N">
+    <value column="MsgText" isTrl="N" original="El documento esta procesado, no se puede realizar esta accion.">El documento esta procesado, no se puede realizar esta accion.</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="D6EC3344E21F4E1B8D37FB6177565E3A" trl="N">
+    <value column="MsgText" isTrl="N" original="No existe datos en la línea">No existe datos en la línea</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="D9403B3313A1490F80774E4A6B825353" trl="N">
+    <value column="MsgText" isTrl="N" original="No se han podido completar las liquidaciones seleccionadas">No se han podido completar las liquidaciones seleccionadas</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="D96DC83C2AA146AB800B1B90DB3589A5" trl="N">
+    <value column="MsgText" isTrl="N" original="La configuración esta incorrecta en el Tipo de ingreso/Egreso">La configuración esta incorrecta en el Tipo de ingreso/Egreso</value>
+    <value column="MsgTip" isTrl="N" original="Por favor revise la configuración del Ingreso/Egreso de provisiones.">Por favor revise la configuración del Ingreso/Egreso de provisiones.</value>
+  </row>
+  <row id="DCC9FE25A87C4BEB8E689490632F69A8" trl="N">
+    <value column="MsgText" isTrl="N" original="No existe PROCEDIMIENTO que realizar el cálculo del rubro: ">No existe PROCEDIMIENTO que realizar el cálculo del rubro: </value>
+    <value column="MsgTip" isTrl="N" original="Ingrese el nombre del procedimiento para el calculo del rubro.">Ingrese el nombre del procedimiento para el calculo del rubro.</value>
+  </row>
+  <row id="EDD6226616D24EA0B78C0206688B4AE5" trl="N">
+    <value column="MsgText" isTrl="N" original="Solo ha seleccionado una liquidación">Solo ha seleccionado una liquidación</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="F0E85C8C61484FC99B552FF069BABCD2" trl="N">
+    <value column="MsgText" isTrl="N" original="Sin datos para procesar">Sin datos para procesar</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="FDAE05BCD56D451FAB355D4C5BB5B0EE" trl="N">
+    <value column="MsgText" isTrl="N" original="Seleccione uno o varios roles">Seleccione uno o varios roles</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+  <row id="FFF4CFF92EE54B83AE92A28F9AAF6B4C" trl="N">
+    <value column="MsgText" isTrl="N" original="Seleccione uno o varios avances">Seleccione uno o varios avances</value>
+    <value column="MsgTip" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

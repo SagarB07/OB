@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_TOTAL_GASTOS_EMPL_TRG">
+    <trigger name="NO_TOTAL_GASTOS_EMPL_TRG" table="NO_GASTOS_EMPLEADO_LINE" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+v_valor NUMBER;
+
+BEGIN
+    IF (UPDATING OR INSERTING) THEN
+
+        select coalesce(sum(valor),0)
+          into v_valor
+          from no_gastos_empleado_line
+          where no_gastos_empleado_id = :new.no_gastos_empleado_id;
+           
+               
+        UPDATE no_gastos_empleado
+           SET total_gastos=v_valor
+         WHERE no_gastos_empleado_id = :new.no_gastos_empleado_id;
+        
+
+        RETURN NEW;
+    END IF;
+
+    IF DELETING THEN
+        select coalesce(sum(valor),0)
+          into v_valor
+          from no_gastos_empleado_line
+          where no_gastos_empleado_id = :old.no_gastos_empleado_id;
+           
+   
+        UPDATE no_gastos_empleado
+           SET total_gastos=v_valor
+         WHERE no_gastos_empleado_id = :old.no_gastos_empleado_id;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_TOTAL_GASTOS_EMPL_TRG
+]]></body>
+    </trigger>
+  </database>

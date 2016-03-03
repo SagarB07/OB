@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_RPLM_INSERT_PAGO_TRG">
+    <trigger name="NO_RPLM_INSERT_PAGO_TRG" table="NO_ROL_PROVISION_LINE_MES" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+  v_mensaje varchar(60);
+  v_tipo_ingreso_egreso_id varchar(32);
+  v_ismes char(1);
+BEGIN
+    
+
+    IF INSERTING THEN
+                
+        select no_tipo_ingreso_egreso_id
+        into v_tipo_ingreso_egreso_id
+        from no_rol_pago_provision_line
+        where no_rol_pago_provision_line_id = :new.no_rol_pago_provision_line_id;
+
+        select isprovmes
+        into v_ismes
+        from no_tipo_ingreso_egreso
+        where no_tipo_ingreso_egreso_id = v_tipo_ingreso_egreso_id;
+        
+        :new.pago:=v_ismes;
+        
+        RETURN NEW;
+    ELSE
+        RETURN OLD;
+    END IF;
+
+END NO_RPLM_INSERT_PAGO_TRG
+]]></body>
+    </trigger>
+  </database>

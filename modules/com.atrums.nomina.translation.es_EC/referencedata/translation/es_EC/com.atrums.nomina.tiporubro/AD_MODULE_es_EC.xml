@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_MODULE" version="">
+  <row id="751E6264F87340F2B544A6868082F86F" trl="N">
+    <value column="Description" isTrl="N" original="Rubros Rol Pago EC">Rubros Rol Pago EC</value>
+    <value column="Help" isTrl="N" original="Rubros Rol Pago EC">Rubros Rol Pago EC</value>
+    <value column="License" isTrl="N" original="OLC">OLC</value>
+    <value column="Updateinfo" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

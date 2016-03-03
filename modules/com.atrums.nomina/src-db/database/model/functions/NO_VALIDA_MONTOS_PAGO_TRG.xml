@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_VALIDA_MONTOS_PAGO_TRG">
+    <function name="NO_VALIDA_MONTOS_PAGO_TRG" type="VARCHAR">
+      <body><![CDATA[v_mensaje varchar(60);
+  v_status varchar(60);
+  v_no_pago_line_id varchar(32);
+BEGIN
+ 
+    IF TG_OP = 'INSERT' THEN
+        
+            if((select count(em_no_pago_line_id) from fin_payment_detail
+            where fin_payment_id=new.fin_payment_id and em_no_pago_line_id is not null )>=1)then
+             RAISE EXCEPTION '@NO_Insertar_Pago_Linea@';
+           
+            END IF;
+         
+            return new;
+    END IF;
+END NO_VALIDA_MONTOS_PAGO_TRG
+]]></body>
+    </function>
+  </database>

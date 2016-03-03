@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_PROCESA_PAGO_LINEAS">
+    <function name="NO_PROCESA_PAGO_LINEAS" type="NULL">
+      <parameter name="p_pago_line_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="usuario" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_no_pago_cabecera_id varchar(32); 
+    v_valor NUMBER;
+    v_bpartner_id varchar(32);
+    v_fin_payment_id varchar(32);
+    v_ad_client_id varchar (32);
+    v_ad_org_id varchar (32);
+    v_c_currency_id varchar (32);
+    v_fecha_pago DATE;
+    v_fin_paymentmethod_id varchar(32);
+    v_documentno varchar(30);
+    v_documentnoline varchar(30);
+    v_fin_financial_account_id varchar(32);
+    v_c_doctype_id varchar(32);
+    v_fin_payment_detail_id varchar(32);
+    v_c_glitem_id varchar(32);
+    v_fin_payment_scheduledetail_id varchar(32);
+    v_descripcion varchar(255):= '';
+    v_name_doctype varchar (60);
+    v_name_bpartner varchar(60);
+    v_Client_ID varchar(32);
+    v_doctype_payment_id varchar(32);
+    v_fin_finacc_transaction_id varchar(32);
+    v_status_fin_payment varchar(60);
+    
+
+    BEGIN 
+    
+    
+        v_fin_payment_id := get_uuid();
+        v_fin_payment_detail_id := get_uuid();
+        v_fin_payment_scheduledetail_id:= get_uuid();
+        v_fin_finacc_transaction_id:= get_uuid();
+      
+        select c_bpartner_id, 
+               no_pago_cabecera_id, 
+               valor, 
+               c_doctype_id,
+               documentno
+          into v_bpartner_id, 
+               v_no_pago_cabecera_id, 
+               v_valor, 
+               v_c_doctype_id,
+               v_documentnoline
+          from no_pago_line 
+         where no_pago_line_id=p_pago_line_id;
+         
+                  
+         select name 
+         into v_name_doctype
+         from c_doctype where c_doctype_id=v_c_doctype_id;
+
+         select name 
+         into v_name_bpartner
+         from c_bpartner where c_bpartner_id=v_bpartner_id;
+         
+         v_descripcion:= v_name_doctype ||  ' N°: ' || v_documentnoline || 'Empleado: '  || v_name_bpartner;
+         
+        select ad_client_id, 
+               ad_org_id, 
+               c_currency_id, 
+               fecha_pago, 
+               fin_paymentmethod_id, 
+               fin_financial_account_id, 
+               c_glitem_id,
+               ad_client_id,
+               pago_c_doctype_id
+          into v_ad_client_id, 
+               v_ad_org_id, 
+               v_c_currency_id, 
+               v_fecha_pago, 
+               v_fin_paymentmethod_id, 
+               v_fin_financial_account_id, 
+               v_c_glitem_id,
+               v_Client_ID,
+               v_doctype_payment_id
+          from no_pago_cabecera 
+         where no_pago_cabecera_id=v_no_pago_cabecera_id;
+
+            SELECT * INTO  v_documentno
+            FROM Ad_Sequence_Doctype(v_doctype_payment_id, v_Client_ID, 'Y');
+
+            
+
+       INSERT INTO fin_payment(fin_payment_id,          ad_client_id,           ad_org_id,                  created, 
+                               createdby,               updated,                updatedby,                  isactive, 
+                               isreceipt,               c_bpartner_id,          paymentdate,                c_currency_id, 
+                               amount,                  writeoffamt,            fin_paymentmethod_id,       documentno, 
+                               referenceno,             status,                 processed,                  processing, 
+                               posted,                  description,            fin_financial_account_id,   c_doctype_id,
+                               c_project_id,            c_campaign_id,          c_activity_id,              user1_id, 
+                               user2_id,                generated_credit,       used_credit,                createdbyalgorithm, 
+                               finacc_txn_convert_rate, finacc_txn_amount,      fin_rev_payment_id,         c_costcenter_id, 
+                               em_aprm_process_payment, em_aprm_reconcile_payment, em_aprm_add_scheduledpayments, em_aprm_executepayment,
+                               em_aprm_reversepayment) 
+                        VALUES(v_fin_payment_id,        v_ad_client_id,          v_ad_org_id,               now(), 
+                               usuario,                 now(),                   usuario,                   'Y',
+                               'N',                     v_bpartner_id,           v_fecha_pago,              v_c_currency_id, 
+                               v_valor,                 0,                       v_fin_paymentmethod_id,    v_documentno,
+                               null,                      'RPAP',                  'N',                       'N', 
+                               'N',                     v_descripcion,           v_fin_financial_account_id, v_c_doctype_id,
+                               null,                      null,                       null,                         null, 
+                               null,                       0,                       0,                          'N', 
+                                1,                       v_valor,                 null,                         null, 
+                                'RE',                    'N',                     'N',                        'N', 
+                                'N');
+
+        INSERT INTO fin_payment_detail(fin_payment_detail_id,       ad_client_id,       ad_org_id,      created, 
+                                       createdby,                   updated,            updatedby,      fin_payment_id, 
+                                        amount,                     refund,             isactive,       writeoffamt, 
+                                        c_glitem_id,                isprepayment,       em_no_pago_line_id) 
+                                values(v_fin_payment_detail_id,     v_ad_client_id,     v_ad_org_id,    now(), 
+                                       usuario,                      now(),              usuario,        v_fin_payment_id, 
+                                       v_valor,                     'N',                'Y',            0, 
+                                       v_c_glitem_id,               'N',                p_pago_line_id);
+        
+
+       
+        INSERT INTO fin_payment_scheduledetail(fin_payment_scheduledetail_id,           ad_client_id,               ad_org_id,
+                                               created,                                 createdby,                  updated,
+                                               updatedby,                               fin_payment_detail_id,      amount,                     
+                                               isactive,                                writeoffamt,                iscanceled,                  
+                                               doubtfuldebt_amount)                                       
+                                        VALUES(v_fin_payment_scheduledetail_id,         v_ad_client_id,             v_ad_org_id,
+                                               now(),                                   usuario,                    now(), 
+                                               usuario,                                 v_fin_payment_detail_id,    v_valor,
+                                               'Y',                                     0,                          'N', 
+                                               0);
+
+
+
+
+       update fin_payment 
+          set status = 'PWNC',
+              processed = 'Y'
+        where fin_payment_id = v_fin_payment_id;
+
+        select status 
+        into v_status_fin_payment
+        from fin_payment
+        where fin_payment_id = v_fin_payment_id;
+   
+        INSERT INTO fin_finacc_transaction(fin_finacc_transaction_id,       ad_client_id,               ad_org_id,              created,
+                                           createdby,                       updated,                    updatedby,              isactive,
+                                           c_currency_id,                   fin_financial_account_id,   line,                   fin_payment_id, 
+                                           dateacct,                        c_glitem_id,                status,                 paymentamt, 
+                                           depositamt,                      processed,                  processing,             posted, 
+                                           statementdate,                   description,                createdbyalgorithm,     c_bpartner_id, 
+                                           em_aprm_delete,                  em_aprm_modify)                          
+                                    VALUES(v_fin_finacc_transaction_id,     v_ad_client_id,             v_ad_org_id,            now(), 
+                                           usuario,                         now(),                      usuario,                'Y', 
+                                           v_c_currency_id,                 v_fin_financial_account_id, 10,                       v_fin_payment_id,                      
+                                           v_fecha_pago,                    v_c_glitem_id,              v_status_fin_payment,    v_valor,                 
+                                           0,                               'Y',                        'N',                     'N', 
+                                           v_fecha_pago,                    v_descripcion,              'N',                     v_bpartner_id, 
+                                           'N',                             'N');
+return;
+END NO_PROCESA_PAGO_LINEAS
+]]></body>
+    </function>
+  </database>

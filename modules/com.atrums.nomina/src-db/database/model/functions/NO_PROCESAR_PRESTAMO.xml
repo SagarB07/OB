@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_PROCESAR_PRESTAMO">
+    <function name="NO_PROCESAR_PRESTAMO" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr 		VARCHAR2(2000):='';
+v_Message    		VARCHAR2(2000):='';
+v_id_novedad		VARCHAR(32);
+v_aux_meses	 NUMBER;
+v_id_period		VARCHAR(32):=null;
+v_count_month		VARCHAR(2000);
+v_count_submonth	VARCHAR(2000);
+
+Cur_Parameter 		RECORD;
+Cur_Parameter_Bp 	RECORD;
+
+BEGIN
+
+FOR Cur_Parameter IN
+	(SELECT i.Record_ID, i.AD_User_ID, np.c_period_id, np.no_tipo_ingreso_egreso_id, np.ad_client_id, np.ad_org_id, np.valor_cuota, np.meses_cuota, np.c_bpartner_id, np.docaction_pro, np.processed
+	FROM AD_PInstance i
+	     LEFT JOIN AD_PInstance_Para p ON (i.AD_PInstance_ID=p.AD_PInstance_ID)
+             INNER JOIN no_prestamo np ON (np.no_prestamo_id=i.Record_ID)
+	WHERE i.AD_PInstance_ID=p_PInstance_ID
+        ORDER BY p.SeqNo
+	)
+LOOP
+
+DBMS_OUTPUT.PUT_LINE('@Procesando el siguiente prestamo: ' || Cur_Parameter.Record_ID);
+
+IF (Cur_Parameter.docaction_pro = 'PR' and Cur_Parameter.processed='N')THEN
+
+v_count_month:=(Cur_Parameter.meses_cuota-1) || ' month'; 
+
+DBMS_OUTPUT.PUT_LINE('@meses: ' || v_count_month);
+
+IF(Cur_Parameter.valor_cuota>0)THEN
+
+	IF(SELECT count(*) > 0 
+	   FROM c_period WHERE startdate IN (SELECT startdate + v_count_month::interval 
+					     FROM c_period 
+					     WHERE c_period_id=Cur_Parameter.c_period_id)
+		         AND ad_client_id = Cur_Parameter.ad_client_id
+			 LIMIT 1)THEN
+
+		v_aux_meses:=0;
+
+		DBMS_OUTPUT.PUT_LINE('@numero de meses: ' || Cur_Parameter.meses_cuota);
+		
+		WHILE (v_aux_meses < Cur_Parameter.meses_cuota) LOOP
+
+			DBMS_OUTPUT.PUT_LINE('@mes contado: ' || v_aux_meses);
+
+			v_count_submonth:=v_aux_meses || ' month';
+
+			SELECT c_period_id INTO v_id_period
+			FROM c_period WHERE startdate IN (SELECT startdate + v_count_submonth::interval 
+							  FROM c_period 
+							  WHERE c_period_id=Cur_Parameter.c_period_id);
+
+			DBMS_OUTPUT.PUT_LINE('@id_periodo: ' || v_id_period);
+			DBMS_OUTPUT.PUT_LINE('@id_tipo_ingreso: ' || Cur_Parameter.no_tipo_ingreso_egreso_id);
+			
+							   
+			SELECT n.no_novedad_id INTO v_id_novedad
+			FROM no_novedad n
+			WHERE n.c_period_id = v_id_period
+			AND n.no_tipo_ingreso_egreso_id = Cur_Parameter.no_tipo_ingreso_egreso_id;
+
+			DBMS_OUTPUT.PUT_LINE('@id_novedad: ' || v_id_novedad);
+
+			IF(v_id_novedad is null)THEN
+			   v_id_novedad:=get_uuid(); 
+			   
+			   INSERT INTO no_novedad(no_novedad_id, ad_client_id, ad_org_id, isactive, created, createdby, 
+					      updated, updatedby, no_tipo_ingreso_egreso_id, c_period_id, name)
+			      VALUES (v_id_novedad, Cur_Parameter.ad_client_id , Cur_Parameter.ad_org_id, 'Y', now(), Cur_Parameter.AD_User_ID, 
+				      now(), Cur_Parameter.AD_User_ID, Cur_Parameter.no_tipo_ingreso_egreso_id, v_id_period, null);
+			END IF;
+
+			INSERT INTO no_novedad_linea(no_novedad_linea_id, ad_client_id, ad_org_id, isactive, created, 
+					             createdby, updated, updatedby, c_bpartner_id, valor, no_novedad_id, 
+					             isprestamo)
+			VALUES (get_uuid(), Cur_Parameter.ad_client_id , Cur_Parameter.ad_org_id, 'Y', now(), Cur_Parameter.AD_User_ID, 
+				now(), Cur_Parameter.AD_User_ID, Cur_Parameter.c_bpartner_id, Cur_Parameter.valor_cuota, v_id_novedad, 
+			        'Y');
+
+			v_id_period:=null;
+			v_id_novedad:=null;
+			v_aux_meses:=v_aux_meses+1;
+			
+		END LOOP;
+
+		UPDATE no_prestamo SET docaction_pro='CO', processed='Y' WHERE no_prestamo_id = Cur_Parameter.Record_ID;
+
+		v_ResultStr:='Prestamo procesado';
+
+	 AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 1, v_ResultStr);
+		RETURN;
+	ELSE
+		DBMS_OUTPUT.PUT_LINE( '@No existen periodos suficientes para el prestamo');
+
+		v_ResultStr:='No existen periodos suficientes para el prestamo';
+		
+	 AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 0, v_ResultStr);
+		RETURN;
+	END IF;
+ELSE
+
+	v_ResultStr:='Necesita que la cuota sea mayor que 0';
+		
+ AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 0, v_ResultStr);
+	RETURN;
+
+END IF;
+
+END IF;
+
+END LOOP;
+
+DBMS_OUTPUT.PUT_LINE('@Finalizando el Proceso no_procesar_prestamo');
+
+EXCEPTION
+WHEN OTHERS THEN
+	v_ResultStr:= '@ERROR=' || SQLERRM;
+	DBMS_OUTPUT.PUT_LINE(v_ResultStr);
+END NO_PROCESAR_PRESTAMO
+]]></body>
+    </function>
+  </database>

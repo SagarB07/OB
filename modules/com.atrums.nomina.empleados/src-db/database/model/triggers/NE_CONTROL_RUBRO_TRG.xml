@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_CONTROL_RUBRO_TRG">
+    <trigger name="NE_CONTROL_RUBRO_TRG" table="NE_PERFIL_RUBRO_LINE" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+	v_ne_perfil_rubro_id character varying(32);
+	v_no_tipo_ingreso_egreso_id character varying(32);
+BEGIN
+	-- Traigo el id del perfil rubro de la tabla perfil rubro linea
+	select ne_perfil_rubro_id
+	into v_ne_perfil_rubro_id
+	from ne_perfil_rubro_line
+	where ne_perfil_rubro_id = :new.ne_perfil_rubro_id;
+
+	if v_ne_perfil_rubro_id is not null then
+		-- Traigo el tipo ingreso egreso de la tabla perfil rubro linea
+		-- dado el id del perfil de rubro
+		select no_tipo_ingreso_egreso_id
+		into v_no_tipo_ingreso_egreso_id
+		from ne_perfil_rubro_line
+		where ne_perfil_rubro_id = v_ne_perfil_rubro_id
+		and no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id;
+
+		if v_no_tipo_ingreso_egreso_id is not null then
+			RAISE NO_DATA_FOUND;
+		end if;		
+	end if;
+	
+	return new;
+END NE_CONTROL_RUBRO_TRG
+]]></body>
+    </trigger>
+  </database>

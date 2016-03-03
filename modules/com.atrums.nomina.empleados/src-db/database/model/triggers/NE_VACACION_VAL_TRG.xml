@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_VACACION_VAL_TRG">
+    <trigger name="NE_VACACION_VAL_TRG" table="NO_VACACION" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	v_days NUMBER;
+	v_linea NUMBER;
+BEGIN
+	if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
+		raise '%', 'La Fecha Final no puede ser menor a la Fecha Inicio';
+	else
+		select max(em_ne_linea) 
+		into v_linea
+		from no_vacacion;
+		
+		:new.em_ne_linea := v_linea + 10;
+
+		v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :new.em_ne_fecha_inicio::timestamp);
+		:new.em_ne_total_dias=to_number(v_days);
+	end if;
+	return new; 
+END NE_VACACION_VAL_TRG
+]]></body>
+    </trigger>
+  </database>

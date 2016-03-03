@@ -1,0 +1,1030 @@
+<?xml version="1.0"?>
+  <vector>
+    <versionInfo version="3.0.21811"/>
+    <removeTriggerChange triggerName="NO_CONTRATO_EMP_DATE_TRG"/>
+    <removeTriggerChange triggerName="NO_VACACIONES_SALDO2_TRG"/>
+    <columnDataChange tablename="AD_ELEMENT" columnname="NAME" pkRow="187">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_ELEMENT" columnname="PRINTNAME" pkRow="187">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="144">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="161">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="163">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="176">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="190">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="195">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="240">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="245">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="247">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="255">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="277">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="287">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="296">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="342">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="349">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="800032">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="800054">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="1004400001">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="6EEE4A4DB1BA476BA7929EC7FCF285F8">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="7F06BC5C7987471FB57499C3CF647788">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_PROCESS_PARA" columnname="NAME" pkRow="DCB60794671A4787A0718FB918CD9CEE">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="ISUPDATEABLE" pkRow="2895">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="AD_VAL_RULE_ID" pkRow="716E093DE6A841669182750E954A1B41">
+      <oldValue><![CDATA[0D684206D56C4BE3A28D010B35062588]]></oldValue>
+      <newValue/>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="AD_REFERENCE_ID" pkRow="7CA4F6EB2A434D68898A40BC5237C824">
+      <oldValue><![CDATA[18]]></oldValue>
+      <newValue><![CDATA[19]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="AD_REFERENCE_VALUE_ID" pkRow="7CA4F6EB2A434D68898A40BC5237C824">
+      <oldValue><![CDATA[8B9C763C0ACC48C98A80AC7408A0B4D8]]></oldValue>
+      <newValue/>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="ISIDENTIFIER" pkRow="7CA4F6EB2A434D68898A40BC5237C824">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="ISSESSIONATTR" pkRow="AF6D273569A6473C9A12DF00F835B934">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="AD_CALLOUT_ID" pkRow="AF6D273569A6473C9A12DF00F835B934">
+      <oldValue/>
+      <newValue><![CDATA[CEE1CA6F3B9249779824A29865990FB5]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="OBUISEL_SELECTOR_FIELD" columnname="NAME" pkRow="34940C0A024A4C438BF57B4A12E656E5">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="OBUISEL_SELECTOR_FIELD" columnname="NAME" pkRow="6416523431E04149891BC4AE749AA725">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="ISACTIVE" pkRow="214">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="ISACTIVE" pkRow="1005100000">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="SEQNO" pkRow="E1AEFB0AA4044AF2B28F4C5387E42379">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1573">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1574">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1594">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1595">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1596">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1597">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1599">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2129">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISREADONLY" pkRow="2156">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2183">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2202">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2225">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2309">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2342">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2406">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2448">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2490">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISCENTRALLYMAINTAINED" pkRow="2499">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="2499">
+      <oldValue><![CDATA[10]]></oldValue>
+      <newValue><![CDATA[90]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISFIRSTFOCUSEDFIELD" pkRow="2499">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="2499">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[90]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISCENTRALLYMAINTAINED" pkRow="2501">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="2501">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[10]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISFIRSTFOCUSEDFIELD" pkRow="2501">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="2501">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[10]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="2506">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[200]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="2506">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[200]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="2517">
+      <oldValue><![CDATA[10]]></oldValue>
+      <newValue/>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2588">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2766">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2928">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="3064">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="3325">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="3408">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="3419">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="3486">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="4478">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="4623">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5250">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5455">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5731">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="6289">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="6290">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7005">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7395">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7484">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7848">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7938">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7981">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="8111">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="8148">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800064">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800106">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800112">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800191">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800214">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800221">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800246">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800256">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800438">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800492">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800530">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800603">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800642">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800667">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800853">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800907">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801009">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801048">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801053">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801434">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801483">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801808">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="802534">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="802534">
+      <oldValue><![CDATA[80]]></oldValue>
+      <newValue><![CDATA[210]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="802534">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="802534">
+      <oldValue><![CDATA[60]]></oldValue>
+      <newValue><![CDATA[210]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="802936">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803170">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803344">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803367">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803398">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803426">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="803566">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="803566">
+      <oldValue><![CDATA[90]]></oldValue>
+      <newValue><![CDATA[220]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="803566">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="803566">
+      <oldValue><![CDATA[70]]></oldValue>
+      <newValue><![CDATA[220]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803749">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803791">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803816">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803956">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="803992">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="804074">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1003900004">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1004400001">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1004400037">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1004400062">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1005100004">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="00E376EEC89349D986D386BFC4FDDE8E">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="020DC4D9870F466D86DE98458B9D4264">
+      <oldValue><![CDATA[70]]></oldValue>
+      <newValue><![CDATA[10]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="020DC4D9870F466D86DE98458B9D4264">
+      <oldValue/>
+      <newValue><![CDATA[10]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="08F0383D9A7A453D90FEB519E7BEF561">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="098D44D589354A5CAC8F6E7F06798F21">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="0A99CE2E10AC428998F167FCCAEC39D0">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="0A99CE2E10AC428998F167FCCAEC39D0">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[130]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="0A99CE2E10AC428998F167FCCAEC39D0">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="0DE8BC0780764FA9BBCB9D807DBF4D65">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="1C6BDB8172FC429C9F0DA6E732B475D7">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="1C6BDB8172FC429C9F0DA6E732B475D7">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1D0AFB268D0546329CC96D964D9284E5">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1FCFCD9B64674CF69935E5B107EF1104">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2032A1BD242A45E9900AFB51D81CE8B4">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2066FEBD09BA499F8A6440BBDC9A3798">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="23647F42A6D74F5C9CF9F0A747EC764A">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="23647F42A6D74F5C9CF9F0A747EC764A">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="247C943D58E54C5F825B9551A1B927DA">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="247C943D58E54C5F825B9551A1B927DA">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="255D15622D8C42DCAFA7B2A3A9B14DDA">
+      <oldValue><![CDATA[Docstatus]]></oldValue>
+      <newValue><![CDATA[Estado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="26F69D8FF24D485BBD5D76C3B1E6D6A8">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="283BC8391E59451ABE835A963EE45B0A">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2A7661F6384747F9904C1EC4A6A2369B">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2B491D93C92D467992E7E4E38AEDDFD5">
+      <oldValue><![CDATA[Docstatus]]></oldValue>
+      <newValue><![CDATA[Estado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="2B491D93C92D467992E7E4E38AEDDFD5">
+      <oldValue><![CDATA[80]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="2B491D93C92D467992E7E4E38AEDDFD5">
+      <oldValue/>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="3251836A694348BF925B743638985242">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISREADONLY" pkRow="32C5C58118774A8D96B3C14A76C34627">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="45D48FE8D18A4AB7BCEB85D9F444168D">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="45D48FE8D18A4AB7BCEB85D9F444168D">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="47C0A7FC7AB347D2B486034E7B3BF3BD">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="4D8849205E094A68B61C2A179B4EF523">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="4F13FB6312E74155B3904F4A618C8CDF">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="4FABF38BC7CA40CD8A1FC3D0393B79BF">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="519B5BC4A37B4EFDA5FE4C94EC89DB42">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="532FD4B7469C45BBB47F46CCBA15E450">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="537C71BB04004A20916787D665752EC7">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="538C757FA9794764ACB0B5B1118DAA6E">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[60]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="538C757FA9794764ACB0B5B1118DAA6E">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[60]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5467A4EA9B12467791B0FF9ABE8F3031">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="55E47437B52847D4AC6193187048D1D1">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="56A4BB94CA7D4E1D8321946954AB6A67">
+      <oldValue><![CDATA[Dateaccount]]></oldValue>
+      <newValue><![CDATA[Fecha Contable]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="56DEF16739504E678E9F45121F02F442">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5AAB80CFEA744FBF8BED5F1E018BBB15">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5E99F2C56E104200BC2D77262C05008E">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="60EC662D65694AAA98069ED236320AC3">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="61F6A35636F3462BA18ED46B37927CA8">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="66ADA5DF716A4581B49E76E12308C4EF">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="6AE1A4B2CDE34CF8A2E7984A4678C2E0">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="6B6CFF12D5284380990D0E9BFD9F7EAD">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISREADONLY" pkRow="6BB1EF31AF25420AAEF5D55AEC400FCE">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7201CEE01D4F4DBDAAAB3831CF55CF13">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="749A0FA093C6466580F72DC0583705EF">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="7544FF5B2EAE4945A15D02B6BD7B4429">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="7544FF5B2EAE4945A15D02B6BD7B4429">
+      <oldValue/>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="776C005E832443078EF0D894311A740D">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="77E468C61A124417883B1E1EE3C41F7D">
+      <oldValue/>
+      <newValue><![CDATA[60]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7D133EE29B654BBEB6FB284CFA4D4276">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="7D9EA7EEAB4943CF94D003FEA4B3C6FA">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="7D9EA7EEAB4943CF94D003FEA4B3C6FA">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISSHOWNINSTATUSBAR" pkRow="7D9EA7EEAB4943CF94D003FEA4B3C6FA">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7DC34559B402B45BE040007F0100784A">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7FF2234748F6844FE040007F01003861">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="7FF44B41FD4E0341E040007F01006989">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="80E4CFBA7918A660E040007F01005D04">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="817B4B3BB4B946B2ADC1B9C3F5BC1D56">
+      <oldValue><![CDATA[170]]></oldValue>
+      <newValue><![CDATA[110]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="817B4B3BB4B946B2ADC1B9C3F5BC1D56">
+      <oldValue/>
+      <newValue><![CDATA[110]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="81D70676C48A4523BA3246AFBE93866C">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="82B7B2BAEDF84980E040007F010008E7">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="82F2E8A160E6472CE040007F01005324">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="8420366B8593339CE040007F010023A9">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="85D58529BA624AF687DA7DCB8654C7A4">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="85D58529BA624AF687DA7DCB8654C7A4">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="8643B2FF17844F2CA6E39623C4903BDA">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="86D00708B7AA465FA80D19488B6BA7E8">
+      <oldValue><![CDATA[80]]></oldValue>
+      <newValue><![CDATA[100]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="87AD14DC21444A5DAE84113B40AAD24E">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="89FAD90840794836B8942FF1691B50C4">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISCENTRALLYMAINTAINED" pkRow="8D426B7180224AA3A2EBEE2BFCC3CD75">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="8D426B7180224AA3A2EBEE2BFCC3CD75">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="92BECAD0D4834D4B9317098BA7554F08">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="9B52729520A24AD5B093A2014F502CD6">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A0F8A84B9B264D828A77A272C9746543">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A2E0416252534775963C3F47229D6682">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A37C70FE6BA3C015E040007F01006DF4">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A45E6687B5BB400BBFB9024D1D02E24E">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A703E0E01BA2494B984DBB1A668AB080">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A7F15315104B4244E040007F010064A6">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A92FF6B8EFB842ECA29A01ADD3EB72BA">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="AB0EA946454B4978A55CFC17F209AEB9">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[50]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="AB0EA946454B4978A55CFC17F209AEB9">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[50]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="AD50F31DA0844EE5AE577618EA5057DE">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="AF4090093D1F1431E040007F010048A5">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="AF4090093DBE1431E040007F010048A5">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="AFF7991175A1482A8AF00D4AAC0ADFFB">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="B1E825476B684E44AA16DD841DC1D4A9">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="C06730576EA3457083260A0062810EF4">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="C5F27595CABA442CB8FC12E19BCFB46E">
+      <oldValue><![CDATA[Fecha de Ingreso]]></oldValue>
+      <newValue><![CDATA[Fecha Primer Ingreso]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="CE8D28F94E0D460AE040007F01000DA6">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="CFAB1B5C13FE439095F45131BAFFB4DD">
+      <oldValue><![CDATA[Dateaccount]]></oldValue>
+      <newValue><![CDATA[Fecha de Contabilización]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="CFAB1B5C13FE439095F45131BAFFB4DD">
+      <oldValue><![CDATA[100]]></oldValue>
+      <newValue><![CDATA[50]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="CFAB1B5C13FE439095F45131BAFFB4DD">
+      <oldValue/>
+      <newValue><![CDATA[50]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="D08D168018C442BD9C1DC7AD23B5920C">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="D5BA78CABC7346BEB0C64EE971084AC5">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="D8E70A1FCF974213AFF79F8E53C73867">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="DF234430CD644E3AA19A2776486F71DE">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="E45D37E26B394486BA816EF3D4A6A830">
+      <oldValue><![CDATA[130]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="E45D37E26B394486BA816EF3D4A6A830">
+      <oldValue/>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="E47B4A82F0B241CF9449679E0C34134B">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="E628DB2415BA40EAB56D8C91903316C1">
+      <oldValue><![CDATA[Fecha de Finalización]]></oldValue>
+      <newValue><![CDATA[Fecha de Salida]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="E656C5BD5F184EA2AA316ECA38257DC5">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="ED431FEFAC4A4A6CAD98036371080F58">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="ED431FEFAC4A4A6CAD98036371080F58">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISSHOWNINSTATUSBAR" pkRow="ED431FEFAC4A4A6CAD98036371080F58">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="EF91D48BA39149B6A6CE45E62E043CB3">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F2815B39B30A4F2BB1ADCC5209471456">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F2DA624C7E3F46C3A276991AB6543DBB">
+      <oldValue><![CDATA[Document No.]]></oldValue>
+      <newValue><![CDATA[No. Documento Provisión]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="F2DA624C7E3F46C3A276991AB6543DBB">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F40D332DCFD040E8BDB5D0CA208166B3">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F4A7AD7B84CB49E08F3B5FF360389061">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F647516E12FE4315B9E2054F647DC9E6">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F892EEE3A87346DE8093EEB8D4F358B6">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F903B2FEECBA4E258C5CE4E6B04D8713">
+      <oldValue><![CDATA[Business Partner]]></oldValue>
+      <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="FEA55E92BA514030AD977DC43A0B0DA3">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[15]]></newValue>
+    </columnDataChange>
+  </vector>

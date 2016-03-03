@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NE_CALCULO_VACACION_TRG">
+    <function name="NE_CALCULO_VACACION_TRG" type="VARCHAR">
+      <body><![CDATA[v_cursor record;
+	v_vacacion_tomada decimal(10);
+	v_total_dias decimal(10) := 0;
+BEGIN
+	for v_cursor in (
+		select * 
+		from no_vacacion
+		where no_contrato_empleado_id = new.no_contrato_empleado_id
+		)
+	loop
+		if v_cursor.em_ne_estado = 'AP' then
+			v_total_dias := v_total_dias + v_cursor.em_ne_total_dias;
+		end if;
+	end loop;
+	new.em_ne_vacacion_tom := v_total_dias;
+	return new;
+END NE_CALCULO_VACACION_TRG
+]]></body>
+    </function>
+  </database>

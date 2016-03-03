@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_REFRIGERIOS">
+    <function name="NO_REFRIGERIOS" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN
+
+return round( 20 * 0.84,2);
+END NO_REFRIGERIOS
+]]></body>
+    </function>
+  </database>

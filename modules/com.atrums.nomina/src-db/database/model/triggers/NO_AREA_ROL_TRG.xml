@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_AREA_ROL_TRG">
+    <trigger name="NO_AREA_ROL_TRG" table="NO_ROL_PAGO_PROVISION" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+
+v_area_empresa_id varchar;
+
+BEGIN
+    IF DELETING THEN
+        RETURN OLD;
+    ELSE
+            SELECT em_no_area_empresa_id 
+              INTO v_area_empresa_id 
+              FROM c_bpartner 
+             WHERE isemployee='Y'
+               AND c_bpartner_id=:NEW.c_bpartner_id;
+
+               :NEW.no_area_empresa_id=v_area_empresa_id;
+               
+        RETURN NEW;
+    END IF;
+
+END NO_AREA_ROL_TRG
+]]></body>
+    </trigger>
+  </database>

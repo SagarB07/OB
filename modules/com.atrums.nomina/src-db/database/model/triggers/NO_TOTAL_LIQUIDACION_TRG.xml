@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_TOTAL_LIQUIDACION_TRG">
+    <trigger name="NO_TOTAL_LIQUIDACION_TRG" table="NO_LIQUIDA_EMPLEADO_LINE" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+
+v_val_ingreso NUMBER;
+v_val_egreso NUMBER;
+
+BEGIN
+    IF UPDATING OR INSERTING THEN
+        select coalesce(sum(lel.valor),0)
+          into v_val_ingreso
+          from no_liquida_empleado_line lel,
+               no_tipo_rubro_liqu_emp tle
+         where lel.no_liquidacion_empleado_id=:new.no_liquidacion_empleado_id
+           and lel.no_tipo_rubro_liqu_emp_id=tle.no_tipo_rubro_liqu_emp_id
+           and tle.es_pago = 'Y';
+
+        select coalesce(sum(lel.valor),0)
+          into v_val_egreso
+          from no_liquida_empleado_line lel,
+               no_tipo_rubro_liqu_emp tle
+         where lel.no_liquidacion_empleado_id=:new.no_liquidacion_empleado_id
+           and lel.no_tipo_rubro_liqu_emp_id=tle.no_tipo_rubro_liqu_emp_id
+           and tle.es_pago = 'N';
+
+        UPDATE no_liquidacion_empleado
+           SET total_ingreso= v_val_ingreso, total_egreso=v_val_egreso, total_neto= v_val_ingreso - v_val_egreso
+         WHERE no_liquidacion_empleado_id = :new.no_liquidacion_empleado_id;
+
+        RETURN NEW;
+    END IF;
+
+    IF DELETING THEN
+        select coalesce(sum(lel.valor),0)
+          into v_val_ingreso
+          from no_liquida_empleado_line lel,
+               no_tipo_rubro_liqu_emp tle
+         where lel.no_liquidacion_empleado_id=:old.no_liquidacion_empleado_id
+           and lel.no_tipo_rubro_liqu_emp_id=tle.no_tipo_rubro_liqu_emp_id
+           and tle.es_pago = 'Y';
+
+        select coalesce(sum(lel.valor),0)
+          into v_val_egreso
+          from no_liquida_empleado_line lel,
+               no_tipo_rubro_liqu_emp tle
+         where lel.no_liquidacion_empleado_id=:old.no_liquidacion_empleado_id
+           and lel.no_tipo_rubro_liqu_emp_id=tle.no_tipo_rubro_liqu_emp_id
+           and tle.es_pago = 'N';
+
+        UPDATE no_liquidacion_empleado
+           SET total_ingreso= v_val_ingreso, total_egreso=v_val_egreso, total_neto= v_val_ingreso - v_val_egreso
+         WHERE no_liquidacion_empleado_id = :old.no_liquidacion_empleado_id;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_TOTAL_LIQUIDACION_TRG
+]]></body>
+    </trigger>
+  </database>

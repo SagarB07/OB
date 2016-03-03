@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACTUALIZA_INPAY_TRG">
+    <trigger name="NO_ACTUALIZA_INPAY_TRG" table="NO_PAGO_LINE" fires="after" insert="true" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+v_mensaje VARCHAR;
+v_qry VARCHAR;
+v_tablename VARCHAR;
+v_in_payment CHAR(1);
+v_recor_id varchar;
+
+BEGIN
+		IF(INSERTING)THEN
+              select t.tablename 
+                into v_tablename
+                from ad_table t, 
+                     c_doctype dt1
+                where t.ad_table_id = dt1.ad_table_id
+                  and dt1.c_doctype_id = :new.c_doctype_id;
+
+				v_in_payment = 'Y';
+                v_recor_id:=:new.record_id;
+                
+		END IF;
+		
+		IF(DELETING)THEN
+
+              select t.tablename 
+                into v_tablename
+                from ad_table t, 
+                     c_doctype dt1
+                where t.ad_table_id = dt1.ad_table_id
+                  and dt1.c_doctype_id = :old.c_doctype_id;
+
+				v_in_payment = 'N';
+                v_recor_id:=:old.record_id;
+		END IF;
+
+        v_qry:= 'update ' || v_tablename || ' set in_payment = ''' || v_in_payment || 
+                ''' where ' || v_tablename || '_id = ''' ||v_recor_id||'''';
+
+        execute v_qry;
+    
+
+    IF(DELETING)THEN
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+ 
+END NO_ACTUALIZA_INPAY_TRG
+]]></body>
+    </trigger>
+  </database>

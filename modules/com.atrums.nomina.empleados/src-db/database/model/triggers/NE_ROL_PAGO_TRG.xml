@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_ROL_PAGO_TRG">
+    <trigger name="NE_ROL_PAGO_TRG" table="NO_CB_EMPLEADO_ACCT" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+	ingreso NUMBER;
+BEGIN
+	select count(*) 
+	into ingreso 
+	from no_rol_pago_provision_line
+	where no_tipo_ingreso_egreso_id = :old.no_tipo_ingreso_egreso_id;
+
+	if ingreso > 0 then
+		raise '%', '@NE_TERCERO_CON_RUB@';
+	else
+		return old;
+	end if;
+END NE_ROL_PAGO_TRG
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_MODULE" version="">
+  <row id="22AD9E86E90E4864BB57EF1720BC270F" trl="N">
+    <value column="Description" isTrl="N" original="Modulo para generar las retenciones bajo de relación de dependencia">Modulo para generar las retenciones bajo de relación de dependencia</value>
+    <value column="Help" isTrl="N" original=""/>
+    <value column="License" isTrl="N" original=""/>
+    <value column="Updateinfo" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

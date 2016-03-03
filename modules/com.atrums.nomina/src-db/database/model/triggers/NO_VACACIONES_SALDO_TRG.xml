@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VACACIONES_SALDO_TRG">
+    <trigger name="NO_VACACIONES_SALDO_TRG" table="NO_VACACION_LINEA" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+days NUMBER;
+v_mensaje VARCHAR;
+
+
+BEGIN
+    select sum(dias) as dias from no_vacacion_linea	where estado='AP' INTO days;
+
+    IF (UPDATING OR INSERTING) THEN	
+	
+        update no_vacacion set saldo=days where no_vacacion_id=:new.no_vacacion_id;
+
+    END IF;
+    RETURN NEW; 
+END NO_VACACIONES_SALDO_TRG
+]]></body>
+    </trigger>
+  </database>

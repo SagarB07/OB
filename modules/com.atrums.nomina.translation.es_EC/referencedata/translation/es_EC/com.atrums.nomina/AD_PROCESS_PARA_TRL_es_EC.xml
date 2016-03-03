@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_PROCESS_PARA" version="">
+  <row id="4522887272364E089AAD42DCD8F8DFEB" trl="N">
+    <value column="Name" isTrl="Y" original="Output type">Formato de Salida</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Defines the output format type from the available list.">Define el formato de salida del archivo.</value>
+  </row>
+</compiereTrl>

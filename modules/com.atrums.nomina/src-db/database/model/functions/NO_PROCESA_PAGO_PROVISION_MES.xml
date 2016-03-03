@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_PROCESA_PAGO_PROVISION_MES">
+    <function name="NO_PROCESA_PAGO_PROVISION_MES" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):=''; 
+    v_Message VARCHAR(2000):=''; 
+    v_Record_ID VARCHAR(32); 
+    v_Result NUMBER:=1; 
+
+    
+    
+    Cur_Parameter RECORD;
+    Cur_RolSchema RECORD;
+
+    
+    v_no_rol_provision_linea_id VARCHAR(32); 
+    v_Client_ID VARCHAR(32); 
+    v_Org_ID VARCHAR(32); 
+    v_User_ID VARCHAR(32); 
+
+    
+    v_valor NUMBER;
+    v_fin_paymentmethod_id VARCHAR(32);
+    v_account_id VARCHAR(32); 
+    v_no_tipo_ingreso_egreso_id VARCHAR(32);
+    v_es_ingreso char(1);
+    v_acctschema_name VARCHAR;
+    v_cuenta_rubro_debe VARCHAR(32);
+    v_no_rol_pago_prov_line_id VARCHAR(32);
+    v_cuenta_bancos VARCHAR(32);
+    v_account_debe VARCHAR(32);
+    v_account_bancos VARCHAR(32);
+
+    v_alias_debe VARCHAR(40);
+    v_description_debe VARCHAR(255);
+    v_combination_debe VARCHAR(120);
+    v_alias_payment VARCHAR(40);
+    v_description_payment VARCHAR(255);
+    v_combination_payment VARCHAR(120);
+
+    v_alias VARCHAR(40);
+    v_combination VARCHAR(120);
+    v_description VARCHAR(255);
+
+    v_fin_payment1_id VARCHAR(32);
+    v_fin_payment_detail_id VARCHAR(32);
+    v_fin_financial_account_id VARCHAR(32);
+    v_fin_payment_scheduledetail_id VARCHAR(32);
+    v_line NUMBER;
+    v_fin_finacc_transaction_id VARCHAR(32);
+    v_documentno_rol VARCHAR(30);
+    v_name_partner VARCHAR(60);
+    v_doctype_payment_id VARCHAR(32);
+    gl_category_payment_id VARCHAR(32);
+    v_name_pvr VARCHAR;
+    
+
+    v_fact_acct_id VARCHAR(32); 
+    v_acctschema_id VARCHAR(32); 
+    v_period_id VARCHAR(32); 
+    v_table_id VARCHAR(32); 
+    v_table_payment_id VARCHAR(32);
+    v_amtacctcr VARCHAR(32); 
+    v_currency_id VARCHAR(32); 
+    v_currency_orig_id VARCHAR(32); 
+    v_bpartner_id VARCHAR(32); 
+    v_locfrom_id VARCHAR(32); 
+    v_locto_id VARCHAR(32); 
+    v_fact_acct_group_cto_id VARCHAR(32); 
+    v_fact_acct_group_cto_pay_id VARCHAR(32); 
+    v_seqno NUMBER;
+    v_documentno VARCHAR(30);
+    v_doctype_id VARCHAR(32); 
+    v_docbasetype VARCHAR(40);
+    
+    v_paymentmethod_id VARCHAR(32); 
+    v_financial_account_id VARCHAR(32); 
+    v_no_rol_provision_line_mes_id VARCHAR(32); 
+
+BEGIN
+   
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN 
+    
+        
+        FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date,
+                  i.AD_Org_ID,
+                  i.AD_Client_ID
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_PInstance_ID
+            ORDER BY p.SeqNo)
+        LOOP
+          v_no_rol_provision_line_mes_id:=Cur_Parameter.Record_ID;
+          v_User_ID:=Cur_Parameter.AD_User_ID;
+          v_Org_ID:=Cur_Parameter.AD_Org_ID;
+          v_Client_ID:=Cur_Parameter.AD_Client_ID;
+        END LOOP;
+        
+
+            
+            select ad_table_id
+              into v_table_payment_id
+              from ad_table
+             where upper(tablename) = upper('FIN_Payment');
+        
+        
+        select a.fin_paymentmethod_id, a.fin_financial_account_id
+          into v_paymentmethod_id, v_financial_account_id
+          from no_rol_pago_provision_line a,
+               no_rol_provision_line_mes b
+         where a.no_rol_pago_provision_line_id = b.no_rol_pago_provision_line_id
+           and b.no_rol_provision_line_mes_id = v_no_rol_provision_line_mes_id;
+           
+        if v_paymentmethod_id is null then
+            RAISE EXCEPTION 'Metodo de pago no seleccionado';
+        end if;
+        
+        if v_financial_account_id is null then
+            RAISE EXCEPTION 'Cuenta financiera no seleccionada';
+        end if;
+        
+        
+        FOR Cur_RolSchema IN
+        (select rpp.no_rol_pago_provision_id,
+                ppl.no_rol_pago_provision_line_id,
+                rpp.c_doctype_id,
+                rpp.c_bpartner_id,
+                rpp.documentno,
+                ppl.fechafin,
+                ppl.c_currency_id as moneda_origen,
+                ppl.fin_financial_account_id,
+                ppl.fin_paymentmethod_id,
+                ppl.no_tipo_ingreso_egreso_id,
+                b.valor,
+                ppl.processed,
+                rpp.total_neto,
+                a.c_acctschema_id,
+                a.name,
+                a.c_currency_id,
+                tie.isingreso,
+                tie.name as name_prv,
+                faa.fin_out_intransit_acct,
+                faa.fin_withdrawal_acct,
+                ba.c_acctschema_id,
+                ba.no_cuenta_ingreso_acct,
+                ea.em_no_pago_acct,
+                rpp.c_period_id
+           from no_rol_pago_provision rpp,
+                no_rol_pago_provision_line ppl,
+                no_rol_provision_line_mes b,
+                no_tipo_ingreso_egreso tie,
+                fin_financial_account_acct faa,
+                c_bp_employee_acct ea,
+                no_cb_empleado_acct ba,
+                c_acctschema a
+          where rpp.no_rol_pago_provision_id=ppl.no_rol_pago_provision_id
+            and tie.no_tipo_ingreso_egreso_id=ppl.no_tipo_ingreso_egreso_id
+            and rpp.c_bpartner_id = ba.c_bpartner_id
+            and faa.fin_financial_account_id = ppl.fin_financial_account_id
+            and faa.c_acctschema_id=a.c_acctschema_id
+            and ba.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
+            and ea.c_bpartner_id = ba.c_bpartner_id
+            and ea.c_acctschema_id=a.c_acctschema_id
+            and ba.c_acctschema_id = ea.c_acctschema_id
+            and ppl.isactive='Y'
+            and tie.isactive='Y'
+            and ea.isactive='Y'
+            and ba.isactive='Y'
+            and faa.isactive = 'Y'
+            and tie.isprovision = 'Y'
+            and ppl.no_rol_pago_provision_line_id=b.no_rol_pago_provision_line_id
+            and b.no_rol_provision_line_mes_id = v_no_rol_provision_line_mes_id)
+        LOOP
+      
+            v_doctype_id:=Cur_RolSchema.c_doctype_id;
+            v_bpartner_id:=Cur_RolSchema.c_bpartner_id;
+            v_documentno_rol:=Cur_RolSchema.documentno;
+            v_fin_financial_account_id:=Cur_RolSchema.fin_financial_account_id;
+            v_fin_paymentmethod_id:=Cur_RolSchema.fin_paymentmethod_id;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            v_currency_orig_id:=Cur_RolSchema.moneda_origen;
+            v_currency_id:=Cur_RolSchema.c_currency_id;
+            v_acctschema_id:=Cur_RolSchema.c_acctschema_id;
+            v_no_rol_pago_prov_line_id:=Cur_RolSchema.no_rol_pago_provision_line_id;
+            v_valor:= Cur_RolSchema.valor;
+            v_no_tipo_ingreso_egreso_id:=Cur_RolSchema.no_tipo_ingreso_egreso_id;
+            v_es_ingreso:=Cur_RolSchema.isingreso;
+            v_name_pvr:=Cur_RolSchema.name_prv;
+            
+            
+            select p.c_period_id
+              into v_period_id
+              from c_period p
+             where exists (select *
+                             from c_periodcontrol pc
+                            where p.c_period_id=pc.c_period_id
+                              and upper(pc.periodstatus)='O')
+               and exists(select *
+                            from c_calendar c, c_year y
+                           where y.c_calendar_id=c.c_calendar_id
+                             and p.c_year_id=y.c_year_id
+                            AND AD_ISORGINCLUDED( v_Org_ID, c.ad_org_id, v_Client_ID) <> '-1')
+               and now()+0 between startdate and enddate;
+
+            
+            select C_Currency_Convert(Cur_RolSchema.valor, v_currency_orig_id, v_currency_id, NULL, NULL, v_Client_ID, v_Org_ID) into v_valor;
+            
+            
+            select get_uuid() into v_fact_acct_group_cto_id;
+
+            
+            select get_uuid() into v_fin_payment1_id;
+            
+            
+            select get_uuid() into v_fact_acct_group_cto_pay_id;
+
+            
+            
+            select c_doctype_id,
+                   gl_category_id
+              into v_doctype_payment_id,
+                   gl_category_payment_id
+              from c_doctype
+             where docbasetype='APP'
+               AND AD_ISORGINCLUDED( v_Org_ID, c_doctype.ad_org_id, v_Client_ID) <> '-1';
+
+            SELECT * INTO  v_documentno
+              FROM Ad_Sequence_Doctype(v_doctype_payment_id, v_Client_ID, 'Y');
+            
+            
+            
+            
+            
+                v_cuenta_rubro_debe:=Cur_RolSchema.em_no_pago_acct;
+                if( v_cuenta_rubro_debe is null) then
+                    v_Message:='@NO_NullCuentaRubroEgreso@';
+                    RAISE v_Message;
+                end if;
+
+            v_acctschema_name:= Cur_RolSchema.name;
+            
+
+            select name
+              into v_name_partner
+              from c_bpartner
+             where c_bpartner_id=v_bpartner_id;
+
+            select account_id,
+                   alias,
+                   description,
+                   combination
+              into v_account_debe,
+                   v_alias_debe,
+                   v_description_debe,
+                   v_combination_debe
+              from c_validcombination
+             where c_validcombination_id=v_cuenta_rubro_debe ;
+
+            
+            select coalesce(max(seqno),0)+10 into v_seqno
+              from fact_acct
+             where record_id = v_fin_payment1_id;
+
+            
+            select get_uuid() into v_fact_acct_id;
+
+            insert into fact_acct(fact_acct_id,                    ad_client_id,               ad_org_id,          isactive,                                created,             createdby,                      updated,                                       updatedby,
+                                  c_acctschema_id,                 account_id,                 datetrx,            dateacct,                                c_period_id,         ad_table_id,                    record_id,                                     line_id,
+                                  gl_category_id,                  c_tax_id,                   m_locator_id,       postingtype,                             c_currency_id,       amtsourcedr,                    amtsourcecr,                                   amtacctdr,
+                                  amtacctcr,                       c_uom_id,                   qty,                m_product_id,                            c_bpartner_id,       ad_orgtrx_id,                   c_locfrom_id,                                  c_locto_id,
+                                  c_salesregion_id,                c_project_id,               c_campaign_id,      c_activity_id,                           user1_id,            user2_id,                       description,                                   a_asset_id,
+                                  fact_acct_group_id,              seqno,                      factaccttype,       docbasetype,                             acctvalue,           acctdescription,                record_id2,                                    c_withholding_id,
+                                  c_doctype_id)
+                           values(v_fact_acct_id,                  v_Client_ID,                v_Org_ID,           'Y',                                     current_timestamp,   v_User_ID,                      current_timestamp,                             v_User_ID,
+                                  v_acctschema_id,                 v_account_debe,            current_timestamp,  DATE_TRUNC('day', current_timestamp ),    v_period_id,         v_table_payment_id,             v_fin_payment1_id,                             v_no_rol_provision_line_mes_id,
+                                  gl_category_payment_id,          null,                       null,               'A',                                     v_currency_id,       v_valor,                        0,                                             v_valor,
+                                  0,                               null,                       0,                  null,                                    v_bpartner_id,       null,                           null,                                          null,
+                                  null,                            null,                       null,               null,                                    null,                null,                           v_documentno|| ' # ' ||v_name_partner,         null,
+                                  v_fact_acct_group_cto_pay_id,    v_seqno,                    'N',                'APP',                                   v_alias_debe,        v_description_debe,             null,                                          null,
+                                  v_doctype_payment_id);
+            
+            
+
+            
+            update no_rol_pago_provision_line
+               set processed = 'Y'
+             where no_rol_pago_provision_line_id = Cur_RolSchema.no_rol_pago_provision_line_id;
+            
+
+            
+            insert into fin_payment(fin_payment_id,             ad_client_id,               ad_org_id,                      created,                                                        createdby,                      updated,
+                                    updatedby,                  isactive,                   isreceipt,                      c_bpartner_id,                                                  paymentdate,                    c_currency_id,
+                                    amount,                     writeoffamt,                fin_paymentmethod_id,           documentno,                                                     referenceno,                    status,
+                                    processed,                  processing,                 posted,                         description,                                                    fin_financial_account_id,       c_doctype_id,
+                                    c_project_id,               c_campaign_id,              c_activity_id,                  user1_id,                                                       user2_id,                       generated_credit,
+                                    used_credit,                createdbyalgorithm,         finacc_txn_convert_rate,        finacc_txn_amount,                                              
+                                    em_aprm_process_payment,    em_aprm_reconcile_payment,  em_aprm_add_scheduledpayments,  em_aprm_executepayment)
+                            values (v_fin_payment1_id,          v_Client_ID,                v_Org_ID,                       current_timestamp,                                              v_User_ID,                      current_timestamp,
+                                    v_User_ID,                  'Y',                        'N',                            v_bpartner_id,                                                  current_timestamp,              v_currency_id,
+                                    v_valor,                    0,                          v_fin_paymentmethod_id,         v_documentno,                                                   null,                           'RPAP',
+                                    'N',                        'N',                        'N',                            'Rol de Provisiones No.:' || v_documentno_rol || ' - ' || v_name_pvr||' - '|| v_name_partner,  v_fin_financial_account_id,     v_doctype_payment_id,
+                                    null,                       null,                       null,                           null,                                                           null,                           null,
+                                    0,                          'N',                        1,                              v_valor,                                                  
+                                    'R',                        'N',                        'N',                            'N');
+            
+
+            
+            select get_uuid() into v_fin_payment_detail_id;
+
+            INSERT INTO fin_payment_detail(fin_payment_detail_id,       ad_client_id,       ad_org_id,          created,            createdby,
+                                           updated,                     updatedby,          fin_payment_id,     amount,             refund,
+                                           isactive,                    writeoffamt,        c_glitem_id,        isprepayment)
+                                    VALUES(v_fin_payment_detail_id,     v_Client_ID,        v_Org_ID,           current_timestamp,  v_User_ID,
+                                           current_timestamp,           v_User_ID,          v_fin_payment1_id,  v_valor,      'N',
+                                           'Y',                         0,                  null,               'N');
+            
+
+            
+            select get_uuid() into v_fin_payment_scheduledetail_id;
+
+            INSERT INTO fin_payment_scheduledetail(fin_payment_scheduledetail_id,     ad_client_id,                     ad_org_id,             created,
+                                                   createdby,                         updated,                          updatedby,             fin_payment_detail_id,
+                                                   fin_payment_schedule_order,        fin_payment_schedule_invoice,     amount,                isactive,
+                                                   writeoffamt,                       iscanceled,                       c_bpartner_id,         c_activity_id,
+                                                   m_product_id,                      c_campaign_id,                    c_project_id,          c_salesregion_id)
+                                           VALUES (v_fin_payment_scheduledetail_id,   v_Client_ID,                      v_Org_ID,              current_timestamp,
+                                                   v_User_ID,                         current_timestamp,                v_User_ID,             v_fin_payment_detail_id,
+                                                   null,                              null,                             v_valor,         'Y',
+                                                   0,                                 'N',                              v_bpartner_id,         null,
+                                                   null,                              null,                             null,                  null);
+            
+
+
+
+            
+            
+
+            if Cur_RolSchema.fin_out_intransit_acct is not null then
+                select account_id,
+                       alias,
+                       description,
+                       combination
+                  into v_account_bancos,
+                       v_alias_payment,
+                       v_description_payment,
+                       v_combination_payment
+                  from c_validcombination
+                 where c_validcombination_id = Cur_RolSchema.fin_out_intransit_acct;
+             else if Cur_RolSchema.fin_withdrawal_acct is not null then
+                    select account_id,
+                           alias,
+                           description,
+                           combination
+                      into v_account_bancos,
+                           v_alias_payment,
+                           v_description_payment,
+                           v_combination_payment
+                      from c_validcombination
+                     where c_validcombination_id = Cur_RolSchema.fin_withdrawal_acct;
+                end if;
+            end if;
+
+            
+            select get_uuid() into v_fact_acct_id;
+
+            select coalesce(max(seqno),0)+10 into v_seqno
+              from fact_acct
+             where record_id = v_fin_payment1_id;
+
+            insert into fact_acct(fact_acct_id,                    ad_client_id,               ad_org_id,          isactive,                                created,             createdby,                  updated,                                    updatedby,
+                                  c_acctschema_id,                 account_id,                 datetrx,            dateacct,                                c_period_id,         ad_table_id,                record_id,                                  line_id,
+                                  gl_category_id,                  c_tax_id,                   m_locator_id,       postingtype,                             c_currency_id,       amtsourcedr,                amtsourcecr,                                amtacctdr,
+                                  amtacctcr,                       c_uom_id,                   qty,                m_product_id,                            c_bpartner_id,       ad_orgtrx_id,               c_locfrom_id,                               c_locto_id,
+                                  c_salesregion_id,                c_project_id,               c_campaign_id,      c_activity_id,                           user1_id,            user2_id,                   description,                                a_asset_id,
+                                  fact_acct_group_id,              seqno,                      factaccttype,       docbasetype,                             acctvalue,           acctdescription,            record_id2,                                 c_withholding_id,
+                                  c_doctype_id)
+                           values(v_fact_acct_id,                  v_Client_ID,                v_Org_ID,           'Y',                                     current_timestamp,   v_User_ID,                  current_timestamp,                          v_User_ID,
+                                  v_acctschema_id,                 v_account_bancos,           current_timestamp,  DATE_TRUNC('day', current_timestamp ),   v_period_id,         v_table_payment_id,         v_fin_payment1_id,                           null,
+                                  gl_category_payment_id,          null,                       null,               'A',                                     v_currency_id,       0,                          v_valor,                                     0,
+                                  v_valor,                         null,                       0,                  null,                                    v_bpartner_id,       null,                       null,                                       null,
+                                  null,                            null,                       null,               null,                                    null,                null,                       v_documentno|| ' # ' ||v_name_partner,      null,
+                                  v_fact_acct_group_cto_pay_id,    v_seqno,                    'N',                'APP',                                   v_alias_payment,     v_description_payment,      null,                                       null,
+                                  v_doctype_payment_id);
+            
+            
+
+        END LOOP;        
+        
+            update fin_payment 
+             
+               set status='PPM',
+                   processed='Y',
+                   posted='D'
+             where fin_payment_id = v_fin_payment1_id;
+        
+        
+        UPDATE no_rol_pago_provision_line SET processed = 'Y' WHERE no_rol_pago_provision_line_id = v_no_rol_provision_linea_id;
+        UPDATE no_rol_provision_line_mes SET pago = 'Y' WHERE no_rol_provision_line_mes_id = v_no_rol_provision_line_mes_id;
+
+    
+        v_Message:='@NO_EjecucionCorrecta@';
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message) ;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+        
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END NO_PROCESA_PAGO_PROVISION_MES
+]]></body>
+    </function>
+  </database>

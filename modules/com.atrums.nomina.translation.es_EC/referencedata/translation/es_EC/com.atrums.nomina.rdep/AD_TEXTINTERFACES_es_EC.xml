@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="es_EC" language="es_EC" table="AD_TEXTINTERFACES" version="">
+  <row id="01959B298B284FBBB812480734CA715A" trl="N">
+    <value column="Text" isTrl="N" original="Create File">Create File</value>
+  </row>
+  <row id="0F1731831C2F4E77ADC2D284B6EC2437" trl="N">
+    <value column="Text" isTrl="N" original="OK">OK</value>
+  </row>
+  <row id="89F6B82726024DBA890A01AC0F0E8D21" trl="N">
+    <value column="Text" isTrl="N" original="Accept">Accept</value>
+  </row>
+  <row id="D922108F80A44F0792D654FAC88BB402" trl="N">
+    <value column="Text" isTrl="N" original="Cancel">Cancel</value>
+  </row>
+</compiereTrl>

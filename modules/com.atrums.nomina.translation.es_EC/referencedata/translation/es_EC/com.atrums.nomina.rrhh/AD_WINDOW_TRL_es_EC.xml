@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_WINDOW" version="">
+  <row id="0F0A5A1BE7B24F3794C359705BFE5D3F" trl="N">
+    <value column="Name" isTrl="N" original="Cargo Empleado">Cargo Empleado</value>
+    <value column="Description" isTrl="N" original="Cargo Empleado">Cargo Empleado</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_PROCESAR_AVANCE">
+    <function name="NO_PROCESAR_AVANCE" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+    v_Message VARCHAR(2000):='';
+	v_MessageReactivar VARCHAR(2000):='';
+	v_MessageAnular VARCHAR(2000):='';
+    v_Record_ID VARCHAR(32);
+    v_Result NUMBER:=1;
+
+    Cur_Parameter RECORD;
+
+    v_no_registra_quinc_line_id VARCHAR(32);	
+	v_Client_ID VARCHAR(32);
+    v_Org_ID VARCHAR(32);
+    v_User_ID VARCHAR(32);
+    v_estado  VARCHAR(60);
+	v_posted CHAR(1);
+    v_valor NUMBER;
+    v_ParameterName VARCHAR(32);
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN
+        FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date,
+                  i.AD_Org_ID,
+                  i.AD_Client_ID
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_PInstance_ID
+            ORDER BY p.SeqNo)
+        LOOP
+            v_no_registra_quinc_line_id:=Cur_Parameter.Record_ID;
+            v_User_ID:=Cur_Parameter.AD_User_ID;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            v_ParameterName:=Cur_Parameter.ParameterName;
+            v_estado:=Cur_Parameter.P_String;
+        END LOOP;
+		
+		select posted, valor into v_posted, v_valor from no_registra_quinc_line where no_registra_quinc_line_id = v_no_registra_quinc_line_id;
+        
+		
+		if(v_estado = 'AN') then
+		 
+			if(v_posted = 'Y') then
+				v_MessageAnular:='@NO_AVANCE_ERRORANULAR@';
+				RAISE v_MessageAnular;
+			else
+			
+				update no_registra_quinc_line
+				   set docstatus = 'AN',
+					   processed = 'Y',
+					   docactionno = 'AN',
+					   Updated=now(),
+					   UpdatedBy=v_User_ID
+				 where no_registra_quinc_line_id = v_no_registra_quinc_line_id;
+			end if;
+			
+		
+        else
+		
+			
+			if(v_estado = 'CO' AND v_valor <> 0) then
+				update no_registra_quinc_line
+				   set docstatus = 'CO',
+					   processed = 'Y',
+					   docactionno = 'RE',
+					   Updated=now(),
+					   UpdatedBy=v_User_ID
+				 where no_registra_quinc_line_id = v_no_registra_quinc_line_id; 
+			
+			 else
+				
+				if(v_posted = 'Y') then
+					v_MessageReactivar:='@NO_AVANCE_ERROREACTIVAR@';
+					RAISE v_MessageReactivar;
+					
+				else
+					
+					update no_registra_quinc_line
+					   set docstatus = 'BO',
+						   processed = 'N',
+						   docactionno = 'CO',
+						   Updated=now(),
+						   UpdatedBy=v_User_ID
+					 where no_registra_quinc_line_id = v_no_registra_quinc_line_id;
+					 
+				end if;
+			end if;
+		end if;
+            
+        v_Message:='@EjecucionCorrecta@';
+        
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message) ;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+    END;    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+                AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END NO_PROCESAR_AVANCE
+]]></body>
+    </function>
+  </database>

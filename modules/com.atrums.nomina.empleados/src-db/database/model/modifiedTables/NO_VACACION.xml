@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE NO_VACACION">
+    <table name="NO_VACACION" primaryKey="NO_VACACION_KEY">
+      <column name="EM_NE_LINEA" primaryKey="false" required="false" type="DECIMAL" size="10,0" autoIncrement="false">
+        <default><![CDATA[0]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NE_FECHA_INICIO" primaryKey="false" required="false" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NE_FECHA_FIN" primaryKey="false" required="false" type="TIMESTAMP" size="7" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NE_TOTAL_DIAS" primaryKey="false" required="false" type="DECIMAL" size="10,0" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_NE_ESTADO" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>
