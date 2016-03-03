@@ -88,6 +88,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_USERCONTACT = "userContact";
     public static final String PROPERTY_IMPORTERRORMESSAGE = "importErrorMessage";
     public static final String PROPERTY_IMPORTPROCESSCOMPLETE = "importProcessComplete";
+    public static final String PROPERTY_IDTGENERO = "iDTGenero";
 
     public BusinessPartner() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -459,6 +460,14 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setImportProcessComplete(Boolean importProcessComplete) {
         set(PROPERTY_IMPORTPROCESSCOMPLETE, importProcessComplete);
+    }
+
+    public String getIDTGenero() {
+        return (String) get(PROPERTY_IDTGENERO);
+    }
+
+    public void setIDTGenero(String iDTGenero) {
+        set(PROPERTY_IDTGENERO, iDTGenero);
     }
 
 }
