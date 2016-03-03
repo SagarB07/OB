@@ -218,7 +218,8 @@ public class EdiFileImport extends HttpSecureAppServlet {
     return data;
   }
 
-  private String clean(String oldstr) {
+@SuppressWarnings("unused")
+private String clean(String oldstr) {
     String newstr = oldstr.substring(0, oldstr.length() - 1);
     return newstr;
   }
@@ -240,11 +241,8 @@ public class EdiFileImport extends HttpSecureAppServlet {
       ServletException {
     if (log4j.isDebugEnabled())
       log4j.debug("Output: edi files importing Frame Set");
-    XmlDocument xmlDocument = xmlEngine.readXmlTemplate(
-        "org/openbravo/erpCommon/ad_forms/EdiFileImport").createXmlDocument();
-
-    ToolBar toolbar = new ToolBar(this, vars.getLanguage(), "EdiFileImport", false, "", "", "",
-        false, "ad_forms", strReplaceWith, false, true);
+    XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_forms/EdiFileImport").createXmlDocument();
+    ToolBar toolbar = new ToolBar(this, vars.getLanguage(), "EdiFileImport", false, "", "", "",false, "ad_forms", strReplaceWith, false, true);
     toolbar.prepareSimpleToolBarTemplate();
     xmlDocument.setParameter("toolbar", toolbar.toString());
 

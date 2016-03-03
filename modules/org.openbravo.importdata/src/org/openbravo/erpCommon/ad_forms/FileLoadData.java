@@ -31,13 +31,11 @@ class FileLoadData extends MultipartRequest {
   public FileLoadData() {
   }
 
-  public FileLoadData(VariablesBase _vars, String _filename, boolean _firstLineHeads,
-      String _format, FieldProvider[] _data) throws IOException {
+  public FileLoadData(VariablesBase _vars, String _filename, boolean _firstLineHeads,  String _format, FieldProvider[] _data) throws IOException {
     super(_vars, _filename, _firstLineHeads, _format, _data);
   }
 
-  public FileLoadData(VariablesBase _vars, String _filename, boolean _firstLineHeads, String _format)
-      throws IOException {
+  public FileLoadData(VariablesBase _vars, String _filename, boolean _firstLineHeads, String _format)  throws IOException {
     super(_vars, _filename, _firstLineHeads, _format, null);
   }
 

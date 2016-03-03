@@ -31,8 +31,7 @@ public class MultipartRequest implements FieldProvider {
   public MultipartRequest() {
   }
 
-  public MultipartRequest(VariablesBase vars, String filename, boolean firstLineHeads,
-      String format, FieldProvider[] data) throws IOException {
+  public MultipartRequest(VariablesBase vars, String filename, boolean firstLineHeads,  String format, FieldProvider[] data) throws IOException {
     init(vars, filename, firstLineHeads, format, data);
     readSubmittedFile();
   }
@@ -90,8 +89,8 @@ public class MultipartRequest implements FieldProvider {
       return lineSeparatorFormated(linea);
   }
 
-  public void init(VariablesBase vars, String filename, boolean firstLineHeads, String format,
-      FieldProvider[] data) throws IOException {
+  public void init(VariablesBase vars, String filename, boolean firstLineHeads, String format, FieldProvider[] data) throws IOException 
+  {
     if (vars == null)
       throw new IllegalArgumentException("VariablesBase cannot be null");
     // if (filename==null || filename.equals("")) throw new

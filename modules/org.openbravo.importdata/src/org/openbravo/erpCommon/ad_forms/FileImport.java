@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.openbravo.base.secureApp.HttpSecureAppServlet;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 import org.openbravo.data.FieldProvider;
-import org.openbravo.erpCommon.ad_forms.FileImportData;
 import org.openbravo.erpCommon.businessUtility.WindowTabs;
 import org.openbravo.erpCommon.utility.ComboTableData;
 import org.openbravo.erpCommon.utility.LeftTabsBar;
@@ -73,8 +72,7 @@ public class FileImport extends HttpSecureAppServlet {
       if (strSeparator.equalsIgnoreCase("F"))
         rows = FileImportData.select(this, strAdImpformatId);
       fieldsData = new FileLoadData(vars, "inpFile", firstRowHeaders, strSeparator, rows);
-      printSampleImport(vars, fieldsData.getFieldProvider(), request, response, strAdImpformatId,
-          strFirstLineHeader);
+      printSampleImport(vars, fieldsData.getFieldProvider(), request, response, strAdImpformatId, strFirstLineHeader);
     } else if (vars.commandIn("SAVE")) {
       String strAdImpformatId = vars.getStringParameter("inpadImpformatId");
       FieldProvider[] rows = null;
@@ -90,9 +88,8 @@ public class FileImport extends HttpSecureAppServlet {
       pageError(response);
   }
 
-  private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2,
-      HttpServletRequest request, HttpServletResponse response, String strAdImpformatId,
-      String strFirstLineHeader) throws ServletException, IOException {
+  @SuppressWarnings("unused")
+private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, HttpServletRequest request, HttpServletResponse response, String strAdImpformatId,  String strFirstLineHeader) throws ServletException, IOException {
     if (data2 == null)
       return "";
     StringBuffer texto = new StringBuffer("");
@@ -133,9 +130,7 @@ public class FileImport extends HttpSecureAppServlet {
     return texto.toString();
   }
 
-  private OBError importarFichero(VariablesSecureApp vars, FieldProvider[] data2,
-      HttpServletRequest request, HttpServletResponse response, String strAdImpformatId)
-      throws ServletException, IOException {
+  private OBError importarFichero(VariablesSecureApp vars, FieldProvider[] data2, HttpServletRequest request, HttpServletResponse response, String strAdImpformatId)    throws ServletException, IOException {
     Connection con = null;
     StringBuffer strFields = new StringBuffer("");
     StringBuffer strValues = new StringBuffer("");
@@ -152,8 +147,7 @@ public class FileImport extends HttpSecureAppServlet {
         // create a basic row with uuid to be updated in the next step
         String sequence = SequenceIdData.getUUID();
         try {
-          FileImportData.insert(con, this, strTable, (strTable + "_ID"), sequence,
-              vars.getClient(), vars.getOrg(), vars.getUser());
+          FileImportData.insert(con, this, strTable, (strTable + "_ID"), sequence,  vars.getClient(), vars.getOrg(), vars.getUser());
         } catch (ServletException ex) {
           myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
           releaseRollbackConnection(con);
@@ -162,9 +156,7 @@ public class FileImport extends HttpSecureAppServlet {
         // generate the updated row information and update the basic row already created.
         int jj = 0;
         for (int j = 0; j < data.length; j++) {
-          if ((data2[i].getField(String.valueOf(j - constant)) == null || data2[i].getField(
-              String.valueOf(j - constant)).equals(""))
-              && data[j].constantvalue.equals(""))
+          if ((data2[i].getField(String.valueOf(j - constant)) == null || data2[i].getField( String.valueOf(j - constant)).equals("")) && data[j].constantvalue.equals(""))
             continue;
           if (jj > 0)
             strFields.append(",");
@@ -175,19 +167,18 @@ public class FileImport extends HttpSecureAppServlet {
             strValues.append(data[j].constantvalue);
             constant = constant + 1;
           } else
-            strValues.append(parseField(data2[i].getField(String.valueOf(j - constant)),
-                data[j].fieldlength, data[j].datatype, data[j].dataformat, data[j].decimalpoint,
-                data[j].referencename));
+          strValues.append(parseField(data2[i].getField(String.valueOf(j - constant)),data[j].fieldlength, data[j].datatype, data[j].dataformat, data[j].decimalpoint,data[j].referencename));
+         System.out.println(data2[i].getField(String.valueOf(j - constant)));
+         
           strValues.append("'");
           strFields.append(strValues);
           strValues.delete(0, strValues.length());
         }
         constant = 0;
-        if (log4j.isDebugEnabled())
-          log4j.debug("##########iteration - " + (i + 1) + " - strFields = " + strFields);
+       // if (log4j.isDebugEnabled())
+         // log4j.debug("##########iteration - " + (i + 1) + " - strFields = " + strFields);
         try {
-          FileImportData.update(con, this, strTable, strFields.toString(), (strTable + "_id = '"
-              + sequence + "'"));
+          FileImportData.update(con, this, strTable, strFields.toString(), (strTable + "_id = '"+ sequence + "'"));
         } catch (ServletException ex) {
           myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
           if (i == 0 && !firstRowHeaders) {
@@ -229,11 +220,9 @@ public class FileImport extends HttpSecureAppServlet {
     return myMessage;
   }
 
-  private String parseField(String strTexto, String strLength, String strDataType,
-      String strDataFormat, String strDecimalPoint, String strReferenceName)
-      throws ServletException {
+  private String parseField(String strTexto, String strLength, String strDataType,String strDataFormat, String strDecimalPoint, String strReferenceName) throws ServletException {
     if (strReferenceName.equals("TableDir")) {
-      strLength = "32";
+      strLength = "33";
     }
     if (strDataType.equals("D")) {
       strTexto = FileImportData.parseDate(this, strTexto, strDataFormat);
@@ -370,10 +359,20 @@ public class FileImport extends HttpSecureAppServlet {
             sb.append(data[j].constantvalue);
             constant = constant + 1;
           } else
-            sb
-                .append(parseField(data2[i].getField(String.valueOf(j - constant)),
-                    data[j].fieldlength, data[j].datatype, data[j].dataformat,
-                    data[j].decimalpoint, ""));
+        	  
+        try {
+        	System.out.println(data2[i].getField(String.valueOf(j - constant)));
+        	System.out.println(data[j].fieldlength);
+        	System.out.println(data[j].datatype);
+        	System.out.println(data[j].dataformat);
+        	System.out.println(data[j].decimalpoint);
+            sb.append(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
+
+        }catch (Exception ex){
+        	System.out.println(ex);
+  	  	}
+            
+          	
           if (i == 0 && strFirstLineHeader.equalsIgnoreCase("Y"))
             sb.append("</th>");
           else

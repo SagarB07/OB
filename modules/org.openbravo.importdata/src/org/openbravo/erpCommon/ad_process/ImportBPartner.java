@@ -35,8 +35,7 @@ public class ImportBPartner extends ImportProcess {
   private String m_Record_ID = "";
   private boolean m_deleteOldImported;
 
-  public ImportBPartner(ConnectionProvider conn, String AD_Process_ID, String recordId,
-      boolean deleteOld) {
+  public ImportBPartner(ConnectionProvider conn, String AD_Process_ID, String recordId,boolean deleteOld) {
     super(conn);
     m_AD_Process_ID = AD_Process_ID;
     m_Record_ID = recordId;
