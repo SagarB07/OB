@@ -32,13 +32,13 @@ static Logger log4j = Logger.getLogger(SupplierData.class);
   public String cIncotermsId;
   public String cIncotermsIdr;
   public String incotermsDescription;
-  public String note;
-  public String cProjectId;
-  public String isactive;
   public String adOrgId;
   public String adClientId;
   public String cProjectVendorId;
   public String mPricelistVersionId;
+  public String note;
+  public String cProjectId;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -80,12 +80,6 @@ static Logger log4j = Logger.getLogger(SupplierData.class);
       return cIncotermsIdr;
     else if (fieldName.equalsIgnoreCase("incoterms_description") || fieldName.equals("incotermsDescription"))
       return incotermsDescription;
-    else if (fieldName.equalsIgnoreCase("note"))
-      return note;
-    else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
-      return cProjectId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
@@ -94,6 +88,12 @@ static Logger log4j = Logger.getLogger(SupplierData.class);
       return cProjectVendorId;
     else if (fieldName.equalsIgnoreCase("m_pricelist_version_id") || fieldName.equals("mPricelistVersionId"))
       return mPricelistVersionId;
+    else if (fieldName.equalsIgnoreCase("note"))
+      return note;
+    else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
+      return cProjectId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -141,13 +141,13 @@ Select for edit
       "C_Project_Vendor.C_Incoterms_ID, " +
       "(CASE WHEN C_Project_Vendor.C_Incoterms_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS C_Incoterms_IDR, " +
       "C_Project_Vendor.Incoterms_Description, " +
-      "C_Project_Vendor.Note, " +
-      "C_Project_Vendor.C_Project_ID, " +
-      "COALESCE(C_Project_Vendor.IsActive, 'N') AS IsActive, " +
       "C_Project_Vendor.AD_Org_ID, " +
       "C_Project_Vendor.AD_Client_ID, " +
       "C_Project_Vendor.C_Project_Vendor_ID, " +
       "C_Project_Vendor.M_PriceList_Version_ID, " +
+      "C_Project_Vendor.Note, " +
+      "C_Project_Vendor.C_Project_ID, " +
+      "COALESCE(C_Project_Vendor.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
       "        FROM C_Project_Vendor left join (select C_BPartner_ID, Name from C_BPartner) table1 on (C_Project_Vendor.C_BPartner_ID = table1.C_BPartner_ID) left join (select M_PriceList_ID, Name from M_PriceList) table2 on (C_Project_Vendor.M_PriceList_ID = table2.M_PriceList_ID) left join (select C_Incoterms_ID, Name from C_Incoterms) table3 on (C_Project_Vendor.C_Incoterms_ID = table3.C_Incoterms_ID)" +
       "        WHERE 2=2 " +
@@ -208,13 +208,13 @@ Select for edit
         objectSupplierData.cIncotermsId = UtilSql.getValue(result, "c_incoterms_id");
         objectSupplierData.cIncotermsIdr = UtilSql.getValue(result, "c_incoterms_idr");
         objectSupplierData.incotermsDescription = UtilSql.getValue(result, "incoterms_description");
-        objectSupplierData.note = UtilSql.getValue(result, "note");
-        objectSupplierData.cProjectId = UtilSql.getValue(result, "c_project_id");
-        objectSupplierData.isactive = UtilSql.getValue(result, "isactive");
         objectSupplierData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectSupplierData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectSupplierData.cProjectVendorId = UtilSql.getValue(result, "c_project_vendor_id");
         objectSupplierData.mPricelistVersionId = UtilSql.getValue(result, "m_pricelist_version_id");
+        objectSupplierData.note = UtilSql.getValue(result, "note");
+        objectSupplierData.cProjectId = UtilSql.getValue(result, "c_project_id");
+        objectSupplierData.isactive = UtilSql.getValue(result, "isactive");
         objectSupplierData.language = UtilSql.getValue(result, "language");
         objectSupplierData.adUserClient = "";
         objectSupplierData.adOrgClient = "";
@@ -266,13 +266,13 @@ Create a registry
     objectSupplierData[0].cIncotermsId = cIncotermsId;
     objectSupplierData[0].cIncotermsIdr = "";
     objectSupplierData[0].incotermsDescription = incotermsDescription;
-    objectSupplierData[0].note = note;
-    objectSupplierData[0].cProjectId = cProjectId;
-    objectSupplierData[0].isactive = isactive;
     objectSupplierData[0].adOrgId = adOrgId;
     objectSupplierData[0].adClientId = adClientId;
     objectSupplierData[0].cProjectVendorId = cProjectVendorId;
     objectSupplierData[0].mPricelistVersionId = mPricelistVersionId;
+    objectSupplierData[0].note = note;
+    objectSupplierData[0].cProjectId = cProjectId;
+    objectSupplierData[0].isactive = isactive;
     objectSupplierData[0].language = "";
     return objectSupplierData;
   }
@@ -511,7 +511,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Project_Vendor" +
-      "        SET C_BPartner_ID = (?) , M_PriceList_ID = (?) , GenerateOrder = (?) , C_Incoterms_ID = (?) , Incoterms_Description = (?) , Note = (?) , C_Project_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , C_Project_Vendor_ID = (?) , M_PriceList_Version_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET C_BPartner_ID = (?) , M_PriceList_ID = (?) , GenerateOrder = (?) , C_Incoterms_ID = (?) , Incoterms_Description = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , C_Project_Vendor_ID = (?) , M_PriceList_Version_ID = (?) , Note = (?) , C_Project_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_Project_Vendor.C_Project_Vendor_ID = ? " +
       "                 AND C_Project_Vendor.C_Project_ID = ? " +
       "        AND C_Project_Vendor.AD_Client_ID IN (";
@@ -534,13 +534,13 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateorder);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cIncotermsId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, incotermsDescription);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectVendorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectVendorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
@@ -570,7 +570,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Project_Vendor " +
-      "        (C_BPartner_ID, M_PriceList_ID, GenerateOrder, C_Incoterms_ID, Incoterms_Description, Note, C_Project_ID, IsActive, AD_Org_ID, AD_Client_ID, C_Project_Vendor_ID, M_PriceList_Version_ID, created, createdby, updated, updatedBy)" +
+      "        (C_BPartner_ID, M_PriceList_ID, GenerateOrder, C_Incoterms_ID, Incoterms_Description, AD_Org_ID, AD_Client_ID, C_Project_Vendor_ID, M_PriceList_Version_ID, Note, C_Project_ID, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -584,13 +584,13 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateorder);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cIncotermsId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, incotermsDescription);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectVendorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

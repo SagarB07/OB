@@ -31,10 +31,10 @@ MRP_Run_Production.Launchwr,
 MRP_Run_Production.Launchmr, 
 MRP_Run_Production.Simulate, 
 MRP_Run_Production.Recalculatestock, 
-COALESCE(MRP_Run_Production.IsActive, 'N') AS IsActive, 
-MRP_Run_Production.Description, 
-MRP_Run_Production.AD_Client_ID, 
 MRP_Run_Production.MRP_Run_Production_ID, 
+MRP_Run_Production.Description, 
+COALESCE(MRP_Run_Production.IsActive, 'N') AS IsActive, 
+MRP_Run_Production.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM MRP_Run_Production left join (select AD_Org_ID, Name from AD_Org) table1 on (MRP_Run_Production.AD_Org_ID = table1.AD_Org_ID) left join (select MRP_Planner_ID, Name from MRP_Planner) table2 on (MRP_Run_Production.MRP_Planner_ID = table2.MRP_Planner_ID) left join (select C_BPartner_ID, Name from C_BPartner) table3 on (MRP_Run_Production.C_BPartner_ID = table3.C_BPartner_ID) left join (select C_BP_Group_ID, Name from C_BP_Group) table4 on (MRP_Run_Production.C_BP_Group_ID = table4.C_BP_Group_ID) left join (select M_Product_ID, Name from M_Product) table5 on (MRP_Run_Production.M_Product_ID = table5.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL5 on (table5.M_Product_ID = tableTRL5.M_Product_ID and tableTRL5.AD_Language = ?)  left join (select M_Product_Category_ID, Name from M_Product_Category) table7 on (MRP_Run_Production.M_Product_Category_ID = table7.M_Product_Category_ID) left join (select M_Product_Category_ID,AD_Language, Name from M_Product_Category_TRL) tableTRL7 on (table7.M_Product_Category_ID = tableTRL7.M_Product_Category_ID and tableTRL7.AD_Language = ?) 
@@ -125,13 +125,13 @@ MRP_Run_Production.MRP_Run_Production_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MRP_Run_Production
-        SET AD_Org_ID = (?) , DateDoc = TO_DATE(?) , Name = (?) , Timehorizon = TO_NUMBER(?) , Securitymargin = TO_NUMBER(?) , MRP_Planner_ID = (?) , C_BPartner_ID = (?) , C_BP_Group_ID = (?) , M_Product_ID = (?) , M_Product_Category_ID = (?) , Launchwr = (?) , Launchmr = (?) , Simulate = (?) , Recalculatestock = (?) , IsActive = (?) , Description = (?) , AD_Client_ID = (?) , MRP_Run_Production_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , DateDoc = TO_DATE(?) , Name = (?) , Timehorizon = TO_NUMBER(?) , Securitymargin = TO_NUMBER(?) , MRP_Planner_ID = (?) , C_BPartner_ID = (?) , C_BP_Group_ID = (?) , M_Product_ID = (?) , M_Product_Category_ID = (?) , Launchwr = (?) , Launchmr = (?) , Simulate = (?) , Recalculatestock = (?) , MRP_Run_Production_ID = (?) , Description = (?) , IsActive = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE MRP_Run_Production.MRP_Run_Production_ID = ? 
         
         AND MRP_Run_Production.AD_Client_ID IN ('1') 
         AND MRP_Run_Production.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="name"></Parameter> <Parameter name="timehorizon"></Parameter> <Parameter name="securitymargin"></Parameter> <Parameter name="mrpPlannerId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="launchwr"></Parameter> <Parameter name="launchmr"></Parameter> <Parameter name="simulate"></Parameter> <Parameter name="recalculatestock"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="description"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mrpRunProductionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="name"></Parameter> <Parameter name="timehorizon"></Parameter> <Parameter name="securitymargin"></Parameter> <Parameter name="mrpPlannerId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="launchwr"></Parameter> <Parameter name="launchmr"></Parameter> <Parameter name="simulate"></Parameter> <Parameter name="recalculatestock"></Parameter> <Parameter name="mrpRunProductionId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mrpRunProductionId"></Parameter>
     
@@ -143,10 +143,10 @@ MRP_Run_Production.MRP_Run_Production_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MRP_Run_Production 
-        (AD_Org_ID, DateDoc, Name, Timehorizon, Securitymargin, MRP_Planner_ID, C_BPartner_ID, C_BP_Group_ID, M_Product_ID, M_Product_Category_ID, Launchwr, Launchmr, Simulate, Recalculatestock, IsActive, Description, AD_Client_ID, MRP_Run_Production_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, DateDoc, Name, Timehorizon, Securitymargin, MRP_Planner_ID, C_BPartner_ID, C_BP_Group_ID, M_Product_ID, M_Product_Category_ID, Launchwr, Launchmr, Simulate, Recalculatestock, MRP_Run_Production_ID, Description, IsActive, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), TO_DATE(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="name"></Parameter> <Parameter name="timehorizon"></Parameter> <Parameter name="securitymargin"></Parameter> <Parameter name="mrpPlannerId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="launchwr"></Parameter> <Parameter name="launchmr"></Parameter> <Parameter name="simulate"></Parameter> <Parameter name="recalculatestock"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="description"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mrpRunProductionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="name"></Parameter> <Parameter name="timehorizon"></Parameter> <Parameter name="securitymargin"></Parameter> <Parameter name="mrpPlannerId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="launchwr"></Parameter> <Parameter name="launchmr"></Parameter> <Parameter name="simulate"></Parameter> <Parameter name="recalculatestock"></Parameter> <Parameter name="mrpRunProductionId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

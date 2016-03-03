@@ -8,6 +8,9 @@
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-gen"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src-test"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/org.openbravo.importdata/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.nomina.empleados/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.nomina/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.nomina.rdep/src"/>
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/OpenbravoCore/OpenbravoCore">
 <dependency-type>uses</dependency-type>
 </dependent-module>

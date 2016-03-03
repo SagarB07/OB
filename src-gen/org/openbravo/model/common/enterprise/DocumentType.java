@@ -18,6 +18,15 @@
 */
 package org.openbravo.model.common.enterprise;
 
+import com.atrums.nomina.data.noContratoEmpleado;
+import com.atrums.nomina.data.noLiquidacionEmpleado;
+import com.atrums.nomina.data.noPagoCabecera;
+import com.atrums.nomina.data.noPagoLine;
+import com.atrums.nomina.data.noRegistraQuincLine;
+import com.atrums.nomina.data.noRolPagoProvision;
+import com.atrums.nomina.data.noRolPagoProvisionLine;
+import com.atrums.nomina.data.noRolProvisionLineMes;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,8 +124,17 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_INVOICEV2TRANSACTIONDOCUMENTLIST = "invoiceV2TransactionDocumentList";
     public static final String PROPERTY_MANUFACTURINGWORKREQUIREMENTLIST = "manufacturingWorkRequirementList";
     public static final String PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST = "materialMgmtShipmentInOutList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
+    public static final String PROPERTY_ROLPROVISIONLINEMESLIST = "rolProvisionLineMesList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLIST = "rolPagoProvisionList";
     public static final String PROPERTY_ORDERLIST = "orderList";
     public static final String PROPERTY_ORDERTRANSACTIONDOCUMENTLIST = "orderTransactionDocumentList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
+    public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
+    public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
+    public static final String PROPERTY_PAGOCABECERATIPODOCUMENTOPAGOLIST = "pagoCabeceraTipoDocumentoPagoList";
+    public static final String PROPERTY_PAGOLINELIST = "pagoLineList";
+    public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
 
     public DocumentType() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -155,8 +173,17 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
         setDefaultValue(PROPERTY_INVOICEV2TRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MANUFACTURINGWORKREQUIREMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPROVISIONLINEMESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERTRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERATIPODOCUMENTOPAGOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
     }
 
     @Override
@@ -640,6 +667,33 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     }
 
     @SuppressWarnings("unchecked")
+    public List<noRolPagoProvisionLine> getRolPagoProvisionLineList() {
+      return (List<noRolPagoProvisionLine>) get(PROPERTY_ROLPAGOPROVISIONLINELIST);
+    }
+
+    public void setRolPagoProvisionLineList(List<noRolPagoProvisionLine> rolPagoProvisionLineList) {
+        set(PROPERTY_ROLPAGOPROVISIONLINELIST, rolPagoProvisionLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolProvisionLineMes> getRolProvisionLineMesList() {
+      return (List<noRolProvisionLineMes>) get(PROPERTY_ROLPROVISIONLINEMESLIST);
+    }
+
+    public void setRolProvisionLineMesList(List<noRolProvisionLineMes> rolProvisionLineMesList) {
+        set(PROPERTY_ROLPROVISIONLINEMESLIST, rolProvisionLineMesList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolPagoProvision> getRolPagoProvisionList() {
+      return (List<noRolPagoProvision>) get(PROPERTY_ROLPAGOPROVISIONLIST);
+    }
+
+    public void setRolPagoProvisionList(List<noRolPagoProvision> rolPagoProvisionList) {
+        set(PROPERTY_ROLPAGOPROVISIONLIST, rolPagoProvisionList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<org.openbravo.model.common.order.Order> getOrderList() {
       return (List<org.openbravo.model.common.order.Order>) get(PROPERTY_ORDERLIST);
     }
@@ -655,6 +709,60 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setOrderTransactionDocumentList(List<org.openbravo.model.common.order.Order> orderTransactionDocumentList) {
         set(PROPERTY_ORDERTRANSACTIONDOCUMENTLIST, orderTransactionDocumentList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noLiquidacionEmpleado> getLiquidacionEmpleadoList() {
+      return (List<noLiquidacionEmpleado>) get(PROPERTY_LIQUIDACIONEMPLEADOLIST);
+    }
+
+    public void setLiquidacionEmpleadoList(List<noLiquidacionEmpleado> liquidacionEmpleadoList) {
+        set(PROPERTY_LIQUIDACIONEMPLEADOLIST, liquidacionEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERALIST);
+    }
+
+    public void setPagoCabeceraList(List<noPagoCabecera> pagoCabeceraList) {
+        set(PROPERTY_PAGOCABECERALIST, pagoCabeceraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraTipoDocumentoPagoList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERATIPODOCUMENTOPAGOLIST);
+    }
+
+    public void setPagoCabeceraTipoDocumentoPagoList(List<noPagoCabecera> pagoCabeceraTipoDocumentoPagoList) {
+        set(PROPERTY_PAGOCABECERATIPODOCUMENTOPAGOLIST, pagoCabeceraTipoDocumentoPagoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoLine> getPagoLineList() {
+      return (List<noPagoLine>) get(PROPERTY_PAGOLINELIST);
+    }
+
+    public void setPagoLineList(List<noPagoLine> pagoLineList) {
+        set(PROPERTY_PAGOLINELIST, pagoLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistraQuincLine> getRegistraQuincLineList() {
+      return (List<noRegistraQuincLine>) get(PROPERTY_REGISTRAQUINCLINELIST);
+    }
+
+    public void setRegistraQuincLineList(List<noRegistraQuincLine> registraQuincLineList) {
+        set(PROPERTY_REGISTRAQUINCLINELIST, registraQuincLineList);
     }
 
 }

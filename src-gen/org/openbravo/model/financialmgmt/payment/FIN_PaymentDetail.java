@@ -58,6 +58,7 @@ public class FIN_PaymentDetail extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_WRITEOFFAMOUNT = "writeoffAmount";
     public static final String PROPERTY_GLITEM = "gLItem";
     public static final String PROPERTY_ISPREPAYMENT = "isprepayment";
+    public static final String PROPERTY_NOPAGOLINE = "noPagoLine";
     public static final String PROPERTY_INVOICETAXCASHVATVLIST = "invoiceTaxCashVATVList";
     public static final String PROPERTY_FINPAYMENTSCHEDULEDETAILLIST = "fINPaymentScheduleDetailList";
     public static final String PROPERTY_INVOICETAXCASHVATLIST = "invoiceTaxCashVATList";
@@ -190,6 +191,14 @@ public class FIN_PaymentDetail extends BaseOBObject implements Traceable, Client
 
     public void setPrepayment(Boolean isprepayment) {
         set(PROPERTY_ISPREPAYMENT, isprepayment);
+    }
+
+    public String getNoPagoLine() {
+        return (String) get(PROPERTY_NOPAGOLINE);
+    }
+
+    public void setNoPagoLine(String noPagoLine) {
+        set(PROPERTY_NOPAGOLINE, noPagoLine);
     }
 
     @SuppressWarnings("unchecked")

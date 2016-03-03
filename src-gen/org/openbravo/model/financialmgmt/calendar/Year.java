@@ -18,6 +18,9 @@
 */
 package org.openbravo.model.financialmgmt.calendar;
 
+import com.atrums.nomina.data.noSalarioDigno;
+import com.atrums.nomina.data.noUtilidad;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,6 +64,8 @@ public class Year extends BaseOBObject implements Traceable, ClientEnabled, Orga
     public static final String PROPERTY_ORGANIZATIONCLOSINGLIST = "organizationClosingList";
     public static final String PROPERTY_PERIODCONTROLLOGLIST = "periodControlLogList";
     public static final String PROPERTY_YEARCLOSEVLIST = "yearCloseVList";
+    public static final String PROPERTY_SALARIODIGNOLIST = "salarioDignoList";
+    public static final String PROPERTY_UTILIDADLIST = "utilidadList";
 
     public Year() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -72,6 +77,8 @@ public class Year extends BaseOBObject implements Traceable, ClientEnabled, Orga
         setDefaultValue(PROPERTY_ORGANIZATIONCLOSINGLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PERIODCONTROLLOGLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_YEARCLOSEVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_SALARIODIGNOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_UTILIDADLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -234,6 +241,24 @@ public class Year extends BaseOBObject implements Traceable, ClientEnabled, Orga
 
     public void setYearCloseVList(List<YearClose> yearCloseVList) {
         set(PROPERTY_YEARCLOSEVLIST, yearCloseVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noSalarioDigno> getSalarioDignoList() {
+      return (List<noSalarioDigno>) get(PROPERTY_SALARIODIGNOLIST);
+    }
+
+    public void setSalarioDignoList(List<noSalarioDigno> salarioDignoList) {
+        set(PROPERTY_SALARIODIGNOLIST, salarioDignoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noUtilidad> getUtilidadList() {
+      return (List<noUtilidad>) get(PROPERTY_UTILIDADLIST);
+    }
+
+    public void setUtilidadList(List<noUtilidad> utilidadList) {
+        set(PROPERTY_UTILIDADLIST, utilidadList);
     }
 
 }

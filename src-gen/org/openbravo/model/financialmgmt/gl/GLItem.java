@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.financialmgmt.gl;
 
+import com.atrums.nomina.data.noPagoCabecera;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -88,6 +90,7 @@ public class GLItem extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY_FINANCIALMGMTJOURNALLINELIST = "financialMgmtJournalLineList";
     public static final String PROPERTY_FINANCIALMGMTTAXREGISTERTYPELIST = "financialMgmtTaxRegisterTypeList";
     public static final String PROPERTY_INVOICELINEACCOUNTLIST = "invoiceLineAccountList";
+    public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
 
     public GLItem() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -109,6 +112,7 @@ public class GLItem extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_FINANCIALMGMTJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXREGISTERTYPELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINEACCOUNTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
     }
 
     @Override
@@ -378,6 +382,15 @@ public class GLItem extends BaseOBObject implements Traceable, ClientEnabled, Or
 
     public void setInvoiceLineAccountList(List<InvoiceLine> invoiceLineAccountList) {
         set(PROPERTY_INVOICELINEACCOUNTLIST, invoiceLineAccountList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERALIST);
+    }
+
+    public void setPagoCabeceraList(List<noPagoCabecera> pagoCabeceraList) {
+        set(PROPERTY_PAGOCABECERALIST, pagoCabeceraList);
     }
 
 }

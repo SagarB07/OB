@@ -18,6 +18,17 @@
 */
 package org.openbravo.model.financialmgmt.calendar;
 
+import com.atrums.nomina.data.NO_Registro_Hora_Extra;
+import com.atrums.nomina.data.noLiquidacionEmpleado;
+import com.atrums.nomina.data.noNovedad;
+import com.atrums.nomina.data.noPagoCabecera;
+import com.atrums.nomina.data.noPrestamo;
+import com.atrums.nomina.data.noReComision;
+import com.atrums.nomina.data.noRegistraQuincena;
+import com.atrums.nomina.data.noRegistroGasto;
+import com.atrums.nomina.data.noRolPagoProvision;
+import com.atrums.nomina.data.noRolProvisionLineMes;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,8 +92,18 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY_FINANCIALMGMTPERIODCONTROLLIST = "financialMgmtPeriodControlList";
     public static final String PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST = "financialMgmtPeriodControlVList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
+    public static final String PROPERTY_RECOMISIONESLIST = "reComisionesList";
+    public static final String PROPERTY_REGISTROHORAEXTRALIST = "registroHoraExtraList";
+    public static final String PROPERTY_ROLPROVISIONLINEMESLIST = "rolProvisionLineMesList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLIST = "rolPagoProvisionList";
     public static final String PROPERTY_PERIODCONTROLLOGPERIODNOLIST = "periodControlLogPeriodNoList";
     public static final String PROPERTY_PERIODCONTROLLOGLIST = "periodControlLogList";
+    public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
+    public static final String PROPERTY_NOVEDADLIST = "novedadList";
+    public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
+    public static final String PROPERTY_PRESTAMOLIST = "prestamoList";
+    public static final String PROPERTY_REGISTRAQUINCENALIST = "registraQuincenaList";
+    public static final String PROPERTY_REGISTROGASTOLIST = "registroGastoList";
 
 
     // Computed columns properties, these properties cannot be directly accessed, they need
@@ -107,8 +128,18 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_FINANCIALMGMTPERIODCONTROLLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RECOMISIONESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTROHORAEXTRALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPROVISIONLINEMESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PERIODCONTROLLOGPERIODNOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PERIODCONTROLLOGLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_NOVEDADLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PRESTAMOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTRAQUINCENALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTROGASTOLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -401,6 +432,42 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
     }
 
     @SuppressWarnings("unchecked")
+    public List<noReComision> getReComisionesList() {
+      return (List<noReComision>) get(PROPERTY_RECOMISIONESLIST);
+    }
+
+    public void setReComisionesList(List<noReComision> reComisionesList) {
+        set(PROPERTY_RECOMISIONESLIST, reComisionesList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<NO_Registro_Hora_Extra> getRegistroHoraExtraList() {
+      return (List<NO_Registro_Hora_Extra>) get(PROPERTY_REGISTROHORAEXTRALIST);
+    }
+
+    public void setRegistroHoraExtraList(List<NO_Registro_Hora_Extra> registroHoraExtraList) {
+        set(PROPERTY_REGISTROHORAEXTRALIST, registroHoraExtraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolProvisionLineMes> getRolProvisionLineMesList() {
+      return (List<noRolProvisionLineMes>) get(PROPERTY_ROLPROVISIONLINEMESLIST);
+    }
+
+    public void setRolProvisionLineMesList(List<noRolProvisionLineMes> rolProvisionLineMesList) {
+        set(PROPERTY_ROLPROVISIONLINEMESLIST, rolProvisionLineMesList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolPagoProvision> getRolPagoProvisionList() {
+      return (List<noRolPagoProvision>) get(PROPERTY_ROLPAGOPROVISIONLIST);
+    }
+
+    public void setRolPagoProvisionList(List<noRolPagoProvision> rolPagoProvisionList) {
+        set(PROPERTY_ROLPAGOPROVISIONLIST, rolPagoProvisionList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<PeriodControlLog> getPeriodControlLogPeriodNoList() {
       return (List<PeriodControlLog>) get(PROPERTY_PERIODCONTROLLOGPERIODNOLIST);
     }
@@ -416,6 +483,60 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
 
     public void setPeriodControlLogList(List<PeriodControlLog> periodControlLogList) {
         set(PROPERTY_PERIODCONTROLLOGLIST, periodControlLogList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noLiquidacionEmpleado> getLiquidacionEmpleadoList() {
+      return (List<noLiquidacionEmpleado>) get(PROPERTY_LIQUIDACIONEMPLEADOLIST);
+    }
+
+    public void setLiquidacionEmpleadoList(List<noLiquidacionEmpleado> liquidacionEmpleadoList) {
+        set(PROPERTY_LIQUIDACIONEMPLEADOLIST, liquidacionEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noNovedad> getNovedadList() {
+      return (List<noNovedad>) get(PROPERTY_NOVEDADLIST);
+    }
+
+    public void setNovedadList(List<noNovedad> novedadList) {
+        set(PROPERTY_NOVEDADLIST, novedadList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERALIST);
+    }
+
+    public void setPagoCabeceraList(List<noPagoCabecera> pagoCabeceraList) {
+        set(PROPERTY_PAGOCABECERALIST, pagoCabeceraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPrestamo> getPrestamoList() {
+      return (List<noPrestamo>) get(PROPERTY_PRESTAMOLIST);
+    }
+
+    public void setPrestamoList(List<noPrestamo> prestamoList) {
+        set(PROPERTY_PRESTAMOLIST, prestamoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistraQuincena> getRegistraQuincenaList() {
+      return (List<noRegistraQuincena>) get(PROPERTY_REGISTRAQUINCENALIST);
+    }
+
+    public void setRegistraQuincenaList(List<noRegistraQuincena> registraQuincenaList) {
+        set(PROPERTY_REGISTRAQUINCENALIST, registraQuincenaList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistroGasto> getRegistroGastoList() {
+      return (List<noRegistroGasto>) get(PROPERTY_REGISTROGASTOLIST);
+    }
+
+    public void setRegistroGastoList(List<noRegistroGasto> registroGastoList) {
+        set(PROPERTY_REGISTROGASTOLIST, registroGastoList);
     }
 
 

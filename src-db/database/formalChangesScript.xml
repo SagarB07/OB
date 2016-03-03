@@ -88,6 +88,14 @@
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="00F6EA0904664744B181CEEDA53A75B2">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="8982CE6EA9E8433E8FA23C11DEED4D6C">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="IGNOREINWAD" pkRow="3713">
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
@@ -1953,6 +1961,14 @@
       <newValue><![CDATA[Table]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="800222">
+      <oldValue/>
+      <newValue><![CDATA[Table]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="65AD1337450F4409A3FED56B2DE61A6B">
+      <oldValue/>
+      <newValue><![CDATA[Table]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="D86B7BF0279F496197C952B920396B63">
       <oldValue/>
       <newValue><![CDATA[Table]]></newValue>
     </columnDataChange>

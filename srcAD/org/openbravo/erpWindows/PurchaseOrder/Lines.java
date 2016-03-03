@@ -536,7 +536,7 @@ vars.getGlobalVariable("inpcOrderId", windowId + "|C_Order_ID");
       
       HeaderData[] data = HeaderData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPC_Order_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|DateOrdered", data[0].dateordered);    vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].cBpartnerId);    vars.setSessionValue(windowId + "|C_BPartner_Location_ID", data[0].cBpartnerLocationId);    vars.setSessionValue(windowId + "|M_Warehouse_ID", data[0].mWarehouseId);    vars.setSessionValue(windowId + "|DatePromised", data[0].datepromised);    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].mPricelistId);    vars.setSessionValue(windowId + "|DocStatus", data[0].docstatus);    vars.setSessionValue(windowId + "|C_Currency_ID", data[0].cCurrencyId);    vars.setSessionValue(windowId + "|C_DocType_ID", data[0].cDoctypeId);    vars.setSessionValue(windowId + "|DeliveryViaRule", data[0].deliveryviarule);    vars.setSessionValue(windowId + "|M_Shipper_ID", data[0].mShipperId);    vars.setSessionValue(windowId + "|FreightCostRule", data[0].freightcostrule);    vars.setSessionValue(windowId + "|C_Order_ID", data[0].cOrderId);    vars.setSessionValue(windowId + "|IsSOTrx", data[0].issotrx);    vars.setSessionValue(windowId + "|Posted", data[0].posted);    vars.setSessionValue(windowId + "|Processed", data[0].processed);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|DateOrdered", data[0].dateordered);    vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].cBpartnerId);    vars.setSessionValue(windowId + "|C_BPartner_Location_ID", data[0].cBpartnerLocationId);    vars.setSessionValue(windowId + "|M_Warehouse_ID", data[0].mWarehouseId);    vars.setSessionValue(windowId + "|DatePromised", data[0].datepromised);    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].mPricelistId);    vars.setSessionValue(windowId + "|DocStatus", data[0].docstatus);    vars.setSessionValue(windowId + "|C_Currency_ID", data[0].cCurrencyId);    vars.setSessionValue(windowId + "|C_DocType_ID", data[0].cDoctypeId);    vars.setSessionValue(windowId + "|DeliveryViaRule", data[0].deliveryviarule);    vars.setSessionValue(windowId + "|M_Shipper_ID", data[0].mShipperId);    vars.setSessionValue(windowId + "|FreightCostRule", data[0].freightcostrule);    vars.setSessionValue(windowId + "|C_Order_ID", data[0].cOrderId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|Processed", data[0].processed);    vars.setSessionValue(windowId + "|IsSOTrx", data[0].issotrx);    vars.setSessionValue(windowId + "|Posted", data[0].posted);
       vars.setSessionValue(windowId + "|C_Order_ID", strPC_Order_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -995,8 +995,8 @@ xmlDocument.setParameter("buttonPriceList", Utility.messageBD(this, "Calc", vars
 xmlDocument.setParameter("buttonGrossPriceList", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonDiscount", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonTaxbaseamt", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttongrosspricestd", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonPriceStd", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("buttongrosspricestd", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonQtyReserved", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonQtyDelivered", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonQtyInvoiced", Utility.messageBD(this, "Calc", vars.getLanguage()));
@@ -1019,10 +1019,10 @@ xmlDocument.setParameter("Explode_BTNname", Utility.getButtonName(this, vars, "D
 xmlDocument.setParameter("Explode_Modal", modalExplode?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
+xmlDocument.setParameter("DateInvoiced_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonChargeAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonPriceLimit", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("DateDelivered_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("DateInvoiced_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ServletException(ex);

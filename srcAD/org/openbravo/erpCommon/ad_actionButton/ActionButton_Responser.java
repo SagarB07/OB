@@ -125,6 +125,27 @@ public class ActionButton_Responser extends HttpSecureAppServlet {
     } else if (vars.commandIn("BUTTON800109")) {
         
         printPageButton800109(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTONF03D64524CD642EFA6DDC11150EDC498")) {
+        
+        printPageButtonF03D64524CD642EFA6DDC11150EDC498(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTON2A6B08C238B24CC1A483C84AB02DFBC2")) {
+        
+        printPageButton2A6B08C238B24CC1A483C84AB02DFBC2(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTON61B3BD10ED0C4A37950A9269A07AF344")) {
+        
+        printPageButton61B3BD10ED0C4A37950A9269A07AF344(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTON7ADEF4948DD34B6DA43F75582C166396")) {
+        
+        printPageButton7ADEF4948DD34B6DA43F75582C166396(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTONA5EE7B720325485C8CF63DB7871A7101")) {
+        
+        printPageButtonA5EE7B720325485C8CF63DB7871A7101(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTONB670ED126EC0470A966FB31C6EEB8647")) {
+        
+        printPageButtonB670ED126EC0470A966FB31C6EEB8647(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTONBB3C25ED65BC4816A097E6F4E6E179B8")) {
+        
+        printPageButtonBB3C25ED65BC4816A097E6F4E6E179B8(response, vars, strProcessId);
     } else if (vars.commandIn("BUTTOND234AE084F7040DCB66E281A4237FF99")) {
         
         printPageButtonD234AE084F7040DCB66E281A4237FF99(response, vars, strProcessId);
@@ -154,6 +175,20 @@ public class ActionButton_Responser extends HttpSecureAppServlet {
        process800151(vars, request, response);    
     } else if (vars.commandIn("SAVE_BUTTONActionButton800109")) {
        process800109(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButtonF03D64524CD642EFA6DDC11150EDC498")) {
+       processF03D64524CD642EFA6DDC11150EDC498(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButton2A6B08C238B24CC1A483C84AB02DFBC2")) {
+       process2A6B08C238B24CC1A483C84AB02DFBC2(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButton61B3BD10ED0C4A37950A9269A07AF344")) {
+       process61B3BD10ED0C4A37950A9269A07AF344(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButton7ADEF4948DD34B6DA43F75582C166396")) {
+       process7ADEF4948DD34B6DA43F75582C166396(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButtonA5EE7B720325485C8CF63DB7871A7101")) {
+       processA5EE7B720325485C8CF63DB7871A7101(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButtonB670ED126EC0470A966FB31C6EEB8647")) {
+       processB670ED126EC0470A966FB31C6EEB8647(vars, request, response);    
+    } else if (vars.commandIn("SAVE_BUTTONActionButtonBB3C25ED65BC4816A097E6F4E6E179B8")) {
+       processBB3C25ED65BC4816A097E6F4E6E179B8(vars, request, response);    
     } else if (vars.commandIn("SAVE_BUTTONActionButtonD234AE084F7040DCB66E281A4237FF99")) {
        processD234AE084F7040DCB66E281A4237FF99(vars, request, response);    
     } else if (vars.commandIn("SAVE_BUTTONActionButton800171")) {
@@ -650,6 +685,319 @@ comboTableData = null;
       out.println(xmlDocument.print());
       out.close();
     }
+    void printPageButtonF03D64524CD642EFA6DDC11150EDC498(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process F03D64524CD642EFA6DDC11150EDC498");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButtonF03D64524CD642EFA6DDC11150EDC498", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("F03D64524CD642EFA6DDC11150EDC498");
+        vars.removeMessage("F03D64524CD642EFA6DDC11150EDC498");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("c_period_id", ActionButtonSQLDefaultData.selectActPF03D64524CD642EFA6DDC11150EDC498_c_period_id(this, Utility.getContext(this, vars, "AD_ORG_ID", ""), Utility.getContext(this, vars, "AD_CLIENT_ID", "")));
+    comboTableData = new ComboTableData(vars, this, "18", "c_period_id", "275", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, ActionButtonSQLDefaultData.selectActPF03D64524CD642EFA6DDC11150EDC498_c_period_id(this, Utility.getContext(this, vars, "AD_ORG_ID", ""), Utility.getContext(this, vars, "AD_CLIENT_ID", "")));
+    xmlDocument.setData("reportc_period_id", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButton2A6B08C238B24CC1A483C84AB02DFBC2(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 2A6B08C238B24CC1A483C84AB02DFBC2");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButton2A6B08C238B24CC1A483C84AB02DFBC2", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("2A6B08C238B24CC1A483C84AB02DFBC2");
+        vars.removeMessage("2A6B08C238B24CC1A483C84AB02DFBC2");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButton61B3BD10ED0C4A37950A9269A07AF344(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 61B3BD10ED0C4A37950A9269A07AF344");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButton61B3BD10ED0C4A37950A9269A07AF344", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("61B3BD10ED0C4A37950A9269A07AF344");
+        vars.removeMessage("61B3BD10ED0C4A37950A9269A07AF344");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("ANIO", "");
+    comboTableData = new ComboTableData(vars, this, "18", "ANIO", "A18160D7A6D247C8AF5904F61A8BEEF2", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportANIO", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("VALOR_UTILIDADES", "");
+    xmlDocument.setParameter("outputType", "xls");
+    comboTableData = new ComboTableData(vars, this, "17", "outputType", "800104", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "xls");
+    xmlDocument.setData("reportoutputType", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButton7ADEF4948DD34B6DA43F75582C166396(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 7ADEF4948DD34B6DA43F75582C166396");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButton7ADEF4948DD34B6DA43F75582C166396", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("7ADEF4948DD34B6DA43F75582C166396");
+        vars.removeMessage("7ADEF4948DD34B6DA43F75582C166396");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("year", "");
+    comboTableData = new ComboTableData(vars, this, "18", "year", "A18160D7A6D247C8AF5904F61A8BEEF2", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportyear", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("ad_ref", "");
+    comboTableData = new ComboTableData(vars, this, "17", "ad_ref", "D782279EDFB144A2914AC7C7C8036C19", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportad_ref", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("outputtype", "xls");
+    comboTableData = new ComboTableData(vars, this, "17", "outputtype", "800104", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "xls");
+    xmlDocument.setData("reportoutputtype", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButtonA5EE7B720325485C8CF63DB7871A7101(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process A5EE7B720325485C8CF63DB7871A7101");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButtonA5EE7B720325485C8CF63DB7871A7101", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("A5EE7B720325485C8CF63DB7871A7101");
+        vars.removeMessage("A5EE7B720325485C8CF63DB7871A7101");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("ANIO", "");
+    comboTableData = new ComboTableData(vars, this, "18", "ANIO", "A18160D7A6D247C8AF5904F61A8BEEF2", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportANIO", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("VALOR_SALARIO", "");
+    xmlDocument.setParameter("outputType", "xls");
+    comboTableData = new ComboTableData(vars, this, "17", "outputType", "800104", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "xls");
+    xmlDocument.setData("reportoutputType", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButtonB670ED126EC0470A966FB31C6EEB8647(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process B670ED126EC0470A966FB31C6EEB8647");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButtonB670ED126EC0470A966FB31C6EEB8647", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("B670ED126EC0470A966FB31C6EEB8647");
+        vars.removeMessage("B670ED126EC0470A966FB31C6EEB8647");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("c_period_id", ActionButtonSQLDefaultData.selectActPB670ED126EC0470A966FB31C6EEB8647_c_period_id(this, Utility.getContext(this, vars, "AD_ORG_ID", ""), Utility.getContext(this, vars, "AD_CLIENT_ID", "")));
+    comboTableData = new ComboTableData(vars, this, "19", "c_period_id", "", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, ActionButtonSQLDefaultData.selectActPB670ED126EC0470A966FB31C6EEB8647_c_period_id(this, Utility.getContext(this, vars, "AD_ORG_ID", ""), Utility.getContext(this, vars, "AD_CLIENT_ID", "")));
+    xmlDocument.setData("reportc_period_id", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("outputType", "xls");
+    comboTableData = new ComboTableData(vars, this, "17", "outputType", "800104", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "xls");
+    xmlDocument.setData("reportoutputType", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButtonBB3C25ED65BC4816A097E6F4E6E179B8(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process BB3C25ED65BC4816A097E6F4E6E179B8");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButtonBB3C25ED65BC4816A097E6F4E6E179B8", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButton_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("BB3C25ED65BC4816A097E6F4E6E179B8");
+        vars.removeMessage("BB3C25ED65BC4816A097E6F4E6E179B8");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("c_period_id", ActionButtonSQLDefaultData.selectActPBB3C25ED65BC4816A097E6F4E6E179B8_c_period_id(this, Utility.getContext(this, vars, "AD_ORG_ID", ""), Utility.getContext(this, vars, "AD_CLIENT_ID", "")));
+    comboTableData = new ComboTableData(vars, this, "19", "c_period_id", "", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, ActionButtonSQLDefaultData.selectActPBB3C25ED65BC4816A097E6F4E6E179B8_c_period_id(this, Utility.getContext(this, vars, "AD_ORG_ID", ""), Utility.getContext(this, vars, "AD_CLIENT_ID", "")));
+    xmlDocument.setData("reportc_period_id", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("outputType", "pdf");
+    comboTableData = new ComboTableData(vars, this, "17", "outputType", "800104", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "pdf");
+    xmlDocument.setData("reportoutputType", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
     void printPageButtonD234AE084F7040DCB66E281A4237FF99(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
     throws IOException, ServletException {
       log4j.debug("Output: Button process D234AE084F7040DCB66E281A4237FF99");
@@ -954,6 +1302,125 @@ String strmaProcessplanId = vars.getStringParameter("inpmaProcessplanId");
 PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "MA_Processplan_ID", strmaProcessplanId, vars.getClient(), vars.getOrg(), vars.getUser());
 String strcalcdate = vars.getStringParameter("inpcalcdate");
 PInstanceProcessData.insertPInstanceParamDate(this, pinstance, "30", "CalcDate", strcalcdate, vars.getClient(), vars.getOrg(), vars.getUser());
+
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void processF03D64524CD642EFA6DDC11150EDC498(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "F03D64524CD642EFA6DDC11150EDC498", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        String strcPeriodId = vars.getStringParameter("inpcPeriodId");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "c_period_id", strcPeriodId, vars.getClient(), vars.getOrg(), vars.getUser());
+
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void process2A6B08C238B24CC1A483C84AB02DFBC2(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "2A6B08C238B24CC1A483C84AB02DFBC2", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void process61B3BD10ED0C4A37950A9269A07AF344(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "61B3BD10ED0C4A37950A9269A07AF344", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        String stranio = vars.getStringParameter("inpanio");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "ANIO", stranio, vars.getClient(), vars.getOrg(), vars.getUser());
+String strvalorUtilidades = vars.getNumericParameter("inpvalorUtilidades");
+PInstanceProcessData.insertPInstanceParamNumber(this, pinstance, "20", "VALOR_UTILIDADES", strvalorUtilidades, vars.getClient(), vars.getOrg(), vars.getUser());
+String stroutputtype = vars.getStringParameter("inpoutputtype");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "30", "outputType", stroutputtype, vars.getClient(), vars.getOrg(), vars.getUser());
+
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void process7ADEF4948DD34B6DA43F75582C166396(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "7ADEF4948DD34B6DA43F75582C166396", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        String stryear = vars.getStringParameter("inpyear");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "year", stryear, vars.getClient(), vars.getOrg(), vars.getUser());
+String stradRef = vars.getStringParameter("inpadRef");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "ad_ref", stradRef, vars.getClient(), vars.getOrg(), vars.getUser());
+String stroutputtype = vars.getStringParameter("inpoutputtype");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "30", "outputtype", stroutputtype, vars.getClient(), vars.getOrg(), vars.getUser());
+
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void processA5EE7B720325485C8CF63DB7871A7101(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "A5EE7B720325485C8CF63DB7871A7101", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        String stranio = vars.getStringParameter("inpanio");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "ANIO", stranio, vars.getClient(), vars.getOrg(), vars.getUser());
+String strvalorSalario = vars.getNumericParameter("inpvalorSalario");
+PInstanceProcessData.insertPInstanceParamNumber(this, pinstance, "20", "VALOR_SALARIO", strvalorSalario, vars.getClient(), vars.getOrg(), vars.getUser());
+String stroutputtype = vars.getStringParameter("inpoutputtype");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "30", "outputType", stroutputtype, vars.getClient(), vars.getOrg(), vars.getUser());
+
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void processB670ED126EC0470A966FB31C6EEB8647(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "B670ED126EC0470A966FB31C6EEB8647", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        String strcPeriodId = vars.getStringParameter("inpcPeriodId");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "c_period_id", strcPeriodId, vars.getClient(), vars.getOrg(), vars.getUser());
+String stroutputtype = vars.getStringParameter("inpoutputtype");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "outputType", stroutputtype, vars.getClient(), vars.getOrg(), vars.getUser());
+
+        
+        ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+        new ProcessRunner(bundle).execute(this);
+
+        processButtonHelper(request, response, vars, pinstance);    
+  }
+    private void processBB3C25ED65BC4816A097E6F4E6E179B8(VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException{
+         
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        String pinstance = SequenceIdData.getUUID();
+        PInstanceProcessData.insertPInstance(this, pinstance, "BB3C25ED65BC4816A097E6F4E6E179B8", "0", strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+        String strcPeriodId = vars.getStringParameter("inpcPeriodId");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "c_period_id", strcPeriodId, vars.getClient(), vars.getOrg(), vars.getUser());
+String stroutputtype = vars.getStringParameter("inpoutputtype");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "outputType", stroutputtype, vars.getClient(), vars.getOrg(), vars.getUser());
 
         
         ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);

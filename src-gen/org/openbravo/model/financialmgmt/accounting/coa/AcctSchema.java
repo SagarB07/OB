@@ -18,6 +18,11 @@
 */
 package org.openbravo.model.financialmgmt.accounting.coa;
 
+import com.atrums.nomina.data.noCbEmpleadoAcct;
+import com.atrums.nomina.data.noTipoIngEgrAcct;
+import com.atrums.nomina.data.no_tipo_rub_liqu_emp_acct;
+import com.atrums.nomina.empleados.data.nePerfilRubroLine;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +39,7 @@ import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.ad.system.ClientInformation;
 import org.openbravo.model.common.bank.BankAccountAccounts;
+import org.openbravo.model.common.businesspartner.BusinessPartner;
 import org.openbravo.model.common.businesspartner.CategoryAccounts;
 import org.openbravo.model.common.businesspartner.CustomerAccounts;
 import org.openbravo.model.common.businesspartner.EmployeeAccounts;
@@ -103,6 +109,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
     public static final String PROPERTY_BANKACCOUNTACCOUNTSLIST = "bankAccountAccountsList";
+    public static final String PROPERTY_BUSINESSPARTNEREMNECACCTSCHEMAIDLIST = "businessPartnerEmNeCAcctschemaIdList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTLIST = "businessPartnerCategoryAccountList";
     public static final String PROPERTY_CACCTSCHEMAPROCESSLIST = "cAcctSchemaProcessList";
     public static final String PROPERTY_CLIENTINFORMATIONPRIMARYACCOUNTINGSCHEMALIST = "clientInformationPrimaryAccountingSchemaList";
@@ -132,6 +139,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_FINANCIALMGMTTAXPAYMENTLIST = "financialMgmtTaxPaymentList";
     public static final String PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSLIST = "financialMgmtTaxRateAccountsList";
     public static final String PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSLIST = "financialMgmtWithholdingAccountsList";
+    public static final String PROPERTY_CBEMPLEADOACCTLIST = "cbEmpleadoAcctList";
     public static final String PROPERTY_ORGANIZATIONLIST = "organizationList";
     public static final String PROPERTY_ORGANIZATIONACCTSCHEMALIST = "organizationAcctSchemaList";
     public static final String PROPERTY_PRODUCTACCOUNTSLIST = "productAccountsList";
@@ -139,6 +147,9 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_PROJECTACCOUNTSLIST = "projectAccountsList";
     public static final String PROPERTY_VENDORACCOUNTSLIST = "vendorAccountsList";
     public static final String PROPERTY_WAREHOUSEACCOUNTSLIST = "warehouseAccountsList";
+    public static final String PROPERTY_PERFILRUBROLINELIST = "perfilRubroLineList";
+    public static final String PROPERTY_TIPOINGEGRACCTLIST = "tipoIngEgrAcctList";
+    public static final String PROPERTY_TIPORUBLIQUEMPACCTLIST = "tipoRubLiquEmpAcctList";
 
     public AcctSchema() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -160,6 +171,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BANKACCOUNTACCOUNTSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_BUSINESSPARTNEREMNECACCTSCHEMAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CACCTSCHEMAPROCESSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONPRIMARYACCOUNTINGSCHEMALIST, new ArrayList<Object>());
@@ -189,6 +201,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CBEMPLEADOACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORGANIZATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORGANIZATIONACCTSCHEMALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSLIST, new ArrayList<Object>());
@@ -196,6 +209,9 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
         setDefaultValue(PROPERTY_PROJECTACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_VENDORACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSEACCOUNTSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PERFILRUBROLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPOINGEGRACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPORUBLIQUEMPACCTLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -471,6 +487,15 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     }
 
     @SuppressWarnings("unchecked")
+    public List<BusinessPartner> getBusinessPartnerEmNeCAcctschemaIdList() {
+      return (List<BusinessPartner>) get(PROPERTY_BUSINESSPARTNEREMNECACCTSCHEMAIDLIST);
+    }
+
+    public void setBusinessPartnerEmNeCAcctschemaIdList(List<BusinessPartner> businessPartnerEmNeCAcctschemaIdList) {
+        set(PROPERTY_BUSINESSPARTNEREMNECACCTSCHEMAIDLIST, businessPartnerEmNeCAcctschemaIdList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<CategoryAccounts> getBusinessPartnerCategoryAccountList() {
       return (List<CategoryAccounts>) get(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTLIST);
     }
@@ -732,6 +757,15 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     }
 
     @SuppressWarnings("unchecked")
+    public List<noCbEmpleadoAcct> getCbEmpleadoAcctList() {
+      return (List<noCbEmpleadoAcct>) get(PROPERTY_CBEMPLEADOACCTLIST);
+    }
+
+    public void setCbEmpleadoAcctList(List<noCbEmpleadoAcct> cbEmpleadoAcctList) {
+        set(PROPERTY_CBEMPLEADOACCTLIST, cbEmpleadoAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Organization> getOrganizationList() {
       return (List<Organization>) get(PROPERTY_ORGANIZATIONLIST);
     }
@@ -792,6 +826,33 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setWarehouseAccountsList(List<WarehouseAccounts> warehouseAccountsList) {
         set(PROPERTY_WAREHOUSEACCOUNTSLIST, warehouseAccountsList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<nePerfilRubroLine> getPerfilRubroLineList() {
+      return (List<nePerfilRubroLine>) get(PROPERTY_PERFILRUBROLINELIST);
+    }
+
+    public void setPerfilRubroLineList(List<nePerfilRubroLine> perfilRubroLineList) {
+        set(PROPERTY_PERFILRUBROLINELIST, perfilRubroLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noTipoIngEgrAcct> getTipoIngEgrAcctList() {
+      return (List<noTipoIngEgrAcct>) get(PROPERTY_TIPOINGEGRACCTLIST);
+    }
+
+    public void setTipoIngEgrAcctList(List<noTipoIngEgrAcct> tipoIngEgrAcctList) {
+        set(PROPERTY_TIPOINGEGRACCTLIST, tipoIngEgrAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<no_tipo_rub_liqu_emp_acct> getTipoRubLiquEmpAcctList() {
+      return (List<no_tipo_rub_liqu_emp_acct>) get(PROPERTY_TIPORUBLIQUEMPACCTLIST);
+    }
+
+    public void setTipoRubLiquEmpAcctList(List<no_tipo_rub_liqu_emp_acct> tipoRubLiquEmpAcctList) {
+        set(PROPERTY_TIPORUBLIQUEMPACCTLIST, tipoRubLiquEmpAcctList);
     }
 
 }

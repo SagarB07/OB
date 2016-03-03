@@ -18,6 +18,11 @@
 */
 package org.openbravo.model.financialmgmt.accounting.coa;
 
+import com.atrums.nomina.data.noCbEmpleadoAcct;
+import com.atrums.nomina.data.noTipoIngEgrAcct;
+import com.atrums.nomina.data.no_tipo_rub_liqu_emp_acct;
+import com.atrums.nomina.empleados.data.nePerfilRubroLine;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -104,6 +109,7 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_BANKACCOUNTACCOUNTSBANKSETTLEMENTLOSSLIST = "bankAccountAccountsBankSettlementLossList";
     public static final String PROPERTY_BANKACCOUNTACCOUNTSBANKREVALUATIONGAINLIST = "bankAccountAccountsBankRevaluationGainList";
     public static final String PROPERTY_BANKACCOUNTACCOUNTSBANKREVALUATIONLOSSLIST = "bankAccountAccountsBankRevaluationLossList";
+    public static final String PROPERTY_BUSINESSPARTNEREMNOPAGOACCTLIST = "businessPartnerEmNoPagoAcctList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTCUSTOMERRECEIVABLESNOLIST = "businessPartnerCategoryAccountCustomerReceivablesNoList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTCUSTOMERPREPAYMENTLIST = "businessPartnerCategoryAccountCustomerPrepaymentList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTVENDORLIABILITYLIST = "businessPartnerCategoryAccountVendorLiabilityList";
@@ -130,6 +136,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEEXPENSESLIST = "employeeAccountsEmployeeExpensesList";
     public static final String PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEPREPAYMENTSLIST = "employeeAccountsEmployeePrepaymentsList";
+    public static final String PROPERTY_EMPLOYEEACCOUNTSEMNOCUENTAPAGOLIST = "employeeAccountsEMNoCuentaPagoList";
+    public static final String PROPERTY_EMPLOYEEACCOUNTSEMNOPROVISIONACCTLIST = "employeeAccountsEMNoProvisionAcctList";
     public static final String PROPERTY_FINFINANCIALACCOUNTACCTRECEIVEPAYMENTACCOUNTLIST = "fINFinancialAccountAcctReceivePaymentAccountList";
     public static final String PROPERTY_FINFINANCIALACCOUNTACCTMAKEPAYMENTACCOUNTLIST = "fINFinancialAccountAcctMakePaymentAccountList";
     public static final String PROPERTY_FINFINANCIALACCOUNTACCTDEPOSITACCOUNTLIST = "fINFinancialAccountAcctDepositAccountList";
@@ -252,6 +260,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSTAXDUETRANSITORYLIST = "financialMgmtTaxRateAccountsTaxDueTransitoryList";
     public static final String PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSTAXCREDITTRANSITORYLIST = "financialMgmtTaxRateAccountsTaxCreditTransitoryList";
     public static final String PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSWITHHOLDINGACCOUNTLIST = "financialMgmtWithholdingAccountsWithholdingAccountList";
+    public static final String PROPERTY_CBEMPLEADOACCTCUENTADELINGRESOLIST = "cbEmpleadoAcctCuentaDelIngresoList";
+    public static final String PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST = "cbEmpleadoAcctCuentaDelEgresoList";
     public static final String PROPERTY_PRODUCTACCOUNTSPRODUCTREVENUELIST = "productAccountsProductRevenueList";
     public static final String PROPERTY_PRODUCTACCOUNTSPRODUCTEXPENSELIST = "productAccountsProductExpenseList";
     public static final String PROPERTY_PRODUCTACCOUNTSFIXEDASSETLIST = "productAccountsFixedAssetList";
@@ -285,6 +295,12 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_WAREHOUSEACCOUNTSINVENTORYADJUSTMENTLIST = "warehouseAccountsInventoryAdjustmentList";
     public static final String PROPERTY_WAREHOUSEACCOUNTSWAREHOUSEDIFFERENCESLIST = "warehouseAccountsWarehouseDifferencesList";
     public static final String PROPERTY_WAREHOUSEACCOUNTSINVENTORYREVALUATIONLIST = "warehouseAccountsInventoryRevaluationList";
+    public static final String PROPERTY_PERFILRUBROLINENEDEBEACCTLIST = "perfilRubroLineNeDebeAcctList";
+    public static final String PROPERTY_PERFILRUBROLINENEHABERACCTLIST = "perfilRubroLineNeHaberAcctList";
+    public static final String PROPERTY_TIPOINGEGRACCTNDEBEACCTLIST = "tipoIngEgrAcctNDebeAcctList";
+    public static final String PROPERTY_TIPOINGEGRACCTNHABERACCTLIST = "tipoIngEgrAcctNHaberAcctList";
+    public static final String PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBRODEBELIST = "tipoRubLiquEmpAcctCuentaRubroDebeList";
+    public static final String PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBROHABERLIST = "tipoRubLiquEmpAcctCuentaRubroHaberList";
 
     public AccountingCombination() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -301,6 +317,7 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_BANKACCOUNTACCOUNTSBANKSETTLEMENTLOSSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BANKACCOUNTACCOUNTSBANKREVALUATIONGAINLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BANKACCOUNTACCOUNTSBANKREVALUATIONLOSSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_BUSINESSPARTNEREMNOPAGOACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTCUSTOMERRECEIVABLESNOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTCUSTOMERPREPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTVENDORLIABILITYLIST, new ArrayList<Object>());
@@ -327,6 +344,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEEXPENSESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEPREPAYMENTSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_EMPLOYEEACCOUNTSEMNOCUENTAPAGOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_EMPLOYEEACCOUNTSEMNOPROVISIONACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINANCIALACCOUNTACCTRECEIVEPAYMENTACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINANCIALACCOUNTACCTMAKEPAYMENTACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINANCIALACCOUNTACCTDEPOSITACCOUNTLIST, new ArrayList<Object>());
@@ -449,6 +468,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSTAXDUETRANSITORYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSTAXCREDITTRANSITORYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSWITHHOLDINGACCOUNTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CBEMPLEADOACCTCUENTADELINGRESOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSPRODUCTREVENUELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSPRODUCTEXPENSELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSFIXEDASSETLIST, new ArrayList<Object>());
@@ -482,6 +503,12 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_WAREHOUSEACCOUNTSINVENTORYADJUSTMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSEACCOUNTSWAREHOUSEDIFFERENCESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSEACCOUNTSINVENTORYREVALUATIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PERFILRUBROLINENEDEBEACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PERFILRUBROLINENEHABERACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPOINGEGRACCTNDEBEACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPOINGEGRACCTNHABERACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBRODEBELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBROHABERLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -798,6 +825,15 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     }
 
     @SuppressWarnings("unchecked")
+    public List<BusinessPartner> getBusinessPartnerEmNoPagoAcctList() {
+      return (List<BusinessPartner>) get(PROPERTY_BUSINESSPARTNEREMNOPAGOACCTLIST);
+    }
+
+    public void setBusinessPartnerEmNoPagoAcctList(List<BusinessPartner> businessPartnerEmNoPagoAcctList) {
+        set(PROPERTY_BUSINESSPARTNEREMNOPAGOACCTLIST, businessPartnerEmNoPagoAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<CategoryAccounts> getBusinessPartnerCategoryAccountCustomerReceivablesNoList() {
       return (List<CategoryAccounts>) get(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTCUSTOMERRECEIVABLESNOLIST);
     }
@@ -1029,6 +1065,24 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
 
     public void setEmployeeAccountsEmployeePrepaymentsList(List<EmployeeAccounts> employeeAccountsEmployeePrepaymentsList) {
         set(PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEPREPAYMENTSLIST, employeeAccountsEmployeePrepaymentsList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<EmployeeAccounts> getEmployeeAccountsEMNoCuentaPagoList() {
+      return (List<EmployeeAccounts>) get(PROPERTY_EMPLOYEEACCOUNTSEMNOCUENTAPAGOLIST);
+    }
+
+    public void setEmployeeAccountsEMNoCuentaPagoList(List<EmployeeAccounts> employeeAccountsEMNoCuentaPagoList) {
+        set(PROPERTY_EMPLOYEEACCOUNTSEMNOCUENTAPAGOLIST, employeeAccountsEMNoCuentaPagoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<EmployeeAccounts> getEmployeeAccountsEMNoProvisionAcctList() {
+      return (List<EmployeeAccounts>) get(PROPERTY_EMPLOYEEACCOUNTSEMNOPROVISIONACCTLIST);
+    }
+
+    public void setEmployeeAccountsEMNoProvisionAcctList(List<EmployeeAccounts> employeeAccountsEMNoProvisionAcctList) {
+        set(PROPERTY_EMPLOYEEACCOUNTSEMNOPROVISIONACCTLIST, employeeAccountsEMNoProvisionAcctList);
     }
 
     @SuppressWarnings("unchecked")
@@ -2130,6 +2184,24 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     }
 
     @SuppressWarnings("unchecked")
+    public List<noCbEmpleadoAcct> getCbEmpleadoAcctCuentaDelIngresoList() {
+      return (List<noCbEmpleadoAcct>) get(PROPERTY_CBEMPLEADOACCTCUENTADELINGRESOLIST);
+    }
+
+    public void setCbEmpleadoAcctCuentaDelIngresoList(List<noCbEmpleadoAcct> cbEmpleadoAcctCuentaDelIngresoList) {
+        set(PROPERTY_CBEMPLEADOACCTCUENTADELINGRESOLIST, cbEmpleadoAcctCuentaDelIngresoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noCbEmpleadoAcct> getCbEmpleadoAcctCuentaDelEgresoList() {
+      return (List<noCbEmpleadoAcct>) get(PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST);
+    }
+
+    public void setCbEmpleadoAcctCuentaDelEgresoList(List<noCbEmpleadoAcct> cbEmpleadoAcctCuentaDelEgresoList) {
+        set(PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST, cbEmpleadoAcctCuentaDelEgresoList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<ProductAccounts> getProductAccountsProductRevenueList() {
       return (List<ProductAccounts>) get(PROPERTY_PRODUCTACCOUNTSPRODUCTREVENUELIST);
     }
@@ -2424,6 +2496,60 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
 
     public void setWarehouseAccountsInventoryRevaluationList(List<WarehouseAccounts> warehouseAccountsInventoryRevaluationList) {
         set(PROPERTY_WAREHOUSEACCOUNTSINVENTORYREVALUATIONLIST, warehouseAccountsInventoryRevaluationList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<nePerfilRubroLine> getPerfilRubroLineNeDebeAcctList() {
+      return (List<nePerfilRubroLine>) get(PROPERTY_PERFILRUBROLINENEDEBEACCTLIST);
+    }
+
+    public void setPerfilRubroLineNeDebeAcctList(List<nePerfilRubroLine> perfilRubroLineNeDebeAcctList) {
+        set(PROPERTY_PERFILRUBROLINENEDEBEACCTLIST, perfilRubroLineNeDebeAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<nePerfilRubroLine> getPerfilRubroLineNeHaberAcctList() {
+      return (List<nePerfilRubroLine>) get(PROPERTY_PERFILRUBROLINENEHABERACCTLIST);
+    }
+
+    public void setPerfilRubroLineNeHaberAcctList(List<nePerfilRubroLine> perfilRubroLineNeHaberAcctList) {
+        set(PROPERTY_PERFILRUBROLINENEHABERACCTLIST, perfilRubroLineNeHaberAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noTipoIngEgrAcct> getTipoIngEgrAcctNDebeAcctList() {
+      return (List<noTipoIngEgrAcct>) get(PROPERTY_TIPOINGEGRACCTNDEBEACCTLIST);
+    }
+
+    public void setTipoIngEgrAcctNDebeAcctList(List<noTipoIngEgrAcct> tipoIngEgrAcctNDebeAcctList) {
+        set(PROPERTY_TIPOINGEGRACCTNDEBEACCTLIST, tipoIngEgrAcctNDebeAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noTipoIngEgrAcct> getTipoIngEgrAcctNHaberAcctList() {
+      return (List<noTipoIngEgrAcct>) get(PROPERTY_TIPOINGEGRACCTNHABERACCTLIST);
+    }
+
+    public void setTipoIngEgrAcctNHaberAcctList(List<noTipoIngEgrAcct> tipoIngEgrAcctNHaberAcctList) {
+        set(PROPERTY_TIPOINGEGRACCTNHABERACCTLIST, tipoIngEgrAcctNHaberAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<no_tipo_rub_liqu_emp_acct> getTipoRubLiquEmpAcctCuentaRubroDebeList() {
+      return (List<no_tipo_rub_liqu_emp_acct>) get(PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBRODEBELIST);
+    }
+
+    public void setTipoRubLiquEmpAcctCuentaRubroDebeList(List<no_tipo_rub_liqu_emp_acct> tipoRubLiquEmpAcctCuentaRubroDebeList) {
+        set(PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBRODEBELIST, tipoRubLiquEmpAcctCuentaRubroDebeList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<no_tipo_rub_liqu_emp_acct> getTipoRubLiquEmpAcctCuentaRubroHaberList() {
+      return (List<no_tipo_rub_liqu_emp_acct>) get(PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBROHABERLIST);
+    }
+
+    public void setTipoRubLiquEmpAcctCuentaRubroHaberList(List<no_tipo_rub_liqu_emp_acct> tipoRubLiquEmpAcctCuentaRubroHaberList) {
+        set(PROPERTY_TIPORUBLIQUEMPACCTCUENTARUBROHABERLIST, tipoRubLiquEmpAcctCuentaRubroHaberList);
     }
 
 }

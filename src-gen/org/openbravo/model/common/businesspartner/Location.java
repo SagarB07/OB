@@ -71,6 +71,7 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
     public static final String PROPERTY_LOCATIONADDRESS = "locationAddress";
     public static final String PROPERTY_TAXLOCATION = "taxLocation";
     public static final String PROPERTY_UPCEAN = "uPCEAN";
+    public static final String PROPERTY_NONUMDIR = "noNumDir";
     public static final String PROPERTY_ADUSERLIST = "aDUserList";
     public static final String PROPERTY_ACTIVEPROPOSALVLIST = "activeProposalVList";
     public static final String PROPERTY_DATAIMPORTBUSINESSPARTNERLIST = "dataImportBusinessPartnerList";
@@ -291,6 +292,14 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
 
     public void setUPCEAN(String uPCEAN) {
         set(PROPERTY_UPCEAN, uPCEAN);
+    }
+
+    public String getNoNumDir() {
+        return (String) get(PROPERTY_NONUMDIR);
+    }
+
+    public void setNoNumDir(String noNumDir) {
+        set(PROPERTY_NONUMDIR, noNumDir);
     }
 
     @SuppressWarnings("unchecked")

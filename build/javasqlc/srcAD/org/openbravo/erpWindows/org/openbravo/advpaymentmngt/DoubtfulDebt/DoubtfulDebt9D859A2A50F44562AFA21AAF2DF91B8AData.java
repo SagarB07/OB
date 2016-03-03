@@ -53,11 +53,11 @@ static Logger log4j = Logger.getLogger(DoubtfulDebt9D859A2A50F44562AFA21AAF2DF91
   public String emAprmProcess;
   public String emAprmProcessBtn;
   public String aAssetId;
-  public String finDoubtfulDebtId;
-  public String processing;
-  public String processed;
-  public String cCurrencyId;
   public String adClientId;
+  public String cCurrencyId;
+  public String finDoubtfulDebtId;
+  public String processed;
+  public String processing;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -141,16 +141,16 @@ static Logger log4j = Logger.getLogger(DoubtfulDebt9D859A2A50F44562AFA21AAF2DF91
       return emAprmProcessBtn;
     else if (fieldName.equalsIgnoreCase("a_asset_id") || fieldName.equals("aAssetId"))
       return aAssetId;
-    else if (fieldName.equalsIgnoreCase("fin_doubtful_debt_id") || fieldName.equals("finDoubtfulDebtId"))
-      return finDoubtfulDebtId;
-    else if (fieldName.equalsIgnoreCase("processing"))
-      return processing;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
-    else if (fieldName.equalsIgnoreCase("c_currency_id") || fieldName.equals("cCurrencyId"))
-      return cCurrencyId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("c_currency_id") || fieldName.equals("cCurrencyId"))
+      return cCurrencyId;
+    else if (fieldName.equalsIgnoreCase("fin_doubtful_debt_id") || fieldName.equals("finDoubtfulDebtId"))
+      return finDoubtfulDebtId;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("processing"))
+      return processing;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -219,11 +219,11 @@ Select for edit
       "FIN_Doubtful_Debt.EM_APRM_Process, " +
       "list2.name as EM_APRM_Process_BTN, " +
       "FIN_Doubtful_Debt.A_Asset_ID, " +
-      "FIN_Doubtful_Debt.FIN_Doubtful_Debt_ID, " +
-      "COALESCE(FIN_Doubtful_Debt.Processing, 'N') AS Processing, " +
-      "COALESCE(FIN_Doubtful_Debt.Processed, 'N') AS Processed, " +
-      "FIN_Doubtful_Debt.C_Currency_ID, " +
       "FIN_Doubtful_Debt.AD_Client_ID, " +
+      "FIN_Doubtful_Debt.C_Currency_ID, " +
+      "FIN_Doubtful_Debt.FIN_Doubtful_Debt_ID, " +
+      "COALESCE(FIN_Doubtful_Debt.Processed, 'N') AS Processed, " +
+      "COALESCE(FIN_Doubtful_Debt.Processing, 'N') AS Processing, " +
       "        ? AS LANGUAGE " +
       "        FROM FIN_Doubtful_Debt left join (select C_Doctype_ID, Name from C_Doctype) table1 on (FIN_Doubtful_Debt.C_Doctype_ID = table1.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL1 on (table1.C_DocType_ID = tableTRL1.C_DocType_ID and tableTRL1.AD_Language = ?)  left join (select FIN_Doubtful_Debt_Run_ID, Rundate, Percentage, Daysoverdue from FIN_Doubtful_Debt_Run) table3 on (FIN_Doubtful_Debt.FIN_Doubtful_Debt_Run_ID = table3.FIN_Doubtful_Debt_Run_ID) left join (select FIN_Payment_Schedule_ID, Duedate, Amount from FIN_Payment_Schedule) table4 on (FIN_Doubtful_Debt.FIN_Payment_Schedule_ID = table4.FIN_Payment_Schedule_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND FIN_Doubtful_Debt.Posted = TO_CHAR(list1.value)) left join (select C_BPartner_ID, Name from C_BPartner) table5 on (FIN_Doubtful_Debt.C_Bpartner_ID = table5.C_BPartner_ID) left join (select M_Product_ID, Name from M_Product) table6 on (FIN_Doubtful_Debt.M_Product_ID = table6.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL6 on (table6.M_Product_ID = tableTRL6.M_Product_ID and tableTRL6.AD_Language = ?)  left join (select C_Campaign_ID, Name from C_Campaign) table8 on (FIN_Doubtful_Debt.C_Campaign_ID = table8.C_Campaign_ID) left join (select C_Activity_ID, Name from C_Activity) table9 on (FIN_Doubtful_Debt.C_Activity_ID = table9.C_Activity_ID) left join ad_ref_list_v list2 on (list2.ad_reference_id = '798239EB069F41A9BA8EE040C63DDBBC' and list2.ad_language = ?  AND FIN_Doubtful_Debt.EM_APRM_Process = TO_CHAR(list2.value))" +
       "        WHERE 2=2 " +
@@ -304,11 +304,11 @@ Select for edit
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.emAprmProcess = UtilSql.getValue(result, "em_aprm_process");
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.emAprmProcessBtn = UtilSql.getValue(result, "em_aprm_process_btn");
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.aAssetId = UtilSql.getValue(result, "a_asset_id");
-        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.finDoubtfulDebtId = UtilSql.getValue(result, "fin_doubtful_debt_id");
-        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.processing = UtilSql.getValue(result, "processing");
-        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.processed = UtilSql.getValue(result, "processed");
-        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.cCurrencyId = UtilSql.getValue(result, "c_currency_id");
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.cCurrencyId = UtilSql.getValue(result, "c_currency_id");
+        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.finDoubtfulDebtId = UtilSql.getValue(result, "fin_doubtful_debt_id");
+        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.processed = UtilSql.getValue(result, "processed");
+        objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.processing = UtilSql.getValue(result, "processing");
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.language = UtilSql.getValue(result, "language");
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.adUserClient = "";
         objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData.adOrgClient = "";
@@ -381,11 +381,11 @@ Create a registry
     objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].emAprmProcess = emAprmProcess;
     objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].emAprmProcessBtn = emAprmProcessBtn;
     objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].aAssetId = aAssetId;
-    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].finDoubtfulDebtId = finDoubtfulDebtId;
-    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].processing = processing;
-    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].processed = processed;
-    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].cCurrencyId = cCurrencyId;
     objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].adClientId = adClientId;
+    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].cCurrencyId = cCurrencyId;
+    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].finDoubtfulDebtId = finDoubtfulDebtId;
+    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].processed = processed;
+    objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].processing = processing;
     objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData[0].language = "";
     return objectDoubtfulDebt9D859A2A50F44562AFA21AAF2DF91B8AData;
   }
@@ -547,7 +547,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Doubtful_Debt" +
-      "        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , DateAcct = TO_DATE(?) , FIN_Doubtful_Debt_Run_ID = (?) , FIN_Payment_Schedule_ID = (?) , Description = (?) , Amount = TO_NUMBER(?) , Isactive = (?) , Posted = (?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , User2_ID = (?) , EM_APRM_Process = (?) , A_Asset_ID = (?) , FIN_Doubtful_Debt_ID = (?) , Processing = (?) , Processed = (?) , C_Currency_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , DateAcct = TO_DATE(?) , FIN_Doubtful_Debt_Run_ID = (?) , FIN_Payment_Schedule_ID = (?) , Description = (?) , Amount = TO_NUMBER(?) , Isactive = (?) , Posted = (?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , User2_ID = (?) , EM_APRM_Process = (?) , A_Asset_ID = (?) , AD_Client_ID = (?) , C_Currency_ID = (?) , FIN_Doubtful_Debt_ID = (?) , Processed = (?) , Processing = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Doubtful_Debt.FIN_Doubtful_Debt_ID = ? " +
       "        AND FIN_Doubtful_Debt.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -584,11 +584,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcess);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finDoubtfulDebtId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finDoubtfulDebtId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finDoubtfulDebtId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -617,7 +617,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Doubtful_Debt " +
-      "        (AD_Org_ID, C_Doctype_ID, DocumentNo, DateAcct, FIN_Doubtful_Debt_Run_ID, FIN_Payment_Schedule_ID, Description, Amount, Isactive, Posted, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, User1_ID, User2_ID, EM_APRM_Process, A_Asset_ID, FIN_Doubtful_Debt_ID, Processing, Processed, C_Currency_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, C_Doctype_ID, DocumentNo, DateAcct, FIN_Doubtful_Debt_Run_ID, FIN_Payment_Schedule_ID, Description, Amount, Isactive, Posted, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, User1_ID, User2_ID, EM_APRM_Process, A_Asset_ID, AD_Client_ID, C_Currency_ID, FIN_Doubtful_Debt_ID, Processed, Processing, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), TO_DATE(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -646,11 +646,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcess);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finDoubtfulDebtId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finDoubtfulDebtId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

@@ -18,6 +18,12 @@
 */
 package org.openbravo.model.financialmgmt.payment;
 
+import com.atrums.nomina.data.noContratoEmpleado;
+import com.atrums.nomina.data.noLiquidacionEmpleado;
+import com.atrums.nomina.data.noPagoCabecera;
+import com.atrums.nomina.data.noRegistraQuincLine;
+import com.atrums.nomina.data.noRolPagoProvisionLine;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,6 +113,11 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
     public static final String PROPERTY_FINANCIALMGMTBANKFILEEXCEPTIONLIST = "financialMgmtBankFileExceptionList";
     public static final String PROPERTY_FINANCIALMGMTFINACCPAYMENTMETHODLIST = "financialMgmtFinAccPaymentMethodList";
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
+    public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
+    public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
+    public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
 
 
     // Computed columns properties, these properties cannot be directly accessed, they need
@@ -145,6 +156,11 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         setDefaultValue(PROPERTY_FINANCIALMGMTBANKFILEEXCEPTIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTFINACCPAYMENTMETHODLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
     }
 
     @Override
@@ -631,6 +647,51 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
 
     public void setFinancialMgmtGLJournalLineList(List<GLJournalLine> financialMgmtGLJournalLineList) {
         set(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, financialMgmtGLJournalLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolPagoProvisionLine> getRolPagoProvisionLineList() {
+      return (List<noRolPagoProvisionLine>) get(PROPERTY_ROLPAGOPROVISIONLINELIST);
+    }
+
+    public void setRolPagoProvisionLineList(List<noRolPagoProvisionLine> rolPagoProvisionLineList) {
+        set(PROPERTY_ROLPAGOPROVISIONLINELIST, rolPagoProvisionLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noLiquidacionEmpleado> getLiquidacionEmpleadoList() {
+      return (List<noLiquidacionEmpleado>) get(PROPERTY_LIQUIDACIONEMPLEADOLIST);
+    }
+
+    public void setLiquidacionEmpleadoList(List<noLiquidacionEmpleado> liquidacionEmpleadoList) {
+        set(PROPERTY_LIQUIDACIONEMPLEADOLIST, liquidacionEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERALIST);
+    }
+
+    public void setPagoCabeceraList(List<noPagoCabecera> pagoCabeceraList) {
+        set(PROPERTY_PAGOCABECERALIST, pagoCabeceraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistraQuincLine> getRegistraQuincLineList() {
+      return (List<noRegistraQuincLine>) get(PROPERTY_REGISTRAQUINCLINELIST);
+    }
+
+    public void setRegistraQuincLineList(List<noRegistraQuincLine> registraQuincLineList) {
+        set(PROPERTY_REGISTRAQUINCLINELIST, registraQuincLineList);
     }
 
 

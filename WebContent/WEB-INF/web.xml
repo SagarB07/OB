@@ -539,6 +539,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.GeneradorPagosNomina.PagoNominaCabecera424295FE162A4CF88B993BD228C47679
+      </display-name>
+      <servlet-name>
+        W424295FE162A4CF88B993BD228C47679
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.GeneradorPagosNomina.PagoNominaCabecera424295FE162A4CF88B993BD228C47679
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.GeneralLedgerConfiguration.GeneralLedgerConfiguration
       </display-name>
       <servlet-name>
@@ -683,6 +695,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.LiquidacionEmpleado.LiquidacionEmpleado55D81228F99B47F8AAC41D1DE0175DFC
+      </display-name>
+      <servlet-name>
+        W55D81228F99B47F8AAC41D1DE0175DFC
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.LiquidacionEmpleado.LiquidacionEmpleado55D81228F99B47F8AAC41D1DE0175DFC
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.ManageRequisitions.Header
       </display-name>
       <servlet-name>
@@ -810,6 +834,18 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.PeriodicQualityControlData.Test
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.PermisodeEmpleados.PermisodeEmpleados375F8A61F52D41D6A72639CE12A97ED7
+      </display-name>
+      <servlet-name>
+        W375F8A61F52D41D6A72639CE12A97ED7
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.PermisodeEmpleados.PermisodeEmpleados375F8A61F52D41D6A72639CE12A97ED7
       </servlet-class>
     </servlet>
   
@@ -1043,6 +1079,42 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RegistrarAnticipos.RegistrarAnticiposD6E6846C2564435F9B297860CB950D31
+      </display-name>
+      <servlet-name>
+        WD6E6846C2564435F9B297860CB950D31
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RegistrarAnticipos.RegistrarAnticiposD6E6846C2564435F9B297860CB950D31
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RegistrarAnticipos.RegistrarAvancesLineC018CCAD1E4F435EB18BF1CCA45604CC
+      </display-name>
+      <servlet-name>
+        WC018CCAD1E4F435EB18BF1CCA45604CC
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RegistrarAnticipos.RegistrarAvancesLineC018CCAD1E4F435EB18BF1CCA45604CC
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RegistrarPrestamos.RegistroPrestamosEAE8C067A95849F89D14E8489E481119
+      </display-name>
+      <servlet-name>
+        WEAE8C067A95849F89D14E8489E481119
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RegistrarPrestamos.RegistroPrestamosEAE8C067A95849F89D14E8489E481119
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.Requisition.Requisition
       </display-name>
       <servlet-name>
@@ -1050,6 +1122,18 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.Requisition.Requisition
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.rdep.RetencionesEmpleado.RetencionesCabecera8982CE6EA9E8433E8FA23C11DEED4D6C
+      </display-name>
+      <servlet-name>
+        W8982CE6EA9E8433E8FA23C11DEED4D6C
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.rdep.RetencionesEmpleado.RetencionesCabecera8982CE6EA9E8433E8FA23C11DEED4D6C
       </servlet-class>
     </servlet>
   
@@ -1098,6 +1182,66 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.ReturntoVendorShipment.Header
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldePagos.RoldePagos9627836015B94CF6ACD14D0E16F4627B
+      </display-name>
+      <servlet-name>
+        W9627836015B94CF6ACD14D0E16F4627B
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldePagos.RoldePagos9627836015B94CF6ACD14D0E16F4627B
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones.RoldeProvisiones2407AED87B05460DBD174C5F8EF29677
+      </display-name>
+      <servlet-name>
+        W2407AED87B05460DBD174C5F8EF29677
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones.RoldeProvisiones2407AED87B05460DBD174C5F8EF29677
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones.Linea00E24D4D2F074977B69197B0A12B8189
+      </display-name>
+      <servlet-name>
+        W00E24D4D2F074977B69197B0A12B8189
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones.Linea00E24D4D2F074977B69197B0A12B8189
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones.ProvisionMensual6FF22921D16B4043A16ACDCD4C751290
+      </display-name>
+      <servlet-name>
+        W6FF22921D16B4043A16ACDCD4C751290
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.RoldeProvisiones.ProvisionMensual6FF22921D16B4043A16ACDCD4C751290
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.SalarioDigno.SalarioDigno910392DFB0E94D9CB9B160A6BCDC4DBF
+      </display-name>
+      <servlet-name>
+        W910392DFB0E94D9CB9B160A6BCDC4DBF
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.SalarioDigno.SalarioDigno910392DFB0E94D9CB9B160A6BCDC4DBF
       </servlet-class>
     </servlet>
   
@@ -1242,6 +1386,42 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.TaxPayment.Header
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.UtilidadesEmpleado.Utilidades780D8D8AED8D4D05B740E02687292A1C
+      </display-name>
+      <servlet-name>
+        W780D8D8AED8D4D05B740E02687292A1C
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.UtilidadesEmpleado.Utilidades780D8D8AED8D4D05B740E02687292A1C
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.Vacaciones.Vacaciones842CC2DF626D478498EF81923785A8F5
+      </display-name>
+      <servlet-name>
+        W842CC2DF626D478498EF81923785A8F5
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.Vacaciones.Vacaciones842CC2DF626D478498EF81923785A8F5
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.Vacaciones.Linea030D19C3A2434EC5A02B5113AF75FB84
+      </display-name>
+      <servlet-name>
+        W030D19C3A2434EC5A02B5113AF75FB84
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.Vacaciones.Linea030D19C3A2434EC5A02B5113AF75FB84
       </servlet-class>
     </servlet>
   
@@ -1692,6 +1872,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.EmailConfiguration_Port
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.nomina.empleados.ad_callouts.Ne_edad_empleado
+      </display-name>
+      <servlet-name>
+        C472191C985F549C087CE1202EFAF5FED
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.empleados.ad_callouts.Ne_edad_empleado
       </servlet-class>
       
       
@@ -3029,6 +3223,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.nomina.ad_callouts.NO_CalculaCuotas
+      </display-name>
+      <servlet-name>
+        CBA07E6BA38724996B48C83FA39596FD3
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.ad_callouts.NO_CalculaCuotas
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_Requisition_BPartner_PriceList
       </display-name>
       <servlet-name>
@@ -3050,6 +3258,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_AdvPayment_Document
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.nomina.ad_callouts.NO_Validafondosdereserva
+      </display-name>
+      <servlet-name>
+        CC2D5914F9BBA43EAB50461041D8AEFB1
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.ad_callouts.NO_Validafondosdereserva
       </servlet-class>
       
       
@@ -3260,6 +3482,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.userinterface.selector.SelectorFieldPropertyCallout
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.nomina.ad_callouts.NO_CalculaPorcentajeUtilidad
+      </display-name>
+      <servlet-name>
+        CFE4A5F07BFB249ABA4B8DDF2C7F1BD26
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.ad_callouts.NO_CalculaPorcentajeUtilidad
       </servlet-class>
       
       
@@ -4667,6 +4903,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_process.assets.AssetLinearDepreciationMethodProcess
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.nomina.rdep.erpCommon.ad_actionButton.CrearRDEP
+      </display-name>
+      <servlet-name>
+        P8B54312AFC8D476F8A9D074FA7BF451F
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.rdep.erpCommon.ad_actionButton.CrearRDEP
       </servlet-class>
       
       
@@ -6354,6 +6604,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.nomina.info.BusinessPartner
+      </display-name>
+      <servlet-name>
+        S1BDD759DF382492AB81F89AEA630E5F2
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.info.BusinessPartner
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.info.BusinessPartner
       </display-name>
       <servlet-name>
@@ -7487,6 +7751,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        W424295FE162A4CF88B993BD228C47679
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaGeneradorPagosNomina/PagoNominaCabecera424295FE162A4CF88B993BD228C47679_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W199
       </servlet-name>
       <url-pattern>/GeneralLedgerConfiguration/GeneralLedgerConfiguration_Edition.html</url-pattern>
@@ -7571,6 +7842,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        W55D81228F99B47F8AAC41D1DE0175DFC
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaLiquidacionEmpleado/LiquidacionEmpleado55D81228F99B47F8AAC41D1DE0175DFC_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W1004400001
       </servlet-name>
       <url-pattern>/ManageRequisitions/Header_Edition.html</url-pattern>
@@ -7644,6 +7922,13 @@
         W800161
       </servlet-name>
       <url-pattern>/PeriodicQualityControlData/Test_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W375F8A61F52D41D6A72639CE12A97ED7
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaPermisodeEmpleados/PermisodeEmpleados375F8A61F52D41D6A72639CE12A97ED7_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -7781,9 +8066,37 @@
   
     <servlet-mapping>
       <servlet-name>
+        WD6E6846C2564435F9B297860CB950D31
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRegistrarAnticipos/RegistrarAnticiposD6E6846C2564435F9B297860CB950D31_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        WC018CCAD1E4F435EB18BF1CCA45604CC
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRegistrarAnticipos/RegistrarAvancesLineC018CCAD1E4F435EB18BF1CCA45604CC_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        WEAE8C067A95849F89D14E8489E481119
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRegistrarPrestamos/RegistroPrestamosEAE8C067A95849F89D14E8489E481119_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W800249
       </servlet-name>
       <url-pattern>/Requisition/Requisition_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W8982CE6EA9E8433E8FA23C11DEED4D6C
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.rdepRetencionesEmpleado/RetencionesCabecera8982CE6EA9E8433E8FA23C11DEED4D6C_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -7812,6 +8125,41 @@
         W728DBD16A1F14A4D82335E37BA433E33
       </servlet-name>
       <url-pattern>/ReturntoVendorShipment/Header_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W9627836015B94CF6ACD14D0E16F4627B
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRoldePagos/RoldePagos9627836015B94CF6ACD14D0E16F4627B_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W2407AED87B05460DBD174C5F8EF29677
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRoldeProvisiones/RoldeProvisiones2407AED87B05460DBD174C5F8EF29677_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W00E24D4D2F074977B69197B0A12B8189
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRoldeProvisiones/Linea00E24D4D2F074977B69197B0A12B8189_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W6FF22921D16B4043A16ACDCD4C751290
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaRoldeProvisiones/ProvisionMensual6FF22921D16B4043A16ACDCD4C751290_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W910392DFB0E94D9CB9B160A6BCDC4DBF
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaSalarioDigno/SalarioDigno910392DFB0E94D9CB9B160A6BCDC4DBF_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -7896,6 +8244,27 @@
         W1002100011
       </servlet-name>
       <url-pattern>/TaxPayment/Header_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W780D8D8AED8D4D05B740E02687292A1C
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaUtilidadesEmpleado/Utilidades780D8D8AED8D4D05B740E02687292A1C_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W842CC2DF626D478498EF81923785A8F5
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaVacaciones/Vacaciones842CC2DF626D478498EF81923785A8F5_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W030D19C3A2434EC5A02B5113AF75FB84
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaVacaciones/Linea030D19C3A2434EC5A02B5113AF75FB84_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8129,6 +8498,13 @@
         C432571B2025F45C69B715B5E249BCBE9
       </servlet-name>
       <url-pattern>/ad_callouts/EmailConfiguration_Port.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C472191C985F549C087CE1202EFAF5FED
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.empleados.ad_callouts/Ne_edad_empleado.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8798,6 +9174,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        CBA07E6BA38724996B48C83FA39596FD3
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.ad_callouts/NO_CalculaCuotas.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CBAA507E4C79F498DE040007F010077E2
       </servlet-name>
       <url-pattern>/ad_callouts/SL_Requisition_BPartner_PriceList.html</url-pattern>
@@ -8808,6 +9191,13 @@
         CC1F20E5072B74CE28C3094BFC13EE7DB
       </servlet-name>
       <url-pattern>/ad_callouts/SL_AdvPayment_Document.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CC2D5914F9BBA43EAB50461041D8AEFB1
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.ad_callouts/NO_Validafondosdereserva.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8906,6 +9296,13 @@
         CF7FF75897F0442CAA12FA95119AF2402
       </servlet-name>
       <url-pattern>/org.openbravo.userinterface.selector.ad_callouts/Selector_Field_Property_Callout.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CFE4A5F07BFB249ABA4B8DDF2C7F1BD26
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.ad_callouts/NO_CalculaPorcentajeUtilidad.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9080,14 +9477,7 @@
       <servlet-name>
         P1000500009
       </servlet-name>
-      <url-pattern>/orders/send.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P1000500009
-      </servlet-name>
-      <url-pattern>/orders/*</url-pattern>
+      <url-pattern>/orders/PrintOptions.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9101,7 +9491,14 @@
       <servlet-name>
         P1000500009
       </servlet-name>
-      <url-pattern>/orders/PrintOptions.html</url-pattern>
+      <url-pattern>/orders/send.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P1000500009
+      </servlet-name>
+      <url-pattern>/orders/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9150,14 +9547,14 @@
       <servlet-name>
         P1000500020
       </servlet-name>
-      <url-pattern>/shipments/send.html</url-pattern>
+      <url-pattern>/shipments/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P1000500020
       </servlet-name>
-      <url-pattern>/shipments/*</url-pattern>
+      <url-pattern>/shipments/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9241,14 +9638,14 @@
       <servlet-name>
         P35F48DA64DB14F0489CC0C9BF6C3A849
       </servlet-name>
-      <url-pattern>/ad_reports/ReportAssetDepreciationSchedule.jrxml</url-pattern>
+      <url-pattern>/ad_reports/ReportAssetDepreciationSchedule.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P35F48DA64DB14F0489CC0C9BF6C3A849
       </servlet-name>
-      <url-pattern>/ad_reports/ReportAssetDepreciationSchedule.html</url-pattern>
+      <url-pattern>/ad_reports/ReportAssetDepreciationSchedule.jrxml</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9409,6 +9806,13 @@
       <servlet-name>
         P800737
       </servlet-name>
+      <url-pattern>/ad_actionButton/CreateFromMultiple_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P800737
+      </servlet-name>
       <url-pattern>/ad_actionButton/CreateFromMultiple_F2.html</url-pattern>
     </servlet-mapping>
   
@@ -9417,13 +9821,6 @@
         P800737
       </servlet-name>
       <url-pattern>/ad_actionButton/CreateFromMultiple_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P800737
-      </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFromMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9486,13 +9883,6 @@
       <servlet-name>
         P801017
       </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFrom_FS.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P801017
-      </servlet-name>
       <url-pattern>/ad_actionButton/CreateFrom_F1.html</url-pattern>
     </servlet-mapping>
   
@@ -9501,6 +9891,13 @@
         P801017
       </servlet-name>
       <url-pattern>/ad_actionButton/CreateFrom.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P801017
+      </servlet-name>
+      <url-pattern>/ad_actionButton/CreateFrom_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9528,14 +9925,14 @@
       <servlet-name>
         P801126
       </servlet-name>
-      <url-pattern>/ad_process/CreateAccountingReportPopUp.html</url-pattern>
+      <url-pattern>/ad_process/CreateAccountingReport.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P801126
       </servlet-name>
-      <url-pattern>/ad_process/CreateAccountingReport.html</url-pattern>
+      <url-pattern>/ad_process/CreateAccountingReportPopUp.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9598,14 +9995,14 @@
       <servlet-name>
         P801433
       </servlet-name>
-      <url-pattern>/utility/ExportGrid.pdf</url-pattern>
+      <url-pattern>/utility/ExportGrid.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P801433
       </servlet-name>
-      <url-pattern>/utility/ExportGrid.html</url-pattern>
+      <url-pattern>/utility/ExportGrid.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9634,6 +10031,13 @@
         P89313103AC3C4CC0BF080175CE85AEE9
       </servlet-name>
       <url-pattern>/org.openbravo.advpaymentmngt.ad_actionbutton/AddTransaction.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P8B54312AFC8D476F8A9D074FA7BF451F
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.rdep.erpCommon/ad_actionButton/CrearRDEP.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9745,14 +10149,14 @@
       <servlet-name>
         R0AA8445A6B3649A9AC1ED47B7665C95B
       </servlet-name>
-      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.pdf</url-pattern>
+      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R0AA8445A6B3649A9AC1ED47B7665C95B
       </servlet-name>
-      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.html</url-pattern>
+      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9780,13 +10184,6 @@
       <servlet-name>
         R1002100043
       </servlet-name>
-      <url-pattern>/ad_reports/ReportAnnualCertification.xls</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R1002100043
-      </servlet-name>
       <url-pattern>/ad_reports/ReportAnnualCertification.html</url-pattern>
     </servlet-mapping>
   
@@ -9795,6 +10192,13 @@
         R1002100043
       </servlet-name>
       <url-pattern>/ad_reports/ReportAnnualCertification.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R1002100043
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportAnnualCertification.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9815,21 +10219,14 @@
       <servlet-name>
         R1005900014
       </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectProgress.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportProjectProgress.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R1005900014
       </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectProgress.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R338B29351B1D41138A09B2103B2B07C8
-      </servlet-name>
-      <url-pattern>/payments/print.html</url-pattern>
+      <url-pattern>/ad_reports/ReportProjectProgress.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9850,14 +10247,14 @@
       <servlet-name>
         R338B29351B1D41138A09B2103B2B07C8
       </servlet-name>
-      <url-pattern>/payments/send.html</url-pattern>
+      <url-pattern>/payments/print.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
-        R800787
+        R338B29351B1D41138A09B2103B2B07C8
       </servlet-name>
-      <url-pattern>/ad_reports/ReportTrialBalance.html</url-pattern>
+      <url-pattern>/payments/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9871,7 +10268,21 @@
       <servlet-name>
         R800787
       </servlet-name>
+      <url-pattern>/ad_reports/ReportTrialBalance.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800787
+      </servlet-name>
       <url-pattern>/ad_reports/ReportTrialBalancePDF.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800793
+      </servlet-name>
+      <url-pattern>/RptC_InvoiceLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9883,9 +10294,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800793
+        R800794
       </servlet-name>
-      <url-pattern>/RptC_InvoiceLines.pdf</url-pattern>
+      <url-pattern>/RptM_InoutLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9904,9 +10315,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800794
+        R800804
       </servlet-name>
-      <url-pattern>/RptM_InoutLines.pdf</url-pattern>
+      <url-pattern>/RptC_OrderLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9914,13 +10325,6 @@
         R800804
       </servlet-name>
       <url-pattern>/RptC_Order.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800804
-      </servlet-name>
-      <url-pattern>/RptC_OrderLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9962,6 +10366,13 @@
       <servlet-name>
         R800830
       </servlet-name>
+      <url-pattern>/RptC_SettlementHeader.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800830
+      </servlet-name>
       <url-pattern>/RptC_Settlement.pdf</url-pattern>
     </servlet-mapping>
   
@@ -9974,9 +10385,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800830
+        R800832
       </servlet-name>
-      <url-pattern>/RptC_SettlementHeader.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportRefundSalesDimensionalAnalysesFilter.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9984,13 +10395,6 @@
         R800832
       </servlet-name>
       <url-pattern>/ad_reports/ReportRefundSalesDimensionalAnalysesEdition.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800832
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportRefundSalesDimensionalAnalysesFilter.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10011,7 +10415,7 @@
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPODescription.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPOLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10025,21 +10429,14 @@
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPO.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPODescription.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPOLines.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800836
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerJournalPDF.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPO.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10053,14 +10450,14 @@
       <servlet-name>
         R800836
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.html</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerJournalPDF.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
-        R800848
+        R800836
       </servlet-name>
-      <url-pattern>/ad_reports/ReportMaterialTransactionEditionJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10075,6 +10472,13 @@
         R800848
       </servlet-name>
       <url-pattern>/ad_reports/ReportMaterialTransactionFilter.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800848
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportMaterialTransactionEditionJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10109,14 +10513,14 @@
       <servlet-name>
         R800856
       </servlet-name>
-      <url-pattern>/ad_reports/GeneralAccountingReports.pdf</url-pattern>
+      <url-pattern>/ad_reports/GeneralAccountingReports.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800856
       </servlet-name>
-      <url-pattern>/ad_reports/GeneralAccountingReports.html</url-pattern>
+      <url-pattern>/ad_reports/GeneralAccountingReports.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10151,7 +10555,7 @@
       <servlet-name>
         R800872
       </servlet-name>
-      <url-pattern>/RptMA_CCP_Measures_Hours.pdf</url-pattern>
+      <url-pattern>/RptMA_CCP_Measures.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10165,7 +10569,7 @@
       <servlet-name>
         R800872
       </servlet-name>
-      <url-pattern>/RptMA_CCP_Measures.pdf</url-pattern>
+      <url-pattern>/RptMA_CCP_Measures_Hours.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10186,20 +10590,6 @@
       <servlet-name>
         R800874
       </servlet-name>
-      <url-pattern>/RptPromissoryNoteAfter.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800874
-      </servlet-name>
-      <url-pattern>/RptPromissoryNote.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800874
-      </servlet-name>
       <url-pattern>/RptPromissoryNoteHeader.pdf</url-pattern>
     </servlet-mapping>
   
@@ -10207,7 +10597,21 @@
       <servlet-name>
         R800874
       </servlet-name>
+      <url-pattern>/RptPromissoryNoteAfter.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800874
+      </servlet-name>
       <url-pattern>/RptPromissoryNoteError.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800874
+      </servlet-name>
+      <url-pattern>/RptPromissoryNote.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10221,21 +10625,14 @@
       <servlet-name>
         R800882
       </servlet-name>
-      <url-pattern>/RptM_MovementLines.pdf</url-pattern>
+      <url-pattern>/RptM_Movement.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800882
       </servlet-name>
-      <url-pattern>/RptM_Movement.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800889
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportShipmentDimensionalAnalyzeJRFilter.html</url-pattern>
+      <url-pattern>/RptM_MovementLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10247,9 +10644,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800892
+        R800889
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPricelist.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportShipmentDimensionalAnalyzeJRFilter.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10261,9 +10658,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800941
+        R800892
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerExcel.xls</url-pattern>
+      <url-pattern>/ad_reports/ReportPricelist.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10278,6 +10675,13 @@
         R800941
       </servlet-name>
       <url-pattern>/ad_reports/ReportGeneralLedgerPDF.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800941
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportGeneralLedgerExcel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10319,7 +10723,7 @@
       <servlet-name>
         R801140
       </servlet-name>
-      <url-pattern>/RptC_RemittanceHeader.pdf</url-pattern>
+      <url-pattern>/RptC_Remittance.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10333,7 +10737,7 @@
       <servlet-name>
         R801140
       </servlet-name>
-      <url-pattern>/RptC_Remittance.pdf</url-pattern>
+      <url-pattern>/RptC_RemittanceHeader.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10389,14 +10793,14 @@
       <servlet-name>
         R801706
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderFilterJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801706
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderFilterJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10417,14 +10821,14 @@
       <servlet-name>
         R801709
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGuaranteeDateJR.jrxml</url-pattern>
+      <url-pattern>/ad_reports/ReportGuaranteeDateJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801709
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGuaranteeDateJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportGuaranteeDateJR.jrxml</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10522,14 +10926,14 @@
       <servlet-name>
         R801727
       </servlet-name>
-      <url-pattern>/RptMA_ProcessPlan.pdf</url-pattern>
+      <url-pattern>/RptMA_ProcessPlanJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801727
       </servlet-name>
-      <url-pattern>/RptMA_ProcessPlanJR.pdf</url-pattern>
+      <url-pattern>/RptMA_ProcessPlan.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10557,13 +10961,6 @@
       <servlet-name>
         R801735
       </servlet-name>
-      <url-pattern>/ad_reports/ReportShipmentEditionJR.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801735
-      </servlet-name>
       <url-pattern>/ad_reports/ReportShipmentEditionJR.pdf</url-pattern>
     </servlet-mapping>
   
@@ -10572,6 +10969,13 @@
         R801735
       </servlet-name>
       <url-pattern>/ad_reports/ReportShipmentFilterJR.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801735
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportShipmentEditionJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10585,14 +10989,14 @@
       <servlet-name>
         R801736
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPendingProductionEditJr.html</url-pattern>
+      <url-pattern>/ad_reports/ReportPendingProductionJr.jrxml</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801736
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPendingProductionJr.jrxml</url-pattern>
+      <url-pattern>/ad_reports/ReportPendingProductionEditJr.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10648,6 +11052,13 @@
       <servlet-name>
         R804366
       </servlet-name>
+      <url-pattern>/ad_reports/ReportCashFlow.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R804366
+      </servlet-name>
       <url-pattern>/ad_reports/ReportCashFlowPopUp.html</url-pattern>
     </servlet-mapping>
   
@@ -10656,13 +11067,6 @@
         R804366
       </servlet-name>
       <url-pattern>/ad_reports/ReportCashFlowReload.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R804366
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportCashFlow.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10690,7 +11094,7 @@
       <servlet-name>
         RBA8D4904244F4983AA09EDA84FDD1E7C
       </servlet-name>
-      <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReport.html</url-pattern>
+      <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReportExcel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10704,7 +11108,7 @@
       <servlet-name>
         RBA8D4904244F4983AA09EDA84FDD1E7C
       </servlet-name>
-      <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReportExcel.xls</url-pattern>
+      <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReport.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10719,6 +11123,13 @@
         RFF808181316BE3F001316C15D3D1000D
       </servlet-name>
       <url-pattern>/ad_reports/ReportTrialBalanceDetail.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S1BDD759DF382492AB81F89AEA630E5F2
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.info/BusinessPartner.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10781,21 +11192,7 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S800779
-      </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_F3.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S800779
-      </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10809,7 +11206,21 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_FS.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple_F3.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S800779
+      </servlet-name>
+      <url-pattern>/info/BusinessPartnerMultiple_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S800779
+      </servlet-name>
+      <url-pattern>/info/BusinessPartnerMultiple.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10823,7 +11234,14 @@
       <servlet-name>
         S800781
       </servlet-name>
-      <url-pattern>/info/ProductMultiple_FS.html</url-pattern>
+      <url-pattern>/info/ProductMultiple.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S800781
+      </servlet-name>
+      <url-pattern>/info/ProductMultiple_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10844,14 +11262,7 @@
       <servlet-name>
         S800781
       </servlet-name>
-      <url-pattern>/info/ProductMultiple_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S800781
-      </servlet-name>
-      <url-pattern>/info/ProductMultiple.html</url-pattern>
+      <url-pattern>/info/ProductMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10914,7 +11325,7 @@
       <servlet-name>
         S801413
       </servlet-name>
-      <url-pattern>/info/Location_FS.html</url-pattern>
+      <url-pattern>/info/Location_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10935,7 +11346,7 @@
       <servlet-name>
         S801413
       </servlet-name>
-      <url-pattern>/info/Location_F1.html</url-pattern>
+      <url-pattern>/info/Location_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10970,14 +11381,14 @@
       <servlet-name>
         X1004400019
       </servlet-name>
-      <url-pattern>/ad_forms/RequisitionToOrder.html</url-pattern>
+      <url-pattern>/ad_forms/RequisitionToOrderCreate.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X1004400019
       </servlet-name>
-      <url-pattern>/ad_forms/RequisitionToOrderCreate.html</url-pattern>
+      <url-pattern>/ad_forms/RequisitionToOrder.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11110,14 +11521,14 @@
       <servlet-name>
         X800661
       </servlet-name>
-      <url-pattern>/businessUtility/TabAttachments_FS.html</url-pattern>
+      <url-pattern>/businessUtility/TabAttachments_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X800661
       </servlet-name>
-      <url-pattern>/businessUtility/TabAttachments_F1.html</url-pattern>
+      <url-pattern>/businessUtility/TabAttachments_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11145,7 +11556,7 @@
       <servlet-name>
         X800665
       </servlet-name>
-      <url-pattern>/security/Login_F1.html</url-pattern>
+      <url-pattern>/security/Login_F0.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11159,7 +11570,7 @@
       <servlet-name>
         X800665
       </servlet-name>
-      <url-pattern>/security/Login_Options_F1.html</url-pattern>
+      <url-pattern>/security/Login_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11173,14 +11584,14 @@
       <servlet-name>
         X800665
       </servlet-name>
-      <url-pattern>/security/Login_Welcome.html</url-pattern>
+      <url-pattern>/security/Login_Options_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X800665
       </servlet-name>
-      <url-pattern>/security/Login_F0.html</url-pattern>
+      <url-pattern>/security/Login_Welcome.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11208,14 +11619,14 @@
       <servlet-name>
         X800669
       </servlet-name>
-      <url-pattern>/utility/UsedByLink_Detail.html</url-pattern>
+      <url-pattern>/utility/UsedByLink.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X800669
       </servlet-name>
-      <url-pattern>/utility/UsedByLink.html</url-pattern>
+      <url-pattern>/utility/UsedByLink_Detail.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11250,14 +11661,14 @@
       <servlet-name>
         X801429
       </servlet-name>
-      <url-pattern>/utility/DynamicJS.js</url-pattern>
+      <url-pattern>/utility/MessagesJS.js</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X801429
       </servlet-name>
-      <url-pattern>/utility/MessagesJS.js</url-pattern>
+      <url-pattern>/utility/DynamicJS.js</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11299,21 +11710,14 @@
       <servlet-name>
         X801949
       </servlet-name>
-      <url-pattern>/ad_forms/CreateInvoicesfromOrders.html</url-pattern>
+      <url-pattern>/ad_forms/GenerateInvoicesmanual.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X801949
       </servlet-name>
-      <url-pattern>/ad_forms/GenerateInvoicesmanual.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X801950
-      </servlet-name>
-      <url-pattern>/ad_forms/GenerateShipmentsmanual.html</url-pattern>
+      <url-pattern>/ad_forms/CreateInvoicesfromOrders.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11325,9 +11729,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        X801951
+        X801950
       </servlet-name>
-      <url-pattern>/ad_forms/MaterialReceiptPending.html</url-pattern>
+      <url-pattern>/ad_forms/GenerateShipmentsmanual.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11339,9 +11743,16 @@
   
     <servlet-mapping>
       <servlet-name>
+        X801951
+      </servlet-name>
+      <url-pattern>/ad_forms/MaterialReceiptPending.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_FS.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Field_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11355,28 +11766,7 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F2.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X99087891EBCFA68BE040A8C0BD063FFC
-      </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_FS.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X99087891EBCFA68BE040A8C0BD063FFC
-      </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F2.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X99087891EBCFA68BE040A8C0BD063FFC
-      </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_F1.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11390,14 +11780,35 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F1.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Field_FS.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F2.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X99087891EBCFA68BE040A8C0BD063FFC
+      </servlet-name>
+      <url-pattern>/ad_help/DisplayHelp_Edit_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X99087891EBCFA68BE040A8C0BD063FFC
+      </servlet-name>
+      <url-pattern>/ad_help/DisplayHelp_Edit_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X99087891EBCFA68BE040A8C0BD063FFC
+      </servlet-name>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>

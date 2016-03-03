@@ -18,6 +18,29 @@
 */
 package org.openbravo.model.common.businesspartner;
 
+import com.atrums.nomina.data.NO_Registro_Hora_Extra;
+import com.atrums.nomina.data.NoEmpleadoIngresoEgreso;
+import com.atrums.nomina.data.NoPermiso;
+import com.atrums.nomina.data.noAreaEmpresa;
+import com.atrums.nomina.data.noCargaEmpleado;
+import com.atrums.nomina.data.noCbEmpleadoAcct;
+import com.atrums.nomina.data.noContratoEmpleado;
+import com.atrums.nomina.data.noGastosEmpleado;
+import com.atrums.nomina.data.noLiquidacionEmpleado;
+import com.atrums.nomina.data.noNovedadLinea;
+import com.atrums.nomina.data.noPagoLine;
+import com.atrums.nomina.data.noPrestamo;
+import com.atrums.nomina.data.noReComisionDetalle;
+import com.atrums.nomina.data.noRegistraQuincLine;
+import com.atrums.nomina.data.noRegistroGasto;
+import com.atrums.nomina.data.noRolPagoProvision;
+import com.atrums.nomina.data.noRptCargasFamiliaresV;
+import com.atrums.nomina.data.noSalarioDignoLinea;
+import com.atrums.nomina.data.noUtilidadLinea;
+import com.atrums.nomina.data.noVacacion;
+import com.atrums.nomina.empleados.data.nePerfilRubro;
+import com.atrums.nomina.rdep.data.atrdepCabeceraRetenLine;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,6 +85,7 @@ import org.openbravo.model.dataimport.Order;
 import org.openbravo.model.dataimport.Product;
 import org.openbravo.model.financialmgmt.accounting.AccountingFact;
 import org.openbravo.model.financialmgmt.accounting.coa.AccountingCombination;
+import org.openbravo.model.financialmgmt.accounting.coa.AcctSchema;
 import org.openbravo.model.financialmgmt.accounting.coa.AcctSchemaElement;
 import org.openbravo.model.financialmgmt.assetmgmt.AmortizationLineAccountingDimension;
 import org.openbravo.model.financialmgmt.assetmgmt.Asset;
@@ -206,14 +230,29 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_CUSTOMERBLOCKING = "customerBlocking";
     public static final String PROPERTY_VENDORBLOCKING = "vendorBlocking";
     public static final String PROPERTY_PAYMENTIN = "paymentIn";
+    public static final String PROPERTY_NOESTADOCIVIL = "noEstadocivil";
     public static final String PROPERTY_PAYMENTOUT = "paymentOut";
+    public static final String PROPERTY_NOGENERO = "noGenero";
     public static final String PROPERTY_SALESINVOICE = "salesInvoice";
+    public static final String PROPERTY_NOFECHANACIMIENTO = "noFechanacimiento";
     public static final String PROPERTY_PURCHASEINVOICE = "purchaseInvoice";
+    public static final String PROPERTY_NOAREAEMPRESA = "noAreaEmpresa";
     public static final String PROPERTY_SALESORDER = "salesOrder";
     public static final String PROPERTY_PURCHASEORDER = "purchaseOrder";
     public static final String PROPERTY_GOODSSHIPMENT = "goodsShipment";
     public static final String PROPERTY_GOODSRECEIPT = "goodsReceipt";
     public static final String PROPERTY_CASHVAT = "cashVAT";
+    public static final String PROPERTY_NOMOTIVOSALIDA = "noMotivoSalida";
+    public static final String PROPERTY_NOISDISCAPACITADO = "noIsdiscapacitado";
+    public static final String PROPERTY_NOISTERCERAEDAD = "noIsterceraEdad";
+    public static final String PROPERTY_NECACCTSCHEMA = "neCAcctschema";
+    public static final String PROPERTY_NEEDAD = "neEdad";
+    public static final String PROPERTY_NENUMCARDISCAPACITADO = "neNumCarDiscapacitado";
+    public static final String PROPERTY_NEPERFILRUBRO = "nePerfilRubro";
+    public static final String PROPERTY_NOFECHADEINGRESO = "noFechaDeIngreso";
+    public static final String PROPERTY_NOFECHADESALIDA = "noFechaDeSalida";
+    public static final String PROPERTY_NOPAGOACCT = "noPagoAcct";
+    public static final String PROPERTY_NOSISSALNET = "noSisSalNet";
     public static final String PROPERTY_ADUSERLIST = "aDUserList";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRANSACTIONVLIST = "aPRMFinaccTransactionVList";
@@ -284,6 +323,13 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_MATERIALMGMTRESERVATIONLIST = "materialMgmtReservationList";
     public static final String PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST = "materialMgmtShipmentInOutList";
     public static final String PROPERTY_MATERIALMGMTSHIPMENTINOUTLINELIST = "materialMgmtShipmentInOutLineList";
+    public static final String PROPERTY_REGISTROHORAEXTRALIST = "registroHoraExtraList";
+    public static final String PROPERTY_RPTCARGASFAMILIARESLIST = "rptCargasFamiliaresList";
+    public static final String PROPERTY_CBEMPLEADOACCTLIST = "cbEmpleadoAcctList";
+    public static final String PROPERTY_EMPLEADOINGEGRLIST = "empleadoIngEgrList";
+    public static final String PROPERTY_PERMISOLIST = "permisoList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLIST = "rolPagoProvisionList";
+    public static final String PROPERTY_RECOMISIONDETALLELIST = "reComisionDetalleList";
     public static final String PROPERTY_ORDERLIST = "orderList";
     public static final String PROPERTY_ORDERDROPSHIPPARTNERLIST = "orderDropShipPartnerList";
     public static final String PROPERTY_ORDERLINELIST = "orderLineList";
@@ -312,6 +358,19 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_TRANSACTIONVLIST = "transactionVList";
     public static final String PROPERTY_VENDORACCOUNTSLIST = "vendorAccountsList";
     public static final String PROPERTY_WAREHOUSESHIPPERLIST = "warehouseShipperList";
+    public static final String PROPERTY_ATRDEPCABECERARETENLINELIST = "atrdepCabeceraRetenLineList";
+    public static final String PROPERTY_CARGAEMPLEADOLIST = "cargaEmpleadoList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
+    public static final String PROPERTY_GASTOSEMPLEADOLIST = "gastosEmpleadoList";
+    public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
+    public static final String PROPERTY_NOVEDADLINEALIST = "novedadLineaList";
+    public static final String PROPERTY_PAGOLINELIST = "pagoLineList";
+    public static final String PROPERTY_PRESTAMOLIST = "prestamoList";
+    public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
+    public static final String PROPERTY_REGISTROGASTOLIST = "registroGastoList";
+    public static final String PROPERTY_SALARIODIGNOLINEALIST = "salarioDignoLineaList";
+    public static final String PROPERTY_UTILIDADLINEALIST = "utilidadLineaList";
+    public static final String PROPERTY_VACACIONLIST = "vacacionList";
 
     public BusinessPartner() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -340,6 +399,8 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_GOODSSHIPMENT, true);
         setDefaultValue(PROPERTY_GOODSRECEIPT, false);
         setDefaultValue(PROPERTY_CASHVAT, false);
+        setDefaultValue(PROPERTY_NOISDISCAPACITADO, false);
+        setDefaultValue(PROPERTY_NOISTERCERAEDAD, false);
         setDefaultValue(PROPERTY_ADUSERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONVLIST, new ArrayList<Object>());
@@ -410,6 +471,13 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_MATERIALMGMTRESERVATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MATERIALMGMTSHIPMENTINOUTLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTROHORAEXTRALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RPTCARGASFAMILIARESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CBEMPLEADOACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_EMPLEADOINGEGRLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PERMISOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RECOMISIONDETALLELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERDROPSHIPPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLINELIST, new ArrayList<Object>());
@@ -438,6 +506,19 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_TRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_VENDORACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSESHIPPERLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATRDEPCABECERARETENLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CARGAEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_GASTOSEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_NOVEDADLINEALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PRESTAMOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTROGASTOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_SALARIODIGNOLINEALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_UTILIDADLINEALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_VACACIONLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -1117,12 +1198,28 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_PAYMENTIN, paymentIn);
     }
 
+    public String getNoEstadocivil() {
+        return (String) get(PROPERTY_NOESTADOCIVIL);
+    }
+
+    public void setNoEstadocivil(String noEstadocivil) {
+        set(PROPERTY_NOESTADOCIVIL, noEstadocivil);
+    }
+
     public Boolean isPaymentOut() {
         return (Boolean) get(PROPERTY_PAYMENTOUT);
     }
 
     public void setPaymentOut(Boolean paymentOut) {
         set(PROPERTY_PAYMENTOUT, paymentOut);
+    }
+
+    public String getNoGenero() {
+        return (String) get(PROPERTY_NOGENERO);
+    }
+
+    public void setNoGenero(String noGenero) {
+        set(PROPERTY_NOGENERO, noGenero);
     }
 
     public Boolean isSalesInvoice() {
@@ -1133,12 +1230,28 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_SALESINVOICE, salesInvoice);
     }
 
+    public Date getNoFechanacimiento() {
+        return (Date) get(PROPERTY_NOFECHANACIMIENTO);
+    }
+
+    public void setNoFechanacimiento(Date noFechanacimiento) {
+        set(PROPERTY_NOFECHANACIMIENTO, noFechanacimiento);
+    }
+
     public Boolean isPurchaseInvoice() {
         return (Boolean) get(PROPERTY_PURCHASEINVOICE);
     }
 
     public void setPurchaseInvoice(Boolean purchaseInvoice) {
         set(PROPERTY_PURCHASEINVOICE, purchaseInvoice);
+    }
+
+    public noAreaEmpresa getNoAreaEmpresa() {
+        return (noAreaEmpresa) get(PROPERTY_NOAREAEMPRESA);
+    }
+
+    public void setNoAreaEmpresa(noAreaEmpresa noAreaEmpresa) {
+        set(PROPERTY_NOAREAEMPRESA, noAreaEmpresa);
     }
 
     public Boolean isSalesOrder() {
@@ -1179,6 +1292,94 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setCashVAT(Boolean cashVAT) {
         set(PROPERTY_CASHVAT, cashVAT);
+    }
+
+    public String getNoMotivoSalida() {
+        return (String) get(PROPERTY_NOMOTIVOSALIDA);
+    }
+
+    public void setNoMotivoSalida(String noMotivoSalida) {
+        set(PROPERTY_NOMOTIVOSALIDA, noMotivoSalida);
+    }
+
+    public Boolean isNoIsdiscapacitado() {
+        return (Boolean) get(PROPERTY_NOISDISCAPACITADO);
+    }
+
+    public void setNoIsdiscapacitado(Boolean noIsdiscapacitado) {
+        set(PROPERTY_NOISDISCAPACITADO, noIsdiscapacitado);
+    }
+
+    public Boolean isNoIsterceraEdad() {
+        return (Boolean) get(PROPERTY_NOISTERCERAEDAD);
+    }
+
+    public void setNoIsterceraEdad(Boolean noIsterceraEdad) {
+        set(PROPERTY_NOISTERCERAEDAD, noIsterceraEdad);
+    }
+
+    public AcctSchema getNeCAcctschema() {
+        return (AcctSchema) get(PROPERTY_NECACCTSCHEMA);
+    }
+
+    public void setNeCAcctschema(AcctSchema neCAcctschema) {
+        set(PROPERTY_NECACCTSCHEMA, neCAcctschema);
+    }
+
+    public BigDecimal getNeEdad() {
+        return (BigDecimal) get(PROPERTY_NEEDAD);
+    }
+
+    public void setNeEdad(BigDecimal neEdad) {
+        set(PROPERTY_NEEDAD, neEdad);
+    }
+
+    public String getNeNumCarDiscapacitado() {
+        return (String) get(PROPERTY_NENUMCARDISCAPACITADO);
+    }
+
+    public void setNeNumCarDiscapacitado(String neNumCarDiscapacitado) {
+        set(PROPERTY_NENUMCARDISCAPACITADO, neNumCarDiscapacitado);
+    }
+
+    public nePerfilRubro getNePerfilRubro() {
+        return (nePerfilRubro) get(PROPERTY_NEPERFILRUBRO);
+    }
+
+    public void setNePerfilRubro(nePerfilRubro nePerfilRubro) {
+        set(PROPERTY_NEPERFILRUBRO, nePerfilRubro);
+    }
+
+    public Date getNoFechaDeIngreso() {
+        return (Date) get(PROPERTY_NOFECHADEINGRESO);
+    }
+
+    public void setNoFechaDeIngreso(Date noFechaDeIngreso) {
+        set(PROPERTY_NOFECHADEINGRESO, noFechaDeIngreso);
+    }
+
+    public Date getNoFechaDeSalida() {
+        return (Date) get(PROPERTY_NOFECHADESALIDA);
+    }
+
+    public void setNoFechaDeSalida(Date noFechaDeSalida) {
+        set(PROPERTY_NOFECHADESALIDA, noFechaDeSalida);
+    }
+
+    public AccountingCombination getNoPagoAcct() {
+        return (AccountingCombination) get(PROPERTY_NOPAGOACCT);
+    }
+
+    public void setNoPagoAcct(AccountingCombination noPagoAcct) {
+        set(PROPERTY_NOPAGOACCT, noPagoAcct);
+    }
+
+    public String getNoSisSalNet() {
+        return (String) get(PROPERTY_NOSISSALNET);
+    }
+
+    public void setNoSisSalNet(String noSisSalNet) {
+        set(PROPERTY_NOSISSALNET, noSisSalNet);
     }
 
     @SuppressWarnings("unchecked")
@@ -1812,6 +2013,69 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     }
 
     @SuppressWarnings("unchecked")
+    public List<NO_Registro_Hora_Extra> getRegistroHoraExtraList() {
+      return (List<NO_Registro_Hora_Extra>) get(PROPERTY_REGISTROHORAEXTRALIST);
+    }
+
+    public void setRegistroHoraExtraList(List<NO_Registro_Hora_Extra> registroHoraExtraList) {
+        set(PROPERTY_REGISTROHORAEXTRALIST, registroHoraExtraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRptCargasFamiliaresV> getRptCargasFamiliaresList() {
+      return (List<noRptCargasFamiliaresV>) get(PROPERTY_RPTCARGASFAMILIARESLIST);
+    }
+
+    public void setRptCargasFamiliaresList(List<noRptCargasFamiliaresV> rptCargasFamiliaresList) {
+        set(PROPERTY_RPTCARGASFAMILIARESLIST, rptCargasFamiliaresList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noCbEmpleadoAcct> getCbEmpleadoAcctList() {
+      return (List<noCbEmpleadoAcct>) get(PROPERTY_CBEMPLEADOACCTLIST);
+    }
+
+    public void setCbEmpleadoAcctList(List<noCbEmpleadoAcct> cbEmpleadoAcctList) {
+        set(PROPERTY_CBEMPLEADOACCTLIST, cbEmpleadoAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<NoEmpleadoIngresoEgreso> getEmpleadoIngEgrList() {
+      return (List<NoEmpleadoIngresoEgreso>) get(PROPERTY_EMPLEADOINGEGRLIST);
+    }
+
+    public void setEmpleadoIngEgrList(List<NoEmpleadoIngresoEgreso> empleadoIngEgrList) {
+        set(PROPERTY_EMPLEADOINGEGRLIST, empleadoIngEgrList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<NoPermiso> getPermisoList() {
+      return (List<NoPermiso>) get(PROPERTY_PERMISOLIST);
+    }
+
+    public void setPermisoList(List<NoPermiso> permisoList) {
+        set(PROPERTY_PERMISOLIST, permisoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolPagoProvision> getRolPagoProvisionList() {
+      return (List<noRolPagoProvision>) get(PROPERTY_ROLPAGOPROVISIONLIST);
+    }
+
+    public void setRolPagoProvisionList(List<noRolPagoProvision> rolPagoProvisionList) {
+        set(PROPERTY_ROLPAGOPROVISIONLIST, rolPagoProvisionList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noReComisionDetalle> getReComisionDetalleList() {
+      return (List<noReComisionDetalle>) get(PROPERTY_RECOMISIONDETALLELIST);
+    }
+
+    public void setReComisionDetalleList(List<noReComisionDetalle> reComisionDetalleList) {
+        set(PROPERTY_RECOMISIONDETALLELIST, reComisionDetalleList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<org.openbravo.model.common.order.Order> getOrderList() {
       return (List<org.openbravo.model.common.order.Order>) get(PROPERTY_ORDERLIST);
     }
@@ -2061,6 +2325,123 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setWarehouseShipperList(List<WarehouseShipper> warehouseShipperList) {
         set(PROPERTY_WAREHOUSESHIPPERLIST, warehouseShipperList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atrdepCabeceraRetenLine> getAtrdepCabeceraRetenLineList() {
+      return (List<atrdepCabeceraRetenLine>) get(PROPERTY_ATRDEPCABECERARETENLINELIST);
+    }
+
+    public void setAtrdepCabeceraRetenLineList(List<atrdepCabeceraRetenLine> atrdepCabeceraRetenLineList) {
+        set(PROPERTY_ATRDEPCABECERARETENLINELIST, atrdepCabeceraRetenLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noCargaEmpleado> getCargaEmpleadoList() {
+      return (List<noCargaEmpleado>) get(PROPERTY_CARGAEMPLEADOLIST);
+    }
+
+    public void setCargaEmpleadoList(List<noCargaEmpleado> cargaEmpleadoList) {
+        set(PROPERTY_CARGAEMPLEADOLIST, cargaEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noGastosEmpleado> getGastosEmpleadoList() {
+      return (List<noGastosEmpleado>) get(PROPERTY_GASTOSEMPLEADOLIST);
+    }
+
+    public void setGastosEmpleadoList(List<noGastosEmpleado> gastosEmpleadoList) {
+        set(PROPERTY_GASTOSEMPLEADOLIST, gastosEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noLiquidacionEmpleado> getLiquidacionEmpleadoList() {
+      return (List<noLiquidacionEmpleado>) get(PROPERTY_LIQUIDACIONEMPLEADOLIST);
+    }
+
+    public void setLiquidacionEmpleadoList(List<noLiquidacionEmpleado> liquidacionEmpleadoList) {
+        set(PROPERTY_LIQUIDACIONEMPLEADOLIST, liquidacionEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noNovedadLinea> getNovedadLineaList() {
+      return (List<noNovedadLinea>) get(PROPERTY_NOVEDADLINEALIST);
+    }
+
+    public void setNovedadLineaList(List<noNovedadLinea> novedadLineaList) {
+        set(PROPERTY_NOVEDADLINEALIST, novedadLineaList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoLine> getPagoLineList() {
+      return (List<noPagoLine>) get(PROPERTY_PAGOLINELIST);
+    }
+
+    public void setPagoLineList(List<noPagoLine> pagoLineList) {
+        set(PROPERTY_PAGOLINELIST, pagoLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPrestamo> getPrestamoList() {
+      return (List<noPrestamo>) get(PROPERTY_PRESTAMOLIST);
+    }
+
+    public void setPrestamoList(List<noPrestamo> prestamoList) {
+        set(PROPERTY_PRESTAMOLIST, prestamoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistraQuincLine> getRegistraQuincLineList() {
+      return (List<noRegistraQuincLine>) get(PROPERTY_REGISTRAQUINCLINELIST);
+    }
+
+    public void setRegistraQuincLineList(List<noRegistraQuincLine> registraQuincLineList) {
+        set(PROPERTY_REGISTRAQUINCLINELIST, registraQuincLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistroGasto> getRegistroGastoList() {
+      return (List<noRegistroGasto>) get(PROPERTY_REGISTROGASTOLIST);
+    }
+
+    public void setRegistroGastoList(List<noRegistroGasto> registroGastoList) {
+        set(PROPERTY_REGISTROGASTOLIST, registroGastoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noSalarioDignoLinea> getSalarioDignoLineaList() {
+      return (List<noSalarioDignoLinea>) get(PROPERTY_SALARIODIGNOLINEALIST);
+    }
+
+    public void setSalarioDignoLineaList(List<noSalarioDignoLinea> salarioDignoLineaList) {
+        set(PROPERTY_SALARIODIGNOLINEALIST, salarioDignoLineaList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noUtilidadLinea> getUtilidadLineaList() {
+      return (List<noUtilidadLinea>) get(PROPERTY_UTILIDADLINEALIST);
+    }
+
+    public void setUtilidadLineaList(List<noUtilidadLinea> utilidadLineaList) {
+        set(PROPERTY_UTILIDADLINEALIST, utilidadLineaList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noVacacion> getVacacionList() {
+      return (List<noVacacion>) get(PROPERTY_VACACIONLIST);
+    }
+
+    public void setVacacionList(List<noVacacion> vacacionList) {
+        set(PROPERTY_VACACIONLIST, vacacionList);
     }
 
 }

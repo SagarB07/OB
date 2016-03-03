@@ -64,8 +64,8 @@ static Logger log4j = Logger.getLogger(AccountData.class);
   public String codeaccount;
   public String accountno;
   public String adClientId;
-  public String finFinancialAccountId;
   public String routingno;
+  public String finFinancialAccountId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -171,10 +171,10 @@ static Logger log4j = Logger.getLogger(AccountData.class);
       return accountno;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
-    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
-      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("routingno"))
       return routingno;
+    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
+      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -254,8 +254,8 @@ Select for edit
       "FIN_Financial_Account.Codeaccount, " +
       "FIN_Financial_Account.Accountno, " +
       "FIN_Financial_Account.AD_Client_ID, " +
-      "FIN_Financial_Account.Fin_Financial_Account_ID, " +
       "FIN_Financial_Account.Routingno, " +
+      "FIN_Financial_Account.Fin_Financial_Account_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM FIN_Financial_Account left join (select AD_Org_ID, Name from AD_Org) table1 on (FIN_Financial_Account.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (FIN_Financial_Account.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (FIN_Financial_Account.Type = list1.value and list1.ad_reference_id = 'A6BDFA712FF948CE903C4C463E832FC1' and list1.ad_language = ?)  left join (select C_Location_ID, Address1, Address2, Postal, City, C_Region_ID, C_Country_ID from C_Location) table3 on (FIN_Financial_Account.C_Location_ID = table3.C_Location_ID) left join (select C_Region_ID, Name from C_Region) table4 on (table3.C_Region_ID = table4.C_Region_ID) left join (select C_Country_ID, Name from C_Country) table5 on (table3.C_Country_ID = table5.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL5 on (table5.C_Country_ID = tableTRL5.C_Country_ID and tableTRL5.AD_Language = ?)  left join (select FIN_Matching_Algorithm_ID, Name from FIN_Matching_Algorithm) table7 on (FIN_Financial_Account.FIN_Matching_Algorithm_ID = table7.FIN_Matching_Algorithm_ID) left join (select C_Country_ID, Name from C_Country) table8 on (FIN_Financial_Account.C_Country_ID = table8.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL8 on (table8.C_Country_ID = tableTRL8.C_Country_ID and tableTRL8.AD_Language = ?)  left join ad_ref_list_v list2 on (FIN_Financial_Account.BankFormat = list2.value and list2.ad_reference_id = 'C123B7BF5B2C438D84D2E509734776B5' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (FIN_Financial_Account.Typewriteoff = list3.value and list3.ad_reference_id = 'C3531F85C14B4515AB7259F0D338050D' and list3.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -348,8 +348,8 @@ Select for edit
         objectAccountData.codeaccount = UtilSql.getValue(result, "codeaccount");
         objectAccountData.accountno = UtilSql.getValue(result, "accountno");
         objectAccountData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectAccountData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectAccountData.routingno = UtilSql.getValue(result, "routingno");
+        objectAccountData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectAccountData.language = UtilSql.getValue(result, "language");
         objectAccountData.adUserClient = "";
         objectAccountData.adOrgClient = "";
@@ -433,8 +433,8 @@ Create a registry
     objectAccountData[0].codeaccount = codeaccount;
     objectAccountData[0].accountno = accountno;
     objectAccountData[0].adClientId = adClientId;
-    objectAccountData[0].finFinancialAccountId = finFinancialAccountId;
     objectAccountData[0].routingno = routingno;
+    objectAccountData[0].finFinancialAccountId = finFinancialAccountId;
     objectAccountData[0].language = "";
     return objectAccountData;
   }
@@ -596,7 +596,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Financial_Account" +
-      "        SET AD_Org_ID = (?) , Name = (?) , C_Currency_ID = (?) , Type = (?) , Description = (?) , C_Location_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Isdefault = (?) , Currentbalance = TO_NUMBER(?) , Creditlimit = TO_NUMBER(?) , InitialBalance = TO_NUMBER(?) , FIN_Matching_Algorithm_ID = (?) , GenericAccountNo = (?) , Iban = (?) , Swiftcode = (?) , INE_Number = (?) , C_Country_ID = (?) , BankFormat = (?) , Typewriteoff = (?) , Writeofflimit = TO_NUMBER(?) , EM_APRM_ImportBankFile = (?) , EM_APRM_MatchTransactions = (?) , EM_APRM_Reconcile = (?) , EM_APRM_AddTransactions = (?) , Codebank = (?) , Codebranch = (?) , Bank_Digitcontrol = (?) , Account_Digitcontrol = (?) , Codeaccount = (?) , Accountno = (?) , AD_Client_ID = (?) , Fin_Financial_Account_ID = (?) , Routingno = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , C_Currency_ID = (?) , Type = (?) , Description = (?) , C_Location_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Isdefault = (?) , Currentbalance = TO_NUMBER(?) , Creditlimit = TO_NUMBER(?) , InitialBalance = TO_NUMBER(?) , FIN_Matching_Algorithm_ID = (?) , GenericAccountNo = (?) , Iban = (?) , Swiftcode = (?) , INE_Number = (?) , C_Country_ID = (?) , BankFormat = (?) , Typewriteoff = (?) , Writeofflimit = TO_NUMBER(?) , EM_APRM_ImportBankFile = (?) , EM_APRM_MatchTransactions = (?) , EM_APRM_Reconcile = (?) , EM_APRM_AddTransactions = (?) , Codebank = (?) , Codebranch = (?) , Bank_Digitcontrol = (?) , Account_Digitcontrol = (?) , Codeaccount = (?) , Accountno = (?) , Routingno = (?) , AD_Client_ID = (?) , Fin_Financial_Account_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Financial_Account.Fin_Financial_Account_ID = ? " +
       "        AND FIN_Financial_Account.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -644,9 +644,9 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountDigitcontrol);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codeaccount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -675,7 +675,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Financial_Account " +
-      "        (AD_Org_ID, Name, C_Currency_ID, Type, Description, C_Location_ID, C_Bpartner_ID, Isactive, Isdefault, Currentbalance, Creditlimit, InitialBalance, FIN_Matching_Algorithm_ID, GenericAccountNo, Iban, Swiftcode, INE_Number, C_Country_ID, BankFormat, Typewriteoff, Writeofflimit, EM_APRM_ImportBankFile, EM_APRM_MatchTransactions, EM_APRM_Reconcile, EM_APRM_AddTransactions, Codebank, Codebranch, Bank_Digitcontrol, Account_Digitcontrol, Codeaccount, Accountno, AD_Client_ID, Fin_Financial_Account_ID, Routingno, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, C_Currency_ID, Type, Description, C_Location_ID, C_Bpartner_ID, Isactive, Isdefault, Currentbalance, Creditlimit, InitialBalance, FIN_Matching_Algorithm_ID, GenericAccountNo, Iban, Swiftcode, INE_Number, C_Country_ID, BankFormat, Typewriteoff, Writeofflimit, EM_APRM_ImportBankFile, EM_APRM_MatchTransactions, EM_APRM_Reconcile, EM_APRM_AddTransactions, Codebank, Codebranch, Bank_Digitcontrol, Account_Digitcontrol, Codeaccount, Accountno, AD_Client_ID, Routingno, Fin_Financial_Account_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -716,8 +716,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codeaccount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

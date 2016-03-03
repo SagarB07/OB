@@ -92,6 +92,62 @@ empty select
   }
 
 /**
+procedure No_Procesar_Prestamo
+ */
+  public static ActionButtonData process0C5344E0E93943CEBAC5305789B1E8F5(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL No_Procesar_Prestamo(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
 procedure C_YearPeriods
  */
   public static ActionButtonData process100(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
@@ -1218,6 +1274,62 @@ procedure C_Commission_Process
     String strSql = "";
     strSql = strSql + 
       "        CALL C_Commission_Process(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesa_rol_provision
+ */
+  public static ActionButtonData process128325E030774501A825C3AAD37C75B7(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_rol_provision(?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;
@@ -2780,12 +2892,348 @@ procedure M_InOut_Create0
   }
 
 /**
+procedure no_procesa_liquidacion_pago
+ */
+  public static ActionButtonData process1C658BA1A8E54D8C839ACE408BC9CBED(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_liquidacion_pago(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure NO_Anadir_Anticipo
+ */
+  public static ActionButtonData process20CE876D2AC94B4592AB21D3D0E85F24(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL NO_Anadir_Anticipo(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
 procedure C_GenerateSOFromProjectPhase
  */
   public static ActionButtonData process216(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
       "        CALL C_GenerateSOFromProjectPhase(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_genera_rol_provision
+ */
+  public static ActionButtonData process2A6B08C238B24CC1A483C84AB02DFBC2(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_genera_rol_provision(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesar_vacaciones
+ */
+  public static ActionButtonData process391DE834C5634644A16593B0286EFB64(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesar_vacaciones(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesar_avance
+ */
+  public static ActionButtonData process48433D8674BA4CD5B8A856693D37FB3F(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesar_avance(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesa_rol_pro_linea
+ */
+  public static ActionButtonData process535686AFC88E475383664770714ABE0E(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_rol_pro_linea(?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;
@@ -2892,12 +3340,124 @@ procedure AD_Org_Ready
   }
 
 /**
+procedure no_genera_datos_pago
+ */
+  public static ActionButtonData process576C49557DE645F9A9140791958683AD(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_genera_datos_pago(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
 procedure M_Reservation_Post0
  */
   public static ActionButtonData process5A2A0AF88AF54BB085DCC52FCC9B17B7(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
       "        CALL M_Reservation_Post0(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure 
+ */
+  public static ActionButtonData process61B3BD10ED0C4A37950A9269A07AF344(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL (?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;
@@ -3004,12 +3564,292 @@ procedure AD_Create_Audit_Triggers
   }
 
 /**
+procedure no_procesa_avance_pago
+ */
+  public static ActionButtonData process6B354B0B3B9A4512B81C77FBA5E553DF(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_avance_pago(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
 procedure M_INVEXPLODEBOMNOTSTOCK
  */
   public static ActionButtonData process6E1ADD5C8B6B4ACB82237DAA8114451E(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
       "        CALL M_INVEXPLODEBOMNOTSTOCK(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesar_utilidad
+ */
+  public static ActionButtonData process6E4252763C694A5BADCEB67B1F53D0E0(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesar_utilidad(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesa_liquidacion
+ */
+  public static ActionButtonData process701A7295E2B7474C8552F21BAC63A34E(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_liquidacion(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure 
+ */
+  public static ActionButtonData process7ADEF4948DD34B6DA43F75582C166396(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL (?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesa_rol_pago
+ */
+  public static ActionButtonData process7D59984E9BC24E2D931DC4869560F7A5(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_rol_pago(?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;
@@ -5636,6 +6476,62 @@ procedure
   }
 
 /**
+procedure no_utilidad_post
+ */
+  public static ActionButtonData process90A16733BEF443E594213599F785E668(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_utilidad_post(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
 procedure M_UPDATE_PARETO_PRODUCT0
  */
   public static ActionButtonData process9CD67D41E43242CDA034FB994B75812A(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
@@ -5692,12 +6588,516 @@ procedure M_UPDATE_PARETO_PRODUCT0
   }
 
 /**
+procedure no_procesa_liquidacion
+ */
+  public static ActionButtonData processA164779BCCA640BC9D5B201574C8B8D2(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_liquidacion(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_permiso_empleado
+ */
+  public static ActionButtonData processA44D94CE20024981922580D9053FF944(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_permiso_empleado(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure 
+ */
+  public static ActionButtonData processA5EE7B720325485C8CF63DB7871A7101(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL (?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_genera_salario_digno
+ */
+  public static ActionButtonData processA6BAE9E80FEB450283F2637754AC4C7A(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_genera_salario_digno(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure 
+ */
+  public static ActionButtonData processB670ED126EC0470A966FB31C6EEB8647(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL (?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure 
+ */
+  public static ActionButtonData processBB3C25ED65BC4816A097E6F4E6E179B8(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL (?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_genera_utilidades
+ */
+  public static ActionButtonData processC279711BBF924779BB3C8786894BBD50(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_genera_utilidades(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure ne_dias_vacacion
+ */
+  public static ActionButtonData processCEFF8AF917BF436FA02C93A4EB3BC12C(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL ne_dias_vacacion(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
 procedure 
  */
   public static ActionButtonData processD234AE084F7040DCB66E281A4237FF99(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
       "        CALL (?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesa_rol_pro_mes
+ */
+  public static ActionButtonData processD2999B81B4E84547B24948C424867738(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_rol_pro_mes(?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;
@@ -5866,6 +7266,286 @@ procedure M_EXPLODEBOMNOTSTOCK
     String strSql = "";
     strSql = strSql + 
       "        CALL M_EXPLODEBOMNOTSTOCK(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure atrdep_genera_datos_archivo
+ */
+  public static ActionButtonData processEA45639BE50E404D81AA25A44581A38D(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL atrdep_genera_datos_archivo(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_cambia_estado_rol_pago
+ */
+  public static ActionButtonData processEE9ACE0D59E147A89A400680EFDBED65(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_cambia_estado_rol_pago(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_genera_rol
+ */
+  public static ActionButtonData processF03D64524CD642EFA6DDC11150EDC498(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_genera_rol(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure NO_GENERA_VALOR_RPROVISION
+ */
+  public static ActionButtonData processF30F5A5BE2784756BB8EBF625E482CF4(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL NO_GENERA_VALOR_RPROVISION(?)";
+
+    ActionButtonData objectActionButtonData = new ActionButtonData();
+    CallableStatement st = null;
+    if (connectionProvider.getRDBMS().equalsIgnoreCase("ORACLE")) {
+
+    int iParameter = 0;
+    try {
+      st = connectionProvider.getCallableStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adPinstanceId);
+
+      st.execute();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    }
+    else {
+      Vector<String> parametersData = new Vector<String>();
+      Vector<String> parametersTypes = new Vector<String>();
+      parametersData.addElement(adPinstanceId);
+      parametersTypes.addElement("in");
+      try {
+      RDBMSIndependent.getCallableResult(null, connectionProvider, strSql, parametersData, parametersTypes, 0);
+      } catch(SQLException e){
+        log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+        throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+      } catch(NoConnectionAvailableException ec){
+        log4j.error("Connection error in query: " + strSql + "Exception:"+ ec);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(PoolNotFoundException ep){
+        log4j.error("Pool error in query: " + strSql + "Exception:"+ ep);
+        throw new ServletException("@CODE=NoConnectionAvailable");
+      } catch(Exception ex){
+        log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+        throw new ServletException("@CODE=@" + ex.getMessage());
+      }
+    }
+    return(objectActionButtonData);
+  }
+
+/**
+procedure no_procesa_rol_pro_cabecera
+ */
+  public static ActionButtonData processF9AE3E9FC50A4669AF6D2C7129AACAC3(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        CALL no_procesa_rol_pro_cabecera(?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;

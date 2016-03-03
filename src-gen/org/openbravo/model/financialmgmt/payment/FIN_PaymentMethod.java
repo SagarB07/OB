@@ -18,6 +18,12 @@
 */
 package org.openbravo.model.financialmgmt.payment;
 
+import com.atrums.nomina.data.noContratoEmpleado;
+import com.atrums.nomina.data.noLiquidacionEmpleado;
+import com.atrums.nomina.data.noPagoCabecera;
+import com.atrums.nomina.data.noRegistraQuincLine;
+import com.atrums.nomina.data.noRolPagoProvisionLine;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -94,9 +100,14 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
     public static final String PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST = "financialMgmtPaymentTermLineList";
     public static final String PROPERTY_INVOICELIST = "invoiceList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
     public static final String PROPERTY_ORDERLIST = "orderList";
     public static final String PROPERTY_PROJECTLIST = "projectList";
     public static final String PROPERTY_PROJECTPROPOSALLIST = "projectProposalList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
+    public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
+    public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
+    public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
 
     public FIN_PaymentMethod() {
         setDefaultValue(PROPERTY_CREATIONDATE, new Date());
@@ -130,9 +141,14 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PROJECTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PROJECTPROPOSALLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
     }
 
     @Override
@@ -525,6 +541,15 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
     }
 
     @SuppressWarnings("unchecked")
+    public List<noRolPagoProvisionLine> getRolPagoProvisionLineList() {
+      return (List<noRolPagoProvisionLine>) get(PROPERTY_ROLPAGOPROVISIONLINELIST);
+    }
+
+    public void setRolPagoProvisionLineList(List<noRolPagoProvisionLine> rolPagoProvisionLineList) {
+        set(PROPERTY_ROLPAGOPROVISIONLINELIST, rolPagoProvisionLineList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Order> getOrderList() {
       return (List<Order>) get(PROPERTY_ORDERLIST);
     }
@@ -549,6 +574,42 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
 
     public void setProjectProposalList(List<ProjectProposal> projectProposalList) {
         set(PROPERTY_PROJECTPROPOSALLIST, projectProposalList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noLiquidacionEmpleado> getLiquidacionEmpleadoList() {
+      return (List<noLiquidacionEmpleado>) get(PROPERTY_LIQUIDACIONEMPLEADOLIST);
+    }
+
+    public void setLiquidacionEmpleadoList(List<noLiquidacionEmpleado> liquidacionEmpleadoList) {
+        set(PROPERTY_LIQUIDACIONEMPLEADOLIST, liquidacionEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERALIST);
+    }
+
+    public void setPagoCabeceraList(List<noPagoCabecera> pagoCabeceraList) {
+        set(PROPERTY_PAGOCABECERALIST, pagoCabeceraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRegistraQuincLine> getRegistraQuincLineList() {
+      return (List<noRegistraQuincLine>) get(PROPERTY_REGISTRAQUINCLINELIST);
+    }
+
+    public void setRegistraQuincLineList(List<noRegistraQuincLine> registraQuincLineList) {
+        set(PROPERTY_REGISTRAQUINCLINELIST, registraQuincLineList);
     }
 
 }

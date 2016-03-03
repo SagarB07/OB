@@ -40,11 +40,11 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String docstatus;
   public String docaction;
   public String docactionBtn;
-  public String processing;
   public String adClientId;
+  public String processing;
   public String mRequisitionId;
-  public String isactive;
   public String processed;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -102,16 +102,16 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return docaction;
     else if (fieldName.equalsIgnoreCase("docaction_btn") || fieldName.equals("docactionBtn"))
       return docactionBtn;
-    else if (fieldName.equalsIgnoreCase("processing"))
-      return processing;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("processing"))
+      return processing;
     else if (fieldName.equalsIgnoreCase("m_requisition_id") || fieldName.equals("mRequisitionId"))
       return mRequisitionId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -167,11 +167,11 @@ Select for edit
       "M_Requisition.DocStatus, " +
       "M_Requisition.DocAction, " +
       "list1.name as DocAction_BTN, " +
-      "COALESCE(M_Requisition.Processing, 'N') AS Processing, " +
       "M_Requisition.AD_Client_ID, " +
+      "COALESCE(M_Requisition.Processing, 'N') AS Processing, " +
       "M_Requisition.M_Requisition_ID, " +
-      "COALESCE(M_Requisition.IsActive, 'N') AS IsActive, " +
       "COALESCE(M_Requisition.Processed, 'N') AS Processed, " +
+      "COALESCE(M_Requisition.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Requisition left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Requisition.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (M_Requisition.C_BPartner_ID = table2.C_BPartner_ID) left join (select AD_User_ID, Name from AD_User) table3 on (M_Requisition.AD_User_ID = table3.AD_User_ID) left join (select M_PriceList_ID, Name from M_PriceList) table4 on (M_Requisition.M_PriceList_ID = table4.M_PriceList_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table5 on (M_Requisition.C_Currency_ID = table5.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND (CASE M_Requisition.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(M_Requisition.DocAction) END) = list1.value)" +
       "        WHERE 2=2 " +
@@ -236,11 +236,11 @@ Select for edit
         objectHeaderData.docstatus = UtilSql.getValue(result, "docstatus");
         objectHeaderData.docaction = UtilSql.getValue(result, "docaction");
         objectHeaderData.docactionBtn = UtilSql.getValue(result, "docaction_btn");
-        objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.mRequisitionId = UtilSql.getValue(result, "m_requisition_id");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -300,53 +300,13 @@ Create a registry
     objectHeaderData[0].docstatus = docstatus;
     objectHeaderData[0].docaction = docaction;
     objectHeaderData[0].docactionBtn = docactionBtn;
-    objectHeaderData[0].processing = processing;
     objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].processing = processing;
     objectHeaderData[0].mRequisitionId = mRequisitionId;
-    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].processed = processed;
+    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].language = "";
     return objectHeaderData;
-  }
-
-/**
-Select for auxiliar field
- */
-  public static String selectActP1004400000_C_BPartner_ID(ConnectionProvider connectionProvider, String M_Requisition_ID)    throws ServletException {
-    String strSql = "";
-    strSql = strSql + 
-      "        SELECT M_Requisition.C_Bpartner_Id FROM M_Requisition, (SELECT count(*) as SameBP FROM M_Requisition inner join M_requisitionLine ON M_Requisition.M_Requisition_id = M_requisitionLine.M_Requisition_id WHERE M_Requisition.c_bpartner_id = M_requisitionLine.c_bpartner_id AND M_Requisition.M_Requisition_id = ?) SameBP,  (SELECT count(*) as QtyLines FROM M_RequisitionLine WHERE M_RequisitionLine.M_Requisition_id=?) QtyLines  WHERE SameBP.SameBP = QtyLines.QtyLines AND M_Requisition.M_Requisition_id =? ";
-
-    ResultSet result;
-    String strReturn = "";
-    PreparedStatement st = null;
-
-    int iParameter = 0;
-    try {
-    st = connectionProvider.getPreparedStatement(strSql);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_Requisition_ID);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_Requisition_ID);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_Requisition_ID);
-
-      result = st.executeQuery();
-      if(result.next()) {
-        strReturn = UtilSql.getValue(result, "c_bpartner_id");
-      }
-      result.close();
-    } catch(SQLException e){
-      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
-      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
-    } catch(Exception ex){
-      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
-      throw new ServletException("@CODE=@" + ex.getMessage());
-    } finally {
-      try {
-        connectionProvider.releasePreparedStatement(st);
-      } catch(Exception ignore){
-        ignore.printStackTrace();
-      }
-    }
-    return(strReturn);
   }
 
 /**
@@ -371,6 +331,46 @@ Select for auxiliar field
       result = st.executeQuery();
       if(result.next()) {
         strReturn = UtilSql.getValue(result, "m_pricelist_id");
+      }
+      result.close();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    return(strReturn);
+  }
+
+/**
+Select for auxiliar field
+ */
+  public static String selectActP1004400000_C_BPartner_ID(ConnectionProvider connectionProvider, String M_Requisition_ID)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        SELECT M_Requisition.C_Bpartner_Id FROM M_Requisition, (SELECT count(*) as SameBP FROM M_Requisition inner join M_requisitionLine ON M_Requisition.M_Requisition_id = M_requisitionLine.M_Requisition_id WHERE M_Requisition.c_bpartner_id = M_requisitionLine.c_bpartner_id AND M_Requisition.M_Requisition_id = ?) SameBP,  (SELECT count(*) as QtyLines FROM M_RequisitionLine WHERE M_RequisitionLine.M_Requisition_id=?) QtyLines  WHERE SameBP.SameBP = QtyLines.QtyLines AND M_Requisition.M_Requisition_id =? ";
+
+    ResultSet result;
+    String strReturn = "";
+    PreparedStatement st = null;
+
+    int iParameter = 0;
+    try {
+    st = connectionProvider.getPreparedStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_Requisition_ID);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_Requisition_ID);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_Requisition_ID);
+
+      result = st.executeQuery();
+      if(result.next()) {
+        strReturn = UtilSql.getValue(result, "c_bpartner_id");
       }
       result.close();
     } catch(SQLException e){
@@ -578,7 +578,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Requisition" +
-      "        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , Createpo = (?) , DocStatus = (?) , DocAction = (?) , Processing = (?) , AD_Client_ID = (?) , M_Requisition_ID = (?) , IsActive = (?) , Processed = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , Createpo = (?) , DocStatus = (?) , DocAction = (?) , AD_Client_ID = (?) , Processing = (?) , M_Requisition_ID = (?) , Processed = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Requisition.M_Requisition_ID = ? " +
       "        AND M_Requisition.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -605,11 +605,11 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createpo);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docaction);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -638,7 +638,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Requisition " +
-      "        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, Createpo, DocStatus, DocAction, Processing, AD_Client_ID, M_Requisition_ID, IsActive, Processed, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, Createpo, DocStatus, DocAction, AD_Client_ID, Processing, M_Requisition_ID, Processed, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -657,11 +657,11 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createpo);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docaction);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

@@ -1015,10 +1015,10 @@ xmlDocument.setParameter("Process_Asset_Modal", modalProcess_Asset?"true":"false
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("AssetDisposalDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("AssetServiceDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("AssetDepreciationDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonProfit", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("GuaranteeDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("AssetServiceDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonAcctvalueamt", Utility.messageBD(this, "Calc", vars.getLanguage()));
     } catch (Exception ex) {
       ex.printStackTrace();

@@ -1095,8 +1095,8 @@ xmlDocument.setParameter("buttonTotalpaid", Utility.messageBD(this, "Calc", vars
 xmlDocument.setParameter("LastCalculatedOnDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonOutstandingAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Taxdate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("buttonDueAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("DateOrdered_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("buttonDueAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonWithholdingamount", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Finalsettlement_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonChargeAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));

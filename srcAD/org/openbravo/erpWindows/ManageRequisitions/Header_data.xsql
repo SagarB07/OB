@@ -27,11 +27,11 @@ M_Requisition.Createpo,
 M_Requisition.DocStatus, 
 M_Requisition.DocAction, 
 list1.name as DocAction_BTN, 
-COALESCE(M_Requisition.Processing, 'N') AS Processing, 
 M_Requisition.AD_Client_ID, 
+COALESCE(M_Requisition.Processing, 'N') AS Processing, 
 M_Requisition.M_Requisition_ID, 
-COALESCE(M_Requisition.IsActive, 'N') AS IsActive, 
 COALESCE(M_Requisition.Processed, 'N') AS Processed, 
+COALESCE(M_Requisition.IsActive, 'N') AS IsActive, 
  
         ? AS LANGUAGE 
         FROM M_Requisition left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Requisition.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (M_Requisition.C_BPartner_ID = table2.C_BPartner_ID) left join (select AD_User_ID, Name from AD_User) table3 on (M_Requisition.AD_User_ID = table3.AD_User_ID) left join (select M_PriceList_ID, Name from M_PriceList) table4 on (M_Requisition.M_PriceList_ID = table4.M_PriceList_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table5 on (M_Requisition.C_Currency_ID = table5.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND (CASE M_Requisition.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(M_Requisition.DocAction) END) = list1.value)
@@ -74,10 +74,10 @@ COALESCE(M_Requisition.Processed, 'N') AS Processed,
 
 
 
-   <SqlMethod name="selectActP1004400000_C_BPartner_ID" type="preparedStatement" return="String" default="">
+   <SqlMethod name="selectActP1004400000_M_PriceList_ID" type="preparedStatement" return="String" default="">
     <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
     <Sql><![CDATA[
-        SELECT M_Requisition.C_Bpartner_Id FROM M_Requisition, (SELECT count(*) as SameBP FROM M_Requisition inner join M_requisitionLine ON M_Requisition.M_Requisition_id = M_requisitionLine.M_Requisition_id WHERE M_Requisition.c_bpartner_id = M_requisitionLine.c_bpartner_id AND M_Requisition.M_Requisition_id = ?) SameBP,  (SELECT count(*) as QtyLines FROM M_RequisitionLine WHERE M_RequisitionLine.M_Requisition_id=?) QtyLines  WHERE SameBP.SameBP = QtyLines.QtyLines AND M_Requisition.M_Requisition_id =? 
+        SELECT M_Requisition.m_pricelist_id  FROM M_Requisition,       (SELECT count(*) as SamePL        FROM M_Requisition inner join M_requisitionLine ON M_Requisition.M_Requisition_id = M_requisitionLine.M_Requisition_id       WHERE M_Requisition.m_pricelist_id = M_requisitionLine.m_pricelist_id AND M_Requisition.M_Requisition_id = ?) SamePL,        (SELECT count(*) as QtyLines       FROM M_RequisitionLine       WHERE M_RequisitionLine.M_Requisition_id=?) QtyLines   WHERE SamePL.SamePL = QtyLines.QtyLines AND M_Requisition.M_Requisition_id =? 
     ]]></Sql>
 
 <Parameter name="M_Requisition_ID"/>
@@ -85,10 +85,10 @@ COALESCE(M_Requisition.Processed, 'N') AS Processed,
 <Parameter name="M_Requisition_ID"/>
   </SqlMethod>
 
-   <SqlMethod name="selectActP1004400000_M_PriceList_ID" type="preparedStatement" return="String" default="">
+   <SqlMethod name="selectActP1004400000_C_BPartner_ID" type="preparedStatement" return="String" default="">
     <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
     <Sql><![CDATA[
-        SELECT M_Requisition.m_pricelist_id  FROM M_Requisition,       (SELECT count(*) as SamePL        FROM M_Requisition inner join M_requisitionLine ON M_Requisition.M_Requisition_id = M_requisitionLine.M_Requisition_id       WHERE M_Requisition.m_pricelist_id = M_requisitionLine.m_pricelist_id AND M_Requisition.M_Requisition_id = ?) SamePL,        (SELECT count(*) as QtyLines       FROM M_RequisitionLine       WHERE M_RequisitionLine.M_Requisition_id=?) QtyLines   WHERE SamePL.SamePL = QtyLines.QtyLines AND M_Requisition.M_Requisition_id =? 
+        SELECT M_Requisition.C_Bpartner_Id FROM M_Requisition, (SELECT count(*) as SameBP FROM M_Requisition inner join M_requisitionLine ON M_Requisition.M_Requisition_id = M_requisitionLine.M_Requisition_id WHERE M_Requisition.c_bpartner_id = M_requisitionLine.c_bpartner_id AND M_Requisition.M_Requisition_id = ?) SameBP,  (SELECT count(*) as QtyLines FROM M_RequisitionLine WHERE M_RequisitionLine.M_Requisition_id=?) QtyLines  WHERE SameBP.SameBP = QtyLines.QtyLines AND M_Requisition.M_Requisition_id =? 
     ]]></Sql>
 
 <Parameter name="M_Requisition_ID"/>
@@ -152,13 +152,13 @@ COALESCE(M_Requisition.Processed, 'N') AS Processed,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Requisition
-        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , Createpo = (?) , DocStatus = (?) , DocAction = (?) , Processing = (?) , AD_Client_ID = (?) , M_Requisition_ID = (?) , IsActive = (?) , Processed = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , Createpo = (?) , DocStatus = (?) , DocAction = (?) , AD_Client_ID = (?) , Processing = (?) , M_Requisition_ID = (?) , Processed = (?) , IsActive = (?) , updated = now(), updatedby = ? 
         WHERE M_Requisition.M_Requisition_ID = ? 
         
         AND M_Requisition.AD_Client_ID IN ('1') 
         AND M_Requisition.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="createpo"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mRequisitionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="createpo"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="mRequisitionId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mRequisitionId"></Parameter>
     
@@ -170,10 +170,10 @@ COALESCE(M_Requisition.Processed, 'N') AS Processed,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Requisition 
-        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, Createpo, DocStatus, DocAction, Processing, AD_Client_ID, M_Requisition_ID, IsActive, Processed, created, createdby, updated, updatedBy)
+        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, Createpo, DocStatus, DocAction, AD_Client_ID, Processing, M_Requisition_ID, Processed, IsActive, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="createpo"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mRequisitionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="createpo"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="mRequisitionId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

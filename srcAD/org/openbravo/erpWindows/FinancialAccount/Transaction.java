@@ -556,7 +556,7 @@ vars.getGlobalVariable("inpfinFinancialAccountId", windowId + "|Fin_Financial_Ac
       
       AccountData[] data = AccountData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPFin_Financial_Account_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|Fin_Financial_Account_ID", data[0].finFinancialAccountId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|Fin_Financial_Account_ID", data[0].finFinancialAccountId);
       vars.setSessionValue(windowId + "|Fin_Financial_Account_ID", strPFin_Financial_Account_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -577,7 +577,7 @@ vars.getGlobalVariable("inpfinFinancialAccountId", windowId + "|Fin_Financial_Ac
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Fin_Payment_ID", data[0].getField("finPaymentId"));    vars.setSessionValue(windowId + "|Fin_Finacc_Transaction_ID", data[0].getField("finFinaccTransactionId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Fin_Payment_ID", data[0].getField("finPaymentId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|Fin_Finacc_Transaction_ID", data[0].getField("finFinaccTransactionId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPFin_Financial_Account_ID) throws IOException,ServletException {

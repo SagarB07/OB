@@ -52,6 +52,8 @@ public class EmployeeAccounts extends BaseOBObject implements Traceable, ClientE
     public static final String PROPERTY_UPDATEDBY = "updatedBy";
     public static final String PROPERTY_EMPLOYEEEXPENSES = "employeeExpenses";
     public static final String PROPERTY_EMPLOYEEPREPAYMENTS = "employeePrepayments";
+    public static final String PROPERTY_NOCUENTAPAGO = "noCuentaPago";
+    public static final String PROPERTY_NOPROVISIONACCT = "noProvisionAcct";
 
     public EmployeeAccounts() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -156,6 +158,22 @@ public class EmployeeAccounts extends BaseOBObject implements Traceable, ClientE
 
     public void setEmployeePrepayments(AccountingCombination employeePrepayments) {
         set(PROPERTY_EMPLOYEEPREPAYMENTS, employeePrepayments);
+    }
+
+    public AccountingCombination getNoCuentaPago() {
+        return (AccountingCombination) get(PROPERTY_NOCUENTAPAGO);
+    }
+
+    public void setNoCuentaPago(AccountingCombination noCuentaPago) {
+        set(PROPERTY_NOCUENTAPAGO, noCuentaPago);
+    }
+
+    public AccountingCombination getNoProvisionAcct() {
+        return (AccountingCombination) get(PROPERTY_NOPROVISIONACCT);
+    }
+
+    public void setNoProvisionAcct(AccountingCombination noProvisionAcct) {
+        set(PROPERTY_NOPROVISIONACCT, noProvisionAcct);
     }
 
 }

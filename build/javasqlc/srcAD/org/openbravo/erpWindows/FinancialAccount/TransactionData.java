@@ -866,7 +866,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Finacc_Transaction" +
-      "        SET Line = TO_NUMBER(?) , Trxtype = (?) , AD_Org_ID = (?) , Status = (?) , CreatedByAlgorithm = (?) , Isactive = (?) , Statementdate = TO_DATE(?) , DateAcct = TO_DATE(?) , EM_APRM_Modify = (?) , FIN_Reconciliation_ID = (?) , Fin_Financial_Account_ID = (?) , Fin_Payment_ID = (?) , Description = (?) , C_Glitem_ID = (?) , C_Currency_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Foreign_Currency_ID = (?) , Processed = (?) , Foreign_Amount = TO_NUMBER(?) , Processing = (?) , Posted = (?) , EM_APRM_Delete = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , C_Salesregion_ID = (?) , User1_ID = (?) , User2_ID = (?) , AD_Client_ID = (?) , Fin_Finacc_Transaction_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , Trxtype = (?) , AD_Org_ID = (?) , Status = (?) , CreatedByAlgorithm = (?) , Statementdate = TO_DATE(?) , Isactive = (?) , EM_APRM_Modify = (?) , DateAcct = TO_DATE(?) , Fin_Financial_Account_ID = (?) , FIN_Reconciliation_ID = (?) , Fin_Payment_ID = (?) , Description = (?) , C_Glitem_ID = (?) , C_Currency_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Processed = (?) , Foreign_Currency_ID = (?) , Processing = (?) , Foreign_Amount = TO_NUMBER(?) , Posted = (?) , EM_APRM_Delete = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , C_Salesregion_ID = (?) , User1_ID = (?) , User2_ID = (?) , Fin_Finacc_Transaction_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Finacc_Transaction.Fin_Finacc_Transaction_ID = ? " +
       "                 AND FIN_Finacc_Transaction.Fin_Financial_Account_ID = ? " +
       "        AND FIN_Finacc_Transaction.AD_Client_ID IN (";
@@ -889,22 +889,22 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, status);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdbyalgorithm);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, statementdate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmModify);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cGlitemId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, depositamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignAmount);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignAmount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmDelete);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignConvertRate);
@@ -917,8 +917,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cSalesregionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinaccTransactionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinaccTransactionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);

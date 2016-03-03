@@ -558,7 +558,7 @@ params.put("action", straction);
       
       AccountData[] data = AccountData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPFIN_Financial_Account_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|Fin_Financial_Account_ID", data[0].finFinancialAccountId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|Fin_Financial_Account_ID", data[0].finFinancialAccountId);
       vars.setSessionValue(windowId + "|FIN_Financial_Account_ID", strPFIN_Financial_Account_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work

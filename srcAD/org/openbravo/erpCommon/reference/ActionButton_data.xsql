@@ -6,6 +6,14 @@
     </Sql>
   </SqlMethod>
 
+  <SqlMethod name="process0C5344E0E93943CEBAC5305789B1E8F5" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure No_Procesar_Prestamo</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL No_Procesar_Prestamo(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process100" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure C_YearPeriods</SqlMethodComment>
       <Sql><![CDATA[
@@ -170,6 +178,14 @@
       <SqlMethodComment>procedure C_Commission_Process</SqlMethodComment>
       <Sql><![CDATA[
         CALL C_Commission_Process(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process128325E030774501A825C3AAD37C75B7" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_rol_provision</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_rol_provision(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -390,10 +406,58 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process1C658BA1A8E54D8C839ACE408BC9CBED" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_liquidacion_pago</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_liquidacion_pago(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process20CE876D2AC94B4592AB21D3D0E85F24" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure NO_Anadir_Anticipo</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL NO_Anadir_Anticipo(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process216" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure C_GenerateSOFromProjectPhase</SqlMethodComment>
       <Sql><![CDATA[
         CALL C_GenerateSOFromProjectPhase(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process2A6B08C238B24CC1A483C84AB02DFBC2" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_genera_rol_provision</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_genera_rol_provision(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process391DE834C5634644A16593B0286EFB64" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesar_vacaciones</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesar_vacaciones(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process48433D8674BA4CD5B8A856693D37FB3F" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesar_avance</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesar_avance(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process535686AFC88E475383664770714ABE0E" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_rol_pro_linea</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_rol_pro_linea(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -406,10 +470,26 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process576C49557DE645F9A9140791958683AD" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_genera_datos_pago</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_genera_datos_pago(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process5A2A0AF88AF54BB085DCC52FCC9B17B7" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure M_Reservation_Post0</SqlMethodComment>
       <Sql><![CDATA[
         CALL M_Reservation_Post0(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process61B3BD10ED0C4A37950A9269A07AF344" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -422,10 +502,50 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process6B354B0B3B9A4512B81C77FBA5E553DF" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_avance_pago</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_avance_pago(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process6E1ADD5C8B6B4ACB82237DAA8114451E" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure M_INVEXPLODEBOMNOTSTOCK</SqlMethodComment>
       <Sql><![CDATA[
         CALL M_INVEXPLODEBOMNOTSTOCK(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process6E4252763C694A5BADCEB67B1F53D0E0" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesar_utilidad</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesar_utilidad(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process701A7295E2B7474C8552F21BAC63A34E" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_liquidacion</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_liquidacion(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process7ADEF4948DD34B6DA43F75582C166396" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process7D59984E9BC24E2D931DC4869560F7A5" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_rol_pago</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_rol_pago(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -798,6 +918,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process90A16733BEF443E594213599F785E668" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_utilidad_post</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_utilidad_post(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process9CD67D41E43242CDA034FB994B75812A" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure M_UPDATE_PARETO_PRODUCT0</SqlMethodComment>
       <Sql><![CDATA[
@@ -806,10 +934,82 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="processA164779BCCA640BC9D5B201574C8B8D2" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_liquidacion</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_liquidacion(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processA44D94CE20024981922580D9053FF944" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_permiso_empleado</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_permiso_empleado(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processA5EE7B720325485C8CF63DB7871A7101" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processA6BAE9E80FEB450283F2637754AC4C7A" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_genera_salario_digno</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_genera_salario_digno(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processB670ED126EC0470A966FB31C6EEB8647" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processBB3C25ED65BC4816A097E6F4E6E179B8" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processC279711BBF924779BB3C8786894BBD50" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_genera_utilidades</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_genera_utilidades(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processCEFF8AF917BF436FA02C93A4EB3BC12C" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure ne_dias_vacacion</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL ne_dias_vacacion(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="processD234AE084F7040DCB66E281A4237FF99" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
         CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processD2999B81B4E84547B24948C424867738" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_rol_pro_mes</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_rol_pro_mes(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -834,6 +1034,46 @@
       <SqlMethodComment>procedure M_EXPLODEBOMNOTSTOCK</SqlMethodComment>
       <Sql><![CDATA[
         CALL M_EXPLODEBOMNOTSTOCK(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processEA45639BE50E404D81AA25A44581A38D" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure atrdep_genera_datos_archivo</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL atrdep_genera_datos_archivo(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processEE9ACE0D59E147A89A400680EFDBED65" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_cambia_estado_rol_pago</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_cambia_estado_rol_pago(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processF03D64524CD642EFA6DDC11150EDC498" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_genera_rol</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_genera_rol(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processF30F5A5BE2784756BB8EBF625E482CF4" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure NO_GENERA_VALOR_RPROVISION</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL NO_GENERA_VALOR_RPROVISION(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processF9AE3E9FC50A4669AF6D2C7129AACAC3" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesa_rol_pro_cabecera</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesa_rol_pro_cabecera(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
