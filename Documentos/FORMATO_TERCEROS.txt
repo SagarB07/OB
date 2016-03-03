@@ -1,0 +1,2 @@
+ad_client_id	ad_org_id	user_id	isactive	created	createdby	updatedby	value	name	name2	description	c_bp_group_id	duns	id-tax	naics	greeting
+4028E6C72959682B01295A070852010D	0	100	Y	 now()	100	100		SANTIAGO 	YACELGA		4028E6C72959682B01295F40BC2A02E2	H420	null	null	1A2EEE15FC79416881AA2A06129E16F7
