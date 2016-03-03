@@ -199,6 +199,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
           releaseRollbackConnection(con);
           return myMessage;
         }
+        
         strFields.delete(0, strFields.length());
       }
 
