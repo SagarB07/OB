@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CCO_TOTAL_COSTOS1_TRG">
+    <trigger name="CCO_TOTAL_COSTOS1_TRG" table="CCO_COSTOS_NOMINA" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[total_costo_registra1 NUMBER(10,2);
+total_costo_invoice1 NUMBER(10,2);
+
+
+BEGIN
+
+
+ 
+
+
+
+if (:new.no_contrato_empleado_id is not null) then 
+
+select SUM(valor) INTO total_costo_registra1 from cco_costos_nomina
+                                   where no_contrato_empleado_id=:new.no_contrato_empleado_id
+                                    group by no_contrato_empleado_id;
+    select salario INTO total_costo_invoice1 from no_contrato_empleado
+                                   where no_contrato_empleado_id=:new.no_contrato_empleado_id;
+end if;
+
+    IF (UPDATING) THEN
+        IF(total_costo_registra1>total_costo_invoice1)THEN
+            RAISE NO_DATA_FOUND;
+        END IF;
+   END IF;
+  IF (INSERTING) THEN
+        IF(total_costo_registra1>total_costo_invoice1)THEN
+            RAISE NO_DATA_FOUND;
+        END IF;
+   END IF;
+    RETURN NEW;
+END CCO_TOTAL_COSTOS1_TRG
+]]></body>
+    </trigger>
+  </database>

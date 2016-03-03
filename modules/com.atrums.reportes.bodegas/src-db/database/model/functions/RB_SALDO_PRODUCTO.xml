@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RB_SALDO_PRODUCTO">
+    <function name="RB_SALDO_PRODUCTO" type="NUMERIC">
+      <parameter name="p_product_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_datefrom" type="TIMESTAMP" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Result NUMBER:=0; 
+  
+  BEGIN 
+
+        select sum(amtsourcedr)-sum(amtsourcecr) 
+        into v_Result
+        from fact_acct
+        where m_product_id = p_product_id
+        and acctvalue = 
+        (select ev.value from m_product_acct pa, c_validcombination v, c_elementvalue ev 
+        where pa.m_product_id = p_product_id
+        and pa.c_acctschema_id IN (select c_acctschema_id from c_acctschema where isactive = 'Y') 
+        and pa.p_asset_acct = v.c_validcombination_id
+        and v.account_id = ev.c_elementvalue_id)
+        and dateacct < p_datefrom;
+
+Return v_Result;
+END RB_SALDO_PRODUCTO
+]]></body>
+    </function>
+  </database>

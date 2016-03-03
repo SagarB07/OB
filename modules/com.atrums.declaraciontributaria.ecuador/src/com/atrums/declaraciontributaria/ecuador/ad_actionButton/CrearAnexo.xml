@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ **************************************************************************
+ *EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+ *SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+ **************************************************************************
+-->
+<REPORT>
+	<template file="CrearAnexo.html"/>
+	<PARAMETER id="paramLanguage" name="language" default=""/>
+	<PARAMETER id="paramcRemittanceId" name="key" default="" attribute="value"/>
+	<PARAMETER id="window" name="window" default="" attribute="value"/>
+	<SUBREPORT id="reportTyperemittance" name="reportTyperemittance" report="org/openbravo/erpCommon/reference/List">
+		<ARGUMENT name="parameterListSelected"/>
+	</SUBREPORT>
+	<PARAMETER id="paramDirectory" name="directory" default=""/>
+	<PARAMETER id="paramCSS" name="theme" attribute="href" replace="Default"/>
+	<PARAMETER id="processDescription" name="description" replaceCharacters="htmlHelp" default=""/>
+	<PARAMETER id="processHelp" name="help" replaceCharacters="htmlHelp" default=""/>
+	<PARAMETER id="messageBoxID" name="messageType" attribute="class" replace="yy" default="HIDDEN"/>
+	<PARAMETER id="messageBoxIDTitle" name="messageTitle" default=""/>
+	<PARAMETER id="messageBoxIDMessage" name="messageMessage" default=""/>
+	<DISCARD id="discard"/>
+</REPORT>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATRMEC_SALDO_ESTADO_CUENTA_PR">
+    <function name="ATRMEC_SALDO_ESTADO_CUENTA_PR" type="NUMERIC">
+      <parameter name="p_client_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_datefrom" type="TIMESTAMP" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Result NUMBER:=0; 
+  
+  BEGIN 
+    
+	select coalesce(round(sum(a.valor),2),0)
+	into v_Result
+	from (
+	
+		select i.dateinvoiced as fecha, 
+			dtr.name as doc, 
+			i.documentno as documentno, 
+			case when dt.docbasetype = 'ARC' then abs(i.grandtotal)*-1 else i.grandtotal end as valor
+		from c_invoice i, c_doctype dt, c_doctype_trl dtr
+		where i.c_doctypetarget_id = dt.c_doctype_id
+		and dt.c_doctype_id = dtr.c_doctype_id
+		and dtr.ad_language = 'es_EC'
+		and i.processed = 'Y'
+		and i.ad_client_id = p_client_id
+		and i.issotrx = 'N'
+		and date(i.dateinvoiced) < p_datefrom
+		and i.c_bpartner_id = p_bpartner_id
+
+		UNION ALL
+
+		select p.paymentdate as fecha, 
+			dtr.name as doc, 
+			p.documentno as documentno, 
+			p.amount*-1 as valor
+		from fin_payment p, c_doctype dt, c_doctype_trl dtr
+		where p.c_doctype_id = dt.c_doctype_id
+		and dt.c_doctype_id = dtr.c_doctype_id
+		and dtr.ad_language = 'es_EC'
+		and p.ad_client_id = p_client_id
+		and p.processed = 'Y'
+		and p.fin_financial_account_id NOT IN (select fin_financial_account_id 
+                            from fin_financial_account 
+                            where name like '%etenci%' 
+                            and ad_client_id IN ( p_client_id ) )
+		and p.isreceipt = 'N'
+        and p.fin_payment_id IN (select fin_payment_id from fin_payment_detail_v where fin_payment_sched_inv_id is not null)
+		and date(p.paymentdate) < p_datefrom
+		and p.c_bpartner_id = p_bpartner_id
+
+		UNION ALL
+
+		select rc.fecha_emision as fecha, 
+			'Retención' as doc, 
+			rc.documentno as documentno, 
+			rc.total_retencion*-1 as valor
+		from co_retencion_compra rc, c_invoice i
+		where rc.c_invoice_id = i.c_invoice_id
+		and rc.ad_client_id = p_client_id
+		and rc.processed = 'Y'
+		and date(rc.fecha_emision) < p_datefrom
+		and i.c_bpartner_id = p_bpartner_id
+	) A;
+	
+    
+	Return v_Result;
+END ATRMEC_SALDO_ESTADO_CUENTA_PR
+]]></body>
+    </function>
+  </database>

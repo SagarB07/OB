@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE FIN_PAYMENT_SCHEDULE">
+    <table name="FIN_PAYMENT_SCHEDULE" primaryKey="FIN_PAYMENT_SCHEDULE_KEY">
+      <column name="EM_CO_RETENCION" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

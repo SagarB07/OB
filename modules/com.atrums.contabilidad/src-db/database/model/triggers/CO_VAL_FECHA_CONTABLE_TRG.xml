@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_VAL_FECHA_CONTABLE_TRG">
+    <trigger name="CO_VAL_FECHA_CONTABLE_TRG" table="C_INVOICE" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje VARCHAR; 
+v_dateacct VARCHAR;
+v_dateinvoiced VARCHAR;
+v_anio_dateacct VARCHAR;
+v_mes_dateacct VARCHAR;
+v_anio_dateinvoiced VARCHAR;
+v_mes_dateinvoiced VARCHAR;
+
+BEGIN
+
+SELECT date(:new.dateinvoiced)into v_dateinvoiced
+FROM c_invoice where c_invoice_id=:new.c_invoice_id;
+
+SELECT date(:new.dateacct) into v_dateacct
+FROM c_invoice where c_invoice_id=:new.c_invoice_id;
+
+
+SELECT date_part('year', :new.dateacct) into v_anio_dateacct
+FROM c_invoice where c_invoice_id=:new.c_invoice_id;
+
+SELECT date_part('month', :new.dateacct) into v_mes_dateacct
+FROM c_invoice where c_invoice_id=:new.c_invoice_id;
+
+SELECT date_part('year', :new.dateinvoiced) into v_anio_dateinvoiced
+FROM c_invoice where c_invoice_id=:new.c_invoice_id;
+
+SELECT date_part('month', :new.dateinvoiced) into v_mes_dateinvoiced
+FROM c_invoice where c_invoice_id=:new.c_invoice_id;
+  
+IF (INSERTING OR UPDATING ) THEN
+   IF( v_dateacct < v_dateinvoiced ) THEN
+        v_mensaje:='La fecha contable debe ser mayor a la fecha de la factura';
+        RAISE v_mensaje;
+    END IF;
+/*
+IF( v_mes_dateacct <> v_mes_dateinvoiced ) THEN
+        v_mensaje:='La fecha de la factura y la fecha contable deben estar dentro del mismo periodo';
+        RAISE v_mensaje;
+    END IF;
+
+IF( v_anio_dateacct <> v_anio_dateinvoiced ) THEN
+        v_mensaje:='La fecha de la factura y la fecha contable deben estar dentro del mismo periodo';
+        RAISE v_mensaje;
+    END IF;
+*/
+END IF;
+    END CO_VAL_FECHA_CONTABLE_TRG
+]]></body>
+    </trigger>
+  </database>

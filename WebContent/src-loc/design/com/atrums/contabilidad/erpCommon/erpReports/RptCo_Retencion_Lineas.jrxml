@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptCo_Retencion_Lineas" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA["'847442EF32BE44BCB8228A2A6D7FB44D'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT      date_part('year',co_retencion_compra.fecha_emision) as YEAR,      co_retencion_compra_linea."tipo" AS TIPO,      co_retencion_compra_linea."base_imp_retencion" AS BASE_IMP,      co_retencion_compra_linea."valor_retencion" AS VAL_RET,      to_char(co_tipo_retencion."porcentaje") || '%' AS PORCENTAJE FROM  co_bp_retencion_compra INNER JOIN co_retencion_compra_linea ON co_bp_retencion_compra.co_bp_retencion_compra_id = co_retencion_compra_linea.co_bp_retencion_compra_id      INNER JOIN co_tipo_retencion ON co_bp_retencion_compra.co_tipo_retencion_id = co_tipo_retencion.co_tipo_retencion_id, co_retencion_compra WHERE co_retencion_compra.co_retencion_compra_id = $P{DOCUMENT_ID} AND co_retencion_compra_linea.co_retencion_compra_id = co_retencion_compra.co_retencion_compra_id]]>
+	</queryString>
+	<field name="YEAR" class="java.lang.String"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<field name="PORCENTAJE" class="java.lang.String"/>
+	<field name="BASE_IMP" class="java.lang.String"/>
+	<field name="VAL_RET" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="96" y="0" width="76" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{YEAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="0" width="116" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BASE_IMP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="0" width="84" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PORCENTAJE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="0" width="83" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VAL_RET}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

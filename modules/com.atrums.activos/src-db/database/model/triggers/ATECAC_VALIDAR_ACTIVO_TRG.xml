@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER ATECAC_VALIDAR_ACTIVO_TRG">
+    <trigger name="ATECAC_VALIDAR_ACTIVO_TRG" table="ATECAC_ACTIVO_EMP" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje varchar(60);
+v_activo int;
+v_fecha_fin DATE;
+
+BEGIN
+
+    IF INSERTING OR UPDATING THEN
+
+        select count(ae.a_asset_id),
+               ae.fecha_fin_asignacion 
+          into v_activo,
+               v_fecha_fin
+          from atecac_activo_emp ae
+         where ae.a_asset_id = :new.a_asset_id
+          and (ae.fecha_fin_asignacion is null)
+         group by 2;
+	
+       IF(v_activo > 0) THEN
+		
+			v_mensaje='@ATMYLA_ACTIVO_EMP_NO_ASIGNAR_ACTIVO_EMPLEADO@';
+			RAISE exception '%',v_mensaje;
+		
+        ELSE
+			RETURN NEW;
+		END IF;
+    END IF;
+    
+END ATECAC_VALIDAR_ACTIVO_TRG
+]]></body>
+    </trigger>
+  </database>

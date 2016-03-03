@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE M_PRODUCTPRICE">
+    <table name="M_PRODUCTPRICE" primaryKey="M_PRODUCTPRICE_KEY">
+      <column name="EM_RE_NOMBREPRODUCTO" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

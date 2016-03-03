@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER ATS_VALTOTALES_TRG">
+    <trigger name="ATS_VALTOTALES_TRG" table="C_INVOICE" fires="before" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+total NUMBER;
+subtotal NUMBER;
+total1 NUMBER;
+subtotal1 NUMBER;
+mensaje varchar;
+v_pinstance_id varchar(32);
+v_comprobante NUMBER;
+
+
+BEGIN
+IF (UPDATING) THEN
+
+	IF (:NEW.processing = 'Y' and :OLD.processing = 'N') THEN
+	
+    select em_co_tp_comp_autorizador_sri 
+    into v_comprobante 
+    from c_doctype 
+    where c_doctype_id = :new.c_doctypetarget_id;
+
+    select (em_ats_totalexento + 
+            em_ats_totalbase0 + 
+            em_ats_totalbase12 + 
+            round((em_ats_totalbase12*0.12),2) + 
+            em_ats_totalice) 
+    into total1 
+    from c_invoice 
+    where c_invoice_id=:new.c_invoice_id;
+
+    select (em_ats_totalbase0+em_ats_totalbase12++em_ats_totalexento) 
+    into subtotal1 
+    from c_invoice 
+    where c_invoice_id=:new.c_invoice_id;
+
+    select grandtotal into total from  c_invoice where c_invoice_id=:new.c_invoice_id;
+    select totallines into subtotal from c_invoice where c_invoice_id=:new.c_invoice_id;
+
+        if(v_comprobante= 41) then
+
+                if (total = total1 and subtotal = subtotal1)then
+
+                   RETURN NEW;
+
+                else 
+		    mensaje:= '@ATS_ValoresNoCuadran@';
+                    raise exception '%', mensaje;
+
+                end if;
+
+         end IF;
+
+     RETURN NEW;
+
+	END IF;
+RETURN NEW;
+END IF;
+
+
+    
+
+
+     
+
+
+END ATS_VALTOTALES_TRG
+]]></body>
+    </trigger>
+  </database>

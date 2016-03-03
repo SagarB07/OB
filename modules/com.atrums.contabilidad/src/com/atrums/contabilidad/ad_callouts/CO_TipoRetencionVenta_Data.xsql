@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ -->
+<SqlClass name="COTipoRetencionVentaData" package="com.atrums.contabilidad.ad_callouts">
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+            select bprv.co_bp_retencion_venta_id, bprv.descripcion
+              from co_retencion_venta rv, 
+                   c_invoice i, 
+                   co_bp_retencion_venta bprv, 
+                   co_tipo_retencion tr
+             where i.c_invoice_id = rv.c_invoice_id
+               and bprv.c_bpartner_id = i.c_bpartner_id
+               and bprv.co_tipo_retencion_id = tr.co_tipo_retencion_id
+               and tr.tipo = ?
+               and rv.co_retencion_venta_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="cTipo"/>
+    <Parameter name="coRetencionVentaId"/>
+  </SqlMethod>
+</SqlClass>

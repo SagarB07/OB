@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_FIN_PMT_CHECK_TRG">
+    <trigger name="CO_FIN_PMT_CHECK_TRG" table="FIN_PAYMENT" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+v_DateNull DATE := TO_DATE('01-01-1900','DD-MM-YYYY');
+v_FIN_Financial_Account_ID VARCHAR(32);
+v_Numero_Desde DECIMAL;
+v_Numero_Hasta DECIMAL;
+v_Numero_Actual DECIMAL;
+
+BEGIN
+   
+  
+  IF(INSERTING) THEN
+   
+   
+   v_FIN_Financial_Account_ID:=:NEW.FIN_FINANCIAL_ACCOUNT_ID;
+
+   IF((Select Count(*)
+    From fin_financial_account As ffa
+    Where ffa.fin_financial_account_id = v_FIN_Financial_Account_ID
+    And ffa.em_co_numero_cheque_desde < ffa.em_co_numero_cheque_hasta
+    ) = 1) THEN
+
+        Select Into v_Numero_Desde, v_Numero_Hasta, v_Numero_Actual
+        ffa.em_co_numero_cheque_desde, ffa.em_co_numero_cheque_hasta, ffa.em_co_numero_cheque_ahora
+        From fin_financial_account As ffa
+        Where ffa.fin_financial_account_id = v_FIN_Financial_Account_ID;
+
+        If(v_Numero_Actual IS NULL)Then
+            :New.em_co_nro_cheque := round(v_Numero_Desde);
+            Update fin_financial_account Set em_co_numero_cheque_ahora = round(v_Numero_Desde+1) Where fin_financial_account_id = v_FIN_Financial_Account_ID;
+            Return New;
+        ElseIf(v_Numero_Desde > v_Numero_Actual Or v_Numero_Actual > v_Numero_Hasta) Then
+            Return New;
+            
+        Else
+            :New.em_co_nro_cheque := round(v_Numero_Actual);
+            Update fin_financial_account Set em_co_numero_cheque_ahora = round(v_Numero_Actual+1) Where fin_financial_account_id = v_FIN_Financial_Account_ID;
+            Return New;
+        End If;
+   END IF;
+   
+  END IF;
+
+IF UPDATING THEN RETURN NEW; END IF;
+  
+END CO_FIN_PMT_CHECK_TRG
+]]></body>
+    </trigger>
+  </database>

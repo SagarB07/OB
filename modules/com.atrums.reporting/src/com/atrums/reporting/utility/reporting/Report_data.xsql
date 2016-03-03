@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	*************************************************************************
+	* The contents of this file are subject to the Openbravo  Public  License
+	* Version  1.1  (the  "License"),  being   the  Mozilla   Public  License
+	* Version 1.1  with a permitted attribution clause; you may not  use this
+	* file except in compliance with the License. You  may  obtain  a copy of
+	* the License at http://www.openbravo.com/legal/license.html 
+	* Software distributed under the License  is  distributed  on  an "AS IS"
+	* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+	* License for the specific  language  governing  rights  and  limitations
+	* under the License. 
+	* The Original Code is Openbravo ERP. 
+	* The Initial Developer of the Original Code is Openbravo SLU 
+	* All portions are Copyright (C) 2001-2008 Openbravo SLU 
+	* All Rights Reserved. 
+	* Contributor(s):  ______________________________________.
+	************************************************************************
+-->
+
+<SqlClass name="ReportData" package="com.atrums.reporting.utility.reporting">
+	<SqlClassComment></SqlClassComment>
+
+	<!-- 
+		This definition exists only to define all the fields used in all the queries.
+		This is needed because all the variables in the generated class are based upon
+		all the fields in the first query of the xsql.
+	-->
+	<SqlMethod name="dummy" type="preparedStatement"
+		return="multiple">
+		<SqlMethodComment></SqlMethodComment>
+		<Sql>
+			<![CDATA[
+			select
+				'' as ad_Org_Id,
+				'' as document_id,
+				'' as docstatus,
+				'' as docTypeTargetId,
+				'' as ourreference,
+				'' as cusreference,
+				'' as bpartner_id,
+				'' as bpartner_language,
+				'' as isSalesOrderTransaction
+			from
+				c_order
+			where
+				1=1 
+	        ]]>
+		</Sql>
+		<Parameter name="cOrderId" optional="false" type="argument"
+			after="1=1">
+			<![CDATA[ and c_order.c_order_id in ]]>
+		</Parameter>
+
+	</SqlMethod>
+
+	<SqlMethod name="getRetencionInfo" type="preparedStatement" return="multiple">
+		<SqlMethodComment></SqlMethodComment>
+		<Sql>
+			<![CDATA[
+            select
+                co_retencion_compra.ad_org_id,
+                co_retencion_compra.c_invoice_id as document_id,
+                co_retencion_compra.docstatus,
+                co_retencion_compra.c_doctype_id as docTypeTargetId,
+                co_retencion_compra.documentno as ourreference,
+                null as cusreference,
+                co_retencion_compra.c_bpartner_id as bpartner_id,
+                'N' as isSalesOrderTransaction,
+                c_bpartner.ad_language as bpartner_language
+           from co_retencion_compra left join c_doctype on co_retencion_compra.c_doctype_id = c_doctype.c_doctype_id
+                                    left join c_invoice on co_retencion_compra.c_invoice_id = c_invoice.c_invoice_id
+                                    left join c_bpartner on c_invoice.c_bpartner_id = c_bpartner.c_bpartner_id
+            where co_retencion_compra.co_retencion_compra_id = ?
+              and co_retencion_compra.docstatus='CO'
+	        ]]>
+		</Sql>
+		<Parameter name="cInvoiceId" />
+
+	</SqlMethod>
+
+    <SqlMethod name="getMovimientoInfo" type="preparedStatement" return="multiple">
+        <SqlMethodComment></SqlMethodComment>
+        <Sql>
+            <![CDATA[
+                select  m.ad_org_id,
+                        m.m_movement_id as document_id,
+                        'CO' as docstatus,
+                        m.EM_Co_Doctype_ID as docTypeTargetId,
+                        m.documentno as ourreference,
+                        null as cusreference,
+                        null as bpartner_id,
+                        'N' as isSalesOrderTransaction,
+                        'es_EC' as bpartner_language
+                   from M_MOVEMENT m
+                  where m.m_movement_id = ?
+            ]]>
+        </Sql>
+        <Parameter name="mMovementId" />
+
+    </SqlMethod>
+ 
+</SqlClass>

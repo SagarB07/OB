@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_NUM_COMPROBANTES">
+    <function name="ATS_NUM_COMPROBANTES" type="VARCHAR">
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_inicio" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tp_comp_sri" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(10):=''; 
+BEGIN 
+        select count(*) into v_ResultStr
+          from c_invoice i,
+               c_doctype d
+         where i.c_doctypetarget_id = d.c_doctype_id
+           and i.issotrx = 'Y'
+           and i.processed = 'Y'
+		   and i.docstatus <> 'VO'
+           and i.c_bpartner_id = p_bpartner_id
+           and date(i.dateinvoiced) >= TO_DATE(p_fecha_inicio,'dd-MM-yyyy')
+           and date(i.dateinvoiced) <= TO_DATE(p_fecha_fin,'dd-MM-yyyy')
+           and d.em_co_tp_comp_autorizador_sri = p_tp_comp_sri;
+        
+    return v_ResultStr;
+END ATS_NUM_COMPROBANTES
+]]></body>
+    </function>
+  </database>

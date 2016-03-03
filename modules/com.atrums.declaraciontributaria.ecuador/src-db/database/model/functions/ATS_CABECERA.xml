@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_CABECERA">
+    <function name="ATS_CABECERA" type="VARCHAR">
+      <parameter name="p_org" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_per" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_anioStr VARCHAR(4):='';
+v_mesStr VARCHAR(2):='';
+v_date DATE;
+BEGIN 
+
+v_date := to_timestamp(p_fecha_per, 'dd/mm/yyyy');
+
+    RETURN query select xmlforest(  'R' as "TipoIDInformante",
+                                    oi.taxid as "IdInformante",
+                                    replace(o.value,'.','') as "razonSocial",
+                                    date_part('Year', v_date) as "Anio",
+                                    ltrim(to_char(date_part('Month', v_date),'00')) as "Mes",
+                                    (select ltrim(to_char(count(*),'000')) from ad_org where issummary = 'N' and ad_client_id = o.ad_client_id) as "numEstabRuc",
+                                   (select ltrim(to_char(sum(A.Fac)-sum(A.NC),'9999999990.00'))
+										from (
+												select sum(abs(i.totallines)) as Fac,'0' as NC
+												from c_invoice i, c_doctype dt 
+												where i.c_doctypetarget_id = dt.c_doctype_id 
+												 and dt.em_co_tp_comp_autorizador_sri <> 0
+												 and dt.em_co_tp_comp_autorizador_sri <> 4
+												 and i.processed = 'Y'
+												 and i.docstatus <> 'VO'
+												 and date(i.dateinvoiced) >= v_date
+												 and date(i.dateinvoiced) <= (select ((date_trunc('month',v_date) 
+																	  + interval '1 month') - interval '1 day'))
+												 and i.ad_client_id = o.ad_client_id
+												 and i.issotrx='Y'
+												union
+												select '0' as Fac,sum(abs(i.totallines)) as NC
+												from c_invoice i, c_doctype dt 
+												where i.c_doctypetarget_id = dt.c_doctype_id 
+												 and dt.em_co_tp_comp_autorizador_sri = 4
+												 and i.processed = 'Y'
+												 and i.docstatus <> 'VO'
+												 and date(i.dateinvoiced) >= v_date
+												 and date(i.dateinvoiced) <= (select ((date_trunc('month',v_date) 
+																	  + interval '1 month') - interval '1 day'))
+												 and i.ad_client_id = o.ad_client_id
+												 and i.issotrx='Y'
+											) A
+									) as "totalVentas",
+                                   'IVA' as "codigoOperativo"
+                                ) as strXml
+                       from ad_org o,
+                            ad_orginfo oi
+                      where o.ad_org_id = oi.ad_org_id
+                        and o.ad_org_id = p_Org;
+END ATS_CABECERA
+]]></body>
+    </function>
+  </database>

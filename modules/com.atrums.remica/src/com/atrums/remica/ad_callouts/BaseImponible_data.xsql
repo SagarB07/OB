@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="BaseImponibleData"  package="com.atrums.remica.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+
+    select totallines as taxbaseamt, grandtotal - totallines as taxamt  
+    from c_invoice
+    where c_invoice_id = ?
+    
+      ]]>
+    </Sql>
+    <Parameter name="cInvoiceId"/>  
+  </SqlMethod>
+</SqlClass>

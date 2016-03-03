@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="CCOValorTotalPorcentajeData" package="com.atrums.centrocostos.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+	
+	select totallines from c_invoice
+	where c_invoice_id=?
+		    
+      ]]>
+    </Sql>
+    <Parameter name="cInvoiceId"/> 
+    </SqlMethod>
+
+<!--not used anymore -->
+  <SqlMethod name="selectpayment" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+	
+	select amount from fin_payment
+	where fin_payment_id=?
+		    
+      ]]>
+    </Sql>
+    <Parameter name="finPaymentId"/> 
+    </SqlMethod>
+    
+    
+    <!--not used anymore -->
+  <SqlMethod name="selectcontrato" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+	
+select salario from no_contrato_empleado
+	where no_contrato_empleado_id=?
+		    
+      ]]>
+    </Sql>
+    <Parameter name="noContratoEmpleadoId"/> 
+    </SqlMethod>
+    
+     <!--not used anymore -->
+  <SqlMethod name="selectdespacho" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+	select coalesce(sum(transactioncost),0) 
+    from m_transaction 
+    where m_inoutline_id IN 
+        (select m_inoutline_id 
+        from m_inoutline 
+        where m_inout_id = ? )
+
+		    
+      ]]>
+    </Sql>
+    <Parameter name="mInoutId"/> 
+    </SqlMethod>
+    
+
+    
+</SqlClass>

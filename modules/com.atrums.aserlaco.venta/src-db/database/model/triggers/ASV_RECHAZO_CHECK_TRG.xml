@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER ASV_RECHAZO_CHECK_TRG">
+    <trigger name="ASV_RECHAZO_CHECK_TRG" table="ASV_PEDIDO_DETALLE" fires="before" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+  
+DECLARE
+
+BEGIN
+    if :new.rechazo > 0 then
+        :new.chk_rechazo = 'Y';
+    end if;
+    if :new.rechazo = 0 then
+        :new.chk_rechazo = 'N';
+    end if;
+    RETURN NEW;
+END ASV_RECHAZO_CHECK_TRG
+]]></body>
+    </trigger>
+  </database>

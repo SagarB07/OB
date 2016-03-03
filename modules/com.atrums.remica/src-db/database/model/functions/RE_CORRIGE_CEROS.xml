@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_CORRIGE_CEROS">
+    <function name="RE_CORRIGE_CEROS" type="NULL">
+      <body><![CDATA[Cur_Facturas RECORD;
+v_payment_schedule_id VARCHAR(32);
+v_amount NUMBER;
+v_outstanding NUMBER;
+v_paidamt NUMBER;
+v_payment_scheduledetail_id VARCHAR(32);
+
+
+BEGIN
+
+     FOR Cur_Facturas IN
+        (select i.documentno, 
+                i.c_invoice_id, 
+                i.grandtotal,
+                i.outstandingamt, 
+                i.totalpaid
+         from c_invoice i
+         where i.issotrx = 'Y' 
+           and i.ispaid = 'N'
+           and i.outstandingamt < 0.01
+           and i.outstandingamt > 0.00
+         order by i.documentno)
+     LOOP
+
+        select COALESCE(amount,0), fin_payment_schedule_id, COALESCE(outstandingamt,0), COALESCE(paidamt,0)
+        into v_amount, v_payment_schedule_id, v_outstanding, v_paidamt
+        from fin_payment_schedule
+        where c_invoice_id = Cur_Facturas.c_invoice_id
+        order by duedate limit 1;
+
+        IF (v_outstanding < 0.01 and v_outstanding > 0) then
+
+            select fin_payment_scheduledetail_id
+            into v_payment_scheduledetail_id
+            from fin_payment_scheduledetail
+            where fin_payment_schedule_invoice = v_payment_schedule_id
+              and amount < 0.01 and amount > 0
+              and fin_payment_detail_id is null;
+
+            IF (v_payment_scheduledetail_id is not null) then
+                delete from fin_payment_scheduledetail where fin_payment_scheduledetail_id = v_payment_scheduledetail_id;
+
+                update fin_payment_schedule set outstandingamt = 0 where fin_payment_schedule_id = v_payment_schedule_id;
+
+                update c_invoice set outstandingamt = 0, ispaid='Y' where c_invoice_id = Cur_Facturas.c_invoice_id;
+            END IF;
+            IF  (v_payment_scheduledetail_id is null) then
+                
+                update fin_payment_schedule set outstandingamt = 0 where fin_payment_schedule_id = v_payment_schedule_id;
+
+                update c_invoice set outstandingamt = 0, ispaid='Y' where c_invoice_id = Cur_Facturas.c_invoice_id;
+            END IF;
+
+         END IF;
+
+     END LOOP;
+END RE_CORRIGE_CEROS
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION COU_CONSUMO_HISTORICO">
+    <function name="COU_CONSUMO_HISTORICO" type="NUMERIC">
+      <parameter name="p_product_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_warehouse_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="type_doc" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="mes_promedio" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_inisio_mes" type="CHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[Cur_PromedioMes RECORD;
+
+    v_Message VARCHAR(2000):=''; 
+    v_Result NUMBER:=1; 
+    v_ResultStr  VARCHAR(2000):=''; 
+
+    v_qry VARCHAR:=''; 
+    v_fecha_fin VARCHAR:=''; 
+    v_count NUMBER:=0;
+    v_suma NUMBER:=0;
+    v_suma_aux NUMBER:=0;
+
+BEGIN
+    BEGIN 
+
+        WHILE mes_promedio > v_count LOOP
+            select COALESCE(cou_consumo_doc_mes(p_product_id, p_warehouse_id, type_doc, v_count, p_inisio_mes),0) into v_suma_aux;
+            v_suma:= v_suma_aux + v_suma;
+            v_suma_aux:=0;
+            v_count:=v_count+1;
+        END LOOP;
+
+        v_Result:= trunc(v_suma / mes_promedio, 2);
+
+        RETURN v_Result;
+
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+        RETURN 0;
+END COU_CONSUMO_HISTORICO
+]]></body>
+    </function>
+  </database>

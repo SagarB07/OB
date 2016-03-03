@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_CALC_MONTO_IVA_ICE">
+    <function name="ATS_CALC_MONTO_IVA_ICE" type="NUMERIC">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_ice" type="CHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr NUMBER:=0;
+BEGIN 
+
+    select case 
+             when sum(i.taxamt) is null
+             
+             then 0 else  sum(i.taxamt)
+           end
+           into v_ResultStr
+      from c_invoicetax i,
+           c_taxcategory tc,
+           c_tax t
+     where i.c_tax_id = t.c_tax_id
+       and t.c_taxcategory_id = tc.c_taxcategory_id
+       and tc.em_co_es_ice = p_ice
+       and i.c_invoice_id  = p_invoice_id;
+        
+    return v_ResultStr;
+END ATS_CALC_MONTO_IVA_ICE
+]]></body>
+    </function>
+  </database>

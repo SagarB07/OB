@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER ATECFE_COPIA_FACTURA_RET_TRG">
+    <trigger name="ATECFE_COPIA_FACTURA_RET_TRG" table="CO_RETENCION_COMPRA" fires="before" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+v_co_retencion_compra_id    VARCHAR(32);
+v_ad_user_id                VARCHAR(32);
+v_ad_role_id                VARCHAR(32);
+v_taxid                     VARCHAR(20);
+v_c_location_id             VARCHAR(32);
+v_c_bp_group_id             VARCHAR(32);
+v_c_bpartner_id             VARCHAR(32);
+v_c_bpartner_location_id    VARCHAR(32);
+v_c_doctype_id              VARCHAR(32);
+v_ad_org_id                 VARCHAR(32);
+v_ad_org_ret                VARCHAR(32);
+v_ad_client_id              VARCHAR(255);
+v_puerto_bdd                NUMBER; 
+v_ip_serv_consul            VARCHAR(200);
+v_nombre_bdd                VARCHAR(255);
+v_usuario_bdd               VARCHAR(255);
+v_password_bdd              VARCHAR(255);
+v_conn                      VARCHAR(255);
+v_c_year_id                 VARCHAR(32);
+v_c_period_id               VARCHAR(32);
+v_em_atecfe_fac_elec        CHAR(1);
+v_em_atecfe_nro_estab       VARCHAR(3);
+v_em_atecfe_punto_emision   VARCHAR(3);
+
+v_co_bp_retencion_compra_id VARCHAR(32); 
+v_co_tipo_retencion_id      VARCHAR(32);
+
+cur_lineas                  RECORD;
+
+BEGIN
+
+IF INSERTING THEN 
+    RETURN NEW; 
+ELSEIF UPDATING THEN 
+
+    SELECT d.em_atecfe_fac_elec, p.c_year_id, rc.c_period_id, rc.co_retencion_compra_id
+            INTO v_em_atecfe_fac_elec, v_c_year_id, v_c_period_id, v_co_retencion_compra_id
+    FROM co_retencion_compra rc
+         INNER JOIN c_doctype d ON (rc.c_doctype_id = d.c_doctype_id)
+         LEFT JOIN c_period p ON (rc.c_period_id = p.c_period_id)
+    WHERE rc.co_retencion_compra_id = :OLD.co_retencion_compra_id;
+
+    IF (:NEW.em_atecfe_docstatus = 'AP' and :OLD.em_atecfe_docstatus <> 'AP') THEN
+        
+        SELECT a.ip_serv_consul, a.puerto_bdd, a.nombre_bdd, a.usuario_bdd, a.password_bdd, a.ad_client_id, :OLD.ad_org_id, :OLD.c_doctype_id, :OLD.c_bpartner_id
+               INTO v_ip_serv_consul, v_puerto_bdd, v_nombre_bdd, v_usuario_bdd, v_password_bdd, v_ad_client_id, v_ad_org_id, v_c_doctype_id, v_c_bpartner_id
+        FROM atecfe_conf_servidor a
+        WHERE a.ad_client_id = :OLD.ad_client_id;
+
+        SELECT b.c_bp_group_id, bl.c_location_id, bl.c_bpartner_location_id, b.taxid
+                INTO v_c_bp_group_id, v_c_location_id, v_c_bpartner_location_id, v_taxid
+        FROM c_bpartner b 
+             LEFT JOIN c_bpartner_location bl ON (b.c_bpartner_id = bl.c_bpartner_id)
+        WHERE b.c_bpartner_id = v_c_bpartner_id;
+
+        v_conn := 'dbname='|| v_nombre_bdd ||' host='|| v_ip_serv_consul || ' user='|| v_usuario_bdd ||' password='|| v_password_bdd ||' port='|| v_puerto_bdd ||'';
+
+        IF (NOT EXISTS(SELECT a.ad_client_id
+                       FROM
+                       dblink(v_conn, 'SELECT ad_client_id FROM ad_client') 
+                       AS a(ad_client_id VARCHAR(32))
+                       WHERE  a.ad_client_id = v_ad_client_id)) THEN
+
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO ad_client VALUES ('''||coalesce(ad_client_id,'')||''','''
+                                        ||coalesce(ad_org_id,'')||''','''|| 'Y'||''','''
+                                        ||now()||''','''|| '100'||''','''
+                                        ||now()||''','''|| '100'||''','''
+                                        ||coalesce(value,'')||''','''||coalesce(name,'')||''','''
+                                        ||coalesce(description,'')||''','''||'100'||''','''
+                                        ||'100'||''','''||'100'||''','''||'100'||''','''||'100'||''','''||'es_EC'||''','''
+                                        ||coalesce(ismultilingualdocument,'')||''','''||coalesce(issmtpauthorization,'')||''','''
+                                        ||'100'||''','''||coalesce(acctdim_centrally_maintained,'')||''','''
+                                        ||coalesce(project_acctdim_isenable,'')||''','''||coalesce(project_acctdim_header,'')||''','''||coalesce(project_acctdim_lines,'')||''','''
+                                        ||coalesce(project_acctdim_breakdown,'')||''','''||coalesce(bpartner_acctdim_isenable,'')||''','''||coalesce(bpartner_acctdim_header,'')||''','''
+                                        ||coalesce(bpartner_acctdim_lines,'')||''','''||coalesce(bpartner_acctdim_breakdown,'')||''','''||coalesce(product_acctdim_isenable,'')||''','''
+                                        ||coalesce(product_acctdim_header,'')||''','''||coalesce(product_acctdim_lines,'')||''','''||coalesce(product_acctdim_breakdown,'')||''','''
+                                        ||coalesce(costcenter_acctdim_header,'')||''','''||coalesce(costcenter_acctdim_lines,'')||''','''||coalesce(costcenter_acctdim_breakdown,'')||''','''
+                                        ||coalesce(user1_acctdim_isenable,'')||''','''||coalesce(user1_acctdim_header,'')||''','''||coalesce(user1_acctdim_lines,'')||''','''
+                                        ||coalesce(user1_acctdim_breakdown,'')||''','''||coalesce(user2_acctdim_isenable,'')||''','''||coalesce(user2_acctdim_header,'')||''','''
+                                        ||coalesce(user2_acctdim_lines,'')||''','''||coalesce(user2_acctdim_breakdown,'')||''','''||coalesce(costcenter_acctdim_isenable,'')||''','''
+                                        ||coalesce(org_acctdim_isenable,'')||''','''||coalesce(org_acctdim_header,'')||''','''||coalesce(org_acctdim_lines,'')||''','''
+                                        ||coalesce(org_acctdim_breakdown,'')||''','''||coalesce(em_co_nro_estab,'')||''','''||coalesce(em_atecfe_contriespecial,'')||''','''
+                                        ||coalesce(em_atecfe_tipoambiente,'')||''','''||coalesce(em_atecfe_numresolsri,'')||''','''||coalesce(em_atecfe_codinumerico,'')||''','''
+                                        ||coalesce(em_atecfe_tipoemisi,'')||''','''||coalesce(em_atecfe_obligcontabi,'')||''');'
+                                        FROM ad_client WHERE ad_client_id = v_ad_client_id));
+        END IF;
+
+        IF (NOT EXISTS (SELECT a.ad_org_id
+                        FROM dblink(v_conn,'SELECT ad_org_id FROM ad_org') 
+                        AS a(ad_org_id VARCHAR(32))
+                        WHERE a.ad_org_id = v_ad_org_id))THEN
+            
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO ad_org VALUES ('''||coalesce(ad_org_id,'')
+                                        ||''','''||coalesce(ad_client_id,'')
+                                        ||''','''||'Y'||''','''||now()
+                                        ||''','''||'100'||''','''||now()
+                                        ||''','''||'100'||''','''||coalesce(value,'')
+                                        ||''','''||coalesce(name,'')||''','''||coalesce(description,'')
+                                        ||''','''||coalesce(issummary,'')||''','''||coalesce(ad_orgtype_id,'1')
+                                        ||''','''||'N'||''',null,'''||'N'
+                                        ||''','''||coalesce(social_name,'')
+                                        ||''','''||'100'||''',null,null,null);'
+                                        FROM ad_org 
+                                        WHERE ad_org_id = v_ad_org_id));
+        END IF;
+
+        IF(NOT EXISTS(SELECT a.c_doctype_id
+                      FROM dblink(v_conn,'SELECT c_doctype_id FROM c_doctype') 
+                      AS a(c_doctype_id VARCHAR(32))
+                      WHERE  a.c_doctype_id = v_c_doctype_id))THEN
+            
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO c_doctype VALUES('''||coalesce(c_doctype_id,'')||''','''||coalesce(ad_client_id,'')||''','''|| '0'
+                                            ||''','''||'Y'||''','''||now()||''','''||'100'
+                                            ||''','''||now()||''','''||'100'|| ''','''||coalesce(name,'')
+                                            ||''','''||coalesce(printname,'')||''','''','''||coalesce(docbasetype,'')||''','''
+                                            ||coalesce(issotrx,'')||''',null,null,null,'''||coalesce(isdocnocontrolled,'')||''', null,'''
+                                            ||'0'||''','''||coalesce(documentnote,'')||''','''
+                                            ||coalesce(isdefault,'')||''',1,null,'''||coalesce(orgfiltered,'')||''',null,'''
+                                            ||coalesce(isexpense,'')||''','''||coalesce(isreversal,'')||''','''||coalesce(isreturn,'')||''',null,'||em_co_tp_comp_autorizador_sri||');'
+                                    FROM c_doctype 
+                                    WHERE c_doctype_id = v_c_doctype_id));
+        ELSE
+            perform dblink_exec (v_conn, (SELECT 'UPDATE c_doctype SET em_co_tp_comp_autorizador_sri = '
+                                        ||coalesce(em_co_tp_comp_autorizador_sri,1)||' WHERE c_doctype_id = '''||v_c_doctype_id||''';'
+            FROM c_doctype 
+            WHERE c_doctype_id = v_c_doctype_id)); 
+        END IF;
+
+        IF(NOT EXISTS(SELECT b.c_bp_group_id
+                        FROM
+                        dblink(v_conn,'SELECT c_bp_group_id FROM c_bp_group') 
+                        AS b(c_bp_group_id VARCHAR(32))
+                        WHERE  b.c_bp_group_id = v_c_bp_group_id))THEN
+            
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO c_bp_group VALUES ( '''||coalesce(c_bp_group_id,'')||''','''
+                                            ||coalesce(ad_client_id,'')||''','''||'0'||''','''
+                                            ||'Y'||''','''||now()||''','''||'100'||''','''
+                                            ||now()||''','''||'100'||''','''||coalesce(value,'')||''','''
+                                            ||coalesce(name,'')||''','''','''||coalesce(isdefault,'')||''');'
+                                            FROM c_bp_group 
+                                            WHERE c_bp_group_id = v_c_bp_group_id));
+        END IF;
+
+        IF(NOT EXISTS (SELECT a.c_bpartner_id
+                        FROM
+                        dblink(v_conn,'SELECT c_bpartner_id FROM c_bpartner') 
+                        as a(c_bpartner_id VARCHAR(32))
+                        WHERE  a.c_bpartner_id = v_c_bpartner_id))THEN
+            
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO c_bpartner(c_bpartner_id,ad_client_id,ad_org_id,isactive,'
+                                            ||'created,	createdby, updated, updatedby,'
+                                            ||'value, name, name2, description,'
+                                            ||'issummary, c_bp_group_id, isonetime, isprospect,'
+                                            ||'isvendor,  iscustomer,	isemployee,	issalesrep,'
+                                            ||'taxid, istaxexempt, firstsale, acqusitioncost,'
+                                            ||'potentiallifetimevalue, actuallifetimevalue, so_creditlimit, so_creditused,'
+                                            ||'isdiscountprinted, socreditstatus, showpriceinorder, isworker,'
+                                            ||'customer_blocking, vendor_blocking, so_payment_blocking,	po_payment_blocking,'
+                                            ||'so_invoice_blocking, po_invoice_blocking, so_order_blocking, po_order_blocking,'
+                                            ||'so_goods_blocking, po_goods_blocking) VALUES ( '''
+                                            ||coalesce(c_bpartner_id,'')||''','''
+                                            ||'0'||''','''||'0'||''','''||'Y'||''','''
+                                            ||now()||''','''||'100'||''','''
+                                            ||now()||''','''||'100'||''','''||coalesce(value,'')||''','''
+                                            ||coalesce(replace(name,'''',''''''),'') ||''','''||coalesce(replace(name2,'''',''''''),'')||''','''||coalesce(description,'')||''','''
+                                            ||coalesce(issummary,'')||''','''||coalesce(c_bp_group_id,'')||''','''
+                                            ||coalesce(isonetime,'')||''','''||coalesce(isprospect,'')||''','''
+                                            ||coalesce(isvendor,'')||''','''||coalesce(iscustomer,'')||''','''
+                                            ||coalesce(isemployee,'')||''','''||coalesce(issalesrep,'')||''','''
+                                            ||coalesce(taxid,'')||''','''||coalesce(istaxexempt,'')||''',null,'''
+                                            ||coalesce(acqusitioncost,0)||''','''||coalesce(potentiallifetimevalue,0)||''','''
+                                            ||coalesce(actuallifetimevalue,0)||''','''||coalesce(so_creditlimit,0)||''','''
+                                            ||coalesce(so_creditused,0)||''','''||coalesce(isdiscountprinted,'')||''','''
+                                            ||coalesce(socreditstatus,'')||''','''||coalesce(showpriceinorder,'')||''','''
+                                            ||coalesce(isworker,'')||''','''||coalesce(customer_blocking,'')||''','''
+                                            ||coalesce(vendor_blocking,'')||''','''||coalesce(so_payment_blocking,'')||''','''
+                                            ||coalesce(po_payment_blocking,'')||''','''||coalesce(so_invoice_blocking,'')||''','''
+                                            ||coalesce(po_invoice_blocking,'')||''','''||coalesce(so_order_blocking,'')||''','''
+                                            ||coalesce(po_order_blocking,'')||''','''||coalesce(so_goods_blocking,'')||''','''
+                                            ||coalesce(po_goods_blocking,'')||''');'
+                                            FROM c_bpartner
+                                            WHERE c_bpartner_id = v_c_bpartner_id));
+
+        END IF;
+
+        IF(NOT EXISTS(SELECT a.username 
+                            FROM
+                            dblink(v_conn,'SELECT username FROM ad_user') 
+                            AS a(username VARCHAR(32))
+                            WHERE a.username = v_taxid))THEN
+                            
+                SELECT get_uuid() INTO v_ad_user_id;
+                
+                perform dblink_exec (v_conn, (SELECT 'INSERT INTO ad_user (ad_user_id, ad_client_id, ad_org_id, '
+                                                ||'isactive, created, createdby, updated, updatedby, name, username, '
+                                                ||'password, email, c_bpartner_id, processing, islocked, grant_portal_access, '
+                                                ||'default_ad_language) values ('''
+                                                ||v_ad_user_id||''',''0'',''0'',''Y'','''
+                                                ||now()||''',''100'','''
+                                                ||now()||''',''100'','''|| coalesce(replace(b.name,'''',''''''),'')||''','''||b.taxid||''','''
+                                                ||encode(digest(b.taxid,'sha1'),'base64')||''','''
+                                                ||coalesce(u.email,'')||''','''||coalesce(b.c_bpartner_id,'')||''','''
+                                                ||'N'||''','''||'N'||''','''||'N'||''',''es_EC'');'
+                                                FROM c_bpartner b
+                                                    LEFT JOIN ad_user u ON (b.c_bpartner_id = u.c_bpartner_id)
+                                                WHERE b.c_bpartner_id = v_c_bpartner_id LIMIT 1));
+
+                v_ad_role_id := NULL;
+
+                SELECT a.ad_role_id
+                    INTO v_ad_role_id
+                FROM
+                dblink(v_conn, 'SELECT ad_role_id, name FROM ad_role') 
+                AS a(ad_role_id VARCHAR(32), name VARCHAR(60))
+                WHERE upper(a.name) LIKE upper('%Consultar Facturas%');
+
+                IF(v_ad_role_id IS NOT NULL)THEN
+                    perform dblink_exec (v_conn, ('INSERT INTO ad_user_roles VALUES ('''
+                                                    ||get_uuid()||''','''||v_ad_user_id||''','''
+                                                    ||v_ad_role_id||''',''0'',''0'',''Y'','''
+                                                    ||now()||''',''100'','''||now()||''',''100'',''N'');'));
+            END IF;
+        ELSE
+            SELECT a.ad_user_id 
+                    INTO v_ad_user_id
+            FROM
+                dblink(v_conn,'SELECT ad_user_id, username FROM ad_user') 
+                AS a(ad_user_id VARCHAR(32), username VARCHAR(60))
+            WHERE a.username = v_taxid;
+        END IF;
+
+        IF(NOT EXISTS(SELECT a.c_location_id
+                        FROM
+                        dblink(v_conn,'SELECT c_location_id FROM c_location') 
+                        as a(c_location_id VARCHAR(32))
+                        WHERE  a.c_location_id = v_c_location_id))THEN
+            
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO c_location VALUES ( '''||c_location_id||''','''||coalesce(ad_client_id,'')||''','''
+                                            ||'0'||''','''||'Y'||''','''||now()||''','''||'100'||''','''
+                                            ||now()||''','''||'100'||''','''||coalesce(replace(address1,'''',''''''),'')||''','''
+                                            ||coalesce(replace(address2,'''',''''''),'')||''','''||coalesce(replace(city,'''',''''''),'')||''','''
+                                            ||coalesce(postal,'')||''','''||coalesce(postal_add,'')||''',171,null,null,'''
+                                            ||coalesce(replace(regionname,'''',''''''),'')||''','''|| coalesce(replace(em_co_parroquia,'''',''''''),'')||''','''
+                                            ||coalesce(replace(em_co_barrio,'''',''''''),'')||''');'
+                                            FROM c_location
+                                            WHERE c_location_id = v_c_location_id));
+        END IF;
+
+        IF(NOT EXISTS (SELECT a.c_bpartner_location_id
+                        FROM
+                        dblink(v_conn,'SELECT c_bpartner_location_id FROM c_bpartner_location') 
+                        AS a(c_bpartner_location_id VARCHAR(32))
+                        WHERE  a.c_bpartner_location_id = v_c_bpartner_location_id))THEN
+             
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO c_bpartner_location VALUES ('''
+                                            ||coalesce(c_bpartner_location_id)||''','''||coalesce(ad_client_id,'')||''',''0'',''Y'','''
+                                            ||now()||''','''||'100'||''','''||now()||''','''||'100'||''','''
+                                            ||coalesce(replace(name,'''',''''''),'')||''','''||coalesce(isbillto,'')||''','''
+                                            ||coalesce(isshipto,'')||''','''||coalesce(ispayfrom,'')||''','''
+                                            ||coalesce(isremitto,'')||''','''||coalesce(phone,'')||''','''
+                                            ||coalesce(phone2,'')||''','''||coalesce(fax,'')||''',null,'''
+                                            ||c_bpartner_id||''','''||c_location_id||''','''
+                                            ||coalesce(istaxlocation,'')||''','''
+                                            ||coalesce(upc,'')||''','''||coalesce(em_no_num_dir,'')||''');'
+                                            FROM c_bpartner_location
+                                            WHERE c_bpartner_location_id = v_c_bpartner_location_id));
+        END IF;
+
+        IF(NOT EXISTS(SELECT a.co_retencion_compra_id
+                        FROM
+                        dblink(v_conn,'SELECT co_retencion_compra_id FROM co_retencion_compra') 
+                        as a(co_retencion_compra_id VARCHAR(32))
+                        WHERE  a.co_retencion_compra_id = v_co_retencion_compra_id))THEN
+
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO co_retencion_compra(co_retencion_compra_id, ad_client_id, ad_org_id,'
+                                            ||' created, createdby, updated, updatedby, isactive, '
+                                            ||' documentno, no_autorizacion, c_bpartner_id, ruc_bp,'
+                                            ||' c_bpartner_location_id, fecha_emision, tipo_comprobante_venta,'
+                                            ||' no_comprobante_venta, total_retencion, processed,'
+                                            ||' docstatus, c_doctype_id, dateacct, processing,'
+                                            ||' posted, docactionre, em_atecfe_docstatus,'
+                                            ||' em_atecfe_docaction, em_atecfe_menobserror_sri, em_atecfe_codigo_acc,'
+                                            ||' em_atecfe_documento_xml, em_atecfe_user_id, em_atecfe_fecha_autori,'
+                                            ||' em_atecfe_email_clie, em_atecfe_ad_client) VALUES ('''||co_retencion_compra_id||''', '''||ad_client_id||''', '''||ad_org_id||''', '''
+                                            ||now()||''', '''||'100'||''', '''||now()||''', '''||'100'||''', '''||isactive||''', '''
+                                            ||coalesce(documentno,'')||''', '''||coalesce(:NEW.no_autorizacion,'')||''', '''||coalesce(c_bpartner_id,'')||''', '''||coalesce(ruc_bp,'')||''', '''
+                                            ||coalesce(c_bpartner_location_id,'')||''', '''||fecha_emision||''', '''||tipo_comprobante_venta||''', '''
+                                            ||no_comprobante_venta||''', '''||total_retencion||''', '''||'N'||''', '''
+                                            ||'BR'||''', '''||c_doctype_id||''', '''||dateacct||''', '''||processing||''','''
+                                            ||'N'||''', '''||docactionre||''', '''||coalesce(:NEW.em_atecfe_docstatus,'')||''', '''
+                                            ||coalesce(:NEW.em_atecfe_docaction,'')||''', '''||coalesce(:NEW.em_atecfe_menobserror_sri,'')||''', '''||coalesce(:NEW.em_atecfe_codigo_acc,'')||''', '''
+                                            ||coalesce(convert_to(replace(convert_from(:NEW.em_atecfe_documento_xml, 'UTF8'),'''',''''''), 'UTF8'),'')
+                                            ||''','''||v_ad_user_id||''','''||:NEW.em_atecfe_fecha_autori||''','''
+                                            ||coalesce((SELECT array_to_string(array_agg(u.email), ';') FROM ad_user as u WHERE u.c_bpartner_id = co.c_bpartner_id AND u.em_atecfe_check_email = 'Y'),'')||''','''
+                                            ||ad_client_id||''');'
+                                            FROM co_retencion_compra co
+                                            WHERE co.co_retencion_compra_id = v_co_retencion_compra_id));
+        ELSE
+            perform dblink_exec (v_conn, ('UPDATE co_retencion_compra SET '
+                                            ||'em_atecfe_documento_xml = '''||:NEW.em_atecfe_documento_xml||''', '
+                                            ||'em_atecfe_docstatus = '''||:NEW.em_atecfe_docstatus||''', '
+                                            ||'em_atecfe_docaction = '''||:NEW.em_atecfe_docaction||''', '
+                                            ||'em_atecfe_codigo_acc = '''||:NEW.em_atecfe_codigo_acc||''', '
+                                            ||'em_atecfe_menobserror_sri = '''||:NEW.em_atecfe_menobserror_sri||''', '
+                                            ||'processed = ''N'', posted = ''N'''
+                                            ||'WHERE co_retencion_compra_id = '''||v_co_retencion_compra_id||''';'));
+        END IF;
+
+        FOR cur_lineas IN (
+            SELECT co_retencion_compra_linea_id FROM co_retencion_compra_linea WHERE co_retencion_compra_id = v_co_retencion_compra_id
+        ) LOOP
+
+            SELECT rcl.co_bp_retencion_compra_id, brc.co_tipo_retencion_id
+                    INTO v_co_bp_retencion_compra_id, v_co_tipo_retencion_id
+            FROM co_retencion_compra_linea rcl
+                INNER JOIN co_bp_retencion_compra brc ON (rcl.co_bp_retencion_compra_id = brc.co_bp_retencion_compra_id)
+            WHERE rcl.co_retencion_compra_linea_id = cur_lineas.co_retencion_compra_linea_id;
+
+            IF(NOT EXISTS(SELECT a.co_tipo_retencion_id
+                        FROM
+                        dblink(v_conn,'SELECT co_tipo_retencion_id FROM co_tipo_retencion') 
+                        as a(co_tipo_retencion_id VARCHAR(32))
+                        WHERE  a.co_tipo_retencion_id = v_co_tipo_retencion_id))THEN
+
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO co_tipo_retencion(co_tipo_retencion_id, ad_client_id, ad_org_id, created, createdby, updated, updatedby,'
+                                            ||' name, tipo, porcentaje, isactive,'
+                                            ||' tiporetencioniva, tiporetencionfuente) VALUES ('''
+                                            ||co_tipo_retencion_id||''', '''||ad_client_id||''', '''||ad_org_id||''', '''||now()||''', '''||'100'||''', '''||now()||''', '''||'100'||''', '''
+                                            ||coalesce(name,'')||''', '''||coalesce(tipo,'')||''', '''||coalesce(porcentaje,0)||''', '''||coalesce(isactive,'')||''', '''
+                                            ||coalesce(tiporetencioniva,'')||''', '''||coalesce(tiporetencionfuente,'')||''');'
+                                          FROM co_tipo_retencion
+                                          WHERE co_tipo_retencion_id = v_co_tipo_retencion_id));
+            END IF;
+
+            IF(NOT EXISTS(SELECT a.co_bp_retencion_compra_id
+                        FROM
+                        dblink(v_conn,'SELECT co_bp_retencion_compra_id FROM co_bp_retencion_compra') 
+                        as a(co_bp_retencion_compra_id VARCHAR(32))
+                        WHERE  a.co_bp_retencion_compra_id = v_co_bp_retencion_compra_id))THEN
+
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO co_bp_retencion_compra(co_bp_retencion_compra_id, ad_client_id, ad_org_id,'
+                                            ||' created, createdby, updated, updatedby,'
+                                            ||' descripcion, c_bpartner_id, '
+                                            ||'co_tipo_retencion_id, isactive) VALUES ('''
+                                            ||co_bp_retencion_compra_id||''', '''||ad_client_id||''', '''||ad_org_id||''', '''
+                                            ||now()||''', '''|| '100'||''', '''|| now()||''', '''|| '100'||''', '''
+                                            ||coalesce(descripcion,'')||''', '''||c_bpartner_id||''', '''
+                                            ||co_tipo_retencion_id||''','''||isactive||''');'
+                                          FROM co_bp_retencion_compra
+                                          WHERE co_bp_retencion_compra_id = v_co_bp_retencion_compra_id));
+            END IF;
+
+            IF(NOT EXISTS(SELECT a.co_retencion_compra_linea_id
+                        FROM
+                        dblink(v_conn,'SELECT co_retencion_compra_linea_id FROM co_retencion_compra_linea') 
+                        as a(co_retencion_compra_linea_id VARCHAR(32))
+                        WHERE  a.co_retencion_compra_linea_id = cur_lineas.co_retencion_compra_linea_id))THEN
+
+            perform dblink_exec (v_conn, (SELECT 'INSERT INTO co_retencion_compra_linea('
+                                            ||'co_retencion_compra_linea_id, ad_client_id, ad_org_id,'
+                                            ||' created, createdby, updated, updatedby,'
+                                            ||' co_retencion_compra_id, line, tipo, no_cheque, '
+                                            ||'base_imp_retencion, co_bp_retencion_compra_id,'
+                                            ||' valor_retencion, isactive) VALUES ('''
+                                            ||co_retencion_compra_linea_id||''','''||ad_client_id||''','''||ad_org_id||''','''
+                                            ||now()||''','''||'100'||''','''||now()||''','''||'100'||''','''
+                                            ||co_retencion_compra_id||''','''|| line||''','''|| tipo||''','''||coalesce(no_cheque,'')||''','''
+                                            ||base_imp_retencion||''','''||co_bp_retencion_compra_id||''','''||valor_retencion||''','''||isactive||''');'
+                                          FROM co_retencion_compra_linea
+                                          WHERE co_retencion_compra_linea_id = cur_lineas.co_retencion_compra_linea_id));
+            END IF;
+
+        END LOOP;
+
+        v_ad_org_ret := (SELECT ad_org_id FROM co_retencion_compra WHERE co_retencion_compra_id = v_co_retencion_compra_id);
+
+         SELECT org.em_co_nro_estab, org.em_co_punto_emision
+           INTO v_em_atecfe_nro_estab, v_em_atecfe_punto_emision
+           FROM ad_org org
+          WHERE org.ad_org_id = v_ad_org_ret;
+
+
+        perform dblink_exec (v_conn, ('UPDATE co_retencion_compra SET posted =''Y'', processed = ''Y'', docstatus = ''CO'', em_atecfe_nro_estab = '''
+        ||v_em_atecfe_nro_estab||''', em_atecfe_punto_emision = '''||v_em_atecfe_punto_emision||''' WHERE co_retencion_compra_id = '''||v_co_retencion_compra_id||''';'));
+
+    END IF;
+
+    RETURN NEW; 
+
+    
+END IF;
+
+
+
+
+END ATECFE_COPIA_FACTURA_RET_TRG
+]]></body>
+    </trigger>
+  </database>

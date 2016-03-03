@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_CORRIGE_FACT_RET">
+    <function name="RE_CORRIGE_FACT_RET" type="NULL">
+      <body><![CDATA[Cur_Facturas RECORD;
+v_payment_schedule_id VARCHAR(32);
+v_amount NUMBER;
+v_outstanding NUMBER;
+v_paidamt NUMBER;
+v_payment_scheduledetail_id VARCHAR(32);
+
+BEGIN
+
+     FOR Cur_Facturas IN
+        (select i.documentno, 
+                i.c_invoice_id, 
+                i.grandtotal,
+                i.outstandingamt, 
+                i.totalpaid, 
+                rv.total_retencion 
+         from c_invoice i, 
+              co_retencion_venta rv 
+         where i.c_invoice_id = rv.c_invoice_id 
+           and i.issotrx = 'Y' 
+           and i.c_invoice_id IN (select c_invoice_id from co_retencion_venta where processed = 'Y')
+           
+         order by i.documentno)
+     LOOP
+
+        select COALESCE(amount,0), fin_payment_schedule_id, COALESCE(outstandingamt,0), COALESCE(paidamt,0)
+        into v_amount, v_payment_schedule_id, v_outstanding, v_paidamt
+        from fin_payment_schedule
+        where c_invoice_id = Cur_Facturas.c_invoice_id
+        
+        order by duedate limit 1;
+
+        if (v_amount is NOT NULL AND Cur_Facturas.outstandingamt <= 0.01 and Cur_Facturas.outstandingamt > 0) THEN
+
+            
+           
+            DBMS_OUTPUT.PUT_LINE('Factura: ' || Cur_Facturas.documentno || ' Total: ' || Cur_Facturas.grandtotal || ' Pagado: ' || Cur_Facturas.totalpaid || ' Pendiente: ' || Cur_Facturas.outstandingamt || ' Cuota: ' || v_amount || ' Pendiente Cuota: ' || v_outstanding || ' Pagado Cuota: ' || v_paidamt || ' Retencion: ' || Cur_Facturas.total_retencion);
+        END IF;
+     END LOOP;
+END RE_CORRIGE_FACT_RET
+]]></body>
+    </function>
+  </database>

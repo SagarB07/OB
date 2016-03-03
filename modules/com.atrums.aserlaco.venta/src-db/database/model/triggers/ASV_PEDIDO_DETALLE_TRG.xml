@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER ASV_PEDIDO_DETALLE_TRG">
+    <trigger name="ASV_PEDIDO_DETALLE_TRG" table="ASV_PEDIDO_INVENTARIO" fires="after" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+
+DECLARE
+   mproduct record;
+   asvpiId varchar;
+   inv_ant NUMBER(10,2);
+   v_m_locator_id character varying(32);
+   v_qtyonhand NUMBER:= 0;
+BEGIN
+--     asvpiId := (select asv_pedido_inventario_id from asv_pedido_inventario where fecha = NEW.fecha - INTERVAL '1 days');
+
+	select m_locator_id into v_m_locator_id from m_locator where m_warehouse_id = :new.m_warehouse_id limit 1;
+    
+    FOR mproduct IN
+	select p.m_product_id 
+	from m_product p
+	where p.isactive='Y'
+	  and p.em_asv_pro_env_loc='Y'
+    LOOP
+	select qtyonhand into v_qtyonhand from m_storage_detail where m_locator_id = v_m_locator_id and m_product_id = mproduct.m_product_id;
+        -- select into inv_ant inventario_actual from asv_pedido_detalle where asv_pedido_inventario_id = asvpiId 
+-- 	    and m_product_id=mproduct.m_product_id;
+-- 	if inv_ant is NULL then
+-- 	    inv_ant:=0;
+-- 	end if;
+	if v_qtyonhand is null then
+		v_qtyonhand := 0;
+	end if;
+	INSERT INTO asv_pedido_detalle(
+            asv_pedido_detalle_id, ad_client_id, ad_org_id, isactive, created, 
+            createdby, updated, updatedby, m_product_id, asv_pedido_inventario_id, 
+            inventario_anterior, inventario_actual, dado_baja, diferencia, 
+            pedido, enviado, recibido, rechazo)
+	VALUES (get_uuid(), :NEW.ad_client_id, :NEW.ad_org_id, 'Y', now(), 
+            :NEW.createdby, :NEW.updated, :NEW.updatedby, mproduct.m_product_id, :NEW.asv_pedido_inventario_id, 
+            0, v_qtyonhand, 0, 0, 
+            0, 0, 0, 0);
+     END LOOP;
+     RETURN NEW;
+END ASV_PEDIDO_DETALLE_TRG
+]]></body>
+    </trigger>
+  </database>

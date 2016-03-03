@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION COU_CONSUMO_DOC_MES">
+    <function name="COU_CONSUMO_DOC_MES" type="NUMERIC">
+      <parameter name="p_product_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_warehouse_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="type_doc" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="mes_anterior" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_inisio_mes" type="CHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Message VARCHAR(2000):=''; 
+    v_Result NUMBER:=1; 
+    v_ResultStr  VARCHAR(2000):=''; 
+    
+    v_qry VARCHAR:=''; 
+    v_fecha_inicio VARCHAR:=''; 
+    v_fecha_fin VARCHAR:=''; 
+    v_trunc_fecha VARCHAR:=''; 
+    
+BEGIN
+    BEGIN 
+    
+        IF p_inisio_mes = 'Y' THEN
+            v_trunc_fecha='''MONTH''';
+        ELSE
+            v_trunc_fecha='''DAY''';
+        END IF;
+        
+        v_fecha_inicio:='(DATE_TRUNC('|| v_trunc_fecha||', now()) - INTERVAL '''|| mes_anterior || ' MONTH'')::TIMESTAMP ';
+        
+        IF mes_anterior < 1 THEN
+            v_fecha_fin:='AND now() ';
+        ELSE
+            IF p_inisio_mes = 'Y' THEN
+                v_fecha_fin:='AND ((DATE_TRUNC('|| v_trunc_fecha||', now()) - INTERVAL '''|| mes_anterior - 1 || ' MONTH'')::TIMESTAMP - INTERVAL '' 1 DAY'') ';
+            ELSE
+                v_fecha_fin:='AND ((DATE_TRUNC('|| v_trunc_fecha||', now()) - INTERVAL '''|| mes_anterior - 1 || ' MONTH'')::TIMESTAMP) ';
+            END IF;
+        END IF;
+        
+        IF type_doc = 'PV' THEN
+
+            v_qry :=  e'SELECT SUM(ol.qtyordered) FROM c_order o, c_orderline ol '
+                   || 'WHERE o.c_order_id = ol.c_order_id '
+                   || 'AND o.processed=''Y'' '
+                   || 'AND o.issotrx = ''Y'' '
+                   || 'AND o.docstatus= ''CO'' '
+                   || 'AND o.dateordered BETWEEN '
+                   || v_fecha_inicio
+                   || v_fecha_fin
+                   || 'AND ol.m_product_id = ''' || p_product_id || ''' '
+                   || 'AND ol.m_warehouse_id = ''' || p_warehouse_id || '''';
+
+            execute v_qry into v_Result;
+            
+        elsif type_doc = 'FV' THEN
+        
+            v_qry :=  e'SELECT SUM(il.qtyinvoiced) FROM c_invoice i, c_invoiceline il '
+                   || 'WHERE i.c_invoice_id = il.c_invoice_id '
+                   || 'AND i.processed=''Y'' '
+                   || 'AND i.issotrx = ''Y'' '
+                   || 'AND i.docstatus= ''CO'' '
+                   || 'AND i.dateinvoiced BETWEEN '
+                   || v_fecha_inicio
+                   || v_fecha_fin
+                   || 'AND il.m_product_id = ''' || p_product_id || '''';
+
+            execute v_qry into v_Result;
+            
+        elsif type_doc = 'GD' THEN
+        
+            v_qry :=  e'SELECT SUM(iol.movementqty) FROM m_inout io, m_inoutline iol, m_locator l '
+                   || 'WHERE io.m_inout_id = iol.m_inout_id '
+                   || 'AND iol.m_locator_id = l.m_locator_id '
+                   || 'AND io.issotrx = ''Y'' '
+                   || 'AND io.docstatus = ''CO'' '
+                   || 'AND io.processed = ''Y'' '
+                   || 'AND io.movementdate BETWEEN '
+                   || v_fecha_inicio
+                   || v_fecha_fin
+                   || 'AND iol.m_product_id = ''' || p_product_id || ''' '
+                   || 'AND l.m_warehouse_id = ''' || p_warehouse_id ||'''';
+
+            execute v_qry into v_Result;
+            
+        else
+        
+            v_qry :=  e'SELECT SUM(ml.movementqty) FROM m_movement m, m_movementline ml, m_locator l '
+                   || 'WHERE m.m_movement_id = ml.m_movement_id '
+                   || 'AND m.processed = ''Y'' '
+                   || 'AND ml.m_locatorto_id = l.m_locator_id '
+                   || 'AND m.movementdate BETWEEN '
+                   || v_fecha_inicio
+                   || v_fecha_fin                   
+                   || 'AND ml.m_product_id = '''  || p_product_id || ''' '
+                   || 'AND l.m_warehouse_id = ''' || p_warehouse_id ||'''';
+
+            execute v_qry into v_Result;
+            
+        end if;
+
+        RETURN v_Result;
+    
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+        RETURN 0;
+END COU_CONSUMO_DOC_MES
+]]></body>
+    </function>
+  </database>

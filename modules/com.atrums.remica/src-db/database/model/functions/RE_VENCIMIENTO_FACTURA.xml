@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_VENCIMIENTO_FACTURA">
+    <function name="RE_VENCIMIENTO_FACTURA" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_count NUMBER;
+    v_resultado varchar(500);
+BEGIN
+
+    select count(*) into v_count
+    from fin_payment_sched_inv_v 
+    where c_invoice_id = p_invoice_id;
+
+    IF v_count = 1 THEN
+        select to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00'))
+        into v_resultado
+        from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id;
+    END IF;
+
+    IF v_count = 2 THEN
+        select (
+        (select vto
+           from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 1) 
+        || '  /  ' ||
+        (select vto
+            from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 2)
+        ) into v_resultado from dual;
+    END IF;
+
+    IF v_count = 3 THEN
+        select (
+        (select vto
+           from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 1) 
+        || '  /  ' ||
+        (select vto
+            from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 2)
+        || '  /  ' ||
+        (select vto
+            from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 3)
+        ) into v_resultado from dual;
+    END IF;
+
+    IF v_count > 3 THEN
+        select (
+        (select vto
+           from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 1) 
+        || '  /  ' ||
+        (select vto
+            from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 2)
+        || '  /  ' ||
+        (select vto
+            from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 3)
+        || '  /  ' ||
+        (select vto
+            from (
+            select row_number()over() as num, to_char(duedate,'dd-MM-yyyy') || ' - usd ' || ltrim(to_char(outstanding,'9999999D00')) as vto
+            from fin_payment_sched_inv_v where c_invoice_id = p_invoice_id) dual where num = 4)
+        ) into v_resultado from dual;
+    END IF;
+
+return v_resultado;
+END RE_VENCIMIENTO_FACTURA
+]]></body>
+    </function>
+  </database>

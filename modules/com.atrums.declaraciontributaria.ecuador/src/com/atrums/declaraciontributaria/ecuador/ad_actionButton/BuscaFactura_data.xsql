@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<SqlClass name="BuscaFacturaData" package="com.atrums.declaraciontributaria.ecuador.ad_actionButton">
+
+<SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+          SELECT  
+          I.C_BPARTNER_ID,
+          D.DOCBASETYPE,
+          I.C_INVOICE_ID,
+		  '' as TOTAL,
+		  '' as tpIdCliente,
+		  '' as idCliente,
+		  '' as tipoComprobante,
+		  '' as numeroComprobantes,
+		  '' as baseNoGraIva,
+		  '' as baseImponible,
+		  '' as baseImpGrav,
+		  '' as montoIva,
+		  '' as valorRetIva,
+		  '' as valorRetRenta
+          FROM C_INVOICE I, C_DOCTYPE D
+         WHERE DOCSTATUS ='CO'
+           AND DOCACTION = 'RE'
+           AND PROCESSED = 'Y'
+           AND DATEINVOICED >= ?
+           AND DATEINVOICED <= ?
+           AND I.AD_CLIENT_ID = ?
+           AND I.ISSOTRX = ?
+           AND I.C_DOCTYPETARGET_ID = D.C_DOCTYPE_ID
+		   and I.c_doctypetarget_id NOT IN (select c_doctype_id from c_doctype where em_co_tp_comp_autorizador_sri = '0')
+      ]]>
+    </Sql>
+    <Parameter name="fechaInicio"/>
+    <Parameter name="fechaFin"/>
+    <Parameter name="adClient"/>
+    <Parameter name="adIssoyrx"/>    
+  </SqlMethod>
+
+<SqlMethod name="selectVentas" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+          
+          select    B.tpidcliente, 
+        B.idcliente, 
+        B.tipocomprobante, 
+        ats_num_comprobantes(B.c_bpartner_id, B.FechaInicio, B.FechaFin, b.tipoComprobante) AS numerocomprobantes, 
+        ATS_calculo_base(B.c_bpartner_id, B.FechaInicio, B.FechaFin, '1', b.tipoComprobante) AS baseNoGraIva, 
+        ATS_calculo_base(B.c_bpartner_id, B.FechaInicio, B.FechaFin, '2', b.tipoComprobante) as baseImponible, 
+        ATS_calculo_base(B.c_bpartner_id, B.FechaInicio, B.FechaFin, '3', b.tipoComprobante) as baseImpGrav, 
+        ats_calculo_iva(B.c_bpartner_id, B.FechaInicio, B.FechaFin, b.tipoComprobante) as montoIva, 
+        (case when B.tipocomprobante = '04' then 0 else ats_valor_retencion_venta(B.c_bpartner_id, B.FechaInicio, B.FechaFin, 'IVA') end) as valorRetIva, 
+        (case when B.tipocomprobante = '04' then 0 else ats_valor_retencion_venta(B.c_bpartner_id, B.FechaInicio, B.FechaFin, 'FUENTE') end) as valorRetRenta 
+    from ( 
+    
+    select  a.c_bpartner_id, 
+            (case when (select em_co_tipo_identificacion from c_bpartner where c_bpartner_id = A.C_BPARTNER_ID) != '07' 
+                    then ltrim(to_char(to_number((select em_co_tipo_identificacion from c_bpartner where c_bpartner_id = A.C_BPARTNER_ID))+3,'00')) 
+                    else (select em_co_tipo_identificacion from c_bpartner where c_bpartner_id = A.C_BPARTNER_ID) end) as tpIdCliente, 
+    
+            (case when (select em_co_tipo_identificacion from c_bpartner where c_bpartner_id = A.C_BPARTNER_ID) = '07' 
+                    then '9999999999999' else (select taxid from c_bpartner where c_bpartner_id = A.C_BPARTNER_ID) end) as idCliente, 
+    
+            A.DOCBASETYPE as tipoComprobante, 
+            A.FechaInicio, 
+            A.FechaFin 
+            
+    from ( 
+         (SELECT I.C_BPARTNER_ID,  
+                (case when (select docbasetype from c_doctype where c_doctype_id = i.c_doctypetarget_id and isreturn = 'N')='ARI' then '18' 
+                      when (select docbasetype from c_doctype where c_doctype_id = i.c_doctypetarget_id and isreturn = 'Y') = 'ARI' then '04' 
+                      when (select docbasetype from c_doctype where c_doctype_id = i.c_doctypetarget_id) = 'ARC' then '04' 
+                      end) as DOCBASETYPE, 
+                '1' as Fact, 
+                ? as FechaInicio, 
+                ? as FechaFin 
+         FROM C_INVOICE I  
+         WHERE I.processed ='Y'  
+           AND date(I.DATEINVOICED) >= to_date(?) 
+           AND date(I.DATEINVOICED) <= to_date(?) 
+           AND I.AD_CLIENT_ID = ?  
+           AND I.ISSOTRX = ? 
+           and (select em_co_tp_comp_autorizador_sri from c_doctype where i.c_doctypetarget_id = c_doctype_id) <> 0  
+         order by 1,2) 
+         UNION 
+         (SELECT (select c_bpartner_id from c_invoice where rv.c_invoice_id = c_invoice_id) as C_BPARTNER_ID,   
+                '18' as DOCBASETYPE, 
+                '2' as Fact, 
+                ? as FechaInicio, 
+                ? as FechaFin 
+         FROM co_retencion_venta rv  
+         WHERE to_Date(rv.fecha_emision) >= to_date(?) 
+           AND to_date(rv.fecha_emision) <= to_date(?) 
+           AND rv.AD_CLIENT_ID = ?  
+         order by 1,2) 
+        ) A 
+    
+    group by 1,2,3,4,5,6 
+    order by 3,2 
+    
+    ) B 
+          
+      ]]>
+    </Sql>
+    <Parameter name="fechaInicio"/> 
+    <Parameter name="fechaFin"/> 
+    <Parameter name="fechaInicio"/> 
+    <Parameter name="fechaFin"/> 
+    <Parameter name="adClient"/> 
+    <Parameter name="adIssotrx"/> 
+    <Parameter name="fechaInicio"/> 
+    <Parameter name="fechaFin"/> 
+     <Parameter name="fechaInicio"/> 
+    <Parameter name="fechaFin"/> 
+    <Parameter name="adClient"/> 
+  </SqlMethod>
+
+  <SqlMethod name="selectInvoice" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+          SELECT C_INVOICE_ID
+          FROM C_INVOICE
+         WHERE PROCESSED = 'Y'
+           AND TO_DATE(DATEINVOICED+0) >= TO_DATE(?)
+           AND TO_DATE(DATEINVOICED+0) <= TO_DATE(?)
+           AND AD_CLIENT_ID = ?
+           AND ISSOTRX = ?
+		   and c_doctypetarget_id NOT IN (select c_doctype_id from c_doctype where em_co_tp_comp_autorizador_sri = '0')
+      ]]>
+    </Sql>
+    <Parameter name="fechaInicio"/>
+    <Parameter name="fechaFin"/>
+    <Parameter name="adClient"/>
+    <Parameter name="adIssoyrx"/>    
+  </SqlMethod>
+  
+  
+
+</SqlClass>

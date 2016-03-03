@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="CODatosRetencionData" package="com.atrums.contabilidad.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+
+    SELECT b.taxid,c.c_bpartner_location_id,c.dateacct,c.c_bpartner_id
+    FROM c_invoice c, c_bpartner b 
+    WHERE  c.c_bpartner_id=b.c_bpartner_id
+    AND c_invoice_id=?
+    
+      ]]>
+    </Sql>
+    <Parameter name="cInvoiceId"/>  
+  </SqlMethod>
+</SqlClass>

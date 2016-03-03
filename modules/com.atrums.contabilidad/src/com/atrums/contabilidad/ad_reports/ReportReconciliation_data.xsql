@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="ReportReconciliationData" package="com.atrums.contabilidad.ad_reports">
+  <SqlMethod name="select" type="preparedStatement" return="String">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+      select coalesce(sum(fa.amtsourcedr)-sum(fa.amtsourcecr),0) as resultado
+      from fact_acct fa, fin_financial_account_acct f
+      where fa.account_id = (select account_id from c_validcombination where c_validcombination_id = f.fin_asset_acct)
+      and f.fin_financial_account_id = ?
+      and date(fa.dateacct) <= date(?)
+      ]]>
+    </Sql>
+    <Parameter name="fin_financial_account_id"/>
+    <Parameter name="dateacct"/>
+  </SqlMethod>
+</SqlClass>

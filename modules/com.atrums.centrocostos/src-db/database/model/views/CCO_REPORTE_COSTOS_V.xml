@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+  <database name="VIEW CCO_REPORTE_COSTOS_V">
+    <view name="CCO_REPORTE_COSTOS_V"><![CDATA[SELECT crc.cco_registra_costos_id AS cco_reporte_costos_v_id, cc.ad_client_id, cc.ad_org_id, cc.isactive, cc.created, cc.createdby, cc.updated, cc.updatedby, cc.value, cc.name, i.documentno, crc.detalle, crc.valor, crc.porcentaje FROM cco_registra_costos crc LEFT JOIN c_invoice i ON crc.c_invoice_id = i.c_invoice_id JOIN cco_cuenta_costos cc ON crc.cco_cuenta_costos_id = cc.cco_cuenta_costos_id WHERE cc.isactive = 'Y' ORDER BY cc.name]]></view>
+  </database>

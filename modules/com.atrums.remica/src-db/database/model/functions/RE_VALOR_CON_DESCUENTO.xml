@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_VALOR_CON_DESCUENTO">
+    <function name="RE_VALOR_CON_DESCUENTO" type="NUMERIC">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_invoice_line_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[/*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************/
+v_descuento NUMBER:=0;
+v_total_factura NUMBER:=0;
+
+v_monto NUMBER:=0;
+v_cantidad NUMBER:=0;
+v_priceactual NUMBER:=0;
+
+v_valor NUMBER:=0;
+BEGIN
+
+    select sum(il.qtyinvoiced * il.priceactual) 
+      into v_descuento
+      from c_invoice i, c_invoiceline il
+     where il.c_invoice_id = i.c_invoice_id
+       and il.priceactual < 0
+       and i.c_invoice_id = p_invoice_id;
+
+    select sum(il.qtyinvoiced * il.priceactual)
+      into v_total_factura
+      from c_invoice i, c_invoiceline il
+     where il.c_invoice_id = i.c_invoice_id
+       and il.PRICEACTUAL > 0
+       and i.c_invoice_id = p_invoice_id;
+    
+    select il.qtyinvoiced * il.priceactual,
+           il.qtyinvoiced,
+           il.priceactual
+      into v_monto,
+           v_cantidad,
+           v_priceactual
+      from c_invoice i, c_invoiceline il
+     where il.c_invoice_id = i.c_invoice_id
+       and il.PRICEACTUAL > 0
+       and i.c_invoice_id = p_invoice_id
+       and il.c_invoiceline_id = p_invoice_line_id;
+    
+    v_valor:= ((v_monto * 100 / v_total_factura) * v_descuento / 100) / v_cantidad;
+
+    return v_priceactual - abs(v_valor);
+END RE_VALOR_CON_DESCUENTO
+]]></body>
+    </function>
+  </database>

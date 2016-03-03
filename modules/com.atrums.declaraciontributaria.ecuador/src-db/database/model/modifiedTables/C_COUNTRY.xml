@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE C_COUNTRY">
+    <table name="C_COUNTRY" primaryKey="C_COUNTRY_KEY">
+      <column name="EM_ATS_CODIGO_SRI" primaryKey="false" required="false" type="VARCHAR" size="3" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+ -->
+<SqlClass name="CODescripcionRetencionData" package="com.atrums.contabilidad.ad_callouts">
+  <SqlMethod name="select" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+        select name 
+          from co_tipo_retencion
+         where co_tipo_retencion_id = ? 
+      ]]>
+    </Sql>
+    <Parameter name="coTipoRetencionId"/>
+  </SqlMethod>
+</SqlClass>

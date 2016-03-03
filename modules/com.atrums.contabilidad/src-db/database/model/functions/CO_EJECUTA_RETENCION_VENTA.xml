@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION CO_EJECUTA_RETENCION_VENTA">
+    <function name="CO_EJECUTA_RETENCION_VENTA" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):=''; 
+    v_Message VARCHAR(2000):=''; 
+    v_Record_ID VARCHAR(32); 
+    v_Result NUMBER:=1; 
+
+    
+    
+    Cur_Parameter RECORD;
+
+    
+    v_retencion_venta_id VARCHAR(32); 
+    v_fin_paymentmethod_id VARCHAR(32); 
+    v_fin_financial_account_id VARCHAR(32); 
+    v_Client_ID VARCHAR(32); 
+    v_Org_ID VARCHAR(32); 
+    v_User_ID VARCHAR(32); 
+	
+	v_doctyperetenco_id VARCHAR(32); 
+	
+    v_invoice_id VARCHAR(32); 
+
+    
+    v_total_retencion NUMBER;
+    v_payment_schedule_id VARCHAR(32); 
+    v_docstatus VARCHAR(60); 
+    v_bpartner_id VARCHAR(32); 
+    v_doctype_id VARCHAR(32); 
+
+    v_documentno VARCHAR(30);
+    v_documentno_invoice VARCHAR(30);
+    
+    v_fin_payment_detail_id VARCHAR(32);
+    v_fin_payment_scheduledetail_id VARCHAR(32);
+    v_fin_payment1_id VARCHAR(32);
+    v_outstandingamt NUMBER;
+    v_line NUMBER:=0;
+    v_fin_finacc_transaction_id VARCHAR(32);
+    v_currentbalance  NUMBER;
+    v_valor_saldo_factura_retencion NUMBER;
+    v_paidamt NUMBER;
+    v_outstandingamt_fac NUMBER;
+    v_total_faltante NUMBER;
+    v_totalpaid_fac NUMBER;
+    v_monto_cuota NUMBER;
+    
+    v_docaction  VARCHAR(60);
+    v_docactionStatus VARCHAR(60);
+    
+    v_ispaid VARCHAR(1);
+    v_posted VARCHAR(60); 
+    v_fin_payment_schedule_invoice VARCHAR(32);
+    v_amount_1 NUMBER;
+	v_amount_sh NUMBER;
+
+BEGIN
+   
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+
+    BEGIN 
+    
+
+        
+        FOR Cur_Parameter IN
+        (SELECT i.Record_ID,
+                i.AD_User_ID,
+                p.ParameterName,
+                p.P_String,
+                p.P_Number,
+                p.P_Date,
+                i.AD_Org_ID,
+                i.AD_Client_ID
+           FROM AD_PInstance i
+           LEFT JOIN AD_PInstance_Para p
+             ON i.AD_PInstance_ID=p.AD_PInstance_ID
+          WHERE i.AD_PInstance_ID=p_PInstance_ID
+          ORDER BY p.SeqNo)
+        LOOP
+            v_retencion_venta_id:=Cur_Parameter.Record_ID;
+            v_User_ID:=Cur_Parameter.AD_User_ID;
+            v_Org_ID:=Cur_Parameter.AD_Org_ID;
+            v_Client_ID:=Cur_Parameter.AD_Client_ID;
+            
+            v_docaction := Cur_Parameter.p_string;
+        END LOOP;
+        
+
+        if(not exists(select * from fin_paymentmethod where fin_paymentmethod_id = 'EC104')) then
+            v_Message:='La parametrizacion de retenciones no esta cargada.';
+            RAISE v_Message;
+        end if;
+            
+        if(not exists(select 1 from fin_payment where fin_payment_id = '0')) then
+
+			if(not exists(select 1 from fin_financial_account where fin_financial_account_id = '0')) then
+				INSERT INTO fin_financial_account(fin_financial_account_id, ad_client_id, ad_org_id, created, createdby, updated, updatedby, isactive, c_currency_id, name, description, type, c_bpartner_id, c_location_id, routingno, swiftcode, codebank, codebranch, bank_digitcontrol, ine_number, account_digitcontrol, codeaccount, accountno, currentbalance, initialbalance, creditlimit, iban, isdefault, fin_matching_algorithm_id, em_aprm_importbankfile, em_aprm_matchtransactions, em_aprm_reconcile, em_aprm_addtransactions)
+					 VALUES('0', '0', '0', now(), '100', now(), '100', 'Y', '100', 'Caja Retención', 'Caja Retención', 'B', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, 'N', NULL, 'N', 'N', 'N', 'N');
+			end if;
+		
+			
+			select c_doctype_id 
+			  into v_doctyperetenco_id
+			  from c_doctype 
+			 where docbasetype = 'ARR'
+			   and issotrx = 'Y'
+			   and ad_table_id = 'D1A97202E832470285C9B1EB026D54E2'
+			   and ad_client_id = v_Client_ID;
+
+            INSERT INTO fin_payment(fin_payment_id, ad_client_id, ad_org_id, created, createdby, updated, updatedby, isactive, isreceipt, c_bpartner_id, paymentdate, c_currency_id, amount, writeoffamt, fin_paymentmethod_id, documentno, referenceno, status, processed, processing, posted, description, fin_financial_account_id, c_doctype_id, c_project_id, c_campaign_id, c_activity_id, user1_id, user2_id, generated_credit, used_credit, createdbyalgorithm, finacc_txn_convert_rate, finacc_txn_amount, em_co_nro_cheque, em_co_nombre_banco, em_aprm_process_payment, em_aprm_reconcile_payment, em_aprm_add_scheduledpayments, em_aprm_executepayment)
+                  VALUES('0', '0', '0', now(), '0', now(), '0', 'N', 'Y', NULL, now(), '100', 0, 0, 'EC104', 'RETENCION', NULL, 'RDNC', 'N', 'N', 'N', NULL, '0', v_doctyperetenco_id, NULL, NULL, NULL, NULL, NULL, 0, 0, 'N', 1, 0, NULL, NULL, 'P', 'N', 'N', 'N');
+
+ 		   INSERT INTO fin_payment_detail(fin_payment_detail_id, ad_client_id, ad_org_id, created, createdby, updated, updatedby, fin_payment_id, amount, refund, isactive, writeoffamt, c_glitem_id, isprepayment)
+                  VALUES('0', '0', '0', now(), '0', now(), '0', '0', 0, 'N', 'Y', 0, NULL, 'N');
+        
+        end if;
+
+		
+		select c_invoice_id,
+			   round(total_retencion,2),
+			   posted
+		  into v_invoice_id,
+			   v_total_retencion,
+			   v_posted
+		  from co_retencion_venta
+		 where co_retencion_venta_id = v_retencion_venta_id;
+
+            
+            
+            
+            select docstatus,
+                   c_bpartner_id,
+                   documentno,
+                   outstandingamt,
+                   totalpaid,
+                   ispaid
+              into v_docstatus,
+                   v_bpartner_id,
+                   v_documentno_invoice,
+                   v_outstandingamt_fac,
+                   v_totalpaid_fac,
+                   v_ispaid
+              from c_invoice
+             where c_invoice_id = v_invoice_id;
+
+		 
+        if(v_docaction = 'CO') then
+            
+
+            
+            if( v_total_retencion = 0) then
+                v_Message:='@CO_VALOR_CERO@';
+                RAISE v_Message;
+            end if;
+
+            if(not exists (select * from co_retencion_venta_linea where co_retencion_venta_id = v_retencion_venta_id)) then
+				v_Message:='@CO_NO_LINEAS@';
+				RAISE v_Message;
+			end if;
+
+            if( not(v_docstatus = 'CO')) then
+                v_Message:='@CO_FACTURA_PROCESADA@';
+                RAISE v_Message;
+            end if;
+            
+            
+            if( v_ispaid = 'Y' ) then
+                v_Message:='@CO_FACTURA_VENTA_PAGADA@';
+                RAISE v_Message;
+            end if;
+            
+            
+            
+
+        select COALESCE(amount,0), fin_payment_schedule_id, COALESCE(outstandingamt,0), COALESCE(paidamt,0)
+          into v_amount_1, v_payment_schedule_id,v_outstandingamt,v_paidamt
+          from fin_payment_schedule
+         where c_invoice_id = v_invoice_id 
+           and amount-paidamt >= v_total_retencion 
+         order by duedate limit 1;
+        
+        
+        
+        IF(v_payment_schedule_id IS NULL) THEN
+             
+             
+             select amount-paidamt
+             into v_amount_1
+             from fin_payment_schedule
+             where c_invoice_id = v_invoice_id 
+             order by duedate limit 1;
+
+             
+             
+             v_Message:='Valor pendiente en factura: ' || v_amount_1 || ' es menor al valor de retencion: ' || v_total_retencion;
+             RAISE v_Message;
+         END IF;
+
+             
+             
+             select amount
+               into v_monto_cuota
+               from fin_payment_scheduledetail 
+              where fin_payment_schedule_invoice = v_payment_schedule_id
+                and fin_payment_detail_id is null 
+              order by created asc limit 1;
+             
+             
+             
+            
+            v_valor_saldo_factura_retencion := v_outstandingamt-v_total_retencion;
+            v_total_faltante := v_outstandingamt_fac - v_total_retencion;
+            v_paidamt := v_paidamt + v_total_retencion;
+
+            v_monto_cuota =  v_monto_cuota - v_total_retencion;
+
+            
+            update fin_payment_schedule 
+			   set paidamt =v_paidamt, 
+			       outstandingamt = v_valor_saldo_factura_retencion, 
+				   em_co_retencion = v_retencion_venta_id 
+		     where c_invoice_id = v_invoice_id 
+		       and fin_payment_schedule_id=v_payment_schedule_id;
+            
+            
+            update c_invoice 
+			   set outstandingamt = v_total_faltante, 
+			       totalpaid=v_totalpaid_fac+v_total_retencion 
+		     where c_invoice_id = v_invoice_id;
+
+            
+            
+            
+            update fin_payment_scheduledetail set amount = v_monto_cuota
+             where fin_payment_scheduledetail_id 
+                   in (select fin_payment_scheduledetail_id 
+                         from fin_payment_scheduledetail 
+                        where fin_payment_schedule_invoice = v_payment_schedule_id
+                        and fin_payment_detail_id is null 
+                        order by created asc limit 1);
+
+			 select outstandingamt
+               into v_outstandingamt_fac
+			  from c_invoice 
+			 where c_invoice_id = v_invoice_id;
+             
+             if (v_outstandingamt_fac=0) then
+                update c_invoice 
+                   set ispaid = 'Y'
+                 where c_invoice_id = v_invoice_id;
+             end if;
+						
+						
+            select get_uuid() into v_fin_payment_scheduledetail_id;
+            
+            INSERT INTO fin_payment_scheduledetail(
+                        fin_payment_scheduledetail_id,      ad_client_id,                   ad_org_id,          created,
+                        createdby,                          updated,                        updatedby,          fin_payment_detail_id,
+                        fin_payment_schedule_order,         fin_payment_schedule_invoice,   amount,             isactive,
+                        writeoffamt,                        iscanceled,                     c_bpartner_id,      c_activity_id,
+                        m_product_id,                       c_campaign_id,                  c_project_id,       c_salesregion_id)
+                VALUES (v_fin_payment_scheduledetail_id,    v_Client_ID,                    v_Org_ID,           current_timestamp,
+                        v_User_ID,                          current_timestamp,              v_User_ID,          '0',
+                        null,                               v_payment_schedule_id,          v_total_retencion,  'Y',
+                        0,                                  'N',                            null,               null,
+                        null,                               null,                           null,               null);
+
+            
+            update co_retencion_venta
+               set DocStatus = 'CO',
+                   processed = 'Y',
+                   DocActionRe = 'RE',
+                   Updated=now(),
+                   UpdatedBy=v_User_ID                  
+             where co_retencion_venta_id=v_retencion_venta_id;
+            
+        end if;
+        
+        
+        if(v_docaction = 'RE' or v_docaction = 'AN') then
+
+		if( v_posted = 'Y') then
+                v_Message:='@CO_RET_CONTABILIZA@';
+                RAISE v_Message;
+            end if;
+        
+            
+            select fin_payment_schedule_id,
+                   outstandingamt
+              into v_fin_payment_schedule_invoice,
+                   v_outstandingamt
+              from fin_payment_schedule
+             where em_co_retencion = v_retencion_venta_id;
+
+            update fin_payment_schedule 
+               set paidamt =paidamt - v_total_retencion, 
+                   outstandingamt = v_outstandingamt + v_total_retencion,
+                   em_co_retencion = null 
+             where em_co_retencion = v_retencion_venta_id;
+
+			  select fin_payment_scheduledetail_id,
+				   amount
+			  into v_fin_payment_scheduledetail_id,
+			       v_amount_sh
+			  from fin_payment_scheduledetail  
+			 where fin_payment_schedule_invoice = v_fin_payment_schedule_invoice 
+			   and fin_payment_detail_id is null; 
+
+    		update fin_payment_scheduledetail
+			   set amount = v_amount_sh + v_total_retencion
+			 where fin_payment_scheduledetail_id = v_fin_payment_scheduledetail_id;
+            
+			 
+            delete 
+              from fin_payment_scheduledetail
+             where fin_payment_schedule_invoice =v_fin_payment_schedule_invoice
+               and amount = v_total_retencion;
+   
+		    update c_invoice
+			   set outstandingamt = v_outstandingamt_fac+v_total_retencion,
+			       totalpaid = totalpaid - v_total_retencion,
+				   ispaid='N'
+			 where c_invoice_id = v_invoice_id;
+			   
+            if(v_docaction = 'RE') then 
+                
+                update co_retencion_venta
+                   set DocStatus = 'BR',
+                       processed = 'N',
+                       DocActionRe = 'CO',
+                       Updated=now(),
+                       UpdatedBy=v_User_ID                  
+                 where co_retencion_venta_id=v_retencion_venta_id;
+            
+            else 
+                        
+                
+                update co_retencion_venta
+                   set DocStatus = 'AN',
+                       processed = 'Y',
+                       DocActionRe = 'AN',
+                       Updated=now(),
+                       UpdatedBy=v_User_ID                  
+                 where co_retencion_venta_id=v_retencion_venta_id;
+             
+            end if;
+
+        end if;
+
+        
+        v_Message:='@CO_EjecucionCorrecta@';
+
+        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message) ;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        RETURN;
+
+    END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+        
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END CO_EJECUTA_RETENCION_VENTA
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_INVOICE_SRI_TRG">
+    <trigger name="CO_INVOICE_SRI_TRG" table="C_INVOICE" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+  
+BEGIN
+
+    IF :new.issotrx = 'N' AND :new.processed = 'N' THEN
+        update c_bpartner
+           set em_co_bp_nro_estab = :new.em_co_nro_estab, 
+               em_co_bp_punto_emision = :new.em_co_punto_emision, 
+               em_co_bp_nro_aut_fc_sri = :new.em_co_nro_aut_sri, 
+               em_co_bp_fec_venct_aut_fc_sri = :new.em_co_vencimiento_aut_sri
+         where c_bpartner_id = :new.c_bpartner_id; 
+     END IF;
+
+END CO_INVOICE_SRI_TRG
+]]></body>
+    </trigger>
+  </database>

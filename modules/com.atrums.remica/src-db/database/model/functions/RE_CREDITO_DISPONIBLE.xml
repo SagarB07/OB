@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_CREDITO_DISPONIBLE">
+    <function name="RE_CREDITO_DISPONIBLE" type="NULL">
+      <body><![CDATA[Cur_Cliente RECORD;
+     lnEntero INTEGER;
+
+BEGIN
+     
+FOR Cur_Cliente IN 
+    (select i.c_Bpartner_id, 
+            b.name, 
+            b.so_creditlimit,
+            b.so_creditused,
+            sum(i.outstandingamt) as pendiente 
+     from c_invoice i, c_bpartner b 
+     where i.c_bpartner_id = b.c_bpartner_id 
+       and i.issotrx = 'Y' 
+     group by 1,2,3,4)
+LOOP
+    
+    update c_bpartner
+    set so_creditused = Cur_Cliente.pendiente
+    where c_bpartner_id = Cur_Cliente.c_bpartner_id;
+    
+    DBMS_OUTPUT.PUT_LINE('Actualizando Cliente: ' || Cur_Cliente.c_bpartner_id);
+
+END LOOP;
+END RE_CREDITO_DISPONIBLE
+]]></body>
+    </function>
+  </database>

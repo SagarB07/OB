@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+  <vector>
+    <versionInfo version="3.0.21083"/>
+    <columnDataChange tablename="AD_COLUMN" columnname="DESCRIPTION" pkRow="5CFD58EB055A4988BD83B84504E4E5B5">
+      <oldValue><![CDATA[Total]]></oldValue>
+      <newValue/>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="HELP" pkRow="5CFD58EB055A4988BD83B84504E4E5B5">
+      <oldValue><![CDATA[Total de la cuenta del centro de costo]]></oldValue>
+      <newValue><![CDATA[Total amount]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="AD_ELEMENT_ID" pkRow="5CFD58EB055A4988BD83B84504E4E5B5">
+      <oldValue/>
+      <newValue><![CDATA[800691]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="A0417A0E9257CA28E040007F01003C18">
+      <oldValue><![CDATA[Add Transaction]]></oldValue>
+      <newValue><![CDATA[EM_APRM_AddTransactions]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DESCRIPTION" pkRow="CD7CBB9F9FD048A4A75E2E556D910920">
+      <oldValue><![CDATA[Total]]></oldValue>
+      <newValue/>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="HELP" pkRow="CD7CBB9F9FD048A4A75E2E556D910920">
+      <oldValue><![CDATA[Total de la cuenta del centro de costo]]></oldValue>
+      <newValue><![CDATA[Total amount]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="03D900E18D4E44B39C21A36DDF45F2E4">
+      <oldValue><![CDATA[310]]></oldValue>
+      <newValue><![CDATA[280]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2354D84E040007F01005FEC">
+      <oldValue><![CDATA[180]]></oldValue>
+      <newValue><![CDATA[150]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2364D84E040007F01005FEC">
+      <oldValue><![CDATA[90]]></oldValue>
+      <newValue><![CDATA[70]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A23B4D84E040007F01005FEC">
+      <oldValue><![CDATA[200]]></oldValue>
+      <newValue><![CDATA[170]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2404D84E040007F01005FEC">
+      <oldValue><![CDATA[240]]></oldValue>
+      <newValue><![CDATA[200]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2414D84E040007F01005FEC">
+      <oldValue><![CDATA[270]]></oldValue>
+      <newValue><![CDATA[230]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2424D84E040007F01005FEC">
+      <oldValue><![CDATA[280]]></oldValue>
+      <newValue><![CDATA[240]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2434D84E040007F01005FEC">
+      <oldValue><![CDATA[260]]></oldValue>
+      <newValue><![CDATA[220]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2444D84E040007F01005FEC">
+      <oldValue><![CDATA[190]]></oldValue>
+      <newValue><![CDATA[160]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2454D84E040007F01005FEC">
+      <oldValue><![CDATA[250]]></oldValue>
+      <newValue><![CDATA[210]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2514D84E040007F01005FEC">
+      <oldValue><![CDATA[300]]></oldValue>
+      <newValue><![CDATA[260]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2524D84E040007F01005FEC">
+      <oldValue><![CDATA[290]]></oldValue>
+      <newValue><![CDATA[250]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A25C4D84E040007F01005FEC">
+      <oldValue><![CDATA[210]]></oldValue>
+      <newValue><![CDATA[180]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2B84D84E040007F01005FEC">
+      <oldValue><![CDATA[10]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2B94D84E040007F01005FEC">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2BA4D84E040007F01005FEC">
+      <oldValue><![CDATA[120]]></oldValue>
+      <newValue><![CDATA[110]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2C24D84E040007F01005FEC">
+      <oldValue><![CDATA[70]]></oldValue>
+      <newValue><![CDATA[80]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2C34D84E040007F01005FEC">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[60]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2C54D84E040007F01005FEC">
+      <oldValue><![CDATA[114]]></oldValue>
+      <newValue><![CDATA[100]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2D54D84E040007F01005FEC">
+      <oldValue><![CDATA[220]]></oldValue>
+      <newValue><![CDATA[190]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2DA4D84E040007F01005FEC">
+      <oldValue><![CDATA[102]]></oldValue>
+      <newValue><![CDATA[80]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2EC4D84E040007F01005FEC">
+      <oldValue><![CDATA[90]]></oldValue>
+      <newValue><![CDATA[100]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2F04D84E040007F01005FEC">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[50]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3384D84E040007F01005FEC">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A34C4D84E040007F01005FEC">
+      <oldValue><![CDATA[310]]></oldValue>
+      <newValue><![CDATA[270]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3644D84E040007F01005FEC">
+      <oldValue><![CDATA[170]]></oldValue>
+      <newValue><![CDATA[140]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3654D84E040007F01005FEC">
+      <oldValue><![CDATA[70]]></oldValue>
+      <newValue><![CDATA[60]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3674D84E040007F01005FEC">
+      <oldValue><![CDATA[108]]></oldValue>
+      <newValue><![CDATA[90]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3734D84E040007F01005FEC">
+      <oldValue><![CDATA[150]]></oldValue>
+      <newValue><![CDATA[130]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3754D84E040007F01005FEC">
+      <oldValue><![CDATA[80]]></oldValue>
+      <newValue><![CDATA[90]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3E84D84E040007F01005FEC">
+      <oldValue><![CDATA[60]]></oldValue>
+      <newValue><![CDATA[70]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="C7FA62AA617111DEB014001B388C05F0">
+      <oldValue><![CDATA[130]]></oldValue>
+      <newValue><![CDATA[120]]></newValue>
+    </columnDataChange>
+  </vector>

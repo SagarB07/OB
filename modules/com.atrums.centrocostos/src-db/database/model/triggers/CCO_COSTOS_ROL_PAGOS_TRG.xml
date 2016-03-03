@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CCO_COSTOS_ROL_PAGOS_TRG">
+    <trigger name="CCO_COSTOS_ROL_PAGOS_TRG" table="NO_ROL_PAGO_PROVISION" fires="before" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+Cur_Cuentas RECORD;
+v_empleado varchar(32);
+v_contrato_id varchar(32);
+v_client_id varchar(32);
+v_org_id varchar(32);
+v_user_id varchar(32);
+v_period_id varchar(32);
+v_total_ingreso NUMBER;
+v_porcentaje NUMBER;
+v_message varchar(2000);
+
+BEGIN
+
+IF (UPDATING) THEN
+
+    if(:old.docstatus='BR' and :new.docstatus='CO') then
+
+        select ad_client_id, ad_org_id, updatedby, c_bpartner_id, c_period_id, total_ingreso
+        into v_client_id, v_org_id, v_user_id, v_empleado, v_period_id, v_total_ingreso
+        from no_rol_pago_provision
+        where no_rol_pago_provision_id = :new.no_rol_pago_provision_id;
+
+        select no_contrato_empleado_id
+        into v_contrato_id
+        from no_contrato_empleado
+        where c_bpartner_id = v_empleado
+        and isactive = 'Y';
+
+        
+        FOR Cur_Cuentas IN (select cco_cuenta_costos_id,
+                                   porcentaje 
+                            from cco_costos_nomina 
+                            where no_contrato_empleado_id = v_contrato_id
+                            and isactive = 'Y')
+        LOOP
+
+            insert into cco_registra_costos (
+                   cco_registra_costos_id,      ad_client_id,           ad_org_id,          isactive,       
+                   created,                     createdby,              updated,            updatedby,
+                   cco_cuenta_costos_id,        c_period_id,            valor,              porcentaje,
+                   no_rol_pago_provision_id)
+            values (get_uuid(),                 v_client_id,            v_org_id,           'Y',
+                   now(),                       v_user_id,              now(),              v_user_id,
+                   Cur_Cuentas.cco_cuenta_costos_id, v_period_id,       round(v_total_ingreso*(Cur_Cuentas.porcentaje / 100),2),   Cur_Cuentas.porcentaje,
+                   :new.no_rol_pago_provision_id);
+        END LOOP;
+
+
+    end if; 
+
+    if(:old.docstatus='CO' and :new.docstatus='BR') then
+
+        delete from cco_registra_costos where no_rol_pago_provision_id = :old.no_rol_pago_provision_id;
+
+    end if; 
+
+END IF; 
+
+RETURN NEW;
+
+END CCO_COSTOS_ROL_PAGOS_TRG
+]]></body>
+    </trigger>
+  </database>

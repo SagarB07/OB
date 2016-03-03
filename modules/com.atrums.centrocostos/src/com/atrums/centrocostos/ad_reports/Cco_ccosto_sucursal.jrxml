@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cco_ccosto_sucursal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="10.834705943388506"/>
+	<property name="ireport.x" value="4467"/>
+	<property name="ireport.y" value="1751"/>
+	<parameter name="PERIODO" class="java.lang.String"/>
+	<parameter name="USER_CLIENT" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select a.name as sucursal, cc.name as centro_de_costo, sum (cr.valor) as valor, p.name
+from ad_org a, cco_cuenta_costos cc, cco_registra_costos cr, c_period p where p.c_period_id = cr.c_period_id and cr.cco_cuenta_costos_id = cc.cco_cuenta_costos_id
+and a.ad_org_id = cr.ad_org_id and cr.c_period_id=$P{PERIODO}
+and cr.ad_client_id IN ($P!{USER_CLIENT})
+
+
+group by 1,2,4 order by 2,1,4]]>
+	</queryString>
+	<field name="sucursal" class="java.lang.String"/>
+	<field name="centro_de_costo" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="name" class="java.lang.String"/>
+	<variable name="Subtotal" class="java.math.BigDecimal" resetType="Group" resetGroup="centro_costo" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL" class="java.math.BigDecimal" incrementType="Group" incrementGroup="centro_costo" calculation="Sum">
+		<variableExpression><![CDATA[$V{Subtotal}]]></variableExpression>
+	</variable>
+	<group name="centro_costo">
+		<groupExpression><![CDATA[$F{centro_de_costo}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<rectangle>
+					<reportElement x="128" y="21" width="305" height="20" isRemoveLineWhenBlank="true"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="333" y="20" width="100" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[VALOR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="128" y="20" width="205" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SUCURSAL]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="128" y="0" width="205" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["C.C. "+$F{centro_de_costo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="43">
+				<rectangle>
+					<reportElement x="128" y="0" width="305" height="20" isRemoveLineWhenBlank="true"/>
+				</rectangle>
+				<textField pattern="###0.00">
+					<reportElement x="333" y="0" width="100" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{Subtotal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="128" y="0" width="205" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["SUBTOTAL "+$F{centro_de_costo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="32" width="555" height="35"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRO DE COSTOS POR SUCURSAL]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Top" isUsingCache="true">
+				<reportElement key="image-2" x="433" y="3" width="122" height="29"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<imageExpression class="java.awt.Image"><![CDATA[org.openbravo.erpCommon.utility.Utility.showImageLogo("yourcompanylogin")]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="128" y="67" width="205" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PERIODO "+$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="6" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="432" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="128" y="0" width="1" height="20"/>
+			</line>
+			<textField pattern="###0.00">
+				<reportElement x="333" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="0" width="205" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sucursal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="36" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement x="128" y="0" width="305" height="20" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<textField pattern="###0.00">
+				<reportElement x="333" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="128" y="0" width="205" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL CENTRO DE COSTOS]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

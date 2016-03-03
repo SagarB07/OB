@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="CodigoTerceroData" package="com.atrums.remica.ad_callouts">
+                                   
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+
+    select coalesce(max(to_number(value)),0)+1  AS codigo 
+      from c_bpartner 
+     where c_bp_group_id = ?
+    
+      ]]>
+    </Sql>
+    <Parameter name="cBpGroupId"/>  
+  </SqlMethod>
+  
+  <SqlMethod name="getLetraGrupo" type="preparedStatement" return="string" default="">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+        select substr(max(value),1,1) 
+    from c_bp_group 
+    where c_bp_group_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="cBpGroupId"/> 
+  </SqlMethod>
+  
+</SqlClass>

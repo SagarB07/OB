@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE AD_CLIENT">
+    <table name="AD_CLIENT" primaryKey="AD_CLIENT_KEY">
+      <column name="EM_CO_NRO_ESTAB" primaryKey="false" required="false" type="VARCHAR" size="3" autoIncrement="false">
+        <default><![CDATA[001]]></default>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CCO_TOTAL_COSTOS_TRG">
+    <trigger name="CCO_TOTAL_COSTOS_TRG" table="CCO_REGISTRA_COSTOS" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[total_costo_registra NUMBER(10,4);
+total_costo_invoice NUMBER(10,4);
+
+
+BEGIN
+
+
+IF (INSERTING OR UPDATING) THEN
+
+    IF (:new.c_invoice_id IS NOT NULL) THEN 
+
+        select ROUND(SUM(valor),2) 
+        INTO total_costo_registra 
+        from cco_registra_costos
+        where c_invoice_id = :new.c_invoice_id
+        group by c_invoice_id;
+
+        select totallines 
+        INTO total_costo_invoice 
+        from c_invoice
+        where c_invoice_id = :new.c_invoice_id;
+
+        IF(total_costo_registra>total_costo_invoice) THEN
+
+            RAISE NO_DATA_FOUND;
+
+        END IF;
+
+    END IF;
+
+    IF (:new.fin_payment_id IS NOT NULL) THEN 
+
+        select ROUND(SUM(valor),2) 
+        INTO total_costo_registra 
+        from cco_registra_costos
+        where fin_payment_id = :new.fin_payment_id
+        group by fin_payment_id;
+
+        select amount 
+        INTO total_costo_invoice 
+        from fin_payment
+        where fin_payment_id = :new.fin_payment_id;
+
+        IF(total_costo_registra>total_costo_invoice) THEN
+
+            RAISE NO_DATA_FOUND;
+
+        END IF;
+
+    END IF;
+
+
+    IF (:new.m_inout_id IS NOT NULL) THEN 
+
+        select SUM(porcentaje)
+        INTO total_costo_registra 
+        from cco_registra_costos
+        where m_inout_id = :new.m_inout_id;
+
+        select coalesce(sum(transactioncost),0) 
+        into total_costo_invoice 
+        from m_transaction 
+        where m_inoutline_id IN (select m_inoutline_id 
+                    from m_inoutline 
+                    where m_inout_id = :new.m_inout_id);
+
+        IF (total_costo_registra >= 100.01) then
+
+             RAISE NO_DATA_FOUND;
+
+        END IF;
+        
+    END IF;
+
+RETURN NEW;
+
+END IF;
+
+    
+END CCO_TOTAL_COSTOS_TRG
+]]></body>
+    </trigger>
+  </database>

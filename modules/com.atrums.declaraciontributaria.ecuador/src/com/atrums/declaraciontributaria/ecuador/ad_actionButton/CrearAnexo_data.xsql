@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<SqlClass name="CrearAnexoData" package="com.atrums.declaraciontributaria.ecuador.ad_actionButton">
+  
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+  
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+        SELECT A.NOMBRE_XML, 
+               A.NOMBRE_ARCHIVO, 
+               AC.TIPO_INFORMACION, 
+               AC.PROCEDIMIENTO,
+               PS.STARTDATE, 
+               PS.ENDDATE,
+               PA.AD_ORG_ID 
+          FROM ATS_PROCESA_ANEXO PA,
+               C_PERIOD PS,
+               ATS_ANEXO A,
+               ATS_ANEXO_CONFIG AC
+         WHERE PA.ATS_PROCESA_ANEXO_ID = ?
+           AND PA.ATS_ANEXO_ID = A.ATS_ANEXO_ID
+           AND AC.ATS_ANEXO_ID = A.ATS_ANEXO_ID
+           AND A.ISACTIVE = 'Y'
+           AND PA.C_PERIOD_ID = PS.C_PERIOD_ID
+         ORDER BY AC.LINE ASC
+      ]]>
+    </Sql>
+    <Parameter name="adProcesaId"/>
+  </SqlMethod>
+
+</SqlClass>

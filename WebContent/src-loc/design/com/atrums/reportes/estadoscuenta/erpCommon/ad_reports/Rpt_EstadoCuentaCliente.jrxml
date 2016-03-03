@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_EstadoCuentaCliente" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000024"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["http://localhost:8008/openbravoaf/web"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USER_CLIENT" class="java.lang.String"/>
+	<parameter name="USER_ORG" class="java.lang.String"/>
+	<parameter name="DateFrom" class="java.util.Date"/>
+	<parameter name="DateTo" class="java.util.Date"/>
+	<parameter name="Bpartner" class="java.lang.String"/>
+	<parameter name="AUX1_Bpartner" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{Bpartner}==null || $P{Bpartner}.equals("")) ? "" : " and i.c_bpartner_id = '" + $P{Bpartner} + "'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AUX2_Bpartner" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{Bpartner}==null || $P{Bpartner}.equals("")) ? "" : " and i.c_bpartner_id = '" + $P{Bpartner} + "'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AUX3_Bpartner" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{Bpartner}==null || $P{Bpartner}.equals("")) ? "" : " and ba.c_bpartner_id = '" + $P{Bpartner} + "'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AUX4_Bpartner" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{Bpartner}==null || $P{Bpartner}.equals("")) ? "" : " and e.value = (select e2.value from c_bpartner cb2 join c_bp_vendor_acct ba2 on (cb2.c_bpartner_id = ba2.c_bpartner_id) join c_validcombination v2 on (ba2.v_liability_acct = v2.c_validcombination_id) join c_elementvalue e2 on (v2.account_id = e2.c_elementvalue_id) where cb2.c_bpartner_id = '" + $P{Bpartner} + "')"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AUX5_Bpartner" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{Bpartner}==null || $P{Bpartner}.equals("")) ? "" : " and cb.c_bpartner_id = '" + $P{Bpartner} + "'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select  upper(a.tercero) as tercero,
+        a.c_invoice_id,
+        date(a.fecha),
+        a.doc,
+        a.documentno,
+        a.valor,
+        a.documetno_i,
+        coalesce(round(sum(fa.amtsourcedr)-sum(fa.amtsourcecr),2),0) as saldo,
+        orden,
+'C32139D1C76941788E92B8D13F5174C2' AS org_id
+from (
+select i.dateinvoiced as fecha,
+       dtr.name as doc,
+       i.documentno as documentno,
+       case when dt.docbasetype = 'ARC' then
+                case when i.docstatus = 'VO' and i.grandtotal < 0 then
+                     abs(i.grandtotal)
+                else
+                     abs(i.grandtotal)*-1
+                end
+            else
+               i.grandtotal
+       end as valor,
+       (select name from c_bpartner where c_bpartner_id = i.c_bpartner_id) as tercero,
+       i.c_bpartner_id,
+       i.c_invoice_id,
+       i.documentno as documetno_i,
+       1 as orden
+from c_invoice i, c_doctype dt, c_doctype_trl dtr
+where i.c_doctypetarget_id = dt.c_doctype_id
+and dt.c_doctype_id = dtr.c_doctype_id
+and dtr.ad_language = 'es_EC'
+and i.processed = 'Y'
+and i.docstatus <> 'VO'
+and i.ad_client_id IN ($P!{USER_CLIENT})
+and i.issotrx = 'Y'
+and date(i.dateacct) >= $P{DateFrom}
+and date(i.dateacct) <= $P{DateTo}
+$P!{AUX1_Bpartner}
+
+UNION ALL
+
+select p.paymentdate as fecha, dtr.name as doc, p.documentno as documentno, (sum(dv.paidamt))*-1 as valor,
+(select name from c_bpartner where c_bpartner_id = i.c_bpartner_id) as tercero,
+       i.c_bpartner_id,
+       ps.c_invoice_id as c_invoice_id,
+       i.documentno as documetno_i,
+       3 as orden
+from fin_payment p, c_doctype dt, c_doctype_trl dtr, fin_payment_detail_v as dv, fin_payment_schedule as ps, c_invoice i
+where p.c_doctype_id = dt.c_doctype_id
+and ps.c_invoice_id = i.c_invoice_id
+and dt.c_doctype_id = dtr.c_doctype_id
+and p.fin_payment_id = dv.fin_payment_id
+and dv.fin_payment_sched_inv_id = ps.fin_payment_schedule_id
+and dtr.ad_language = 'es_EC'
+and p.ad_client_id IN ($P!{USER_CLIENT})
+and p.processed = 'Y'
+and p.fin_financial_account_id NOT IN (select fin_financial_account_id
+                            from fin_financial_account
+                            where name like '%etenci%'
+                            and ad_client_id IN ($P!{USER_CLIENT})
+                            )
+and p.isreceipt = 'Y'
+and p.fin_payment_id IN (select fin_payment_id from fin_payment_detail_v where fin_payment_sched_inv_id is not null)
+and date(p.paymentdate) >= $P{DateFrom}
+and date(p.paymentdate) <= $P{DateTo}
+--and (select dtt.docbasetype from c_doctype dtt where dtt.c_doctype_id=i.c_doctypetarget_id) <> 'ARC'
+$P!{AUX2_Bpartner}
+group by 1,2,3,5,6,7,8
+
+UNION ALL
+
+select rv.fecha_emision as fecha, 'Retención' as doc, rv.documentno as documentno, rv.total_retencion*-1 as valor,
+(select name from c_bpartner where c_bpartner_id = i.c_bpartner_id) as tercero,
+       i.c_bpartner_id,
+       i.c_invoice_id,
+       i.documentno as documetno_i,
+       2 as orden
+from co_retencion_venta rv, c_invoice i
+where rv.c_invoice_id = i.c_invoice_id
+and rv.ad_client_id IN ($P!{USER_CLIENT})
+and rv.processed = 'Y'
+and rv.docstatus = 'CO'
+and date(rv.dateacct) >= $P{DateFrom}
+and date(rv.dateacct) <= $P{DateTo}
+$P!{AUX1_Bpartner}
+
+UNION ALL
+
+select  null as fecha,
+        '' as doc,
+        '' as documentno,
+        0 as valor,
+        b.tercero,
+        b.c_bpartner_id,
+        '' as c_invoice_id,
+        '' as documetno_i,
+       4 as orden
+from (select cb.name as tercero, cb.c_bpartner_id,  coalesce(round(sum(fa.amtsourcedr)-sum(fa.amtsourcecr),2),0) as saldo
+from c_bpartner cb
+     left join c_bp_customer_acct cba on (cba.c_bpartner_id = cb.c_bpartner_id $P!{AUX5_Bpartner}
+)
+    inner join c_validcombination vc on (vc.c_validcombination_id = cba.c_receivable_acct)
+    left join fact_acct fa  on (fa.account_id = vc.account_id and fa.c_bpartner_id = cb.c_bpartner_id and date(fa.dateacct) < $P{DateFrom}
+)
+group by 1,2
+order by 1) b where b.saldo <> 0
+
+) a left join c_bp_customer_acct cba on (cba.c_bpartner_id = a.c_bpartner_id and cba.ad_client_id in ($P!{USER_CLIENT}))
+    inner join c_validcombination vc on (vc.c_validcombination_id = cba.c_receivable_acct and vc.ad_client_id in ($P!{USER_CLIENT}))
+    left join fact_acct fa  on (fa.account_id = vc.account_id and fa.ad_client_id in ($P!{USER_CLIENT}) and fa.c_bpartner_id = a.c_bpartner_id and date(fa.dateacct) < $P{DateFrom}
+)
+group by 1,2,3,4,5,6,7,9
+order by 1,7,9,3]]>
+	</queryString>
+	<field name="tercero" class="java.lang.String"/>
+	<field name="date" class="java.sql.Date"/>
+	<field name="doc" class="java.lang.String"/>
+	<field name="documentno" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="saldo" class="java.math.BigDecimal"/>
+	<field name="org_id" class="java.lang.String"/>
+	<variable name="sum_valor" class="java.math.BigDecimal" resetType="Group" resetGroup="tercero" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="v_saldoactual" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[$F{saldo}.add($V{sum_valor})]]></variableExpression>
+	</variable>
+	<variable name="v_total_sum_valor" class="java.math.BigDecimal" incrementType="Group" incrementGroup="tercero" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_valor}]]></variableExpression>
+	</variable>
+	<group name="tercero">
+		<groupExpression><![CDATA[$F{tercero}]]></groupExpression>
+		<groupHeader>
+			<band height="58">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="0" width="555" height="24" forecolor="#006600"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tercero}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="0" y="41" width="111" height="17" forecolor="#000000"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="111" y="41" width="126" height="17" forecolor="#000000"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Documento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="237" y="41" width="109" height="17" forecolor="#000000"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Nro. Documento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="346" y="41" width="98" height="17" forecolor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[Monto]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement style="Detail" x="444" y="24" width="111" height="17"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{saldo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="346" y="24" width="98" height="17" forecolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Saldo Anterior: $]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="17">
+				<staticText>
+					<reportElement style="Column header" x="237" y="0" width="109" height="17" forecolor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<text><![CDATA[Monto Total: $]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement x="346" y="0" width="98" height="17"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="11"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_valor}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="17">
+				<staticText>
+					<reportElement style="Column header" x="346" y="0" width="98" height="17" forecolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[Saldo Actual: $]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement x="444" y="0" width="111" height="17"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="11"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_saldoactual}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="11" width="444" height="33" forecolor="#006600"/>
+				<textElement verticalAlignment="Middle">
+					<font size="22" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Clientes - Estado de Cuenta Detallado]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Top" isUsingCache="true">
+				<reportElement key="" x="457" y="0" width="98" height="44"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<imageExpression class="java.awt.Image"><![CDATA[org.openbravo.erpCommon.utility.Utility.showImageLogo("yourcompanylegal", $F{org_id})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" forecolor="#006600"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="111" height="17" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="237" y="0" width="109" height="17" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="111" y="0" width="126" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{DateFrom}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="346" y="0" width="98" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{DateTo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement style="Detail" x="0" y="0" width="111" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="126" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{doc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="237" y="0" width="109" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documentno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="346" y="0" width="98" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="346" y="0" width="98" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="444" y="0" width="111" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement style="Column header" x="0" y="0" width="237" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="17">
+			<textField pattern="#,##0.00">
+				<reportElement x="444" y="0" width="111" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_total_sum_valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="288" y="0" width="156" height="17" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Movimientos: $]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

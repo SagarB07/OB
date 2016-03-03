@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_DOC_MODIFICADO">
+    <function name="ATS_DOC_MODIFICADO" type="VARCHAR">
+      <parameter name="p_c_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_param" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(32):=''; 
+BEGIN 
+    
+    if(p_param = 1) then
+        
+        select coalesce(em_co_nro_estab,'000') into v_ResultStr from c_invoice where c_invoice_id IN
+        (select c_invoice_id  from fin_payment_schedule where c_invoice_id NOT IN (p_c_invoice_id) and fin_payment_schedule_id IN 
+        (select fin_payment_sched_inv_v_id from fin_payment_detail_v where fin_payment_id IN
+            (select fin_payment_id from fin_payment_detail_v where fin_payment_sched_inv_v_id IN
+              (select fin_payment_schedule_id from fin_payment_schedule where c_invoice_id IN (p_c_invoice_id)))));
+        
+    elsif (p_param = 2) then
+
+        select coalesce(em_co_punto_emision,'000') into v_ResultStr from c_invoice where c_invoice_id IN
+        (select c_invoice_id  from fin_payment_schedule where c_invoice_id NOT IN (p_c_invoice_id) and fin_payment_schedule_id IN 
+        (select fin_payment_sched_inv_v_id from fin_payment_detail_v where fin_payment_id IN
+            (select fin_payment_id from fin_payment_detail_v where fin_payment_sched_inv_v_id IN
+              (select fin_payment_schedule_id from fin_payment_schedule where c_invoice_id IN (p_c_invoice_id)))));
+    
+     elsif (p_param = 3) then
+
+        select coalesce(documentno,'0') into v_ResultStr from c_invoice where c_invoice_id IN
+        (select c_invoice_id  from fin_payment_schedule where c_invoice_id NOT IN (p_c_invoice_id) and fin_payment_schedule_id IN 
+        (select fin_payment_sched_inv_v_id from fin_payment_detail_v where fin_payment_id IN
+            (select fin_payment_id from fin_payment_detail_v where fin_payment_sched_inv_v_id IN
+              (select fin_payment_schedule_id from fin_payment_schedule where c_invoice_id IN (p_c_invoice_id)))));
+
+     elsif (p_param = 4) then
+
+        select coalesce(em_co_nro_aut_sri,'000') into v_ResultStr from c_invoice where c_invoice_id IN
+        (select c_invoice_id  from fin_payment_schedule where c_invoice_id NOT IN (p_c_invoice_id) and fin_payment_schedule_id IN 
+        (select fin_payment_sched_inv_v_id from fin_payment_detail_v where fin_payment_id IN
+            (select fin_payment_id from fin_payment_detail_v where fin_payment_sched_inv_v_id IN
+              (select fin_payment_schedule_id from fin_payment_schedule where c_invoice_id IN (p_c_invoice_id)))));
+
+      end if;
+
+    return v_ResultStr;
+END ATS_DOC_MODIFICADO
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_VALIDA_RET_VENTA_TRG">
+    <trigger name="CO_VALIDA_RET_VENTA_TRG" table="CO_RETENCION_VENTA_LINEA" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_base_imp NUMBER;
+v_subtotal NUMBER;
+v_valor_impuesto NUMBER;
+
+v_Message VARCHAR;
+
+BEGIN
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        if (:new.tipo = 'FUENTE') then
+        
+            select sum(base_imp_retencion) 
+              into v_base_imp
+              from co_retencion_venta_linea 
+             where tipo = 'FUENTE'
+               and co_retencion_venta_id = :new.co_retencion_venta_id
+               and co_retencion_venta_linea_id <> :new.co_retencion_venta_linea_id;
+               
+            v_base_imp := COALESCE(v_base_imp,0) + :new.base_imp_retencion;
+            
+            select i.totallines
+              into v_subtotal
+              from c_invoice i
+             inner join co_retencion_venta rc on i.c_invoice_id = rc.c_invoice_id
+             where rc.co_retencion_venta_id = :new.co_retencion_venta_id;
+            
+            if(v_subtotal < v_base_imp  ) then
+                v_Message:='La base imponible de las retenciones tipo RENTA no puede ser mayor al valor de la base imponible de la factura';
+                RAISE v_Message;
+            end if;
+        else
+            select sum(base_imp_retencion) 
+              into v_base_imp
+              from co_retencion_venta_linea 
+             where tipo = 'IVA'
+               and co_retencion_venta_id = :new.co_retencion_venta_id
+               and co_retencion_venta_linea_id <> :new.co_retencion_venta_linea_id;
+               
+            v_base_imp := COALESCE(v_base_imp,0) + :new.base_imp_retencion;
+        
+            select abs(grandtotal - i.totallines)
+              into v_valor_impuesto
+              from c_invoice i
+             inner join co_retencion_venta rc on i.c_invoice_id = rc.c_invoice_id
+             where rc.co_retencion_venta_id = :new.co_retencion_venta_id;
+             
+            if(v_valor_impuesto < v_base_imp) then
+                v_Message:='La base imponible de las retenciones tipo IVA no puede ser mayor al valor del impuesto de la factura';
+                RAISE v_Message;
+            end if;
+             
+        end if;
+        
+
+        RETURN NEW; 
+    END IF; 
+
+END CO_VALIDA_RET_VENTA_TRG
+]]></body>
+    </trigger>
+  </database>

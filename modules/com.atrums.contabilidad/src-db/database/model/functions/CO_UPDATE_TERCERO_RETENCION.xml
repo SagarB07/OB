@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION CO_UPDATE_TERCERO_RETENCION">
+    <function name="CO_UPDATE_TERCERO_RETENCION" type="NULL">
+      <body><![CDATA[Cur_Retencion RECORD;
+ BEGIN
+  
+    
+   FOR Cur_Retencion IN (
+    SELECT f.fact_Acct_id, i.c_bpartner_id
+                  FROM fact_acct f, co_retencion_venta rv, c_invoice i
+                  where f.record_id = rv.co_retencion_venta_id
+                  and rv.c_invoice_id = i.c_invoice_id
+                
+   ) LOOP
+
+               update fact_acct
+               set c_bpartner_id = Cur_Retencion.c_bpartner_id
+               where fact_acct_id = Cur_Retencion.fact_Acct_id;
+             
+   END LOOP;
+  
+  Return;
+END CO_UPDATE_TERCERO_RETENCION
+]]></body>
+    </function>
+  </database>

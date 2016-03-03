@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="REPorcentajeGananciaData" package="com.atrums.remica.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+      
+      SELECT em_re_gasto,em_re_ganancia 
+      FROM m_discountschemaline
+      WHERE m_discountschemaline_id=?
+         
+      ]]>
+    </Sql>
+    <Parameter name="mDiscountschemalineId"/>  
+  </SqlMethod>
+</SqlClass>

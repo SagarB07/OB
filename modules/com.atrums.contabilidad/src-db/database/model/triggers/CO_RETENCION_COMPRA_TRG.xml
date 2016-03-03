@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_RETENCION_COMPRA_TRG">
+    <trigger name="CO_RETENCION_COMPRA_TRG" table="CO_RETENCION_COMPRA" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+v_processed VARCHAR;
+
+BEGIN
+
+IF DELETING THEN 
+    v_processed := (select docstatus from co_retencion_compra where co_retencion_compra_id = :old.co_retencion_compra_id);
+
+    IF v_processed <> 'BR' THEN
+        RAISE NO_DATA_FOUND;
+    ELSE
+        RETURN OLD; 
+    END IF;
+ELSE 
+    RETURN NEW; 
+END IF; 
+
+END CO_RETENCION_COMPRA_TRG
+]]></body>
+    </trigger>
+  </database>

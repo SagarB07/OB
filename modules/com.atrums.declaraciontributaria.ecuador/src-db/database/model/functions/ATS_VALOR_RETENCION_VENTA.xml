@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_VALOR_RETENCION_VENTA">
+    <function name="ATS_VALOR_RETENCION_VENTA" type="NUMERIC">
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_inicio" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_retencion" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(10):=''; 
+BEGIN 
+
+    	select ltrim(to_char(coalesce(sum(rvl.valor_retencion),0),'9999990.99')) into v_ResultStr
+          from c_invoice i,
+               co_retencion_venta rv,
+               co_retencion_venta_linea rvl
+         where i.c_invoice_id = rv.c_invoice_id
+           and i.issotrx = 'Y'
+		   and i.docstatus <> 'VO'
+           and rv.co_retencion_venta_id = rvl.co_retencion_venta_id
+           and i.c_bpartner_id = p_bpartner_id
+           and rv.fecha_emision >= TO_DATE(p_fecha_inicio)
+           and rv.fecha_emision <= TO_DATE(p_fecha_fin)
+           and rvl.tipo = p_tipo_retencion;
+           
+        
+    return v_ResultStr;
+END ATS_VALOR_RETENCION_VENTA
+]]></body>
+    </function>
+  </database>

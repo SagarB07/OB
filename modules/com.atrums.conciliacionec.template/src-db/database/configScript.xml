@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+  <vector>
+    <versionInfo version="3.0.21083"/>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="B69B23AA55CD46F0B7CF8CB6B60EF7F8">
+      <oldValue><![CDATA[Borrar]]></oldValue>
+      <newValue><![CDATA[DP_Borrar]]></newValue>
+    </columnDataChange>
+  </vector>

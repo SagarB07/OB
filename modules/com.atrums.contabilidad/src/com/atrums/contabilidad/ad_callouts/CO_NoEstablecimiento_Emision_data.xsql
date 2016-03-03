@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="CONoEstablecimientoEmisionData" package="com.atrums.contabilidad.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+          select COALESCE(o.em_co_nro_estab,'001') as establecimiento, 
+                 COALESCE(o.em_co_punto_emision,'001') as emision 
+            from ad_org o
+           where o.ad_org_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="strOrg"/>
+  </SqlMethod>
+</SqlClass>

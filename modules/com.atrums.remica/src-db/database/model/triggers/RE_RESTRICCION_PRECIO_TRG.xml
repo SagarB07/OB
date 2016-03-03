@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER RE_RESTRICCION_PRECIO_TRG">
+    <trigger name="RE_RESTRICCION_PRECIO_TRG" table="C_ORDERLINE" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[v_mensaje VARCHAR;
+v_costo NUMBER;
+v_issotrx VARCHAR;
+BEGIN
+
+    
+    IF (INSERTING) THEN
+    
+    select o.issotrx into v_issotrx from c_order o where c_order_id = :new.c_order_id;
+       
+       IF (v_issotrx = 'Y') THEN 
+            
+            IF(:new.m_product_id <> '1314') THEN
+            
+                 select cost 
+                 INTO v_costo
+                 from m_costing 
+                where m_product_id = :new.m_product_id 
+                  and dateto = TO_DATE('31-12-9999','dd-MM-yyyy') limit 1;
+                
+                IF (:new.priceActual < v_costo) THEN
+                     v_mensaje:='El precio unitario no puede ser menor al costo';
+                    RAISE v_mensaje;
+                END IF;
+                
+                IF (:new.priceActual = 0.00) THEN
+
+                    v_mensaje:='El precio unitario no puede ser 0.00.';
+                    RAISE v_mensaje;
+                END IF;
+           
+            END IF;
+            
+        END IF;
+       
+    END IF;
+    
+    RETURN NEW; 
+END RE_RESTRICCION_PRECIO_TRG
+]]></body>
+    </trigger>
+  </database>

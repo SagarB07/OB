@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="DefiniciondelBuffer6D8883038DC84D42A742864B6570B430Data" package="org.openbravo.erpWindows.com.atrums.compras.buffer.FuncionalidaddeBuffer">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(cou_param_buffer.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = cou_param_buffer.CreatedBy) as CreatedByR, 
+        to_char(cou_param_buffer.Updated, ?) as updated, 
+        to_char(cou_param_buffer.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        cou_param_buffer.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = cou_param_buffer.UpdatedBy) as UpdatedByR,
+        cou_param_buffer.AD_Org_ID, 
+(CASE WHEN cou_param_buffer.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
+cou_param_buffer.M_Warehouse_ID, 
+(CASE WHEN cou_param_buffer.M_Warehouse_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS M_Warehouse_IDR, 
+cou_param_buffer.Nombre, 
+cou_param_buffer.Tipo_Documento, 
+(CASE WHEN cou_param_buffer.Tipo_Documento IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS Tipo_DocumentoR, 
+cou_param_buffer.MES_Promedio, 
+COALESCE(cou_param_buffer.Isactive, 'N') AS Isactive, 
+cou_param_buffer.Processed, 
+cou_param_buffer.COU_Param_Buffer_ID, 
+cou_param_buffer.AD_Client_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM cou_param_buffer left join (select AD_Org_ID, Name from AD_Org) table1 on (cou_param_buffer.AD_Org_ID = table1.AD_Org_ID) left join (select M_Warehouse_ID, Name from M_Warehouse) table2 on (cou_param_buffer.M_Warehouse_ID = table2.M_Warehouse_ID) left join ad_ref_list_v list1 on (cou_param_buffer.Tipo_Documento = list1.value and list1.ad_reference_id = '7F16E35E98544100B5128AC166E01B93' and list1.ad_language = ?) 
+        WHERE 2=2 
+
+        AND 1=1 
+        AND cou_param_buffer.COU_Param_Buffer_ID = ? 
+        AND cou_param_buffer.AD_Client_ID IN ('1') 
+           AND cou_param_buffer.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+
+
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="cou_param_buffer.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="cou_param_buffer.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+
+<Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="mWarehouseId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="processed"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="isactive"></Parameter><Parameter name="couParamBufferId"></Parameter><Parameter name="mesPromedio"></Parameter><Parameter name="tipoDocumento"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="nombre"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef08671EAB1DBD424E84BE52AC2E5BBA8B_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef2F56558BCE134DC899F7CC488F655668_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE cou_param_buffer
+        SET AD_Org_ID = (?) , M_Warehouse_ID = (?) , Nombre = (?) , Tipo_Documento = (?) , MES_Promedio = TO_NUMBER(?) , Isactive = (?) , Processed = (?) , COU_Param_Buffer_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        WHERE cou_param_buffer.COU_Param_Buffer_ID = ? 
+        
+        AND cou_param_buffer.AD_Client_ID IN ('1') 
+        AND cou_param_buffer.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="nombre"></Parameter> <Parameter name="tipoDocumento"></Parameter> <Parameter name="mesPromedio"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="couParamBufferId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="couParamBufferId"></Parameter>
+    
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="cou_param_buffer.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="cou_param_buffer.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO cou_param_buffer 
+        (AD_Org_ID, M_Warehouse_ID, Nombre, Tipo_Documento, MES_Promedio, Isactive, Processed, COU_Param_Buffer_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="nombre"></Parameter> <Parameter name="tipoDocumento"></Parameter> <Parameter name="mesPromedio"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="couParamBufferId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM cou_param_buffer
+        WHERE cou_param_buffer.COU_Param_Buffer_ID = ? 
+        
+        AND cou_param_buffer.AD_Client_ID IN ('1') 
+        AND cou_param_buffer.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="cou_param_buffer.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="cou_param_buffer.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM cou_param_buffer
+         WHERE cou_param_buffer.COU_Param_Buffer_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM cou_param_buffer
+         WHERE cou_param_buffer.COU_Param_Buffer_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

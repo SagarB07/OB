@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FIN_PaymentMethod id="EC104" identifier="Retención">
+    <id>EC104</id>
+    <creationDate transient="true">2013-09-22T07:31:11.839Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-09-22T07:31:11.839Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <active>true</active>
+    <name>Retención</name>
+    <description>Retención</description>
+    <automaticReceipt>false</automaticReceipt>
+    <automaticPayment>false</automaticPayment>
+    <automaticDeposit>false</automaticDeposit>
+    <automaticWithdrawn>false</automaticWithdrawn>
+    <payinAllow>true</payinAllow>
+    <payoutAllow>true</payoutAllow>
+    <payinExecutionType>M</payinExecutionType>
+    <payoutExecutionType>M</payoutExecutionType>
+    <payinExecutionProcess xsi:nil="true"/>
+    <payoutExecutionProcess xsi:nil="true"/>
+    <payinDeferred>false</payinDeferred>
+    <payoutDeferred>false</payoutDeferred>
+    <uponReceiptUse xsi:nil="true"/>
+    <uponDepositUse xsi:nil="true"/>
+    <iNUponClearingUse xsi:nil="true"/>
+    <uponPaymentUse xsi:nil="true"/>
+    <uponWithdrawalUse xsi:nil="true"/>
+    <oUTUponClearingUse xsi:nil="true"/>
+    <payinIsMulticurrency>false</payinIsMulticurrency>
+    <payoutIsMulticurrency>false</payoutIsMulticurrency>
+    <atsCodigo xsi:nil="true"/>
+  </FIN_PaymentMethod>
+</ob:Openbravo>

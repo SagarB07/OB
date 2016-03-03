@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_FORMAS_PAGO">
+    <function name="ATS_FORMAS_PAGO" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Resultstr VARCHAR:=''; 
+ v_formaPago VARCHAR:='';
+BEGIN 
+
+select f.em_ats_codigo
+into v_formaPago
+from c_invoice c, fin_paymentmethod f
+where c.fin_paymentmethod_id = f.fin_paymentmethod_id
+  and c.c_invoice_id = p_invoice_id;
+
+        select xmlelement(name "formasDePago" ,
+                       xmlelement(name "formaPago", v_formaPago)
+                       ) into v_Resultstr;
+          
+    RETURN v_Resultstr;
+END ATS_FORMAS_PAGO
+]]></body>
+    </function>
+  </database>

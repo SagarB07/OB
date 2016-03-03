@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE M_INVENTORY">
+    <table name="M_INVENTORY" primaryKey="M_INVENTORY_KEY">
+      <column name="EM_CO_INVENTARIO" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default><![CDATA[Y]]></default>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_Hoja_Ruta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="56"/>
+	<parameter name="DateFrom" class="java.lang.String"/>
+	<parameter name="DateTo" class="java.lang.String"/>
+	<parameter name="salesrep_id" class="java.lang.String"/>
+	<parameter name="C_Region_ID" class="java.lang.String"/>
+	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/_Desarrollo/OpenBravo/munditransport/OpenBravoERP/modules/com.woofinc.openbravo.module/src"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{BASE_DESIGN} + "/com/atrums/reportes/cobranzas/ad_reports/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREP_Rpt_Subreport_HRuta_Detalle" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LANGUAGE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["en_US"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USER_CLIENT" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["('1000000)"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="C_Zona_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="aux_zona" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{C_Zona_ID}.equals("") ? " " : " and upper(l.city) like upper('%" +$P{C_Zona_ID}+"%')"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select bp.c_bpartner_id,
+       coalesce(bp.value, '') as codigo,
+       coalesce(bp.name2,'') || '-' || coalesce(bp.name,'') as nombre,
+       coalesce(l.city,'') as zona,
+       coalesce(bp.em_cob_calificacion,'') as calificacion,
+       coalesce(l.address1,'') ||', '|| coalesce(l.address2, '') as direccion,
+       coalesce(bl.phone, '') ||' - '|| coalesce(bl.phone2, '') as telefono,
+       (select max(i.dateinvoiced)
+          from c_invoice i
+         where i.c_bpartner_id = bp.c_bpartner_id
+        ) as ultimaventa,
+       bp.so_creditlimit as cupo,
+       coalesce(bp.so_creditlimit-(select sum(i.outstandingamt)
+	  from c_invoice i,
+	       c_doctype dt
+	 where i.issotrx = 'Y'
+	   and i.c_doctype_id = dt.c_doctype_id
+	   and i.docstatus = 'CO'
+	   and dt.docbasetype IN ('ARI','ARC')
+	   and i.ispaid = 'N'
+	   and i.c_bpartner_id = bp.c_bpartner_id
+	   and i.dateinvoiced < TO_DATE($P{DateTo})),bp.so_creditlimit) as disponible,
+       (select sum(generated_credit) from fin_payment where c_bpartner_id = bp.c_bpartner_id) as favor,
+       (select coalesce(name,'') from c_bpartner where c_bpartner_id = bp.salesrep_id) as vendedor
+  from c_bpartner bp,
+       c_bpartner_location bl,
+       c_location l
+ where bp.c_bpartner_id = bl.c_bpartner_id
+   and bl.c_location_id = l.c_location_id
+   and bp.salesrep_id = $P{salesrep_id}
+   and l.c_region_id = $P{C_Region_ID}
+   and bl.isbillto = 'Y'
+   and bp.isactive = 'Y'
+$P!{aux_zona}
+ order by codigo, zona, nombre]]>
+	</queryString>
+	<field name="c_bpartner_id" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="ultimaventa" class="java.sql.Timestamp"/>
+	<field name="cupo" class="java.math.BigDecimal"/>
+	<field name="disponible" class="java.math.BigDecimal"/>
+	<field name="favor" class="java.math.BigDecimal"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="calificacion" class="java.lang.String"/>
+	<group name="cliente">
+		<groupExpression><![CDATA[$F{c_bpartner_id}]]></groupExpression>
+		<groupHeader>
+			<band height="43">
+				<rectangle radius="10">
+					<reportElement x="1" y="1" width="555" height="40"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="5" y="7" width="34" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[codigo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="70" y="7" width="37" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Nombre:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="430" y="7" width="26" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Zona:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="5" y="23" width="40" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Dirección:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="23" width="40" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Teléfono:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="39" y="7" width="31" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="107" y="7" width="323" height="14"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="456" y="7" width="74" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{zona}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="51" y="23" width="339" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="430" y="23" width="126" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{telefono}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="530" y="2" width="17" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{calificacion}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="60">
+				<staticText>
+					<reportElement x="1" y="16" width="63" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Ultima venta:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="231" y="16" width="36" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Cupo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="376" y="16" width="80" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Cupo Disponible:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="142" y="46" width="89" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[OBSERVACIONES:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="64" y="16" width="102" height="14"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{ultimaventa}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="269" y="16" width="87" height="14"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cupo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="143" y="0" width="268" height="14"/>
+					<textElement textAlignment="Center">
+						<font isBold="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Datos Financieros]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="396" y="32" width="60" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Saldo a favor:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="460" y="32" width="78" height="14" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{favor}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="459" y="16" width="79" height="14"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{disponible}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="345" y="0" width="210" height="22"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HOJA DE RUTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="43" width="76" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Semana del:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="43" width="15" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[al:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="59" width="93" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de corte:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="43" width="69" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{DateFrom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="43" width="66" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{DateTo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="390" y="59" width="95" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="311" y="26" width="76" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Vendedor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="26" width="161" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="2" width="210" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REMICA CIA. LTDA.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<subreport>
+				<reportElement x="2" y="2" width="554" height="19"/>
+				<subreportParameter name="DateTo">
+					<subreportParameterExpression><![CDATA[$P{DateTo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="c_bpartner_id">
+					<subreportParameterExpression><![CDATA[$F{c_bpartner_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DateFrom">
+					<subreportParameterExpression><![CDATA[$P{DateFrom}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Rpt_Subreport_HRuta_Detalle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

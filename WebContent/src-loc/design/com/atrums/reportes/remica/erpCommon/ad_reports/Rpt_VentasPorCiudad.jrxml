@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_VentasPorCiudad" pageWidth="900" pageHeight="595" orientation="Landscape" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="USER_CLIENT" class="java.lang.String"/>
+	<parameter name="DATE_FROM" class="java.util.Date"/>
+	<parameter name="DATE_TO" class="java.util.Date"/>
+	<parameter name="ZONA" class="java.lang.String"/>
+	<parameter name="ZONA_AUX" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{ZONA} == null || $P{ZONA}.equals("")) ? "" : " AND upper(l.city) like upper('%" + $P{ZONA} + "%') "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="VENDEDOR" class="java.lang.String"/>
+	<parameter name="VENDEDOR_AUX" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{VENDEDOR} == null || $P{VENDEDOR}.equals("")) ? "" : " AND bp.salesrep_id ='" + $P{VENDEDOR} + "'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["http://190.108.65.30//openbravo/web"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select i.documentno,
+       sum(case when dt.em_co_tp_comp_autorizador_sri = 4 then abs(il.linenetamt)*-1 else il.linenetamt end) as total,
+       rtrim(upper(coalesce(l.city, 'SIN ZONA'))) as zona,
+       coalesce((select name from c_city where c_city_id = l.c_city_id), '') as ciudad,
+       bp.AD_ORG_ID AS organizationid,
+       bp.value as codcliente,
+       coalesce(bp.name2,'') || ' - ' || coalesce(bp.name,'') as cliente,
+       coalesce((select name from c_bpartner where c_bpartner_id = bp.salesrep_id),'') as vendedor,
+       i.documentno as documentono,
+       (case when (docbasetype = 'ARI' and isreturn = 'Y') then 'AN FAC'
+            when (docbasetype = 'ARI' and isreturn = 'N') then 'FAC'
+            when (docbasetype = 'ARC' and isreturn = 'N') then 'N/C'
+        end) as tipo,
+       i.dateinvoiced as fecha
+from c_invoice i
+     join c_doctype dt on (i.c_doctypetarget_id = dt.c_doctype_id)
+     join c_bpartner_location bpl on (i.c_bpartner_location_id = bpl.c_bpartner_location_id)
+     join c_location l on (bpl.c_location_id = l.c_location_id)
+     left join c_bpartner bp on (i.c_bpartner_id = bp.c_bpartner_id)
+     join c_invoiceline il on (i.c_invoice_id = il.c_invoice_id)
+where bp.ad_client_id IN ($P!{USER_CLIENT})
+      and i.issotrx = 'Y'
+      and i.isactive = 'Y'
+      and i.processed = 'Y'
+      and date(i.dateinvoiced) between date($P{DATE_FROM}) and date($P{DATE_TO})
+      and il.m_product_id is not null
+      $P!{ZONA_AUX}
+      $P!{VENDEDOR_AUX}
+group by 1, 3, 4, 5, 6, 7, 8, 9, 10, 11
+order by 3, 4, 6, 9, 11]]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="documentono" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="organizationid" class="java.lang.String"/>
+	<field name="codcliente" class="java.lang.String"/>
+	<variable name="total_zona" class="java.math.BigDecimal" resetType="Group" resetGroup="zona" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total_gen" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<group name="zona">
+		<groupExpression><![CDATA[$F{zona}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<staticText>
+					<reportElement style="Column header" mode="Transparent" x="79" y="21" width="275" height="16" forecolor="#666666" backcolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="354" y="21" width="80" height="16"/>
+					<textElement>
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Ciudad]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="434" y="21" width="148" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Vendedor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="721" y="21" width="60" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Nro. Doc.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="582" y="21" width="60" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Tipo Doc.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="642" y="21" width="79" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="781" y="21" width="79" height="16"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="79" height="21" forecolor="#666666"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Zona:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="79" y="0" width="275" height="21"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{zona}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" mode="Transparent" x="1" y="21" width="78" height="16" forecolor="#666666" backcolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<text><![CDATA[Cód. Cliente]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="16">
+				<staticText>
+					<reportElement x="642" y="0" width="139" height="16" forecolor="#666666"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Zona:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement x="781" y="0" width="79" height="16"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{total_zona}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="0" width="681" height="50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="20"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS POR ZONA]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Top" isUsingCache="true">
+				<reportElement key="image-1" x="681" y="0" width="179" height="50"/>
+				<imageExpression class="java.awt.Image"><![CDATA[org.openbravo.erpCommon.utility.Utility.showImageLogo("yourcompanylogin")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="434" y="0" width="148" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="721" y="0" width="60" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documentono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="582" y="0" width="60" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement style="Detail" x="642" y="0" width="79" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="Detail" x="781" y="0" width="79" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="354" y="0" width="80" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="78" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codcliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="79" y="0" width="275" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="605" y="0" width="139" height="16" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total General:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="744" y="0" width="116" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{total_gen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="681" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pág. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="761" y="0" width="41" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

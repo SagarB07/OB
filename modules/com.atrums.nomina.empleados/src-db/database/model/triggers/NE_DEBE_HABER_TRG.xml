@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_DEBE_HABER_TRG">
+    <trigger name="NE_DEBE_HABER_TRG" table="NE_PERFIL_RUBRO_LINE" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	
+BEGIN
+	if :new.ne_debe_acct is null and
+			:new.ne_haber_acct is null then
+		raise '%', '@NE_RUB_LIN_DEB_HAB_VAL@';
+	end if;
+	
+	return new;
+END NE_DEBE_HABER_TRG
+]]></body>
+    </trigger>
+  </database>

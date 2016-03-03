@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="COTipoRetencionCompraData" package="com.atrums.contabilidad.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+      
+	select bprc.co_bp_retencion_compra_id, bprc.descripcion
+	  from co_retencion_compra rc, 
+		   c_invoice i, 
+		   co_bp_retencion_compra bprc, 
+		   co_tipo_retencion tr
+	 where i.c_invoice_id = rc.c_invoice_id
+	   and bprc.c_bpartner_id = i.c_bpartner_id
+	   and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+	   and rc.co_retencion_compra_id = ?  
+	   and tr.tipo = ?
+    
+      ]]>
+    </Sql>
+    <Parameter name="coRetencionCompraId"/> 
+    <Parameter name="cTipo"/>  
+  </SqlMethod>
+</SqlClass>

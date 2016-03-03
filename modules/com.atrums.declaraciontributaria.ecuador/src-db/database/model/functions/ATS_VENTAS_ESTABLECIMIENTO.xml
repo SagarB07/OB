@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_VENTAS_ESTABLECIMIENTO">
+    <function name="ATS_VENTAS_ESTABLECIMIENTO" type="VARCHAR">
+      <parameter name="p_client_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_inicio" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN  
+
+    RETURN query select xmlelement(name "ventaEst",
+                                xmlelement( name "codEstab", A.pe),
+                                xmlelement( name "ventasEstab", ltrim(to_char(sum(A.Fac)-sum(A.NC),'9999999990.00')))
+                                    ) as strXml
+                       
+                        from (
+                            select sum(abs(i.totallines)) as Fac,'0' as NC, o.em_co_nro_estab as PE
+                            from ad_org o, c_invoice i, c_doctype dt 
+                            where o.ad_org_id = i.ad_org_id
+                             and i.c_doctypetarget_id = dt.c_doctype_id 
+                             and dt.em_co_tp_comp_autorizador_sri <> 0
+                             and dt.em_co_tp_comp_autorizador_sri <> 4
+                             and i.processed = 'Y'
+							 and i.docstatus <> 'VO'
+                             and date(i.dateinvoiced) >= TO_DATE(p_fecha_inicio)
+                             and date(i.dateinvoiced) <= TO_DATE(p_fecha_fin)
+                             and o.ad_client_id = p_client_id
+                            and i.issotrx='Y'
+                            group by 3
+                            union
+                            select '0' as Fac,sum(abs(i.totallines)) as NC, o.em_co_nro_estab as PE
+                            from ad_org o, c_invoice i, c_doctype dt 
+                            where o.ad_org_id = i.ad_org_id
+                             and i.c_doctypetarget_id = dt.c_doctype_id 
+                             and dt.em_co_tp_comp_autorizador_sri = 4
+                             and i.processed = 'Y'
+							 and i.docstatus <> 'VO'
+                             and date(i.dateinvoiced) >= TO_DATE(p_fecha_inicio)
+                             and date(i.dateinvoiced) <= TO_DATE(p_fecha_fin)
+                             and o.ad_client_id = p_client_id
+                             and i.issotrx='Y'
+                             group by 3) A
+                    group by A.pe;
+END ATS_VENTAS_ESTABLECIMIENTO
+]]></body>
+    </function>
+  </database>

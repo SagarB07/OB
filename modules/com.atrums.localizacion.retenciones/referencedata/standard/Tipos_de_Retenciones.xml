@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CO_TipoRetencion id="1401108CCED048CEB2DEB6E5F7ACE61E" identifier="(310) 1% TRANSPORTE">
+    <id>1401108CCED048CEB2DEB6E5F7ACE61E</id>
+    <creationDate transient="true">2012-10-20T15:40:55.120Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T15:58:03.806Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(310) 1% TRANSPORTE</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>1</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>310</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="1CC80730B350426AAA6CB75D0AA074A8" identifier="(332) 0% NO OBJETO DE RETENCION">
+    <id>1CC80730B350426AAA6CB75D0AA074A8</id>
+    <creationDate transient="true">2012-09-16T18:42:25.479Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T16:00:15.175Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(332) 0% NO OBJETO DE RETENCION</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>0</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>332</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="218C0853E0E1427B904A3313EE484C61" identifier="(323) 2% RENDIMIENTOS FINANCIEROS NO IFIS">
+    <id>218C0853E0E1427B904A3313EE484C61</id>
+    <creationDate transient="true">2012-10-20T15:50:43.654Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-04-16T18:42:41.766Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(323) 2% RENDIMIENTOS FINANCIEROS NO IFIS</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>2</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>323</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="24AC0754F260478188BFA73ACD3BEA33" identifier="(303) 10% HONORARIOS, COMISIONES PERSONAS ">
+    <id>24AC0754F260478188BFA73ACD3BEA33</id>
+    <creationDate transient="true">2012-05-07T15:54:08.915Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-08T17:33:56.712Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(303) 10% HONORARIOS, COMISIONES PERSONAS </name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>10</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>303</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="377F4DAD3F8D4DF9AB28D3A1740BC6F0" identifier="(312) 1% TRANSFERENCIA DE BIENES CORPORALES">
+    <id>377F4DAD3F8D4DF9AB28D3A1740BC6F0</id>
+    <creationDate transient="true">2012-09-16T18:31:55.136Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-09-25T20:24:42.62Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(312) 1% TRANSFERENCIA DE BIENES CORPORALES</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>1</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>312</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="5112A511D4A14FCDAE987821523E9B38" identifier="(307) 2% PREDOMINA LA MANO DE OBRA">
+    <id>5112A511D4A14FCDAE987821523E9B38</id>
+    <creationDate transient="true">2012-09-16T18:30:20.908Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T15:57:14.529Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(307) 2% PREDOMINA LA MANO DE OBRA</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>2</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>307</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="56969F209D2D4A6090B8C51065E4732C" identifier="(421) 25% PAGOS AL EXTERIOR">
+    <id>56969F209D2D4A6090B8C51065E4732C</id>
+    <creationDate transient="true">2012-05-07T15:54:24.442Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T16:02:36.664Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(421) 25% PAGOS AL EXTERIOR</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>25</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>421</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="6B114638DCB64F38A0D540A0A6E20178" identifier="(320) 8% ARRIENDOS">
+    <id>6B114638DCB64F38A0D540A0A6E20178</id>
+    <creationDate transient="true">2012-05-07T15:53:33.315Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T15:58:44.382Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(320) 8% ARRIENDOS</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>8</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>320</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="6CC148C31D7D4D1B8D6053C246739A57" identifier="(334) 0% PAGO CON TARJETA DE CREDITO">
+    <id>6CC148C31D7D4D1B8D6053C246739A57</id>
+    <creationDate transient="true">2012-09-16T18:43:58.582Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-07-08T09:23:22.888Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(334) 0% PAGO CON TARJETA DE CREDITO</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>0</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>334</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="74B2E0B1DE4C48E98C216494B68CE4E9" identifier="(322) 1% SEGUROS Y REASEGUROS">
+    <id>74B2E0B1DE4C48E98C216494B68CE4E9</id>
+    <creationDate transient="true">2012-05-07T15:54:40.289Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-27T16:40:26.117Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(322) 1% SEGUROS Y REASEGUROS</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>1</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>322</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="76BCDF0DDB2945E0AA0AD78490016782" identifier="IVA 70% SERVICIOS PROFESIONALE">
+    <id>76BCDF0DDB2945E0AA0AD78490016782</id>
+    <creationDate transient="true">2012-05-07T15:52:30.481Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T16:03:29.263Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>IVA 70% SERVICIOS PROFESIONALE</name>
+    <tipo>IVA</tipo>
+    <porcentaje>70</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA>RS</tipoDeRetencinIVA>
+    <conceptoRetencinFuente xsi:nil="true"/>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="784F342987724A8D98BEAABE9B0E705B" identifier="(340) 1% OTRAS RETENCIONES APLICABLES">
+    <id>784F342987724A8D98BEAABE9B0E705B</id>
+    <creationDate transient="true">2012-07-25T15:01:53.545Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T16:01:38.530Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(340) 1% OTRAS RETENCIONES APLICABLES</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>1</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>340</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="A034969E306649158AD30580FACF3D59" identifier="(333) 0% DEBITO BACARIO">
+    <id>A034969E306649158AD30580FACF3D59</id>
+    <creationDate transient="true">2012-09-16T18:45:00.244Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-07-08T09:23:34.591Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(333) 0% DEBITO BACARIO</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>0</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>333</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="A4B34B080FB14CBBA137F5F84B2180C6" identifier="(341) 2% OTRAS RETENCIONES APLICABLES">
+    <id>A4B34B080FB14CBBA137F5F84B2180C6</id>
+    <creationDate transient="true">2012-05-07T15:53:22.93Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T16:01:51.780Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(341) 2% OTRAS RETENCIONES APLICABLES</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>2</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>341</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="B71943AB98254343B9237DF563C69CA7" identifier="(308) 2% SERVICIO ENTRE SOCIEDADES">
+    <id>B71943AB98254343B9237DF563C69CA7</id>
+    <creationDate transient="true">2012-10-20T15:25:01.972Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T15:25:01.972Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(308) 2% SERVICIO ENTRE SOCIEDADES</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>2</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>308</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="C898CDA924E541DEAF25A0E4E1975FA4" identifier="(304) 8% PREDOMINA EL INTELECTO">
+    <id>C898CDA924E541DEAF25A0E4E1975FA4</id>
+    <creationDate transient="true">2014-02-11T17:24:28.712Z</creationDate>
+    <createdBy transient="true" id="8C9D4EB3008E4767A3BB095E591C81D8" entity-name="ADUser" identifier="fpazmiño"/>
+    <updated transient="true">2014-02-11T17:24:28.712Z</updated>
+    <updatedBy transient="true" id="8C9D4EB3008E4767A3BB095E591C81D8" entity-name="ADUser" identifier="fpazmiño"/>
+    <name>(304) 8% PREDOMINA EL INTELECTO</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>8</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>304</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="CEB21DA562244E6182129591D4CFF237" identifier="(309) 1% PUBLICIDAD Y COMUNICACION">
+    <id>CEB21DA562244E6182129591D4CFF237</id>
+    <creationDate transient="true">2012-10-20T15:34:51.854Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T15:57:38.490Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(309) 1% PUBLICIDAD Y COMUNICACION</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>1</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>309</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="D9FE1B900A2242D6A37DA74EE6511E10" identifier="IVA 30% BIENES">
+    <id>D9FE1B900A2242D6A37DA74EE6511E10</id>
+    <creationDate transient="true">2012-05-07T15:52:07.327Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-09-24T16:25:08.454Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>IVA 30% BIENES</name>
+    <tipo>IVA</tipo>
+    <porcentaje>30</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA>RB</tipoDeRetencinIVA>
+    <conceptoRetencinFuente xsi:nil="true"/>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="F5134A19DB24483B89A9BEF68661DE1F" identifier="(427) PAGOS AL EXTERIOR NO SUJETOS A RETENCION">
+    <id>F5134A19DB24483B89A9BEF68661DE1F</id>
+    <creationDate transient="true">2013-07-08T09:48:54.527Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-07-08T09:48:54.527Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>(427) PAGOS AL EXTERIOR NO SUJETOS A RETENCION</name>
+    <tipo>FUENTE</tipo>
+    <porcentaje>0</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA xsi:nil="true"/>
+    <conceptoRetencinFuente>427</conceptoRetencinFuente>
+  </CO_TipoRetencion>
+  <CO_TipoRetencion id="FBB63958C6F4456CBB37BAEA7237BE41" identifier="IVA 100% SERVICIOS PROFESIONALES">
+    <id>FBB63958C6F4456CBB37BAEA7237BE41</id>
+    <creationDate transient="true">2012-05-07T15:52:44.486Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-10-20T16:03:11.894Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>IVA 100% SERVICIOS PROFESIONALES</name>
+    <tipo>IVA</tipo>
+    <porcentaje>100</porcentaje>
+    <active>true</active>
+    <tipoDeRetencinIVA>RC</tipoDeRetencinIVA>
+    <conceptoRetencinFuente xsi:nil="true"/>
+  </CO_TipoRetencion>
+</ob:Openbravo>

@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION CO_INVENTORY_LISTCREATE">
+    <function name="CO_INVENTORY_LISTCREATE" type="NULL">
+      <parameter name="pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):=''; 
+  v_Message VARCHAR(2000):=''; 
+  v_Result NUMBER:=0; 
+  v_InProcess CHAR(1) ;
+  v_Done CHAR(1) ;
+  v_NoInserted NUMBER:=0;
+  v_NoUpdated NUMBER:=0;
+  
+  
+    Cur_Parameter RECORD;
+    
+    v_Record_ID VARCHAR(32); 
+    v_User_ID VARCHAR(32); 
+    v_ProductValue VARCHAR(40) ; 
+    v_Locator_ID VARCHAR(32); 
+    v_Product_Category_ID VARCHAR(32); 
+    v_QtyRange VARCHAR(60) ; 
+    v_Regularization VARCHAR(60) ; 
+    v_ABC VARCHAR(60); 
+    
+    v_Warehouse_ID VARCHAR(32); 
+    v_Client_ID VARCHAR(32); 
+    v_Org_ID VARCHAR(32); 
+    v_MovDate DATE;
+    
+    v_NextNo VARCHAR(32); 
+    v_NextLine NUMBER;
+    v_Stock NUMBER;
+    
+    Cur_Storage RECORD;
+    END_PROCESS BOOLEAN:=false;
+  BEGIN
+    
+    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing') ;
+    v_ResultStr:='PInstanceNotFound';
+    AD_UPDATE_PINSTANCE(PInstance_ID, NULL, 'Y', NULL, NULL) ;
+  BEGIN 
+    
+    v_ResultStr:='ReadingParameters';
+    FOR Cur_Parameter IN
+      (SELECT i.Record_ID,
+        p.ParameterName,
+        p.P_String,
+        p.P_Number,
+        p.P_Date,
+        i.Ad_User_Id
+      FROM AD_PInstance i
+      LEFT JOIN AD_PInstance_Para p
+        ON i.AD_PInstance_ID=p.AD_PInstance_ID
+      WHERE i.AD_PInstance_ID=PInstance_ID
+      ORDER BY p.SeqNo
+      )
+    LOOP
+      v_Record_ID:=Cur_Parameter.Record_ID;
+      v_User_ID:=Cur_Parameter.Ad_User_Id;
+      IF(Cur_Parameter.ParameterName='QtyRange') THEN
+        v_QtyRange:=Cur_Parameter.P_String;
+        DBMS_OUTPUT.PUT_LINE('  QtyRange=' || v_QtyRange) ;
+      ELSIF(Cur_Parameter.ParameterName='ProductValue') THEN
+        v_ProductValue:=Cur_Parameter.P_String;
+        DBMS_OUTPUT.PUT_LINE('  ProductValue=' || v_ProductValue) ;
+      ELSIF(Cur_Parameter.ParameterName='regularization') THEN
+        v_Regularization:=Cur_Parameter.P_String;
+        DBMS_OUTPUT.PUT_LINE('  Regularization=' || v_Regularization) ;
+      ELSIF(Cur_Parameter.ParameterName='M_Locator_ID') THEN
+        v_Locator_ID:=Cur_Parameter.P_String;
+        DBMS_OUTPUT.PUT_LINE('  M_Locator_ID=' || v_Locator_ID) ;
+      ELSIF(Cur_Parameter.ParameterName='M_Product_Category_ID') THEN
+        v_Product_Category_ID:=Cur_Parameter.P_String;
+        DBMS_OUTPUT.PUT_LINE('  M_Product_Category_ID=' || v_Product_Category_ID) ;
+      ELSIF(Cur_Parameter.ParameterName='ABC') THEN
+        v_ABC:=Cur_Parameter.P_String;
+        DBMS_OUTPUT.PUT_LINE('  ABC=' || v_ABC) ;
+      ELSE
+        DBMS_OUTPUT.PUT_LINE('*** Unknown Parameter=' || Cur_Parameter.ParameterName) ;
+      END IF;
+    END LOOP; 
+    DBMS_OUTPUT.PUT_LINE('  Record_ID=' || v_Record_ID) ;
+    v_ResultStr:='ReadingInventory - (Record not saved)';
+  BEGIN
+    SELECT Processing,
+      Processed,
+      AD_Client_ID,
+      AD_Org_ID,
+      M_Warehouse_ID,
+      movementdate
+    INTO v_InProcess,
+      v_Done,
+      v_Client_ID,
+      v_Org_ID,
+      v_Warehouse_ID,
+      v_MovDate
+    FROM M_Inventory
+    WHERE M_Inventory_ID=v_Record_ID;
+  EXCEPTION
+  WHEN OTHERS THEN
+    v_Message:='@SaveErrorRowNotFound@';
+    END_PROCESS:=true;
+  END;
+  IF(NOT END_PROCESS) THEN
+    IF(v_InProcess='Y') THEN
+      v_Message:='@OtherProcessActive@';
+      END_PROCESS:=true;
+    END IF;
+  END IF;
+  IF(NOT END_PROCESS) THEN
+    IF(v_Done='Y') THEN
+      v_Message:='@AlreadyPosted@';
+      END_PROCESS:=true;
+    END IF;
+  END IF;
+  
+  
+  IF(NOT END_PROCESS) THEN
+    v_ResultStr:='ReadingInventoryLine';
+    SELECT COALESCE(MAX(Line)+10, 10) 
+    INTO v_NextLine
+    FROM M_InventoryLine
+    WHERE M_Inventory_ID=v_Record_ID;
+
+    FOR Cur_Storage IN
+    (select t.m_product_id,
+    sum(t.movementqty) as movementqty,
+    t.m_locator_id,
+    t.m_attributesetinstance_id,
+    t.c_uom_id
+     from m_transaction t
+     where t.ad_client_id = v_Client_ID
+     and t.movementdate <= v_MovDate
+     and t.m_locator_id IN (select m_locator_id from m_locator where m_warehouse_id = v_Warehouse_ID)
+     group by m_product_id, m_locator_id, m_attributesetinstance_id, c_uom_id
+    )
+    LOOP
+
+    select get_uuid() into v_NextNo;
+    
+          INSERT
+          INTO M_InventoryLine
+            (
+              M_InventoryLine_ID, Line, AD_Client_ID, AD_Org_ID,
+              IsActive, Created, CreatedBy, Updated,
+              UpdatedBy, M_Inventory_ID, M_Locator_ID, M_ATTRIBUTESETINSTANCE_ID,
+              M_Product_ID, QtyBook, QtyCount, C_UOM_ID,
+              QUANTITYORDER, QUANTITYORDERBOOK, M_Product_UOM_ID
+            )
+            VALUES
+            (
+              v_NextNo, v_NextLine, v_Client_ID, v_Org_ID,
+               'Y', now(), v_User_ID, now(),
+              v_User_ID, v_Record_ID, Cur_Storage.M_Locator_ID, Cur_Storage.M_ATTRIBUTESETINSTANCE_ID,
+              Cur_Storage.M_Product_ID, Cur_Storage.movementqty, Cur_Storage.movementqty, (select c_uom_id from m_product where m_product_id = Cur_Storage.M_Product_ID),
+              null, null, null
+            )
+            ;
+          v_NextLine:=v_NextLine + 10;
+          v_NoInserted:=v_NoInserted + 1;
+    END LOOP; 
+
+
+
+
+    
+    v_Message:='@Inserted@=' || v_NoInserted || ', @Updated@=' || v_NoUpdated;
+    v_Result:=1; 
+  END IF;
+  
+  
+  DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished') ;
+  DBMS_OUTPUT.PUT_LINE(v_Message) ;
+  AD_UPDATE_PINSTANCE(PInstance_ID, NULL, 'N', v_Result, v_Message) ;
+  RETURN;
+END; 
+EXCEPTION
+WHEN OTHERS THEN
+  v_ResultStr:= '@ERROR=' || SQLERRM;
+  DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
+  AD_UPDATE_PINSTANCE(PInstance_ID, NULL, 'N', 0, v_ResultStr) ;
+  RETURN;
+END CO_INVENTORY_LISTCREATE
+]]></body>
+    </function>
+  </database>

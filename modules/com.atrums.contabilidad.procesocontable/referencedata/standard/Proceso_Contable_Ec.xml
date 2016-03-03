@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ADAcctProcess id="3A4C2839C7A84A789BE53D4F3854FDF8" identifier="Proceso Contable Ec">
+    <id>3A4C2839C7A84A789BE53D4F3854FDF8</id>
+    <active>true</active>
+    <creationDate transient="true">2013-04-29T15:41:11.833Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2013-04-29T15:44:49.510Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>Proceso Contable Ec</name>
+    <javaClassName>com.atrums.contabilidad.procesocontable.RetCompraProcess</javaClassName>
+    <description>Proceso para retenciones de compras</description>
+  </ADAcctProcess>
+</ob:Openbravo>

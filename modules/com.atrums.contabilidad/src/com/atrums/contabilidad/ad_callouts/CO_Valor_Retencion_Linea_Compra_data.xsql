@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="COValorRetencionLineaCompraData" package="com.atrums.contabilidad.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+      
+        SELECT r.porcentaje 
+        FROM co_bp_retencion_compra b,co_tipo_retencion r 
+        WHERE b.co_tipo_retencion_id=r.co_tipo_retencion_id 
+        AND b.co_bp_retencion_compra_id=?
+
+    
+      ]]>
+    </Sql>
+    <Parameter name="coBpRetencionCompraId"/>  
+  </SqlMethod>
+</SqlClass>

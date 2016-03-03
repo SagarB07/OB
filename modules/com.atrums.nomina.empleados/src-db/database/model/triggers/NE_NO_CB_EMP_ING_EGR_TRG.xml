@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NE_NO_CB_EMP_ING_EGR_TRG">
+    <trigger name="NE_NO_CB_EMP_ING_EGR_TRG" table="NO_CB_EMPLEADO_ACCT" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	v_no_cb_empleado_acct_id character varying(32);
+BEGIN
+	if :new.no_cuenta_ingreso_acct is null 
+			and :new.no_cuenta_egreso_acct is null then
+		raise '%', '@NE_NO_CB_EMP_ING_EGR@';
+	end if;
+	
+	select no_cb_empleado_acct_id
+	into v_no_cb_empleado_acct_id
+	from no_cb_empleado_acct
+	where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id
+	and c_bpartner_id = :new.c_bpartner_id;
+
+	if v_no_cb_empleado_acct_id is not null then
+		raise '%', '@NE_NO_CB_EMP_ING_EGR_REP@';
+	end if;
+	
+	return new;
+END NE_NO_CB_EMP_ING_EGR_TRG
+]]></body>
+    </trigger>
+  </database>

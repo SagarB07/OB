@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_ValoracionStock" pageWidth="520" pageHeight="842" columnWidth="480" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="USER_CLIENT" class="java.lang.String"/>
+	<parameter name="DATE_TO" class="java.util.Date"/>
+	<parameter name="AUX_BODEGA" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{BODEGA_ID} == null || $P{BODEGA_ID}.equals("")) ? "" : " AND w.m_warehouse_id ='" + $P{BODEGA_ID} + "'"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["http://192.168.0.216/openbravo/web"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BODEGA_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.organizationid, a.categoria, sum(a.Costo * a.Stock) as subtotal
+from (
+SELECT t.AD_ORG_ID AS organizationid,
+       p.name AS Nombre,
+       cat.name as Categoria,
+       coalesce((select c.cost from m_costing c
+              where p.m_product_id = c.m_product_id AND
+                    c.datefrom < ($P{DATE_TO}) AND
+                    c.dateto >= ($P{DATE_TO}) limit 1), '0'
+                                             ) AS Costo,
+       sum(t.movementqty) AS Stock
+FROM m_product p, m_transaction t, m_product_category cat
+WHERE p.ad_client_id IN ($P!{USER_CLIENT}) AND p.isactive='Y' AND
+      t.m_product_id = p.m_product_id AND
+      cat.m_product_category_id = p.m_product_category_id AND
+      p.isactive='Y' AND
+      t.m_locator_id IN (select m_locator_id from m_locator where m_warehouse_id in (select m_warehouse_id from m_warehouse where isactive='Y')) AND
+      t.movementdate <= ($P{DATE_TO})
+GROUP BY 1, 2, 3, 4
+ORDER BY 3,2
+) a
+GROUP BY 1, 2
+order by 2]]>
+	</queryString>
+	<field name="organizationid" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<variable name="total" class="java.math.BigDecimal" resetType="Group" resetGroup="categoria" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
+	</variable>
+	<variable name="total_general" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
+	</variable>
+	<group name="categoria">
+		<groupExpression><![CDATA[$F{categoria}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField pattern="#,##0.00">
+					<reportElement x="269" y="0" width="141" height="17"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{subtotal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="216" height="17"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{categoria}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="0" width="410" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="24" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Reporte Valoración de Inventario]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Top" isUsingCache="true">
+				<reportElement key="image-1" x="358" y="0" width="122" height="40"/>
+				<imageExpression class="java.net.URL"><![CDATA[new java.net.URL($P{BASE_WEB}+"/../utility/ShowImageLogo?logo=yourcompanydoc&orgId="+ $F{organizationid})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="216" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="269" y="0" width="141" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="359" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="439" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement style="Column header" x="0" y="0" width="102" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

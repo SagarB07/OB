@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ob:Openbravo xmlns:ob="http://www.openbravo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <DocumentType id="7BA807DF437B4F5287ADD011A2849A05" identifier="Retención de Compra">
+    <id>7BA807DF437B4F5287ADD011A2849A05</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-17T11:51:42.346Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-17T14:47:41.767Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <name>Retención de Compra</name>
+    <printText>Retención de Compra</printText>
+    <description xsi:nil="true"/>
+    <documentCategory>API</documentCategory>
+    <salesTransaction>false</salesTransaction>
+    <sOSubType xsi:nil="true"/>
+    <documentTypeForShipment xsi:nil="true"/>
+    <documentTypeForInvoice xsi:nil="true"/>
+    <sequencedDocument>false</sequencedDocument>
+    <documentSequence xsi:nil="true"/>
+    <gLCategory id="FF8080812C2ABFC6012C2B3BE4980098" entity-name="FinancialMgmtGLCategory" identifier="Standard"/>
+    <comments xsi:nil="true"/>
+    <default>true</default>
+    <numberOfCopies>1</numberOfCopies>
+    <table id="5F3A4CF997BA41BFB7C547777AF7CC1C" entity-name="ADTable" identifier="co_retencion_compra"/>
+    <filterByOrganization>false</filterByOrganization>
+    <documentCancelled xsi:nil="true"/>
+    <expense>false</expense>
+    <reversal>false</reversal>
+    <return>false</return>
+    <coTipoComprobanteAutorizadorSRI>0</coTipoComprobanteAutorizadorSRI>
+  </DocumentType>
+  <EmailTemplate id="3B0D3ED855B341068AEFA2FB8EC762BF" identifier="Retención de Compra - ">
+    <id>3B0D3ED855B341068AEFA2FB8EC762BF</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-17T17:12:44.988Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-17T17:12:44.988Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <pocDocumentType id="0A25C39F74624053A69E2284260C9396" entity-name="DocumentTemplate" identifier="Retención de Compra"/>
+    <subject xsi:nil="true"/>
+    <body xsi:nil="true"/>
+    <default>false</default>
+    <language id="139" entity-name="ADLanguage" identifier="Spanish (Ecuador)"/>
+  </EmailTemplate>
+  <DocumentTemplate id="0A25C39F74624053A69E2284260C9396" identifier="Retención de Compra">
+    <id>0A25C39F74624053A69E2284260C9396</id>
+    <active>true</active>
+    <creationDate transient="true">2012-07-17T11:54:00.497Z</creationDate>
+    <createdBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <updated transient="true">2012-07-17T17:17:52.494Z</updated>
+    <updatedBy transient="true" id="100" entity-name="ADUser" identifier="Openbravo"/>
+    <documentType id="7BA807DF437B4F5287ADD011A2849A05" entity-name="DocumentType" identifier="Retención de Compra"/>
+    <name>Retención de Compra</name>
+    <templateLocation>@basedesign@/com/atrums/contabilidad/erpCommon/erpReports</templateLocation>
+    <reportFilename>Retención Compra-@our_ref@</reportFilename>
+    <templateFilename>RptCo_Retencion.jrxml</templateFilename>
+    <showcompanydata>true</showcompanydata>
+    <showlogo>true</showlogo>
+    <headermargin xsi:nil="true"/>
+  </DocumentTemplate>
+</ob:Openbravo>

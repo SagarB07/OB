@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_CALCULO_IVA">
+    <function name="ATS_CALCULO_IVA" type="VARCHAR">
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_inicio" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tp_comp_sri" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(10):=''; 
+BEGIN 
+        select ltrim(to_char(coalesce(sum(abs(it.taxamt)),0),'9999990.99')) into v_ResultStr
+          from c_invoice i,
+               c_invoicetax it
+         where i.c_invoice_id = it.c_invoice_id
+           and i.issotrx = 'Y'
+           and i.processed = 'Y'
+		   and i.docstatus <> 'VO'
+           and i.c_bpartner_id = p_bpartner_id
+           and date(i.dateinvoiced) >= TO_DATE(p_fecha_inicio)
+           and date(i.dateinvoiced) <= TO_DATE(p_fecha_fin)
+           and (select em_co_tp_comp_autorizador_sri from c_doctype where c_doctype.c_doctype_id = i.c_doctypetarget_id)=p_tp_comp_sri;
+        
+    return v_ResultStr;
+END ATS_CALCULO_IVA
+]]></body>
+    </function>
+  </database>

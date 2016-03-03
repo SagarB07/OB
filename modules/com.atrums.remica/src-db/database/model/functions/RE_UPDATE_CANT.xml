@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_UPDATE_CANT">
+    <function name="RE_UPDATE_CANT" type="NULL">
+      <body><![CDATA[Cur_Productos RECORD;
+    v_qty NUMBER; 
+    v_cumqty NUMBER;
+    v_product varchar(32);
+
+BEGIN
+
+    
+ FOR Cur_Productos IN
+      (SELECT m_product_id, qtycount from m_inventoryline)
+    LOOP
+      v_qty:=Cur_Productos.qtycount;
+      v_cumqty:=Cur_Productos.qtycount;
+      v_product:=Cur_Productos.m_product_id;
+      
+      update m_costing
+      set qty = v_qty,
+      cumqty = v_cumqty
+      where m_product_id = v_product;
+      
+    END LOOP;
+END RE_UPDATE_CANT
+]]></body>
+    </function>
+  </database>

@@ -1,0 +1,13 @@
+<SqlClass name="SEValidacionDocumentoData" package="com.atrums.remica.ad_callouts">
+
+  <SqlMethod name="esRetorno" type="preparedStatement" return="string" default="">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+            select case when issotrx = 'Y' then isreturn else 'Y' end as isreturn
+              from c_doctype where c_doctype_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="cDoctypeId"/>
+  </SqlMethod>
+</SqlClass>

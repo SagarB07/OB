@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_DETALLE_AIR">
+    <function name="ATS_DETALLE_AIR" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Resultstr VARCHAR:=''; 
+BEGIN 
+
+    if(exists(select 1 from c_invoice i, co_retencion_compra rc, co_retencion_compra_linea rcl,
+                            co_bp_retencion_compra bprc,  co_tipo_retencion tr
+                      where i.c_invoice_id = rc.c_invoice_id
+                        and rc.co_retencion_compra_id = rcl.co_retencion_compra_id
+                        and rcl.co_bp_retencion_compra_id = bprc.co_bp_retencion_compra_id
+                        and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+                        and tr.tipo = 'FUENTE'
+                        and i.c_invoice_id = p_invoice_id
+						and rc.docstatus <> 'AN'))
+    then
+        select xmlagg(xmlelement(name "detalleAir", xmlelement(name "codRetAir", case when tr.tiporetencionfuente is null 
+                                                                  then '' else tr.tiporetencionfuente end),
+                                                  xmlelement(name "baseImpAir", ltrim(to_char(rcl.base_imp_retencion,'9999990.99'))),
+                                                  xmlelement(name "porcentajeAir", ltrim(to_char(tr.porcentaje,'990.99'))),
+                                                  xmlelement(name "valRetAir", ltrim(to_char(rcl.valor_retencion,'9990.99')))
+                      )) into v_Resultstr
+          from c_invoice i,
+               co_retencion_compra rc,
+               co_retencion_compra_linea rcl,
+               co_bp_retencion_compra bprc,
+               co_tipo_retencion tr
+         where i.c_invoice_id = rc.c_invoice_id
+           and rc.co_retencion_compra_id = rcl.co_retencion_compra_id
+           and rcl.co_bp_retencion_compra_id = bprc.co_bp_retencion_compra_id
+           and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+           and tr.tipo = 'FUENTE'
+		   and rc.docstatus <> 'AN'
+           and i.c_invoice_id = p_invoice_id;
+           
+           if(v_Resultstr is null)
+           then
+                select xmlagg(xmlelement(name "detalleAir",xmlelement(name "codRetAir", ''),
+                                                         xmlelement(name "baseImpAir",''),
+                                                         xmlelement(name "porcentajeAir",''),
+                                                         xmlelement(name "valRetAir", '')
+                              )) into v_Resultstr;
+           end if;
+    else
+        select xmlagg(xmlelement(name "detalleAir",xmlelement(name "codRetAir", ''),
+                                                 xmlelement(name "baseImpAir",''),
+                                                 xmlelement(name "porcentajeAir",''),
+                                                 xmlelement(name "valRetAir", '')
+                      )) into v_Resultstr;
+    end if;
+    return v_Resultstr;
+END ATS_DETALLE_AIR
+]]></body>
+    </function>
+  </database>

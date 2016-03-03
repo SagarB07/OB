@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+
+<SqlClass name="DatosCompletosProductoData" package="com.atrums.remica.ad_callouts">
+  <SqlMethod name="select" type="preparedStatement" return="String">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+      SELECT em_re_nombreproducto
+        FROM M_PRODUCT WHERE M_PRODUCT_ID = ?
+      ]]>
+    </Sql>
+    <Parameter name="mProductId"/>
+  </SqlMethod>
+ 
+</SqlClass>

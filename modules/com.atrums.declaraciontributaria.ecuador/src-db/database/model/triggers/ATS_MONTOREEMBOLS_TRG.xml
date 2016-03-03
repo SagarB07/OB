@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER ATS_MONTOREEMBOLS_TRG">
+    <trigger name="ATS_MONTOREEMBOLS_TRG" table="ATS_REEMBOLSO" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+totalexento NUMBER;
+totalbase0 NUMBER;
+totalbase12 NUMBER;
+totaliva NUMBER;
+totalice NUMBER;
+
+
+
+BEGIN
+
+
+
+    IF (INSERTING) THEN
+
+select sum(base0) into totalbase0 from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(base12) into totalbase12 from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(base_exento) into totalexento  from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(valor_ice) into totalice from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(valor_iva) into totaliva from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+
+UPDATE c_invoice SET em_ats_totalbase0 = totalbase0  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalexento = totalexento  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalbase12 = totalbase12  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totaliva = totaliva  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalice = totalice  where c_invoice_id = :new.c_invoice_id;
+       
+        RETURN NEW;
+
+    END IF;
+
+IF (UPDATING) THEN
+
+select sum(base0) into totalbase0 from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(base12) into totalbase12 from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(base_exento) into totalexento  from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(valor_ice) into totalice from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+select sum(valor_iva) into totaliva from ats_reembolso where c_invoice_id = :new.c_invoice_id;
+
+UPDATE c_invoice SET em_ats_totalbase0 = totalbase0  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalexento = totalexento  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalbase12 = totalbase12  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totaliva = totaliva  where c_invoice_id = :new.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalice = totalice  where c_invoice_id = :new.c_invoice_id;
+
+
+       
+        RETURN NEW;
+
+    END IF;
+
+IF (DELETING) THEN
+
+select sum(base0) into totalbase0 from ats_reembolso where c_invoice_id = :old.c_invoice_id;
+select sum(base12) into totalbase12 from ats_reembolso where c_invoice_id = :old.c_invoice_id;
+select sum(base_exento) into totalexento  from ats_reembolso where c_invoice_id = :old.c_invoice_id;
+select sum(valor_ice) into totalice from ats_reembolso where c_invoice_id = :old.c_invoice_id;
+select sum(valor_iva) into totaliva from ats_reembolso where c_invoice_id = :old.c_invoice_id;
+
+UPDATE c_invoice SET em_ats_totalbase0 = totalbase0  where c_invoice_id = :old.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalexento = totalexento  where c_invoice_id = :old.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalbase12 = totalbase12  where c_invoice_id = :old.c_invoice_id;
+UPDATE c_invoice SET em_ats_totaliva = totaliva  where c_invoice_id = :old.c_invoice_id;
+UPDATE c_invoice SET em_ats_totalice = totalice  where c_invoice_id = :old.c_invoice_id;
+       
+        RETURN NEW;
+
+    END IF;
+     
+
+
+
+
+END ATS_MONTOREEMBOLS_TRG
+]]></body>
+    </trigger>
+  </database>

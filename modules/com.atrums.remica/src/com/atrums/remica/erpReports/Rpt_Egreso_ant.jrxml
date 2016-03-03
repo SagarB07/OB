@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_Egreso" pageWidth="595" pageHeight="432" columnWidth="493" leftMargin="56" rightMargin="46" topMargin="40" bottomMargin="1">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="69"/>
+	<property name="ireport.y" value="290"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="Label" forecolor="#999999" fontSize="14" isBold="true"/>
+	<parameter name="SUBREP_Rpt_EgresoLinea" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="NUMBERFORMAT" class="java.text.DecimalFormat" isForPrompting="false"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DOCUMENT_NAME" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ATTACH" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SHOW_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SHOW_COMPANYDATA" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="HEADER_MARGIN" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT p.documentno as PAYMENTNO, bp.name AS BUSINESSPARTNER, p.paymentdate as PAYMENT_DATE,
+       p.amount as TOTAL, pm.name as PAYMENT_METHOD, cur.cursymbol as CURRENCY, p.isreceipt as ISRECEIPT,
+       org.ad_org_id as legalentity, org.name as LE_NAME, bp.taxid as LE_TAXID,
+       c_location_description(ad_orginfo.c_location_id) as LE_LOCATION,
+COALESCE(p.em_co_nro_cheque,'') as CHEQUE,
+  fin.name as BANCO,
+fin.accountno as CUENTA, COALESCE(p.description, '') as RAZON,
+CREATED_USER.NAME AS CREATED_USER_NAME
+FROM fin_payment p join c_bpartner bp on (p.c_bpartner_id=bp.c_bpartner_id)
+	LEFT outer JOIN AD_USER AS CREATED_USER ON p.CREATEDBY = CREATED_USER.AD_USER_ID
+     join c_currency cur on (p.c_currency_id=cur.c_currency_id)
+     left outer join fin_paymentmethod pm on (p.fin_paymentmethod_id=pm.fin_paymentmethod_id), ad_org org, ad_orginfo,fin_financial_account fin
+WHERE p.fin_payment_id=$P{DOCUMENT_ID}
+      and org.ad_org_id = ad_orginfo.ad_org_id
+      and org.ad_org_id = (select o.ad_org_id
+                           from ad_org o join ad_orgtype t on (o.ad_orgtype_id=t.ad_orgtype_id)
+                           where ad_isorgincluded(p.ad_org_id, o.ad_org_id, p.ad_client_id)<>-1
+                                 and (t.islegalentity='Y' OR t.isacctlegalentity='Y'))
+and fin.fin_financial_account_id=p.fin_financial_account_id]]>
+	</queryString>
+	<field name="PAYMENTNO" class="java.lang.String"/>
+	<field name="BUSINESSPARTNER" class="java.lang.String"/>
+	<field name="PAYMENT_DATE" class="java.util.Date"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<field name="PAYMENT_METHOD" class="java.lang.String"/>
+	<field name="CURRENCY" class="java.lang.String"/>
+	<field name="ISRECEIPT" class="java.lang.String"/>
+	<field name="LEGALENTITY" class="java.lang.String"/>
+	<field name="LE_NAME" class="java.lang.String"/>
+	<field name="LE_TAXID" class="java.lang.String"/>
+	<field name="LE_LOCATION" class="java.lang.String"/>
+	<field name="CHEQUE" class="java.lang.String"/>
+	<field name="BANCO" class="java.lang.String"/>
+	<field name="CUENTA" class="java.lang.String"/>
+	<field name="RAZON" class="java.lang.String"/>
+	<field name="CREATED_USER_NAME" class="java.lang.String"/>
+	<group name="Payment">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="180" splitType="Stretch">
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-4" x="39" y="90" width="136" height="13"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{PAYMENT_DATE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-9" x="39" y="115" width="269" height="13"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BUSINESSPARTNER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="245" y="88" width="100" height="13"/>
+					<textElement>
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CHEQUE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="377" y="114" width="100" height="13"/>
+					<textElement textAlignment="Center">
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BANCO}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="378" y="86" width="100" height="13"/>
+					<textElement textAlignment="Center">
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CUENTA}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="56" splitType="Stretch">
+				<textField>
+					<reportElement x="411" y="36" width="80" height="20"/>
+					<textElement>
+						<font fontName="Courier New" size="8" isItalic="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{LE_TAXID}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="36" width="111" height="20"/>
+					<textElement>
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CREATED_USER_NAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="111" y="36" width="106" height="20"/>
+					<textElement textAlignment="Left">
+						<font fontName="Courier New" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{CREATED_USER_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="122" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-1" x="0" y="0" width="493" height="122"/>
+				<subreportParameter name="FIN_PAYMENT_ID">
+					<subreportParameterExpression><![CDATA[$P{DOCUMENT_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NUMBERFORMAT">
+					<subreportParameterExpression><![CDATA[$P{NUMBERFORMAT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SUBREP_Rpt_EgresoLinea}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

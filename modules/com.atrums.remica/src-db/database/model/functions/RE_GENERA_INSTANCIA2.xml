@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RE_GENERA_INSTANCIA2">
+    <function name="RE_GENERA_INSTANCIA2" type="NULL">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_pinstance_id varchar(32); 
+    v_process_id varchar(32);
+BEGIN
+
+    
+
+    
+    select get_uuid() into v_pinstance_id;
+    
+    
+    select ad_process_id into v_process_id from ad_process where upper(procedurename) = upper('c_invoice_post0');
+
+    insert into ad_pinstance(ad_pinstance_id, ad_process_id, record_id, isprocessing, created, 
+                 ad_user_id, updated, result, errormsg, ad_client_id, 
+                 ad_org_id, createdby, updatedby, isactive)
+             values (v_pinstance_id, v_process_id, p_invoice_id, 'N', now(), 
+                 '0', now(), 0, '', '928EE3C3AC76434CBCCDC79A47B3B1D9', 
+                 '0', '100', '100', 'Y');
+
+    C_INVOICE_POST(v_pinstance_id, p_invoice_id);
+END RE_GENERA_INSTANCIA2
+]]></body>
+    </function>
+  </database>

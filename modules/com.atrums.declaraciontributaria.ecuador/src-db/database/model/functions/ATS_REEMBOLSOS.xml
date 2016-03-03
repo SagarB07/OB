@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_REEMBOLSOS">
+    <function name="ATS_REEMBOLSOS" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Resultstr VARCHAR:='<reembolsos>'; 
+v_reembolso VARCHAR:=''; 
+cur_reembolso record;
+BEGIN 
+
+for cur_reembolso in (select ats_reembolso_id from ats_reembolso where c_invoice_id = p_invoice_id) loop
+
+    select   xmlelement(name "reembolso", 
+                    xmlelement(name "tipoComprobanteReemb", ltrim(to_char(d.em_co_tp_comp_autorizador_sri,'00'))),
+                    xmlelement(name "tpIdProvReemb", r.tipo_identificacion),
+                    xmlelement(name "idProvReemb", r.identificacion),
+                    xmlelement(name "establecimientoReemb", r.establecimiento),
+                    xmlelement(name "puntoEmisionReemb", r.emision),
+                    xmlelement(name "secuencialReemb", r.secuencial),
+                    xmlelement(name "fechaEmisionReemb", to_char(r.fecha_emision,'dd/mm/yyyy')),
+
+                    xmlelement(name "autorizacionReemb", r.autorizacion_sri),
+                    xmlelement(name "baseImponibleReemb", ltrim(to_char(r.base0,'99999990.99'))),
+                    xmlelement(name "baseImpGravReemb", ltrim(to_char(r.base12,'99999990.99'))),
+                    xmlelement(name "baseNoGraIvaReemb", ltrim(to_char(r.base_exento,'99999990.99'))),
+                    xmlelement(name "montoIceRemb", ltrim(to_char(r.valor_ice,'99999990.99'))),
+                    xmlelement(name "montoIvaRemb", ltrim(to_char(r.valor_iva,'99999990.99')))
+                         )
+          into v_reembolso
+
+        from ats_reembolso r, c_doctype d
+       where r.c_doctype_id = d.c_doctype_id
+         and r.ats_reembolso_id = cur_reembolso.ats_reembolso_id;
+         
+         v_Resultstr:=v_Resultstr || v_reembolso;
+
+    END LOOP;   
+    
+    v_Resultstr:=v_Resultstr ||'</reembolsos>';
+    RETURN v_Resultstr;
+END ATS_REEMBOLSOS
+]]></body>
+    </function>
+  </database>

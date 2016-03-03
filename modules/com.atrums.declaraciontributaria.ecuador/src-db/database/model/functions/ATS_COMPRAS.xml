@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_COMPRAS">
+    <function name="ATS_COMPRAS" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN 
+
+        RETURN query select xmlelement(name "detalleCompras",
+                        xmlelement(name "codSustento", case when i.em_co_codSustento is null 
+                                                          then '01' else i.em_co_codSustento end),
+                        xmlelement(name "tpIdProv", p.em_co_tipo_identificacion),
+                        xmlelement(name "idProv", p.taxid),
+                        xmlelement(name "tipoComprobante", ltrim(to_char(dt.em_co_tp_comp_autorizador_sri,'00'))),
+						(select case when p.em_co_tipo_identificacion = '03' then xmlelement(name "tipoProv",'01') end),
+						(select case when p.em_co_tipo_identificacion = '03' then xmlelement(name "parteRel",'NO') end),
+                        xmlelement(name "fechaRegistro", to_char(i.DateAcct,'dd/mm/yyyy')),
+                        xmlelement(name "establecimiento", case when i.em_co_nro_estab is null 
+                                                              then '000' else i.em_co_nro_estab end),
+                        xmlelement(name "puntoEmision", case when i.em_co_punto_emision is null
+                                                           then '000' else i.em_co_punto_emision end),
+                        xmlelement(name "secuencial", i.documentno),
+                        xmlelement(name "fechaEmision", to_char(i.dateinvoiced,'dd/mm/yyyy')),
+                        xmlelement(name "autorizacion", case when i.em_co_nro_aut_sri is null 
+                                                           then '' else i.em_co_nro_aut_sri end),
+                        xmlelement(name "baseNoGraIva", to_char(ats_calc_base_imponible(i.c_invoice_id, '1'),'999999990.99')),
+                        xmlelement(name "baseImponible",to_char(ats_calc_base_imponible(i.c_invoice_id, '2'),'999999990.99')),
+                        xmlelement(name "baseImpGrav", to_char(ats_calc_base_imponible(i.c_invoice_id, '3'),'9999999990.99')),
+                        xmlelement(name "montoIce", ats_calc_monto_iva_ice(i.c_invoice_id, 'Y')),
+                        xmlelement(name "montoIva", to_char(ats_calc_monto_iva_ice(i.c_invoice_id, 'N'),'9999990.99')),
+                        xmlelement(name "valorRetBienes", to_char(ats_val_retencion_iva(i.c_invoice_id, 'RB'),'9999990.99')),
+                        xmlelement(name "valorRetServicios", to_char(ats_val_retencion_iva(i.c_invoice_id, 'RS'),'9999990.99')),
+                        xmlelement(name "valRetServ100", to_char(ats_val_retencion_iva(i.c_invoice_id, 'RC'),'9999990.99')),
+                        XMLPARSE(CONTENT ATS_PAGO_EXTERIOR(i.c_invoice_id)),
+                        case when i.grandtotal > 999 then XMLPARSE(CONTENT ATS_FORMAS_PAGO(i.c_invoice_id)) end,
+						case when dt.em_co_tp_comp_autorizador_sri = 41 then XMLPARSE(CONTENT ATS_REEMBOLSOS(i.c_invoice_id)) end,
+                        case when dt.em_co_tp_comp_autorizador_sri = 1 then xmlelement(name "air", XMLPARSE(CONTENT ats_detalle_air(i.c_invoice_id)))
+							 when dt.em_co_tp_comp_autorizador_sri = 3 then xmlelement(name "air", XMLPARSE(CONTENT ats_detalle_air(i.c_invoice_id))) end,
+                        case when rc.co_retencion_compra_id is null then ' ' else xmlelement(name "estabRetencion1", c.em_co_nro_estab) end,
+                        case when rc.co_retencion_compra_id is null then ' ' else xmlelement(name "ptoEmiRetencion1", o.em_co_punto_emision) end,
+                        case when rc.co_retencion_compra_id is null then ' ' else xmlelement(name "secRetencion1", rc.documentno) end,
+                        case when rc.co_retencion_compra_id is null then ' ' else xmlelement(name "autRetencion1", rc.no_autorizacion) end,
+                        case when rc.co_retencion_compra_id is null then ' ' else xmlelement(name "fechaEmiRet1", to_char(rc.fecha_emision,'dd/mm/yyyy')) end,
+                        
+                        (select case when dt.em_co_tp_comp_autorizador_sri = 4 then xmlelement(name "docModificado", '01') end),
+                        (select case when dt.em_co_tp_comp_autorizador_sri = 4 then xmlelement(name "estabModificado",  coalesce(ats_doc_modificado(i.c_invoice_id,1),'000')) end),
+                        (select case when dt.em_co_tp_comp_autorizador_sri = 4 then xmlelement(name "ptoEmiModificado",  coalesce(ats_doc_modificado(i.c_invoice_id,2),'000')) end),
+                        (select case when dt.em_co_tp_comp_autorizador_sri = 4 then xmlelement(name "secModificado",  coalesce(ats_doc_modificado(i.c_invoice_id,3),'0')) end),
+                        (select case when dt.em_co_tp_comp_autorizador_sri = 4 then xmlelement(name "autModificado",  coalesce(ats_doc_modificado(i.c_invoice_id,4),'000')) end)
+                        ) as strXml
+                   from c_invoice i left join c_bpartner p on i.c_bpartner_id = p.c_bpartner_id
+                                    left join c_doctype dt on i.c_doctype_id = dt.c_doctype_id
+                                    left join ad_client c on i.ad_client_id = c.ad_client_id
+                                    left join ad_org o on i.ad_org_id = o.ad_org_id
+                                    left join co_retencion_compra rc on (rc.c_invoice_id = i.c_invoice_id and rc.docstatus <> 'VO')
+                  where i.c_invoice_id = p_invoice_id
+				    and i.processed = 'Y';
+END ATS_COMPRAS
+]]></body>
+    </function>
+  </database>

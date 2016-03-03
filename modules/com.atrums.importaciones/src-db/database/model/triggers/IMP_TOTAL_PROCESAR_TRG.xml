@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER IMP_TOTAL_PROCESAR_TRG">
+    <trigger name="IMP_TOTAL_PROCESAR_TRG" table="CCO_REGISTRA_COSTOS" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+imp_total_procesar_v character varying(32);
+cco_cuenta_costo_v character varying(32);
+ad_client_v character varying(32);
+ad_org_v character varying(32);
+isactive_v character varying(1);
+created_v DATE;
+createdby_v character varying(32);
+updated_v DATE;
+updatedby_V character varying(32);
+value_v character varying(40);
+name_v character varying(60);
+totalsumado  NUMBER(10);
+em_imp_esfacturaimp_v character varying(1);
+valor_old NUMBER(10);
+total_old NUMBER(10);
+cco_cuenta_costo_old character varying(32);
+
+BEGIN
+
+
+ IF AD_isTriggerEnabled()='N' THEN RETURN;
+    END IF;
+
+
+
+IF (UPDATING OR INSERTING) THEN
+
+select cco_cuenta_costos_id,em_imp_esfacturaimp into cco_cuenta_costo_v,em_imp_esfacturaimp_v 
+from cco_registra_costos where cco_registra_costos_id=:new.cco_registra_costos_id;
+
+
+
+select imp_total_procesar_id into imp_total_procesar_v from imp_total_procesar where cco_cuenta_costos_id=cco_cuenta_costo_v;
+
+
+SELECT cc.ad_client_id, cc.ad_org_id, cc.isactive, cc.created, cc.createdby, cc.updated, cc.updatedby, cc.value, cc.name,sum(crc.valor)
+INTO ad_client_v,ad_org_v,isactive_v,created_v,createdby_v,updated_v,updatedby_v,value_v,name_v,totalsumado
+FROM cco_registra_costos crc
+   LEFT JOIN c_invoice i ON crc.c_invoice_id = i.c_invoice_id
+   JOIN cco_cuenta_costos cc ON crc.cco_cuenta_costos_id= cc.cco_cuenta_costos_id
+  WHERE cc.isactive = 'Y' 
+   and cc.cco_cuenta_costos_id=cco_cuenta_costo_v and crc.em_imp_esfacturaimp='N'
+  GROUP BY cc.cco_cuenta_costos_id, cc.ad_client_id, cc.ad_org_id, cc.isactive, cc.created, cc.createdby, cc.updated, cc.updatedby, cc.value, cc.name
+  ORDER BY cc.name;
+
+
+     
+if (:new.em_imp_esfacturaimp='N')THEN
+
+if (imp_total_procesar_v IS NULL)THEN
+
+select get_uuid() into imp_total_procesar_v;
+  INSERT INTO imp_total_procesar(
+            imp_total_procesar_id, ad_client_id, ad_org_id, isactive, created, 
+            createdby, updated, updatedby, cco_cuenta_costos_id, "value", 
+            "name", procesar, procesado, total)
+    VALUES (imp_total_procesar_v,ad_client_v,ad_org_v,isactive_v,created_v,
+	   createdby_v,updated_v,updatedby_v,cco_cuenta_costo_v ,value_v,
+	   name_v, 'N','N',totalsumado);
+	   
+else
+
+UPDATE imp_total_procesar
+        SET total = totalsumado
+        WHERE imp_total_procesar_id=imp_total_procesar_v;
+        
+
+END IF;
+END IF;--em_imp_esfacturaimp_v
+
+END IF;
+    
+
+IF DELETING THEN 
+
+
+    
+select cco_cuenta_costos_id into cco_cuenta_costo_old from cco_registra_costos where cco_registra_costos_id=:old.cco_registra_costos_id;
+select imp_total_procesar_id,total into imp_total_procesar_v,total_old from imp_total_procesar where cco_cuenta_costos_id=cco_cuenta_costo_v;
+
+
+UPDATE imp_total_procesar
+        SET total = total_old-:old.valor
+        WHERE imp_total_procesar_id=imp_total_procesar_v;
+        
+
+END IF; 
+END IMP_TOTAL_PROCESAR_TRG
+]]></body>
+    </trigger>
+  </database>

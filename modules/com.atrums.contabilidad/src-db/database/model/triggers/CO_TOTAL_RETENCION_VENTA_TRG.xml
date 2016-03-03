@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_TOTAL_RETENCION_VENTA_TRG">
+    <trigger name="CO_TOTAL_RETENCION_VENTA_TRG" table="CO_RETENCION_VENTA_LINEA" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+BEGIN
+
+    IF (UPDATING OR INSERTING) THEN
+        update co_retencion_venta 
+           set total_retencion = (select sum(valor_retencion) 
+                                    from co_retencion_venta_linea 
+                                   where co_retencion_venta_id = :new.co_retencion_venta_id
+                                     and isactive = 'Y')
+         where co_retencion_venta_id = :new.co_retencion_venta_id;
+    END IF;
+    
+    RETURN NEW; 
+END CO_TOTAL_RETENCION_VENTA_TRG
+]]></body>
+    </trigger>
+  </database>

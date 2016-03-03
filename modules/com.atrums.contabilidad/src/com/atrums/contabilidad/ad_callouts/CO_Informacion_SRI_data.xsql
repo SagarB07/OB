@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="COInformacionSRIData" package="com.atrums.contabilidad.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="selectBP" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+            select COALESCE(em_co_bp_nro_estab,'001') as estab, 
+                   COALESCE(em_co_bp_punto_emision,'001') as emision,
+                   COALESCE(em_co_bp_nro_aut_fc_sri,'') as noAutoriza, 
+                   em_co_bp_fec_venct_aut_fc_sri as fecAutoriza
+             from c_bpartner  
+            where c_bpartner_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="strbpartnerId"/>
+  </SqlMethod>
+  
+    <SqlMethod name="selectIv" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+        select COALESCE(em_co_bp_nro_estab,'001') as estab, 
+               COALESCE(em_co_bp_punto_emision,'001') as emision,
+               COALESCE(em_co_bp_nro_aut_rt_sri,'') as noAutoriza, 
+               em_co_bp_fec_venct_aut_rt_sri as fecAutoriza
+         from c_bpartner  
+        where c_bpartner_id in (select c_bpartner_id from c_invoice where c_invoice_id = ?)
+      ]]>
+    </Sql>
+    <Parameter name="strInvoiceId"/>
+  </SqlMethod>
+  
+    <SqlMethod name="updateInvoice" type="preparedStatement" return="rowCount" static="true">
+      <SqlMethodComment></SqlMethodComment>
+      <Sql>
+            update c_bpartner 
+               set em_co_bp_nro_estab = ?,
+                   em_co_bp_punto_emision = ?,
+                   em_co_bp_nro_aut_fc_sri = ?,
+                   em_co_bp_fec_venct_aut_fc_sri=?
+            where c_bpartner_id = ?
+      </Sql>
+      <Parameter name="strEstab"/>
+      <Parameter name="strEmision"/>
+      <Parameter name="strNoAutorizaFac"/>
+      <Parameter name="strFecVencAutFac"/>
+      <Parameter name="strBpartnerId"/>
+   </SqlMethod>
+   
+     <SqlMethod name="updateRetencion" type="preparedStatement" return="rowCount" static="true">
+      <SqlMethodComment></SqlMethodComment>
+      <Sql>
+            update c_bpartner 
+               set em_co_bp_nro_estab = ?,
+                   em_co_bp_punto_emision = ?,
+                   em_co_bp_nro_aut_rt_sri = ?,
+                   em_co_bp_fec_venct_aut_rt_sri = ?
+            where c_bpartner_id in (select c_bpartner_id from c_invoice where c_invoice_id = ?)
+      </Sql>
+      <Parameter name="strEstab"/>
+      <Parameter name="strEmision"/>
+      <Parameter name="strNoAutorizaRect"/>
+      <Parameter name="strFecVencAutRect"/>
+      <Parameter name="strInvoiceId"/>
+   </SqlMethod>
+  
+</SqlClass>

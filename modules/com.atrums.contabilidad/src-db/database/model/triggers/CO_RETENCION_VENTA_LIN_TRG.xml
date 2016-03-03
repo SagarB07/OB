@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_RETENCION_VENTA_LIN_TRG">
+    <trigger name="CO_RETENCION_VENTA_LIN_TRG" table="CO_RETENCION_VENTA_LINEA" fires="before" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+
+v_mensaje VARCHAR;  
+v_docstatus VARCHAR;
+v_docstatus1 VARCHAR;
+BEGIN
+    IF (INSERTING) THEN
+
+        v_docstatus1 = (SELECT rv.docstatus FROM co_retencion_venta rv
+                        WHERE rv.co_retencion_venta_id = :new.co_retencion_venta_id);
+
+        IF (v_docstatus1 = 'CO') THEN
+
+            v_mensaje:='Error. Documento procesado.';
+            RAISE v_mensaje;
+
+        ELSE RETURN NEW;
+
+        END IF; 
+        
+     ELSIF (DELETING) THEN
+
+        v_docstatus = (SELECT rv.docstatus FROM co_retencion_venta rv
+                       WHERE rv.co_retencion_venta_id = :old.co_retencion_venta_id);
+	
+		IF (v_docstatus = 'CO') THEN
+		
+			v_mensaje:='Error. Documento procesado.';
+			RAISE v_mensaje;
+			
+            ELSE RETURN OLD;
+
+		END IF; 
+        
+    ELSIF (UPDATING) THEN
+
+        v_docstatus = (SELECT rv.docstatus FROM co_retencion_venta rv
+                       WHERE rv.co_retencion_venta_id = :old.co_retencion_venta_id);
+	
+		IF (v_docstatus = 'CO') THEN
+		
+			v_mensaje:='Error. Documento procesado.';
+			RAISE v_mensaje;
+			
+            ELSE RETURN NEW;
+
+		END IF;
+        
+    ELSE RETURN NEW;
+		
+	END IF;
+END CO_RETENCION_VENTA_LIN_TRG
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION IMP_UPDATE_COSTO">
+    <function name="IMP_UPDATE_COSTO" type="NULL">
+      <body><![CDATA[v_ResultStr VARCHAR(2000):=''; 
+    v_Message VARCHAR(2000):=''; 
+    v_Record_ID VARCHAR(32); 
+    v_Result NUMBER:=1; 
+
+
+    Cur_Parameter RECORD;
+    Cur_TodasFacturas RECORD;
+    Cur_IndividualFacturas RECORD;
+
+    v_Client_ID VARCHAR(32); 
+    v_Org_ID VARCHAR(32); 
+    v_User_ID VARCHAR(32); 
+
+
+imp_total_procesar_id_v VARCHAR(32):=''; 
+cco_cuenta_costos_id_imp VARCHAR(32):='';
+m_costing_id_v VARCHAR(32):='';
+value_imp VARCHAR(40):='';
+name_imp VARCHAR(60):='';
+total_gast_imp NUMBER;
+procesado_imp VARCHAR(1):='';
+total_factura_comp NUMBER;
+stock NUMBER;
+    
+porcentaje_gasto NUMBER;
+gasto_real NUMBER;
+gasto_individual NUMBER;
+costo_real NUMBER;
+contador NUMBER:=0;
+costo_promedio NUMBER:=0;
+cost_costing NUMBER:=0;
+    
+BEGIN
+    
+    
+DBMS_OUTPUT.PUT_LINE('Saca Parametros');
+        
+
+        FOR Cur_TodasFacturas IN
+          (select m_costing_id, m_product_id from m_costing where dateto = TO_DATE('31-12-9999','dd-MM-yyyy')
+            and m_product_id IN (select m_product_id
+            from c_invoiceline where c_invoice_id = 'FB192382EC414793BE926E4A67F784DD'))
+        LOOP
+       
+select cost into cost_costing from m_costing where dateto = TO_DATE('03-01-2013','dd-MM-yyyy')
+and m_product_id = Cur_TodasFacturas.m_product_id;
+
+update m_costing
+set cost = (price+cost_costing)/2
+where m_costing_id = Cur_TodasFacturas.m_costing_id;
+	
+	        
+DBMS_OUTPUT.PUT_LINE('Update m_costing');
+
+        END LOOP; 
+
+        RETURN;
+END IMP_UPDATE_COSTO
+]]></body>
+    </function>
+  </database>

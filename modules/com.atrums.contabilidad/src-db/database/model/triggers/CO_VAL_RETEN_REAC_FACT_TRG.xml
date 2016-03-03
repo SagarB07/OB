@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_VAL_RETEN_REAC_FACT_TRG">
+    <trigger name="CO_VAL_RETEN_REAC_FACT_TRG" table="C_INVOICE" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje VARCHAR;
+v_docstatus VARCHAR(2);
+
+
+BEGIN
+IF (UPDATING ) THEN
+	IF(:NEW.docstatus = 'DR' and :OLD.docstatus = 'CO') THEN
+
+		IF(:NEW.issotrx = 'N') THEN
+
+			select docstatus
+			  into v_docstatus
+			  from co_retencion_compra 
+			 where c_invoice_id = :old.c_invoice_id;
+
+			IF(v_docstatus = 'CO') THEN
+				v_mensaje:='No se puede reactivar la factura, la retención esta completada.';
+				RAISE v_mensaje;
+			END IF;
+		END IF;
+		
+		IF(:NEW.issotrx = 'Y') THEN
+
+			select docstatus
+			  into v_docstatus
+			  from co_retencion_venta 
+			 where c_invoice_id = :old.c_invoice_id;
+
+			IF(v_docstatus = 'CO') THEN
+				v_mensaje:='No se puede reactivar la factura, la retención esta completada.';
+				RAISE v_mensaje;
+			END IF;
+		END IF;
+	END IF;
+	
+	RETURN NEW;
+END IF;
+
+END CO_VAL_RETEN_REAC_FACT_TRG
+]]></body>
+    </trigger>
+  </database>

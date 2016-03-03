@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_VAL_RETENCION_FTE_VENTA">
+    <function name="ATS_VAL_RETENCION_FTE_VENTA" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_param" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Resultstr VARCHAR:=''; 
+BEGIN 
+
+    if(p_param = 1) then
+        select coalesce(tr.tiporetencionfuente,'') as tiporetencionfuente
+          into v_Resultstr
+          from c_invoice i,
+               co_retencion_venta rc,
+               co_retencion_venta_linea rcl,
+               co_bp_retencion_venta bprc,
+               co_tipo_retencion tr
+         where i.c_invoice_id = rc.c_invoice_id
+           and rc.co_retencion_venta_id = rcl.co_retencion_venta_id
+           and rcl.co_bp_retencion_venta_id = bprc.co_bp_retencion_venta_id
+           and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+           and tr.tipo = 'FUENTE'
+		   and rc.docstatus <> 'AN'
+           and i.c_invoice_id = p_invoice_id;
+    end if;
+
+    if(p_param = 2) then
+        select ltrim(to_char(rcl.base_imp_retencion,'9999990.99'))
+          into v_Resultstr
+          from c_invoice i,
+               co_retencion_venta rc,
+               co_retencion_venta_linea rcl,
+               co_bp_retencion_venta bprc,
+               co_tipo_retencion tr
+         where i.c_invoice_id = rc.c_invoice_id
+           and rc.co_retencion_venta_id = rcl.co_retencion_venta_id
+           and rcl.co_bp_retencion_venta_id = bprc.co_bp_retencion_venta_id
+           and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+           and tr.tipo = 'FUENTE'
+		   and rc.docstatus <> 'AN'
+           and i.c_invoice_id = p_invoice_id;
+    end if;
+   
+    if(p_param = 3) then
+        select ltrim(to_char(rcl.valor_retencion,'9990.99'))
+          into v_Resultstr
+          from c_invoice i,
+               co_retencion_venta rc,
+               co_retencion_venta_linea rcl,
+               co_bp_retencion_venta bprc,
+               co_tipo_retencion tr
+         where i.c_invoice_id = rc.c_invoice_id
+           and rc.co_retencion_venta_id = rcl.co_retencion_venta_id
+           and rcl.co_bp_retencion_venta_id = bprc.co_bp_retencion_venta_id
+           and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+           and tr.tipo = 'FUENTE'
+		   and rc.docstatus <> 'AN'
+           and i.c_invoice_id = p_invoice_id;
+    end if;
+          
+    return v_Resultstr;
+END ATS_VAL_RETENCION_FTE_VENTA
+]]></body>
+    </function>
+  </database>

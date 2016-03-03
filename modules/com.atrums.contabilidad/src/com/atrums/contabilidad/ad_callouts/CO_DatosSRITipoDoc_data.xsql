@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<SqlClass name="CODatosSRITipoDocData" package="com.atrums.contabilidad.ad_callouts">
+
+  <SqlMethod name="SelectDatoSRI" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+        select co_vencimiento_aut_sri, 
+               co_nro_aut_sri   
+          from co_aut_sri 
+         where isactive = 'Y' and c_doctype_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="cDocTypeId"/>
+  </SqlMethod>    
+
+  <SqlMethod name="ExisteDatoSRI" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+        select count(*) 
+          from co_aut_sri 
+         where isactive = 'Y' and c_doctype_id = ?
+      ]]>
+    </Sql>
+    <Parameter name="cDocTypeId"/>
+  </SqlMethod>
+ 
+</SqlClass>

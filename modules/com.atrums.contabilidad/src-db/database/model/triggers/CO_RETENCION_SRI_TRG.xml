@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_RETENCION_SRI_TRG">
+    <trigger name="CO_RETENCION_SRI_TRG" table="CO_RETENCION_VENTA" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+  
+BEGIN
+    IF(:new.processed = 'N') THEN
+        update c_bpartner
+           set em_co_bp_nro_estab = :new.co_no_establecimiento, 
+               em_co_bp_punto_emision = :new.co_pto_emision, 
+               em_co_bp_nro_aut_rt_sri = :new.no_autorizacion 
+         where c_bpartner_id in (select c_bpartner_id from c_invoice where c_invoice_id =:new.c_invoice_id);
+    END IF;
+
+END CO_RETENCION_SRI_TRG
+]]></body>
+    </trigger>
+  </database>

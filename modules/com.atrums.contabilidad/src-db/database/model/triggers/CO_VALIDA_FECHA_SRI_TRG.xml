@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_VALIDA_FECHA_SRI_TRG">
+    <trigger name="CO_VALIDA_FECHA_SRI_TRG" table="C_INVOICE" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje VARCHAR;  
+BEGIN
+
+    IF( :new.em_co_vencimiento_aut_sri < :new.dateinvoiced ) THEN
+        v_mensaje:='La fecha de la factura no puede ser mayor a la fecha de Vencimiento de la Autorización del SRI';
+        RAISE v_mensaje;
+    END IF;
+
+    END CO_VALIDA_FECHA_SRI_TRG
+]]></body>
+    </trigger>
+  </database>

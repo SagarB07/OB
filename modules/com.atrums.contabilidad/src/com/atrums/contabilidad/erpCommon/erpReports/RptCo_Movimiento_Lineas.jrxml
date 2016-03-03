@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptCo_Movimiento_Lineas" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.2100000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA["'847442EF32BE44BCB8228A2A6D7FB44D'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select p.value,
+       u.name as unit,
+       p.name,
+       ml.movementqty
+  from m_movementline ml,
+       m_product p,
+       c_uom u
+ where ml.m_product_id = p.m_product_id
+   and u.c_uom_id = ml.c_uom_id
+   and ml.m_movement_id = $P{DOCUMENT_ID}]]>
+	</queryString>
+	<field name="value" class="java.lang.String"/>
+	<field name="unit" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="movementqty" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="18">
+			<line>
+				<reportElement x="0" y="1" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="16" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="10" y="2" width="36" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="2" width="41" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="2" width="51" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="2" width="46" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="94" y="2" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="187" y="2" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="456" y="2" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="554" y="2" width="1" height="14"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="61" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{value}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="1" width="58" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{unit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="1" width="240" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="67" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{movementqty}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="-1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="94" y="-1" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="187" y="0" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="456" y="-1" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="554" y="-1" width="1" height="17"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21">
+			<line>
+				<reportElement x="0" y="1" width="555" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

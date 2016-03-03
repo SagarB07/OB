@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_DIRECC_NAME_TRG">
+    <trigger name="CO_DIRECC_NAME_TRG" table="C_LOCATION" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+
+BEGIN
+    
+
+UPDATE c_bpartner_location 
+SET name = :new.address1 
+WHERE c_location_id = :new.c_location_id;
+
+RETURN NEW;
+ 
+END CO_DIRECC_NAME_TRG
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_CALC_BASE_IMPONIBLE">
+    <function name="ATS_CALC_BASE_IMPONIBLE" type="NUMERIC">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tp_base_imponible" type="CHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr NUMBER:=0; 
+BEGIN 
+
+    if(exists(select 1 from c_invoicetax it, c_tax t, c_taxcategory tc where it.c_tax_id = t.c_tax_id
+                                                                         and t.c_taxcategory_id = tc.c_taxcategory_id
+                                                                         and tc.em_co_tp_base_imponible = p_tp_base_imponible
+                                                                         and it.c_invoice_id  = p_invoice_id))
+    then
+        
+        select COALESCE(it.taxbaseamt,0) into v_ResultStr
+          from c_invoicetax it,
+               c_tax t,
+               c_taxcategory tc
+         where it.c_tax_id = t.c_tax_id
+           and t.c_taxcategory_id = tc.c_taxcategory_id
+           and tc.em_co_tp_base_imponible = p_tp_base_imponible
+           and it.c_invoice_id = p_invoice_id;
+    else
+        v_ResultStr := 0;
+    end if;
+        
+    return v_ResultStr;
+END ATS_CALC_BASE_IMPONIBLE
+]]></body>
+    </function>
+  </database>

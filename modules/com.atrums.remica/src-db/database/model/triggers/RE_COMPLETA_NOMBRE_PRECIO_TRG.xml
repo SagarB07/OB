@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER RE_COMPLETA_NOMBRE_PRECIO_TRG">
+    <trigger name="RE_COMPLETA_NOMBRE_PRECIO_TRG" table="M_PRODUCTPRICE" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+
+v_nombre VARCHAR(60) ;
+BEGIN
+
+        
+  IF AD_isTriggerEnabled()='N' THEN RETURN;
+  END IF;
+
+    select em_re_nombreproducto into v_nombre from m_product where m_product_id=:new.m_product_id;
+                                 
+                                     
+     :new.em_re_nombreproducto:=v_nombre;
+
+END RE_COMPLETA_NOMBRE_PRECIO_TRG
+]]></body>
+    </trigger>
+  </database>

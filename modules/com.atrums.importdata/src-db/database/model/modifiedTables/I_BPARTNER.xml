@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE I_BPARTNER">
+    <table name="I_BPARTNER" primaryKey="I_BPARTNER_KEY">
+      <column name="EM_IDT_GENERO" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+  <database name="VIEW CCO_REPORTE_COSTOS_TOTAL_V">
+    <view name="CCO_REPORTE_COSTOS_TOTAL_V"><![CDATA[SELECT cc.cco_cuenta_costos_id AS cco_reporte_costos_total_v_id, cc.ad_client_id, cc.ad_org_id, cc.isactive, cc.created, cc.createdby, cc.updated, cc.updatedby, cc.value, cc.name, sum(crc.valor) AS total FROM cco_registra_costos crc LEFT JOIN c_invoice i ON crc.c_invoice_id = i.c_invoice_id JOIN cco_cuenta_costos cc ON crc.cco_cuenta_costos_id = cc.cco_cuenta_costos_id WHERE cc.isactive = 'Y' GROUP BY cc.cco_cuenta_costos_id, cc.ad_client_id, cc.ad_org_id, cc.isactive, cc.created, cc.createdby, cc.updated, cc.updatedby, cc.value, cc.name ORDER BY cc.name]]></view>
+  </database>

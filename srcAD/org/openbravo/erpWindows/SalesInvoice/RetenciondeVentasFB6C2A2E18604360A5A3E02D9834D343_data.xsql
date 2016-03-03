@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="RetenciondeVentasFB6C2A2E18604360A5A3E02D9834D343Data" package="org.openbravo.erpWindows.SalesInvoice">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(CO_RETENCION_VENTA.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = CO_RETENCION_VENTA.CreatedBy) as CreatedByR, 
+        to_char(CO_RETENCION_VENTA.Updated, ?) as updated, 
+        to_char(CO_RETENCION_VENTA.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        CO_RETENCION_VENTA.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = CO_RETENCION_VENTA.UpdatedBy) as UpdatedByR,
+        CO_RETENCION_VENTA.AD_Org_ID, 
+CO_RETENCION_VENTA.CO_No_Establecimiento, 
+CO_RETENCION_VENTA.CO_Pto_Emision, 
+CO_RETENCION_VENTA.NO_Autorizacion, 
+CO_RETENCION_VENTA.C_Doctype_ID, 
+(CASE WHEN CO_RETENCION_VENTA.C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL1.Name IS NULL THEN TO_CHAR(table1.Name) ELSE TO_CHAR(tableTRL1.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
+CO_RETENCION_VENTA.DocumentNo, 
+CO_RETENCION_VENTA.Fecha_Emision, 
+CO_RETENCION_VENTA.Tipo_Comprobante_Venta, 
+(CASE WHEN CO_RETENCION_VENTA.Tipo_Comprobante_Venta IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS Tipo_Comprobante_VentaR, 
+CO_RETENCION_VENTA.NO_Comprobante_Venta, 
+CO_RETENCION_VENTA.Dateacct, 
+CO_RETENCION_VENTA.Total_Retencion, 
+COALESCE(CO_RETENCION_VENTA.Processed, 'N') AS Processed, 
+COALESCE(CO_RETENCION_VENTA.Isactive, 'N') AS Isactive, 
+CO_RETENCION_VENTA.Posted, 
+list2.name as Posted_BTN, 
+CO_RETENCION_VENTA.Docactionre, 
+list3.name as Docactionre_BTN, 
+CO_RETENCION_VENTA.Processing, 
+CO_RETENCION_VENTA.Docstatus, 
+CO_RETENCION_VENTA.C_Doctypetarget_ID, 
+CO_RETENCION_VENTA.AD_Client_ID, 
+CO_RETENCION_VENTA.C_Invoice_ID, 
+CO_RETENCION_VENTA.CO_Retencion_Venta_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM CO_RETENCION_VENTA left join (select C_DocType_ID, Name from C_DocType) table1 on (CO_RETENCION_VENTA.C_Doctype_ID =  table1.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL1 on (table1.C_DocType_ID = tableTRL1.C_DocType_ID and tableTRL1.AD_Language = ?)  left join ad_ref_list_v list1 on (CO_RETENCION_VENTA.Tipo_Comprobante_Venta = list1.value and list1.ad_reference_id = '94DD3D9C266148BEAE4E201BD84F8F76' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND CO_RETENCION_VENTA.Posted = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = 'CB29EF103ACC49108693B711ACEF6261' and list3.ad_language = ?  AND CO_RETENCION_VENTA.Docactionre = TO_CHAR(list3.value))
+        WHERE 2=2 
+
+        AND 1=1 
+        AND CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ? 
+        AND CO_RETENCION_VENTA.AD_Client_ID IN ('1') 
+           AND CO_RETENCION_VENTA.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+
+    <Parameter name="cInvoiceId" optional="true" after="AND 1=1 " id="paramKeyParent"> AND CO_RETENCION_VENTA.C_Invoice_ID = ? </Parameter>
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="CO_RETENCION_VENTA.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="CO_RETENCION_VENTA.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+    <Parameter name="cInvoiceId" id="paramKeyParent"></Parameter>
+<Parameter name="cDoctypetargetId"></Parameter><Parameter name="processed"></Parameter><Parameter name="docstatus"></Parameter><Parameter name="coNoEstablecimiento"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="fechaEmision"></Parameter><Parameter name="posted"></Parameter><Parameter name="postedBtn"></Parameter><Parameter name="dateacct"></Parameter><Parameter name="noComprobanteVenta"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="isactive"></Parameter><Parameter name="documentno"></Parameter><Parameter name="docactionre"></Parameter><Parameter name="docactionreBtn"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="processing"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="coRetencionVentaId"></Parameter><Parameter name="tipoComprobanteVenta"></Parameter><Parameter name="coPtoEmision"></Parameter><Parameter name="totalRetencion"></Parameter><Parameter name="noAutorizacion"></Parameter><Parameter name="cDoctypeId"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef180DACC7A8C64503904FDC79FAEC513E" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        select COALESCE(em_co_bp_nro_estab,'001') AS DefaultValue from c_bpartner where c_bpartner_id in (select c_bpartner_id from c_invoice where c_invoice_id = ?) 
+    ]]></Sql>
+
+<Parameter name="c_invoice_id"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef28707085D03D4CA593A06A750114DEEE_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef399EF229625B47D890FE7831F76DB253" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        select coalesce(em_co_nro_estab,'') || '-' || coalesce(em_co_punto_emision,'') || '-' || documentno as defaultValue from c_invoice where ad_client_id = ? and c_invoice_id = ? 
+    ]]></Sql>
+
+<Parameter name="AD_CLIENT_ID"/>
+<Parameter name="c_invoice_id"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef4D49B91918F34C47854FE88F1A8C4FAD_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefEAB8C210B6D541E68296959AC3104EE1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        select COALESCE(em_co_bp_punto_emision,'001') AS DefaultValue from c_bpartner where c_bpartner_id in (select c_bpartner_id from c_invoice where c_invoice_id = ?) 
+    ]]></Sql>
+
+<Parameter name="c_invoice_id"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefFA8A7F8EBC774ABFBCF7B50F8719DFA0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        select COALESCE(em_co_bp_nro_aut_rt_sri,'') AS DefaultValue from c_bpartner  where c_bpartner_id in (select c_bpartner_id from c_invoice where c_invoice_id = ?) 
+    ]]></Sql>
+
+<Parameter name="c_invoice_id"/>
+  </SqlMethod>
+
+
+
+  <SqlMethod name="selectParentID" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>return the parent ID</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT CO_RETENCION_VENTA.C_Invoice_ID AS NAME
+        FROM CO_RETENCION_VENTA
+        WHERE CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ?
+    ]]></Sql>
+    <Parameter name="key"></Parameter>
+  </SqlMethod>
+
+   <SqlMethod name="selectParent" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.DocumentNo), '')) || ' - ' || TO_CHAR(table1.DateInvoiced, 'DD-MM-YYYY') || ' - ' || TO_CHAR(COALESCE(TO_CHAR(table1.GrandTotal), ''))) AS NAME FROM C_Invoice left join (select C_Invoice_ID, DocumentNo, DateInvoiced, GrandTotal from C_Invoice) table1 on (C_Invoice.C_Invoice_ID = table1.C_Invoice_ID) WHERE C_Invoice.C_Invoice_ID = ?  
+    ]]></Sql>
+<Parameter name="cInvoiceId"/>
+
+  </SqlMethod>
+
+
+
+
+   <SqlMethod name="selectParentTrl" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.DocumentNo), '')) || ' - ' || TO_CHAR(table1.DateInvoiced, 'DD-MM-YYYY') || ' - ' || TO_CHAR(COALESCE(TO_CHAR(table1.GrandTotal), ''))) AS NAME FROM C_Invoice left join (select C_Invoice_ID, DocumentNo, DateInvoiced, GrandTotal from C_Invoice) table1 on (C_Invoice.C_Invoice_ID = table1.C_Invoice_ID) WHERE C_Invoice.C_Invoice_ID = ?  
+    ]]></Sql>
+<Parameter name="cInvoiceId"/>
+
+  </SqlMethod>
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE CO_RETENCION_VENTA
+        SET AD_Org_ID = (?) , CO_No_Establecimiento = (?) , CO_Pto_Emision = (?) , NO_Autorizacion = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , Fecha_Emision = TO_DATE(?) , Tipo_Comprobante_Venta = (?) , NO_Comprobante_Venta = (?) , Dateacct = TO_DATE(?) , Total_Retencion = TO_NUMBER(?) , Processed = (?) , Isactive = (?) , Posted = (?) , Docactionre = (?) , Processing = (?) , Docstatus = (?) , C_Doctypetarget_ID = (?) , AD_Client_ID = (?) , C_Invoice_ID = (?) , CO_Retencion_Venta_ID = (?) , updated = now(), updatedby = ? 
+        WHERE CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ? 
+                 AND CO_RETENCION_VENTA.C_Invoice_ID = ? 
+        AND CO_RETENCION_VENTA.AD_Client_ID IN ('1') 
+        AND CO_RETENCION_VENTA.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="coNoEstablecimiento"></Parameter> <Parameter name="coPtoEmision"></Parameter> <Parameter name="noAutorizacion"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="fechaEmision"></Parameter> <Parameter name="tipoComprobanteVenta"></Parameter> <Parameter name="noComprobanteVenta"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="totalRetencion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="docactionre"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypetargetId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cInvoiceId"></Parameter> <Parameter name="coRetencionVentaId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="coRetencionVentaId"></Parameter>
+    
+    <Parameter name="cInvoiceId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="CO_RETENCION_VENTA.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="CO_RETENCION_VENTA.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO CO_RETENCION_VENTA 
+        (AD_Org_ID, CO_No_Establecimiento, CO_Pto_Emision, NO_Autorizacion, C_Doctype_ID, DocumentNo, Fecha_Emision, Tipo_Comprobante_Venta, NO_Comprobante_Venta, Dateacct, Total_Retencion, Processed, Isactive, Posted, Docactionre, Processing, Docstatus, C_Doctypetarget_ID, AD_Client_ID, C_Invoice_ID, CO_Retencion_Venta_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="coNoEstablecimiento"></Parameter> <Parameter name="coPtoEmision"></Parameter> <Parameter name="noAutorizacion"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="fechaEmision"></Parameter> <Parameter name="tipoComprobanteVenta"></Parameter> <Parameter name="noComprobanteVenta"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="totalRetencion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="docactionre"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypetargetId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cInvoiceId"></Parameter> <Parameter name="coRetencionVentaId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM CO_RETENCION_VENTA
+        WHERE CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ? 
+                 AND CO_RETENCION_VENTA.C_Invoice_ID = ? 
+        AND CO_RETENCION_VENTA.AD_Client_ID IN ('1') 
+        AND CO_RETENCION_VENTA.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+        <Parameter name="cInvoiceId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="CO_RETENCION_VENTA.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="CO_RETENCION_VENTA.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM CO_RETENCION_VENTA
+         WHERE CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM CO_RETENCION_VENTA
+         WHERE CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

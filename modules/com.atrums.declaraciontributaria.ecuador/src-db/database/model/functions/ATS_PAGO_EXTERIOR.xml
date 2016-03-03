@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_PAGO_EXTERIOR">
+    <function name="ATS_PAGO_EXTERIOR" type="VARCHAR">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Resultstr VARCHAR:=''; 
+ v_codPais VARCHAR:='';
+BEGIN 
+
+select p.em_ats_codigo_sri
+into v_codPais
+from c_invoice c, c_bpartner bp, c_bpartner_location bpl, c_location l, c_country p
+where c.c_bpartner_id = bp.c_bpartner_id
+  and bp.c_bpartner_id = bpl.c_bpartner_id
+  and bpl.c_location_id = l.c_location_id
+  and l.c_country_id = p.c_country_id
+  and c.c_invoice_id = p_invoice_id;
+
+    IF(v_codPais='593') THEN
+
+        select xmlelement(name "pagoExterior" ,
+                       xmlelement(name "pagoLocExt", '01'),
+                       xmlelement(name "paisEfecPago", 'NA'),
+                       xmlelement(name "aplicConvDobTrib", 'NA'),
+                       xmlelement(name "pagExtSujRetNorLeg", 'NA')
+                       ) into v_Resultstr;
+          
+    ELSE      
+        
+        select xmlelement(name "pagoExterior" ,
+                       xmlelement(name "pagoLocExt", '02'),
+                       xmlelement(name "paisEfecPago", v_codPais ),
+                       xmlelement(name "aplicConvDobTrib", 'SI'),
+                       xmlelement(name "pagExtSujRetNorLeg", 'NO')
+                       ) into v_Resultstr;
+
+    END IF;
+
+    RETURN v_Resultstr;
+END ATS_PAGO_EXTERIOR
+]]></body>
+    </function>
+  </database>

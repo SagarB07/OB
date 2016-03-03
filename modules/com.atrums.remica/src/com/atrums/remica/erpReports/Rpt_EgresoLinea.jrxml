@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_EgresoLinea" pageWidth="483" pageHeight="108" columnWidth="483" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.652892561983471"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="GroupHeader_DarkGray" mode="Opaque" forecolor="#FFFFFF" backcolor="#555555" vAlign="Middle" fontName="Bitstream Vera Sans" fontSize="18" isBold="true">
+		<box leftPadding="5"/>
+	</style>
+	<style name="Gray" mode="Opaque" forecolor="#000000" backcolor="#CCCCCC"/>
+	<parameter name="FIN_PAYMENT_ID" class="java.lang.String"/>
+	<parameter name="NUMBERFORMAT" class="java.text.DecimalFormat" isForPrompting="false"/>
+	<parameter name="LOCALE" class="java.util.Locale" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT
+     case when psd.fin_payment_schedule_order is not null and psd.fin_payment_schedule_invoice is null then 'O'
+          when psd.fin_payment_schedule_invoice is not null and psd.fin_payment_schedule_order is null then 'I'
+          when psd.fin_payment_schedule_invoice is not null and psd.fin_payment_schedule_order is not null then 'I'
+          when pd.c_glitem_id is not null then 'GL'
+          when psd.fin_payment_schedule_invoice is null and psd.fin_payment_schedule_order is null and p.referenceno= 'RP'
+          then 'RP'
+          else 'U'
+          end as LINE_DOCUMENTTYPE,
+     coalesce(to_char(inv.documentno), to_char(ord.documentno), to_char('')) as LINE_DOCUMENTNO,
+
+     case when p.used_credit = 0 then
+                  coalesce(psd.amount, pd.amount)-coalesce(p.used_credit,0)
+          else
+                coalesce(p.used_credit,0)
+     end as AMOUNT,
+     p.description as RAZON,
+
+     case when p.used_credit = 0 then
+            c_validcombination.alias
+          else
+            ANTICIPO.alias
+     end
+  as CUENTA_PAGO,
+
+ case when p.used_credit = 0 then
+            c_validcombination.description
+          else
+            ANTICIPO.description
+     end
+     as CUENTA_PAGO_NOMBRE,
+
+     CASE WHEN pd.c_glitem_id is not null THEN
+               (select alias from c_validcombination vc1, c_glitem_acct gl1
+                  where gl1.glitem_credit_acct = vc1.c_validcombination_id
+                  and pd.c_glitem_id = gl1.c_glitem_id)
+          when upper(p.description) like 'ROL%' then
+               BENEFICIARIO.alias
+          ELSE  BENEFICIARIO1.alias
+     END as CUENTA_BENEFICIARIO,
+
+     CASE WHEN pd.c_glitem_id is not null THEN
+              (select description from c_validcombination vc1, c_glitem_acct gl1
+                where gl1.glitem_credit_acct = vc1.c_validcombination_id
+                  and pd.c_glitem_id = gl1.c_glitem_id)
+         when upper(p.description) like 'ROL%' then
+              BENEFICIARIO.description
+         ELSE BENEFICIARIO1.description
+     END as CUENTA_BENEFICIARIO_NOMBRE
+
+    FROM fin_payment p join fin_payment_detail pd on (p.fin_payment_id=pd.fin_payment_id)
+        join fin_payment_scheduledetail psd on (pd.fin_payment_detail_id=psd.fin_payment_detail_id)
+        left outer join fin_payment_schedule ps on (psd.fin_payment_schedule_invoice=ps.fin_payment_schedule_id)
+        left outer join c_invoice inv on (ps.c_invoice_id = inv.c_invoice_id)
+        left outer join fin_payment_schedule ps2 on (psd.fin_payment_schedule_order=ps2.fin_payment_schedule_id)
+        left outer join c_order ord on (ps2.c_order_id = ord.c_order_id)
+        left outer join c_glitem gl on (pd.c_glitem_id = gl.c_glitem_id)
+
+	join fin_financial_account finact on (finact.fin_financial_account_id=p.fin_financial_account_id)
+	join c_validcombination on (c_validcombination_id = (select fin_withdrawal_acct from  fin_financial_account_acct where fin_financial_account_id=finact.fin_financial_account_id limit 1))
+	LEFT JOIN c_validcombination BENEFICIARIO on BENEFICIARIO.c_validcombination_id = (select em_no_pago_acct from c_bp_employee_acct where c_bpartner_id=p.c_bpartner_id limit 1)
+    LEFT JOIN c_validcombination BENEFICIARIO1 on BENEFICIARIO1.c_validcombination_id = (select v_liability_acct from c_bp_vendor_acct where c_bpartner_id=p.c_bpartner_id limit 1)
+    LEFT JOIN c_validcombination ANTICIPO on ANTICIPO.c_validcombination_id = (select v_prepayment_acct from c_bp_vendor_acct where c_bpartner_id=p.c_bpartner_id limit 1)
+   WHERE  p.fin_payment_id=$P{FIN_PAYMENT_ID}]]>
+	</queryString>
+	<field name="LINE_DOCUMENTTYPE" class="java.lang.String"/>
+	<field name="LINE_DOCUMENTNO" class="java.lang.String"/>
+	<field name="AMOUNT" class="java.math.BigDecimal"/>
+	<field name="RAZON" class="java.lang.String"/>
+	<field name="CUENTA_PAGO" class="java.lang.String"/>
+	<field name="CUENTA_BENEFICIARIO" class="java.lang.String"/>
+	<field name="CUENTA_PAGO_NOMBRE" class="java.lang.String"/>
+	<field name="CUENTA_BENEFICIARIO_NOMBRE" class="java.lang.String"/>
+	<variable name="SUM_LINEAMT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{AMOUNT}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="348" y="0" width="82" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="0" width="135" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUENTA_BENEFICIARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="0" width="185" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUENTA_BENEFICIARIO_NOMBRE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="14" y="0" width="135" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUENTA_PAGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="0" width="185" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUENTA_PAGO_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="382" y="0" width="101" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_LINEAMT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="41">
+			<textField>
+				<reportElement x="15" y="29" width="333" height="10"/>
+				<textElement>
+					<font fontName="Courier New" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RAZON}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="383" y="29" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Courier New" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SUM_LINEAMT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

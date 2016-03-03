@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_FIELD" version="">
+  <row id="001B5B2BFC064FA4AEDD5B20518B2DD1" trl="Y">
+    <value column="Name" isTrl="Y" original="Amount Currently Due">Importe Actualmente Vencido</value>
+    <value column="Description" isTrl="Y" original="Due Amount">Importe Actualmente Vencido</value>
+    <value column="Help" isTrl="Y" original="Total amount due">Importe Actualmente Vencido</value>
+  </row>
+  <row id="030214D33DE44805B2BA9139944B0BE1" trl="N">
+    <value column="Name" isTrl="Y" original="RM receipt">Recepción de Items</value>
+    <value column="Description" isTrl="Y" original="The document number for identifying an act of sending goods.">El número de documento para la identificación al momento de enviar mercancías.</value>
+    <value column="Help" isTrl="Y" original="The Shipment ID indicates the unique document for this shipment.">El ID de envío indica el documento único para este envío.</value>
+  </row>
+  <row id="0554CE00C06447F2B33889030BC040E3" trl="N">
+    <value column="Name" isTrl="N" original="Net List Price">Net List Price</value>
+    <value column="Description" isTrl="N" original="The official net price of a product in a specified currency.">The official net price of a product in a specified currency.</value>
+    <value column="Help" isTrl="N" original="The Net List Price is the official price stated by the selected pricelist and the currency of the document.">The Net List Price is the official price stated by the selected pricelist and the currency of the document.</value>
+  </row>
+  <row id="06119ABE11644B2B8CD67F7DC4C96891" trl="N">
+    <value column="Name" isTrl="N" original="Copy from Attribute">Copy from Attribute</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="07BA019E35BC4495AD040F8338740D95" trl="N">
+    <value column="Name" isTrl="N" original="Receipt Status">Receipt Status</value>
+    <value column="Description" isTrl="N" original="Receipt Status">Receipt Status</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="090122697F994BE696E9F947FFF34E3C" trl="N">
+    <value column="Name" isTrl="Y" original="Upon Reconciliation Use">Cuenta para Conciliación</value>
+    <value column="Description" isTrl="Y" original="Account used upon reconciliation">Cuenta utilizada para la conciliacion</value>
+    <value column="Help" isTrl="Y" original="Account used upon reconciliation">Cuenta utilizada para la conciliacion</value>
+  </row>
+  <row id="0F5888C3B41142FFAAC11D68CD176C05" trl="Y">
+    <value column="Name" isTrl="Y" original="Amount Currently Due">Monto actualmente vencido</value>
+    <value column="Description" isTrl="Y" original="Due Amount">Monto actualmente vencido</value>
+    <value column="Help" isTrl="Y" original="Total amount due">Monto actualmente vencido</value>
+  </row>
+  <row id="1004400028" trl="Y">
+    <value column="Name" isTrl="Y" original="Requester">Solicitante</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1004400043" trl="Y">
+    <value column="Name" isTrl="Y" original="Requester">Solicitante</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005100005" trl="Y">
+    <value column="Name" isTrl="Y" original="Cost Salary Category">Categoría salarial</value>
+    <value column="Description" isTrl="Y" original="A classification of salaries based on similar characteristics or attributes.">Clasificación de salarios basada en atributos o características similares.</value>
+    <value column="Help" isTrl="Y" original="Indicates a salary category">Indica una categoría salarial</value>
+  </row>
+  <row id="1005400207" trl="Y">
+    <value column="Name" isTrl="Y" original="Disable Heartbeat">Activar Heartbeat</value>
+    <value column="Description" isTrl="Y" original="Disable Heartbeat process">Activar/Desactivar proceso Heartbeat</value>
+    <value column="Help" isTrl="Y" original="Disable Heartbeat process">Activar/Desactivar proceso Heartbeat</value>
+  </row>
+  <row id="1005900000" trl="Y">
+    <value column="Name" isTrl="Y" original="Contract Amount">Cuantía del acuerdo</value>
+    <value column="Description" isTrl="Y" original="The maximum legal monetary price a project may be billed for.">Suma máxima facturable de un proyecto.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900002" trl="Y">
+    <value column="Name" isTrl="Y" original="Ending Date">Fecha de final</value>
+    <value column="Description" isTrl="Y" original="A parameter stating when a specified request will end.">Parámetro que indica el momento en que finaliza una petición.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900003" trl="Y">
+    <value column="Name" isTrl="Y" original="Price Ceiling">Límite superior</value>
+    <value column="Description" isTrl="Y" original="An indication that the highest possible contract amount and quantity are being charged (may depend on government regulations.">Indicación de que se está cobrando la suma o importe máximos permitidos por el contrato (puede depender de los requisitios del gobierno).</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900004" trl="Y">
+    <value column="Name" isTrl="Y" original="Task Complete">Tarea completa</value>
+    <value column="Description" isTrl="Y" original="Task is complete">Indica que la tarea está completa.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900005" trl="Y">
+    <value column="Name" isTrl="Y" original="Net Unit Price">Precio unitario</value>
+    <value column="Description" isTrl="Y" original="The price that will be paid for a specified item.">Precio que se paga por un ítem específico.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900006" trl="Y">
+    <value column="Name" isTrl="Y" original="Starting Date">Fecha de inicio</value>
+    <value column="Description" isTrl="Y" original="A parameter stating when a specified request will begin.">Parámetro que indica el momento en que finaliza una petición.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900007" trl="Y">
+    <value column="Name" isTrl="Y" original="Planned Expenses">Gastos planificados</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="1005900009" trl="Y">
+    <value column="Name" isTrl="Y" original="Reinvoiced Expenses">Gastos refacturables</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Reinvoicing Expenses">Gastos refacturables</value>
+  </row>
+  <row id="1005900011" trl="Y">
+    <value column="Name" isTrl="Y" original="Service Cost">Costo del servicio</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Service cost">Costo del servicio</value>
+  </row>
+  <row id="1005900013" trl="Y">
+    <value column="Name" isTrl="Y" original="Service Revenue">Ingresos del servicio</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Revenue services">Ingresos del servicio</value>
+  </row>
+  <row id="1137" trl="N">
+    <value column="Name" isTrl="N" original="Net List Price">Net List Price</value>
+    <value column="Description" isTrl="N" original="The official net price of a product in a specified currency.">The official net price of a product in a specified currency.</value>
+    <value column="Help" isTrl="N" original="The Net List Price is the official price stated by the selected pricelist and the currency of the document.">The Net List Price is the official price stated by the selected pricelist and the currency of the document.</value>
+  </row>
+  <row id="114" trl="Y">
+    <value column="Name" isTrl="Y" original="Name">Nombre</value>
+    <value column="Description" isTrl="Y" original="Alphanumeric identifier of the entity">Identificador alfanumérico de la entidad</value>
+    <value column="Help" isTrl="Y" original="The name of an entity (record) is used as an default search option in addition to the search key. The name is up to 60 characters in length.">Para realizar las búsquedas, además de la clave, se utiliza el nombre del registro. Puede alcanzar una longitud de 60 caracteres. </value>
+  </row>
+  <row id="12C428AA32294335A97B3AAFCF00A7AD" trl="Y">
+    <value column="Name" isTrl="Y" original="Total Outstanding">Total Pendiente</value>
+    <value column="Description" isTrl="Y" original="Outstanding Amount">Monto pendiente</value>
+    <value column="Help" isTrl="Y" original="Total Outstanding Amount. Amount pending to be paid">Monto Total pendiente de pago</value>
+  </row>
+  <row id="133B82E6E63D42A8BF22920E72A3A5EA" trl="N">
+    <value column="Name" isTrl="Y" original="Paying From">Pagando desde</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Financial account where the payment amount is deposited.">Cuenta financiera, donde la cantidad del pago es depositada.</value>
+  </row>
+  <row id="1418FA20C83B4B6A99BB2729D52997E3" trl="N">
+    <value column="Name" isTrl="Y" original="Currency">Moneda</value>
+    <value column="Description" isTrl="Y" original="An accepted medium of monetary exchange that may vary across countries.">Un medio aceptado de intercambio monetario que puede variar entre países.</value>
+    <value column="Help" isTrl="Y" original="Organization currency will be loaded at login time and used to default its value in transactional windows. It will not be used for cost calculation.">Organización de divisas se cargará en el momento de inicio de sesión y se utiliza por defecto en las ventanas de su valor de transacción. No se utiliza para el cálculo de costes.</value>
+  </row>
+  <row id="18C2A1446F2A4F0C912873EA6754B668" trl="N">
+    <value column="Name" isTrl="N" original="Payment No.">Payment No.</value>
+    <value column="Description" isTrl="N" original="Document NO of the related payment">Document NO of the related payment</value>
+    <value column="Help" isTrl="N" original="Document NO of the related payment">Document NO of the related payment</value>
+  </row>
+  <row id="2124" trl="Y">
+    <value column="Name" isTrl="Y" original="Language">Idioma</value>
+    <value column="Description" isTrl="Y" original="Language for this application">Idioma de la aplicación</value>
+    <value column="Help" isTrl="Y" original="The Language identifies the language to use for display">Es el idioma en el que se emitirán los pedidos, guías de despacho, facturas,... destinados a este tercero.&amp;nbsp;</value>
+  </row>
+  <row id="2686" trl="Y">
+    <value column="Name" isTrl="Y" original="Movement Date">F.movimiento</value>
+    <value column="Description" isTrl="Y" original="Date a product was moved in or out of inventory">Fecha en la cual un producto entro o salió la bodega</value>
+    <value column="Help" isTrl="Y" original="The Movement Date indicates the date that a product moved in or out of inventory.  This is the result of a shipment, receipt or inventory movement.">Indica la fecha en que se realiza el conteo de inventario. </value>
+  </row>
+  <row id="2689" trl="Y">
+    <value column="Name" isTrl="Y" original="Process Inventory Count">Proceso de Conteo de Inventario</value>
+    <value column="Description" isTrl="Y" original="Process Inventory count and update Inventory">Proceso de recuento de inventario y actualización.</value>
+    <value column="Help" isTrl="Y" original="This button process the Inventory Count Lines updating the stock of the products. Once processed, it is not possible to modify the Count Lines">&lt;P&gt;Este botón procesa las líneas de conteo de inventario actualizando el stock de los productos al indicado en cada línea.&lt;/P&gt;
+&#13;&lt;P&gt;Una vez procesado no es posible volver a modificar las líneas de conteo.&lt;/P&gt;</value>
+  </row>
+  <row id="2C35866FFB62490998CCAA44F3C0DCE4" trl="N">
+    <value column="Name" isTrl="N" original="Incl. documents up to this date">Incl. documents up to this date</value>
+    <value column="Description" isTrl="N" original="The date when a specified request must be carried out by.">The date when a specified request must be carried out by.</value>
+    <value column="Help" isTrl="N" original="Date when the payment is due without deductions or discount">Date when the payment is due without deductions or discount</value>
+  </row>
+  <row id="2CF21F30B3B24EA489126EF4DDBD643E" trl="N">
+    <value column="Name" isTrl="Y" original="In Transit Payment IN Account">En Cuenta de transporte de pago</value>
+    <value column="Description" isTrl="Y" original="Account used for in transit status of incoming payments">Cuenta utilizada para el tránsito en el estado de los pagos recibidos</value>
+    <value column="Help" isTrl="Y" original="Account used for in transit status of incoming payments">Cuenta utilizada para el tránsito en el estado de los pagos recibidos</value>
+  </row>
+  <row id="300" trl="Y">
+    <value column="Name" isTrl="Y" original="Name">Usuario</value>
+    <value column="Description" isTrl="Y" original="Alphanumeric identifier of the entity">Identificador alfanumérico del usuario</value>
+    <value column="Help" isTrl="Y" original="The name of an entity (record) is used as an default search option in addition to the search key. The name is up to 60 characters in length.">&lt;P&gt;Es el usuario&amp;nbsp;que debe de introducir en la pantalla de login para poder acceder a la aplicación.&lt;/P&gt;</value>
+  </row>
+  <row id="3124" trl="Y">
+    <value column="Name" isTrl="Y" original="Discount">Descuento %</value>
+    <value column="Description" isTrl="Y" original="Discount in percent">Descuento en porcentaje</value>
+    <value column="Help" isTrl="Y" original="The Discount indicates the discount applied as a percentage of the List Price.">Indica el descuento aplicado o recogido como porcentaje de la Lista de Precios.</value>
+  </row>
+  <row id="3219" trl="Y">
+    <value column="Name" isTrl="Y" original="Direct print">Impresión directa</value>
+    <value column="Description" isTrl="Y" original="Print without dialog">Impresión directa</value>
+    <value column="Help" isTrl="Y" original="The Direct Print checkbox indicates that the report will print without displaying the print dialog box.">Mediante esta opción de selección podemos realizar una impresión directa del informe. Es decir, no se nos mostrará el diálogo de impresión cuando pulsemos el botón de impresión.</value>
+  </row>
+  <row id="3305" trl="Y">
+    <value column="Name" isTrl="Y" original="Goods Shipment/Receipt Line">Productos despachados/Línea de recepción</value>
+    <value column="Description" isTrl="Y" original="A statement displaying one item, charge, or movement in a shipment or receipt">Productos despachados/Línea de recepción</value>
+    <value column="Help" isTrl="Y" original="The Shipment/Receipt indicates a unique line in a Shipment/Receipt document">Productos despachados/Línea de recepción</value>
+  </row>
+  <row id="3351" trl="Y">
+    <value column="Name" isTrl="Y" original="Supplier Reference">Referencia del Proveedor</value>
+    <value column="Description" isTrl="Y" original="A reference or document order number as listed in business partner application.">	Número de factura del proveedor asociado al pago, es decir de la factura del proveedor que está pagando.</value>
+    <value column="Help" isTrl="Y" original="Supplier invoice number associated with the payment, i.e., which of the supplier’s invoices you are paying">Número de factura del proveedor asociado al pago, es decir de la factura del proveedor que está pagando</value>
+  </row>
+  <row id="3363" trl="Y">
+    <value column="Name" isTrl="Y" original="Purchase Order Line">Línea pedido compra</value>
+    <value column="Description" isTrl="Y" original="Purchase Order Line">Línea pedido compra</value>
+    <value column="Help" isTrl="Y" original="The Purchase Order Line is a unique identifier for a line in an order.">Para cada una de las líneas de un pedido de compra existe un idenficador único.</value>
+  </row>
+  <row id="3395" trl="N">
+    <value column="Name" isTrl="N" original="Net List Price">Net List Price</value>
+    <value column="Description" isTrl="N" original="The official net price of a product in a specified currency.">The official net price of a product in a specified currency.</value>
+    <value column="Help" isTrl="N" original="The Net List Price is the official price stated by the selected pricelist and the currency of the document.">The Net List Price is the official price stated by the selected pricelist and the currency of the document.</value>
+  </row>
+  <row id="345C98C256834D0884968A82B3290FB4" trl="N">
+    <value column="Name" isTrl="N" original="Alternate Taxable Amount">Alternate Taxable Amount</value>
+    <value column="Description" isTrl="N" original="The total sum on which taxes are added.">The total sum on which taxes are added.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="3521" trl="Y">
+    <value column="Name" isTrl="Y" original="Purchase Order Line">Línea pedido compra</value>
+    <value column="Description" isTrl="Y" original="Purchase Order Line">Línea pedido compra</value>
+    <value column="Help" isTrl="Y" original="The Purchase Order Line is a unique identifier for a line in an order.">Para cada una de las líneas de un pedido de compra existe un idenficador único.</value>
+  </row>
+  <row id="3742" trl="Y">
+    <value column="Name" isTrl="Y" original="Base Version (Default)">Origen tarifa</value>
+    <value column="Description" isTrl="Y" original="Base Price List">Origen de cálculo de la lista de precios </value>
+    <value column="Help" isTrl="Y" original="The Base Price List identifies the Base Pricelist used for calculating prices (the source)">Identifica la lista de precios usada como base para calcular los nuevos.</value>
+  </row>
+  <row id="3747" trl="Y">
+    <value column="Name" isTrl="Y" original="Verify BOM">Comprobar LDM</value>
+    <value column="Description" isTrl="Y" original="Verify BOM Structure">Comprobar la estructura de LDM</value>
+    <value column="Help" isTrl="Y" original="The Verify BOM Structure checks the elements and steps which comprise a Bill of Materials.">Este botón aparece cuando un item es marcado como lista de materiales. Comprueba que se han introducido los productos que componen la lista.</value>
+  </row>
+  <row id="37CB520066824462B975F7293A547925" trl="N">
+    <value column="Name" isTrl="Y" original="RM order">Pedido Devolución</value>
+    <value column="Description" isTrl="N" original="A unique and often automatically generated identifier for a sales order.">A unique and often automatically generated identifier for a sales order.</value>
+    <value column="Help" isTrl="N" original="Unique identifier and a reference to a Sales Order originating from the document sequence defined for this document type.">Unique identifier and a reference to a Sales Order originating from the document sequence defined for this document type.</value>
+  </row>
+  <row id="3D88F0ED765A4F7188198E0A1B23145E" trl="N">
+    <value column="Name" isTrl="Y" original="RMA vendor ref.">Ref. Devolución Proveedor</value>
+    <value column="Description" isTrl="Y" original="A reference or document order number as listed in business partner application.">Una referencia o número de orden de los documentos que se enumeran en la solicitud de socio de negocios.</value>
+    <value column="Help" isTrl="Y" original="This can be used to input a reference for this specific transaction. For example, a Purchase Order number can be input on a Sales Order for easier reference.">Esto puede ser utilizado para introducir una referencia para esta operación específica. Por ejemplo, un número de orden de compra puede ser la entrada de una orden de venta para facilitar la referencia.</value>
+  </row>
+  <row id="4001" trl="Y">
+    <value column="Name" isTrl="Y" original="Process Statement">Procesar</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="">El proceso genera una liquidación de cancelación para los efectos del extracto.</value>
+  </row>
+  <row id="4457" trl="Y">
+    <value column="Name" isTrl="Y" original="Planned Quantity">Cantidad prevista</value>
+    <value column="Description" isTrl="Y" original="The expected or provisional quantity to be involved for a transaction line.">Cantidad esperada o provisoria de una línea de transacción.</value>
+    <value column="Help" isTrl="Y" original="The Planned Quantity indicates the anticipated quantity for this project or project line">Indica la cantidad prevista a priori para este proyecto o línea.</value>
+  </row>
+  <row id="4462" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner / Sales Rep">Tercero/Vendedor</value>
+    <value column="Description" isTrl="Y" original="Identifies a Business Partner (Sales Rep) receiving the Commission">Identifica el tercero que recibe la comisión.</value>
+    <value column="Help" isTrl="Y" original="The Business Partner should be a vendor and may be a Sales Representative">&lt;P&gt;Es el comercial o representante de ventas al que se le paga la comisión.&lt;/P&gt;</value>
+  </row>
+  <row id="4724" trl="N">
+    <value column="Name" isTrl="N" original="Account">Account</value>
+    <value column="Description" isTrl="N" original="The (natural) account used">The (natural) account used</value>
+    <value column="Help" isTrl="N" original="The (natural) account used">The (natural) account used</value>
+  </row>
+  <row id="47F5727373514860AEA698530C9272F5" trl="N">
+    <value column="Name" isTrl="N" original="Period">Period</value>
+    <value column="Description" isTrl="N" original="A specified time period. Target period to be opened or closed.">A specified time period. Target period to be opened or closed.</value>
+    <value column="Help" isTrl="N" original="The Period indicates an exclusive range of dates for a calendar. When selected just this period will be opened or closed">The Period indicates an exclusive range of dates for a calendar. When selected just this period will be opened or closed</value>
+  </row>
+  <row id="4F5A30F1CFAB4459A26D5AA5AD4DEFFB" trl="N">
+    <value column="Name" isTrl="N" original="Completed Quantity">Completed Quantity</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Indicates how many times has been processed the work requirement phase.">Indicates how many times has been processed the work requirement phase.</value>
+  </row>
+  <row id="50FD7240D744436FB84543C30CB2625D" trl="N">
+    <value column="Name" isTrl="Y" original="Upon Clearing Use">Cuenta para conciliación</value>
+    <value column="Description" isTrl="N" original="Account used upon clearing">Account used upon clearing</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="5126" trl="Y">
+    <value column="Name" isTrl="Y" original="Create Columns from DB">Crear columnas de la base de datos</value>
+    <value column="Description" isTrl="Y" original="Create Dictionary Columns of Table not existing as a Column but in the Database">Crea columnas en el diccionario que no esten ya creadas pero si en la base de datos</value>
+    <value column="Help" isTrl="Y" original="If you have added columns in the database to this table, this procedure creates the Column records in the Dictionary.  Please be aware, that they may deleted, if the entity type is not set to User.">Si se han añadido columnas en la base de datos a esta tabla, este procedimiento lo único que hace es crearlas a su vez en el diccionario. Por favor tener en cuenta, de que pueden ser borradas si el tipo de entidad no ha sido fijada por el usuario</value>
+  </row>
+  <row id="5260" trl="N">
+    <value column="Name" isTrl="N" original="Base Unit Price">Base Unit Price</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="5444" trl="Y">
+    <value column="Name" isTrl="Y" original="Report Date">Fecha del informe</value>
+    <value column="Description" isTrl="Y" original="Expense/Time Report Date">Informe de fechas de gastos y tiempo</value>
+    <value column="Help" isTrl="Y" original="Date of Expense/Time Report">Fecha del informe de gastos/tiempo.</value>
+  </row>
+  <row id="5445" trl="Y">
+    <value column="Name" isTrl="Y" original="Employee">Empleado</value>
+    <value column="Description" isTrl="Y" original="Identifies an Employee">Selecciona un empleado</value>
+    <value column="Help" isTrl="Y" original="A employee is a Business Partner checked as Employee">Combo de selección de empleados. Saldrán sólo aquellos terceros que estén marcados como empleados</value>
+  </row>
+  <row id="5456" trl="Y">
+    <value column="Name" isTrl="Y" original="Reinvoicing">Refacturable</value>
+    <value column="Description" isTrl="N" original="Line reinvoiced">Line reinvoiced</value>
+    <value column="Help" isTrl="Y" original="Indicator if the expense line is billable to customer.">Refacturable</value>
+  </row>
+  <row id="5460" trl="Y">
+    <value column="Name" isTrl="Y" original="Converted Amount">Importe convertido</value>
+    <value column="Description" isTrl="Y" original="The monetary sum at which one unit of measure is changed to another.">Suma en la que una unidad de medida cambia por otra.</value>
+    <value column="Help" isTrl="Y" original="The Converted Amount is the result of multiplying the Source Amount by the Conversion Rate for this target currency.">El Importe Cambiado es el resultado de multiplicar el importe origen por el factor de conversión para la divisa objetivo.</value>
+  </row>
+  <row id="5462" trl="Y">
+    <value column="Name" isTrl="Y" original="Expense Amount">Importe del gasto</value>
+    <value column="Description" isTrl="Y" original="Amount for this expense">Importe del gasto</value>
+    <value column="Help" isTrl="Y" original="Expense amount in currency">Importe del gasto</value>
+  </row>
+  <row id="5465" trl="Y">
+    <value column="Name" isTrl="Y" original="Expense Date">Fecha del gasto</value>
+    <value column="Description" isTrl="Y" original="Date of expense">Fecha de gastos</value>
+    <value column="Help" isTrl="Y" original="Date of expense">Fecha de gastos</value>
+  </row>
+  <row id="564A03970CD644E686CE22595EFB1AD3" trl="N">
+    <value column="Name" isTrl="N" original="Quotation Date">Quotation Date</value>
+    <value column="Description" isTrl="N" original="The time listed on the order.">The time listed on the order.</value>
+    <value column="Help" isTrl="N" original="Indicates the Date an item was ordered.">Indicates the Date an item was ordered.</value>
+  </row>
+  <row id="565E666A61B92693E040007F01002851" trl="N">
+    <value column="Name" isTrl="N" original="Version">Version</value>
+    <value column="Description" isTrl="Y" original="Module version">Version del módulo</value>
+    <value column="Help" isTrl="Y" original="Module version is a 3 integer dot separated number to identify the version. The 2 first ones define the module's major version whereas the last one is the minor version. An example could be 2.50.10440, where 2.50 is the major version and 10440 is the minor one.">Versión del módulo es un número entero de 3 puntos separados para identificar la versión. Los 2 primeros definen la versión principal del módulo, mientras que la última es la versión secundaria. Un ejemplo podría ser 2.50.10440, donde 2.50 es la versión principal y 10440 es el menor.</value>
+  </row>
+  <row id="56EBDFF41AC25BDDE040007F0100368E" trl="N">
+    <value column="Name" isTrl="N" original="Version">Version</value>
+    <value column="Description" isTrl="N" original="First compatible version">First compatible version</value>
+    <value column="Help" isTrl="Y" original="It is the first compatible version for the dependency, in case last version is blank is will be the only one.">Se trata de la primera versión compatible para la dependencia, en el caso de la última versión está en blanco se va a ser el único.</value>
+  </row>
+  <row id="56ED7737A7C989BFE040007F01003A61" trl="N">
+    <value column="Name" isTrl="Y" original="Included Module">Modulo Incluido</value>
+    <value column="Description" isTrl="Y" original="Included Module">Modulo Incluido</value>
+    <value column="Help" isTrl="Y" original="It is the module included in the current inclusion list of modules.">Es el módulo incluido en la lista de inclusión actual de módulos.</value>
+  </row>
+  <row id="5717" trl="Y">
+    <value column="Name" isTrl="Y" original="Expense Amount">Importe del gasto</value>
+    <value column="Description" isTrl="Y" original="Amount for this expense">Importe del gasto</value>
+    <value column="Help" isTrl="Y" original="Expense amount in currency">Importe del gasto</value>
+  </row>
+  <row id="5718" trl="Y">
+    <value column="Name" isTrl="Y" original="Expense Date">Fecha del gasto</value>
+    <value column="Description" isTrl="Y" original="Date of expense">Fecha del gasto</value>
+    <value column="Help" isTrl="Y" original="Date of expense">Fecha del gasto</value>
+  </row>
+  <row id="5730" trl="Y">
+    <value column="Name" isTrl="Y" original="Reinvoicing">Refacturable</value>
+    <value column="Description" isTrl="Y" original="An indication that a transaction may be invoiced to a business partner.">Indicación de que puede facturarse una transacción a un tercero. </value>
+    <value column="Help" isTrl="Y" original="Indicator if invoiced">Refacturable</value>
+  </row>
+  <row id="5734" trl="Y">
+    <value column="Name" isTrl="Y" original="Net Unit Price">Precio a facturar</value>
+    <value column="Description" isTrl="Y" original="The price at which something may be invoiced, shown in the currency of the invoiced business partner.">Precio al que puede facturarse algo, en la moneda en que se factura al tercero.</value>
+    <value column="Help" isTrl="Y" original="Unit Price in the currency of the business partner!  If it is 0, the standard price of the sales price list of the business partner (customer) is used.">Unidad de precio para el tercero. Si es 0, se utiliza el precio estándar de la tarifa de venta del cliente.</value>
+  </row>
+  <row id="5735" trl="Y">
+    <value column="Name" isTrl="Y" original="Net Unit Price">Precio a facturar</value>
+    <value column="Description" isTrl="Y" original="The price at which something may be invoiced, shown in the currency of the invoiced business partner.">Precio al que puede facturarse algo, en la moneda en que se factura al tercero.</value>
+    <value column="Help" isTrl="Y" original="Unit Price in the currency of the business partner!  If it is 0, the standard price of the sales price list of the business partner (customer) is used.">Unidad de precio para el tercero. Si es 0, se utiliza el precio estándar de la tarifa de venta del cliente.</value>
+  </row>
+  <row id="5814736D56B34AD3A6F89D5023FAF575" trl="N">
+    <value column="Name" isTrl="Y" original="Update payment monitor">Actualizar Monitor de Cobro/Pago</value>
+    <value column="Description" isTrl="Y" original="Update payment monitor process">Actualizar el proceso de monitoreo de Cobro/Pago.</value>
+    <value column="Help" isTrl="Y" original="Updates payment monitor information">Actualiza la informacion del monitor de cobro/pago</value>
+  </row>
+  <row id="58D503FCDDAFD53FE040007F01016BBB" trl="Y">
+    <value column="Name" isTrl="Y" original="Until Period.">Hasta el Periodo</value>
+    <value column="Description" isTrl="Y" original="Until Period Number">Hasta el número del periodo</value>
+    <value column="Help" isTrl="Y" original="The process will open or close all the documents of this period and the periods before this one for the selected year.">El proceso será abierto o cerrado para todos los documentos de este periodo y los periodos anteriores al seleccionado.</value>
+  </row>
+  <row id="58E0AFDC8162B4CCE040007F01006F95" trl="N">
+    <value column="Name" isTrl="Y" original="Module Language">Idioma del Modulo</value>
+    <value column="Description" isTrl="Y" original="Language for the current module">Idioma para el módulo actual</value>
+    <value column="Help" isTrl="Y" original="This language defines the language used as base for the user interface elements in the module.">Este lenguaje define el lenguaje utilizado como base para los elementos de la interfaz de usuario en el módulo.</value>
+  </row>
+  <row id="5B8B513DB09446C4A363E1C5508ECB35" trl="N">
+    <value column="Name" isTrl="N" original="Payment">Payment</value>
+    <value column="Description" isTrl="N" original="Payment event">Payment event</value>
+    <value column="Help" isTrl="N" original="Payment event">Payment event</value>
+  </row>
+  <row id="5E6B91050CDA4F6B9ABC3DD692875337" trl="N">
+    <value column="Name" isTrl="Y" original="Cleared Payment Account">Cuenta para Cobros Conciliados</value>
+    <value column="Description" isTrl="Y" original="Account used for payment IN when clearing ">Cuenta utilizada para el pago al aclarar</value>
+    <value column="Help" isTrl="Y" original="Account used for payment IN when clearing ">Cuenta utilizada para el pago al aclarar </value>
+  </row>
+  <row id="5F27F456BE1C41A186ABF8305E3752DF" trl="N">
+    <value column="Name" isTrl="N" original="Vendor">Vendor</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="63981B875CAA7A68E040007F01006697" trl="N">
+    <value column="Name" isTrl="Y" original="Object Name">Nombre del Objeto</value>
+    <value column="Description" isTrl="Y" original="Object Name">Nombre del Objeto</value>
+    <value column="Help" isTrl="Y" original="The name of the object that does not follow the naming rules.">El nombre del objeto que no no sigue con las respectivas reglas.</value>
+  </row>
+  <row id="63981B875CAC7A68E040007F01006697" trl="N">
+    <value column="Name" isTrl="Y" original="Table Name">Nombre de la Tabla</value>
+    <value column="Description" isTrl="Y" original="Table Name">Nombre de la Tabla</value>
+    <value column="Help" isTrl="Y" original="It is the name of the table that holds the object.">Este es el nombre de la tabla que tiene el objeto.</value>
+  </row>
+  <row id="63981B875CAE7A68E040007F01006697" trl="N">
+    <value column="Name" isTrl="Y" original="DB Object Type">Tipo de Objeto de DB</value>
+    <value column="Description" isTrl="Y" original="Database Object type">Tipo de Objeto de DB</value>
+    <value column="Help" isTrl="Y" original="Defines which kind of object it is.">Define que tipo de objeto es este.</value>
+  </row>
+  <row id="6544" trl="Y">
+    <value column="Name" isTrl="Y" original="Invoice Amount">Importe de factura</value>
+    <value column="Description" isTrl="Y" original="The monetary sum that is invoiced for a specified item or service.">Suma que se factura por un ítem o servicio específico.</value>
+    <value column="Help" isTrl="Y" original="The amount invoiced">El importe de la factura.</value>
+  </row>
+  <row id="6546" trl="Y">
+    <value column="Name" isTrl="Y" original="Current Phase">Fase actual</value>
+    <value column="Description" isTrl="Y" original="One section or part of a project which is potentially made up of one or many tasks.">Sección o parte de un proyecto que puede estar compuesta por una o más tareas.</value>
+    <value column="Help" isTrl="Y" original="Phase of the project with standard performance information with standard work">Fase del proyecto con información standard.</value>
+  </row>
+  <row id="6547" trl="Y">
+    <value column="Name" isTrl="Y" original="Invoice Quantity">Cantidad de factura</value>
+    <value column="Description" isTrl="Y" original="The total number of a product included in an invoice to a business partner.">Cantidad total de un producto que se incluye en la factura de un tercero.</value>
+    <value column="Help" isTrl="Y" original="The Quantity Invoiced">Indica la cantidad facturada en esta factura.</value>
+  </row>
+  <row id="6550" trl="Y">
+    <value column="Name" isTrl="Y" original="Contract Quantity">Cantidad acordada</value>
+    <value column="Description" isTrl="Y" original="The maximum legal quantity for a project.">Importe máximo permitido de un proyecto.</value>
+    <value column="Help" isTrl="Y" original="The commitment amount is independent from the planned amount. You would use the planned amount for your realistic estimation, which might be higher or lower than the commitment amount.">La cantidad comprometida es independiente de la prevista. Se usa la cantidad prevista para la previsiones realistas, que pueden ser más elevadas o inferiores que las comprometidas.</value>
+  </row>
+  <row id="659" trl="Y">
+    <value column="Name" isTrl="Y" original="Visible at User">Usuario/Contacto</value>
+    <value column="Description" isTrl="Y" original="An acquaintance to reach for information related to the business partner.">Referente que puede aportar información sobre un tercero.</value>
+    <value column="Help" isTrl="Y" original="The User identifies a unique user in the system. This could be an internal user or a business partner contact">Es el contacto que tiene asociado el tercero</value>
+  </row>
+  <row id="663" trl="Y">
+    <value column="Name" isTrl="Y" original="Value">Identificador</value>
+    <value column="Description" isTrl="Y" original="Value assigned to the property">Método rápido para hallar un registro particular.</value>
+    <value column="Help" isTrl="Y" original="It is the actual value that is assigned to the property at the defined level.">Una llave de búsqueda, o identificador, le permite un método rápido de encontrar un registro particular. Si usted deja el identificador vacío, el sistema automáticamente genera un número. La secuencia de documento usada para este número de vuelta atrás es definida en el "Mantain la Secuence" la ventana con el nombre "DocumentNo_&lt;TABLENAME&gt;", donde TableName es el nombre real de la tabla (p.ej. C_Order).</value>
+  </row>
+  <row id="6634" trl="Y">
+    <value column="Name" isTrl="Y" original="Standard Quantity">Cantidad estándar</value>
+    <value column="Description" isTrl="Y" original="Standard Quantity">Cantidad estándar</value>
+    <value column="Help" isTrl="Y" original="Standard Quantity">Cantidad estándar</value>
+  </row>
+  <row id="6650" trl="Y">
+    <value column="Name" isTrl="Y" original="Ending Date">Fecha de final</value>
+    <value column="Description" isTrl="Y" original="A parameter stating when a specified request will end.">Parámetro que indica el momento en que finaliza una petición.</value>
+    <value column="Help" isTrl="Y" original="The End Date indicates the last date in this range.">Indica el último día de un rango de fechas.</value>
+  </row>
+  <row id="6652" trl="Y">
+    <value column="Name" isTrl="Y" original="Phase Complete">Fase completa</value>
+    <value column="Description" isTrl="Y" original="Phase is complete">Fase completa</value>
+    <value column="Help" isTrl="Y" original="Indicates that this phase is complete">Indica que la fase está completa.</value>
+  </row>
+  <row id="6654" trl="Y">
+    <value column="Name" isTrl="Y" original="Create Sales Order from Project Phase">Generar pedido de venta de la fase</value>
+    <value column="Description" isTrl="Y" original="Generate Order from Project Phase">Generar pedido sobre la fase de un proyecto</value>
+    <value column="Help" isTrl="Y" original="The Generate Order process will generate a new Order document based on the project phase or tasks. A price list and warehouse/service point must be defined on the project.  If a product is defined on phase level, the Phase information is used as the basis">El proceso de pedido Generar va a generar un documento nuevo orden basado en la fase de proyecto o de las tareas. Una lista de precios y almacén / almacenes deben ser definidos en el proyecto. Si un producto se define en el nivel de fase, la información de fase se utiliza como la base para la Orden (facturación hito) - de lo contrario las tareas individuales.</value>
+  </row>
+  <row id="6794" trl="Y">
+    <value column="Name" isTrl="Y" original="Standard Task">Tarea estándar</value>
+    <value column="Description" isTrl="Y" original="Standard Project Type Task">Tipo de tarea estándar del proyecto</value>
+    <value column="Help" isTrl="Y" original="Standard Project Task in a Project Phase with standard effort">Tarea de proyecto estándar en una fase de proyecto con esfuerzo estándar.</value>
+  </row>
+  <row id="6812" trl="Y">
+    <value column="Name" isTrl="Y" original="Standard Quantity">Cantidad estándar</value>
+    <value column="Description" isTrl="Y" original="Standard Quantity">Cantidad estándar</value>
+    <value column="Help" isTrl="Y" original="Standard Quantity">Cantidad estándar</value>
+  </row>
+  <row id="6837" trl="Y">
+    <value column="Name" isTrl="Y" original="Login time">Fecha Creación</value>
+    <value column="Description" isTrl="Y" original="Time when the session started">Fecha en que se completa este registro.</value>
+    <value column="Help" isTrl="Y" original="Login time is the date and time when the session started.">Indica la fecha en la que el dato fue creado. </value>
+  </row>
+  <row id="7010" trl="Y">
+    <value column="Name" isTrl="Y" original="User">Usuario</value>
+    <value column="Description" isTrl="Y" original="Alphanumeric identifier of the entity">Identificador alfanumérico de la entidad</value>
+    <value column="Help" isTrl="Y" original="The User Name which contact  will have access to application. It must be registered in user window as application user.">&lt;P&gt;Nombre de usuario con el que esta persona de contacto tendrá acceso a la aplicación. Además tendrá que ser dado de alta como usuario de la aplicación en la ventana de usuarios.&lt;/P&gt;</value>
+  </row>
+  <row id="7526828ADF604AFC9E1BD0DACDCA1F5B" trl="N">
+    <value column="Name" isTrl="Y" original="Upon Reconciliation Use">Cuenta para Conciliación</value>
+    <value column="Description" isTrl="Y" original="Account used upon reconciliation">Cuenta para Conciliación</value>
+    <value column="Help" isTrl="Y" original="Account used upon reconciliation">Cuenta para Conciliación</value>
+  </row>
+  <row id="7C541AC0C75AFDD7E040007F01016B4D" trl="N">
+    <value column="Name" isTrl="Y" original="Deposit To">Depositar en</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Financial account where the payment amount is deposited.">Cuenta financiera, donde la cantidad del pago es depositado.</value>
+  </row>
+  <row id="7C541AC0C75CFDD7E040007F01016B4D" trl="N">
+    <value column="Name" isTrl="Y" original="Received From">Cobrado de</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="The Business Partner the payment is receipt from.">The Business Partner the payment is receipt from.</value>
+  </row>
+  <row id="7DC34559B400B45BE040007F0100784A" trl="N">
+    <value column="Name" isTrl="Y" original="Paying From">Pagando a</value>
+    <value column="Description" isTrl="Y" original="Financial account used to deposit / withdrawal money such as bank accounts or petty cash">Cuenta financiera utilizada para el dinero de depósito / retiro, tales como cuentas de banco o caja chica</value>
+    <value column="Help" isTrl="Y" original="Financial account used to deposit / withdrawal money such as bank accounts or petty cash">Cuenta financiera utilizada para el dinero de depósito / retiro, tales como cuentas de banco o caja chica</value>
+  </row>
+  <row id="7DDB021EF8FF4041BE373FD1386DBE51" trl="N">
+    <value column="Name" isTrl="N" original="Discount">Discount</value>
+    <value column="Description" isTrl="N" original="Discount in percent">Discount in percent</value>
+    <value column="Help" isTrl="N" original="The Discount indicates the discount applied as a percentage of the List Price.">The Discount indicates the discount applied as a percentage of the List Price.</value>
+  </row>
+  <row id="7E35F16BB0F8C186E040007F010014C7" trl="N">
+    <value column="Name" isTrl="Y" original="Alternate Taxable Amount">Base Imponible Alternativa</value>
+    <value column="Description" isTrl="Y" original="The total sum on which taxes are added.">La suma total de los impuestos que se añaden.</value>
+    <value column="Help" isTrl="Y" original="The Tax Base Amount indicates the base amount used for calculating the tax amount.">La cantidad base fiscal indica la cantidad de base utilizada para calcular el importe del impuesto.</value>
+  </row>
+  <row id="7E35F16BB0F9C186E040007F010014C7" trl="N">
+    <value column="Name" isTrl="Y" original="Alternate Taxable Amount">Base Imponible Alternativa</value>
+    <value column="Description" isTrl="Y" original="The total sum on which taxes are added. Used as an alternative for tax calculation.">La suma total de los impuestos que se añaden. Se utiliza como una alternativa para el cálculo de los impuestos.</value>
+    <value column="Help" isTrl="Y" original="The total sum on which taxes are added. used as an alternative for tax calculation. As default behavior the value provided will be equal to the line net amount, but can be overwritten.">La suma total de los impuestos que se añaden. utilizado como una alternativa para calcular los impuestos. Como el comportamiento por defecto el valor proporcionado será igual al importe neto de línea, pero se puede sobrescribir.</value>
+  </row>
+  <row id="7E37B8136CC375EFE040007F0100360F" trl="N">
+    <value column="Name" isTrl="Y" original="Alternate Taxable Amount">Base Imponible Alternativa</value>
+    <value column="Description" isTrl="Y" original="The total sum on which taxes are added.">La suma total de los impuestos que son agregados.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="7E37B8136CC575EFE040007F0100360F" trl="Y">
+    <value column="Name" isTrl="Y" original="Alternate Taxable Amount">Base Imponible Alternativa</value>
+    <value column="Description" isTrl="Y" original="The total sum on which taxes are added.">La suma total de los impuestos que se añaden.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="7FAF83C5C27E4C2791FF863BC5EE2199" trl="N">
+    <value column="Name" isTrl="N" original="RMA vendor ref.">RMA vendor ref.</value>
+    <value column="Description" isTrl="N" original="A reference or document order number as listed in business partner application.">A reference or document order number as listed in business partner application.</value>
+    <value column="Help" isTrl="N" original="This can be used to input a reference for this specific transaction. For example, a Purchase Order number can be input on a Sales Order for easier reference.">This can be used to input a reference for this specific transaction. For example, a Purchase Order number can be input on a Sales Order for easier reference.</value>
+  </row>
+  <row id="800036" trl="Y">
+    <value column="Name" isTrl="Y" original="Initiative Type">Tipo de iniciativa</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="A public or private enterprise. This are the most typical initiatives">&lt;P&gt;Dos son los tipos de inicativa más habituales. &lt;BR&gt;&lt;STRONG&gt;Publica:&lt;/STRONG&gt; Son de este tipo los proyectos impulsados por la administración pblica, ayuntamientos, diputaciones,... &lt;BR&gt;&lt;STRONG&gt;Privada:&lt;/STRONG&gt; Son de este tipo los proyectos impulsados por promotores particulares. &lt;/P&gt;</value>
+  </row>
+  <row id="800061" trl="Y">
+    <value column="Name" isTrl="Y" original="Planned Quantity">Cantidad prevista</value>
+    <value column="Description" isTrl="Y" original="The expected or provisional quantity to be involved for a transaction line.">Cantidad esperada o provisoria de una línea de transacción.</value>
+    <value column="Help" isTrl="Y" original="The Planned Quantity indicates the anticipated quantity for this project or project line">Indica la cantidad prevista a priori para este proyecto o línea.</value>
+  </row>
+  <row id="800067" trl="Y">
+    <value column="Name" isTrl="Y" original="Contract Quantity">Cantidad acordada</value>
+    <value column="Description" isTrl="Y" original="The maximum legal quantity for a project.">Importe máximo permitido de un proyecto.</value>
+    <value column="Help" isTrl="Y" original="The commitment amount is independent from the planned amount. You would use the planned amount for your realistic estimation, which might be higher or lower than the commitment amount.">La cantidad comprometida es independiente de la prevista. Se usa la cantidad prevista para la previsiones realistas, que pueden ser más elevadas o inferiores que las comprometidas.</value>
+  </row>
+  <row id="800068" trl="Y">
+    <value column="Name" isTrl="Y" original="Invoice Quantity">Cantidad de factura</value>
+    <value column="Description" isTrl="Y" original="The total number of a product included in an invoice to a business partner.">Cantidad total de un producto que se incluye en la factura de un tercero.</value>
+    <value column="Help" isTrl="Y" original="The Quantity Invoiced">Indica la cantidad facturada en esta factura.</value>
+  </row>
+  <row id="800071" trl="Y">
+    <value column="Name" isTrl="Y" original="Invoice Amount">Importe de factura</value>
+    <value column="Description" isTrl="Y" original="The monetary sum that is invoiced for a specified item or service.">Suma que se factura por un ítem o servicio específico.</value>
+    <value column="Help" isTrl="Y" original="The amount invoiced">El importe de la factura.</value>
+  </row>
+  <row id="800074" trl="Y">
+    <value column="Name" isTrl="Y" original="Warehouse">Bodega</value>
+    <value column="Description" isTrl="Y" original="The location where products arrive to or are sent from.">Ubicación a la que se envían, o de donde proceden, los productos.</value>
+    <value column="Help" isTrl="Y" original="The Warehouse identifies a unique Warehouse where products are stored or Services are provided.">Identifica un único bodega donde los productos son almacenados o los servicios facilitados.</value>
+  </row>
+  <row id="800077" trl="Y">
+    <value column="Name" isTrl="Y" original="Planned PO Net Unit Price">Precio de compra previsto</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Indicates the planned price for the purchase order">Indica el precio de compra de este producto a priori.</value>
+  </row>
+  <row id="800082" trl="Y">
+    <value column="Name" isTrl="Y" original="Planned Quantity">Cantidad prevista</value>
+    <value column="Description" isTrl="Y" original="The expected or provisional quantity to be involved for a transaction line.">Cantidad esperada o provisoria de una línea de transacción.</value>
+    <value column="Help" isTrl="Y" original="The Planned Quantity indicates the anticipated quantity for this project or project line">Indica la cantidad prevista a priori para este proyecto o línea.</value>
+  </row>
+  <row id="800091" trl="Y">
+    <value column="Name" isTrl="Y" original="Planned SO Net Unit Price">Precio previsto</value>
+    <value column="Description" isTrl="Y" original="Planned price for this project line">Precio previsto para esta línea del proyecto</value>
+    <value column="Help" isTrl="Y" original="The Planned Price indicates the anticipated price for this project line.">Precio previsto de venta para esta línea de proyecto. </value>
+  </row>
+  <row id="800113" trl="Y">
+    <value column="Name" isTrl="Y" original="Date Sent">Fecha de envío</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="The date of the proposal was sent">Indica la fecha en la que se envió el documento.</value>
+  </row>
+  <row id="800116" trl="Y">
+    <value column="Name" isTrl="Y" original="Copy Lines from Project">Copiar líneas del proyecto</value>
+    <value column="Description" isTrl="Y" original="Copy Lines from Project">Copiar líneas del proyecto</value>
+    <value column="Help" isTrl="Y" original="Copy Lines from Project">&lt;P&gt;Este proceso permite copiar las líneas de los proyectos definidos en la solapa de productos para este proyecto, en líneas de presupuesto para este tercero particular. Posteriormente se revisarán los precios y cantidades de cada producto </value>
+  </row>
+  <row id="800138" trl="Y">
+    <value column="Name" isTrl="Y" original="Created">Creado</value>
+    <value column="Description" isTrl="Y" original="Record create date">Fecha de creación del registro</value>
+    <value column="Help" isTrl="Y" original="Date when project was added to Project List">&lt;P&gt;Indica la fecha en la que este proyecto fue agregado a la lista de proyectos.&lt;/P&gt;</value>
+  </row>
+  <row id="800167" trl="Y">
+    <value column="Name" isTrl="Y" original="Create Purchase Order from Project">Generar pedido de compra del proyecto</value>
+    <value column="Description" isTrl="Y" original="Generate Purchase Order From Project">Genera pedidos de compra de un proyecto</value>
+    <value column="Help" isTrl="Y" original="Generate Purchase Order From Project">Genera pedidos de compra de un proyecto</value>
+  </row>
+  <row id="800446" trl="Y">
+    <value column="Name" isTrl="Y" original="Amount">Importe</value>
+    <value column="Description" isTrl="Y" original="Amount in a defined currency">Importe en la moneda definida</value>
+    <value column="Help" isTrl="Y" original="The Amount indicates the amount for this document line.">Indica el importe del efecto.</value>
+  </row>
+  <row id="800545" trl="Y">
+    <value column="Name" isTrl="Y" original="Settlement Amount">Importe liquidado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="800638" trl="Y">
+    <value column="Name" isTrl="Y" original="Forced org">Organización forzada</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="800718" trl="Y">
+    <value column="Name" isTrl="Y" original="Settlement Open">Abrir liquidación</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Unprocesses the processed settlement and enables to make changes on it.">Desprocesa la liquidación procesada y nos permite realizar cambios sobre ella.</value>
+  </row>
+  <row id="800731" trl="Y">
+    <value column="Name" isTrl="Y" original="Business Partner">Tercero</value>
+    <value column="Description" isTrl="Y" original="Identifies a Business Partner">Selecciona un tercero</value>
+    <value column="Help" isTrl="Y" original="A Business Partner is anyone with whom you transact.  This can include Vendor, Customer, Employee or Salesperson">Identifica al propietario&amp;nbsp;del producto. Se utiliza en las empresas de almacenamiento en las que el producto pertenece a un cliente específico.</value>
+  </row>
+  <row id="801010" trl="Y">
+    <value column="Name" isTrl="Y" original="Settlement Open">Procesar Liquidación</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="This process deletes selected debt payments on cancel tab and generates the debt payments of &quot;generate&quot; tab. To run this process is mandatory to be the same the quantity of the cancel amount and the generated.">Al ejecutar el proceso, se eliminan los efectos seleccionados en la solapa de cancelación y se crean tantos efectos como registros en la solapa de efectos generados. Para la ejecución de este proceso es condición indispensable que el importe cancelado sea</value>
+  </row>
+  <row id="801022" trl="N">
+    <value column="Name" isTrl="N" original="Goods Receipt Line">Goods Receipt Line</value>
+    <value column="Description" isTrl="N" original="A statement displaying one item, charge, or movement in a receipt.">A statement displaying one item, charge, or movement in a receipt.</value>
+    <value column="Help" isTrl="N" original="The Goods Receipt Line indicates a unique line in a Receipt document">The Goods Receipt Line indicates a unique line in a Receipt document</value>
+  </row>
+  <row id="801029" trl="Y">
+    <value column="Name" isTrl="Y" original="Cost">Costo</value>
+    <value column="Description" isTrl="Y" original="A charge related to conducting business.">Expensa relacionada con las operaciones comerciales.</value>
+    <value column="Help" isTrl="Y" original="Cost amount. The amount must be expressed in the currency of the Legal Entity. Notice that legacy cost engine costs are expressed in the currency of the Client.">&lt;P&gt;Define el valor del costo en unidades monetarias para un centro de costo.&lt;/P&gt;</value>
+  </row>
+  <row id="801030" trl="N">
+    <value column="Name" isTrl="N" original="Cost Type">Cost Type</value>
+    <value column="Description" isTrl="N" original="A distinct cost characteristic used for processes.">A distinct cost characteristic used for processes.</value>
+    <value column="Help" isTrl="N" original="Different types of cost used by the legacy cost engine. To configure costs use Costing Rules.">Different types of cost used by the legacy cost engine. To configure costs use Costing Rules.</value>
+  </row>
+  <row id="801031" trl="N">
+    <value column="Name" isTrl="N" original="Legacy Standard Cost">Legacy Standard Cost</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="The value of the standard cost used by the legacy engine">The value of the standard cost used by the legacy engine</value>
+  </row>
+  <row id="801095" trl="Y">
+    <value column="Name" isTrl="Y" original="Line No">Nivel</value>
+    <value column="Description" isTrl="Y" original="Unique line for this document">Linea unica para este documento</value>
+    <value column="Help" isTrl="N" original="">Nivel de la dimensión.</value>
+  </row>
+  <row id="801110" trl="Y">
+    <value column="Name" isTrl="Y" original="Product Identifier">Identificador del producto</value>
+    <value column="Description" isTrl="Y" original="A value specified in many forms.">Valor especificado de varias formas</value>
+    <value column="Help" isTrl="Y" original="A value specified in many forms.">Valor especificado de varias formas</value>
+  </row>
+  <row id="801111" trl="Y">
+    <value column="Name" isTrl="Y" original="Product Name">Nombre del producto</value>
+    <value column="Description" isTrl="Y" original="A identifier for a document which can be used as a search tool.">Identificador de un documento que puede utilizarse como herramienta de búsqueda.</value>
+    <value column="Help" isTrl="Y" original="Name of the product">Nombre del producto</value>
+  </row>
+  <row id="801112" trl="Y">
+    <value column="Name" isTrl="Y" original="Product Description">Descripción del producto</value>
+    <value column="Description" isTrl="Y" original="A space to write additional related information.">Espacio para escribir información adicional relacionada.</value>
+    <value column="Help" isTrl="Y" original="Description for the product">Descripcion del producto</value>
+  </row>
+  <row id="801113" trl="Y">
+    <value column="Name" isTrl="Y" original="Product Identifier">Identificador del producto</value>
+    <value column="Description" isTrl="Y" original="A value specified in many forms.">Valor especificado de varias formas</value>
+    <value column="Help" isTrl="Y" original="A value specified in many forms.">Valor especificado de varias formas</value>
+  </row>
+  <row id="801114" trl="Y">
+    <value column="Name" isTrl="Y" original="Product Name">Nombre del producto</value>
+    <value column="Description" isTrl="Y" original="A identifier for a document which can be used as a search tool.">Identificador de un documento que puede utilizarse como herramienta de búsqueda.</value>
+    <value column="Help" isTrl="N" original="Name of the product">Name of the product</value>
+  </row>
+  <row id="801115" trl="Y">
+    <value column="Name" isTrl="Y" original="Product Description">Descripción del producto</value>
+    <value column="Description" isTrl="Y" original="A space to write additional related information.">Espacio para escribir información adicional relacionada.</value>
+    <value column="Help" isTrl="N" original="Description for the product">Description for the product</value>
+  </row>
+  <row id="801363" trl="Y">
+    <value column="Name" isTrl="Y" original="Process Now">Procesar</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="">&lt;P&gt;&amp;nbsp;&lt;/P&gt;</value>
+  </row>
+  <row id="801506" trl="Y">
+    <value column="Name" isTrl="Y" original="Payment Rule">Proveedor F.P</value>
+    <value column="Description" isTrl="Y" original="Purchase payment option">Forma de pago</value>
+    <value column="Help" isTrl="Y" original="The Payment Rule indicates the method of purchase payment.">&lt;P&gt;Indica la forma en la que se realizará el pago de la factura:&lt;BR&gt;(1)-A la vista: ***&lt;BR&gt;(2)-Cheque: El pago se realizará mediante un cheque.&lt;BR&gt;(3)-Contado guía de despacho: El pago se realiza en efectivo al entregar el pedido y la guía de despacho.&lt;BR&gt;(4)-Efectivo: El </value>
+  </row>
+  <row id="801507" trl="Y">
+    <value column="Name" isTrl="Y" original="PO Payment Term">Proveedor C.P</value>
+    <value column="Description" isTrl="Y" original="Payment rules for a purchase order">Reglas de pago de los pedidos de compra</value>
+    <value column="Help" isTrl="Y" original="The PO Payment Term indicates the payment term that will be used when this purchase order becomes an invoice.">Identifica las condiciones y el momento de pago de esta operación.</value>
+  </row>
+  <row id="801508" trl="Y">
+    <value column="Name" isTrl="Y" original="Purchase Pricelist">Proveedor Tarifa</value>
+    <value column="Description" isTrl="Y" original="Price List used by this Business Partner">Lista de precios de compra</value>
+    <value column="Help" isTrl="Y" original="Identifies the price list used by a Vendor for products purchased by this organization.">Se utiliza para determinar el precio, margen y costo de las operaciones de compra o venta. </value>
+  </row>
+  <row id="801525" trl="Y">
+    <value column="Name" isTrl="Y" original="Account Number">Número de cuenta</value>
+    <value column="Description" isTrl="Y" original="Account Number">Número de cuenta</value>
+    <value column="Help" isTrl="Y" original="The Account Number indicates the Number assigned to this account">&lt;P&gt;Indica el número de cuenta asignado a esta cuenta bancaria. En España, los números de cuenta bancaría están formados por 20 cifras. Las primeras 4 cifras definen la entidad bancaria, las siguientes 4 cifras definen la sucursal bancaria, las siguientes dos cifras son denominadas como "dígitos de control" y las últimas 10 cifras identifican nuestra cuenta.&lt;/P&gt;</value>
+  </row>
+  <row id="801768" trl="Y">
+    <value column="Name" isTrl="Y" original="Closed">Cerrado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Indicates if the work requirement is completely done or if we don't want to continue with it.">Indica si la&amp;nbsp;orden de fabricación ya se ha procesado por completo. </value>
+  </row>
+  <row id="801775" trl="Y">
+    <value column="Name" isTrl="Y" original="Quantity">Cantidad</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Indicates the number of times the process plan needs to be executed.">Indica el número de veces que se desea procesar el plan de producción.&amp;nbsp;</value>
+  </row>
+  <row id="801788" trl="Y">
+    <value column="Name" isTrl="Y" original="Quantity">Cantidad</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Indicates the number of times that the work requirement phase must be processed.">Indica el número de veces que ha de procesarse la fase de orden de fabricación.</value>
+  </row>
+  <row id="801822" trl="Y">
+    <value column="Name" isTrl="Y" original="Completed Quantity">Cantidad Realizada</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Indicates how many times has been processed the work requirement phase.">Indica el número de veces que ha sido procesada la fase de orden de fabricación. </value>
+  </row>
+  <row id="801844" trl="Y">
+    <value column="Name" isTrl="Y" original="Quantity">Cantidad</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Indicates how many times has been processed the work requirement phase.">Indica la cantidad de producto que se ha utilizado durante el parte de fabricación.</value>
+  </row>
+  <row id="801862" trl="Y">
+    <value column="Name" isTrl="Y" original="Process Work Requirement">Explotar Fases</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="By running this process the operations (activities) and products will be inserted automatically according to the selected process plan. Quantities will be multiplied according to the number of final products (Process Units) required. If the process plan selected does not have the &quot;explodePhases&quot; checked off, products from previously existing phases will be inserted only.">Mediante este proceso se generan las fases de orden de fabricación. Estas fases se crean a partir de las secuencias que forman parte del plan de producción seleccionado.</value>
+  </row>
+  <row id="801991" trl="Y">
+    <value column="Name" isTrl="Y" original="Processed">Procesado</value>
+    <value column="Description" isTrl="Y" original="The document has been processed">El documento ha sido procesado</value>
+    <value column="Help" isTrl="Y" original="The Processed checkbox indicates that a document has been processed.">Cuando está seleccionado significa que ya se ha lanzado el proceso que genera las fases de orden de fabricación.</value>
+  </row>
+  <row id="801E3D9BC2A74C7F9E48D8BE9B272510" trl="N">
+    <value column="Name" isTrl="N" original="Customer">Customer</value>
+    <value column="Description" isTrl="N" original="Anyone who takes part in daily business operations by acting as a customer, employee, etc.">Anyone who takes part in daily business operations by acting as a customer, employee, etc.</value>
+    <value column="Help" isTrl="N" original="A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.">A Business Partner is anyone with whom you transact.  This can include a customer, vendor, employee or any combination of these.</value>
+  </row>
+  <row id="802677" trl="Y">
+    <value column="Name" isTrl="Y" original="Client">Entidad</value>
+    <value column="Description" isTrl="Y" original="Client for this installation.">Entidad para esta instalación</value>
+    <value column="Help" isTrl="Y" original="A Client is a company or a legal entity. You cannot share data between Clients.">Un cliente es una empresa o entidad legal. No se puede compartir información 
+&#13;
+&#13;entre empresas. Permite compartir la misma instalación a varias empresas. </value>
+  </row>
+  <row id="802724" trl="Y">
+    <value column="Name" isTrl="Y" original="Create CCP">Crear PCC</value>
+    <value column="Description" isTrl="Y" original="Create the CCP for the date and shift selected">Crear los PCC a partir de la fecha y turno</value>
+    <value column="Help" isTrl="Y" original="Create the CCP for the date and shift selected">Crear los PCC a partir de la fecha y turno</value>
+  </row>
+  <row id="802930" trl="Y">
+    <value column="Name" isTrl="Y" original="Insert Maintenances">Insertar Mantenimientos</value>
+    <value column="Description" isTrl="Y" original="Process which will insert scheduled maintenances on the part.">Este proceso inserta mantenimientos previamente programados al parte de mantenimiento.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="803148" trl="Y">
+    <value column="Name" isTrl="Y" original="Invoice Product">Producto de facturación</value>
+    <value column="Description" isTrl="Y" original="Product, Service, Item">Producto, Servicio, Item</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="803316" trl="N">
+    <value column="Name" isTrl="N" original="Account Element">Account Element</value>
+    <value column="Description" isTrl="N" original="The identification code used for accounting.">The identification code used for accounting.</value>
+    <value column="Help" isTrl="N" original="The (natural) account used">The (natural) account used</value>
+  </row>
+  <row id="803566" trl="Y">
+    <value column="Name" isTrl="Y" original="Current Salary Category">Categoría salarial</value>
+    <value column="Description" isTrl="Y" original="A classification of salaries based on similar characteristics or attributes.">Clasificación de salarios basada en atributos o características similares.</value>
+    <value column="Help" isTrl="Y" original="Indicates current salary category of the employee">Indica la categoria del salario actual del empleado</value>
+  </row>
+  <row id="803585" trl="Y">
+    <value column="Name" isTrl="Y" original="Set Project Type">Establecer el tipo de proyecto</value>
+    <value column="Description" isTrl="Y" original="Set Project Type and for Service Projects copy Phases and Tasks of Project Type into Project">Establece el tipo de proyecto y para proyectos multifase copia fases y tareas del tipo de proyecto al proyecto</value>
+    <value column="Help" isTrl="Y" original="Set Project Type and for Service Projects copy Phases and Tasks of Project Type into Project">|</value>
+  </row>
+  <row id="803586" trl="Y">
+    <value column="Name" isTrl="Y" original="Service Revenue">Ingresos del servicio</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Revenue services">Renovar servicios</value>
+  </row>
+  <row id="803587" trl="Y">
+    <value column="Name" isTrl="Y" original="Total Service Cost">Costo del servicio</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Expected total cost of services provided. The real number will originate from all expense sheets (lines marked as Time Sheet) related to this project.">Costo del servicio</value>
+  </row>
+  <row id="803588" trl="Y">
+    <value column="Name" isTrl="Y" original="Reinvoiced Expenses">Gastos refacturables</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="Reinvoicing Expenses">Gastos de refacturación</value>
+  </row>
+  <row id="803975" trl="Y">
+    <value column="Name" isTrl="Y" original="Order Line">Línea pedido de venta</value>
+    <value column="Description" isTrl="Y" original="A unique and often automatically generated identifier for an order line.">Identificador único, a menudo generado automáticamente, para una línea de pedidos de venta.</value>
+    <value column="Help" isTrl="Y" original="A unique identifier and a reference to an order line (product).">Para cada una de las líneas de un pedido de venta existe un idenficador único.</value>
+  </row>
+  <row id="804009" trl="Y">
+    <value column="Name" isTrl="Y" original="Order Line">Línea pedido de venta</value>
+    <value column="Description" isTrl="Y" original="A unique and often automatically generated identifier for an order line.">Identificador único, a menudo generado automáticamente, para una línea de pedidos de venta.</value>
+    <value column="Help" isTrl="Y" original="A unique identifier and a reference to an order line (product).">Para cada una de las líneas de un pedido de venta existe un idenficador único.</value>
+  </row>
+  <row id="804131" trl="Y">
+    <value column="Name" isTrl="Y" original="Grouping category">Grupo Informe cont.</value>
+    <value column="Description" isTrl="Y" original="Acct Rpt Group">Grupo Informe cont.</value>
+    <value column="Help" isTrl="Y" original="Accounting Report Group defines groups for general accounting reports.">Grupo Informe Contabilidad define agrupaciones para informes generales de contabilidad.</value>
+  </row>
+  <row id="804192" trl="Y">
+    <value column="Name" isTrl="Y" original="Fixed">Arreglado</value>
+    <value column="Description" isTrl="Y" original="Is fixed">Arreglado</value>
+    <value column="Help" isTrl="Y" original="When is fixed is set as 'Y' means that the rule that the record which raised the alert has been modified and the rule is not raised for this record anymore.">Arreglado significa que el registor que disparó la alerta ha sido modificado de manera que la alerta ya no aplica para éste.</value>
+  </row>
+  <row id="807015D07BC241389CCD79777F91D613" trl="N">
+    <value column="Name" isTrl="Y" original="Return">Devolución</value>
+    <value column="Description" isTrl="Y" original="The number of an item involved in a transaction, given in standard units.  It is used to determine price per unit.">El número de un elemento involucrado en una transacción, dada en unidades estándar. Se utiliza para determinar el precio por unidad.</value>
+    <value column="Help" isTrl="Y" original="The Ordered Quantity indicates the quantity of a product that was ordered.">La cantidad pedida indica la cantidad de un producto que se le ordenó.</value>
+  </row>
+  <row id="807CB1125A891B22E040007F01013A3F" trl="N">
+    <value column="Name" isTrl="Y" original="Sequence Number">Número de Secuencia</value>
+    <value column="Description" isTrl="Y" original="Order the elements in the list will be displayed in the drop down list">Ordenar los elementos de la lista se mostrarán en la lista desplegable</value>
+    <value column="Help" isTrl="Y" original="-If the value of this field is null for all the elements in the list, the list will be sorted alphabetically.&#10;-If all the elements have this value set, they will be ordered taken into account it.&#10;-If some of the elements have it and some not, the ones having it will appear at the beginning of the list sorted by Sequence Number, the rest of them will be shown at the end ordered alphabetically.">-Si el valor de este campo es nula para todos los elementos de la lista, la lista se ordenará alfabéticamente.
+-Si todos los elementos que tiene este conjunto de valores, se les ordenó tener en cuenta que.
+-Si algunos de los elementos que tienen y otros no, los que tienen que aparecerá al principio de la lista ordenada por número de secuencia, el resto de ellos se muestra al final ordenadas alfabéticamente.</value>
+  </row>
+  <row id="8187" trl="Y">
+    <value column="Name" isTrl="Y" original="Warehouse">Bodega</value>
+    <value column="Description" isTrl="Y" original="The location where products arrive to or are sent from.">Ubicación a la que se envían, o de donde proceden, los productos.</value>
+    <value column="Help" isTrl="Y" original="The Warehouse identifies a unique Warehouse where products are stored or Services are provided.">Identifica un único bodega donde los productos son almacenados o los servicios facilitados.</value>
+  </row>
+  <row id="8227" trl="Y">
+    <value column="Name" isTrl="Y" original="Project Category">Categoría del proyecto</value>
+    <value column="Description" isTrl="Y" original="Project Category">Categoría del proyecto</value>
+    <value column="Help" isTrl="Y" original="The Project Category determines the behavior of the project. Default value is Multiphase Project.">La Categoría de Proyecto determina el comportamiento del proyecto. </value>
+  </row>
+  <row id="82F2E8A160E7472CE040007F01005324" trl="N">
+    <value column="Name" isTrl="Y" original="Location / Address">Dirección</value>
+    <value column="Description" isTrl="Y" original="A specific place or residence.">Un lugar determinado o de residencia.</value>
+    <value column="Help" isTrl="Y" original="Address/Location of the the Financial Account within the Enterprise.">Dirección/Localización de la Cuenta de la financiera dentro de la empresa.</value>
+  </row>
+  <row id="83016B158D074FEBAF1DF77BDFBA1166" trl="N">
+    <value column="Name" isTrl="Y" original="Upon Reconciliation Use">Cuenta para conciliación</value>
+    <value column="Description" isTrl="Y" original="Account to be used upon reconciliation">Cuenta para conciliación</value>
+    <value column="Help" isTrl="Y" original="Account to be used upon reconciliation">Cuenta para conciliación</value>
+  </row>
+  <row id="83424218E05542989EF92FD3E5B5181A" trl="N">
+    <value column="Name" isTrl="Y" original="Update Payment Monitor">Actualizar Monitor de Cobro/Pago</value>
+    <value column="Description" isTrl="Y" original="Invoice Payment Monitor update process">Monitor de pago de facturas proceso de actualización</value>
+    <value column="Help" isTrl="Y" original="Updates payment monitor info">Actualizaciones de pago monitor de informaciónDeshacer cambios</value>
+  </row>
+  <row id="876F74A096F81A73E040007F01000A4E" trl="N">
+    <value column="Name" isTrl="Y" original="Value">Valor</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="String that identifies the Parameter in the java process.">String que identifica el paramtro en el proceso de java.</value>
+  </row>
+  <row id="877" trl="Y">
+    <value column="Name" isTrl="Y" original="Attribute">Atributo</value>
+    <value column="Description" isTrl="Y" original="Name of the preference.">Característica definida de un producto específico.</value>
+    <value column="Help" isTrl="Y" original="It is the name of a preference to assign a value. It is a free text name, as opposite as Property which is a selectable value from a list.">Nombre de atributo que va a tomar el valor.</value>
+  </row>
+  <row id="8B1A2F417A6A4349B2C33E59438920F2" trl="N">
+    <value column="Name" isTrl="N" original="Editable Tab">Editable Tab</value>
+    <value column="Description" isTrl="N" original="An indication that this tab can be edited">An indication that this tab can be edited</value>
+    <value column="Help" isTrl="N" original="Sets whether the tab can be edited or is read only for the current role.">Sets whether the tab can be edited or is read only for the current role.</value>
+  </row>
+  <row id="8B39414C4EF149A1AF97A09A77006467" trl="N">
+    <value column="Name" isTrl="Y" original="In Transit Payment OUT Account">Cuenta para pagos en tránsito</value>
+    <value column="Description" isTrl="Y" original="Account used for in transit status of outgoing payments">Cuenta utilizada para el tránsito en el estado de los pagos denominados</value>
+    <value column="Help" isTrl="Y" original="Account used for in transit status of outgoing payments">Cuenta utilizada para el tránsito en el estado de los pagos denominados</value>
+  </row>
+  <row id="90AEAED4A45C458591CFDEF0CD554A1C" trl="N">
+    <value column="Name" isTrl="N" original="Quantity">Quantity</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Indicates how many times has been processed the work requirement phase.">Indicates how many times has been processed the work requirement phase.</value>
+  </row>
+  <row id="952B638B91B746A1864DF976E6D33987" trl="N">
+    <value column="Name" isTrl="N" original="Reverse Permanent Account Balances">Reverse Permanent Account Balances</value>
+    <value column="Description" isTrl="N" original="Reverse Permanent Account Balances">Reverse Permanent Account Balances</value>
+    <value column="Help" isTrl="N" original="When launching end year closing entry, include an entry to reverse permanent account balances">When launching end year closing entry, include an entry to reverse permanent account balances</value>
+  </row>
+  <row id="A82AF471FFCA4A47A1A45284386E384C" trl="N">
+    <value column="Name" isTrl="N" original="Starting Period">Starting Period</value>
+    <value column="Description" isTrl="N" original="First period for the revenue plan.">First period for the revenue plan.</value>
+    <value column="Help" isTrl="N" original="Booking starts at last day of selected period and lasts for the selected number of periods.">Booking starts at last day of selected period and lasts for the selected number of periods.</value>
+  </row>
+  <row id="A908E57D081C6863E040007F01011588" trl="N">
+    <value column="Name" isTrl="Y" original="Contact">Contacto</value>
+    <value column="Description" isTrl="Y" original="An acquaintance to reach for information related to the organization.">Un conocido para llegar a la información relacionada con la organización.</value>
+    <value column="Help" isTrl="Y" original="The User identifies a unique user in the system. This could be an internal user or a business partner/organization contact">El usuario identifica un usuario único en el sistema. Esto podría ser un usuario interno o un contacto socio de negocios/organización</value>
+  </row>
+  <row id="ABA8AFDB0CDD49B9B20A24D2D8127B38" trl="Y">
+    <value column="Name" isTrl="Y" original="Total Outstanding">Total Pendiente</value>
+    <value column="Description" isTrl="Y" original="Outstanding Amount">Total Pendiente</value>
+    <value column="Help" isTrl="Y" original="Outstanding Amount. Amount pending to be paid">Importe Pendiente. Importe pendiente a pagar</value>
+  </row>
+  <row id="AF4090093D431431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="Y" original="Pick/Edit Lines">Seleccionar/Editar Líneas</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="AF4090093D461431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="Y" original="Create Credit">Crear Crédito</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="AF4090093D4A1431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="N" original="Net List Price">Net List Price</value>
+    <value column="Description" isTrl="N" original="The official net price of a product in a specified currency.">The official net price of a product in a specified currency.</value>
+    <value column="Help" isTrl="N" original="The Net List Price is the official price stated by the selected pricelist and the currency of the document.">The Net List Price is the official price stated by the selected pricelist and the currency of the document.</value>
+  </row>
+  <row id="AF4090093D5A1431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="Y" original="Returned Quantity">Cantidad Devuelta</value>
+    <value column="Description" isTrl="Y" original="The number of an item involved in a transaction, given in standard units.  It is used to determine price per unit.">El número de un elemento involucrado en una transacción, dada en unidades estándar. Se utiliza para determinar el precio por unidad.</value>
+    <value column="Help" isTrl="Y" original="The quantity returned by the customer.">La cantidad devuelta por el cliente.</value>
+  </row>
+  <row id="AF4090093D5C1431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="Y" original="Received Quantity">Cantidad Recibida</value>
+    <value column="Description" isTrl="Y" original="Delivered Quantity">Cantidad Enviada</value>
+    <value column="Help" isTrl="Y" original="The received quantity from the customer.">La cantidad recibida por el cliente.</value>
+  </row>
+  <row id="AF4090093D671431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="Y" original="Discount">Descuento</value>
+    <value column="Description" isTrl="Y" original="Discount in percent">Descuento en porcentaje</value>
+    <value column="Help" isTrl="Y" original="The Discount indicates the discount applied as a percentage of the List Price.">El descuento indica que el descuento que se aplica como un porcentaje del precio de lista.</value>
+  </row>
+  <row id="AF4090093D731431E040007F010048A5" trl="N">
+    <value column="Name" isTrl="Y" original="Alternate Taxable Amount">Base Imponible Alternativa</value>
+    <value column="Description" isTrl="Y" original="The total sum on which taxes are added.">La suma total de los impuestos que se añaden.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B04C07EBF2C500E2E040007F01003385" trl="N">
+    <value column="Name" isTrl="Y" original="ob_selected">Seleccionado</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B04C07EBF2C600E2E040007F01003385" trl="N">
+    <value column="Name" isTrl="Y" original="Shipment/Receipt Line">Línea Envío/Recepción</value>
+    <value column="Description" isTrl="Y" original="A statement displaying one item, charge, or movement in a shipment or receipt.">Una declaración que muestra un elemento, la carga, o el movimiento en un envío o recepción.</value>
+    <value column="Help" isTrl="Y" original="The Shipment/Receipt Line indicates a unique line in a Shipment or Receipt document">La línea de envío/recepción indica una línea única en un documento de envío o recepción</value>
+  </row>
+  <row id="B04C07EBF2C800E2E040007F01003385" trl="N">
+    <value column="Name" isTrl="Y" original="Shipment / Receipt No.">Envío/Recepción No.</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B04C07EBF2C900E2E040007F01003385" trl="N">
+    <value column="Name" isTrl="Y" original="Date">Fecha</value>
+    <value column="Description" isTrl="Y" original="The date that a certain item is moved from one location to another.">La fecha en que un determinado producto se mueve de un lugar a otro.</value>
+    <value column="Help" isTrl="Y" original="The Movement Date indicates the date that a product moved in or out of inventory.  This is the result of a shipment, receipt or inventory movement.">La fecha de Movimiento indica la fecha en que un producto se movió dentro o fuera de inventario. Este es el resultado de un movimiento envío, recepción o inventario.</value>
+  </row>
+  <row id="B04C07EBF2CC00E2E040007F01003385" trl="N">
+    <value column="Name" isTrl="Y" original="Ship/Receipt Qty">Cantidad Envío/Recepción</value>
+    <value column="Description" isTrl="Y" original="The number of items being moved from one location to another.">El número de artículos que se movilizan de un lugar a otro.</value>
+    <value column="Help" isTrl="Y" original="The Movement Quantity indicates the quantity of a product that has been moved.">La cantidad de movimiento indica la cantidad de un producto que se ha movido.</value>
+  </row>
+  <row id="B04C07EBF2CF00E2E040007F01003385" trl="N">
+    <value column="Name" isTrl="N" original="Unit Price">Unit Price</value>
+    <value column="Description" isTrl="N" original="The price that will be paid for a specified item.">The price that will be paid for a specified item.</value>
+    <value column="Help" isTrl="N" original="The actual price indicates the price for a product in source currency.">The actual price indicates the price for a product in source currency.</value>
+  </row>
+  <row id="B0D83CD70D04F5C9E040007F01001E8B" trl="N">
+    <value column="Name" isTrl="Y" original="Sales Order Line">Línea Pedido de Venta</value>
+    <value column="Description" isTrl="Y" original="A unique and often automatically generated identifier for a sales order line.">Un identificador único y, a menudo genera automáticamente para una línea de órdenes de venta.</value>
+    <value column="Help" isTrl="Y" original="A unique identifier and a reference to a sales order line (product).">Un identificador único y una referencia a una línea de órdenes de venta (producto).Deshacer cambios</value>
+  </row>
+  <row id="B151560F62833082E040007F01002081" trl="N">
+    <value column="Name" isTrl="Y" original="Ship Qty">Cantidad Enviada</value>
+    <value column="Description" isTrl="Y" original="The number of items being moved from one location to another.">El número de artículos que se movilizan de un lugar a otro.</value>
+    <value column="Help" isTrl="Y" original="The Movement Quantity indicates the quantity of a product that has been moved.">La cantidad de movimiento indica la cantidad de un producto que se ha movido.</value>
+  </row>
+  <row id="B15197FA9BC7D9E0E040007F010033F7" trl="N">
+    <value column="Name" isTrl="Y" original="Order Line">Línea de Pedido</value>
+    <value column="Description" isTrl="Y" original="A unique and often automatically generated identifier for a sales order line.">Un identificador único y, a menudo genera automáticamente para una línea de órdenes de venta.</value>
+    <value column="Help" isTrl="Y" original="A unique identifier and a reference to a sales order line (product).">Un identificador único y una referencia a una línea de órdenes de venta (producto).</value>
+  </row>
+  <row id="B1EBC90EB5EAC896E040A8C0280118CA" trl="Y">
+    <value column="Name" isTrl="Y" original="Paid in Full Date">Pagado en Fecha</value>
+    <value column="Description" isTrl="N" original="">Pagado en Fecha</value>
+    <value column="Help" isTrl="N" original="">Pagado en Fecha</value>
+  </row>
+  <row id="B1EBC90EB5EBC896E040A8C0280118CA" trl="Y">
+    <value column="Name" isTrl="Y" original="Days to Pay in Full">Días hasta Pago en Fecha</value>
+    <value column="Description" isTrl="N" original="">Días hasta Pago en Fecha</value>
+    <value column="Help" isTrl="N" original="">Días hasta Pago en Fecha</value>
+  </row>
+  <row id="B1EBC90EB5ECC896E040A8C0280118CA" trl="Y">
+    <value column="Name" isTrl="Y" original="Percentage Paid Late">Porcentaje Pagado Tarde</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B1EBCACD0EB2E3F4E040A8C028011B08" trl="Y">
+    <value column="Name" isTrl="Y" original="Paid In Full Date">Fecha pago completo</value>
+    <value column="Description" isTrl="N" original="">Fecha pago completo</value>
+    <value column="Help" isTrl="N" original="">Fecha pago completo</value>
+  </row>
+  <row id="B1EBCACD0EB3E3F4E040A8C028011B08" trl="Y">
+    <value column="Name" isTrl="Y" original="Days to Pay in Full">Dias para el pago completo</value>
+    <value column="Description" isTrl="N" original="">Dias para el pago completo</value>
+    <value column="Help" isTrl="N" original="">Dias para el pago completo</value>
+  </row>
+  <row id="B1EBCACD0EB4E3F4E040A8C028011B08" trl="N">
+    <value column="Name" isTrl="Y" original="Percentage Paid Late">% Pagado Tardio</value>
+    <value column="Description" isTrl="N" original="">% Pagado Tardio</value>
+    <value column="Help" isTrl="N" original="">% Pagado Tardio</value>
+  </row>
+  <row id="B5195C109C5D11DD8CB3001B388C05F0" trl="Y">
+    <value column="Name" isTrl="Y" original="Base Currency">Moneda Base</value>
+    <value column="Description" isTrl="Y" original="Base Currency of the Client.">Moneda Base de la Empresa</value>
+    <value column="Help" isTrl="Y" original="The Base Currency is taken as the currency for the amounts that do not have an explicit currency, for instance, costs.">La Moneda Base es tomada como la moneda para las cantidades que no tienen una moneda explícita, por ejemplo, costos.</value>
+  </row>
+  <row id="B6BB67AE51F61BEBE040A8C091666000" trl="N">
+    <value column="Name" isTrl="N" original="Paid">Paid</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="B81C25DF8140423D9477F0A12FE96DBF" trl="N">
+    <value column="Name" isTrl="Y" original="Return from Customer line">Línea Devolución del Cliente</value>
+    <value column="Description" isTrl="Y" original="A unique and often automatically generated identifier for a sales order line.">Un identificador único y, a menudo genera automáticamente para una línea de órdenes de venta.</value>
+    <value column="Help" isTrl="Y" original="A unique identifier and a reference to a sales order line (product).">Un identificador único y una referencia a una línea de órdenes de venta (producto).</value>
+  </row>
+  <row id="BD54082ED2A740CDBD66AE26F52B860F" trl="Y">
+    <value column="Name" isTrl="Y" original="Sales Tax Exempt Rate">Precio de Venta exento de Impuestos</value>
+    <value column="Description" isTrl="Y" original="Tax Rate to be used in all sales invoices belonging to this Organization (in except of tax rates included in sales invoices, that have got the Is Tax Deductable flag active)">Tasa de impuestos a ser usado en todas las facturas de venta pertenecientes a esta sucursal (Excepto en las tasas de impuesto incluido en las facturas de venta, que tienen la bandera es deducible de impuestos activo)</value>
+    <value column="Help" isTrl="Y" original="Tax Rate to be used in all sales invoices belonging to this Organization (in except of tax rates included in sales invoices, that have got the Is Tax Deductable flag active)">Tasa de impuestos a ser usado en todas las facturas de venta pertenecientes a esta sucursal (Excepto en las tasas de impuesto incluido en las facturas de venta, que tienen la bandera es deducible de impuestos activo)</value>
+  </row>
+  <row id="CA9E542CEB107632E040007F01006734" trl="N">
+    <value column="Name" isTrl="N" original="Purchase Order Line">Purchase Order Line</value>
+    <value column="Description" isTrl="N" original="A unique and often automatically generated identifier for a purchase order line.">A unique and often automatically generated identifier for a purchase order line.</value>
+    <value column="Help" isTrl="N" original="A unique identifier and a reference to a purchase order line (product).">A unique identifier and a reference to a purchase order line (product).</value>
+  </row>
+  <row id="CD35A5791D2F06E5E040007F01001839" trl="N">
+    <value column="Name" isTrl="N" original="Purchase Order Line">Purchase Order Line</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="A unique identifier and a reference to a purchase order line (product).">A unique identifier and a reference to a purchase order line (product).</value>
+  </row>
+  <row id="CE88342CC7CE28E3E040007F01002B8B" trl="N">
+    <value column="Name" isTrl="N" original="SO Document No.">SO Document No.</value>
+    <value column="Description" isTrl="N" original="An often automatically generated identifier for all documents.">An often automatically generated identifier for all documents.</value>
+    <value column="Help" isTrl="N" original="The document number is usually automatically generated by the system and determined by the document type of the document. If the document is not saved, the preliminary number is displayed in &quot;&lt;&gt;&quot;. If the document type of your document has no automatic document sequence defined, the field will be empty when creating a new document. This is for documents which usually have an external number (like vendor invoice).  If you leave the field empty, the system will generate a document number for you. The document sequence used for this fallback number is defined in the &quot;Document Sequence&quot; window with the name &quot;DocumentNo_&lt;TableName&gt;&quot;, where TableName is the actual name of the table inside the database (e.g. C_Order).">The document number is usually automatically generated by the system and determined by the document type of the document. If the document is not saved, the preliminary number is displayed in "&lt;&gt;". If the document type of your document has no automatic document sequence defined, the field will be empty when creating a new document. This is for documents which usually have an external number (like vendor invoice).  If you leave the field empty, the system will generate a document number for you. The document sequence used for this fallback number is defined in the "Document Sequence" window with the name "DocumentNo_&lt;TableName&gt;", where TableName is the actual name of the table inside the database (e.g. C_Order).</value>
+  </row>
+  <row id="CE88342CC7D228E3E040007F01002B8B" trl="N">
+    <value column="Name" isTrl="N" original="PO Received Qty">PO Received Qty</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original="Received quantity">Received quantity</value>
+  </row>
+  <row id="CE8BC64B717AE90FE040007F01007EB7" trl="N">
+    <value column="Name" isTrl="N" original="PO Purchased Qty">PO Purchased Qty</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="CF89E182C6014DE29EB3C3B5E03AF84E" trl="N">
+    <value column="Name" isTrl="Y" original="Paying To">Pagado a</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="Y" original="The Business Partner the payment is paid to.">El socio de negocios el pago se abona a.</value>
+  </row>
+  <row id="DAD73C2515B6410593C6FF1BD479FEF1" trl="N">
+    <value column="Name" isTrl="Y" original="Upon Reconciliation Use">Cuenta para conciliación</value>
+    <value column="Description" isTrl="Y" original="Account to be used upon reconciliation">Cuenta que se utilizará en la conciliacion</value>
+    <value column="Help" isTrl="Y" original="Account to be used upon reconciliation">Cuenta para conciliación</value>
+  </row>
+  <row id="DCB3CD5102A644DB882524C242F4145C" trl="N">
+    <value column="Name" isTrl="N" original="Net List Price">Net List Price</value>
+    <value column="Description" isTrl="N" original="The official net price of a product in a specified currency.">The official net price of a product in a specified currency.</value>
+    <value column="Help" isTrl="N" original="The Net List Price is the official price stated by the selected pricelist and the currency of the document.">The Net List Price is the official price stated by the selected pricelist and the currency of the document.</value>
+  </row>
+  <row id="DF28D00022F846ADA026758669AA1841" trl="N">
+    <value column="Name" isTrl="Y" original="Return to Vendor line">Línea Devolución al Proveedor</value>
+    <value column="Description" isTrl="Y" original="Purchase Order Line">Comprar línea de pedido</value>
+    <value column="Help" isTrl="Y" original="The Purchase Order Line is a unique identifier for a line in an order.">La Línea de la orden de compra es un identificador único para una línea en un pedido.</value>
+  </row>
+  <row id="E28A115E25D44BB181D8D34CB55E0A1B" trl="N">
+    <value column="Name" isTrl="N" original="Purchase Order Line">Purchase Order Line</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="E9720E4D2C164A6398D32AAA916A74CF" trl="N">
+    <value column="Name" isTrl="Y" original="Alternate Taxable Amount">Base Imponible Alternativa</value>
+    <value column="Description" isTrl="Y" original="The total sum on which taxes are added.">La suma total de los impuestos que se agregan.</value>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="EF232FEE3DD749A49279EAD8783044C2" trl="N">
+    <value column="Name" isTrl="N" original="Name">Name</value>
+    <value column="Description" isTrl="N" original="Name of the Promotion Type">Name of the Promotion Type</value>
+    <value column="Help" isTrl="N" original="Promotion Type name is intended to be internally used as identifier for the Promotion Type. In case &quot;Printed Name&quot; is set, that will be the way final user will see the promotion, but if it is empty, &quot;Name&quot; will be used instead.">Promotion Type name is intended to be internally used as identifier for the Promotion Type. In case "Printed Name" is set, that will be the way final user will see the promotion, but if it is empty, "Name" will be used instead.</value>
+  </row>
+  <row id="F07B9467FB5D4905A0B8DE774F10D0F8" trl="N">
+    <value column="Name" isTrl="N" original="Text To Exclude">Text To Exclude</value>
+    <value column="Description" isTrl="N" original="Test to be excluded when trying to match Business Partner by name.">Test to be excluded when trying to match Business Partner by name.</value>
+    <value column="Help" isTrl="N" original="Add here the strings not to be taken into account when trying to match business partner name.">Add here the strings not to be taken into account when trying to match business partner name.</value>
+  </row>
+  <row id="F4C0A29550E845798355C5CA52ADB6DE" trl="N">
+    <value column="Name" isTrl="N" original="Production Run">Production Run</value>
+    <value column="Description" isTrl="N" original=""/>
+    <value column="Help" isTrl="N" original=""/>
+  </row>
+  <row id="FBDCD1FF6A3E439DA44E540CA2DB1A15" trl="N">
+    <value column="Name" isTrl="Y" original="Cleared Payment Account">Cuenta para pagos conciliados</value>
+    <value column="Description" isTrl="Y" original="Account used for status cleared of outgoing payments">Cuenta utilizada para el estado de los pagos denominados despejado</value>
+    <value column="Help" isTrl="Y" original="Account used for status cleared of outgoing payments">Cuenta utilizada para el estado de los pagos denominados despejado</value>
+  </row>
+  <row id="FC53D4705CB44A4789E7E827341BC584" trl="N">
+    <value column="Name" isTrl="Y" original="Execution Date">Fecha de Ejecución</value>
+    <value column="Description" isTrl="Y" original="Indicates the date that this payment run was executed.">Indica la fecha en que este plazo de pago se ha ejecutado.</value>
+    <value column="Help" isTrl="Y" original="The field indicates the date that this payment run was executed.">El campo indica la fecha en que este plazo de pago se ha ejecutado.</value>
+  </row>
+</compiereTrl>

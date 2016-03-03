@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER CO_COMPLETAR_AUT_SRI_FACT_TRG">
+    <trigger name="CO_COMPLETAR_AUT_SRI_FACT_TRG" table="C_INVOICE" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+  em_co_nro_aut_sri_t  VARCHAR(10); 
+  em_co_vencimiento_aut_sri_t timestamp without time zone;
+  em_co_nro_estab_t  VARCHAR(3);
+  em_co_punto_emision_t  VARCHAR(3); 
+  
+BEGIN
+
+    IF :new.issotrx = 'Y' THEN
+
+        select  em_co_punto_emision,em_co_nro_estab 
+           into em_co_punto_emision_t, em_co_nro_estab_t
+           from ad_org 
+          where ad_org_id=:new.ad_org_id;
+
+
+        select co_nro_aut_sri,co_vencimiento_aut_sri 
+          into em_co_nro_aut_sri_t, em_co_vencimiento_aut_sri_t
+          from co_aut_sri 
+         where isactive='Y' 
+           and c_doctype_id = :new.c_doctypetarget_id
+           and ad_org_id=:new.ad_org_id;
+
+        if(:new.em_co_nro_aut_sri is null or :new.em_co_nro_aut_sri = '' ) then 
+            :new.em_co_nro_aut_sri:=em_co_nro_aut_sri_t; 
+        end if;
+
+        if(:new.em_co_vencimiento_aut_sri is null) then 
+            :new.em_co_vencimiento_aut_sri:=em_co_vencimiento_aut_sri_t;
+        end if;
+        if(:new.em_co_nro_estab is null or :new.em_co_nro_estab = '' ) then 
+            :new.em_co_nro_estab :=em_co_nro_estab_t;
+        end if;        
+        if(:new.em_co_punto_emision is null or :new.em_co_punto_emision = '' ) then 
+            :new.em_co_punto_emision:=em_co_punto_emision_t;
+        end if;
+    end if;
+
+
+END CO_COMPLETAR_AUT_SRI_FACT_TRG
+]]></body>
+    </trigger>
+  </database>

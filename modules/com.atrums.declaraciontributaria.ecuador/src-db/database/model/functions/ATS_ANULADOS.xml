@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_ANULADOS">
+    <function name="ATS_ANULADOS" type="VARCHAR">
+      <parameter name="p_fecha_inicio" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_client" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN 
+
+         RETURN query select xmlelement( name "detalleAnulados",
+                                        xmlelement(name "tipoComprobante", R.em_co_tp_comp_autorizador_sri),
+                                        xmlelement(name "establecimiento", R.em_co_nro_estab),
+                                        xmlelement(name "puntoEmision", R.em_co_punto_emision),
+                                        xmlelement(name "secuencialInicio", R.documentno),
+                                        xmlelement(name "secuencialFin", R.documentno),
+                                        xmlelement(name "autorizacion", R.em_co_nro_aut_sri)
+                                       ) as strXml
+                    from(
+                     select to_char(dt.em_co_tp_comp_autorizador_sri,'FM99909') as em_co_tp_comp_autorizador_sri,i.em_co_nro_estab,i.em_co_punto_emision,i.documentno,i.em_co_nro_aut_sri
+                       from c_invoice i, c_doctype dt
+                      where i.dateinvoiced >= TO_DATE(p_fecha_inicio)
+                        and i.dateinvoiced <= TO_DATE(p_fecha_fin)
+                        and i.docstatus = 'VO'
+                        and i.issotrx = 'Y'
+                        and dt.em_co_tp_comp_autorizador_sri = '18'
+                        and i.ad_client_id = p_client
+                        and i.c_doctype_id = dt.c_doctype_id
+                      union
+                     select to_char(7, 'FM99909') as em_co_tp_comp_autorizador_sri,
+                            ci.em_co_nro_estab,ci.em_co_punto_emision,i.documentno,i.no_autorizacion as em_co_nro_aut_sri
+                       from co_retencion_compra i, c_doctype dt, c_invoice ci
+                      where i.fecha_emision >= TO_DATE(p_fecha_inicio)
+                        and i.fecha_emision <= TO_DATE(p_fecha_fin)
+                        and i.docstatus = 'AN'
+                        and dt.em_co_tp_comp_autorizador_sri = '0'
+                        and i.ad_client_id = p_client
+                        and i.c_doctype_id = dt.c_doctype_id
+                        and ci.c_invoice_id = i.c_invoice_id
+                  ) as R;
+END ATS_ANULADOS
+]]></body>
+    </function>
+  </database>

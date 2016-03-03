@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<compiereTrl baseLanguage="en_US" language="es_EC" table="AD_ELEMENT" version="">
+  <row id="0D5107C3E85B4520AD9E4386DAA90C30" trl="N">
+    <value column="Name" isTrl="Y" original="Template">Plantilla</value>
+    <value column="PrintName" isTrl="Y" original="Template">Plantilla</value>
+    <value column="Description" isTrl="Y" original="The template used to generate the client-side representation.">La plantilla utilizada para generar la representación en el cliente</value>
+    <value column="Help" isTrl="Y" original="The template used to generate the client-side representation (in the browser) of the datasource.">La plantilla utilizada para generar la representación en el lado del cliente (en el navegador) de la fuente de datos.</value>
+    <value column="PO_Description" isTrl="N" original=""/>
+    <value column="PO_Help" isTrl="N" original=""/>
+    <value column="PO_Name" isTrl="N" original=""/>
+    <value column="PO_PrintName" isTrl="N" original=""/>
+  </row>
+  <row id="3FB0A141F73D4E119BC633EEB22D07FD" trl="N">
+    <value column="Name" isTrl="Y" original="Java class name">Nombre de la clase Java</value>
+    <value column="PrintName" isTrl="Y" original="Class implementing the functionality in java">Clase que implementa la funcionalidad en Java</value>
+    <value column="Description" isTrl="Y" original="Class implementing the functionality in java">Clase que implementa la funcionalidad en Java</value>
+    <value column="Help" isTrl="Y" original="Class implementing the functionality in java">Clase que implementa la funcionalidad en Java</value>
+    <value column="PO_Description" isTrl="N" original=""/>
+    <value column="PO_Help" isTrl="N" original=""/>
+    <value column="PO_Name" isTrl="N" original=""/>
+    <value column="PO_PrintName" isTrl="N" original=""/>
+  </row>
+  <row id="60A68A01BC1D481996705730BDEA560D" trl="N">
+    <value column="Name" isTrl="Y" original="Datasource Field">Campo de Fuente de Datos</value>
+    <value column="PrintName" isTrl="Y" original="Datasource Field">Campo de Fuente de Datos</value>
+    <value column="Description" isTrl="Y" original="The datasource field is part of the datasource definition.">El campo de fuente de datos es parte de la definición de la fuente de datos.</value>
+    <value column="Help" isTrl="Y" original="The datasource field is part of the datasource definition.">El campo de fuente de datos es parte de la definición de la fuente de datos.</value>
+    <value column="PO_Description" isTrl="N" original=""/>
+    <value column="PO_Help" isTrl="N" original=""/>
+    <value column="PO_Name" isTrl="N" original=""/>
+    <value column="PO_PrintName" isTrl="N" original=""/>
+  </row>
+  <row id="73C534367AFA4C28A9F8767D59AAE37E" trl="N">
+    <value column="Name" isTrl="Y" original="Datasource">Fuente de datos</value>
+    <value column="PrintName" isTrl="Y" original="Datasource">Fuente de datos</value>
+    <value column="Description" isTrl="Y" original="The datasource ">Fuente de datos </value>
+    <value column="Help" isTrl="Y" original="The datasource provides data from the database or from in-memory data.">La fuente de datos proporciona información de la base de datos o de datos almacenados en memoria.</value>
+    <value column="PO_Description" isTrl="N" original=""/>
+    <value column="PO_Help" isTrl="N" original=""/>
+    <value column="PO_Name" isTrl="N" original=""/>
+    <value column="PO_PrintName" isTrl="N" original=""/>
+  </row>
+  <row id="D8467987FB7A4EA6AADCB5500A96CBDB" trl="N">
+    <value column="Name" isTrl="Y" original="HQL Where Clause">Cláusula de HQL 'where'</value>
+    <value column="PrintName" isTrl="Y" original="The HQL where clause used to filter and query for data.">La cláusula de HQL 'where' para filtrar y consultar datos.</value>
+    <value column="Description" isTrl="Y" original="The HQL where clause used to filter and query for data.">La cláusula de HQL 'where' usada para filtrar y consultar datos.</value>
+    <value column="Help" isTrl="Y" original="The HQL where clause is added to the query to retrieve the data which is returned by the datasource.">La cláusula de HQL 'where' se añade a la consulta para leer los datos devueltos por la fuente de datos</value>
+    <value column="PO_Description" isTrl="N" original=""/>
+    <value column="PO_Help" isTrl="N" original=""/>
+    <value column="PO_Name" isTrl="N" original=""/>
+    <value column="PO_PrintName" isTrl="N" original=""/>
+  </row>
+</compiereTrl>

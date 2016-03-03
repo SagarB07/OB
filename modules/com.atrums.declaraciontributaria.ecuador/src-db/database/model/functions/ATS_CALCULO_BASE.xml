@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_CALCULO_BASE">
+    <function name="ATS_CALCULO_BASE" type="VARCHAR">
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_inicio" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tp_base_imponible" type="CHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tp_comp_sri" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(10):=''; 
+BEGIN 
+        select ltrim(to_char(coalesce(sum(abs(it.taxbaseamt)),0),'9999990.99')) into v_ResultStr
+          from c_invoice i,
+               c_invoicetax it,
+               c_tax t,
+               c_taxcategory tc
+         where i.c_invoice_id = it.c_invoice_id
+           and i.issotrx = 'Y'
+           and i.processed = 'Y'
+           and i.docstatus <> 'VO'
+           and i.c_bpartner_id = p_bpartner_id
+           and date(i.dateinvoiced) >= TO_DATE(p_fecha_inicio)
+           and date(i.dateinvoiced) <= TO_DATE(p_fecha_fin)
+           and it.c_tax_id = t.c_tax_id
+           and t.c_taxcategory_id = tc.c_taxcategory_id
+           and tc.em_co_tp_base_imponible = p_tp_base_imponible
+           and (select em_co_tp_comp_autorizador_sri from c_doctype where c_doctype.c_doctype_id = i.c_doctypetarget_id) = p_tp_comp_sri;
+        
+    return v_ResultStr;
+END ATS_CALCULO_BASE
+]]></body>
+    </function>
+  </database>

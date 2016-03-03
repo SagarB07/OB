@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_Codigo_Activo" columnCount="4" printOrder="Horizontal" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="138" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="valor_max" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="valor_max_aux" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{valor_max} == null || $P{valor_max}.equals("")) ? "" : " and ast.value <= (select a.value from a_asset a where a.a_asset_id ='" +$P{valor_max}.toString()+ "') "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USER_CLIENT" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="valor_min" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="valor_min_aux" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[($P{valor_min} == null || $P{valor_min}.equals("")) ? "" : " and ast.value >= (select a.value from a_asset a where a.a_asset_id = '" +$P{valor_min}.toString()+ "') "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USER_ORG" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ast.value as identificador , ast.name as nombre_activo
+  from a_asset ast
+where ad_client_id in ($P!{USER_CLIENT})
+and ad_org_id in ($P!{USER_ORG})
+$P!{valor_max_aux}
+$P!{valor_min_aux}
+order by 1]]>
+	</queryString>
+	<field name="identificador" class="java.lang.String"/>
+	<field name="nombre_activo" class="java.lang.String"/>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="16" width="138" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{identificador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="138" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_activo}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="0" y="0" width="138" height="16"/>
+				<jr:EAN128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="none">
+					<jr:codeExpression><![CDATA[$F{identificador}]]></jr:codeExpression>
+				</jr:EAN128>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

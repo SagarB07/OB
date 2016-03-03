@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_VENTAS">
+    <function name="ATS_VENTAS" type="VARCHAR">
+      <parameter name="p_tpidcliente" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_idcliente" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipocomp" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_numcomp" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_basenog" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_baseimp" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_base" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_montoiva" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valoriva" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valorrenta" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN  
+
+       RETURN query select xmlelement( name "detalleVentas",
+                                        xmlelement(name "tpIdCliente", p_tpidcliente),
+                                        xmlelement(name "idCliente", p_idcliente),
+                                        xmlelement(name "tipoComprobante", p_tipocomp),
+                                        xmlelement(name "numeroComprobantes", p_numcomp),
+                                        xmlelement(name "baseNoGraIva", p_basenog),
+                                        xmlelement(name "baseImponible", p_baseimp),
+                                        xmlelement(name "baseImpGrav", p_base),
+                                        xmlelement(name "montoIva", p_montoiva),
+                                        xmlelement(name "valorRetIva", p_valoriva),
+                                        xmlelement(name "valorRetRenta", p_valorrenta)
+                                       ) as strXml
+                               
+            from dual;
+END ATS_VENTAS
+]]></body>
+    </function>
+  </database>

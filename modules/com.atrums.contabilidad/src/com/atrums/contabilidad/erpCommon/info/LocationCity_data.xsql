@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+
+<SqlClass name="LocationCityData" package="com.atrums.contabilidad.erpCommon.info">
+   <SqlClassComment></SqlClassComment>
+<!--not used anymore -->
+   <SqlMethod name="select" type="preparedStatement" return="multiple">
+      <SqlMethodComment></SqlMethodComment>
+      <Sql>
+      <![CDATA[
+        SELECT c_city_id as ID,name  FROM C_City      
+        WHERE C_City.C_Region_ID=?
+        ]]>
+      </Sql>
+      <Parameter name="cRegionId"/>
+   </SqlMethod>
+</SqlClass>

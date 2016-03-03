@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+ -->
+<SqlClass name="NumeroDocTypeData" package="com.atrums.contabilidad.ad_callouts">
+  <SqlMethod name="SequenceDoctype" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+            SELECT Ad_Sequence_Doctype(?, ?, 'Y') 
+      ]]>
+    </Sql>
+    <Parameter name="cDocTipeId"/>
+    <Parameter name="adClienteID"/>
+  </SqlMethod>
+</SqlClass>

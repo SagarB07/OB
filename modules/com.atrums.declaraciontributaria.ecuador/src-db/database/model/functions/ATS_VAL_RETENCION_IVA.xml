@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ATS_VAL_RETENCION_IVA">
+    <function name="ATS_VAL_RETENCION_IVA" type="NUMERIC">
+      <parameter name="p_invoice_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_retencion" type="CHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr NUMBER:=0; 
+BEGIN 
+
+    if(exists(select 1 from c_invoice i, 
+                            co_retencion_compra rc, 
+                            co_retencion_compra_linea rcl,
+                            co_bp_retencion_compra bprc,
+                            co_tipo_retencion tr
+                      where i.c_invoice_id = rc.c_invoice_id 
+                        and rc.co_retencion_compra_id = rcl.co_retencion_compra_id
+                        and rcl.co_bp_retencion_compra_id = bprc.co_bp_retencion_compra_id
+                        and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+                        and tr.tipo='IVA'
+                        and i.c_invoice_id = p_invoice_id
+                        and tr.tiporetencioniva = p_tipo_retencion))
+    then
+        
+        select COALESCE(rcl.valor_retencion,0) into v_ResultStr
+          from c_invoice i,
+               co_retencion_compra rc,
+               co_retencion_compra_linea rcl,
+               co_bp_retencion_compra bprc,
+               co_tipo_retencion tr
+         where i.c_invoice_id = rc.c_invoice_id
+           and rc.co_retencion_compra_id = rcl.co_retencion_compra_id
+           and rcl.co_bp_retencion_compra_id = bprc.co_bp_retencion_compra_id
+           and bprc.co_tipo_retencion_id = tr.co_tipo_retencion_id
+           and tr.tipo='IVA'
+		   and rc.docstatus <> 'AN'
+           and i.c_invoice_id = p_invoice_id
+           and tr.tiporetencioniva = p_tipo_retencion;
+    else
+        v_ResultStr := 0; 
+    end if;
+        
+    return v_ResultStr;
+END ATS_VAL_RETENCION_IVA
+]]></body>
+    </function>
+  </database>
