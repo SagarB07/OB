@@ -88,7 +88,12 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_USERCONTACT = "userContact";
     public static final String PROPERTY_IMPORTERRORMESSAGE = "importErrorMessage";
     public static final String PROPERTY_IMPORTPROCESSCOMPLETE = "importProcessComplete";
+    public static final String PROPERTY_IDTAPELLIDOS = "iDTApellidos";
+    public static final String PROPERTY_IDTEMAIL = "iDTEmail";
     public static final String PROPERTY_IDTGENERO = "iDTGenero";
+    public static final String PROPERTY_IDTNATURALJURIDICO = "iDTNaturalJuridico";
+    public static final String PROPERTY_IDTNOMBRES = "iDTNombres";
+    public static final String PROPERTY_IDTTIPOIDENTIFICACION = "iDTTipoIdentificacion";
 
     public BusinessPartner() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -462,12 +467,52 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IMPORTPROCESSCOMPLETE, importProcessComplete);
     }
 
+    public String getIDTApellidos() {
+        return (String) get(PROPERTY_IDTAPELLIDOS);
+    }
+
+    public void setIDTApellidos(String iDTApellidos) {
+        set(PROPERTY_IDTAPELLIDOS, iDTApellidos);
+    }
+
+    public String getIDTEmail() {
+        return (String) get(PROPERTY_IDTEMAIL);
+    }
+
+    public void setIDTEmail(String iDTEmail) {
+        set(PROPERTY_IDTEMAIL, iDTEmail);
+    }
+
     public String getIDTGenero() {
         return (String) get(PROPERTY_IDTGENERO);
     }
 
     public void setIDTGenero(String iDTGenero) {
         set(PROPERTY_IDTGENERO, iDTGenero);
+    }
+
+    public String getIDTNaturalJuridico() {
+        return (String) get(PROPERTY_IDTNATURALJURIDICO);
+    }
+
+    public void setIDTNaturalJuridico(String iDTNaturalJuridico) {
+        set(PROPERTY_IDTNATURALJURIDICO, iDTNaturalJuridico);
+    }
+
+    public String getIDTNombres() {
+        return (String) get(PROPERTY_IDTNOMBRES);
+    }
+
+    public void setIDTNombres(String iDTNombres) {
+        set(PROPERTY_IDTNOMBRES, iDTNombres);
+    }
+
+    public String getIDTTipoIdentificacion() {
+        return (String) get(PROPERTY_IDTTIPOIDENTIFICACION);
+    }
+
+    public void setIDTTipoIdentificacion(String iDTTipoIdentificacion) {
+        set(PROPERTY_IDTTIPOIDENTIFICACION, iDTTipoIdentificacion);
     }
 
 }
