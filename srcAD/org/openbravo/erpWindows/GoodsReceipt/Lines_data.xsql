@@ -14,42 +14,42 @@
         M_InOutLine.Line, 
 M_InOutLine.M_Product_ID, 
 (CASE WHEN M_InOutLine.M_Product_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL1.Name IS NULL THEN TO_CHAR(table1.Name) ELSE TO_CHAR(tableTRL1.Name) END)), ''))),'') ) END) AS M_Product_IDR, 
-M_InOutLine.M_AttributeSetInstance_ID, 
-(CASE WHEN M_InOutLine.M_AttributeSetInstance_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Description), ''))),'') ) END) AS M_AttributeSetInstance_IDR, 
 M_InOutLine.M_Condition_Goods_ID, 
+M_InOutLine.M_AttributeSetInstance_ID, 
 M_InOutLine.MovementQty, 
 M_InOutLine.C_UOM_ID, 
-(CASE WHEN M_InOutLine.C_UOM_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_UOM_IDR, 
+(CASE WHEN M_InOutLine.C_UOM_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL3.Name IS NULL THEN TO_CHAR(table3.Name) ELSE TO_CHAR(tableTRL3.Name) END)), ''))),'') ) END) AS C_UOM_IDR, 
 M_InOutLine.M_Locator_ID, 
-(CASE WHEN M_InOutLine.M_Locator_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Value), ''))),'') ) END) AS M_Locator_IDR, 
+(CASE WHEN M_InOutLine.M_Locator_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Value), ''))),'') ) END) AS M_Locator_IDR, 
 M_InOutLine.Description, 
 M_InOutLine.C_OrderLine_ID, 
-(CASE WHEN M_InOutLine.C_OrderLine_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table8.DateOrdered, 'DD-MM-YYYY')),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.GrandTotal), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.Line), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.LineNetAmt), ''))),'') ) END) AS C_OrderLine_IDR, 
 M_InOutLine.M_Product_Uom_Id, 
+(CASE WHEN M_InOutLine.M_Product_Uom_Id IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS M_Product_Uom_IdR, 
 M_InOutLine.QuantityOrder, 
 M_InOutLine.Canceled_Inoutline_ID, 
 M_InOutLine.Manage_Prereservation, 
 M_InOutLine.AD_Org_ID, 
-(CASE WHEN M_InOutLine.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Name), ''))),'') ) END) AS AD_Org_IDR, 
+(CASE WHEN M_InOutLine.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.Name), ''))),'') ) END) AS AD_Org_IDR, 
 M_InOutLine.C_Bpartner_ID, 
-(CASE WHEN M_InOutLine.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table10.Name), ''))),'') ) END) AS C_Bpartner_IDR, 
+(CASE WHEN M_InOutLine.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.Name), ''))),'') ) END) AS C_Bpartner_IDR, 
 M_InOutLine.C_Project_ID, 
-(CASE WHEN M_InOutLine.C_Project_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table11.Value), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table11.Name), ''))),'') ) END) AS C_Project_IDR, 
+(CASE WHEN M_InOutLine.C_Project_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Value), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Name), ''))),'') ) END) AS C_Project_IDR, 
 M_InOutLine.C_Costcenter_ID, 
 M_InOutLine.A_Asset_ID, 
 M_InOutLine.User1_ID, 
 M_InOutLine.User2_ID, 
 M_InOutLine.Explode, 
 M_InOutLine.BOM_Parent_ID, 
+M_InOutLine.em_asv_pedido_detalle_id, 
+COALESCE(M_InOutLine.IsDescription, 'N') AS IsDescription, 
+M_InOutLine.M_InOutLine_ID, 
 M_InOutLine.M_InOut_ID, 
 COALESCE(M_InOutLine.IsActive, 'N') AS IsActive, 
-M_InOutLine.M_InOutLine_ID, 
-COALESCE(M_InOutLine.IsDescription, 'N') AS IsDescription, 
 M_InOutLine.AD_Client_ID, 
 COALESCE(M_InOutLine.IsInvoiced, 'N') AS IsInvoiced, 
  
         ? AS LANGUAGE 
-        FROM M_InOutLine left join (select M_Product_ID, Name from M_Product) table1 on (M_InOutLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table3 on (M_InOutLine.M_AttributeSetInstance_ID = table3.M_AttributeSetInstance_ID) left join (select C_UOM_ID, Name from C_UOM) table4 on (M_InOutLine.C_UOM_ID = table4.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL4 on (table4.C_UOM_ID = tableTRL4.C_UOM_ID and tableTRL4.AD_Language = ?)  left join (select M_Locator_ID, Value from M_Locator) table6 on (M_InOutLine.M_Locator_ID = table6.M_Locator_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table7 on (M_InOutLine.C_OrderLine_ID = table7.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table8 on (table7.C_Order_ID = table8.C_Order_ID) left join (select AD_Org_ID, Name from AD_Org) table9 on (M_InOutLine.AD_Org_ID = table9.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table10 on (M_InOutLine.C_Bpartner_ID = table10.C_BPartner_ID) left join (select C_Project_ID, Value, Name from C_Project) table11 on (M_InOutLine.C_Project_ID = table11.C_Project_ID)
+        FROM M_InOutLine left join (select M_Product_ID, Name from M_Product) table1 on (M_InOutLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select C_UOM_ID, Name from C_UOM) table3 on (M_InOutLine.C_UOM_ID = table3.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL3 on (table3.C_UOM_ID = tableTRL3.C_UOM_ID and tableTRL3.AD_Language = ?)  left join (select M_Locator_ID, Value from M_Locator) table5 on (M_InOutLine.M_Locator_ID = table5.M_Locator_ID) left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_UOM) table6 on (M_InOutLine.M_Product_Uom_Id =  table6.M_Product_Uom_Id) left join ad_ref_list_v list1 on (table6.C_UOM_ID = list1.value and list1.ad_reference_id = '' and list1.ad_language = ?)  left join (select AD_Org_ID, Name from AD_Org) table7 on (M_InOutLine.AD_Org_ID = table7.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table8 on (M_InOutLine.C_Bpartner_ID = table8.C_BPartner_ID) left join (select C_Project_ID, Value, Name from C_Project) table9 on (M_InOutLine.C_Project_ID = table9.C_Project_ID)
         WHERE 2=2 
 
         AND 1=1 
@@ -61,6 +61,7 @@ COALESCE(M_InOutLine.IsInvoiced, 'N') AS IsInvoiced,
     <Parameter name="dateTimeFormat"></Parameter>
     
     <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
 <Parameter name="paramLanguage"/>
 <Parameter name="paramLanguage"/>
 
@@ -84,7 +85,7 @@ COALESCE(M_InOutLine.IsInvoiced, 'N') AS IsInvoiced,
       <SqlMethodComment>Create a registry</SqlMethodComment>
       <Sql></Sql>
     <Parameter name="mInoutId" id="paramKeyParent"></Parameter>
-<Parameter name="aAssetId"></Parameter><Parameter name="mInoutlineId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="mLocatorId"></Parameter><Parameter name="mLocatorIdr"></Parameter><Parameter name="mProductId"></Parameter><Parameter name="mProductIdr"></Parameter><Parameter name="movementqty"></Parameter><Parameter name="description"></Parameter><Parameter name="mConditionGoodsId"></Parameter><Parameter name="line"></Parameter><Parameter name="cOrderlineId"></Parameter><Parameter name="cOrderlineIdr"></Parameter><Parameter name="cUomId"></Parameter><Parameter name="user1Id"></Parameter><Parameter name="isinvoiced"></Parameter><Parameter name="cCostcenterId"></Parameter><Parameter name="explode"></Parameter><Parameter name="mProductUomId"></Parameter><Parameter name="quantityorder"></Parameter><Parameter name="mAttributesetinstanceId"></Parameter><Parameter name="mAttributesetinstanceIdr"></Parameter><Parameter name="isdescription"></Parameter><Parameter name="user2Id"></Parameter><Parameter name="canceledInoutlineId"></Parameter><Parameter name="cBpartnerId"></Parameter><Parameter name="cBpartnerIdr"></Parameter><Parameter name="managePrereservation"></Parameter><Parameter name="bomParentId"></Parameter><Parameter name="cProjectId"></Parameter><Parameter name="cProjectIdr"></Parameter>
+<Parameter name="aAssetId"></Parameter><Parameter name="emAsvPedidoDetalleId"></Parameter><Parameter name="mInoutlineId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="mLocatorId"></Parameter><Parameter name="mLocatorIdr"></Parameter><Parameter name="mProductId"></Parameter><Parameter name="mProductIdr"></Parameter><Parameter name="movementqty"></Parameter><Parameter name="description"></Parameter><Parameter name="mConditionGoodsId"></Parameter><Parameter name="line"></Parameter><Parameter name="cOrderlineId"></Parameter><Parameter name="cUomId"></Parameter><Parameter name="user1Id"></Parameter><Parameter name="isinvoiced"></Parameter><Parameter name="cCostcenterId"></Parameter><Parameter name="explode"></Parameter><Parameter name="mProductUomId"></Parameter><Parameter name="quantityorder"></Parameter><Parameter name="mAttributesetinstanceId"></Parameter><Parameter name="isdescription"></Parameter><Parameter name="user2Id"></Parameter><Parameter name="canceledInoutlineId"></Parameter><Parameter name="cBpartnerId"></Parameter><Parameter name="cBpartnerIdr"></Parameter><Parameter name="managePrereservation"></Parameter><Parameter name="bomParentId"></Parameter><Parameter name="cProjectId"></Parameter><Parameter name="cProjectIdr"></Parameter>
    </SqlMethod>
 
 
@@ -238,23 +239,7 @@ WHERE M_INOUT_ID = ?
 <Parameter name="M_InOut_ID"/>
   </SqlMethod>
 
-   <SqlMethod name="selectDef3811_4" type="preparedStatement" return="String" default="">
-    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
-    <Sql><![CDATA[
-        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.DocumentNo), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table3.DateOrdered, 'DD-MM-YYYY')), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.GrandTotal), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Line), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.LineNetAmt), ''))), '') ) as C_OrderLine_ID FROM C_OrderLine left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table2 on (C_OrderLine.C_OrderLine_ID = table2.C_OrderLine_ID)left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table3 on (table2.C_Order_ID = table3.C_Order_ID) WHERE C_OrderLine.isActive='Y' AND C_OrderLine.C_OrderLine_ID = ?  
-    ]]></Sql>
-<Parameter name="C_OrderLine_IDR"/>
-  </SqlMethod>
-
-   <SqlMethod name="selectDef8772_5" type="preparedStatement" return="String" default="">
-    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
-    <Sql><![CDATA[
-        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Description), ''))), '') ) as M_AttributeSetInstance_ID FROM M_AttributeSetInstance left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table2 on (M_AttributeSetInstance.M_AttributeSetInstance_ID = table2.M_AttributeSetInstance_ID) WHERE M_AttributeSetInstance.isActive='Y' AND M_AttributeSetInstance.M_AttributeSetInstance_ID = ?  
-    ]]></Sql>
-<Parameter name="M_AttributeSetInstance_IDR"/>
-  </SqlMethod>
-
-   <SqlMethod name="selectDefBD1602011B5E4AD1B5DD85E8E9017B11_6" type="preparedStatement" return="String" default="">
+   <SqlMethod name="selectDefBD1602011B5E4AD1B5DD85E8E9017B11_4" type="preparedStatement" return="String" default="">
     <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
     <Sql><![CDATA[
         SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as C_Bpartner_ID FROM C_BPartner left join (select C_BPartner_ID, Name from C_BPartner) table2 on (C_BPartner.C_BPartner_ID = table2.C_BPartner_ID) WHERE C_BPartner.isActive='Y' AND C_BPartner.C_BPartner_ID = ?  
@@ -262,7 +247,7 @@ WHERE M_INOUT_ID = ?
 <Parameter name="C_Bpartner_IDR"/>
   </SqlMethod>
 
-   <SqlMethod name="selectDefF12044E4570546E18AF6834B00961F8E_7" type="preparedStatement" return="String" default="">
+   <SqlMethod name="selectDefF12044E4570546E18AF6834B00961F8E_5" type="preparedStatement" return="String" default="">
     <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
     <Sql><![CDATA[
         SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Value), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as C_Project_ID FROM C_Project left join (select C_Project_ID, Value, Name from C_Project) table2 on (C_Project.C_Project_ID = table2.C_Project_ID) WHERE C_Project.isActive='Y' AND C_Project.C_Project_ID = ?  
@@ -313,13 +298,13 @@ WHERE M_INOUT_ID = ?
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_InOutLine
-        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , M_Condition_Goods_ID = (?) , MovementQty = TO_NUMBER(?) , C_UOM_ID = (?) , M_Locator_ID = (?) , Description = (?) , C_OrderLine_ID = (?) , M_Product_Uom_Id = (?) , QuantityOrder = TO_NUMBER(?) , Canceled_Inoutline_ID = (?) , Manage_Prereservation = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , M_InOut_ID = (?) , IsActive = (?) , M_InOutLine_ID = (?) , IsDescription = (?) , AD_Client_ID = (?) , IsInvoiced = (?) , updated = now(), updatedby = ? 
+        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , M_Condition_Goods_ID = (?) , M_AttributeSetInstance_ID = (?) , MovementQty = TO_NUMBER(?) , C_UOM_ID = (?) , M_Locator_ID = (?) , Description = (?) , C_OrderLine_ID = (?) , M_Product_Uom_Id = (?) , QuantityOrder = TO_NUMBER(?) , Canceled_Inoutline_ID = (?) , Manage_Prereservation = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , em_asv_pedido_detalle_id = (?) , IsDescription = (?) , M_InOutLine_ID = (?) , M_InOut_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , IsInvoiced = (?) , updated = now(), updatedby = ? 
         WHERE M_InOutLine.M_InOutLine_ID = ? 
                  AND M_InOutLine.M_InOut_ID = ? 
         AND M_InOutLine.AD_Client_ID IN ('1') 
         AND M_InOutLine.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isinvoiced"></Parameter> 
+    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="emAsvPedidoDetalleId"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isinvoiced"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mInoutlineId"></Parameter>
     
@@ -331,10 +316,10 @@ WHERE M_INOUT_ID = ?
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_InOutLine 
-        (Line, M_Product_ID, M_AttributeSetInstance_ID, M_Condition_Goods_ID, MovementQty, C_UOM_ID, M_Locator_ID, Description, C_OrderLine_ID, M_Product_Uom_Id, QuantityOrder, Canceled_Inoutline_ID, Manage_Prereservation, AD_Org_ID, C_Bpartner_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, M_InOut_ID, IsActive, M_InOutLine_ID, IsDescription, AD_Client_ID, IsInvoiced, created, createdby, updated, updatedBy)
-        VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+        (Line, M_Product_ID, M_Condition_Goods_ID, M_AttributeSetInstance_ID, MovementQty, C_UOM_ID, M_Locator_ID, Description, C_OrderLine_ID, M_Product_Uom_Id, QuantityOrder, Canceled_Inoutline_ID, Manage_Prereservation, AD_Org_ID, C_Bpartner_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, em_asv_pedido_detalle_id, IsDescription, M_InOutLine_ID, M_InOut_ID, IsActive, AD_Client_ID, IsInvoiced, created, createdby, updated, updatedBy)
+        VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isinvoiced"></Parameter> 
+    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="emAsvPedidoDetalleId"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isinvoiced"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

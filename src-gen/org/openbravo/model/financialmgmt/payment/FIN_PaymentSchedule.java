@@ -62,6 +62,7 @@ public class FIN_PaymentSchedule extends BaseOBObject implements Traceable, Clie
     public static final String PROPERTY_ACTIVE = "active";
     public static final String PROPERTY_FINPAYMENTPRIORITY = "fINPaymentPriority";
     public static final String PROPERTY_UPDATEPAYMENTPLAN = "updatePaymentPlan";
+    public static final String PROPERTY_CORETENCION = "coRetencion";
     public static final String PROPERTY_ORIGDUEDATE = "origDueDate";
     public static final String PROPERTY_DESCRIPTION = "description";
     public static final String PROPERTY_APRMMODIFPAYMENTINPLAN = "aprmModifPaymentINPlan";
@@ -249,6 +250,14 @@ public class FIN_PaymentSchedule extends BaseOBObject implements Traceable, Clie
 
     public void setUpdatePaymentPlan(Boolean updatePaymentPlan) {
         set(PROPERTY_UPDATEPAYMENTPLAN, updatePaymentPlan);
+    }
+
+    public String getCoRetencion() {
+        return (String) get(PROPERTY_CORETENCION);
+    }
+
+    public void setCoRetencion(String coRetencion) {
+        set(PROPERTY_CORETENCION, coRetencion);
     }
 
     public Date getOrigDueDate() {

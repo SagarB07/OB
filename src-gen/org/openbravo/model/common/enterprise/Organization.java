@@ -60,6 +60,8 @@ public class Organization extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_READY = "ready";
     public static final String PROPERTY_SOCIALNAME = "socialName";
     public static final String PROPERTY_CURRENCY = "currency";
+    public static final String PROPERTY_CONROESTAB = "coNroEstab";
+    public static final String PROPERTY_COPUNTOEMISION = "coPuntoEmision";
     public static final String PROPERTY_GENERALLEDGER = "generalLedger";
     public static final String PROPERTY_ADROLEORGANIZATIONLIST = "aDRoleOrganizationList";
     public static final String PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST = "financialMgmtPeriodControlVList";
@@ -72,6 +74,7 @@ public class Organization extends BaseOBObject implements Traceable, ClientEnabl
         setDefaultValue(PROPERTY_SUMMARYLEVEL, false);
         setDefaultValue(PROPERTY_ALLOWPERIODCONTROL, false);
         setDefaultValue(PROPERTY_READY, false);
+        setDefaultValue(PROPERTY_COPUNTOEMISION, "001");
         setDefaultValue(PROPERTY_ADROLEORGANIZATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORGANIZATIONINFORMATIONLIST, new ArrayList<Object>());
@@ -218,6 +221,22 @@ public class Organization extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setCurrency(Currency currency) {
         set(PROPERTY_CURRENCY, currency);
+    }
+
+    public String getCoNroEstab() {
+        return (String) get(PROPERTY_CONROESTAB);
+    }
+
+    public void setCoNroEstab(String coNroEstab) {
+        set(PROPERTY_CONROESTAB, coNroEstab);
+    }
+
+    public String getCoPuntoEmision() {
+        return (String) get(PROPERTY_COPUNTOEMISION);
+    }
+
+    public void setCoPuntoEmision(String coPuntoEmision) {
+        set(PROPERTY_COPUNTOEMISION, coPuntoEmision);
     }
 
     public AcctSchema getGeneralLedger() {

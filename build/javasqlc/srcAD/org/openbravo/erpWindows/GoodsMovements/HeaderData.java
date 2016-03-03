@@ -26,8 +26,11 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String updatedbyr;
   public String adOrgId;
   public String adOrgIdr;
-  public String name;
+  public String emCoDoctypeId;
+  public String emCoDoctypeIdr;
   public String movementdate;
+  public String documentno;
+  public String name;
   public String description;
   public String moveFromtoLocator;
   public String processing;
@@ -36,7 +39,6 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String isactive;
   public String adOrgtrxId;
   public String cProjectId;
-  public String cProjectIdr;
   public String cCostcenterId;
   public String aAssetId;
   public String cActivityId;
@@ -45,10 +47,9 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCampaignIdr;
   public String user1Id;
   public String user2Id;
-  public String adClientId;
   public String mMovementId;
-  public String documentno;
   public String processed;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -78,10 +79,16 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_org_idr") || fieldName.equals("adOrgIdr"))
       return adOrgIdr;
-    else if (fieldName.equalsIgnoreCase("name"))
-      return name;
+    else if (fieldName.equalsIgnoreCase("em_co_doctype_id") || fieldName.equals("emCoDoctypeId"))
+      return emCoDoctypeId;
+    else if (fieldName.equalsIgnoreCase("em_co_doctype_idr") || fieldName.equals("emCoDoctypeIdr"))
+      return emCoDoctypeIdr;
     else if (fieldName.equalsIgnoreCase("movementdate"))
       return movementdate;
+    else if (fieldName.equalsIgnoreCase("documentno"))
+      return documentno;
+    else if (fieldName.equalsIgnoreCase("name"))
+      return name;
     else if (fieldName.equalsIgnoreCase("description"))
       return description;
     else if (fieldName.equalsIgnoreCase("move_fromto_locator") || fieldName.equals("moveFromtoLocator"))
@@ -98,8 +105,6 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return adOrgtrxId;
     else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
       return cProjectId;
-    else if (fieldName.equalsIgnoreCase("c_project_idr") || fieldName.equals("cProjectIdr"))
-      return cProjectIdr;
     else if (fieldName.equalsIgnoreCase("c_costcenter_id") || fieldName.equals("cCostcenterId"))
       return cCostcenterId;
     else if (fieldName.equalsIgnoreCase("a_asset_id") || fieldName.equals("aAssetId"))
@@ -116,14 +121,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("m_movement_id") || fieldName.equals("mMovementId"))
       return mMovementId;
-    else if (fieldName.equalsIgnoreCase("documentno"))
-      return documentno;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -165,8 +168,11 @@ Select for edit
       "        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = M_Movement.UpdatedBy) as UpdatedByR," +
       "        M_Movement.AD_Org_ID, " +
       "(CASE WHEN M_Movement.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, " +
-      "M_Movement.Name, " +
+      "M_Movement.EM_Co_Doctype_ID, " +
+      "(CASE WHEN M_Movement.EM_Co_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS EM_Co_Doctype_IDR, " +
       "M_Movement.MovementDate, " +
+      "M_Movement.DocumentNo, " +
+      "M_Movement.Name, " +
       "M_Movement.Description, " +
       "M_Movement.Move_FromTo_Locator, " +
       "M_Movement.Processing, " +
@@ -175,21 +181,19 @@ Select for edit
       "COALESCE(M_Movement.IsActive, 'N') AS IsActive, " +
       "M_Movement.AD_OrgTrx_ID, " +
       "M_Movement.C_Project_ID, " +
-      "(CASE WHEN M_Movement.C_Project_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Value), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS C_Project_IDR, " +
       "M_Movement.C_Costcenter_ID, " +
       "M_Movement.A_Asset_ID, " +
       "M_Movement.C_Activity_ID, " +
-      "(CASE WHEN M_Movement.C_Activity_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS C_Activity_IDR, " +
+      "(CASE WHEN M_Movement.C_Activity_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Activity_IDR, " +
       "M_Movement.C_Campaign_ID, " +
-      "(CASE WHEN M_Movement.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Campaign_IDR, " +
+      "(CASE WHEN M_Movement.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Name), ''))),'') ) END) AS C_Campaign_IDR, " +
       "M_Movement.User1_ID, " +
       "M_Movement.User2_ID, " +
-      "M_Movement.AD_Client_ID, " +
       "M_Movement.M_Movement_ID, " +
-      "M_Movement.DocumentNo, " +
       "COALESCE(M_Movement.Processed, 'N') AS Processed, " +
+      "M_Movement.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
-      "        FROM M_Movement left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Movement.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Movement.Posted = TO_CHAR(list1.value)) left join (select C_Project_ID, Value, Name from C_Project) table2 on (M_Movement.C_Project_ID = table2.C_Project_ID) left join (select C_Activity_ID, Name from C_Activity) table3 on (M_Movement.C_Activity_ID = table3.C_Activity_ID) left join (select C_Campaign_ID, Name from C_Campaign) table4 on (M_Movement.C_Campaign_ID = table4.C_Campaign_ID)" +
+      "        FROM M_Movement left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Movement.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (M_Movement.EM_Co_Doctype_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Movement.Posted = TO_CHAR(list1.value)) left join (select C_Activity_ID, Name from C_Activity) table4 on (M_Movement.C_Activity_ID = table4.C_Activity_ID) left join (select C_Campaign_ID, Name from C_Campaign) table5 on (M_Movement.C_Campaign_ID = table5.C_Campaign_ID)" +
       "        WHERE 2=2 " +
       "        AND 1=1 " +
       "        AND M_Movement.M_Movement_ID = ? " +
@@ -211,6 +215,7 @@ Select for edit
     st = connectionProvider.getPreparedStatement(strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, key);
@@ -238,8 +243,11 @@ Select for edit
         objectHeaderData.updatedbyr = UtilSql.getValue(result, "updatedbyr");
         objectHeaderData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectHeaderData.adOrgIdr = UtilSql.getValue(result, "ad_org_idr");
-        objectHeaderData.name = UtilSql.getValue(result, "name");
+        objectHeaderData.emCoDoctypeId = UtilSql.getValue(result, "em_co_doctype_id");
+        objectHeaderData.emCoDoctypeIdr = UtilSql.getValue(result, "em_co_doctype_idr");
         objectHeaderData.movementdate = UtilSql.getDateValue(result, "movementdate", "dd-MM-yyyy");
+        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
+        objectHeaderData.name = UtilSql.getValue(result, "name");
         objectHeaderData.description = UtilSql.getValue(result, "description");
         objectHeaderData.moveFromtoLocator = UtilSql.getValue(result, "move_fromto_locator");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
@@ -248,7 +256,6 @@ Select for edit
         objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.adOrgtrxId = UtilSql.getValue(result, "ad_orgtrx_id");
         objectHeaderData.cProjectId = UtilSql.getValue(result, "c_project_id");
-        objectHeaderData.cProjectIdr = UtilSql.getValue(result, "c_project_idr");
         objectHeaderData.cCostcenterId = UtilSql.getValue(result, "c_costcenter_id");
         objectHeaderData.aAssetId = UtilSql.getValue(result, "a_asset_id");
         objectHeaderData.cActivityId = UtilSql.getValue(result, "c_activity_id");
@@ -257,10 +264,9 @@ Select for edit
         objectHeaderData.cCampaignIdr = UtilSql.getValue(result, "c_campaign_idr");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.mMovementId = UtilSql.getValue(result, "m_movement_id");
-        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -295,7 +301,7 @@ Select for edit
 /**
 Create a registry
  */
-  public static HeaderData[] set(String mMovementId, String adClientId, String adOrgId, String isactive, String createdby, String createdbyr, String updatedby, String updatedbyr, String name, String description, String movementdate, String processed, String processing, String aAssetId, String posted, String postedBtn, String moveFromtoLocator, String documentno, String cActivityId, String user2Id, String user1Id, String cProjectId, String cProjectIdr, String cCampaignId, String adOrgtrxId, String cCostcenterId)    throws ServletException {
+  public static HeaderData[] set(String mMovementId, String adClientId, String adOrgId, String isactive, String createdby, String createdbyr, String updatedby, String updatedbyr, String name, String description, String movementdate, String processed, String processing, String aAssetId, String posted, String postedBtn, String moveFromtoLocator, String documentno, String cActivityId, String user2Id, String user1Id, String cProjectId, String cCampaignId, String adOrgtrxId, String emCoDoctypeId, String cCostcenterId)    throws ServletException {
     HeaderData objectHeaderData[] = new HeaderData[1];
     objectHeaderData[0] = new HeaderData();
     objectHeaderData[0].created = "";
@@ -306,8 +312,11 @@ Create a registry
     objectHeaderData[0].updatedbyr = updatedbyr;
     objectHeaderData[0].adOrgId = adOrgId;
     objectHeaderData[0].adOrgIdr = "";
-    objectHeaderData[0].name = name;
+    objectHeaderData[0].emCoDoctypeId = emCoDoctypeId;
+    objectHeaderData[0].emCoDoctypeIdr = "";
     objectHeaderData[0].movementdate = movementdate;
+    objectHeaderData[0].documentno = documentno;
+    objectHeaderData[0].name = name;
     objectHeaderData[0].description = description;
     objectHeaderData[0].moveFromtoLocator = moveFromtoLocator;
     objectHeaderData[0].processing = processing;
@@ -316,7 +325,6 @@ Create a registry
     objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].adOrgtrxId = adOrgtrxId;
     objectHeaderData[0].cProjectId = cProjectId;
-    objectHeaderData[0].cProjectIdr = cProjectIdr;
     objectHeaderData[0].cCostcenterId = cCostcenterId;
     objectHeaderData[0].aAssetId = aAssetId;
     objectHeaderData[0].cActivityId = cActivityId;
@@ -325,10 +333,9 @@ Create a registry
     objectHeaderData[0].cCampaignIdr = "";
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].mMovementId = mMovementId;
-    objectHeaderData[0].documentno = documentno;
     objectHeaderData[0].processed = processed;
+    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -391,44 +398,6 @@ Select for auxiliar field
       result = st.executeQuery();
       if(result.next()) {
         strReturn = UtilSql.getValue(result, "updatedby");
-      }
-      result.close();
-    } catch(SQLException e){
-      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
-      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
-    } catch(Exception ex){
-      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
-      throw new ServletException("@CODE=@" + ex.getMessage());
-    } finally {
-      try {
-        connectionProvider.releasePreparedStatement(st);
-      } catch(Exception ignore){
-        ignore.printStackTrace();
-      }
-    }
-    return(strReturn);
-  }
-
-/**
-Select for auxiliar field
- */
-  public static String selectDef9548_2(ConnectionProvider connectionProvider, String C_Project_IDR)    throws ServletException {
-    String strSql = "";
-    strSql = strSql + 
-      "        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Value), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as C_Project_ID FROM C_Project left join (select C_Project_ID, Value, Name from C_Project) table2 on (C_Project.C_Project_ID = table2.C_Project_ID) WHERE C_Project.isActive='Y' AND C_Project.C_Project_ID = ?  ";
-
-    ResultSet result;
-    String strReturn = "";
-    PreparedStatement st = null;
-
-    int iParameter = 0;
-    try {
-    st = connectionProvider.getPreparedStatement(strSql);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, C_Project_IDR);
-
-      result = st.executeQuery();
-      if(result.next()) {
-        strReturn = UtilSql.getValue(result, "c_project_id");
       }
       result.close();
     } catch(SQLException e){
@@ -527,7 +496,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Movement" +
-      "        SET AD_Org_ID = (?) , Name = (?) , MovementDate = TO_DATE(?) , Description = (?) , Move_FromTo_Locator = (?) , Processing = (?) , Posted = (?) , IsActive = (?) , AD_OrgTrx_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , AD_Client_ID = (?) , M_Movement_ID = (?) , DocumentNo = (?) , Processed = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , EM_Co_Doctype_ID = (?) , MovementDate = TO_DATE(?) , DocumentNo = (?) , Name = (?) , Description = (?) , Move_FromTo_Locator = (?) , Processing = (?) , Posted = (?) , IsActive = (?) , AD_OrgTrx_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Movement_ID = (?) , Processed = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Movement.M_Movement_ID = ? " +
       "        AND M_Movement.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -545,8 +514,10 @@ Select for action search
     try {
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoDoctypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, movementdate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, moveFromtoLocator);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
@@ -560,10 +531,9 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -592,8 +562,8 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Movement " +
-      "        (AD_Org_ID, Name, MovementDate, Description, Move_FromTo_Locator, Processing, Posted, IsActive, AD_OrgTrx_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, AD_Client_ID, M_Movement_ID, DocumentNo, Processed, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, EM_Co_Doctype_ID, MovementDate, DocumentNo, Name, Description, Move_FromTo_Locator, Processing, Posted, IsActive, AD_OrgTrx_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Movement_ID, Processed, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -602,8 +572,10 @@ Select for action search
     try {
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoDoctypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, movementdate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, moveFromtoLocator);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
@@ -617,10 +589,9 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

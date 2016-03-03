@@ -92,6 +92,7 @@ public class ShipmentInOutLine extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_BUSINESSPARTNER = "businessPartner";
     public static final String PROPERTY_EXPLODE = "explode";
     public static final String PROPERTY_BOMPARENT = "bOMParent";
+    public static final String PROPERTY_ASVPEDIDODETALLE = "asvPedidoDetalle";
     public static final String PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST = "inOutLineAccountingDimensionList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
     public static final String PROPERTY_MATERIALMGMTCOSTINGLIST = "materialMgmtCostingList";
@@ -387,6 +388,14 @@ public class ShipmentInOutLine extends BaseOBObject implements Traceable, Client
 
     public void setBOMParent(ShipmentInOutLine bOMParent) {
         set(PROPERTY_BOMPARENT, bOMParent);
+    }
+
+    public String getAsvPedidoDetalle() {
+        return (String) get(PROPERTY_ASVPEDIDODETALLE);
+    }
+
+    public void setAsvPedidoDetalle(String asvPedidoDetalle) {
+        set(PROPERTY_ASVPEDIDODETALLE, asvPedidoDetalle);
     }
 
     @SuppressWarnings("unchecked")

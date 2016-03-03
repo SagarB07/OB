@@ -18,6 +18,12 @@
 */
 package org.openbravo.model.common.enterprise;
 
+import com.atrums.contabilidad.Co_Sustento_Doc;
+import com.atrums.contabilidad.data.CO_Aut_Sri;
+import com.atrums.contabilidad.data.CO_RETENCION_VENTA;
+import com.atrums.contabilidad.data.CO_Retencion_Compra;
+import com.atrums.declaraciontributaria.ecuador.data.Ats_Sustento_Doc;
+import com.atrums.declaraciontributaria.ecuador.data.atsReembolso;
 import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
@@ -56,6 +62,7 @@ import org.openbravo.model.financialmgmt.payment.FIN_Reconciliation;
 import org.openbravo.model.financialmgmt.payment.Settlement;
 import org.openbravo.model.financialmgmt.tax.TaxRegisterTypeLines;
 import org.openbravo.model.manufacturing.transaction.WorkRequirement;
+import org.openbravo.model.materialmgmt.transaction.InternalMovement;
 import org.openbravo.model.materialmgmt.transaction.ShipmentInOut;
 import org.openbravo.model.pos.ExternalPOS;
 /**
@@ -97,7 +104,15 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_REVERSAL = "reversal";
     public static final String PROPERTY_RETURN = "return";
     public static final String PROPERTY_DOCUMENTTYPEFORORDER = "documentTypeForOrder";
+    public static final String PROPERTY_ATECFEFACELEC = "atecfeFacElec";
+    public static final String PROPERTY_COTIPOCOMPROBANTEAUTORIZADORSRI = "coTipoComprobanteAutorizadorSRI";
     public static final String PROPERTY_APRMRECONCILIATIONLIST = "aPRMReconciliationList";
+    public static final String PROPERTY_ATSREEMBOLSOLIST = "aTSREEMBOLSOList";
+    public static final String PROPERTY_AUTSRILIST = "autSriList";
+    public static final String PROPERTY_RETENCIONVENTALIST = "rETENCIONVENTAList";
+    public static final String PROPERTY_RETENCIONVENTATRANSACTIONDOCUMENTLIST = "rETENCIONVENTATransactionDocumentList";
+    public static final String PROPERTY_RETENCIONCOMPRALIST = "retencionCompraList";
+    public static final String PROPERTY_RETENCIONCOMPRATRANSACTIONDOCUMENTLIST = "retencionCompraTransactionDocumentList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
@@ -123,12 +138,15 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_INVOICEV2LIST = "invoiceV2List";
     public static final String PROPERTY_INVOICEV2TRANSACTIONDOCUMENTLIST = "invoiceV2TransactionDocumentList";
     public static final String PROPERTY_MANUFACTURINGWORKREQUIREMENTLIST = "manufacturingWorkRequirementList";
+    public static final String PROPERTY_MATERIALMGMTINTERNALMOVEMENTEMCODOCTYPEIDLIST = "materialMgmtInternalMovementEMCoDoctypeIDList";
     public static final String PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST = "materialMgmtShipmentInOutList";
     public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
     public static final String PROPERTY_ROLPROVISIONLINEMESLIST = "rolProvisionLineMesList";
     public static final String PROPERTY_ROLPAGOPROVISIONLIST = "rolPagoProvisionList";
     public static final String PROPERTY_ORDERLIST = "orderList";
     public static final String PROPERTY_ORDERTRANSACTIONDOCUMENTLIST = "orderTransactionDocumentList";
+    public static final String PROPERTY_ATSSUSTENTODOCLIST = "atsSustentoDocList";
+    public static final String PROPERTY_SUSTENTODOCLIST = "sustentoDocList";
     public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
@@ -146,7 +164,14 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
         setDefaultValue(PROPERTY_EXPENSE, false);
         setDefaultValue(PROPERTY_REVERSAL, false);
         setDefaultValue(PROPERTY_RETURN, false);
+        setDefaultValue(PROPERTY_ATECFEFACELEC, false);
         setDefaultValue(PROPERTY_APRMRECONCILIATIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATSREEMBOLSOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_AUTSRILIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONVENTALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONVENTATRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONCOMPRALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONCOMPRATRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTORDERLIST, new ArrayList<Object>());
@@ -172,12 +197,15 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
         setDefaultValue(PROPERTY_INVOICEV2LIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICEV2TRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MANUFACTURINGWORKREQUIREMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_MATERIALMGMTINTERNALMOVEMENTEMCODOCTYPEIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPROVISIONLINEMESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERTRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATSSUSTENTODOCLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_SUSTENTODOCLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
@@ -423,6 +451,22 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
         set(PROPERTY_DOCUMENTTYPEFORORDER, documentTypeForOrder);
     }
 
+    public Boolean isAtecfeFacElec() {
+        return (Boolean) get(PROPERTY_ATECFEFACELEC);
+    }
+
+    public void setAtecfeFacElec(Boolean atecfeFacElec) {
+        set(PROPERTY_ATECFEFACELEC, atecfeFacElec);
+    }
+
+    public Long getCoTipoComprobanteAutorizadorSRI() {
+        return (Long) get(PROPERTY_COTIPOCOMPROBANTEAUTORIZADORSRI);
+    }
+
+    public void setCoTipoComprobanteAutorizadorSRI(Long coTipoComprobanteAutorizadorSRI) {
+        set(PROPERTY_COTIPOCOMPROBANTEAUTORIZADORSRI, coTipoComprobanteAutorizadorSRI);
+    }
+
     @SuppressWarnings("unchecked")
     public List<APRM_Reconciliation_v> getAPRMReconciliationList() {
       return (List<APRM_Reconciliation_v>) get(PROPERTY_APRMRECONCILIATIONLIST);
@@ -430,6 +474,60 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setAPRMReconciliationList(List<APRM_Reconciliation_v> aPRMReconciliationList) {
         set(PROPERTY_APRMRECONCILIATIONLIST, aPRMReconciliationList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atsReembolso> getATSREEMBOLSOList() {
+      return (List<atsReembolso>) get(PROPERTY_ATSREEMBOLSOLIST);
+    }
+
+    public void setATSREEMBOLSOList(List<atsReembolso> aTSREEMBOLSOList) {
+        set(PROPERTY_ATSREEMBOLSOLIST, aTSREEMBOLSOList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Aut_Sri> getAutSriList() {
+      return (List<CO_Aut_Sri>) get(PROPERTY_AUTSRILIST);
+    }
+
+    public void setAutSriList(List<CO_Aut_Sri> autSriList) {
+        set(PROPERTY_AUTSRILIST, autSriList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_RETENCION_VENTA> getRETENCIONVENTAList() {
+      return (List<CO_RETENCION_VENTA>) get(PROPERTY_RETENCIONVENTALIST);
+    }
+
+    public void setRETENCIONVENTAList(List<CO_RETENCION_VENTA> rETENCIONVENTAList) {
+        set(PROPERTY_RETENCIONVENTALIST, rETENCIONVENTAList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_RETENCION_VENTA> getRETENCIONVENTATransactionDocumentList() {
+      return (List<CO_RETENCION_VENTA>) get(PROPERTY_RETENCIONVENTATRANSACTIONDOCUMENTLIST);
+    }
+
+    public void setRETENCIONVENTATransactionDocumentList(List<CO_RETENCION_VENTA> rETENCIONVENTATransactionDocumentList) {
+        set(PROPERTY_RETENCIONVENTATRANSACTIONDOCUMENTLIST, rETENCIONVENTATransactionDocumentList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Retencion_Compra> getRetencionCompraList() {
+      return (List<CO_Retencion_Compra>) get(PROPERTY_RETENCIONCOMPRALIST);
+    }
+
+    public void setRetencionCompraList(List<CO_Retencion_Compra> retencionCompraList) {
+        set(PROPERTY_RETENCIONCOMPRALIST, retencionCompraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Retencion_Compra> getRetencionCompraTransactionDocumentList() {
+      return (List<CO_Retencion_Compra>) get(PROPERTY_RETENCIONCOMPRATRANSACTIONDOCUMENTLIST);
+    }
+
+    public void setRetencionCompraTransactionDocumentList(List<CO_Retencion_Compra> retencionCompraTransactionDocumentList) {
+        set(PROPERTY_RETENCIONCOMPRATRANSACTIONDOCUMENTLIST, retencionCompraTransactionDocumentList);
     }
 
     @SuppressWarnings("unchecked")
@@ -658,6 +756,15 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     }
 
     @SuppressWarnings("unchecked")
+    public List<InternalMovement> getMaterialMgmtInternalMovementEMCoDoctypeIDList() {
+      return (List<InternalMovement>) get(PROPERTY_MATERIALMGMTINTERNALMOVEMENTEMCODOCTYPEIDLIST);
+    }
+
+    public void setMaterialMgmtInternalMovementEMCoDoctypeIDList(List<InternalMovement> materialMgmtInternalMovementEMCoDoctypeIDList) {
+        set(PROPERTY_MATERIALMGMTINTERNALMOVEMENTEMCODOCTYPEIDLIST, materialMgmtInternalMovementEMCoDoctypeIDList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<ShipmentInOut> getMaterialMgmtShipmentInOutList() {
       return (List<ShipmentInOut>) get(PROPERTY_MATERIALMGMTSHIPMENTINOUTLIST);
     }
@@ -709,6 +816,24 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setOrderTransactionDocumentList(List<org.openbravo.model.common.order.Order> orderTransactionDocumentList) {
         set(PROPERTY_ORDERTRANSACTIONDOCUMENTLIST, orderTransactionDocumentList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Ats_Sustento_Doc> getAtsSustentoDocList() {
+      return (List<Ats_Sustento_Doc>) get(PROPERTY_ATSSUSTENTODOCLIST);
+    }
+
+    public void setAtsSustentoDocList(List<Ats_Sustento_Doc> atsSustentoDocList) {
+        set(PROPERTY_ATSSUSTENTODOCLIST, atsSustentoDocList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Co_Sustento_Doc> getSustentoDocList() {
+      return (List<Co_Sustento_Doc>) get(PROPERTY_SUSTENTODOCLIST);
+    }
+
+    public void setSustentoDocList(List<Co_Sustento_Doc> sustentoDocList) {
+        set(PROPERTY_SUSTENTODOCLIST, sustentoDocList);
     }
 
     @SuppressWarnings("unchecked")

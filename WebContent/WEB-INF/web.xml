@@ -455,6 +455,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.FinancialAccount.Depositos1CA823322A874B879DEAA2577476814A
+      </display-name>
+      <servlet-name>
+        W1CA823322A874B879DEAA2577476814A
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.FinancialAccount.Depositos1CA823322A874B879DEAA2577476814A
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.FinancialAccount.ImportedBankStatements
       </display-name>
       <servlet-name>
@@ -498,6 +510,18 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.FiscalCalendar.Year
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.compras.buffer.FuncionalidaddeBuffer.DefiniciondelBuffer6D8883038DC84D42A742864B6570B430
+      </display-name>
+      <servlet-name>
+        W6D8883038DC84D42A742864B6570B430
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.compras.buffer.FuncionalidaddeBuffer.DefiniciondelBuffer6D8883038DC84D42A742864B6570B430
       </servlet-class>
     </servlet>
   
@@ -827,6 +851,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.aserlaco.venta.PedidoInventario.PedidoInventarioB7272964605B406992E8D5764C6960F8
+      </display-name>
+      <servlet-name>
+        WB7272964605B406992E8D5764C6960F8
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.aserlaco.venta.PedidoInventario.PedidoInventarioB7272964605B406992E8D5764C6960F8
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.PeriodicQualityControlData.Test
       </display-name>
       <servlet-name>
@@ -882,6 +918,18 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.PriceList.PriceListVersion
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.importaciones.ProcesarImportaciones.ProcesarImportaciones5A2518CE725C40DEB15E55F3A8F94526
+      </display-name>
+      <servlet-name>
+        W5A2518CE725C40DEB15E55F3A8F94526
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.importaciones.ProcesarImportaciones.ProcesarImportaciones5A2518CE725C40DEB15E55F3A8F94526
       </servlet-class>
     </servlet>
   
@@ -1002,6 +1050,18 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.PurchaseInvoice.Lines
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.PurchaseInvoice.RetencionesdeCompraD94E34B6795B415FAEBE0DCA7F2E2AF8
+      </display-name>
+      <servlet-name>
+        WD94E34B6795B415FAEBE0DCA7F2E2AF8
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.PurchaseInvoice.RetencionesdeCompraD94E34B6795B415FAEBE0DCA7F2E2AF8
       </servlet-class>
     </servlet>
   
@@ -1271,6 +1331,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.SalesInvoice.RetenciondeVentasFB6C2A2E18604360A5A3E02D9834D343
+      </display-name>
+      <servlet-name>
+        WFB6C2A2E18604360A5A3E02D9834D343
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.SalesInvoice.RetenciondeVentasFB6C2A2E18604360A5A3E02D9834D343
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.SalesOrder.Header
       </display-name>
       <servlet-name>
@@ -1501,6 +1573,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.centrocostos.ad_callouts.CCO_Valor_Total_Valor
+      </display-name>
+      <servlet-name>
+        C05520559280847D391A78B2993A597DE
+      </servlet-name>
+      <servlet-class>
+        com.atrums.centrocostos.ad_callouts.CCO_Valor_Total_Valor
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_PaymentMethod
       </display-name>
       <servlet-name>
@@ -1683,6 +1769,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Tipo_TipoRetencionVenta
+      </display-name>
+      <servlet-name>
+        C1036032937BC4D15BB019C129CDE4440
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Tipo_TipoRetencionVenta
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_Invoice_Glitem
       </display-name>
       <servlet-name>
@@ -1690,6 +1790,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_Invoice_Glitem
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_CargaEstablecimientoPuntoEmision
+      </display-name>
+      <servlet-name>
+        C11EA090A338942BB96493A44B1430CDD
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_CargaEstablecimientoPuntoEmision
       </servlet-class>
       
       
@@ -1725,6 +1839,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Datos_Retencion
+      </display-name>
+      <servlet-name>
+        C18E3D67AD2F2454EA2D3288B84167FE8
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Datos_Retencion
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_GLItem_Transaction
       </display-name>
       <servlet-name>
@@ -1732,6 +1860,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SE_GLItem_Transaction
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.DatosSriFactura
+      </display-name>
+      <servlet-name>
+        C1DC9153487494AD69A56AF446321FA68
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.DatosSriFactura
       </servlet-class>
       
       
@@ -1753,6 +1895,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Tipo_Retencion_Compra
+      </display-name>
+      <servlet-name>
+        C210336DD2E1D49898D8AB61A9C38902C
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Tipo_Retencion_Compra
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_Payment_FinAccount
       </display-name>
       <servlet-name>
@@ -1760,6 +1916,48 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SE_Payment_FinAccount
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.remica.ad_callouts.SL_Order_Product_Partida
+      </display-name>
+      <servlet-name>
+        C22BA3ADF3F344DE0BDA01E345590E33C
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.SL_Order_Product_Partida
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Validar_Cedula_Ruc
+      </display-name>
+      <servlet-name>
+        C2319903B534B431CA31917730298D062
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Validar_Cedula_Ruc
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.remica.ad_callouts.DatosCompletos_Producto
+      </display-name>
+      <servlet-name>
+        C27BC507BB5B74E7F9852AAF28E65DB13
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.DatosCompletos_Producto
       </servlet-class>
       
       
@@ -1795,6 +1993,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.DatosSriRetencion
+      </display-name>
+      <servlet-name>
+        C3373FCFC8405471B9139F72E77973542
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.DatosSriRetencion
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_StatusFieldDefaults
       </display-name>
       <servlet-name>
@@ -1802,6 +2014,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_StatusFieldDefaults
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Retencion_Venta_Factura
+      </display-name>
+      <servlet-name>
+        C3D1D3166C52B4F2B84C0F7305590C170
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Retencion_Venta_Factura
       </servlet-class>
       
       
@@ -1830,6 +2056,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.client.querylist.CheckOptionalFilterCallout
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.declaraciontributaria.ecuador.ad_callouts.ATSFechaDocumento
+      </display-name>
+      <servlet-name>
+        C402587FA00AF4ABCB8C81223E2508875
+      </servlet-name>
+      <servlet-class>
+        com.atrums.declaraciontributaria.ecuador.ad_callouts.ATSFechaDocumento
       </servlet-class>
       
       
@@ -1886,6 +2126,34 @@
       </servlet-name>
       <servlet-class>
         com.atrums.nomina.empleados.ad_callouts.Ne_edad_empleado
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.SE_Numero_DocType
+      </display-name>
+      <servlet-name>
+        C4C49733D62644946A1ED97AD2AF079C4
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.SE_Numero_DocType
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.remica.ad_callouts.CodigoTercero
+      </display-name>
+      <servlet-name>
+        C52B22B4A2427445B83FEE4651C034701
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.CodigoTercero
       </servlet-class>
       
       
@@ -2257,6 +2525,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.remica.ad_callouts.RE_Porcentaje_Ganancia
+      </display-name>
+      <servlet-name>
+        C5A332163E0C64FBCB861E5BF67686112
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.RE_Porcentaje_Ganancia
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_Period_Control
       </display-name>
       <servlet-name>
@@ -2390,6 +2672,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_Journal_Period
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Digitos_Control_Estab
+      </display-name>
+      <servlet-name>
+        C60C68142162E46499425A663836EE6BB
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Digitos_Control_Estab
       </servlet-class>
       
       
@@ -2789,6 +3085,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.centrocostos.ad_callouts.CCO_Valor_Total_Porcentaje
+      </display-name>
+      <servlet-name>
+        C6DA1F196675D47AA83B9123711BA6AAD
+      </servlet-name>
+      <servlet-class>
+        com.atrums.centrocostos.ad_callouts.CCO_Valor_Total_Porcentaje
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_CalculateExchangeRate
       </display-name>
       <servlet-name>
@@ -2803,6 +3113,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.declaraciontributaria.ecuador.ad_callouts.ATSValidarCedulaRuc
+      </display-name>
+      <servlet-name>
+        C6DB165BD9CF844D9AEBE447ED6109ECD
+      </servlet-name>
+      <servlet-class>
+        com.atrums.declaraciontributaria.ecuador.ad_callouts.ATSValidarCedulaRuc
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_ProductPrice_PriceListVersion
       </display-name>
       <servlet-name>
@@ -2810,6 +3134,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_ProductPrice_PriceListVersion
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Digitos_Control_Emision
+      </display-name>
+      <servlet-name>
+        C7228C4313B484F0990B3D02899E51E6D
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Digitos_Control_Emision
       </servlet-class>
       
       
@@ -2845,6 +3183,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_DescripcionRetencion
+      </display-name>
+      <servlet-name>
+        C7698E935893D45C1BC2F8F8D064303CF
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_DescripcionRetencion
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_ModuleCallout
       </display-name>
       <servlet-name>
@@ -2852,6 +3204,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_ModuleCallout
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.declaraciontributaria.ecuador.ad_callouts.ATSCalculoIva
+      </display-name>
+      <servlet-name>
+        C7B2BAD25E1DF49A7BF3270D3725C1792
+      </servlet-name>
+      <servlet-class>
+        com.atrums.declaraciontributaria.ecuador.ad_callouts.ATSCalculoIva
       </servlet-class>
       
       
@@ -3097,6 +3463,34 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Payment_FinAccount
+      </display-name>
+      <servlet-name>
+        C8B16D899651A4B92A70A6FE04AED3C52
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Payment_FinAccount
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Valor_Retencion_Linea_Compra
+      </display-name>
+      <servlet-name>
+        C8BC745649CF643E4A6D3E7C96AEF5D03
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Valor_Retencion_Linea_Compra
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_Organization_NotTaxDeductable
       </display-name>
       <servlet-name>
@@ -3167,6 +3561,34 @@
   
     <servlet>
       <display-name>
+        com.atrums.ventas.notas.erpCommon.ad_callouts.VEN_Order_BPartner
+      </display-name>
+      <servlet-name>
+        C98057692275F46EB9919A553358A20D3
+      </servlet-name>
+      <servlet-class>
+        com.atrums.ventas.notas.erpCommon.ad_callouts.VEN_Order_BPartner
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Concatena_Nombre_Comercial
+      </display-name>
+      <servlet-name>
+        CA2DD63B810FB471785F0D0B8BE9EAD57
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Concatena_Nombre_Comercial
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_Invoice_Organization
       </display-name>
       <servlet-name>
@@ -3195,6 +3617,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.SL_CO_Invoice_DocType
+      </display-name>
+      <servlet-name>
+        CAD5E8FE6086F4B24A710B2E26F290597
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.SL_CO_Invoice_DocType
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SE_InOut_Warehouse
       </display-name>
       <servlet-name>
@@ -3209,6 +3645,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Valida_AutSRI
+      </display-name>
+      <servlet-name>
+        CB37806D8A6584CB381786DF34979F676
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Valida_AutSRI
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_Order_UpdateLinesDate
       </display-name>
       <servlet-name>
@@ -3216,6 +3666,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_Order_UpdateLinesDate
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.remica.ad_callouts.BaseImponible
+      </display-name>
+      <servlet-name>
+        CBA0440F70231438697B13A3D93920B47
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.BaseImponible
       </servlet-class>
       
       
@@ -3293,6 +3757,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.remica.ad_callouts.SE_Order_BPartner_Validacion
+      </display-name>
+      <servlet-name>
+        CC4E8F8748B464BFFA4E98AC22E0B40B5
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.SE_Order_BPartner_Validacion
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_TaxCategory_Org
       </display-name>
       <servlet-name>
@@ -3300,6 +3778,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_TaxCategory_Org
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Invoice_BPartner_SRI
+      </display-name>
+      <servlet-name>
+        CC5AE12CBA1484733AAC878E6273A283D
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Invoice_BPartner_SRI
       </servlet-class>
       
       
@@ -3391,6 +3883,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Valida_Fecha_AutSRI
+      </display-name>
+      <servlet-name>
+        CCD4985C707F6429DA93A120A220D8D31
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Valida_Fecha_AutSRI
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_CreateLines_Conversion_UOM
       </display-name>
       <servlet-name>
@@ -3419,6 +3925,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_ValidaNroAutoSri
+      </display-name>
+      <servlet-name>
+        CDF60E8AB4E0B47C985703759B8ABA1F1
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_ValidaNroAutoSri
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_callouts.SL_ProductCh_Characteristic
       </display-name>
       <servlet-name>
@@ -3426,6 +3946,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_ProductCh_Characteristic
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Razon_Social_A_Nombre_Comercial
+      </display-name>
+      <servlet-name>
+        CE36DAFCB2A064F98B55432362E131DFD
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Razon_Social_A_Nombre_Comercial
       </servlet-class>
       
       
@@ -3454,6 +3988,48 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_ProductionPlan_WRPhase_Quantity
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Llena_Digitos_Control_Ret
+      </display-name>
+      <servlet-name>
+        CEE3CDCACF6854E04831DDA01A61ADC86
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Llena_Digitos_Control_Ret
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.remica.ad_callouts.Validar_Cedula_Ruc
+      </display-name>
+      <servlet-name>
+        CEEC68BAFD90849C4BB1CA55F224C1368
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_callouts.Validar_Cedula_Ruc
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_callouts.CO_Llena_Digitos_Control_Fac
+      </display-name>
+      <servlet-name>
+        CF0190B20691C4BFC84449142DA279C8C
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_callouts.CO_Llena_Digitos_Control_Fac
       </servlet-class>
       
       
@@ -4042,6 +4618,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.erpCommon.erpReports.PrintMovimiento
+      </display-name>
+      <servlet-name>
+        P18483FCC3E5D49EEBA529D2380129436
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.erpCommon.erpReports.PrintMovimiento
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_process.MRPPurchaseCreateReservations
       </display-name>
       <servlet-name>
@@ -4308,6 +4898,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.erpCommon.ad_reports.ImprimirRetencion
+      </display-name>
+      <servlet-name>
+        P6B85FD23A3E44B89B1619F2AEFF6252E
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.erpCommon.ad_reports.ImprimirRetencion
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.costing.CostingRuleProcess
       </display-name>
       <servlet-name>
@@ -4357,6 +4961,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.advpaymentmngt.process.ProcessBatch
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.depositos.ad_actionbutton.DeleteTransaction
+      </display-name>
+      <servlet-name>
+        P7F529DE7AEFE441ABEA65813C43145A1
+      </servlet-name>
+      <servlet-class>
+        com.atrums.depositos.ad_actionbutton.DeleteTransaction
       </servlet-class>
       
       
@@ -4952,6 +5570,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.declaraciontributaria.ecuador.ad_actionButton.CrearAnexo
+      </display-name>
+      <servlet-name>
+        P91CE3C1954EC45D99D10481D19B37F3C
+      </servlet-name>
+      <servlet-class>
+        com.atrums.declaraciontributaria.ecuador.ad_actionButton.CrearAnexo
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_process.ConvertQuotationIntoOrder
       </display-name>
       <servlet-name>
@@ -4987,6 +5619,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.advpaymentmngt.process.FIN_BankStatementProcess
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.ad_actionbutton.AddPaymentFromInvoice
+      </display-name>
+      <servlet-name>
+        P9B14CE90678C490D83E30C94B9AEBF35
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.ad_actionbutton.AddPaymentFromInvoice
       </servlet-class>
       
       
@@ -5134,6 +5780,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.depositos.ad_actionbutton.AddTransaction
+      </display-name>
+      <servlet-name>
+        PB5A477E29B3C472CAF44C0B1B4E4512E
+      </servlet-name>
+      <servlet-class>
+        com.atrums.depositos.ad_actionbutton.AddTransaction
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.ad_forms.InstancePurpose
       </display-name>
       <servlet-name>
@@ -5141,6 +5801,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_forms.InstancePurpose
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.conciliacionec.ad_actionbutton.AddTransaction
+      </display-name>
+      <servlet-name>
+        PB8EF75C998164BF191ECA10DE45716FF
+      </servlet-name>
+      <servlet-class>
+        com.atrums.conciliacionec.ad_actionbutton.AddTransaction
       </servlet-class>
       
       
@@ -5246,6 +5920,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.erpCommon.erpReports.PrintRetencionCompra
+      </display-name>
+      <servlet-name>
+        PD6BA8577DEC4481D8E0D5472A51A6D84
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.erpCommon.erpReports.PrintRetencionCompra
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.advpaymentmngt.ad_actionbutton.AddOrderOrInvoice
       </display-name>
       <servlet-name>
@@ -5253,6 +5941,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.advpaymentmngt.ad_actionbutton.AddOrderOrInvoice
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.felectronica.process.ATECFE_GenerarXml
+      </display-name>
+      <servlet-name>
+        PDDD143BA3CAB4D858058581715EA690C
+      </servlet-name>
+      <servlet-class>
+        com.atrums.felectronica.process.ATECFE_GenerarXml
       </servlet-class>
       
       
@@ -5337,6 +6039,34 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.advpaymentmngt.process.FIN_PaymentProposalProcess
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.remica.ad_actionButton.AddTransaction
+      </display-name>
+      <servlet-name>
+        PFB3A011A359F461189944DA80A1407A5
+      </servlet-name>
+      <servlet-class>
+        com.atrums.remica.ad_actionButton.AddTransaction
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.conciliacionec.ad_actionbutton.Reconciliation
+      </display-name>
+      <servlet-name>
+        PFD1C5B7E1B6B4AA1B71525A4F3377154
+      </servlet-name>
+      <servlet-class>
+        com.atrums.conciliacionec.ad_actionbutton.Reconciliation
       </servlet-class>
       
       
@@ -6618,6 +7348,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.contabilidad.erpCommon.info.LocationCity
+      </display-name>
+      <servlet-name>
+        S7A6265445ACB492C8FE4362B34C7FCD9
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.erpCommon.info.LocationCity
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.info.BusinessPartner
       </display-name>
       <servlet-name>
@@ -6884,6 +7628,20 @@
   
     <servlet>
       <display-name>
+        com.atrums.direccion.erpCommon.info.LocationCity
+      </display-name>
+      <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <servlet-class>
+        com.atrums.direccion.erpCommon.info.LocationCity
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpCommon.info.AccountElementValue
       </display-name>
       <servlet-name>
@@ -6891,6 +7649,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.info.AccountElementValue
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.contabilidad.erpCommon.info.LocationCity
+      </display-name>
+      <servlet-name>
+        SD81AD57191BF47A594E144C6ACD3807E
+      </servlet-name>
+      <servlet-class>
+        com.atrums.contabilidad.erpCommon.info.LocationCity
       </servlet-class>
       
       
@@ -7045,6 +7817,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_forms.InstanceManagement
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.utility.hqlquerytool.HQLQueryTool
+      </display-name>
+      <servlet-name>
+        X772F01FF4E3C4F1CBB717DB2AD0A832B
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.utility.hqlquerytool.HQLQueryTool
       </servlet-class>
       
       
@@ -7702,6 +8488,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        W1CA823322A874B879DEAA2577476814A
+      </servlet-name>
+      <url-pattern>/FinancialAccount/Depositos1CA823322A874B879DEAA2577476814A_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         WC56E698100314ABBBBD3A89626CA551C
       </servlet-name>
       <url-pattern>/FinancialAccount/ImportedBankStatements_Edition.html</url-pattern>
@@ -7726,6 +8519,13 @@
         W129
       </servlet-name>
       <url-pattern>/FiscalCalendar/Year_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W6D8883038DC84D42A742864B6570B430
+      </servlet-name>
+      <url-pattern>/com.atrums.compras.bufferFuncionalidaddeBuffer/DefiniciondelBuffer6D8883038DC84D42A742864B6570B430_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -7919,6 +8719,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        WB7272964605B406992E8D5764C6960F8
+      </servlet-name>
+      <url-pattern>/com.atrums.aserlaco.ventaPedidoInventario/PedidoInventarioB7272964605B406992E8D5764C6960F8_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W800161
       </servlet-name>
       <url-pattern>/PeriodicQualityControlData/Test_Edition.html</url-pattern>
@@ -7950,6 +8757,13 @@
         W238
       </servlet-name>
       <url-pattern>/PriceList/PriceListVersion_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W5A2518CE725C40DEB15E55F3A8F94526
+      </servlet-name>
+      <url-pattern>/com.atrums.importacionesProcesarImportaciones/ProcesarImportaciones5A2518CE725C40DEB15E55F3A8F94526_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8020,6 +8834,13 @@
         W291
       </servlet-name>
       <url-pattern>/PurchaseInvoice/Lines_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        WD94E34B6795B415FAEBE0DCA7F2E2AF8
+      </servlet-name>
+      <url-pattern>/PurchaseInvoice/RetencionesdeCompraD94E34B6795B415FAEBE0DCA7F2E2AF8_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8178,6 +8999,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        WFB6C2A2E18604360A5A3E02D9834D343
+      </servlet-name>
+      <url-pattern>/SalesInvoice/RetenciondeVentasFB6C2A2E18604360A5A3E02D9834D343_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W186
       </servlet-name>
       <url-pattern>/SalesOrder/Header_Edition.html</url-pattern>
@@ -8313,6 +9141,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        C05520559280847D391A78B2993A597DE
+      </servlet-name>
+      <url-pattern>/com.atrums.centrocostos.ad_callouts/CCO_Valor_Total_Valor.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C0C4DB1D0D8E34612B34B78F0A97C5F9F
       </servlet-name>
       <url-pattern>/ad_callouts/SE_PaymentMethod.html</url-pattern>
@@ -8404,9 +9239,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        C1036032937BC4D15BB019C129CDE4440
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/TipoRetencionVenta.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C103BD1E3D87C4A69A5FA03DC6BD85ABD
       </servlet-name>
       <url-pattern>/ad_callouts/SL_Invoice_Glitem.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C11EA090A338942BB96493A44B1430CDD
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_CargaEstablecimientoPuntoEmision.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8425,9 +9274,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        C18E3D67AD2F2454EA2D3288B84167FE8
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Datos_Retencion.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C1B072001F3FC44F2B657EABA9DB630B0
       </servlet-name>
       <url-pattern>/ad_callouts/SE_GLItem_Transaction.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C1DC9153487494AD69A56AF446321FA68
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/DatosSriFactura.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8439,9 +9302,37 @@
   
     <servlet-mapping>
       <servlet-name>
+        C210336DD2E1D49898D8AB61A9C38902C
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/TipoRetencionCompra.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C2179989E376447CBB02066E8D1CCAE20
       </servlet-name>
       <url-pattern>/ad_callouts/SE_Payment_FinAccount.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C22BA3ADF3F344DE0BDA01E345590E33C
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/SL_Order_Product_Partida.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C2319903B534B431CA31917730298D062
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Validar_Cedula_Ruc.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C27BC507BB5B74E7F9852AAF28E65DB13
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/DatosCompletos_Producto.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8460,9 +9351,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        C3373FCFC8405471B9139F72E77973542
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/DatosSriRetencion.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C3C1D6B96736B4E2D9FF327EF4EB38DF6
       </servlet-name>
       <url-pattern>/ad_callouts/SL_StatusFieldDefaults.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C3D1D3166C52B4F2B84C0F7305590C170
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Retencion_Venta_Factura.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8477,6 +9382,13 @@
         C3F74C9717FE2408484E9DE88159D34C3
       </servlet-name>
       <url-pattern>/org.openbravo.client.querylist/CheckOptionalFilterCallout.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C402587FA00AF4ABCB8C81223E2508875
+      </servlet-name>
+      <url-pattern>/com.atrums.declaraciontributaria.ecuador.ad_callouts/ATSFechaDocumento.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8505,6 +9417,20 @@
         C472191C985F549C087CE1202EFAF5FED
       </servlet-name>
       <url-pattern>/com.atrums.nomina.empleados.ad_callouts/Ne_edad_empleado.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C4C49733D62644946A1ED97AD2AF079C4
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/SE_Numero_DocType.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C52B22B4A2427445B83FEE4651C034701
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/CodigoTercero.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8691,6 +9617,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        C5A332163E0C64FBCB861E5BF67686112
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/RE_Porcentaje_Ganancia.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C5DA1703A5803C509E040007F01011435
       </servlet-name>
       <url-pattern>/ad_callouts/SE_Period_Control.html</url-pattern>
@@ -8757,6 +9690,13 @@
         C608
       </servlet-name>
       <url-pattern>/ad_callouts/SL_Journal_Period.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C60C68142162E46499425A663836EE6BB
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Digitos_Control_Estab.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8957,6 +9897,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        C6DA1F196675D47AA83B9123711BA6AAD
+      </servlet-name>
+      <url-pattern>/com.atrums.centrocostos.ad_callouts/CCO_Valor_Total_Porcentaje.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C6DAAF7531ABD453383873AA790B1967A
       </servlet-name>
       <url-pattern>/ad_callouts/SE_CalculateExchangeRate.html</url-pattern>
@@ -8964,9 +9911,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        C6DB165BD9CF844D9AEBE447ED6109ECD
+      </servlet-name>
+      <url-pattern>/com.atrums.declaraciontributaria.ecuador.ad_callouts/ATSValidarCedulaRuc.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C70AAEDDC523E44C6B903E7DAFD3C3228
       </servlet-name>
       <url-pattern>/ad_callouts/SL_ProductPrice_PriceListVersion.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C7228C4313B484F0990B3D02899E51E6D
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Digitos_Control_Emision.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -8985,9 +9946,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        C7698E935893D45C1BC2F8F8D064303CF
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_DescripcionRetencion.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C7AEA3C790893370FE040007F01013A5F
       </servlet-name>
       <url-pattern>/ad_callouts/SL_ModuleCallout.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C7B2BAD25E1DF49A7BF3270D3725C1792
+      </servlet-name>
+      <url-pattern>/com.atrums.declaraciontributaria.ecuador.ad_callouts/ATSCalculoIva.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9111,6 +10086,20 @@
   
     <servlet-mapping>
       <servlet-name>
+        C8B16D899651A4B92A70A6FE04AED3C52
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Payment_FinAccount.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        C8BC745649CF643E4A6D3E7C96AEF5D03
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/ValorRetencionLineaCompra.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         C8EC19A7D662D4DC6B58417C12F1CD3FA
       </servlet-name>
       <url-pattern>/ad_callouts/SE_Organization_NotTaxDeductable.html</url-pattern>
@@ -9146,6 +10135,20 @@
   
     <servlet-mapping>
       <servlet-name>
+        C98057692275F46EB9919A553358A20D3
+      </servlet-name>
+      <url-pattern>/com.atrums.ventas.notas.erpCommon.ad_callouts/VEN_Order_BPartner.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CA2DD63B810FB471785F0D0B8BE9EAD57
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Concatena_Nombre_Comercial.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CA5F45F6DE7234EB1B64791BDD2923B7B
       </servlet-name>
       <url-pattern>/ad_callouts/SE_Invoice_Organization.html</url-pattern>
@@ -9160,6 +10163,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        CAD5E8FE6086F4B24A710B2E26F290597
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/SL_CO_Invoice_DocType.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CB17328E34CF0FF79E040007F0100103F
       </servlet-name>
       <url-pattern>/ad_callouts/SE_InOut_Warehouse.html</url-pattern>
@@ -9167,9 +10177,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        CB37806D8A6584CB381786DF34979F676
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Valida_AutSRI.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CB6293C9D69694CBDA99A557282B09260
       </servlet-name>
       <url-pattern>/ad_callouts/SL_Order_UpdateLinesDate.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CBA0440F70231438697B13A3D93920B47
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/BaseImponible.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9209,9 +10233,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        CC4E8F8748B464BFFA4E98AC22E0B40B5
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/SE_Order_BPartner_Validacion.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CC5319374C7F04199A0140FCB2C89FB98
       </servlet-name>
       <url-pattern>/ad_callouts/SL_TaxCategory_Org.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CC5AE12CBA1484733AAC878E6273A283D
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Invoice_BPartner_SRI.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9251,6 +10289,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        CCD4985C707F6429DA93A120A220D8D31
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Valida_Fecha_AutSRI.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CCE710B1C239D491F8A7D98407283FACE
       </servlet-name>
       <url-pattern>/ad_callouts/SL_CreateLines_Conversion_UOM.html</url-pattern>
@@ -9265,9 +10310,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        CDF60E8AB4E0B47C985703759B8ABA1F1
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_ValidaNroAutoSri.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CDFEA792C0F72598AE040007F01004BA1
       </servlet-name>
       <url-pattern>/ad_callouts/SL_ProductCh_Characteristic.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CE36DAFCB2A064F98B55432362E131DFD
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Razon_Social_A_Nombre_Comercial.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9282,6 +10341,27 @@
         CE9352B3E424544B285B83E9950931164
       </servlet-name>
       <url-pattern>/ad_callouts/SL_ProductionPlan_WRPhase_Quantity.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CEE3CDCACF6854E04831DDA01A61ADC86
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Llena_Digitos_Control_Ret.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CEEC68BAFD90849C4BB1CA55F224C1368
+      </servlet-name>
+      <url-pattern>/com.atrums.remica.ad_callouts/Validar_Cedula_Ruc.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        CF0190B20691C4BFC84449142DA279C8C
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_callouts/CO_Llena_Digitos_Control_Fac.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9435,13 +10515,6 @@
       <servlet-name>
         MEF8E7CE2324E425FB840AD1DCBD8054B
       </servlet-name>
-      <url-pattern>/services/*</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        MEF8E7CE2324E425FB840AD1DCBD8054B
-      </servlet-name>
       <url-pattern>*.jws</url-pattern>
     </servlet-mapping>
   
@@ -9450,6 +10523,13 @@
         MEF8E7CE2324E425FB840AD1DCBD8054B
       </servlet-name>
       <url-pattern>/servlet/AxisServlet</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        MEF8E7CE2324E425FB840AD1DCBD8054B
+      </servlet-name>
+      <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9477,20 +10557,6 @@
       <servlet-name>
         P1000500009
       </servlet-name>
-      <url-pattern>/orders/PrintOptions.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P1000500009
-      </servlet-name>
-      <url-pattern>/orders/print.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P1000500009
-      </servlet-name>
       <url-pattern>/orders/send.html</url-pattern>
     </servlet-mapping>
   
@@ -9503,9 +10569,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        P1000500009
+      </servlet-name>
+      <url-pattern>/orders/PrintOptions.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P1000500009
+      </servlet-name>
+      <url-pattern>/orders/print.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         P1000500018
       </servlet-name>
-      <url-pattern>/invoices/*</url-pattern>
+      <url-pattern>/invoices/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9519,14 +10599,21 @@
       <servlet-name>
         P1000500018
       </servlet-name>
-      <url-pattern>/invoices/print.html</url-pattern>
+      <url-pattern>/invoices/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P1000500018
       </servlet-name>
-      <url-pattern>/invoices/send.html</url-pattern>
+      <url-pattern>/invoices/print.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P1000500020
+      </servlet-name>
+      <url-pattern>/shipments/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9541,13 +10628,6 @@
         P1000500020
       </servlet-name>
       <url-pattern>/shipments/print.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P1000500020
-      </servlet-name>
-      <url-pattern>/shipments/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9604,6 +10684,34 @@
         P14CF968D43864D6AB6F2CEF1971A785D
       </servlet-name>
       <url-pattern>/ad_process/ApplyModulesCallServlet.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P18483FCC3E5D49EEBA529D2380129436
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/movimientos/print.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P18483FCC3E5D49EEBA529D2380129436
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/movimientos/*</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P18483FCC3E5D49EEBA529D2380129436
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/send.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P18483FCC3E5D49EEBA529D2380129436
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/PrintOptions.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9688,6 +10796,13 @@
         P64FFE615A5BA43DDAA13806DFE228F79
       </servlet-name>
       <url-pattern>/ad_actionButton/InvoicePaymentMonitor.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P6B85FD23A3E44B89B1619F2AEFF6252E
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.erpCommon/ad_reports/ImprimirRetencion.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9799,7 +10914,7 @@
       <servlet-name>
         P800737
       </servlet-name>
-      <url-pattern>/ad_ActionButton/CreateFromMultiple_Shipment.html</url-pattern>
+      <url-pattern>/ad_actionButton/CreateFromMultiple_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9813,21 +10928,21 @@
       <servlet-name>
         P800737
       </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFromMultiple_F2.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P800737
-      </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFromMultiple_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P800737
-      </servlet-name>
       <url-pattern>/ad_ActionButton/CreateFromMultiple_Receipt.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P800737
+      </servlet-name>
+      <url-pattern>/ad_ActionButton/CreateFromMultiple_Shipment.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P800737
+      </servlet-name>
+      <url-pattern>/ad_actionButton/CreateFromMultiple_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -9925,14 +11040,14 @@
       <servlet-name>
         P801126
       </servlet-name>
-      <url-pattern>/ad_process/CreateAccountingReport.html</url-pattern>
+      <url-pattern>/ad_process/CreateAccountingReportPopUp.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P801126
       </servlet-name>
-      <url-pattern>/ad_process/CreateAccountingReportPopUp.html</url-pattern>
+      <url-pattern>/ad_process/CreateAccountingReport.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10002,6 +11117,13 @@
       <servlet-name>
         P801433
       </servlet-name>
+      <url-pattern>/utility/ExportGrid.csv</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P801433
+      </servlet-name>
       <url-pattern>/utility/ExportGrid.pdf</url-pattern>
     </servlet-mapping>
   
@@ -10010,13 +11132,6 @@
         P801433
       </servlet-name>
       <url-pattern>/utility/ExportGrid.xls</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P801433
-      </servlet-name>
-      <url-pattern>/utility/ExportGrid.csv</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10056,9 +11171,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        P91CE3C1954EC45D99D10481D19B37F3C
+      </servlet-name>
+      <url-pattern>/com.atrums.declaraciontributaria.ecuador.ad_actionButton/CrearAnexo.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         P9313D44D9A13480388AD5A55B455EDCB
       </servlet-name>
       <url-pattern>/org.openbravo.advpaymentmngt.ad_actionbutton/AddPaymentFromTransaction.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P9B14CE90678C490D83E30C94B9AEBF35
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.ad_actionbutton/AddPaymentFromInvoice.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10084,9 +11213,23 @@
   
     <servlet-mapping>
       <servlet-name>
+        PB5A477E29B3C472CAF44C0B1B4E4512E
+      </servlet-name>
+      <url-pattern>/com.atrums.depositos.ad_actionbutton/AddTransaction.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         PB5FE07148F9C4A818027E2C8D628516B
       </servlet-name>
       <url-pattern>/ad_forms/InstancePurpose.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PB8EF75C998164BF191ECA10DE45716FF
+      </servlet-name>
+      <url-pattern>/com.atrums.conciliacionec.ad_actionbutton/AddTransaction.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10101,6 +11244,34 @@
         PC2FB9E6E16BD4BDEA720399486FA636D
       </servlet-name>
       <url-pattern>/ad_process/ScheduleProcess.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PD6BA8577DEC4481D8E0D5472A51A6D84
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/retenciones/*</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PD6BA8577DEC4481D8E0D5472A51A6D84
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/retenciones/print.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PD6BA8577DEC4481D8E0D5472A51A6D84
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/PrintOptions.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PD6BA8577DEC4481D8E0D5472A51A6D84
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10122,6 +11293,20 @@
         PEF9F7381E3984C6CB7BE705C3BAD3E6C
       </servlet-name>
       <url-pattern>/org.openbravo.advpaymentmngt.ad_actionbutton/AddPaymentFromInvoice.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PFB3A011A359F461189944DA80A1407A5
+      </servlet-name>
+      <url-pattern>/org.openbravo.advpaymentmngt.ad_actionbutton/AddTransaction.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        PFD1C5B7E1B6B4AA1B71525A4F3377154
+      </servlet-name>
+      <url-pattern>/com.atrums.conciliacionec.ad_actionbutton/Reconciliation.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10149,14 +11334,14 @@
       <servlet-name>
         R0AA8445A6B3649A9AC1ED47B7665C95B
       </servlet-name>
-      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.html</url-pattern>
+      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R0AA8445A6B3649A9AC1ED47B7665C95B
       </servlet-name>
-      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.pdf</url-pattern>
+      <url-pattern>/org.openbravo.reports.ordersawaitingdelivery.ad_reports/ReportOrderNotShipped.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10184,14 +11369,14 @@
       <servlet-name>
         R1002100043
       </servlet-name>
-      <url-pattern>/ad_reports/ReportAnnualCertification.html</url-pattern>
+      <url-pattern>/ad_reports/ReportAnnualCertification.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R1002100043
       </servlet-name>
-      <url-pattern>/ad_reports/ReportAnnualCertification.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportAnnualCertification.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10233,6 +11418,13 @@
       <servlet-name>
         R338B29351B1D41138A09B2103B2B07C8
       </servlet-name>
+      <url-pattern>/payments/send.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R338B29351B1D41138A09B2103B2B07C8
+      </servlet-name>
       <url-pattern>/payments/*</url-pattern>
     </servlet-mapping>
   
@@ -10252,20 +11444,6 @@
   
     <servlet-mapping>
       <servlet-name>
-        R338B29351B1D41138A09B2103B2B07C8
-      </servlet-name>
-      <url-pattern>/payments/send.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800787
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportTrialBalanceExcel.xls</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
         R800787
       </servlet-name>
       <url-pattern>/ad_reports/ReportTrialBalance.html</url-pattern>
@@ -10276,6 +11454,13 @@
         R800787
       </servlet-name>
       <url-pattern>/ad_reports/ReportTrialBalancePDF.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800787
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportTrialBalanceExcel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10317,14 +11502,14 @@
       <servlet-name>
         R800804
       </servlet-name>
-      <url-pattern>/RptC_OrderLines.pdf</url-pattern>
+      <url-pattern>/RptC_Order.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800804
       </servlet-name>
-      <url-pattern>/RptC_Order.pdf</url-pattern>
+      <url-pattern>/RptC_OrderLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10352,14 +11537,14 @@
       <servlet-name>
         R800829
       </servlet-name>
-      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800829
       </servlet-name>
-      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10415,7 +11600,7 @@
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPOLines.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPODescription.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10429,7 +11614,7 @@
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPODescription.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPOLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10443,14 +11628,14 @@
       <servlet-name>
         R800836
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.xls</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerJournalPDF.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800836
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerJournalPDF.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10464,14 +11649,14 @@
       <servlet-name>
         R800848
       </servlet-name>
-      <url-pattern>/ad_reports/ReportMaterialTransactionEditionJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportMaterialTransactionFilter.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800848
       </servlet-name>
-      <url-pattern>/ad_reports/ReportMaterialTransactionFilter.html</url-pattern>
+      <url-pattern>/ad_reports/ReportMaterialTransactionEditionJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10492,21 +11677,14 @@
       <servlet-name>
         R800852
       </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800852
       </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800856
-      </servlet-name>
-      <url-pattern>/ad_reports/GeneralAccountingReportsPDF</url-pattern>
+      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10521,6 +11699,13 @@
         R800856
       </servlet-name>
       <url-pattern>/ad_reports/GeneralAccountingReports.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800856
+      </servlet-name>
+      <url-pattern>/ad_reports/GeneralAccountingReportsPDF</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10555,6 +11740,13 @@
       <servlet-name>
         R800872
       </servlet-name>
+      <url-pattern>/RptMA_CCP_Measures_Hours.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800872
+      </servlet-name>
       <url-pattern>/RptMA_CCP_Measures.pdf</url-pattern>
     </servlet-mapping>
   
@@ -10563,13 +11755,6 @@
         R800872
       </servlet-name>
       <url-pattern>/RptMA_CCP_Measures_Values.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800872
-      </servlet-name>
-      <url-pattern>/RptMA_CCP_Measures_Hours.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10590,7 +11775,7 @@
       <servlet-name>
         R800874
       </servlet-name>
-      <url-pattern>/RptPromissoryNoteHeader.pdf</url-pattern>
+      <url-pattern>/RptPromissoryNote.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10604,14 +11789,14 @@
       <servlet-name>
         R800874
       </servlet-name>
-      <url-pattern>/RptPromissoryNoteError.pdf</url-pattern>
+      <url-pattern>/RptPromissoryNoteHeader.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800874
       </servlet-name>
-      <url-pattern>/RptPromissoryNote.pdf</url-pattern>
+      <url-pattern>/RptPromissoryNoteError.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10625,14 +11810,14 @@
       <servlet-name>
         R800882
       </servlet-name>
-      <url-pattern>/RptM_Movement.pdf</url-pattern>
+      <url-pattern>/RptM_MovementLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800882
       </servlet-name>
-      <url-pattern>/RptM_MovementLines.pdf</url-pattern>
+      <url-pattern>/RptM_Movement.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10653,21 +11838,21 @@
       <servlet-name>
         R800892
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPricelist.html</url-pattern>
+      <url-pattern>/ad_reports/ReportPricelist.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800892
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPricelist.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportPricelist.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800941
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedger.html</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerExcel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10681,14 +11866,7 @@
       <servlet-name>
         R800941
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerExcel.xls</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801050
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportBudgetGenerateExcelXLS.xls</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedger.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10696,6 +11874,13 @@
         R801050
       </servlet-name>
       <url-pattern>/ad_reports/ReportBudgetGenerateExcel.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801050
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportBudgetGenerateExcelXLS.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10709,21 +11894,14 @@
       <servlet-name>
         R801111
       </servlet-name>
-      <url-pattern>/ad_reports/ReportRefundSales.html</url-pattern>
+      <url-pattern>/ad_reports/ReportRefundSales.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801111
       </servlet-name>
-      <url-pattern>/ad_reports/ReportRefundSales.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801140
-      </servlet-name>
-      <url-pattern>/RptC_Remittance.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportRefundSales.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10738,6 +11916,13 @@
         R801140
       </servlet-name>
       <url-pattern>/RptC_RemittanceHeader.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801140
+      </servlet-name>
+      <url-pattern>/RptC_Remittance.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10891,14 +12076,14 @@
       <servlet-name>
         R801723
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasper.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasperPop.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801723
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasperPop.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasper.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10912,21 +12097,14 @@
       <servlet-name>
         R801725
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderProvidedJRPop.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderProvidedJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801725
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderProvidedJR.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801727
-      </servlet-name>
-      <url-pattern>/RptMA_ProcessPlanJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderProvidedJRPop.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10934,6 +12112,13 @@
         R801727
       </servlet-name>
       <url-pattern>/RptMA_ProcessPlan.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801727
+      </servlet-name>
+      <url-pattern>/RptMA_ProcessPlanJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10968,21 +12153,21 @@
       <servlet-name>
         R801735
       </servlet-name>
-      <url-pattern>/ad_reports/ReportShipmentFilterJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportShipmentEditionJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801735
       </servlet-name>
-      <url-pattern>/ad_reports/ReportShipmentEditionJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportShipmentFilterJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801736
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPendingProductionJr.html</url-pattern>
+      <url-pattern>/ad_reports/ReportPendingProductionEditJr.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10996,14 +12181,7 @@
       <servlet-name>
         R801736
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPendingProductionEditJr.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801737
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectProfitabilityJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportPendingProductionJr.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11011,6 +12189,13 @@
         R801737
       </servlet-name>
       <url-pattern>/ad_reports/ReportProjectProfitabilityJR.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801737
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportProjectProfitabilityJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11038,14 +12223,14 @@
       <servlet-name>
         R801969
       </servlet-name>
-      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJRFilter_legacy.html</url-pattern>
+      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJREdition_legacy.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801969
       </servlet-name>
-      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJREdition_legacy.html</url-pattern>
+      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJRFilter_legacy.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11059,14 +12244,14 @@
       <servlet-name>
         R804366
       </servlet-name>
-      <url-pattern>/ad_reports/ReportCashFlowPopUp.html</url-pattern>
+      <url-pattern>/ad_reports/ReportCashFlowReload.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R804366
       </servlet-name>
-      <url-pattern>/ad_reports/ReportCashFlowReload.html</url-pattern>
+      <url-pattern>/ad_reports/ReportCashFlowPopUp.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11094,13 +12279,6 @@
       <servlet-name>
         RBA8D4904244F4983AA09EDA84FDD1E7C
       </servlet-name>
-      <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReportExcel.xls</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        RBA8D4904244F4983AA09EDA84FDD1E7C
-      </servlet-name>
       <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReportPDF.pdf</url-pattern>
     </servlet-mapping>
   
@@ -11109,6 +12287,13 @@
         RBA8D4904244F4983AA09EDA84FDD1E7C
       </servlet-name>
       <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReport.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        RBA8D4904244F4983AA09EDA84FDD1E7C
+      </servlet-name>
+      <url-pattern>/org.openbravo.financial.paymentreport/erpCommon/ad_reports/PaymentReportExcel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11192,7 +12377,14 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_FS.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple_F3.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S800779
+      </servlet-name>
+      <url-pattern>/info/BusinessPartnerMultiple.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11206,13 +12398,6 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_F3.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S800779
-      </servlet-name>
       <url-pattern>/info/BusinessPartnerMultiple_F1.html</url-pattern>
     </servlet-mapping>
   
@@ -11220,7 +12405,7 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11228,6 +12413,13 @@
         S800780
       </servlet-name>
       <url-pattern>/info/ImageInfo.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S800781
+      </servlet-name>
+      <url-pattern>/info/ProductMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11256,13 +12448,6 @@
         S800781
       </servlet-name>
       <url-pattern>/info/ProductMultiple_F2.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S800781
-      </servlet-name>
-      <url-pattern>/info/ProductMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11325,14 +12510,14 @@
       <servlet-name>
         S801413
       </servlet-name>
-      <url-pattern>/info/Location_F1.html</url-pattern>
+      <url-pattern>/info/Location_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         S801413
       </servlet-name>
-      <url-pattern>/info/Location_F2.html</url-pattern>
+      <url-pattern>/info/Location_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11351,9 +12536,65 @@
   
     <servlet-mapping>
       <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <url-pattern>/info/Location_F2.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <url-pattern>/info/Location_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <url-pattern>/info/Location_F3.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <url-pattern>/info/Location_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         SAA14992C2E4F11DEABB39BCF3C415EF2
       </servlet-name>
       <url-pattern>/info/AccountElementValue.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        SD81AD57191BF47A594E144C6ACD3807E
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        SD81AD57191BF47A594E144C6ACD3807E
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        SD81AD57191BF47A594E144C6ACD3807E
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_F3.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        SD81AD57191BF47A594E144C6ACD3807E
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11381,14 +12622,14 @@
       <servlet-name>
         X1004400019
       </servlet-name>
-      <url-pattern>/ad_forms/RequisitionToOrderCreate.html</url-pattern>
+      <url-pattern>/ad_forms/RequisitionToOrder.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X1004400019
       </servlet-name>
-      <url-pattern>/ad_forms/RequisitionToOrder.html</url-pattern>
+      <url-pattern>/ad_forms/RequisitionToOrderCreate.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11442,6 +12683,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        X772F01FF4E3C4F1CBB717DB2AD0A832B
+      </servlet-name>
+      <url-pattern>/org.openbravo.utility.hqlquerytool.HQLQueryTool.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         X800523
       </servlet-name>
       <url-pattern>/org.openbravo.erpCommon.ad_forms/FileImport.html</url-pattern>
@@ -11458,14 +12706,14 @@
       <servlet-name>
         X800541
       </servlet-name>
-      <url-pattern>/ad_forms/SQLExecutor.html</url-pattern>
+      <url-pattern>/ad_forms/SQLExecutor_Excel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X800541
       </servlet-name>
-      <url-pattern>/ad_forms/SQLExecutor_Excel.xls</url-pattern>
+      <url-pattern>/ad_forms/SQLExecutor.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11521,6 +12769,13 @@
       <servlet-name>
         X800661
       </servlet-name>
+      <url-pattern>/businessUtility/TabAttachments_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X800661
+      </servlet-name>
       <url-pattern>/businessUtility/TabAttachments_F1.html</url-pattern>
     </servlet-mapping>
   
@@ -11529,13 +12784,6 @@
         X800661
       </servlet-name>
       <url-pattern>/businessUtility/TabAttachments_FS.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X800661
-      </servlet-name>
-      <url-pattern>/businessUtility/TabAttachments_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11556,28 +12804,14 @@
       <servlet-name>
         X800665
       </servlet-name>
-      <url-pattern>/security/Login_F0.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X800665
-      </servlet-name>
-      <url-pattern>/security/Login_FS.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X800665
-      </servlet-name>
-      <url-pattern>/security/Login_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X800665
-      </servlet-name>
       <url-pattern>/security/Login_Logo.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X800665
+      </servlet-name>
+      <url-pattern>/security/Login_F0.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11592,6 +12826,20 @@
         X800665
       </servlet-name>
       <url-pattern>/security/Login_Welcome.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X800665
+      </servlet-name>
+      <url-pattern>/security/Login_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X800665
+      </servlet-name>
+      <url-pattern>/security/Login_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11710,21 +12958,14 @@
       <servlet-name>
         X801949
       </servlet-name>
-      <url-pattern>/ad_forms/GenerateInvoicesmanual.html</url-pattern>
+      <url-pattern>/ad_forms/CreateInvoicesfromOrders.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X801949
       </servlet-name>
-      <url-pattern>/ad_forms/CreateInvoicesfromOrders.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X801950
-      </servlet-name>
-      <url-pattern>/ad_forms/CreateShipmentsfromOrders.html</url-pattern>
+      <url-pattern>/ad_forms/GenerateInvoicesmanual.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11732,6 +12973,13 @@
         X801950
       </servlet-name>
       <url-pattern>/ad_forms/GenerateShipmentsmanual.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X801950
+      </servlet-name>
+      <url-pattern>/ad_forms/CreateShipmentsfromOrders.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11752,14 +13000,14 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Field_FS.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F1.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Field_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11773,6 +13021,13 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X99087891EBCFA68BE040A8C0BD063FFC
+      </servlet-name>
       <url-pattern>/ad_help/DisplayHelp_Edit_F2.html</url-pattern>
     </servlet-mapping>
   
@@ -11780,14 +13035,7 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F2.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X99087891EBCFA68BE040A8C0BD063FFC
-      </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F2.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11801,14 +13049,14 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_F1.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_FS.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>

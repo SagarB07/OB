@@ -28,10 +28,11 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String adOrgIdr;
   public String cDoctypetargetId;
   public String cDoctypetargetIdr;
-  public String documentno;
   public String generatetemplate;
-  public String dateordered;
+  public String documentno;
+  public String finPaymentPriorityId;
   public String cReturnReasonId;
+  public String dateordered;
   public String cBpartnerId;
   public String cBpartnerIdr;
   public String cBpartnerLocationId;
@@ -39,9 +40,9 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String mWarehouseId;
   public String rmPickfromshipment;
   public String datepromised;
-  public String rmReceivematerials;
   public String finPaymentmethodId;
   public String finPaymentmethodIdr;
+  public String rmReceivematerials;
   public String cPaymenttermId;
   public String cPaymenttermIdr;
   public String rmCreateinvoice;
@@ -89,28 +90,28 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String user1Id;
   public String user2Id;
   public String createPolines;
-  public String deliveryLocationId;
-  public String isselfservice;
-  public String dropshipLocationId;
+  public String processed;
+  public String processing;
+  public String invoicerule;
+  public String soResStatus;
+  public String dateacct;
+  public String isprinted;
+  public String isinvoiced;
   public String isdelivered;
+  public String isactive;
+  public String adClientId;
+  public String isselfservice;
+  public String cOrderId;
+  public String dropshipLocationId;
   public String dropshipBpartnerId;
   public String dropshipUserId;
   public String isselected;
   public String posted;
   public String paymentrule;
   public String issotrx;
+  public String deliveryLocationId;
   public String deliveryrule;
-  public String isactive;
-  public String soResStatus;
   public String dateprinted;
-  public String processed;
-  public String isinvoiced;
-  public String isprinted;
-  public String adClientId;
-  public String dateacct;
-  public String invoicerule;
-  public String processing;
-  public String cOrderId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -144,14 +145,16 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return cDoctypetargetId;
     else if (fieldName.equalsIgnoreCase("c_doctypetarget_idr") || fieldName.equals("cDoctypetargetIdr"))
       return cDoctypetargetIdr;
-    else if (fieldName.equalsIgnoreCase("documentno"))
-      return documentno;
     else if (fieldName.equalsIgnoreCase("generatetemplate"))
       return generatetemplate;
-    else if (fieldName.equalsIgnoreCase("dateordered"))
-      return dateordered;
+    else if (fieldName.equalsIgnoreCase("documentno"))
+      return documentno;
+    else if (fieldName.equalsIgnoreCase("fin_payment_priority_id") || fieldName.equals("finPaymentPriorityId"))
+      return finPaymentPriorityId;
     else if (fieldName.equalsIgnoreCase("c_return_reason_id") || fieldName.equals("cReturnReasonId"))
       return cReturnReasonId;
+    else if (fieldName.equalsIgnoreCase("dateordered"))
+      return dateordered;
     else if (fieldName.equalsIgnoreCase("c_bpartner_id") || fieldName.equals("cBpartnerId"))
       return cBpartnerId;
     else if (fieldName.equalsIgnoreCase("c_bpartner_idr") || fieldName.equals("cBpartnerIdr"))
@@ -166,12 +169,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return rmPickfromshipment;
     else if (fieldName.equalsIgnoreCase("datepromised"))
       return datepromised;
-    else if (fieldName.equalsIgnoreCase("rm_receivematerials") || fieldName.equals("rmReceivematerials"))
-      return rmReceivematerials;
     else if (fieldName.equalsIgnoreCase("fin_paymentmethod_id") || fieldName.equals("finPaymentmethodId"))
       return finPaymentmethodId;
     else if (fieldName.equalsIgnoreCase("fin_paymentmethod_idr") || fieldName.equals("finPaymentmethodIdr"))
       return finPaymentmethodIdr;
+    else if (fieldName.equalsIgnoreCase("rm_receivematerials") || fieldName.equals("rmReceivematerials"))
+      return rmReceivematerials;
     else if (fieldName.equalsIgnoreCase("c_paymentterm_id") || fieldName.equals("cPaymenttermId"))
       return cPaymenttermId;
     else if (fieldName.equalsIgnoreCase("c_paymentterm_idr") || fieldName.equals("cPaymenttermIdr"))
@@ -266,14 +269,32 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user2Id;
     else if (fieldName.equalsIgnoreCase("create_polines") || fieldName.equals("createPolines"))
       return createPolines;
-    else if (fieldName.equalsIgnoreCase("delivery_location_id") || fieldName.equals("deliveryLocationId"))
-      return deliveryLocationId;
-    else if (fieldName.equalsIgnoreCase("isselfservice"))
-      return isselfservice;
-    else if (fieldName.equalsIgnoreCase("dropship_location_id") || fieldName.equals("dropshipLocationId"))
-      return dropshipLocationId;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("processing"))
+      return processing;
+    else if (fieldName.equalsIgnoreCase("invoicerule"))
+      return invoicerule;
+    else if (fieldName.equalsIgnoreCase("so_res_status") || fieldName.equals("soResStatus"))
+      return soResStatus;
+    else if (fieldName.equalsIgnoreCase("dateacct"))
+      return dateacct;
+    else if (fieldName.equalsIgnoreCase("isprinted"))
+      return isprinted;
+    else if (fieldName.equalsIgnoreCase("isinvoiced"))
+      return isinvoiced;
     else if (fieldName.equalsIgnoreCase("isdelivered"))
       return isdelivered;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isselfservice"))
+      return isselfservice;
+    else if (fieldName.equalsIgnoreCase("c_order_id") || fieldName.equals("cOrderId"))
+      return cOrderId;
+    else if (fieldName.equalsIgnoreCase("dropship_location_id") || fieldName.equals("dropshipLocationId"))
+      return dropshipLocationId;
     else if (fieldName.equalsIgnoreCase("dropship_bpartner_id") || fieldName.equals("dropshipBpartnerId"))
       return dropshipBpartnerId;
     else if (fieldName.equalsIgnoreCase("dropship_user_id") || fieldName.equals("dropshipUserId"))
@@ -286,30 +307,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return paymentrule;
     else if (fieldName.equalsIgnoreCase("issotrx"))
       return issotrx;
+    else if (fieldName.equalsIgnoreCase("delivery_location_id") || fieldName.equals("deliveryLocationId"))
+      return deliveryLocationId;
     else if (fieldName.equalsIgnoreCase("deliveryrule"))
       return deliveryrule;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("so_res_status") || fieldName.equals("soResStatus"))
-      return soResStatus;
     else if (fieldName.equalsIgnoreCase("dateprinted"))
       return dateprinted;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
-    else if (fieldName.equalsIgnoreCase("isinvoiced"))
-      return isinvoiced;
-    else if (fieldName.equalsIgnoreCase("isprinted"))
-      return isprinted;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("dateacct"))
-      return dateacct;
-    else if (fieldName.equalsIgnoreCase("invoicerule"))
-      return invoicerule;
-    else if (fieldName.equalsIgnoreCase("processing"))
-      return processing;
-    else if (fieldName.equalsIgnoreCase("c_order_id") || fieldName.equals("cOrderId"))
-      return cOrderId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -353,10 +356,11 @@ Select for edit
       "(CASE WHEN C_Order.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, " +
       "C_Order.C_DocTypeTarget_ID, " +
       "(CASE WHEN C_Order.C_DocTypeTarget_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_DocTypeTarget_IDR, " +
-      "C_Order.DocumentNo, " +
       "C_Order.Generatetemplate, " +
-      "C_Order.DateOrdered, " +
+      "C_Order.DocumentNo, " +
+      "C_Order.FIN_Payment_Priority_ID, " +
       "C_Order.C_Return_Reason_ID, " +
+      "C_Order.DateOrdered, " +
       "C_Order.C_BPartner_ID, " +
       "(CASE WHEN C_Order.C_BPartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_BPartner_IDR, " +
       "C_Order.C_BPartner_Location_ID, " +
@@ -364,9 +368,9 @@ Select for edit
       "C_Order.M_Warehouse_ID, " +
       "C_Order.RM_PickFromShipment, " +
       "C_Order.DatePromised, " +
-      "C_Order.RM_ReceiveMaterials, " +
       "C_Order.FIN_Paymentmethod_ID, " +
       "(CASE WHEN C_Order.FIN_Paymentmethod_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'') ) END) AS FIN_Paymentmethod_IDR, " +
+      "C_Order.RM_ReceiveMaterials, " +
       "C_Order.C_PaymentTerm_ID, " +
       "(CASE WHEN C_Order.C_PaymentTerm_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL7.Name IS NULL THEN TO_CHAR(table7.Name) ELSE TO_CHAR(tableTRL7.Name) END)), ''))),'') ) END) AS C_PaymentTerm_IDR, " +
       "C_Order.RM_CreateInvoice, " +
@@ -414,28 +418,28 @@ Select for edit
       "C_Order.User1_ID, " +
       "C_Order.User2_ID, " +
       "C_Order.Create_POLines, " +
-      "C_Order.Delivery_Location_ID, " +
-      "COALESCE(C_Order.IsSelfService, 'N') AS IsSelfService, " +
-      "C_Order.DropShip_Location_ID, " +
+      "COALESCE(C_Order.Processed, 'N') AS Processed, " +
+      "C_Order.Processing, " +
+      "C_Order.InvoiceRule, " +
+      "C_Order.SO_Res_Status, " +
+      "C_Order.DateAcct, " +
+      "COALESCE(C_Order.IsPrinted, 'N') AS IsPrinted, " +
+      "COALESCE(C_Order.IsInvoiced, 'N') AS IsInvoiced, " +
       "COALESCE(C_Order.IsDelivered, 'N') AS IsDelivered, " +
+      "COALESCE(C_Order.IsActive, 'N') AS IsActive, " +
+      "C_Order.AD_Client_ID, " +
+      "COALESCE(C_Order.IsSelfService, 'N') AS IsSelfService, " +
+      "C_Order.C_Order_ID, " +
+      "C_Order.DropShip_Location_ID, " +
       "C_Order.DropShip_BPartner_ID, " +
       "C_Order.DropShip_User_ID, " +
       "COALESCE(C_Order.IsSelected, 'N') AS IsSelected, " +
       "C_Order.Posted, " +
       "C_Order.PaymentRule, " +
       "COALESCE(C_Order.IsSOTrx, 'N') AS IsSOTrx, " +
+      "C_Order.Delivery_Location_ID, " +
       "C_Order.DeliveryRule, " +
-      "COALESCE(C_Order.IsActive, 'N') AS IsActive, " +
-      "C_Order.SO_Res_Status, " +
       "C_Order.DatePrinted, " +
-      "COALESCE(C_Order.Processed, 'N') AS Processed, " +
-      "COALESCE(C_Order.IsInvoiced, 'N') AS IsInvoiced, " +
-      "COALESCE(C_Order.IsPrinted, 'N') AS IsPrinted, " +
-      "C_Order.AD_Client_ID, " +
-      "C_Order.DateAcct, " +
-      "C_Order.InvoiceRule, " +
-      "C_Order.Processing, " +
-      "C_Order.C_Order_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_Order left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Order.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (C_Order.C_DocTypeTarget_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table4 on (C_Order.C_BPartner_ID = table4.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table5 on (C_Order.C_BPartner_Location_ID = table5.C_BPartner_Location_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table6 on (C_Order.FIN_Paymentmethod_ID = table6.FIN_Paymentmethod_ID) left join (select C_PaymentTerm_ID, Name from C_PaymentTerm) table7 on (C_Order.C_PaymentTerm_ID = table7.C_PaymentTerm_ID) left join (select C_PaymentTerm_ID,AD_Language, Name from C_PaymentTerm_TRL) tableTRL7 on (table7.C_PaymentTerm_ID = tableTRL7.C_PaymentTerm_ID and tableTRL7.AD_Language = ?)  left join (select M_PriceList_ID, Name from M_PriceList) table9 on (C_Order.M_PriceList_ID = table9.M_PriceList_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = 'FF80818130217A35013021A672400035' and list1.ad_language = ?  AND (CASE C_Order.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(C_Order.DocAction) END) = list1.value) left join (select C_Project_ID, Value, Name from C_Project) table10 on (C_Order.C_Project_ID = table10.C_Project_ID)" +
       "        WHERE 2=2 " +
@@ -491,10 +495,11 @@ Select for edit
         objectHeaderData.adOrgIdr = UtilSql.getValue(result, "ad_org_idr");
         objectHeaderData.cDoctypetargetId = UtilSql.getValue(result, "c_doctypetarget_id");
         objectHeaderData.cDoctypetargetIdr = UtilSql.getValue(result, "c_doctypetarget_idr");
-        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
         objectHeaderData.generatetemplate = UtilSql.getValue(result, "generatetemplate");
-        objectHeaderData.dateordered = UtilSql.getDateValue(result, "dateordered", "dd-MM-yyyy");
+        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
+        objectHeaderData.finPaymentPriorityId = UtilSql.getValue(result, "fin_payment_priority_id");
         objectHeaderData.cReturnReasonId = UtilSql.getValue(result, "c_return_reason_id");
+        objectHeaderData.dateordered = UtilSql.getDateValue(result, "dateordered", "dd-MM-yyyy");
         objectHeaderData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
         objectHeaderData.cBpartnerIdr = UtilSql.getValue(result, "c_bpartner_idr");
         objectHeaderData.cBpartnerLocationId = UtilSql.getValue(result, "c_bpartner_location_id");
@@ -502,9 +507,9 @@ Select for edit
         objectHeaderData.mWarehouseId = UtilSql.getValue(result, "m_warehouse_id");
         objectHeaderData.rmPickfromshipment = UtilSql.getValue(result, "rm_pickfromshipment");
         objectHeaderData.datepromised = UtilSql.getDateValue(result, "datepromised", "dd-MM-yyyy");
-        objectHeaderData.rmReceivematerials = UtilSql.getValue(result, "rm_receivematerials");
         objectHeaderData.finPaymentmethodId = UtilSql.getValue(result, "fin_paymentmethod_id");
         objectHeaderData.finPaymentmethodIdr = UtilSql.getValue(result, "fin_paymentmethod_idr");
+        objectHeaderData.rmReceivematerials = UtilSql.getValue(result, "rm_receivematerials");
         objectHeaderData.cPaymenttermId = UtilSql.getValue(result, "c_paymentterm_id");
         objectHeaderData.cPaymenttermIdr = UtilSql.getValue(result, "c_paymentterm_idr");
         objectHeaderData.rmCreateinvoice = UtilSql.getValue(result, "rm_createinvoice");
@@ -552,28 +557,28 @@ Select for edit
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
         objectHeaderData.createPolines = UtilSql.getValue(result, "create_polines");
-        objectHeaderData.deliveryLocationId = UtilSql.getValue(result, "delivery_location_id");
-        objectHeaderData.isselfservice = UtilSql.getValue(result, "isselfservice");
-        objectHeaderData.dropshipLocationId = UtilSql.getValue(result, "dropship_location_id");
+        objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.processing = UtilSql.getValue(result, "processing");
+        objectHeaderData.invoicerule = UtilSql.getValue(result, "invoicerule");
+        objectHeaderData.soResStatus = UtilSql.getValue(result, "so_res_status");
+        objectHeaderData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
+        objectHeaderData.isprinted = UtilSql.getValue(result, "isprinted");
+        objectHeaderData.isinvoiced = UtilSql.getValue(result, "isinvoiced");
         objectHeaderData.isdelivered = UtilSql.getValue(result, "isdelivered");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.isselfservice = UtilSql.getValue(result, "isselfservice");
+        objectHeaderData.cOrderId = UtilSql.getValue(result, "c_order_id");
+        objectHeaderData.dropshipLocationId = UtilSql.getValue(result, "dropship_location_id");
         objectHeaderData.dropshipBpartnerId = UtilSql.getValue(result, "dropship_bpartner_id");
         objectHeaderData.dropshipUserId = UtilSql.getValue(result, "dropship_user_id");
         objectHeaderData.isselected = UtilSql.getValue(result, "isselected");
         objectHeaderData.posted = UtilSql.getValue(result, "posted");
         objectHeaderData.paymentrule = UtilSql.getValue(result, "paymentrule");
         objectHeaderData.issotrx = UtilSql.getValue(result, "issotrx");
+        objectHeaderData.deliveryLocationId = UtilSql.getValue(result, "delivery_location_id");
         objectHeaderData.deliveryrule = UtilSql.getValue(result, "deliveryrule");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
-        objectHeaderData.soResStatus = UtilSql.getValue(result, "so_res_status");
         objectHeaderData.dateprinted = UtilSql.getDateValue(result, "dateprinted", "dd-MM-yyyy");
-        objectHeaderData.processed = UtilSql.getValue(result, "processed");
-        objectHeaderData.isinvoiced = UtilSql.getValue(result, "isinvoiced");
-        objectHeaderData.isprinted = UtilSql.getValue(result, "isprinted");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectHeaderData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
-        objectHeaderData.invoicerule = UtilSql.getValue(result, "invoicerule");
-        objectHeaderData.processing = UtilSql.getValue(result, "processing");
-        objectHeaderData.cOrderId = UtilSql.getValue(result, "c_order_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -608,7 +613,7 @@ Select for edit
 /**
 Create a registry
  */
-  public static HeaderData[] set(String convertquotation, String validuntil, String aAssetId, String cOrderId, String adClientId, String adOrgId, String isactive, String createdby, String createdbyr, String updatedby, String updatedbyr, String documentno, String docstatus, String docaction, String docactionBtn, String cDoctypeId, String cDoctypetargetId, String description, String isdelivered, String isinvoiced, String isprinted, String dateordered, String datepromised, String dateacct, String salesrepId, String cPaymenttermId, String billtoId, String cCurrencyId, String invoicerule, String freightamt, String deliveryviarule, String mShipperId, String priorityrule, String totallines, String grandtotal, String mWarehouseId, String mPricelistId, String processing, String cCampaignId, String cBpartnerId, String cBpartnerIdr, String adUserId, String poreference, String cChargeId, String chargeamt, String processed, String cBpartnerLocationId, String cProjectId, String cProjectIdr, String cActivityId, String quotationId, String quotationIdr, String issotrx, String dateprinted, String deliveryrule, String freightcostrule, String paymentrule, String isdiscountprinted, String posted, String istaxincluded, String isselected, String cCostcenterId, String deliverynotes, String cIncotermsId, String incotermsdescription, String generatetemplate, String deliveryLocationId, String copyfrompo, String finPaymentmethodId, String dropshipUserId, String dropshipBpartnerId, String copyfrom, String dropshipLocationId, String isselfservice, String adOrgtrxId, String user2Id, String user1Id, String calculatePromotions, String rmPickfromshipment, String rmReceivematerials, String rmCreateinvoice, String cReturnReasonId, String rmAddorphanline, String soResStatus, String createPolines, String cRejectReasonId)    throws ServletException {
+  public static HeaderData[] set(String convertquotation, String validuntil, String aAssetId, String cOrderId, String adClientId, String adOrgId, String isactive, String createdby, String createdbyr, String updatedby, String updatedbyr, String documentno, String docstatus, String docaction, String docactionBtn, String cDoctypeId, String cDoctypetargetId, String description, String isdelivered, String isinvoiced, String isprinted, String dateordered, String datepromised, String dateacct, String salesrepId, String cPaymenttermId, String billtoId, String cCurrencyId, String invoicerule, String freightamt, String deliveryviarule, String mShipperId, String priorityrule, String totallines, String grandtotal, String mWarehouseId, String mPricelistId, String processing, String cCampaignId, String cBpartnerId, String cBpartnerIdr, String adUserId, String poreference, String cChargeId, String chargeamt, String processed, String cBpartnerLocationId, String cProjectId, String cProjectIdr, String cActivityId, String quotationId, String quotationIdr, String issotrx, String dateprinted, String deliveryrule, String freightcostrule, String paymentrule, String isdiscountprinted, String posted, String istaxincluded, String isselected, String cCostcenterId, String deliverynotes, String cIncotermsId, String incotermsdescription, String generatetemplate, String deliveryLocationId, String copyfrompo, String finPaymentmethodId, String finPaymentPriorityId, String dropshipUserId, String dropshipBpartnerId, String copyfrom, String dropshipLocationId, String isselfservice, String adOrgtrxId, String user2Id, String user1Id, String calculatePromotions, String rmPickfromshipment, String rmReceivematerials, String rmCreateinvoice, String cReturnReasonId, String rmAddorphanline, String soResStatus, String createPolines, String cRejectReasonId)    throws ServletException {
     HeaderData objectHeaderData[] = new HeaderData[1];
     objectHeaderData[0] = new HeaderData();
     objectHeaderData[0].created = "";
@@ -621,10 +626,11 @@ Create a registry
     objectHeaderData[0].adOrgIdr = "";
     objectHeaderData[0].cDoctypetargetId = cDoctypetargetId;
     objectHeaderData[0].cDoctypetargetIdr = "";
-    objectHeaderData[0].documentno = documentno;
     objectHeaderData[0].generatetemplate = generatetemplate;
-    objectHeaderData[0].dateordered = dateordered;
+    objectHeaderData[0].documentno = documentno;
+    objectHeaderData[0].finPaymentPriorityId = finPaymentPriorityId;
     objectHeaderData[0].cReturnReasonId = cReturnReasonId;
+    objectHeaderData[0].dateordered = dateordered;
     objectHeaderData[0].cBpartnerId = cBpartnerId;
     objectHeaderData[0].cBpartnerIdr = cBpartnerIdr;
     objectHeaderData[0].cBpartnerLocationId = cBpartnerLocationId;
@@ -632,9 +638,9 @@ Create a registry
     objectHeaderData[0].mWarehouseId = mWarehouseId;
     objectHeaderData[0].rmPickfromshipment = rmPickfromshipment;
     objectHeaderData[0].datepromised = datepromised;
-    objectHeaderData[0].rmReceivematerials = rmReceivematerials;
     objectHeaderData[0].finPaymentmethodId = finPaymentmethodId;
     objectHeaderData[0].finPaymentmethodIdr = "";
+    objectHeaderData[0].rmReceivematerials = rmReceivematerials;
     objectHeaderData[0].cPaymenttermId = cPaymenttermId;
     objectHeaderData[0].cPaymenttermIdr = "";
     objectHeaderData[0].rmCreateinvoice = rmCreateinvoice;
@@ -682,28 +688,28 @@ Create a registry
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
     objectHeaderData[0].createPolines = createPolines;
-    objectHeaderData[0].deliveryLocationId = deliveryLocationId;
-    objectHeaderData[0].isselfservice = isselfservice;
-    objectHeaderData[0].dropshipLocationId = dropshipLocationId;
+    objectHeaderData[0].processed = processed;
+    objectHeaderData[0].processing = processing;
+    objectHeaderData[0].invoicerule = invoicerule;
+    objectHeaderData[0].soResStatus = soResStatus;
+    objectHeaderData[0].dateacct = dateacct;
+    objectHeaderData[0].isprinted = isprinted;
+    objectHeaderData[0].isinvoiced = isinvoiced;
     objectHeaderData[0].isdelivered = isdelivered;
+    objectHeaderData[0].isactive = isactive;
+    objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].isselfservice = isselfservice;
+    objectHeaderData[0].cOrderId = cOrderId;
+    objectHeaderData[0].dropshipLocationId = dropshipLocationId;
     objectHeaderData[0].dropshipBpartnerId = dropshipBpartnerId;
     objectHeaderData[0].dropshipUserId = dropshipUserId;
     objectHeaderData[0].isselected = isselected;
     objectHeaderData[0].posted = posted;
     objectHeaderData[0].paymentrule = paymentrule;
     objectHeaderData[0].issotrx = issotrx;
+    objectHeaderData[0].deliveryLocationId = deliveryLocationId;
     objectHeaderData[0].deliveryrule = deliveryrule;
-    objectHeaderData[0].isactive = isactive;
-    objectHeaderData[0].soResStatus = soResStatus;
     objectHeaderData[0].dateprinted = dateprinted;
-    objectHeaderData[0].processed = processed;
-    objectHeaderData[0].isinvoiced = isinvoiced;
-    objectHeaderData[0].isprinted = isprinted;
-    objectHeaderData[0].adClientId = adClientId;
-    objectHeaderData[0].dateacct = dateacct;
-    objectHeaderData[0].invoicerule = invoicerule;
-    objectHeaderData[0].processing = processing;
-    objectHeaderData[0].cOrderId = cOrderId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -1012,6 +1018,47 @@ Select for auxiliar field
     return(strReturn);
   }
 
+/**
+Select for auxiliar field
+ */
+  public static String selectDef831B272EE4364C208EFA70098EDF29B4(ConnectionProvider connectionProvider, String AD_Org_ID, String AD_Role_ID, String AD_Client_ID)    throws ServletException {
+    String strSql = "";
+    strSql = strSql + 
+      "        SELECT FIN_Payment_Priority_ID FROM FIN_Payment_Priority WHERE AD_ISORGINCLUDED( (CASE WHEN ?='0' THEN (SELECT ad_org_id FROM ad_org WHERE name = ( SELECT min(o.name) FROM ad_org o join ad_orgtype ot on (o.ad_orgtype_id=ot.ad_orgtype_id) join ad_role_orgaccess ra on (o.ad_org_id=ra.ad_org_id) join ad_role r on (ra.ad_role_id = r.ad_role_id) WHERE ot.istransactionsallowed = 'Y' and r.ad_role_id=?)) ELSE ? END), AD_Org_ID, ?) <> -1 AND Isdefault = 'Y' ORDER BY Priority ";
+
+    ResultSet result;
+    String strReturn = "";
+    PreparedStatement st = null;
+
+    int iParameter = 0;
+    try {
+    st = connectionProvider.getPreparedStatement(strSql);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, AD_Org_ID);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, AD_Role_ID);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, AD_Org_ID);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, AD_Client_ID);
+
+      result = st.executeQuery();
+      if(result.next()) {
+        strReturn = UtilSql.getValue(result, "fin_payment_priority_id");
+      }
+      result.close();
+    } catch(SQLException e){
+      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+    } catch(Exception ex){
+      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+      throw new ServletException("@CODE=@" + ex.getMessage());
+    } finally {
+      try {
+        connectionProvider.releasePreparedStatement(st);
+      } catch(Exception ignore){
+        ignore.printStackTrace();
+      }
+    }
+    return(strReturn);
+  }
+
   public static int updateDocAction(ConnectionProvider connectionProvider, String docaction, String cOrderId)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
@@ -1049,7 +1096,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Order" +
-      "        SET AD_Org_ID = (?) , C_DocTypeTarget_ID = (?) , DocumentNo = (?) , Generatetemplate = (?) , DateOrdered = TO_DATE(?) , C_Return_Reason_ID = (?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , M_Warehouse_ID = (?) , RM_PickFromShipment = (?) , DatePromised = TO_DATE(?) , RM_ReceiveMaterials = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , RM_CreateInvoice = (?) , M_PriceList_ID = (?) , DocStatus = (?) , GrandTotal = TO_NUMBER(?) , TotalLines = TO_NUMBER(?) , C_Currency_ID = (?) , AD_User_ID = (?) , Deliverynotes = (?) , Description = (?) , POReference = (?) , SalesRep_ID = (?) , BillTo_ID = (?) , C_Incoterms_ID = (?) , Incotermsdescription = (?) , IsDiscountPrinted = (?) , C_DocType_ID = (?) , FreightAmt = TO_NUMBER(?) , DeliveryViaRule = (?) , C_Campaign_ID = (?) , M_Shipper_ID = (?) , PriorityRule = (?) , ChargeAmt = TO_NUMBER(?) , C_Charge_ID = (?) , C_Activity_ID = (?) , FreightCostRule = (?) , AD_OrgTrx_ID = (?) , DocAction = (?) , CopyFrom = (?) , CopyFromPO = (?) , IsTaxIncluded = (?) , RM_AddOrphanLine = (?) , Convertquotation = (?) , C_Reject_Reason_ID = (?) , validuntil = TO_DATE(?) , Calculate_Promotions = (?) , Quotation_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Create_POLines = (?) , Delivery_Location_ID = (?) , IsSelfService = (?) , DropShip_Location_ID = (?) , IsDelivered = (?) , DropShip_BPartner_ID = (?) , DropShip_User_ID = (?) , IsSelected = (?) , Posted = (?) , PaymentRule = (?) , IsSOTrx = (?) , DeliveryRule = (?) , IsActive = (?) , SO_Res_Status = (?) , DatePrinted = TO_DATE(?) , Processed = (?) , IsInvoiced = (?) , IsPrinted = (?) , AD_Client_ID = (?) , DateAcct = TO_DATE(?) , InvoiceRule = (?) , Processing = (?) , C_Order_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_DocTypeTarget_ID = (?) , Generatetemplate = (?) , DocumentNo = (?) , FIN_Payment_Priority_ID = (?) , C_Return_Reason_ID = (?) , DateOrdered = TO_DATE(?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , M_Warehouse_ID = (?) , RM_PickFromShipment = (?) , DatePromised = TO_DATE(?) , FIN_Paymentmethod_ID = (?) , RM_ReceiveMaterials = (?) , C_PaymentTerm_ID = (?) , RM_CreateInvoice = (?) , M_PriceList_ID = (?) , DocStatus = (?) , GrandTotal = TO_NUMBER(?) , TotalLines = TO_NUMBER(?) , C_Currency_ID = (?) , AD_User_ID = (?) , Deliverynotes = (?) , Description = (?) , POReference = (?) , SalesRep_ID = (?) , BillTo_ID = (?) , C_Incoterms_ID = (?) , Incotermsdescription = (?) , IsDiscountPrinted = (?) , C_DocType_ID = (?) , FreightAmt = TO_NUMBER(?) , DeliveryViaRule = (?) , C_Campaign_ID = (?) , M_Shipper_ID = (?) , PriorityRule = (?) , ChargeAmt = TO_NUMBER(?) , C_Charge_ID = (?) , C_Activity_ID = (?) , FreightCostRule = (?) , AD_OrgTrx_ID = (?) , DocAction = (?) , CopyFrom = (?) , CopyFromPO = (?) , IsTaxIncluded = (?) , RM_AddOrphanLine = (?) , Convertquotation = (?) , C_Reject_Reason_ID = (?) , validuntil = TO_DATE(?) , Calculate_Promotions = (?) , Quotation_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Create_POLines = (?) , Processed = (?) , Processing = (?) , InvoiceRule = (?) , SO_Res_Status = (?) , DateAcct = TO_DATE(?) , IsPrinted = (?) , IsInvoiced = (?) , IsDelivered = (?) , IsActive = (?) , AD_Client_ID = (?) , IsSelfService = (?) , C_Order_ID = (?) , DropShip_Location_ID = (?) , DropShip_BPartner_ID = (?) , DropShip_User_ID = (?) , IsSelected = (?) , Posted = (?) , PaymentRule = (?) , IsSOTrx = (?) , Delivery_Location_ID = (?) , DeliveryRule = (?) , DatePrinted = TO_DATE(?) , updated = now(), updatedby = ? " +
       "        WHERE C_Order.C_Order_ID = ? " +
       "        AND C_Order.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -1068,17 +1115,18 @@ Select for auxiliar field
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypetargetId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatetemplate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentPriorityId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cReturnReasonId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmPickfromshipment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, datepromised);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmReceivematerials);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentmethodId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmReceivematerials);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPaymenttermId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmCreateinvoice);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
@@ -1122,28 +1170,28 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createPolines);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, deliveryLocationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselfservice);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipLocationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicerule);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, soResStatus);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdelivered);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselfservice);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipUserId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselected);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, deliveryLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, deliveryrule);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, soResStatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicerule);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -1172,8 +1220,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Order " +
-      "        (AD_Org_ID, C_DocTypeTarget_ID, DocumentNo, Generatetemplate, DateOrdered, C_Return_Reason_ID, C_BPartner_ID, C_BPartner_Location_ID, M_Warehouse_ID, RM_PickFromShipment, DatePromised, RM_ReceiveMaterials, FIN_Paymentmethod_ID, C_PaymentTerm_ID, RM_CreateInvoice, M_PriceList_ID, DocStatus, GrandTotal, TotalLines, C_Currency_ID, AD_User_ID, Deliverynotes, Description, POReference, SalesRep_ID, BillTo_ID, C_Incoterms_ID, Incotermsdescription, IsDiscountPrinted, C_DocType_ID, FreightAmt, DeliveryViaRule, C_Campaign_ID, M_Shipper_ID, PriorityRule, ChargeAmt, C_Charge_ID, C_Activity_ID, FreightCostRule, AD_OrgTrx_ID, DocAction, CopyFrom, CopyFromPO, IsTaxIncluded, RM_AddOrphanLine, Convertquotation, C_Reject_Reason_ID, validuntil, Calculate_Promotions, Quotation_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Create_POLines, Delivery_Location_ID, IsSelfService, DropShip_Location_ID, IsDelivered, DropShip_BPartner_ID, DropShip_User_ID, IsSelected, Posted, PaymentRule, IsSOTrx, DeliveryRule, IsActive, SO_Res_Status, DatePrinted, Processed, IsInvoiced, IsPrinted, AD_Client_ID, DateAcct, InvoiceRule, Processing, C_Order_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, C_DocTypeTarget_ID, Generatetemplate, DocumentNo, FIN_Payment_Priority_ID, C_Return_Reason_ID, DateOrdered, C_BPartner_ID, C_BPartner_Location_ID, M_Warehouse_ID, RM_PickFromShipment, DatePromised, FIN_Paymentmethod_ID, RM_ReceiveMaterials, C_PaymentTerm_ID, RM_CreateInvoice, M_PriceList_ID, DocStatus, GrandTotal, TotalLines, C_Currency_ID, AD_User_ID, Deliverynotes, Description, POReference, SalesRep_ID, BillTo_ID, C_Incoterms_ID, Incotermsdescription, IsDiscountPrinted, C_DocType_ID, FreightAmt, DeliveryViaRule, C_Campaign_ID, M_Shipper_ID, PriorityRule, ChargeAmt, C_Charge_ID, C_Activity_ID, FreightCostRule, AD_OrgTrx_ID, DocAction, CopyFrom, CopyFromPO, IsTaxIncluded, RM_AddOrphanLine, Convertquotation, C_Reject_Reason_ID, validuntil, Calculate_Promotions, Quotation_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Create_POLines, Processed, Processing, InvoiceRule, SO_Res_Status, DateAcct, IsPrinted, IsInvoiced, IsDelivered, IsActive, AD_Client_ID, IsSelfService, C_Order_ID, DropShip_Location_ID, DropShip_BPartner_ID, DropShip_User_ID, IsSelected, Posted, PaymentRule, IsSOTrx, Delivery_Location_ID, DeliveryRule, DatePrinted, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1183,17 +1231,18 @@ Select for auxiliar field
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypetargetId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatetemplate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentPriorityId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cReturnReasonId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmPickfromshipment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, datepromised);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmReceivematerials);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentmethodId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmReceivematerials);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPaymenttermId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmCreateinvoice);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
@@ -1237,28 +1286,28 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createPolines);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, deliveryLocationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselfservice);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipLocationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicerule);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, soResStatus);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdelivered);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselfservice);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropshipUserId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselected);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, deliveryLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, deliveryrule);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, soResStatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicerule);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

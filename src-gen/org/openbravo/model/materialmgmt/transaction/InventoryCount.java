@@ -75,6 +75,7 @@ public class InventoryCount extends BaseOBObject implements Traceable, ClientEna
     public static final String PROPERTY_NDDIMENSION = "ndDimension";
     public static final String PROPERTY_COSTCENTER = "costCenter";
     public static final String PROPERTY_ASSET = "asset";
+    public static final String PROPERTY_COINVENTARIO = "coInventario";
     public static final String PROPERTY_COSTINGRULEINITCLOSEINVENTORYLIST = "costingRuleInitCloseInventoryList";
     public static final String PROPERTY_COSTINGRULEINITINITINVENTORYLIST = "costingRuleInitInitInventoryList";
     public static final String PROPERTY_DATAIMPORTINVENTORYLIST = "dataImportInventoryList";
@@ -86,6 +87,7 @@ public class InventoryCount extends BaseOBObject implements Traceable, ClientEna
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_UPDATEQUANTITIES, false);
         setDefaultValue(PROPERTY_GENERATELIST, false);
+        setDefaultValue(PROPERTY_COINVENTARIO, false);
         setDefaultValue(PROPERTY_COSTINGRULEINITCLOSEINVENTORYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_COSTINGRULEINITINITINVENTORYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVENTORYLIST, new ArrayList<Object>());
@@ -295,6 +297,14 @@ public class InventoryCount extends BaseOBObject implements Traceable, ClientEna
 
     public void setAsset(Asset asset) {
         set(PROPERTY_ASSET, asset);
+    }
+
+    public Boolean isCoInventario() {
+        return (Boolean) get(PROPERTY_COINVENTARIO);
+    }
+
+    public void setCoInventario(Boolean coInventario) {
+        set(PROPERTY_COINVENTARIO, coInventario);
     }
 
     @SuppressWarnings("unchecked")

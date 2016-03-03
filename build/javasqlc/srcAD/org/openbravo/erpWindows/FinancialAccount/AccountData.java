@@ -42,6 +42,9 @@ static Logger log4j = Logger.getLogger(AccountData.class);
   public String initialbalance;
   public String finMatchingAlgorithmId;
   public String finMatchingAlgorithmIdr;
+  public String emCoNumeroChequeDesde;
+  public String emCoNumeroChequeHasta;
+  public String emCoNumeroChequeAhora;
   public String genericaccountno;
   public String iban;
   public String swiftcode;
@@ -57,12 +60,16 @@ static Logger log4j = Logger.getLogger(AccountData.class);
   public String emAprmMatchtransactions;
   public String emAprmReconcile;
   public String emAprmAddtransactions;
+  public String emReAddtransactions;
+  public String emDpAddtransactions;
   public String codebank;
   public String codebranch;
   public String bankDigitcontrol;
   public String accountDigitcontrol;
   public String codeaccount;
   public String accountno;
+  public String emAtecdpAddtrs;
+  public String emAtecdpReconcile;
   public String adClientId;
   public String routingno;
   public String finFinancialAccountId;
@@ -127,6 +134,12 @@ static Logger log4j = Logger.getLogger(AccountData.class);
       return finMatchingAlgorithmId;
     else if (fieldName.equalsIgnoreCase("fin_matching_algorithm_idr") || fieldName.equals("finMatchingAlgorithmIdr"))
       return finMatchingAlgorithmIdr;
+    else if (fieldName.equalsIgnoreCase("em_co_numero_cheque_desde") || fieldName.equals("emCoNumeroChequeDesde"))
+      return emCoNumeroChequeDesde;
+    else if (fieldName.equalsIgnoreCase("em_co_numero_cheque_hasta") || fieldName.equals("emCoNumeroChequeHasta"))
+      return emCoNumeroChequeHasta;
+    else if (fieldName.equalsIgnoreCase("em_co_numero_cheque_ahora") || fieldName.equals("emCoNumeroChequeAhora"))
+      return emCoNumeroChequeAhora;
     else if (fieldName.equalsIgnoreCase("genericaccountno"))
       return genericaccountno;
     else if (fieldName.equalsIgnoreCase("iban"))
@@ -157,6 +170,10 @@ static Logger log4j = Logger.getLogger(AccountData.class);
       return emAprmReconcile;
     else if (fieldName.equalsIgnoreCase("em_aprm_addtransactions") || fieldName.equals("emAprmAddtransactions"))
       return emAprmAddtransactions;
+    else if (fieldName.equalsIgnoreCase("em_re_addtransactions") || fieldName.equals("emReAddtransactions"))
+      return emReAddtransactions;
+    else if (fieldName.equalsIgnoreCase("em_dp_addtransactions") || fieldName.equals("emDpAddtransactions"))
+      return emDpAddtransactions;
     else if (fieldName.equalsIgnoreCase("codebank"))
       return codebank;
     else if (fieldName.equalsIgnoreCase("codebranch"))
@@ -169,6 +186,10 @@ static Logger log4j = Logger.getLogger(AccountData.class);
       return codeaccount;
     else if (fieldName.equalsIgnoreCase("accountno"))
       return accountno;
+    else if (fieldName.equalsIgnoreCase("em_atecdp_addtrs") || fieldName.equals("emAtecdpAddtrs"))
+      return emAtecdpAddtrs;
+    else if (fieldName.equalsIgnoreCase("em_atecdp_reconcile") || fieldName.equals("emAtecdpReconcile"))
+      return emAtecdpReconcile;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("routingno"))
@@ -223,7 +244,7 @@ Select for edit
       "(CASE WHEN FIN_Financial_Account.Type IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS TypeR, " +
       "FIN_Financial_Account.Description, " +
       "FIN_Financial_Account.C_Location_ID, " +
-      "(CASE WHEN FIN_Financial_Account.C_Location_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Address1), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Address2), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Postal), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.City), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL5.Name IS NULL THEN TO_CHAR(table5.Name) ELSE TO_CHAR(tableTRL5.Name) END)), ''))),'') ) END) AS C_Location_IDR, " +
+      "(CASE WHEN FIN_Financial_Account.C_Location_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Address1), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Address2), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Postal), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.City), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL6.Name IS NULL THEN TO_CHAR(table6.Name) ELSE TO_CHAR(tableTRL6.Name) END)), ''))),'') ) END) AS C_Location_IDR, " +
       "FIN_Financial_Account.C_Bpartner_ID, " +
       "COALESCE(FIN_Financial_Account.Isactive, 'N') AS Isactive, " +
       "COALESCE(FIN_Financial_Account.Isdefault, 'N') AS Isdefault, " +
@@ -231,13 +252,16 @@ Select for edit
       "FIN_Financial_Account.Creditlimit, " +
       "FIN_Financial_Account.InitialBalance, " +
       "FIN_Financial_Account.FIN_Matching_Algorithm_ID, " +
-      "(CASE WHEN FIN_Financial_Account.FIN_Matching_Algorithm_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.Name), ''))),'') ) END) AS FIN_Matching_Algorithm_IDR, " +
+      "(CASE WHEN FIN_Financial_Account.FIN_Matching_Algorithm_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.Name), ''))),'') ) END) AS FIN_Matching_Algorithm_IDR, " +
+      "FIN_Financial_Account.EM_Co_Numero_Cheque_Desde, " +
+      "FIN_Financial_Account.EM_Co_Numero_Cheque_Hasta, " +
+      "FIN_Financial_Account.EM_Co_Numero_Cheque_Ahora, " +
       "FIN_Financial_Account.GenericAccountNo, " +
       "FIN_Financial_Account.Iban, " +
       "FIN_Financial_Account.Swiftcode, " +
       "FIN_Financial_Account.INE_Number, " +
       "FIN_Financial_Account.C_Country_ID, " +
-      "(CASE WHEN FIN_Financial_Account.C_Country_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL8.Name IS NULL THEN TO_CHAR(table8.Name) ELSE TO_CHAR(tableTRL8.Name) END)), ''))),'') ) END) AS C_Country_IDR, " +
+      "(CASE WHEN FIN_Financial_Account.C_Country_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL9.Name IS NULL THEN TO_CHAR(table9.Name) ELSE TO_CHAR(tableTRL9.Name) END)), ''))),'') ) END) AS C_Country_IDR, " +
       "FIN_Financial_Account.BankFormat, " +
       "(CASE WHEN FIN_Financial_Account.BankFormat IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list2.name),'') ) END) AS BankFormatR, " +
       "FIN_Financial_Account.Typewriteoff, " +
@@ -247,17 +271,21 @@ Select for edit
       "FIN_Financial_Account.EM_APRM_MatchTransactions, " +
       "FIN_Financial_Account.EM_APRM_Reconcile, " +
       "FIN_Financial_Account.EM_APRM_AddTransactions, " +
+      "FIN_Financial_Account.EM_Re_Addtransactions, " +
+      "FIN_Financial_Account.em_dp_addtransactions, " +
       "FIN_Financial_Account.Codebank, " +
       "FIN_Financial_Account.Codebranch, " +
       "FIN_Financial_Account.Bank_Digitcontrol, " +
       "FIN_Financial_Account.Account_Digitcontrol, " +
       "FIN_Financial_Account.Codeaccount, " +
       "FIN_Financial_Account.Accountno, " +
+      "FIN_Financial_Account.EM_Atecdp_Addtrs, " +
+      "FIN_Financial_Account.EM_Atecdp_Reconcile, " +
       "FIN_Financial_Account.AD_Client_ID, " +
       "FIN_Financial_Account.Routingno, " +
       "FIN_Financial_Account.Fin_Financial_Account_ID, " +
       "        ? AS LANGUAGE " +
-      "        FROM FIN_Financial_Account left join (select AD_Org_ID, Name from AD_Org) table1 on (FIN_Financial_Account.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (FIN_Financial_Account.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (FIN_Financial_Account.Type = list1.value and list1.ad_reference_id = 'A6BDFA712FF948CE903C4C463E832FC1' and list1.ad_language = ?)  left join (select C_Location_ID, Address1, Address2, Postal, City, C_Region_ID, C_Country_ID from C_Location) table3 on (FIN_Financial_Account.C_Location_ID = table3.C_Location_ID) left join (select C_Region_ID, Name from C_Region) table4 on (table3.C_Region_ID = table4.C_Region_ID) left join (select C_Country_ID, Name from C_Country) table5 on (table3.C_Country_ID = table5.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL5 on (table5.C_Country_ID = tableTRL5.C_Country_ID and tableTRL5.AD_Language = ?)  left join (select FIN_Matching_Algorithm_ID, Name from FIN_Matching_Algorithm) table7 on (FIN_Financial_Account.FIN_Matching_Algorithm_ID = table7.FIN_Matching_Algorithm_ID) left join (select C_Country_ID, Name from C_Country) table8 on (FIN_Financial_Account.C_Country_ID = table8.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL8 on (table8.C_Country_ID = tableTRL8.C_Country_ID and tableTRL8.AD_Language = ?)  left join ad_ref_list_v list2 on (FIN_Financial_Account.BankFormat = list2.value and list2.ad_reference_id = 'C123B7BF5B2C438D84D2E509734776B5' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (FIN_Financial_Account.Typewriteoff = list3.value and list3.ad_reference_id = 'C3531F85C14B4515AB7259F0D338050D' and list3.ad_language = ?) " +
+      "        FROM FIN_Financial_Account left join (select AD_Org_ID, Name from AD_Org) table1 on (FIN_Financial_Account.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (FIN_Financial_Account.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (FIN_Financial_Account.Type = list1.value and list1.ad_reference_id = 'A6BDFA712FF948CE903C4C463E832FC1' and list1.ad_language = ?)  left join (select C_Location_ID, Address1, Address2, Postal, City, C_City_ID, C_Region_ID, C_Country_ID from C_Location) table3 on (FIN_Financial_Account.C_Location_ID = table3.C_Location_ID) left join (select C_City_ID, Name from C_City) table4 on (table3.C_City_ID = table4.C_City_ID) left join (select C_Region_ID, Name from C_Region) table5 on (table3.C_Region_ID = table5.C_Region_ID) left join (select C_Country_ID, Name from C_Country) table6 on (table3.C_Country_ID = table6.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL6 on (table6.C_Country_ID = tableTRL6.C_Country_ID and tableTRL6.AD_Language = ?)  left join (select FIN_Matching_Algorithm_ID, Name from FIN_Matching_Algorithm) table8 on (FIN_Financial_Account.FIN_Matching_Algorithm_ID = table8.FIN_Matching_Algorithm_ID) left join (select C_Country_ID, Name from C_Country) table9 on (FIN_Financial_Account.C_Country_ID = table9.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL9 on (table9.C_Country_ID = tableTRL9.C_Country_ID and tableTRL9.AD_Language = ?)  left join ad_ref_list_v list2 on (FIN_Financial_Account.BankFormat = list2.value and list2.ad_reference_id = 'C123B7BF5B2C438D84D2E509734776B5' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (FIN_Financial_Account.Typewriteoff = list3.value and list3.ad_reference_id = 'C3531F85C14B4515AB7259F0D338050D' and list3.ad_language = ?) " +
       "        WHERE 2=2 " +
       "        AND 1=1 " +
       "        AND FIN_Financial_Account.Fin_Financial_Account_ID = ? " +
@@ -326,6 +354,9 @@ Select for edit
         objectAccountData.initialbalance = UtilSql.getValue(result, "initialbalance");
         objectAccountData.finMatchingAlgorithmId = UtilSql.getValue(result, "fin_matching_algorithm_id");
         objectAccountData.finMatchingAlgorithmIdr = UtilSql.getValue(result, "fin_matching_algorithm_idr");
+        objectAccountData.emCoNumeroChequeDesde = UtilSql.getValue(result, "em_co_numero_cheque_desde");
+        objectAccountData.emCoNumeroChequeHasta = UtilSql.getValue(result, "em_co_numero_cheque_hasta");
+        objectAccountData.emCoNumeroChequeAhora = UtilSql.getValue(result, "em_co_numero_cheque_ahora");
         objectAccountData.genericaccountno = UtilSql.getValue(result, "genericaccountno");
         objectAccountData.iban = UtilSql.getValue(result, "iban");
         objectAccountData.swiftcode = UtilSql.getValue(result, "swiftcode");
@@ -341,12 +372,16 @@ Select for edit
         objectAccountData.emAprmMatchtransactions = UtilSql.getValue(result, "em_aprm_matchtransactions");
         objectAccountData.emAprmReconcile = UtilSql.getValue(result, "em_aprm_reconcile");
         objectAccountData.emAprmAddtransactions = UtilSql.getValue(result, "em_aprm_addtransactions");
+        objectAccountData.emReAddtransactions = UtilSql.getValue(result, "em_re_addtransactions");
+        objectAccountData.emDpAddtransactions = UtilSql.getValue(result, "em_dp_addtransactions");
         objectAccountData.codebank = UtilSql.getValue(result, "codebank");
         objectAccountData.codebranch = UtilSql.getValue(result, "codebranch");
         objectAccountData.bankDigitcontrol = UtilSql.getValue(result, "bank_digitcontrol");
         objectAccountData.accountDigitcontrol = UtilSql.getValue(result, "account_digitcontrol");
         objectAccountData.codeaccount = UtilSql.getValue(result, "codeaccount");
         objectAccountData.accountno = UtilSql.getValue(result, "accountno");
+        objectAccountData.emAtecdpAddtrs = UtilSql.getValue(result, "em_atecdp_addtrs");
+        objectAccountData.emAtecdpReconcile = UtilSql.getValue(result, "em_atecdp_reconcile");
         objectAccountData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectAccountData.routingno = UtilSql.getValue(result, "routingno");
         objectAccountData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
@@ -384,7 +419,7 @@ Select for edit
 /**
 Create a registry
  */
-  public static AccountData[] set(String bankformat, String writeofflimit, String typewriteoff, String initialbalance, String cCountryId, String finFinancialAccountId, String adClientId, String adOrgId, String createdby, String createdbyr, String updatedby, String updatedbyr, String isactive, String cCurrencyId, String name, String description, String type, String cBpartnerId, String cLocationId, String cLocationIdr, String routingno, String swiftcode, String codebank, String codebranch, String bankDigitcontrol, String ineNumber, String accountDigitcontrol, String codeaccount, String accountno, String currentbalance, String creditlimit, String iban, String isdefault, String genericaccountno, String emAprmImportbankfile, String emAprmMatchtransactions, String emAprmReconcile, String emAprmAddtransactions, String finMatchingAlgorithmId)    throws ServletException {
+  public static AccountData[] set(String bankformat, String emCoNumeroChequeHasta, String emDpAddtransactions, String writeofflimit, String emAtecdpReconcile, String typewriteoff, String initialbalance, String emCoNumeroChequeAhora, String cCountryId, String finFinancialAccountId, String adClientId, String adOrgId, String createdby, String createdbyr, String updatedby, String updatedbyr, String isactive, String cCurrencyId, String name, String description, String type, String cBpartnerId, String cLocationId, String cLocationIdr, String routingno, String swiftcode, String codebank, String codebranch, String bankDigitcontrol, String ineNumber, String accountDigitcontrol, String codeaccount, String accountno, String currentbalance, String creditlimit, String iban, String isdefault, String emReAddtransactions, String genericaccountno, String emAprmImportbankfile, String emAprmMatchtransactions, String emAprmReconcile, String emAprmAddtransactions, String finMatchingAlgorithmId, String emAtecdpAddtrs, String emCoNumeroChequeDesde)    throws ServletException {
     AccountData objectAccountData[] = new AccountData[1];
     objectAccountData[0] = new AccountData();
     objectAccountData[0].created = "";
@@ -411,6 +446,9 @@ Create a registry
     objectAccountData[0].initialbalance = initialbalance;
     objectAccountData[0].finMatchingAlgorithmId = finMatchingAlgorithmId;
     objectAccountData[0].finMatchingAlgorithmIdr = "";
+    objectAccountData[0].emCoNumeroChequeDesde = emCoNumeroChequeDesde;
+    objectAccountData[0].emCoNumeroChequeHasta = emCoNumeroChequeHasta;
+    objectAccountData[0].emCoNumeroChequeAhora = emCoNumeroChequeAhora;
     objectAccountData[0].genericaccountno = genericaccountno;
     objectAccountData[0].iban = iban;
     objectAccountData[0].swiftcode = swiftcode;
@@ -426,12 +464,16 @@ Create a registry
     objectAccountData[0].emAprmMatchtransactions = emAprmMatchtransactions;
     objectAccountData[0].emAprmReconcile = emAprmReconcile;
     objectAccountData[0].emAprmAddtransactions = emAprmAddtransactions;
+    objectAccountData[0].emReAddtransactions = emReAddtransactions;
+    objectAccountData[0].emDpAddtransactions = emDpAddtransactions;
     objectAccountData[0].codebank = codebank;
     objectAccountData[0].codebranch = codebranch;
     objectAccountData[0].bankDigitcontrol = bankDigitcontrol;
     objectAccountData[0].accountDigitcontrol = accountDigitcontrol;
     objectAccountData[0].codeaccount = codeaccount;
     objectAccountData[0].accountno = accountno;
+    objectAccountData[0].emAtecdpAddtrs = emAtecdpAddtrs;
+    objectAccountData[0].emAtecdpReconcile = emAtecdpReconcile;
     objectAccountData[0].adClientId = adClientId;
     objectAccountData[0].routingno = routingno;
     objectAccountData[0].finFinancialAccountId = finFinancialAccountId;
@@ -559,7 +601,7 @@ Select for auxiliar field
   public static String selectDef828EE0AE80485FA1E040007F010067C7_2(ConnectionProvider connectionProvider, String paramLanguage, String C_Location_IDR)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
-      "        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Address1), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Address2), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Postal), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.City), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))), '') ) as C_Location_ID FROM C_Location left join (select C_Location_ID, Address1, Address2, Postal, City, C_Region_ID, C_Country_ID from C_Location) table2 on (C_Location.C_Location_ID = table2.C_Location_ID)left join (select C_Region_ID, Name from C_Region) table3 on (table2.C_Region_ID = table3.C_Region_ID)left join (select C_Country_ID, Name from C_Country) table4 on (table2.C_Country_ID = table4.C_Country_ID)left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL4 on (table4.C_Country_ID = tableTRL4.C_Country_ID and tableTRL4.AD_Language = ?)  WHERE C_Location.isActive='Y' AND C_Location.C_Location_ID = ?  ";
+      "        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Address1), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Address2), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Postal), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.City), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL5.Name IS NULL THEN TO_CHAR(table5.Name) ELSE TO_CHAR(tableTRL5.Name) END)), ''))), '') ) as C_Location_ID FROM C_Location left join (select C_Location_ID, Address1, Address2, Postal, City, C_City_ID, C_Region_ID, C_Country_ID from C_Location) table2 on (C_Location.C_Location_ID = table2.C_Location_ID)left join (select C_City_ID, Name from C_City) table3 on (table2.C_City_ID = table3.C_City_ID)left join (select C_Region_ID, Name from C_Region) table4 on (table2.C_Region_ID = table4.C_Region_ID)left join (select C_Country_ID, Name from C_Country) table5 on (table2.C_Country_ID = table5.C_Country_ID)left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL5 on (table5.C_Country_ID = tableTRL5.C_Country_ID and tableTRL5.AD_Language = ?)  WHERE C_Location.isActive='Y' AND C_Location.C_Location_ID = ?  ";
 
     ResultSet result;
     String strReturn = "";
@@ -596,7 +638,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Financial_Account" +
-      "        SET AD_Org_ID = (?) , Name = (?) , C_Currency_ID = (?) , Type = (?) , Description = (?) , C_Location_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Isdefault = (?) , Currentbalance = TO_NUMBER(?) , Creditlimit = TO_NUMBER(?) , InitialBalance = TO_NUMBER(?) , FIN_Matching_Algorithm_ID = (?) , GenericAccountNo = (?) , Iban = (?) , Swiftcode = (?) , INE_Number = (?) , C_Country_ID = (?) , BankFormat = (?) , Typewriteoff = (?) , Writeofflimit = TO_NUMBER(?) , EM_APRM_ImportBankFile = (?) , EM_APRM_MatchTransactions = (?) , EM_APRM_Reconcile = (?) , EM_APRM_AddTransactions = (?) , Codebank = (?) , Codebranch = (?) , Bank_Digitcontrol = (?) , Account_Digitcontrol = (?) , Codeaccount = (?) , Accountno = (?) , Routingno = (?) , AD_Client_ID = (?) , Fin_Financial_Account_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , C_Currency_ID = (?) , Type = (?) , Description = (?) , C_Location_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Isdefault = (?) , Currentbalance = TO_NUMBER(?) , Creditlimit = TO_NUMBER(?) , InitialBalance = TO_NUMBER(?) , FIN_Matching_Algorithm_ID = (?) , EM_Co_Numero_Cheque_Desde = TO_NUMBER(?) , EM_Co_Numero_Cheque_Hasta = TO_NUMBER(?) , EM_Co_Numero_Cheque_Ahora = TO_NUMBER(?) , GenericAccountNo = (?) , Iban = (?) , Swiftcode = (?) , INE_Number = (?) , C_Country_ID = (?) , BankFormat = (?) , Typewriteoff = (?) , Writeofflimit = TO_NUMBER(?) , EM_APRM_ImportBankFile = (?) , EM_APRM_MatchTransactions = (?) , EM_APRM_Reconcile = (?) , EM_APRM_AddTransactions = (?) , EM_Re_Addtransactions = (?) , em_dp_addtransactions = (?) , Codebank = (?) , Codebranch = (?) , Bank_Digitcontrol = (?) , Account_Digitcontrol = (?) , Codeaccount = (?) , Accountno = (?) , EM_Atecdp_Addtrs = (?) , EM_Atecdp_Reconcile = (?) , AD_Client_ID = (?) , Routingno = (?) , Fin_Financial_Account_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Financial_Account.Fin_Financial_Account_ID = ? " +
       "        AND FIN_Financial_Account.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -626,6 +668,9 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, creditlimit);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, initialbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finMatchingAlgorithmId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNumeroChequeDesde);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNumeroChequeHasta);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNumeroChequeAhora);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, genericaccountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, iban);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, swiftcode);
@@ -638,14 +683,18 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmMatchtransactions);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmReconcile);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmAddtransactions);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReAddtransactions);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emDpAddtransactions);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codebank);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codebranch);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bankDigitcontrol);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountDigitcontrol);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codeaccount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpAddtrs);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpReconcile);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
@@ -675,8 +724,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Financial_Account " +
-      "        (AD_Org_ID, Name, C_Currency_ID, Type, Description, C_Location_ID, C_Bpartner_ID, Isactive, Isdefault, Currentbalance, Creditlimit, InitialBalance, FIN_Matching_Algorithm_ID, GenericAccountNo, Iban, Swiftcode, INE_Number, C_Country_ID, BankFormat, Typewriteoff, Writeofflimit, EM_APRM_ImportBankFile, EM_APRM_MatchTransactions, EM_APRM_Reconcile, EM_APRM_AddTransactions, Codebank, Codebranch, Bank_Digitcontrol, Account_Digitcontrol, Codeaccount, Accountno, AD_Client_ID, Routingno, Fin_Financial_Account_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, Name, C_Currency_ID, Type, Description, C_Location_ID, C_Bpartner_ID, Isactive, Isdefault, Currentbalance, Creditlimit, InitialBalance, FIN_Matching_Algorithm_ID, EM_Co_Numero_Cheque_Desde, EM_Co_Numero_Cheque_Hasta, EM_Co_Numero_Cheque_Ahora, GenericAccountNo, Iban, Swiftcode, INE_Number, C_Country_ID, BankFormat, Typewriteoff, Writeofflimit, EM_APRM_ImportBankFile, EM_APRM_MatchTransactions, EM_APRM_Reconcile, EM_APRM_AddTransactions, EM_Re_Addtransactions, em_dp_addtransactions, Codebank, Codebranch, Bank_Digitcontrol, Account_Digitcontrol, Codeaccount, Accountno, EM_Atecdp_Addtrs, EM_Atecdp_Reconcile, AD_Client_ID, Routingno, Fin_Financial_Account_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -697,6 +746,9 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, creditlimit);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, initialbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finMatchingAlgorithmId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNumeroChequeDesde);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNumeroChequeHasta);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNumeroChequeAhora);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, genericaccountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, iban);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, swiftcode);
@@ -709,12 +761,16 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmMatchtransactions);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmReconcile);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmAddtransactions);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReAddtransactions);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emDpAddtransactions);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codebank);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codebranch);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bankDigitcontrol);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountDigitcontrol);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, codeaccount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpAddtrs);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpReconcile);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);

@@ -57,6 +57,7 @@ public class ProductPrice extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_STANDARDPRICE = "standardPrice";
     public static final String PROPERTY_PRICELIMIT = "priceLimit";
     public static final String PROPERTY_COST = "cost";
+    public static final String PROPERTY_RENOMBREPRODUCTO = "reNombreproducto";
     public static final String PROPERTY_ALGORITHM = "algorithm";
     public static final String PROPERTY_PRODUCTBYPRICEANDWAREHOUSELIST = "productByPriceAndWarehouseList";
 
@@ -182,6 +183,14 @@ public class ProductPrice extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setCost(BigDecimal cost) {
         set(PROPERTY_COST, cost);
+    }
+
+    public String getReNombreproducto() {
+        return (String) get(PROPERTY_RENOMBREPRODUCTO);
+    }
+
+    public void setReNombreproducto(String reNombreproducto) {
+        set(PROPERTY_RENOMBREPRODUCTO, reNombreproducto);
     }
 
     public String getAlgorithm() {

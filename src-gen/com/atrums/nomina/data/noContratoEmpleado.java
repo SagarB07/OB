@@ -18,6 +18,7 @@
 */
 package com.atrums.nomina.data;
 
+import com.atrums.centrocostos.data.ccoCostosNomina;
 import com.atrums.nomina.rrhh.data.AtnorhCargo;
 
 import java.math.BigDecimal;
@@ -81,6 +82,7 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_NEVACACIONRES = "neVacacionRes";
     public static final String PROPERTY_NEVACACIONTOM = "neVacacionTom";
     public static final String PROPERTY_NOPERMISOLIST = "noPermisoList";
+    public static final String PROPERTY_CCOCOSTOSNOMINALIST = "ccoCostosNominaList";
     public static final String PROPERTY_NOVACACIONLIST = "noVacacionList";
 
     public noContratoEmpleado() {
@@ -90,8 +92,10 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_IMPUESTOASUMIDO, false);
         setDefaultValue(PROPERTY_APLICAUTILIDAD, true);
         setDefaultValue(PROPERTY_NEISJORNADAPARCIAL, false);
+        setDefaultValue(PROPERTY_NEREGION, "1");
         setDefaultValue(PROPERTY_NESISSALNET, "1");
         setDefaultValue(PROPERTY_NOPERMISOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOCOSTOSNOMINALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOVACACIONLIST, new ArrayList<Object>());
     }
 
@@ -363,6 +367,15 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
 
     public void setNoPermisoList(List<NoPermiso> noPermisoList) {
         set(PROPERTY_NOPERMISOLIST, noPermisoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<ccoCostosNomina> getCcoCostosNominaList() {
+      return (List<ccoCostosNomina>) get(PROPERTY_CCOCOSTOSNOMINALIST);
+    }
+
+    public void setCcoCostosNominaList(List<ccoCostosNomina> ccoCostosNominaList) {
+        set(PROPERTY_CCOCOSTOSNOMINALIST, ccoCostosNominaList);
     }
 
     @SuppressWarnings("unchecked")

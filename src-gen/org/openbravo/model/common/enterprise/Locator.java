@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.common.enterprise;
 
+import com.atrums.aserlaco.venta.data.asvPedidoDetalle;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -109,6 +111,7 @@ public class Locator extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_RETURNMATERIALSHIPMENTPICKEDITLIST = "returnMaterialShipmentPickEditList";
     public static final String PROPERTY_TRANSACTIONVLIST = "transactionVList";
     public static final String PROPERTY_WAREHOUSEMRETURNLOCATORIDLIST = "warehouseMReturnlocatorIDList";
+    public static final String PROPERTY_ASVPEDIDODETALLELIST = "asvPedidoDetalleList";
 
     public Locator() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -143,6 +146,7 @@ public class Locator extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_RETURNMATERIALSHIPMENTPICKEDITLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSEMRETURNLOCATORIDLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ASVPEDIDODETALLELIST, new ArrayList<Object>());
     }
 
     @Override
@@ -537,6 +541,15 @@ public class Locator extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setWarehouseMReturnlocatorIDList(List<Warehouse> warehouseMReturnlocatorIDList) {
         set(PROPERTY_WAREHOUSEMRETURNLOCATORIDLIST, warehouseMReturnlocatorIDList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<asvPedidoDetalle> getAsvPedidoDetalleList() {
+      return (List<asvPedidoDetalle>) get(PROPERTY_ASVPEDIDODETALLELIST);
+    }
+
+    public void setAsvPedidoDetalleList(List<asvPedidoDetalle> asvPedidoDetalleList) {
+        set(PROPERTY_ASVPEDIDODETALLELIST, asvPedidoDetalleList);
     }
 
 }

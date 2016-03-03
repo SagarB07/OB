@@ -18,6 +18,13 @@
 */
 package org.openbravo.model.common.businesspartner;
 
+import com.atrums.activos.data.atecacActivoEmp;
+import com.atrums.aserlaco.venta.data.asvPedidoInventario;
+import com.atrums.contabilidad.data.BpRetencionVenta;
+import com.atrums.contabilidad.data.CO_BpRetencionCompra;
+import com.atrums.contabilidad.data.CO_Retencion_Compra;
+import com.atrums.contabilidad.data.CoRetencionVentaView;
+import com.atrums.depositos.data.DP_FinaccTransactionV;
 import com.atrums.nomina.data.NO_Registro_Hora_Extra;
 import com.atrums.nomina.data.NoEmpleadoIngresoEgreso;
 import com.atrums.nomina.data.NoPermiso;
@@ -64,6 +71,8 @@ import org.openbravo.model.common.bank.BankAccount;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.common.enterprise.OrganizationInformation;
 import org.openbravo.model.common.enterprise.WarehouseShipper;
+import org.openbravo.model.common.geography.City;
+import org.openbravo.model.common.geography.Country;
 import org.openbravo.model.common.hcm.SalaryCategory;
 import org.openbravo.model.common.interaction.EmailInteraction;
 import org.openbravo.model.common.invoice.InvoiceLine;
@@ -229,6 +238,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_POFINANCIALACCOUNT = "pOFinancialAccount";
     public static final String PROPERTY_CUSTOMERBLOCKING = "customerBlocking";
     public static final String PROPERTY_VENDORBLOCKING = "vendorBlocking";
+    public static final String PROPERTY_COTIPOCONTRIB = "coTipocontrib";
     public static final String PROPERTY_PAYMENTIN = "paymentIn";
     public static final String PROPERTY_NOESTADOCIVIL = "noEstadocivil";
     public static final String PROPERTY_PAYMENTOUT = "paymentOut";
@@ -243,8 +253,29 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_GOODSRECEIPT = "goodsReceipt";
     public static final String PROPERTY_CASHVAT = "cashVAT";
     public static final String PROPERTY_NOMOTIVOSALIDA = "noMotivoSalida";
+    public static final String PROPERTY_COEMAIL = "coEmail";
+    public static final String PROPERTY_CONIVEDU = "coNivEdu";
     public static final String PROPERTY_NOISDISCAPACITADO = "noIsdiscapacitado";
+    public static final String PROPERTY_COVIVIENDA = "coVivienda";
     public static final String PROPERTY_NOISTERCERAEDAD = "noIsterceraEdad";
+    public static final String PROPERTY_COANIOSRES = "coAniosRes";
+    public static final String PROPERTY_COMESESRES = "coMesesRes";
+    public static final String PROPERTY_COTOTALMESES = "coTotalMeses";
+    public static final String PROPERTY_COFECHANAC = "coFechanac";
+    public static final String PROPERTY_COCIUDADNAC = "coCiudadnac";
+    public static final String PROPERTY_CONACIONALIDAD = "coNacionalidad";
+    public static final String PROPERTY_CONOMBRES = "coNombres";
+    public static final String PROPERTY_COAPELLIDOS = "coApellidos";
+    public static final String PROPERTY_COCOMTARJCRED = "coComTarjCred";
+    public static final String PROPERTY_CONATURALJURIDICO = "coNaturalJuridico";
+    public static final String PROPERTY_COBPFECVENCTAUTFCSRI = "coBpFecVenctAutFcSri";
+    public static final String PROPERTY_COBPFECVENCTAUTRTSRI = "coBpFecVenctAutRtSri";
+    public static final String PROPERTY_COBPNROAUTFCSRI = "coBpNroAutFcSri";
+    public static final String PROPERTY_COBPNROAUTRTSRI = "coBpNroAutRtSri";
+    public static final String PROPERTY_COBPNROESTAB = "coBpNroEstab";
+    public static final String PROPERTY_COBPPUNTOEMISION = "coBpPuntoEmision";
+    public static final String PROPERTY_COTIPOIDENTIFICACION = "cOTipoIdentificacion";
+    public static final String PROPERTY_COBCALIFICACION = "cobCalificacion";
     public static final String PROPERTY_NECACCTSCHEMA = "neCAcctschema";
     public static final String PROPERTY_NEEDAD = "neEdad";
     public static final String PROPERTY_NENUMCARDISCAPACITADO = "neNumCarDiscapacitado";
@@ -268,9 +299,13 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_BUSINESSPARTNERLOCATIONLIST = "businessPartnerLocationList";
     public static final String PROPERTY_BUSINESSPARTNERPRODUCTTEMPLATELIST = "businessPartnerProductTemplateList";
     public static final String PROPERTY_BUSINESSPARTNERWITHHOLDINGLIST = "businessPartnerWithholdingList";
+    public static final String PROPERTY_BPRETENCIONVENTALIST = "bPRETENCIONVENTAList";
+    public static final String PROPERTY_BPRETENCIONCOMPRALIST = "bpRetencionCompraList";
+    public static final String PROPERTY_RETENCIONCOMPRALIST = "retencionCompraList";
     public static final String PROPERTY_INVOICETAXCASHVATVLIST = "invoiceTaxCashVATVList";
     public static final String PROPERTY_CLIENTINFORMATIONTEMPLATEBPARTNERLIST = "clientInformationTemplateBPartnerList";
     public static final String PROPERTY_CUSTOMERACCOUNTSLIST = "customerAccountsList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_DATAIMPORTBANKSTATEMENTLIST = "dataImportBankStatementList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTBUSINESSPARTNERLIST = "dataImportBusinessPartnerList";
@@ -358,7 +393,11 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_TRANSACTIONVLIST = "transactionVList";
     public static final String PROPERTY_VENDORACCOUNTSLIST = "vendorAccountsList";
     public static final String PROPERTY_WAREHOUSESHIPPERLIST = "warehouseShipperList";
+    public static final String PROPERTY_ASVPEDIDOINVENTARIOLIST = "asvPedidoInventarioList";
+    public static final String PROPERTY_ATECACACTIVOEMPLIST = "atecacActivoEmpList";
     public static final String PROPERTY_ATRDEPCABECERARETENLINELIST = "atrdepCabeceraRetenLineList";
+    public static final String PROPERTY_VISTARETENCIONVENTASSALESREPIDLIST = "vistaRetencionVentasSalesrepIDList";
+    public static final String PROPERTY_VISTARETENCIONVENTASLIST = "vistaRetencionVentasList";
     public static final String PROPERTY_CARGAEMPLEADOLIST = "cargaEmpleadoList";
     public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_GASTOSEMPLEADOLIST = "gastosEmpleadoList";
@@ -416,9 +455,13 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_BUSINESSPARTNERLOCATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERPRODUCTTEMPLATELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERWITHHOLDINGLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_BPRETENCIONVENTALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_BPRETENCIONCOMPRALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONCOMPRALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICETAXCASHVATVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONTEMPLATEBPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CUSTOMERACCOUNTSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBANKSTATEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST, new ArrayList<Object>());
@@ -506,7 +549,11 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_TRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_VENDORACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSESHIPPERLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ASVPEDIDOINVENTARIOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATECACACTIVOEMPLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ATRDEPCABECERARETENLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_VISTARETENCIONVENTASSALESREPIDLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_VISTARETENCIONVENTASLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CARGAEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_GASTOSEMPLEADOLIST, new ArrayList<Object>());
@@ -1190,6 +1237,14 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_VENDORBLOCKING, vendorBlocking);
     }
 
+    public String getCoTipocontrib() {
+        return (String) get(PROPERTY_COTIPOCONTRIB);
+    }
+
+    public void setCoTipocontrib(String coTipocontrib) {
+        set(PROPERTY_COTIPOCONTRIB, coTipocontrib);
+    }
+
     public Boolean isPaymentIn() {
         return (Boolean) get(PROPERTY_PAYMENTIN);
     }
@@ -1302,6 +1357,22 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_NOMOTIVOSALIDA, noMotivoSalida);
     }
 
+    public String getCoEmail() {
+        return (String) get(PROPERTY_COEMAIL);
+    }
+
+    public void setCoEmail(String coEmail) {
+        set(PROPERTY_COEMAIL, coEmail);
+    }
+
+    public String getCoNivEdu() {
+        return (String) get(PROPERTY_CONIVEDU);
+    }
+
+    public void setCoNivEdu(String coNivEdu) {
+        set(PROPERTY_CONIVEDU, coNivEdu);
+    }
+
     public Boolean isNoIsdiscapacitado() {
         return (Boolean) get(PROPERTY_NOISDISCAPACITADO);
     }
@@ -1310,12 +1381,164 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_NOISDISCAPACITADO, noIsdiscapacitado);
     }
 
+    public String getCoVivienda() {
+        return (String) get(PROPERTY_COVIVIENDA);
+    }
+
+    public void setCoVivienda(String coVivienda) {
+        set(PROPERTY_COVIVIENDA, coVivienda);
+    }
+
     public Boolean isNoIsterceraEdad() {
         return (Boolean) get(PROPERTY_NOISTERCERAEDAD);
     }
 
     public void setNoIsterceraEdad(Boolean noIsterceraEdad) {
         set(PROPERTY_NOISTERCERAEDAD, noIsterceraEdad);
+    }
+
+    public Long getCoAniosRes() {
+        return (Long) get(PROPERTY_COANIOSRES);
+    }
+
+    public void setCoAniosRes(Long coAniosRes) {
+        set(PROPERTY_COANIOSRES, coAniosRes);
+    }
+
+    public Long getCoMesesRes() {
+        return (Long) get(PROPERTY_COMESESRES);
+    }
+
+    public void setCoMesesRes(Long coMesesRes) {
+        set(PROPERTY_COMESESRES, coMesesRes);
+    }
+
+    public Long getCoTotalMeses() {
+        return (Long) get(PROPERTY_COTOTALMESES);
+    }
+
+    public void setCoTotalMeses(Long coTotalMeses) {
+        set(PROPERTY_COTOTALMESES, coTotalMeses);
+    }
+
+    public Date getCoFechanac() {
+        return (Date) get(PROPERTY_COFECHANAC);
+    }
+
+    public void setCoFechanac(Date coFechanac) {
+        set(PROPERTY_COFECHANAC, coFechanac);
+    }
+
+    public City getCoCiudadnac() {
+        return (City) get(PROPERTY_COCIUDADNAC);
+    }
+
+    public void setCoCiudadnac(City coCiudadnac) {
+        set(PROPERTY_COCIUDADNAC, coCiudadnac);
+    }
+
+    public Country getCoNacionalidad() {
+        return (Country) get(PROPERTY_CONACIONALIDAD);
+    }
+
+    public void setCoNacionalidad(Country coNacionalidad) {
+        set(PROPERTY_CONACIONALIDAD, coNacionalidad);
+    }
+
+    public String getCoNombres() {
+        return (String) get(PROPERTY_CONOMBRES);
+    }
+
+    public void setCoNombres(String coNombres) {
+        set(PROPERTY_CONOMBRES, coNombres);
+    }
+
+    public String getCoApellidos() {
+        return (String) get(PROPERTY_COAPELLIDOS);
+    }
+
+    public void setCoApellidos(String coApellidos) {
+        set(PROPERTY_COAPELLIDOS, coApellidos);
+    }
+
+    public Long getCoComTarjCred() {
+        return (Long) get(PROPERTY_COCOMTARJCRED);
+    }
+
+    public void setCoComTarjCred(Long coComTarjCred) {
+        set(PROPERTY_COCOMTARJCRED, coComTarjCred);
+    }
+
+    public String getCoNaturalJuridico() {
+        return (String) get(PROPERTY_CONATURALJURIDICO);
+    }
+
+    public void setCoNaturalJuridico(String coNaturalJuridico) {
+        set(PROPERTY_CONATURALJURIDICO, coNaturalJuridico);
+    }
+
+    public Date getCoBpFecVenctAutFcSri() {
+        return (Date) get(PROPERTY_COBPFECVENCTAUTFCSRI);
+    }
+
+    public void setCoBpFecVenctAutFcSri(Date coBpFecVenctAutFcSri) {
+        set(PROPERTY_COBPFECVENCTAUTFCSRI, coBpFecVenctAutFcSri);
+    }
+
+    public Date getCoBpFecVenctAutRtSri() {
+        return (Date) get(PROPERTY_COBPFECVENCTAUTRTSRI);
+    }
+
+    public void setCoBpFecVenctAutRtSri(Date coBpFecVenctAutRtSri) {
+        set(PROPERTY_COBPFECVENCTAUTRTSRI, coBpFecVenctAutRtSri);
+    }
+
+    public String getCoBpNroAutFcSri() {
+        return (String) get(PROPERTY_COBPNROAUTFCSRI);
+    }
+
+    public void setCoBpNroAutFcSri(String coBpNroAutFcSri) {
+        set(PROPERTY_COBPNROAUTFCSRI, coBpNroAutFcSri);
+    }
+
+    public String getCoBpNroAutRtSri() {
+        return (String) get(PROPERTY_COBPNROAUTRTSRI);
+    }
+
+    public void setCoBpNroAutRtSri(String coBpNroAutRtSri) {
+        set(PROPERTY_COBPNROAUTRTSRI, coBpNroAutRtSri);
+    }
+
+    public String getCoBpNroEstab() {
+        return (String) get(PROPERTY_COBPNROESTAB);
+    }
+
+    public void setCoBpNroEstab(String coBpNroEstab) {
+        set(PROPERTY_COBPNROESTAB, coBpNroEstab);
+    }
+
+    public String getCoBpPuntoEmision() {
+        return (String) get(PROPERTY_COBPPUNTOEMISION);
+    }
+
+    public void setCoBpPuntoEmision(String coBpPuntoEmision) {
+        set(PROPERTY_COBPPUNTOEMISION, coBpPuntoEmision);
+    }
+
+    public String getCOTipoIdentificacion() {
+        return (String) get(PROPERTY_COTIPOIDENTIFICACION);
+    }
+
+    public void setCOTipoIdentificacion(String cOTipoIdentificacion) {
+        set(PROPERTY_COTIPOIDENTIFICACION, cOTipoIdentificacion);
+    }
+
+    public String getCobCalificacion() {
+        return (String) get(PROPERTY_COBCALIFICACION);
+    }
+
+    public void setCobCalificacion(String cobCalificacion) {
+        set(PROPERTY_COBCALIFICACION, cobCalificacion);
     }
 
     public AcctSchema getNeCAcctschema() {
@@ -1518,6 +1741,33 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     }
 
     @SuppressWarnings("unchecked")
+    public List<BpRetencionVenta> getBPRETENCIONVENTAList() {
+      return (List<BpRetencionVenta>) get(PROPERTY_BPRETENCIONVENTALIST);
+    }
+
+    public void setBPRETENCIONVENTAList(List<BpRetencionVenta> bPRETENCIONVENTAList) {
+        set(PROPERTY_BPRETENCIONVENTALIST, bPRETENCIONVENTAList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_BpRetencionCompra> getBpRetencionCompraList() {
+      return (List<CO_BpRetencionCompra>) get(PROPERTY_BPRETENCIONCOMPRALIST);
+    }
+
+    public void setBpRetencionCompraList(List<CO_BpRetencionCompra> bpRetencionCompraList) {
+        set(PROPERTY_BPRETENCIONCOMPRALIST, bpRetencionCompraList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Retencion_Compra> getRetencionCompraList() {
+      return (List<CO_Retencion_Compra>) get(PROPERTY_RETENCIONCOMPRALIST);
+    }
+
+    public void setRetencionCompraList(List<CO_Retencion_Compra> retencionCompraList) {
+        set(PROPERTY_RETENCIONCOMPRALIST, retencionCompraList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<InvoiceTaxCashVAT_V> getInvoiceTaxCashVATVList() {
       return (List<InvoiceTaxCashVAT_V>) get(PROPERTY_INVOICETAXCASHVATVLIST);
     }
@@ -1542,6 +1792,15 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setCustomerAccountsList(List<CustomerAccounts> customerAccountsList) {
         set(PROPERTY_CUSTOMERACCOUNTSLIST, customerAccountsList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")
@@ -2328,12 +2587,48 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     }
 
     @SuppressWarnings("unchecked")
+    public List<asvPedidoInventario> getAsvPedidoInventarioList() {
+      return (List<asvPedidoInventario>) get(PROPERTY_ASVPEDIDOINVENTARIOLIST);
+    }
+
+    public void setAsvPedidoInventarioList(List<asvPedidoInventario> asvPedidoInventarioList) {
+        set(PROPERTY_ASVPEDIDOINVENTARIOLIST, asvPedidoInventarioList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atecacActivoEmp> getAtecacActivoEmpList() {
+      return (List<atecacActivoEmp>) get(PROPERTY_ATECACACTIVOEMPLIST);
+    }
+
+    public void setAtecacActivoEmpList(List<atecacActivoEmp> atecacActivoEmpList) {
+        set(PROPERTY_ATECACACTIVOEMPLIST, atecacActivoEmpList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<atrdepCabeceraRetenLine> getAtrdepCabeceraRetenLineList() {
       return (List<atrdepCabeceraRetenLine>) get(PROPERTY_ATRDEPCABECERARETENLINELIST);
     }
 
     public void setAtrdepCabeceraRetenLineList(List<atrdepCabeceraRetenLine> atrdepCabeceraRetenLineList) {
         set(PROPERTY_ATRDEPCABECERARETENLINELIST, atrdepCabeceraRetenLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CoRetencionVentaView> getVistaRetencionVentasSalesrepIDList() {
+      return (List<CoRetencionVentaView>) get(PROPERTY_VISTARETENCIONVENTASSALESREPIDLIST);
+    }
+
+    public void setVistaRetencionVentasSalesrepIDList(List<CoRetencionVentaView> vistaRetencionVentasSalesrepIDList) {
+        set(PROPERTY_VISTARETENCIONVENTASSALESREPIDLIST, vistaRetencionVentasSalesrepIDList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CoRetencionVentaView> getVistaRetencionVentasList() {
+      return (List<CoRetencionVentaView>) get(PROPERTY_VISTARETENCIONVENTASLIST);
+    }
+
+    public void setVistaRetencionVentasList(List<CoRetencionVentaView> vistaRetencionVentasList) {
+        set(PROPERTY_VISTARETENCIONVENTASLIST, vistaRetencionVentasList);
     }
 
     @SuppressWarnings("unchecked")

@@ -97,6 +97,7 @@ public class TaxRate extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_BASEAMOUNT = "baseAmount";
     public static final String PROPERTY_TAXBASE = "taxBase";
     public static final String PROPERTY_DOCTAXAMOUNT = "docTaxAmount";
+    public static final String PROPERTY_ATECFETARTAX = "atecfeTartax";
     public static final String PROPERTY_ISCASHVAT = "isCashVAT";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
@@ -461,6 +462,14 @@ public class TaxRate extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setDocTaxAmount(String docTaxAmount) {
         set(PROPERTY_DOCTAXAMOUNT, docTaxAmount);
+    }
+
+    public String getAtecfeTartax() {
+        return (String) get(PROPERTY_ATECFETARTAX);
+    }
+
+    public void setAtecfeTartax(String atecfeTartax) {
+        set(PROPERTY_ATECFETARTAX, atecfeTartax);
     }
 
     public Boolean isCashVAT() {

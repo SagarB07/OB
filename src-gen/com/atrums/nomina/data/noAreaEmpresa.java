@@ -18,6 +18,8 @@
 */
 package com.atrums.nomina.data;
 
+import com.atrums.aserlaco.venta.data.asvPedidoInventario;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,7 @@ import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.common.businesspartner.BusinessPartner;
 import org.openbravo.model.common.enterprise.Organization;
+import org.openbravo.model.common.plm.Product;
 /**
  * Entity class for entity no_area_empresa (stored in table no_area_empresa).
  *
@@ -51,15 +54,21 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
     public static final String PROPERTY_UPDATEDBY = "updatedBy";
     public static final String PROPERTY_NOMBRE = "nombre";
     public static final String PROPERTY_DESCRIPCIN = "descripcin";
+    public static final String PROPERTY_ASVMOSTRAR = "asvMostrar";
     public static final String PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST = "businessPartnerEmNoAreaEmpresaIdList";
     public static final String PROPERTY_NOROLPAGOPROVISIONLIST = "noRolPagoProvisionList";
+    public static final String PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST = "productEmAsvAreaEmpresaIdList";
+    public static final String PROPERTY_ASVPEDIDOINVENTARIOLIST = "asvPedidoInventarioList";
     public static final String PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST = "noContratoEmpleadoEmNeAreaEmpresaIdList";
     public static final String PROPERTY_NOPAGOCABECERALIST = "noPagoCabeceraList";
 
     public noAreaEmpresa() {
         setDefaultValue(PROPERTY_ACTIVE, true);
+        setDefaultValue(PROPERTY_ASVMOSTRAR, false);
         setDefaultValue(PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ASVPEDIDOINVENTARIOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOPAGOCABECERALIST, new ArrayList<Object>());
     }
@@ -149,6 +158,14 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
         set(PROPERTY_DESCRIPCIN, descripcin);
     }
 
+    public Boolean isAsvMostrar() {
+        return (Boolean) get(PROPERTY_ASVMOSTRAR);
+    }
+
+    public void setAsvMostrar(Boolean asvMostrar) {
+        set(PROPERTY_ASVMOSTRAR, asvMostrar);
+    }
+
     @SuppressWarnings("unchecked")
     public List<BusinessPartner> getBusinessPartnerEmNoAreaEmpresaIdList() {
       return (List<BusinessPartner>) get(PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST);
@@ -165,6 +182,24 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
 
     public void setNoRolPagoProvisionList(List<noRolPagoProvision> noRolPagoProvisionList) {
         set(PROPERTY_NOROLPAGOPROVISIONLIST, noRolPagoProvisionList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Product> getProductEmAsvAreaEmpresaIdList() {
+      return (List<Product>) get(PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST);
+    }
+
+    public void setProductEmAsvAreaEmpresaIdList(List<Product> productEmAsvAreaEmpresaIdList) {
+        set(PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST, productEmAsvAreaEmpresaIdList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<asvPedidoInventario> getAsvPedidoInventarioList() {
+      return (List<asvPedidoInventario>) get(PROPERTY_ASVPEDIDOINVENTARIOLIST);
+    }
+
+    public void setAsvPedidoInventarioList(List<asvPedidoInventario> asvPedidoInventarioList) {
+        set(PROPERTY_ASVPEDIDOINVENTARIOLIST, asvPedidoInventarioList);
     }
 
     @SuppressWarnings("unchecked")

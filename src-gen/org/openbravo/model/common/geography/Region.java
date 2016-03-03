@@ -36,6 +36,7 @@ import org.openbravo.model.dataimport.Order;
 import org.openbravo.model.dataimport.Tax;
 import org.openbravo.model.financialmgmt.tax.TaxRate;
 import org.openbravo.model.financialmgmt.tax.TaxZone;
+import org.openbravo.model.sales.SalesRegion;
 import org.openbravo.model.shipping.ShippingCompanyFreight;
 /**
  * Entity class for entity Region (stored in table C_Region).
@@ -71,6 +72,7 @@ public class Region extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY_FINANCIALMGMTTAXZONEFROMREGIONLIST = "financialMgmtTaxZoneFromRegionList";
     public static final String PROPERTY_FINANCIALMGMTTAXZONEDESTINATIONREGIONLIST = "financialMgmtTaxZoneDestinationRegionList";
     public static final String PROPERTY_LOCATIONLIST = "locationList";
+    public static final String PROPERTY_SALESREGIONEMREREGIONIDLIST = "salesRegionEMReRegionIDList";
     public static final String PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTLIST = "shippingShippingCompanyFreightList";
     public static final String PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTDESTINATIONREGIONLIST = "shippingShippingCompanyFreightDestinationRegionList";
 
@@ -88,6 +90,7 @@ public class Region extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXZONEFROMREGIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXZONEDESTINATIONREGIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LOCATIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_SALESREGIONEMREREGIONIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTDESTINATIONREGIONLIST, new ArrayList<Object>());
     }
@@ -298,6 +301,15 @@ public class Region extends BaseOBObject implements Traceable, ClientEnabled, Or
 
     public void setLocationList(List<Location> locationList) {
         set(PROPERTY_LOCATIONLIST, locationList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<SalesRegion> getSalesRegionEMReRegionIDList() {
+      return (List<SalesRegion>) get(PROPERTY_SALESREGIONEMREREGIONIDLIST);
+    }
+
+    public void setSalesRegionEMReRegionIDList(List<SalesRegion> salesRegionEMReRegionIDList) {
+        set(PROPERTY_SALESREGIONEMREREGIONIDLIST, salesRegionEMReRegionIDList);
     }
 
     @SuppressWarnings("unchecked")

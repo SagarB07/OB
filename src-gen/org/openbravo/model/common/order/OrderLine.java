@@ -127,6 +127,7 @@ public class OrderLine extends BaseOBObject implements Traceable, ClientEnabled,
     public static final String PROPERTY_TAXABLEAMOUNT = "taxableAmount";
     public static final String PROPERTY_GOODSSHIPMENTLINE = "goodsShipmentLine";
     public static final String PROPERTY_RETURNREASON = "returnReason";
+    public static final String PROPERTY_REPARTIDAPRODUCTO = "rePartidaproducto";
     public static final String PROPERTY_GROSSUNITPRICE = "grossUnitPrice";
     public static final String PROPERTY_LINEGROSSAMOUNT = "lineGrossAmount";
     public static final String PROPERTY_GROSSLISTPRICE = "grossListPrice";
@@ -144,6 +145,7 @@ public class OrderLine extends BaseOBObject implements Traceable, ClientEnabled,
     public static final String PROPERTY_MANAGEPRERESERVATION = "managePrereservation";
     public static final String PROPERTY_EXPLODE = "explode";
     public static final String PROPERTY_BOMPARENT = "bOMParent";
+    public static final String PROPERTY_REVALUEPRODUCTO = "rEValueProducto";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
     public static final String PROPERTY_MRPPRODUCTIONRUNLINELIST = "mRPProductionRunLineList";
@@ -620,6 +622,14 @@ public class OrderLine extends BaseOBObject implements Traceable, ClientEnabled,
         set(PROPERTY_RETURNREASON, returnReason);
     }
 
+    public String getRePartidaproducto() {
+        return (String) get(PROPERTY_REPARTIDAPRODUCTO);
+    }
+
+    public void setRePartidaproducto(String rePartidaproducto) {
+        set(PROPERTY_REPARTIDAPRODUCTO, rePartidaproducto);
+    }
+
     public BigDecimal getGrossUnitPrice() {
         return (BigDecimal) get(PROPERTY_GROSSUNITPRICE);
     }
@@ -754,6 +764,14 @@ public class OrderLine extends BaseOBObject implements Traceable, ClientEnabled,
 
     public void setBOMParent(OrderLine bOMParent) {
         set(PROPERTY_BOMPARENT, bOMParent);
+    }
+
+    public String getREValueProducto() {
+        return (String) get(PROPERTY_REVALUEPRODUCTO);
+    }
+
+    public void setREValueProducto(String rEValueProducto) {
+        set(PROPERTY_REVALUEPRODUCTO, rEValueProducto);
     }
 
     @SuppressWarnings("unchecked")

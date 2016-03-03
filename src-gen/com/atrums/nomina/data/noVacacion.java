@@ -53,6 +53,7 @@ public class noVacacion extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_BUSINESSPARTNER = "businessPartner";
     public static final String PROPERTY_AO = "ao";
     public static final String PROPERTY_BONIFICACIONES = "bonificaciones";
+    public static final String PROPERTY_NEDOCSTATUS = "neDocstatus";
     public static final String PROPERTY_NEESTADO = "neEstado";
     public static final String PROPERTY_NEFECHAFIN = "neFechaFin";
     public static final String PROPERTY_NEFECHAINICIO = "neFechaInicio";
@@ -176,6 +177,14 @@ public class noVacacion extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setDrestantes(Long drestantes) {
         set(COMPUTED_COLUMN_DRESTANTES, drestantes);
+    }
+
+    public String getNeDocstatus() {
+        return (String) get(PROPERTY_NEDOCSTATUS);
+    }
+
+    public void setNeDocstatus(String neDocstatus) {
+        set(PROPERTY_NEDOCSTATUS, neDocstatus);
     }
 
     public String getNeEstado() {

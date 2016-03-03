@@ -13,8 +13,11 @@
         (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = M_Movement.UpdatedBy) as UpdatedByR,
         M_Movement.AD_Org_ID, 
 (CASE WHEN M_Movement.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
-M_Movement.Name, 
+M_Movement.EM_Co_Doctype_ID, 
+(CASE WHEN M_Movement.EM_Co_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS EM_Co_Doctype_IDR, 
 M_Movement.MovementDate, 
+M_Movement.DocumentNo, 
+M_Movement.Name, 
 M_Movement.Description, 
 M_Movement.Move_FromTo_Locator, 
 M_Movement.Processing, 
@@ -23,22 +26,20 @@ list1.name as Posted_BTN,
 COALESCE(M_Movement.IsActive, 'N') AS IsActive, 
 M_Movement.AD_OrgTrx_ID, 
 M_Movement.C_Project_ID, 
-(CASE WHEN M_Movement.C_Project_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Value), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS C_Project_IDR, 
 M_Movement.C_Costcenter_ID, 
 M_Movement.A_Asset_ID, 
 M_Movement.C_Activity_ID, 
-(CASE WHEN M_Movement.C_Activity_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS C_Activity_IDR, 
+(CASE WHEN M_Movement.C_Activity_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Activity_IDR, 
 M_Movement.C_Campaign_ID, 
-(CASE WHEN M_Movement.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Campaign_IDR, 
+(CASE WHEN M_Movement.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Name), ''))),'') ) END) AS C_Campaign_IDR, 
 M_Movement.User1_ID, 
 M_Movement.User2_ID, 
-M_Movement.AD_Client_ID, 
 M_Movement.M_Movement_ID, 
-M_Movement.DocumentNo, 
 COALESCE(M_Movement.Processed, 'N') AS Processed, 
+M_Movement.AD_Client_ID, 
  
         ? AS LANGUAGE 
-        FROM M_Movement left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Movement.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Movement.Posted = TO_CHAR(list1.value)) left join (select C_Project_ID, Value, Name from C_Project) table2 on (M_Movement.C_Project_ID = table2.C_Project_ID) left join (select C_Activity_ID, Name from C_Activity) table3 on (M_Movement.C_Activity_ID = table3.C_Activity_ID) left join (select C_Campaign_ID, Name from C_Campaign) table4 on (M_Movement.C_Campaign_ID = table4.C_Campaign_ID)
+        FROM M_Movement left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Movement.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (M_Movement.EM_Co_Doctype_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Movement.Posted = TO_CHAR(list1.value)) left join (select C_Activity_ID, Name from C_Activity) table4 on (M_Movement.C_Activity_ID = table4.C_Activity_ID) left join (select C_Campaign_ID, Name from C_Campaign) table5 on (M_Movement.C_Campaign_ID = table5.C_Campaign_ID)
         WHERE 2=2 
 
         AND 1=1 
@@ -50,6 +51,7 @@ COALESCE(M_Movement.Processed, 'N') AS Processed,
     <Parameter name="dateTimeFormat"></Parameter>
     
     <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
 <Parameter name="paramLanguage"/>
 
 
@@ -72,7 +74,7 @@ COALESCE(M_Movement.Processed, 'N') AS Processed,
       <SqlMethodComment>Create a registry</SqlMethodComment>
       <Sql></Sql>
 
-<Parameter name="mMovementId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="name"></Parameter><Parameter name="description"></Parameter><Parameter name="movementdate"></Parameter><Parameter name="processed"></Parameter><Parameter name="processing"></Parameter><Parameter name="aAssetId"></Parameter><Parameter name="posted"></Parameter><Parameter name="postedBtn"></Parameter><Parameter name="moveFromtoLocator"></Parameter><Parameter name="documentno"></Parameter><Parameter name="cActivityId"></Parameter><Parameter name="user2Id"></Parameter><Parameter name="user1Id"></Parameter><Parameter name="cProjectId"></Parameter><Parameter name="cProjectIdr"></Parameter><Parameter name="cCampaignId"></Parameter><Parameter name="adOrgtrxId"></Parameter><Parameter name="cCostcenterId"></Parameter>
+<Parameter name="mMovementId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="name"></Parameter><Parameter name="description"></Parameter><Parameter name="movementdate"></Parameter><Parameter name="processed"></Parameter><Parameter name="processing"></Parameter><Parameter name="aAssetId"></Parameter><Parameter name="posted"></Parameter><Parameter name="postedBtn"></Parameter><Parameter name="moveFromtoLocator"></Parameter><Parameter name="documentno"></Parameter><Parameter name="cActivityId"></Parameter><Parameter name="user2Id"></Parameter><Parameter name="user1Id"></Parameter><Parameter name="cProjectId"></Parameter><Parameter name="cCampaignId"></Parameter><Parameter name="adOrgtrxId"></Parameter><Parameter name="emCoDoctypeId"></Parameter><Parameter name="cCostcenterId"></Parameter>
    </SqlMethod>
 
 
@@ -94,14 +96,6 @@ COALESCE(M_Movement.Processed, 'N') AS Processed,
         SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as UpdatedBy FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
     ]]></Sql>
 <Parameter name="UpdatedByR"/>
-  </SqlMethod>
-
-   <SqlMethod name="selectDef9548_2" type="preparedStatement" return="String" default="">
-    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
-    <Sql><![CDATA[
-        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Value), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as C_Project_ID FROM C_Project left join (select C_Project_ID, Value, Name from C_Project) table2 on (C_Project.C_Project_ID = table2.C_Project_ID) WHERE C_Project.isActive='Y' AND C_Project.C_Project_ID = ?  
-    ]]></Sql>
-<Parameter name="C_Project_IDR"/>
   </SqlMethod>
 
 
@@ -132,13 +126,13 @@ COALESCE(M_Movement.Processed, 'N') AS Processed,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Movement
-        SET AD_Org_ID = (?) , Name = (?) , MovementDate = TO_DATE(?) , Description = (?) , Move_FromTo_Locator = (?) , Processing = (?) , Posted = (?) , IsActive = (?) , AD_OrgTrx_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , AD_Client_ID = (?) , M_Movement_ID = (?) , DocumentNo = (?) , Processed = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , EM_Co_Doctype_ID = (?) , MovementDate = TO_DATE(?) , DocumentNo = (?) , Name = (?) , Description = (?) , Move_FromTo_Locator = (?) , Processing = (?) , Posted = (?) , IsActive = (?) , AD_OrgTrx_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Movement_ID = (?) , Processed = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE M_Movement.M_Movement_ID = ? 
         
         AND M_Movement.AD_Client_ID IN ('1') 
         AND M_Movement.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="description"></Parameter> <Parameter name="moveFromtoLocator"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mMovementId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="processed"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="emCoDoctypeId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="moveFromtoLocator"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mMovementId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mMovementId"></Parameter>
     
@@ -150,10 +144,10 @@ COALESCE(M_Movement.Processed, 'N') AS Processed,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Movement 
-        (AD_Org_ID, Name, MovementDate, Description, Move_FromTo_Locator, Processing, Posted, IsActive, AD_OrgTrx_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, AD_Client_ID, M_Movement_ID, DocumentNo, Processed, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, EM_Co_Doctype_ID, MovementDate, DocumentNo, Name, Description, Move_FromTo_Locator, Processing, Posted, IsActive, AD_OrgTrx_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Movement_ID, Processed, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="description"></Parameter> <Parameter name="moveFromtoLocator"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mMovementId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="processed"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="emCoDoctypeId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="moveFromtoLocator"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mMovementId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -18,8 +18,12 @@
 */
 package com.atrums.nomina.data;
 
+import com.atrums.centrocostos.data.cco_registra_costos;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.openbravo.base.structure.ActiveEnabled;
 import org.openbravo.base.structure.BaseOBObject;
@@ -62,6 +66,7 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_PROCESSNOW = "processNow";
     public static final String PROPERTY_POSTED = "posted";
     public static final String PROPERTY_PAYMENT = "payment";
+    public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
     public noRolProvisionLineMes() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -73,6 +78,7 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_POSTED, "N");
         setDefaultValue(PROPERTY_PAYMENT, false);
+        setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -246,6 +252,15 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
 
     public void setPayment(Boolean payment) {
         set(PROPERTY_PAYMENT, payment);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<cco_registra_costos> getCcoRegistraCostosList() {
+      return (List<cco_registra_costos>) get(PROPERTY_CCOREGISTRACOSTOSLIST);
+    }
+
+    public void setCcoRegistraCostosList(List<cco_registra_costos> ccoRegistraCostosList) {
+        set(PROPERTY_CCOREGISTRACOSTOSLIST, ccoRegistraCostosList);
     }
 
 }

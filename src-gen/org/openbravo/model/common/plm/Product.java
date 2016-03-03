@@ -18,6 +18,12 @@
 */
 package org.openbravo.model.common.plm;
 
+import com.atrums.aserlaco.venta.data.asvPedidoDetalle;
+import com.atrums.compras.buffer.data.couDetalleBuffer;
+import com.atrums.depositos.data.DP_FinaccTransactionV;
+import com.atrums.importaciones.imp_datos_gasto;
+import com.atrums.nomina.data.noAreaEmpresa;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -193,8 +199,10 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_QUANTITYTYPE = "quantityType";
     public static final String PROPERTY_SAFETYSTOCK = "safetyStock";
     public static final String PROPERTY_USEATTRIBUTESETVALUEAS = "useAttributeSetValueAs";
+    public static final String PROPERTY_RECODIGOALTERNO = "reCodigoalterno";
     public static final String PROPERTY_ISQUANTITYVARIABLE = "isquantityvariable";
     public static final String PROPERTY_DEFERREDREVENUE = "deferredRevenue";
+    public static final String PROPERTY_REPARTIDAARANCELARIA = "rePartidaarancelaria";
     public static final String PROPERTY_REVENUEPLANTYPE = "revenuePlanType";
     public static final String PROPERTY_PERIODNUMBER = "periodNumber";
     public static final String PROPERTY_ISDEFERREDEXPENSE = "isdeferredexpense";
@@ -210,7 +218,10 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_CREATEVARIANTS = "createVariants";
     public static final String PROPERTY_CHARACTERISTICDESCRIPTION = "characteristicDescription";
     public static final String PROPERTY_UPDATEINVARIANTS = "updateInvariants";
+    public static final String PROPERTY_ASVPROENVLOC = "asvProEnvLoc";
     public static final String PROPERTY_MANAGEVARIANTS = "manageVariants";
+    public static final String PROPERTY_ASVAREAEMPRESA = "asvAreaEmpresa";
+    public static final String PROPERTY_RENOMBREPRODUCTO = "reNombreproducto";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRANSACTIONVLIST = "aPRMFinaccTransactionVList";
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
@@ -222,6 +233,7 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_COSTINGRULEPRODUCTVAPPLYPRODUCTLIST = "costingRuleProductVApplyProductList";
     public static final String PROPERTY_COSTINGRULEPRODUCTVLIST = "costingRuleProductVList";
     public static final String PROPERTY_CREATEPOLINESPELIST = "createPOLinesPEList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_DATAIMPORTINVENTORYLIST = "dataImportInventoryList";
@@ -240,6 +252,7 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_FINANCIALMGMTBUDGETLINELIST = "financialMgmtBudgetLineList";
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLIST = "financialMgmtGLJournalList";
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
+    public static final String PROPERTY_IMPDATOSGASTOIDLIST = "iMPDatosGastoIdList";
     public static final String PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST = "inOutLineAccountingDimensionList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
     public static final String PROPERTY_INVOICELINEACCOUNTINGDIMENSIONLIST = "invoiceLineAccountingDimensionList";
@@ -304,6 +317,8 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_TIMEANDEXPENSESHEETLINELIST = "timeAndExpenseSheetLineList";
     public static final String PROPERTY_TIMEANDEXPENSESHEETLINEVLIST = "timeAndExpenseSheetLineVList";
     public static final String PROPERTY_TRANSACTIONVLIST = "transactionVList";
+    public static final String PROPERTY_ASVPEDIDODETALLELIST = "asvPedidoDetalleList";
+    public static final String PROPERTY_COUDETALLEBUFFERLIST = "couDetalleBufferList";
 
     public Product() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -330,6 +345,7 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_ISGENERIC, false);
         setDefaultValue(PROPERTY_CREATEVARIANTS, false);
         setDefaultValue(PROPERTY_UPDATEINVARIANTS, false);
+        setDefaultValue(PROPERTY_ASVPROENVLOC, false);
         setDefaultValue(PROPERTY_MANAGEVARIANTS, false);
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONVLIST, new ArrayList<Object>());
@@ -342,6 +358,7 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_COSTINGRULEPRODUCTVAPPLYPRODUCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_COSTINGRULEPRODUCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CREATEPOLINESPELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVENTORYLIST, new ArrayList<Object>());
@@ -360,6 +377,7 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_FINANCIALMGMTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IMPDATOSGASTOIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINEACCOUNTINGDIMENSIONLIST, new ArrayList<Object>());
@@ -424,6 +442,8 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLINEVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TRANSACTIONVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ASVPEDIDODETALLELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_COUDETALLEBUFFERLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -991,6 +1011,14 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
         set(PROPERTY_USEATTRIBUTESETVALUEAS, useAttributeSetValueAs);
     }
 
+    public String getReCodigoalterno() {
+        return (String) get(PROPERTY_RECODIGOALTERNO);
+    }
+
+    public void setReCodigoalterno(String reCodigoalterno) {
+        set(PROPERTY_RECODIGOALTERNO, reCodigoalterno);
+    }
+
     public Boolean isQuantityvariable() {
         return (Boolean) get(PROPERTY_ISQUANTITYVARIABLE);
     }
@@ -1005,6 +1033,14 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setDeferredRevenue(Boolean deferredRevenue) {
         set(PROPERTY_DEFERREDREVENUE, deferredRevenue);
+    }
+
+    public String getRePartidaarancelaria() {
+        return (String) get(PROPERTY_REPARTIDAARANCELARIA);
+    }
+
+    public void setRePartidaarancelaria(String rePartidaarancelaria) {
+        set(PROPERTY_REPARTIDAARANCELARIA, rePartidaarancelaria);
     }
 
     public String getRevenuePlanType() {
@@ -1127,12 +1163,36 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
         set(PROPERTY_UPDATEINVARIANTS, updateInvariants);
     }
 
+    public Boolean isAsvProEnvLoc() {
+        return (Boolean) get(PROPERTY_ASVPROENVLOC);
+    }
+
+    public void setAsvProEnvLoc(Boolean asvProEnvLoc) {
+        set(PROPERTY_ASVPROENVLOC, asvProEnvLoc);
+    }
+
     public Boolean isManageVariants() {
         return (Boolean) get(PROPERTY_MANAGEVARIANTS);
     }
 
     public void setManageVariants(Boolean manageVariants) {
         set(PROPERTY_MANAGEVARIANTS, manageVariants);
+    }
+
+    public noAreaEmpresa getAsvAreaEmpresa() {
+        return (noAreaEmpresa) get(PROPERTY_ASVAREAEMPRESA);
+    }
+
+    public void setAsvAreaEmpresa(noAreaEmpresa asvAreaEmpresa) {
+        set(PROPERTY_ASVAREAEMPRESA, asvAreaEmpresa);
+    }
+
+    public String getReNombreproducto() {
+        return (String) get(PROPERTY_RENOMBREPRODUCTO);
+    }
+
+    public void setReNombreproducto(String reNombreproducto) {
+        set(PROPERTY_RENOMBREPRODUCTO, reNombreproducto);
     }
 
     @SuppressWarnings("unchecked")
@@ -1232,6 +1292,15 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setCreatePOLinesPEList(List<CreatePOLinesPE> createPOLinesPEList) {
         set(PROPERTY_CREATEPOLINESPELIST, createPOLinesPEList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")
@@ -1394,6 +1463,15 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setFinancialMgmtGLJournalLineList(List<GLJournalLine> financialMgmtGLJournalLineList) {
         set(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, financialMgmtGLJournalLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<imp_datos_gasto> getIMPDatosGastoIdList() {
+      return (List<imp_datos_gasto>) get(PROPERTY_IMPDATOSGASTOIDLIST);
+    }
+
+    public void setIMPDatosGastoIdList(List<imp_datos_gasto> iMPDatosGastoIdList) {
+        set(PROPERTY_IMPDATOSGASTOIDLIST, iMPDatosGastoIdList);
     }
 
     @SuppressWarnings("unchecked")
@@ -1970,6 +2048,24 @@ public class Product extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setTransactionVList(List<MaterialTransactionV> transactionVList) {
         set(PROPERTY_TRANSACTIONVLIST, transactionVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<asvPedidoDetalle> getAsvPedidoDetalleList() {
+      return (List<asvPedidoDetalle>) get(PROPERTY_ASVPEDIDODETALLELIST);
+    }
+
+    public void setAsvPedidoDetalleList(List<asvPedidoDetalle> asvPedidoDetalleList) {
+        set(PROPERTY_ASVPEDIDODETALLELIST, asvPedidoDetalleList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<couDetalleBuffer> getCouDetalleBufferList() {
+      return (List<couDetalleBuffer>) get(PROPERTY_COUDETALLEBUFFERLIST);
+    }
+
+    public void setCouDetalleBufferList(List<couDetalleBuffer> couDetalleBufferList) {
+        set(PROPERTY_COUDETALLEBUFFERLIST, couDetalleBufferList);
     }
 
 }

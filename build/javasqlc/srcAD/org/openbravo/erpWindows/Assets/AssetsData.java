@@ -71,15 +71,15 @@ static Logger log4j = Logger.getLogger(AssetsData.class);
   public String isowned;
   public String guaranteedate;
   public String assetdisposaldate;
-  public String useunits;
   public String acctvalueamt;
+  public String useunits;
   public String adClientId;
   public String lifeuseunits;
   public String cBpartnerId;
   public String assetdepreciationdate;
-  public String mLocatorId;
   public String profit;
   public String lot;
+  public String mLocatorId;
   public String adUserId;
   public String assetservicedate;
   public String isdisposed;
@@ -210,10 +210,10 @@ static Logger log4j = Logger.getLogger(AssetsData.class);
       return guaranteedate;
     else if (fieldName.equalsIgnoreCase("assetdisposaldate"))
       return assetdisposaldate;
-    else if (fieldName.equalsIgnoreCase("useunits"))
-      return useunits;
     else if (fieldName.equalsIgnoreCase("acctvalueamt"))
       return acctvalueamt;
+    else if (fieldName.equalsIgnoreCase("useunits"))
+      return useunits;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("lifeuseunits"))
@@ -222,12 +222,12 @@ static Logger log4j = Logger.getLogger(AssetsData.class);
       return cBpartnerId;
     else if (fieldName.equalsIgnoreCase("assetdepreciationdate"))
       return assetdepreciationdate;
-    else if (fieldName.equalsIgnoreCase("m_locator_id") || fieldName.equals("mLocatorId"))
-      return mLocatorId;
     else if (fieldName.equalsIgnoreCase("profit"))
       return profit;
     else if (fieldName.equalsIgnoreCase("lot"))
       return lot;
+    else if (fieldName.equalsIgnoreCase("m_locator_id") || fieldName.equals("mLocatorId"))
+      return mLocatorId;
     else if (fieldName.equalsIgnoreCase("ad_user_id") || fieldName.equals("adUserId"))
       return adUserId;
     else if (fieldName.equalsIgnoreCase("assetservicedate"))
@@ -336,15 +336,15 @@ Select for edit
       "COALESCE(A_Asset.IsOwned, 'N') AS IsOwned, " +
       "A_Asset.GuaranteeDate, " +
       "A_Asset.AssetDisposalDate, " +
-      "A_Asset.UseUnits, " +
       "A_Asset.Acctvalueamt, " +
+      "A_Asset.UseUnits, " +
       "A_Asset.AD_Client_ID, " +
       "A_Asset.LifeUseUnits, " +
       "A_Asset.C_BPartner_ID, " +
       "A_Asset.AssetDepreciationDate, " +
-      "A_Asset.M_Locator_ID, " +
       "A_Asset.Profit, " +
       "A_Asset.Lot, " +
+      "A_Asset.M_Locator_ID, " +
       "A_Asset.AD_User_ID, " +
       "A_Asset.AssetServiceDate, " +
       "COALESCE(A_Asset.IsDisposed, 'N') AS IsDisposed, " +
@@ -455,15 +455,15 @@ Select for edit
         objectAssetsData.isowned = UtilSql.getValue(result, "isowned");
         objectAssetsData.guaranteedate = UtilSql.getDateValue(result, "guaranteedate", "dd-MM-yyyy");
         objectAssetsData.assetdisposaldate = UtilSql.getDateValue(result, "assetdisposaldate", "dd-MM-yyyy");
-        objectAssetsData.useunits = UtilSql.getValue(result, "useunits");
         objectAssetsData.acctvalueamt = UtilSql.getValue(result, "acctvalueamt");
+        objectAssetsData.useunits = UtilSql.getValue(result, "useunits");
         objectAssetsData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectAssetsData.lifeuseunits = UtilSql.getValue(result, "lifeuseunits");
         objectAssetsData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
         objectAssetsData.assetdepreciationdate = UtilSql.getDateValue(result, "assetdepreciationdate", "dd-MM-yyyy");
-        objectAssetsData.mLocatorId = UtilSql.getValue(result, "m_locator_id");
         objectAssetsData.profit = UtilSql.getValue(result, "profit");
         objectAssetsData.lot = UtilSql.getValue(result, "lot");
+        objectAssetsData.mLocatorId = UtilSql.getValue(result, "m_locator_id");
         objectAssetsData.adUserId = UtilSql.getValue(result, "ad_user_id");
         objectAssetsData.assetservicedate = UtilSql.getDateValue(result, "assetservicedate", "dd-MM-yyyy");
         objectAssetsData.isdisposed = UtilSql.getValue(result, "isdisposed");
@@ -565,15 +565,15 @@ Create a registry
     objectAssetsData[0].isowned = isowned;
     objectAssetsData[0].guaranteedate = guaranteedate;
     objectAssetsData[0].assetdisposaldate = assetdisposaldate;
-    objectAssetsData[0].useunits = useunits;
     objectAssetsData[0].acctvalueamt = acctvalueamt;
+    objectAssetsData[0].useunits = useunits;
     objectAssetsData[0].adClientId = adClientId;
     objectAssetsData[0].lifeuseunits = lifeuseunits;
     objectAssetsData[0].cBpartnerId = cBpartnerId;
     objectAssetsData[0].assetdepreciationdate = assetdepreciationdate;
-    objectAssetsData[0].mLocatorId = mLocatorId;
     objectAssetsData[0].profit = profit;
     objectAssetsData[0].lot = lot;
+    objectAssetsData[0].mLocatorId = mLocatorId;
     objectAssetsData[0].adUserId = adUserId;
     objectAssetsData[0].assetservicedate = assetservicedate;
     objectAssetsData[0].isdisposed = isdisposed;
@@ -860,7 +860,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE A_Asset" +
-      "        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , A_Asset_Group_ID = (?) , DocumentNo = (?) , Description = (?) , C_Currency_ID = (?) , M_Product_ID = (?) , Issummary = (?) , IsStatic = (?) , IsDepreciated = (?) , Amortizationtype = (?) , Amortizationcalctype = (?) , Annualamortizationpercentage = TO_NUMBER(?) , Assetschedule = (?) , UseLifeYears = TO_NUMBER(?) , UseLifeMonths = TO_NUMBER(?) , Is30DayMonth = (?) , Datepurchased = TO_DATE(?) , Datecancelled = TO_DATE(?) , Amortizationstartdate = TO_DATE(?) , Amortizationenddate = TO_DATE(?) , AssetValueAmt = TO_NUMBER(?) , Residualassetvalueamt = TO_NUMBER(?) , Amortizationvalueamt = TO_NUMBER(?) , Depreciatedpreviousamt = TO_NUMBER(?) , Processed = (?) , Depreciatedvalue = TO_NUMBER(?) , Depreciatedplan = TO_NUMBER(?) , IsFullyDepreciated = (?) , M_AttributeSetInstance_ID = (?) , IsActive = (?) , Qty = TO_NUMBER(?) , C_Project_ID = (?) , Process_Asset = (?) , IsOwned = (?) , GuaranteeDate = TO_DATE(?) , AssetDisposalDate = TO_DATE(?) , UseUnits = TO_NUMBER(?) , Acctvalueamt = TO_NUMBER(?) , AD_Client_ID = (?) , LifeUseUnits = TO_NUMBER(?) , C_BPartner_ID = (?) , AssetDepreciationDate = TO_DATE(?) , M_Locator_ID = (?) , Profit = TO_NUMBER(?) , Lot = (?) , AD_User_ID = (?) , AssetServiceDate = TO_DATE(?) , IsDisposed = (?) , C_Location_ID = (?) , C_BPartner_Location_ID = (?) , A_Asset_ID = (?) , SerNo = (?) , IsInPosession = (?) , VersionNo = (?) , LocationComment = (?) , Help = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , A_Asset_Group_ID = (?) , DocumentNo = (?) , Description = (?) , C_Currency_ID = (?) , M_Product_ID = (?) , Issummary = (?) , IsStatic = (?) , IsDepreciated = (?) , Amortizationtype = (?) , Amortizationcalctype = (?) , Annualamortizationpercentage = TO_NUMBER(?) , Assetschedule = (?) , UseLifeYears = TO_NUMBER(?) , UseLifeMonths = TO_NUMBER(?) , Is30DayMonth = (?) , Datepurchased = TO_DATE(?) , Datecancelled = TO_DATE(?) , Amortizationstartdate = TO_DATE(?) , Amortizationenddate = TO_DATE(?) , AssetValueAmt = TO_NUMBER(?) , Residualassetvalueamt = TO_NUMBER(?) , Amortizationvalueamt = TO_NUMBER(?) , Depreciatedpreviousamt = TO_NUMBER(?) , Processed = (?) , Depreciatedvalue = TO_NUMBER(?) , Depreciatedplan = TO_NUMBER(?) , IsFullyDepreciated = (?) , M_AttributeSetInstance_ID = (?) , IsActive = (?) , Qty = TO_NUMBER(?) , C_Project_ID = (?) , Process_Asset = (?) , IsOwned = (?) , GuaranteeDate = TO_DATE(?) , AssetDisposalDate = TO_DATE(?) , Acctvalueamt = TO_NUMBER(?) , UseUnits = TO_NUMBER(?) , AD_Client_ID = (?) , LifeUseUnits = TO_NUMBER(?) , C_BPartner_ID = (?) , AssetDepreciationDate = TO_DATE(?) , Profit = TO_NUMBER(?) , Lot = (?) , M_Locator_ID = (?) , AD_User_ID = (?) , AssetServiceDate = TO_DATE(?) , IsDisposed = (?) , C_Location_ID = (?) , C_BPartner_Location_ID = (?) , A_Asset_ID = (?) , SerNo = (?) , IsInPosession = (?) , VersionNo = (?) , LocationComment = (?) , Help = (?) , updated = now(), updatedby = ? " +
       "        WHERE A_Asset.A_Asset_ID = ? " +
       "        AND A_Asset.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -915,15 +915,15 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isowned);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, guaranteedate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, assetdisposaldate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, useunits);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, acctvalueamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, useunits);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lifeuseunits);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, assetdepreciationdate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, profit);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lot);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adUserId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, assetservicedate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdisposed);
@@ -963,8 +963,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO A_Asset " +
-      "        (AD_Org_ID, Value, Name, A_Asset_Group_ID, DocumentNo, Description, C_Currency_ID, M_Product_ID, Issummary, IsStatic, IsDepreciated, Amortizationtype, Amortizationcalctype, Annualamortizationpercentage, Assetschedule, UseLifeYears, UseLifeMonths, Is30DayMonth, Datepurchased, Datecancelled, Amortizationstartdate, Amortizationenddate, AssetValueAmt, Residualassetvalueamt, Amortizationvalueamt, Depreciatedpreviousamt, Processed, Depreciatedvalue, Depreciatedplan, IsFullyDepreciated, M_AttributeSetInstance_ID, IsActive, Qty, C_Project_ID, Process_Asset, IsOwned, GuaranteeDate, AssetDisposalDate, UseUnits, Acctvalueamt, AD_Client_ID, LifeUseUnits, C_BPartner_ID, AssetDepreciationDate, M_Locator_ID, Profit, Lot, AD_User_ID, AssetServiceDate, IsDisposed, C_Location_ID, C_BPartner_Location_ID, A_Asset_ID, SerNo, IsInPosession, VersionNo, LocationComment, Help, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_DATE(?), TO_DATE(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_DATE(?), (?), TO_NUMBER(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, Value, Name, A_Asset_Group_ID, DocumentNo, Description, C_Currency_ID, M_Product_ID, Issummary, IsStatic, IsDepreciated, Amortizationtype, Amortizationcalctype, Annualamortizationpercentage, Assetschedule, UseLifeYears, UseLifeMonths, Is30DayMonth, Datepurchased, Datecancelled, Amortizationstartdate, Amortizationenddate, AssetValueAmt, Residualassetvalueamt, Amortizationvalueamt, Depreciatedpreviousamt, Processed, Depreciatedvalue, Depreciatedplan, IsFullyDepreciated, M_AttributeSetInstance_ID, IsActive, Qty, C_Project_ID, Process_Asset, IsOwned, GuaranteeDate, AssetDisposalDate, Acctvalueamt, UseUnits, AD_Client_ID, LifeUseUnits, C_BPartner_ID, AssetDepreciationDate, Profit, Lot, M_Locator_ID, AD_User_ID, AssetServiceDate, IsDisposed, C_Location_ID, C_BPartner_Location_ID, A_Asset_ID, SerNo, IsInPosession, VersionNo, LocationComment, Help, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_DATE(?), TO_DATE(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1010,15 +1010,15 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isowned);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, guaranteedate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, assetdisposaldate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, useunits);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, acctvalueamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, useunits);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lifeuseunits);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, assetdepreciationdate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, profit);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lot);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adUserId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, assetservicedate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdisposed);

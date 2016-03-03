@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.common.businesspartner;
 
+import com.atrums.contabilidad.data.CO_Retencion_Compra;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -74,6 +76,7 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
     public static final String PROPERTY_NONUMDIR = "noNumDir";
     public static final String PROPERTY_ADUSERLIST = "aDUserList";
     public static final String PROPERTY_ACTIVEPROPOSALVLIST = "activeProposalVList";
+    public static final String PROPERTY_RETENCIONCOMPRALIST = "retencionCompraList";
     public static final String PROPERTY_DATAIMPORTBUSINESSPARTNERLIST = "dataImportBusinessPartnerList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
@@ -102,6 +105,7 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
         setDefaultValue(PROPERTY_TAXLOCATION, false);
         setDefaultValue(PROPERTY_ADUSERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ACTIVEPROPOSALVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONCOMPRALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTORDERLIST, new ArrayList<Object>());
@@ -318,6 +322,15 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
 
     public void setActiveProposalVList(List<ActiveProposal> activeProposalVList) {
         set(PROPERTY_ACTIVEPROPOSALVLIST, activeProposalVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Retencion_Compra> getRetencionCompraList() {
+      return (List<CO_Retencion_Compra>) get(PROPERTY_RETENCIONCOMPRALIST);
+    }
+
+    public void setRetencionCompraList(List<CO_Retencion_Compra> retencionCompraList) {
+        set(PROPERTY_RETENCIONCOMPRALIST, retencionCompraList);
     }
 
     @SuppressWarnings("unchecked")

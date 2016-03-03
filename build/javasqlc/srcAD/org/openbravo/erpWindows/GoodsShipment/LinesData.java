@@ -29,7 +29,6 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String mProductIdr;
   public String mConditionGoodsId;
   public String mAttributesetinstanceId;
-  public String mAttributesetinstanceIdr;
   public String movementqty;
   public String cUomId;
   public String cUomIdr;
@@ -39,6 +38,7 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String cOrderlineId;
   public String cOrderlineIdr;
   public String mProductUomId;
+  public String mProductUomIdr;
   public String quantityorder;
   public String isdescription;
   public String canceledInoutlineId;
@@ -94,8 +94,6 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return mConditionGoodsId;
     else if (fieldName.equalsIgnoreCase("m_attributesetinstance_id") || fieldName.equals("mAttributesetinstanceId"))
       return mAttributesetinstanceId;
-    else if (fieldName.equalsIgnoreCase("m_attributesetinstance_idr") || fieldName.equals("mAttributesetinstanceIdr"))
-      return mAttributesetinstanceIdr;
     else if (fieldName.equalsIgnoreCase("movementqty"))
       return movementqty;
     else if (fieldName.equalsIgnoreCase("c_uom_id") || fieldName.equals("cUomId"))
@@ -114,6 +112,8 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return cOrderlineIdr;
     else if (fieldName.equalsIgnoreCase("m_product_uom_id") || fieldName.equals("mProductUomId"))
       return mProductUomId;
+    else if (fieldName.equalsIgnoreCase("m_product_uom_idr") || fieldName.equals("mProductUomIdr"))
+      return mProductUomIdr;
     else if (fieldName.equalsIgnoreCase("quantityorder"))
       return quantityorder;
     else if (fieldName.equalsIgnoreCase("isdescription"))
@@ -198,16 +198,16 @@ Select for edit
       "(CASE WHEN M_InOutLine.M_Product_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL1.Name IS NULL THEN TO_CHAR(table1.Name) ELSE TO_CHAR(tableTRL1.Name) END)), ''))),'') ) END) AS M_Product_IDR, " +
       "M_InOutLine.M_Condition_Goods_ID, " +
       "M_InOutLine.M_AttributeSetInstance_ID, " +
-      "(CASE WHEN M_InOutLine.M_AttributeSetInstance_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Description), ''))),'') ) END) AS M_AttributeSetInstance_IDR, " +
       "M_InOutLine.MovementQty, " +
       "M_InOutLine.C_UOM_ID, " +
-      "(CASE WHEN M_InOutLine.C_UOM_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_UOM_IDR, " +
+      "(CASE WHEN M_InOutLine.C_UOM_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL3.Name IS NULL THEN TO_CHAR(table3.Name) ELSE TO_CHAR(tableTRL3.Name) END)), ''))),'') ) END) AS C_UOM_IDR, " +
       "M_InOutLine.M_Locator_ID, " +
-      "(CASE WHEN M_InOutLine.M_Locator_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Value), ''))),'') ) END) AS M_Locator_IDR, " +
+      "(CASE WHEN M_InOutLine.M_Locator_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Value), ''))),'') ) END) AS M_Locator_IDR, " +
       "M_InOutLine.Description, " +
       "M_InOutLine.C_OrderLine_ID, " +
-      "(CASE WHEN M_InOutLine.C_OrderLine_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table8.DateOrdered, 'DD-MM-YYYY')),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.GrandTotal), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.Line), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.LineNetAmt), ''))),'') ) END) AS C_OrderLine_IDR, " +
+      "(CASE WHEN M_InOutLine.C_OrderLine_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table7.DateOrdered, 'DD-MM-YYYY')),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.GrandTotal), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Line), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.LineNetAmt), ''))),'') ) END) AS C_OrderLine_IDR, " +
       "M_InOutLine.M_Product_Uom_Id, " +
+      "(CASE WHEN M_InOutLine.M_Product_Uom_Id IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS M_Product_Uom_IdR, " +
       "M_InOutLine.QuantityOrder, " +
       "COALESCE(M_InOutLine.IsDescription, 'N') AS IsDescription, " +
       "M_InOutLine.Canceled_Inoutline_ID, " +
@@ -229,7 +229,7 @@ Select for edit
       "COALESCE(M_InOutLine.IsActive, 'N') AS IsActive, " +
       "M_InOutLine.C_Bpartner_ID, " +
       "        ? AS LANGUAGE " +
-      "        FROM M_InOutLine left join (select M_Product_ID, Name from M_Product) table1 on (M_InOutLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table3 on (M_InOutLine.M_AttributeSetInstance_ID = table3.M_AttributeSetInstance_ID) left join (select C_UOM_ID, Name from C_UOM) table4 on (M_InOutLine.C_UOM_ID = table4.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL4 on (table4.C_UOM_ID = tableTRL4.C_UOM_ID and tableTRL4.AD_Language = ?)  left join (select M_Locator_ID, Value from M_Locator) table6 on (M_InOutLine.M_Locator_ID = table6.M_Locator_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table7 on (M_InOutLine.C_OrderLine_ID = table7.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table8 on (table7.C_Order_ID = table8.C_Order_ID) left join (select AD_Org_ID, Name from AD_Org) table9 on (M_InOutLine.AD_Org_ID = table9.AD_Org_ID) left join (select C_Project_ID, Value, Name from C_Project) table10 on (M_InOutLine.C_Project_ID = table10.C_Project_ID)" +
+      "        FROM M_InOutLine left join (select M_Product_ID, Name from M_Product) table1 on (M_InOutLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select C_UOM_ID, Name from C_UOM) table3 on (M_InOutLine.C_UOM_ID = table3.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL3 on (table3.C_UOM_ID = tableTRL3.C_UOM_ID and tableTRL3.AD_Language = ?)  left join (select M_Locator_ID, Value from M_Locator) table5 on (M_InOutLine.M_Locator_ID = table5.M_Locator_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table6 on (M_InOutLine.C_OrderLine_ID = table6.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table7 on (table6.C_Order_ID = table7.C_Order_ID) left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_UOM) table8 on (M_InOutLine.M_Product_Uom_Id =  table8.M_Product_Uom_Id) left join ad_ref_list_v list1 on (table8.C_UOM_ID = list1.value and list1.ad_reference_id = '' and list1.ad_language = ?)  left join (select AD_Org_ID, Name from AD_Org) table9 on (M_InOutLine.AD_Org_ID = table9.AD_Org_ID) left join (select C_Project_ID, Value, Name from C_Project) table10 on (M_InOutLine.C_Project_ID = table10.C_Project_ID)" +
       "        WHERE 2=2 " +
       "        AND 1=1 ";
     strSql = strSql + ((mInoutId==null || mInoutId.equals(""))?"":"  AND M_InOutLine.M_InOut_ID = ?  ");
@@ -253,6 +253,7 @@ Select for edit
     st = connectionProvider.getPreparedStatement(strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
@@ -287,7 +288,6 @@ Select for edit
         objectLinesData.mProductIdr = UtilSql.getValue(result, "m_product_idr");
         objectLinesData.mConditionGoodsId = UtilSql.getValue(result, "m_condition_goods_id");
         objectLinesData.mAttributesetinstanceId = UtilSql.getValue(result, "m_attributesetinstance_id");
-        objectLinesData.mAttributesetinstanceIdr = UtilSql.getValue(result, "m_attributesetinstance_idr");
         objectLinesData.movementqty = UtilSql.getValue(result, "movementqty");
         objectLinesData.cUomId = UtilSql.getValue(result, "c_uom_id");
         objectLinesData.cUomIdr = UtilSql.getValue(result, "c_uom_idr");
@@ -297,6 +297,7 @@ Select for edit
         objectLinesData.cOrderlineId = UtilSql.getValue(result, "c_orderline_id");
         objectLinesData.cOrderlineIdr = UtilSql.getValue(result, "c_orderline_idr");
         objectLinesData.mProductUomId = UtilSql.getValue(result, "m_product_uom_id");
+        objectLinesData.mProductUomIdr = UtilSql.getValue(result, "m_product_uom_idr");
         objectLinesData.quantityorder = UtilSql.getValue(result, "quantityorder");
         objectLinesData.isdescription = UtilSql.getValue(result, "isdescription");
         objectLinesData.canceledInoutlineId = UtilSql.getValue(result, "canceled_inoutline_id");
@@ -351,7 +352,7 @@ Select for edit
 /**
 Create a registry
  */
-  public static LinesData[] set(String mInoutId, String aAssetId, String mInoutlineId, String adClientId, String adOrgId, String isactive, String createdby, String createdbyr, String updatedby, String updatedbyr, String mLocatorId, String mLocatorIdr, String mProductId, String mProductIdr, String movementqty, String description, String mConditionGoodsId, String line, String cOrderlineId, String cOrderlineIdr, String cUomId, String user1Id, String isinvoiced, String cCostcenterId, String explode, String mProductUomId, String quantityorder, String mAttributesetinstanceId, String mAttributesetinstanceIdr, String isdescription, String user2Id, String canceledInoutlineId, String cBpartnerId, String managePrereservation, String bomParentId, String cProjectId, String cProjectIdr)    throws ServletException {
+  public static LinesData[] set(String mInoutId, String aAssetId, String mInoutlineId, String adClientId, String adOrgId, String isactive, String createdby, String createdbyr, String updatedby, String updatedbyr, String mLocatorId, String mLocatorIdr, String mProductId, String mProductIdr, String movementqty, String description, String mConditionGoodsId, String line, String cOrderlineId, String cOrderlineIdr, String cUomId, String user1Id, String isinvoiced, String cCostcenterId, String explode, String mProductUomId, String quantityorder, String mAttributesetinstanceId, String isdescription, String user2Id, String canceledInoutlineId, String cBpartnerId, String managePrereservation, String bomParentId, String cProjectId, String cProjectIdr)    throws ServletException {
     LinesData objectLinesData[] = new LinesData[1];
     objectLinesData[0] = new LinesData();
     objectLinesData[0].created = "";
@@ -365,7 +366,6 @@ Create a registry
     objectLinesData[0].mProductIdr = mProductIdr;
     objectLinesData[0].mConditionGoodsId = mConditionGoodsId;
     objectLinesData[0].mAttributesetinstanceId = mAttributesetinstanceId;
-    objectLinesData[0].mAttributesetinstanceIdr = mAttributesetinstanceIdr;
     objectLinesData[0].movementqty = movementqty;
     objectLinesData[0].cUomId = cUomId;
     objectLinesData[0].cUomIdr = "";
@@ -375,6 +375,7 @@ Create a registry
     objectLinesData[0].cOrderlineId = cOrderlineId;
     objectLinesData[0].cOrderlineIdr = cOrderlineIdr;
     objectLinesData[0].mProductUomId = mProductUomId;
+    objectLinesData[0].mProductUomIdr = "";
     objectLinesData[0].quantityorder = quantityorder;
     objectLinesData[0].isdescription = isdescription;
     objectLinesData[0].canceledInoutlineId = canceledInoutlineId;
@@ -1054,45 +1055,7 @@ Select for auxiliar field
 /**
 Select for auxiliar field
  */
-  public static String selectDef8772_5(ConnectionProvider connectionProvider, String M_AttributeSetInstance_IDR)    throws ServletException {
-    String strSql = "";
-    strSql = strSql + 
-      "        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Description), ''))), '') ) as M_AttributeSetInstance_ID FROM M_AttributeSetInstance left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table2 on (M_AttributeSetInstance.M_AttributeSetInstance_ID = table2.M_AttributeSetInstance_ID) WHERE M_AttributeSetInstance.isActive='Y' AND M_AttributeSetInstance.M_AttributeSetInstance_ID = ?  ";
-
-    ResultSet result;
-    String strReturn = "";
-    PreparedStatement st = null;
-
-    int iParameter = 0;
-    try {
-    st = connectionProvider.getPreparedStatement(strSql);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, M_AttributeSetInstance_IDR);
-
-      result = st.executeQuery();
-      if(result.next()) {
-        strReturn = UtilSql.getValue(result, "m_attributesetinstance_id");
-      }
-      result.close();
-    } catch(SQLException e){
-      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
-      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
-    } catch(Exception ex){
-      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
-      throw new ServletException("@CODE=@" + ex.getMessage());
-    } finally {
-      try {
-        connectionProvider.releasePreparedStatement(st);
-      } catch(Exception ignore){
-        ignore.printStackTrace();
-      }
-    }
-    return(strReturn);
-  }
-
-/**
-Select for auxiliar field
- */
-  public static String selectDefF12044E4570546E18AF6834B00961F8E_6(ConnectionProvider connectionProvider, String C_Project_IDR)    throws ServletException {
+  public static String selectDefF12044E4570546E18AF6834B00961F8E_5(ConnectionProvider connectionProvider, String C_Project_IDR)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
       "        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Value), ''))), '')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as C_Project_ID FROM C_Project left join (select C_Project_ID, Value, Name from C_Project) table2 on (C_Project.C_Project_ID = table2.C_Project_ID) WHERE C_Project.isActive='Y' AND C_Project.C_Project_ID = ?  ";

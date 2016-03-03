@@ -29,6 +29,7 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cDoctypeId;
   public String cDoctypeIdr;
   public String documentno;
+  public String emCoNroCheque;
   public String referenceno;
   public String paymentdate;
   public String cBpartnerId;
@@ -43,6 +44,7 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String finaccTxnAmount;
   public String finaccTxnConvertRate;
   public String generatedCredit;
+  public String emCoNombreBanco;
   public String emAprmAddScheduledpayments;
   public String posted;
   public String postedBtn;
@@ -63,13 +65,13 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCampaignId;
   public String user1Id;
   public String user2Id;
-  public String finPaymentId;
-  public String isactive;
-  public String processing;
-  public String isreceipt;
-  public String adClientId;
   public String emAprmReconcilePayment;
+  public String finPaymentId;
+  public String processing;
   public String processed;
+  public String adClientId;
+  public String isactive;
+  public String isreceipt;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -105,6 +107,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return cDoctypeIdr;
     else if (fieldName.equalsIgnoreCase("documentno"))
       return documentno;
+    else if (fieldName.equalsIgnoreCase("em_co_nro_cheque") || fieldName.equals("emCoNroCheque"))
+      return emCoNroCheque;
     else if (fieldName.equalsIgnoreCase("referenceno"))
       return referenceno;
     else if (fieldName.equalsIgnoreCase("paymentdate"))
@@ -133,6 +137,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return finaccTxnConvertRate;
     else if (fieldName.equalsIgnoreCase("generated_credit") || fieldName.equals("generatedCredit"))
       return generatedCredit;
+    else if (fieldName.equalsIgnoreCase("em_co_nombre_banco") || fieldName.equals("emCoNombreBanco"))
+      return emCoNombreBanco;
     else if (fieldName.equalsIgnoreCase("em_aprm_add_scheduledpayments") || fieldName.equals("emAprmAddScheduledpayments"))
       return emAprmAddScheduledpayments;
     else if (fieldName.equalsIgnoreCase("posted"))
@@ -173,20 +179,20 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("fin_payment_id") || fieldName.equals("finPaymentId"))
-      return finPaymentId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("processing"))
-      return processing;
-    else if (fieldName.equalsIgnoreCase("isreceipt"))
-      return isreceipt;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("em_aprm_reconcile_payment") || fieldName.equals("emAprmReconcilePayment"))
       return emAprmReconcilePayment;
+    else if (fieldName.equalsIgnoreCase("fin_payment_id") || fieldName.equals("finPaymentId"))
+      return finPaymentId;
+    else if (fieldName.equalsIgnoreCase("processing"))
+      return processing;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("isreceipt"))
+      return isreceipt;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -231,6 +237,7 @@ Select for edit
       "FIN_Payment.C_DocType_ID, " +
       "(CASE WHEN FIN_Payment.C_DocType_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_DocType_IDR, " +
       "FIN_Payment.DocumentNo, " +
+      "FIN_Payment.EM_Co_Nro_Cheque, " +
       "FIN_Payment.Referenceno, " +
       "FIN_Payment.Paymentdate, " +
       "FIN_Payment.C_Bpartner_ID, " +
@@ -245,6 +252,7 @@ Select for edit
       "FIN_Payment.Finacc_Txn_Amount, " +
       "FIN_Payment.Finacc_Txn_Convert_Rate, " +
       "FIN_Payment.Generated_Credit, " +
+      "FIN_Payment.EM_Co_Nombre_Banco, " +
       "FIN_Payment.EM_Aprm_Add_Scheduledpayments, " +
       "FIN_Payment.Posted, " +
       "list1.name as Posted_BTN, " +
@@ -265,13 +273,13 @@ Select for edit
       "FIN_Payment.C_Campaign_ID, " +
       "FIN_Payment.User1_ID, " +
       "FIN_Payment.User2_ID, " +
-      "FIN_Payment.Fin_Payment_ID, " +
-      "COALESCE(FIN_Payment.Isactive, 'N') AS Isactive, " +
-      "COALESCE(FIN_Payment.Processing, 'N') AS Processing, " +
-      "COALESCE(FIN_Payment.Isreceipt, 'N') AS Isreceipt, " +
-      "FIN_Payment.AD_Client_ID, " +
       "FIN_Payment.EM_APRM_Reconcile_Payment, " +
+      "FIN_Payment.Fin_Payment_ID, " +
+      "COALESCE(FIN_Payment.Processing, 'N') AS Processing, " +
       "COALESCE(FIN_Payment.Processed, 'N') AS Processed, " +
+      "FIN_Payment.AD_Client_ID, " +
+      "COALESCE(FIN_Payment.Isactive, 'N') AS Isactive, " +
+      "COALESCE(FIN_Payment.Isreceipt, 'N') AS Isreceipt, " +
       "        ? AS LANGUAGE " +
       "        FROM FIN_Payment left join (select AD_Org_ID, Name from AD_Org) table1 on (FIN_Payment.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (FIN_Payment.C_DocType_ID = table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table4 on (FIN_Payment.C_Bpartner_ID = table4.C_BPartner_ID) left join (select Fin_Paymentmethod_ID, Name from Fin_Paymentmethod) table5 on (FIN_Payment.Fin_Paymentmethod_ID = table5.Fin_Paymentmethod_ID) left join (select Fin_Financial_Account_ID, Name, C_Currency_ID from Fin_Financial_Account) table6 on (FIN_Payment.Fin_Financial_Account_ID = table6.Fin_Financial_Account_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table7 on (table6.C_Currency_ID = table7.C_Currency_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table8 on (FIN_Payment.C_Currency_ID = table8.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND FIN_Payment.Posted = TO_CHAR(list1.value)) left join ad_ref_list_v list2 on (list2.ad_reference_id = '36972531DA994BB38ECB91993058282F' and list2.ad_language = ?  AND FIN_Payment.EM_APRM_Process_Payment = TO_CHAR(list2.value)) left join (select C_Project_ID, Value, Name from C_Project) table9 on (FIN_Payment.C_Project_ID = table9.C_Project_ID)" +
       "        WHERE 2=2 " +
@@ -328,6 +336,7 @@ Select for edit
         objectHeaderData.cDoctypeId = UtilSql.getValue(result, "c_doctype_id");
         objectHeaderData.cDoctypeIdr = UtilSql.getValue(result, "c_doctype_idr");
         objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
+        objectHeaderData.emCoNroCheque = UtilSql.getValue(result, "em_co_nro_cheque");
         objectHeaderData.referenceno = UtilSql.getValue(result, "referenceno");
         objectHeaderData.paymentdate = UtilSql.getDateValue(result, "paymentdate", "dd-MM-yyyy");
         objectHeaderData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
@@ -342,6 +351,7 @@ Select for edit
         objectHeaderData.finaccTxnAmount = UtilSql.getValue(result, "finacc_txn_amount");
         objectHeaderData.finaccTxnConvertRate = UtilSql.getValue(result, "finacc_txn_convert_rate");
         objectHeaderData.generatedCredit = UtilSql.getValue(result, "generated_credit");
+        objectHeaderData.emCoNombreBanco = UtilSql.getValue(result, "em_co_nombre_banco");
         objectHeaderData.emAprmAddScheduledpayments = UtilSql.getValue(result, "em_aprm_add_scheduledpayments");
         objectHeaderData.posted = UtilSql.getValue(result, "posted");
         objectHeaderData.postedBtn = UtilSql.getValue(result, "posted_btn");
@@ -362,13 +372,13 @@ Select for edit
         objectHeaderData.cCampaignId = UtilSql.getValue(result, "c_campaign_id");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.finPaymentId = UtilSql.getValue(result, "fin_payment_id");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
-        objectHeaderData.processing = UtilSql.getValue(result, "processing");
-        objectHeaderData.isreceipt = UtilSql.getValue(result, "isreceipt");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.emAprmReconcilePayment = UtilSql.getValue(result, "em_aprm_reconcile_payment");
+        objectHeaderData.finPaymentId = UtilSql.getValue(result, "fin_payment_id");
+        objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
+        objectHeaderData.isreceipt = UtilSql.getValue(result, "isreceipt");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -403,7 +413,7 @@ Select for edit
 /**
 Create a registry
  */
-  public static HeaderData[] set(String finFinancialAccountId, String cCostcenterId, String createdbyalgorithm, String finaccTxnConvertRate, String finaccTxnAmount, String finPaymentId, String adClientId, String adOrgId, String createdby, String createdbyr, String updatedby, String updatedbyr, String isactive, String isreceipt, String cBpartnerId, String cBpartnerIdr, String paymentdate, String cCurrencyId, String amount, String writeoffamt, String documentno, String referenceno, String status, String processed, String processing, String posted, String postedBtn, String finPaymentmethodId, String emAprmProcessPayment, String emAprmProcessPaymentBtn, String emAprmReconcilePayment, String emAprmAddScheduledpayments, String cDoctypeId, String cProjectId, String cProjectIdr, String cCampaignId, String cActivityId, String user1Id, String user2Id, String emAprmExecutepayment, String description, String generatedCredit, String usedCredit, String emAprmReversepayment, String finRevPaymentId)    throws ServletException {
+  public static HeaderData[] set(String finFinancialAccountId, String cCostcenterId, String createdbyalgorithm, String finaccTxnConvertRate, String finaccTxnAmount, String finPaymentId, String adClientId, String adOrgId, String createdby, String createdbyr, String updatedby, String updatedbyr, String isactive, String isreceipt, String cBpartnerId, String cBpartnerIdr, String paymentdate, String cCurrencyId, String amount, String writeoffamt, String documentno, String referenceno, String status, String processed, String processing, String posted, String postedBtn, String finPaymentmethodId, String emAprmProcessPayment, String emAprmProcessPaymentBtn, String emAprmReconcilePayment, String emCoNombreBanco, String emAprmAddScheduledpayments, String cDoctypeId, String cProjectId, String cProjectIdr, String cCampaignId, String cActivityId, String user1Id, String user2Id, String emAprmExecutepayment, String description, String generatedCredit, String usedCredit, String emAprmReversepayment, String finRevPaymentId, String emCoNroCheque)    throws ServletException {
     HeaderData objectHeaderData[] = new HeaderData[1];
     objectHeaderData[0] = new HeaderData();
     objectHeaderData[0].created = "";
@@ -417,6 +427,7 @@ Create a registry
     objectHeaderData[0].cDoctypeId = cDoctypeId;
     objectHeaderData[0].cDoctypeIdr = "";
     objectHeaderData[0].documentno = documentno;
+    objectHeaderData[0].emCoNroCheque = emCoNroCheque;
     objectHeaderData[0].referenceno = referenceno;
     objectHeaderData[0].paymentdate = paymentdate;
     objectHeaderData[0].cBpartnerId = cBpartnerId;
@@ -431,6 +442,7 @@ Create a registry
     objectHeaderData[0].finaccTxnAmount = finaccTxnAmount;
     objectHeaderData[0].finaccTxnConvertRate = finaccTxnConvertRate;
     objectHeaderData[0].generatedCredit = generatedCredit;
+    objectHeaderData[0].emCoNombreBanco = emCoNombreBanco;
     objectHeaderData[0].emAprmAddScheduledpayments = emAprmAddScheduledpayments;
     objectHeaderData[0].posted = posted;
     objectHeaderData[0].postedBtn = postedBtn;
@@ -451,13 +463,13 @@ Create a registry
     objectHeaderData[0].cCampaignId = cCampaignId;
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].finPaymentId = finPaymentId;
-    objectHeaderData[0].isactive = isactive;
-    objectHeaderData[0].processing = processing;
-    objectHeaderData[0].isreceipt = isreceipt;
-    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].emAprmReconcilePayment = emAprmReconcilePayment;
+    objectHeaderData[0].finPaymentId = finPaymentId;
+    objectHeaderData[0].processing = processing;
     objectHeaderData[0].processed = processed;
+    objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].isactive = isactive;
+    objectHeaderData[0].isreceipt = isreceipt;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -740,7 +752,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Payment" +
-      "        SET AD_Org_ID = (?) , C_DocType_ID = (?) , DocumentNo = (?) , Referenceno = (?) , Paymentdate = TO_DATE(?) , C_Bpartner_ID = (?) , Description = (?) , Fin_Paymentmethod_ID = (?) , Fin_Financial_Account_ID = (?) , C_Currency_ID = (?) , Finacc_Txn_Amount = TO_NUMBER(?) , Finacc_Txn_Convert_Rate = TO_NUMBER(?) , Generated_Credit = TO_NUMBER(?) , EM_Aprm_Add_Scheduledpayments = (?) , Posted = (?) , EM_APRM_Process_Payment = (?) , EM_Aprm_Executepayment = (?) , Amount = TO_NUMBER(?) , Status = (?) , Used_Credit = TO_NUMBER(?) , Writeoffamt = TO_NUMBER(?) , EM_APRM_ReversePayment = (?) , FIN_Rev_Payment_ID = (?) , CreatedByAlgorithm = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , Fin_Payment_ID = (?) , Isactive = (?) , Processing = (?) , Isreceipt = (?) , AD_Client_ID = (?) , EM_APRM_Reconcile_Payment = (?) , Processed = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_DocType_ID = (?) , DocumentNo = (?) , EM_Co_Nro_Cheque = (?) , Referenceno = (?) , Paymentdate = TO_DATE(?) , C_Bpartner_ID = (?) , Description = (?) , Fin_Paymentmethod_ID = (?) , Fin_Financial_Account_ID = (?) , C_Currency_ID = (?) , Finacc_Txn_Amount = TO_NUMBER(?) , Finacc_Txn_Convert_Rate = TO_NUMBER(?) , Generated_Credit = TO_NUMBER(?) , EM_Co_Nombre_Banco = (?) , EM_Aprm_Add_Scheduledpayments = (?) , Posted = (?) , EM_APRM_Process_Payment = (?) , EM_Aprm_Executepayment = (?) , Amount = TO_NUMBER(?) , Status = (?) , Used_Credit = TO_NUMBER(?) , Writeoffamt = TO_NUMBER(?) , EM_APRM_ReversePayment = (?) , FIN_Rev_Payment_ID = (?) , CreatedByAlgorithm = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , EM_APRM_Reconcile_Payment = (?) , Fin_Payment_ID = (?) , Processing = (?) , Processed = (?) , AD_Client_ID = (?) , Isactive = (?) , Isreceipt = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Payment.Fin_Payment_ID = ? " +
       "        AND FIN_Payment.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -760,6 +772,7 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroCheque);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, referenceno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
@@ -770,6 +783,7 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finaccTxnAmount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finaccTxnConvertRate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatedCredit);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNombreBanco);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmAddScheduledpayments);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcessPayment);
@@ -787,13 +801,13 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isreceipt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmReconcilePayment);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isreceipt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -822,8 +836,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Payment " +
-      "        (AD_Org_ID, C_DocType_ID, DocumentNo, Referenceno, Paymentdate, C_Bpartner_ID, Description, Fin_Paymentmethod_ID, Fin_Financial_Account_ID, C_Currency_ID, Finacc_Txn_Amount, Finacc_Txn_Convert_Rate, Generated_Credit, EM_Aprm_Add_Scheduledpayments, Posted, EM_APRM_Process_Payment, EM_Aprm_Executepayment, Amount, Status, Used_Credit, Writeoffamt, EM_APRM_ReversePayment, FIN_Rev_Payment_ID, CreatedByAlgorithm, C_Project_ID, C_Costcenter_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, Fin_Payment_ID, Isactive, Processing, Isreceipt, AD_Client_ID, EM_APRM_Reconcile_Payment, Processed, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, C_DocType_ID, DocumentNo, EM_Co_Nro_Cheque, Referenceno, Paymentdate, C_Bpartner_ID, Description, Fin_Paymentmethod_ID, Fin_Financial_Account_ID, C_Currency_ID, Finacc_Txn_Amount, Finacc_Txn_Convert_Rate, Generated_Credit, EM_Co_Nombre_Banco, EM_Aprm_Add_Scheduledpayments, Posted, EM_APRM_Process_Payment, EM_Aprm_Executepayment, Amount, Status, Used_Credit, Writeoffamt, EM_APRM_ReversePayment, FIN_Rev_Payment_ID, CreatedByAlgorithm, C_Project_ID, C_Costcenter_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, EM_APRM_Reconcile_Payment, Fin_Payment_ID, Processing, Processed, AD_Client_ID, Isactive, Isreceipt, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -834,6 +848,7 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroCheque);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, referenceno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
@@ -844,6 +859,7 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finaccTxnAmount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finaccTxnConvertRate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatedCredit);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNombreBanco);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmAddScheduledpayments);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcessPayment);
@@ -861,13 +877,13 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isreceipt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmReconcilePayment);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isreceipt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

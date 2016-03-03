@@ -70,6 +70,8 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
     public static final String PROPERTY_REGION = "region";
     public static final String PROPERTY_CITY = "city";
     public static final String PROPERTY_REGIONNAME = "regionName";
+    public static final String PROPERTY_COPARROQUIA = "coParroquia";
+    public static final String PROPERTY_COBARRIO = "coBarrio";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLOCATIONFROMADDRESSLIST = "aPRMFinAccTransactionAcctVLocationFromAddressList";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLOCATIONTOADDRESSLIST = "aPRMFinAccTransactionAcctVLocationToAddressList";
     public static final String PROPERTY_BANKLIST = "bankList";
@@ -250,6 +252,22 @@ public class Location extends BaseOBObject implements Traceable, ClientEnabled, 
 
     public void setRegionName(String regionName) {
         set(PROPERTY_REGIONNAME, regionName);
+    }
+
+    public String getCoParroquia() {
+        return (String) get(PROPERTY_COPARROQUIA);
+    }
+
+    public void setCoParroquia(String coParroquia) {
+        set(PROPERTY_COPARROQUIA, coParroquia);
+    }
+
+    public String getCoBarrio() {
+        return (String) get(PROPERTY_COBARRIO);
+    }
+
+    public void setCoBarrio(String coBarrio) {
+        set(PROPERTY_COBARRIO, coBarrio);
     }
 
     @SuppressWarnings("unchecked")

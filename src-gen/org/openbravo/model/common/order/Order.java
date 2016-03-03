@@ -157,6 +157,7 @@ public class Order extends BaseOBObject implements Traceable, ClientEnabled, Org
     public static final String PROPERTY_RESERVATIONSTATUS = "reservationStatus";
     public static final String PROPERTY_CREATEPOLINES = "createPOLines";
     public static final String PROPERTY_CASHVAT = "cashVAT";
+    public static final String PROPERTY_VENNOTA = "venNota";
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
     public static final String PROPERTY_DEBTPAYMENTVLIST = "debtPaymentVList";
@@ -923,6 +924,14 @@ public class Order extends BaseOBObject implements Traceable, ClientEnabled, Org
 
     public void setDeliveryStatus(Long deliveryStatus) {
         set(COMPUTED_COLUMN_DELIVERYSTATUS, deliveryStatus);
+    }
+
+    public String getVenNota() {
+        return (String) get(PROPERTY_VENNOTA);
+    }
+
+    public void setVenNota(String venNota) {
+        set(PROPERTY_VENNOTA, venNota);
     }
 
     public Long getInvoiceStatus() {

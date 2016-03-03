@@ -18,6 +18,11 @@
 */
 package org.openbravo.model.common.invoice;
 
+import com.atrums.centrocostos.data.cco_registra_costos;
+import com.atrums.contabilidad.data.CO_RETENCION_VENTA;
+import com.atrums.contabilidad.data.CO_Retencion_Compra;
+import com.atrums.declaraciontributaria.ecuador.data.atsReembolso;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -142,8 +147,30 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_CALCULATEPROMOTIONS = "calculatePromotions";
     public static final String PROPERTY_APRMPROCESSINVOICE = "aPRMProcessinvoice";
     public static final String PROPERTY_ASSET = "asset";
+    public static final String PROPERTY_CONROAUTSRI = "coNroAutSri";
     public static final String PROPERTY_CASHVAT = "cashVAT";
+    public static final String PROPERTY_COVENCIMIENTOAUTSRI = "coVencimientoAutSri";
+    public static final String PROPERTY_CONROESTAB = "coNroEstab";
+    public static final String PROPERTY_COPUNTOEMISION = "coPuntoEmision";
+    public static final String PROPERTY_COCODSUSTENTO = "coCodSustento";
+    public static final String PROPERTY_ATECFEDOCSTATUS = "atecfeDocstatus";
+    public static final String PROPERTY_CORISE = "coRise";
+    public static final String PROPERTY_ATECFEDOCACTION = "atecfeDocaction";
+    public static final String PROPERTY_ATECFEMENSAJESRI = "atecfeMensajeSri";
+    public static final String PROPERTY_ATECFECODIGOACC = "atecfeCodigoAcc";
+    public static final String PROPERTY_COADDPAYMENT = "coAddpayment";
+    public static final String PROPERTY_ATECFEDOCUMENTOXML = "atecfeDocumentoXml";
+    public static final String PROPERTY_ATECFECINVOICE = "atecfeCInvoice";
+    public static final String PROPERTY_ATECFEFECHAAUTORI = "atecfeFechaAutori";
+    public static final String PROPERTY_ATSTOTALEXENTO = "atsTotalexento";
+    public static final String PROPERTY_ATSTOTALBASE0 = "atsTotalbase0";
+    public static final String PROPERTY_ATSTOTALBASE12 = "atsTotalbase12";
+    public static final String PROPERTY_ATSTOTALIVA = "atsTotaliva";
+    public static final String PROPERTY_ATSTOTALICE = "atsTotalice";
     public static final String PROPERTY_APRMPENDINGPAYMENTINVOICELIST = "aPRMPendingPaymentInvoiceList";
+    public static final String PROPERTY_ATSREEMBOLSOLIST = "aTSREEMBOLSOList";
+    public static final String PROPERTY_RETENCIONVENTALIST = "rETENCIONVENTAList";
+    public static final String PROPERTY_RETENCIONCOMPRALIST = "retencionCompraList";
     public static final String PROPERTY_CURRENCYCONVERSIONRATEDOCLIST = "currencyConversionRateDocList";
     public static final String PROPERTY_DATAIMPORTBANKSTATEMENTLIST = "dataImportBankStatementList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
@@ -154,6 +181,7 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_FINANCIALMGMTDEBTPAYMENTLIST = "financialMgmtDebtPaymentList";
     public static final String PROPERTY_FINANCIALMGMTDEBTPAYMENTCANCELVLIST = "financialMgmtDebtPaymentCancelVList";
     public static final String PROPERTY_FINANCIALMGMTDEBTPAYMENTGENERATEVLIST = "financialMgmtDebtPaymentGenerateVList";
+    public static final String PROPERTY_INVOICEEMATECFECINVOICEIDLIST = "invoiceEMAtecfeCInvoiceIDList";
     public static final String PROPERTY_INVOICEDISCOUNTLIST = "invoiceDiscountList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
     public static final String PROPERTY_INVOICELINETAXLIST = "invoiceLineTaxList";
@@ -165,6 +193,7 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_REVERSEDINVOICESLIST = "reversedInvoicesList";
     public static final String PROPERTY_REVERSEDINVOICESREVERSEDINVOICELIST = "reversedInvoicesReversedInvoiceList";
     public static final String PROPERTY_SALESCOMMISSIONRUNLIST = "salesCommissionRunList";
+    public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
     public Invoice() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -191,7 +220,15 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_CALCULATEPROMOTIONS, false);
         setDefaultValue(PROPERTY_APRMPROCESSINVOICE, "CO");
         setDefaultValue(PROPERTY_CASHVAT, false);
+        setDefaultValue(PROPERTY_COCODSUSTENTO, "06");
+        setDefaultValue(PROPERTY_ATECFEDOCSTATUS, "PD");
+        setDefaultValue(PROPERTY_CORISE, false);
+        setDefaultValue(PROPERTY_ATECFEDOCACTION, "PR");
+        setDefaultValue(PROPERTY_COADDPAYMENT, true);
         setDefaultValue(PROPERTY_APRMPENDINGPAYMENTINVOICELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATSREEMBOLSOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONVENTALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONCOMPRALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CURRENCYCONVERSIONRATEDOCLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBANKSTATEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
@@ -202,6 +239,7 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_FINANCIALMGMTDEBTPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTDEBTPAYMENTCANCELVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTDEBTPAYMENTGENERATEVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_INVOICEEMATECFECINVOICEIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICEDISCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINETAXLIST, new ArrayList<Object>());
@@ -213,6 +251,7 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_REVERSEDINVOICESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_REVERSEDINVOICESREVERSEDINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SALESCOMMISSIONRUNLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -772,12 +811,164 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
         set(PROPERTY_ASSET, asset);
     }
 
+    public String getCoNroAutSri() {
+        return (String) get(PROPERTY_CONROAUTSRI);
+    }
+
+    public void setCoNroAutSri(String coNroAutSri) {
+        set(PROPERTY_CONROAUTSRI, coNroAutSri);
+    }
+
     public Boolean isCashVAT() {
         return (Boolean) get(PROPERTY_CASHVAT);
     }
 
     public void setCashVAT(Boolean cashVAT) {
         set(PROPERTY_CASHVAT, cashVAT);
+    }
+
+    public Date getCoVencimientoAutSri() {
+        return (Date) get(PROPERTY_COVENCIMIENTOAUTSRI);
+    }
+
+    public void setCoVencimientoAutSri(Date coVencimientoAutSri) {
+        set(PROPERTY_COVENCIMIENTOAUTSRI, coVencimientoAutSri);
+    }
+
+    public String getCoNroEstab() {
+        return (String) get(PROPERTY_CONROESTAB);
+    }
+
+    public void setCoNroEstab(String coNroEstab) {
+        set(PROPERTY_CONROESTAB, coNroEstab);
+    }
+
+    public String getCoPuntoEmision() {
+        return (String) get(PROPERTY_COPUNTOEMISION);
+    }
+
+    public void setCoPuntoEmision(String coPuntoEmision) {
+        set(PROPERTY_COPUNTOEMISION, coPuntoEmision);
+    }
+
+    public String getCoCodSustento() {
+        return (String) get(PROPERTY_COCODSUSTENTO);
+    }
+
+    public void setCoCodSustento(String coCodSustento) {
+        set(PROPERTY_COCODSUSTENTO, coCodSustento);
+    }
+
+    public String getAtecfeDocstatus() {
+        return (String) get(PROPERTY_ATECFEDOCSTATUS);
+    }
+
+    public void setAtecfeDocstatus(String atecfeDocstatus) {
+        set(PROPERTY_ATECFEDOCSTATUS, atecfeDocstatus);
+    }
+
+    public Boolean isCoRise() {
+        return (Boolean) get(PROPERTY_CORISE);
+    }
+
+    public void setCoRise(Boolean coRise) {
+        set(PROPERTY_CORISE, coRise);
+    }
+
+    public String getAtecfeDocaction() {
+        return (String) get(PROPERTY_ATECFEDOCACTION);
+    }
+
+    public void setAtecfeDocaction(String atecfeDocaction) {
+        set(PROPERTY_ATECFEDOCACTION, atecfeDocaction);
+    }
+
+    public String getAtecfeMensajeSri() {
+        return (String) get(PROPERTY_ATECFEMENSAJESRI);
+    }
+
+    public void setAtecfeMensajeSri(String atecfeMensajeSri) {
+        set(PROPERTY_ATECFEMENSAJESRI, atecfeMensajeSri);
+    }
+
+    public String getAtecfeCodigoAcc() {
+        return (String) get(PROPERTY_ATECFECODIGOACC);
+    }
+
+    public void setAtecfeCodigoAcc(String atecfeCodigoAcc) {
+        set(PROPERTY_ATECFECODIGOACC, atecfeCodigoAcc);
+    }
+
+    public Boolean isCoAddpayment() {
+        return (Boolean) get(PROPERTY_COADDPAYMENT);
+    }
+
+    public void setCoAddpayment(Boolean coAddpayment) {
+        set(PROPERTY_COADDPAYMENT, coAddpayment);
+    }
+
+    public byte[] getAtecfeDocumentoXml() {
+        return (byte[]) get(PROPERTY_ATECFEDOCUMENTOXML);
+    }
+
+    public void setAtecfeDocumentoXml(byte[] atecfeDocumentoXml) {
+        set(PROPERTY_ATECFEDOCUMENTOXML, atecfeDocumentoXml);
+    }
+
+    public Invoice getAtecfeCInvoice() {
+        return (Invoice) get(PROPERTY_ATECFECINVOICE);
+    }
+
+    public void setAtecfeCInvoice(Invoice atecfeCInvoice) {
+        set(PROPERTY_ATECFECINVOICE, atecfeCInvoice);
+    }
+
+    public String getAtecfeFechaAutori() {
+        return (String) get(PROPERTY_ATECFEFECHAAUTORI);
+    }
+
+    public void setAtecfeFechaAutori(String atecfeFechaAutori) {
+        set(PROPERTY_ATECFEFECHAAUTORI, atecfeFechaAutori);
+    }
+
+    public BigDecimal getAtsTotalexento() {
+        return (BigDecimal) get(PROPERTY_ATSTOTALEXENTO);
+    }
+
+    public void setAtsTotalexento(BigDecimal atsTotalexento) {
+        set(PROPERTY_ATSTOTALEXENTO, atsTotalexento);
+    }
+
+    public BigDecimal getAtsTotalbase0() {
+        return (BigDecimal) get(PROPERTY_ATSTOTALBASE0);
+    }
+
+    public void setAtsTotalbase0(BigDecimal atsTotalbase0) {
+        set(PROPERTY_ATSTOTALBASE0, atsTotalbase0);
+    }
+
+    public BigDecimal getAtsTotalbase12() {
+        return (BigDecimal) get(PROPERTY_ATSTOTALBASE12);
+    }
+
+    public void setAtsTotalbase12(BigDecimal atsTotalbase12) {
+        set(PROPERTY_ATSTOTALBASE12, atsTotalbase12);
+    }
+
+    public BigDecimal getAtsTotaliva() {
+        return (BigDecimal) get(PROPERTY_ATSTOTALIVA);
+    }
+
+    public void setAtsTotaliva(BigDecimal atsTotaliva) {
+        set(PROPERTY_ATSTOTALIVA, atsTotaliva);
+    }
+
+    public BigDecimal getAtsTotalice() {
+        return (BigDecimal) get(PROPERTY_ATSTOTALICE);
+    }
+
+    public void setAtsTotalice(BigDecimal atsTotalice) {
+        set(PROPERTY_ATSTOTALICE, atsTotalice);
     }
 
     @SuppressWarnings("unchecked")
@@ -787,6 +978,33 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setAPRMPendingPaymentInvoiceList(List<APRMPendingPaymentFromInvoice> aPRMPendingPaymentInvoiceList) {
         set(PROPERTY_APRMPENDINGPAYMENTINVOICELIST, aPRMPendingPaymentInvoiceList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atsReembolso> getATSREEMBOLSOList() {
+      return (List<atsReembolso>) get(PROPERTY_ATSREEMBOLSOLIST);
+    }
+
+    public void setATSREEMBOLSOList(List<atsReembolso> aTSREEMBOLSOList) {
+        set(PROPERTY_ATSREEMBOLSOLIST, aTSREEMBOLSOList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_RETENCION_VENTA> getRETENCIONVENTAList() {
+      return (List<CO_RETENCION_VENTA>) get(PROPERTY_RETENCIONVENTALIST);
+    }
+
+    public void setRETENCIONVENTAList(List<CO_RETENCION_VENTA> rETENCIONVENTAList) {
+        set(PROPERTY_RETENCIONVENTALIST, rETENCIONVENTAList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Retencion_Compra> getRetencionCompraList() {
+      return (List<CO_Retencion_Compra>) get(PROPERTY_RETENCIONCOMPRALIST);
+    }
+
+    public void setRetencionCompraList(List<CO_Retencion_Compra> retencionCompraList) {
+        set(PROPERTY_RETENCIONCOMPRALIST, retencionCompraList);
     }
 
     @SuppressWarnings("unchecked")
@@ -877,6 +1095,15 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setFinancialMgmtDebtPaymentGenerateVList(List<DebtPaymentGenerateV> financialMgmtDebtPaymentGenerateVList) {
         set(PROPERTY_FINANCIALMGMTDEBTPAYMENTGENERATEVLIST, financialMgmtDebtPaymentGenerateVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Invoice> getInvoiceEMAtecfeCInvoiceIDList() {
+      return (List<Invoice>) get(PROPERTY_INVOICEEMATECFECINVOICEIDLIST);
+    }
+
+    public void setInvoiceEMAtecfeCInvoiceIDList(List<Invoice> invoiceEMAtecfeCInvoiceIDList) {
+        set(PROPERTY_INVOICEEMATECFECINVOICEIDLIST, invoiceEMAtecfeCInvoiceIDList);
     }
 
     @SuppressWarnings("unchecked")
@@ -976,6 +1203,15 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setSalesCommissionRunList(List<CommissionRun> salesCommissionRunList) {
         set(PROPERTY_SALESCOMMISSIONRUNLIST, salesCommissionRunList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<cco_registra_costos> getCcoRegistraCostosList() {
+      return (List<cco_registra_costos>) get(PROPERTY_CCOREGISTRACOSTOSLIST);
+    }
+
+    public void setCcoRegistraCostosList(List<cco_registra_costos> ccoRegistraCostosList) {
+        set(PROPERTY_CCOREGISTRACOSTOSLIST, ccoRegistraCostosList);
     }
 
 }

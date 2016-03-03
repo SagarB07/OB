@@ -57,6 +57,9 @@ public class TaxCategory extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_NAME = "name";
     public static final String PROPERTY_DESCRIPTION = "description";
     public static final String PROPERTY_DEFAULT = "default";
+    public static final String PROPERTY_COESICE = "coEsICE";
+    public static final String PROPERTY_COTPBASEIMPONIBLE = "coTpBaseImponible";
+    public static final String PROPERTY_ATECFECODTAX = "atecfeCodtax";
     public static final String PROPERTY_DATAIMPORTTAXLIST = "dataImportTaxList";
     public static final String PROPERTY_EXPENSETYPELIST = "expenseTypeList";
     public static final String PROPERTY_FINANCIALMGMTGLCHARGELIST = "financialMgmtGLChargeList";
@@ -69,6 +72,7 @@ public class TaxCategory extends BaseOBObject implements Traceable, ClientEnable
     public TaxCategory() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_DEFAULT, false);
+        setDefaultValue(PROPERTY_COESICE, false);
         setDefaultValue(PROPERTY_DATAIMPORTTAXLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EXPENSETYPELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTGLCHARGELIST, new ArrayList<Object>());
@@ -170,6 +174,30 @@ public class TaxCategory extends BaseOBObject implements Traceable, ClientEnable
 
     public void setDefault(Boolean deflt) {
         set(PROPERTY_DEFAULT, deflt);
+    }
+
+    public Boolean isCoEsICE() {
+        return (Boolean) get(PROPERTY_COESICE);
+    }
+
+    public void setCoEsICE(Boolean coEsICE) {
+        set(PROPERTY_COESICE, coEsICE);
+    }
+
+    public String getCoTpBaseImponible() {
+        return (String) get(PROPERTY_COTPBASEIMPONIBLE);
+    }
+
+    public void setCoTpBaseImponible(String coTpBaseImponible) {
+        set(PROPERTY_COTPBASEIMPONIBLE, coTpBaseImponible);
+    }
+
+    public String getAtecfeCodtax() {
+        return (String) get(PROPERTY_ATECFECODTAX);
+    }
+
+    public void setAtecfeCodtax(String atecfeCodtax) {
+        set(PROPERTY_ATECFECODTAX, atecfeCodtax);
     }
 
     @SuppressWarnings("unchecked")

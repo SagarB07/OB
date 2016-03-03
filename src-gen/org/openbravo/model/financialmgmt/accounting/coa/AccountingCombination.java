@@ -18,6 +18,7 @@
 */
 package org.openbravo.model.financialmgmt.accounting.coa;
 
+import com.atrums.contabilidad.data.CO_TipoRetencionAcct;
 import com.atrums.nomina.data.noCbEmpleadoAcct;
 import com.atrums.nomina.data.noTipoIngEgrAcct;
 import com.atrums.nomina.data.no_tipo_rub_liqu_emp_acct;
@@ -131,6 +132,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTBADDEBTEXPENSEACCOUNTLIST = "businessPartnerCategoryAccountBadDebtExpenseAccountList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTBADDEBTREVENUEACCOUNTLIST = "businessPartnerCategoryAccountBadDebtRevenueAccountList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTALLOWANCEFORDOUBTFULDEBTACCOUNTLIST = "businessPartnerCategoryAccountAllowanceForDoubtfulDebtAccountList";
+    public static final String PROPERTY_TIPORETENCIONACCTCOVENTAACCTLIST = "tipoRetencionAcctCOVentaAcctList";
+    public static final String PROPERTY_TIPORETENCIONACCTCOCOMPRAACCTLIST = "tipoRetencionAcctCOCompraAcctList";
     public static final String PROPERTY_CUSTOMERACCOUNTSCUSTOMERRECEIVABLESNOLIST = "customerAccountsCustomerReceivablesNoList";
     public static final String PROPERTY_CUSTOMERACCOUNTSCUSTOMERPREPAYMENTLIST = "customerAccountsCustomerPrepaymentList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
@@ -339,6 +342,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTBADDEBTEXPENSEACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTBADDEBTREVENUEACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTALLOWANCEFORDOUBTFULDEBTACCOUNTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPORETENCIONACCTCOVENTAACCTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPORETENCIONACCTCOCOMPRAACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CUSTOMERACCOUNTSCUSTOMERRECEIVABLESNOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CUSTOMERACCOUNTSCUSTOMERPREPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
@@ -1020,6 +1025,24 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
 
     public void setBusinessPartnerCategoryAccountAllowanceForDoubtfulDebtAccountList(List<CategoryAccounts> businessPartnerCategoryAccountAllowanceForDoubtfulDebtAccountList) {
         set(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTALLOWANCEFORDOUBTFULDEBTACCOUNTLIST, businessPartnerCategoryAccountAllowanceForDoubtfulDebtAccountList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_TipoRetencionAcct> getTipoRetencionAcctCOVentaAcctList() {
+      return (List<CO_TipoRetencionAcct>) get(PROPERTY_TIPORETENCIONACCTCOVENTAACCTLIST);
+    }
+
+    public void setTipoRetencionAcctCOVentaAcctList(List<CO_TipoRetencionAcct> tipoRetencionAcctCOVentaAcctList) {
+        set(PROPERTY_TIPORETENCIONACCTCOVENTAACCTLIST, tipoRetencionAcctCOVentaAcctList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_TipoRetencionAcct> getTipoRetencionAcctCOCompraAcctList() {
+      return (List<CO_TipoRetencionAcct>) get(PROPERTY_TIPORETENCIONACCTCOCOMPRAACCTLIST);
+    }
+
+    public void setTipoRetencionAcctCOCompraAcctList(List<CO_TipoRetencionAcct> tipoRetencionAcctCOCompraAcctList) {
+        set(PROPERTY_TIPORETENCIONACCTCOCOMPRAACCTLIST, tipoRetencionAcctCOCompraAcctList);
     }
 
     @SuppressWarnings("unchecked")

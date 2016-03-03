@@ -84,6 +84,7 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_OUTUPONCLEARINGUSE = "oUTUponClearingUse";
     public static final String PROPERTY_PAYINISMULTICURRENCY = "payinIsMulticurrency";
     public static final String PROPERTY_PAYOUTISMULTICURRENCY = "payoutIsMulticurrency";
+    public static final String PROPERTY_ATSCODIGO = "atsCodigo";
     public static final String PROPERTY_APRMPAYMENTPROPOSALPICKEDITLIST = "aPRMPaymentProposalPickEditList";
     public static final String PROPERTY_BUSINESSPARTNERLIST = "businessPartnerList";
     public static final String PROPERTY_BUSINESSPARTNERPOPAYMENTMETHODLIST = "businessPartnerPOPaymentMethodList";
@@ -394,6 +395,14 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
 
     public void setPayoutIsMulticurrency(Boolean payoutIsMulticurrency) {
         set(PROPERTY_PAYOUTISMULTICURRENCY, payoutIsMulticurrency);
+    }
+
+    public String getAtsCodigo() {
+        return (String) get(PROPERTY_ATSCODIGO);
+    }
+
+    public void setAtsCodigo(String atsCodigo) {
+        set(PROPERTY_ATSCODIGO, atsCodigo);
     }
 
     @SuppressWarnings("unchecked")

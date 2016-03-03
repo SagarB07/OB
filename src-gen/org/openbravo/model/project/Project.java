@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.project;
 
+import com.atrums.depositos.data.DP_FinaccTransactionV;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -166,6 +168,7 @@ public class Project extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
     public static final String PROPERTY_ACTIVEPROPOSALVLIST = "activeProposalVList";
     public static final String PROPERTY_AMORTIZATIONLINEACCOUNTINGDIMENSIONLIST = "amortizationLineAccountingDimensionList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
@@ -233,6 +236,7 @@ public class Project extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ACTIVEPROPOSALVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_AMORTIZATIONLINEACCOUNTINGDIMENSIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
@@ -897,6 +901,15 @@ public class Project extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setAmortizationLineAccountingDimensionList(List<AmortizationLineAccountingDimension> amortizationLineAccountingDimensionList) {
         set(PROPERTY_AMORTIZATIONLINEACCOUNTINGDIMENSIONLIST, amortizationLineAccountingDimensionList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")

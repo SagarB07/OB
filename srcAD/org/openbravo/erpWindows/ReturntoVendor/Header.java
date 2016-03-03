@@ -72,13 +72,13 @@ public class Header extends HttpSecureAppServlet {
       } catch (PropertyException e) {
       }
      
-      if (command.contains("104")) {
+      if (command.contains("D3436E4900324346AC11E8CCEDDF95AB")) {
         SessionInfo.setProcessType("P");
-        SessionInfo.setProcessId("104");
-        SessionInfo.setModuleId("0");
+        SessionInfo.setProcessId("D3436E4900324346AC11E8CCEDDF95AB");
+        SessionInfo.setModuleId("8A34006A651A44B5B33DE07DE67E2768");
         if (securedProcess) {
           classInfo.type = "P";
-          classInfo.id = "104";
+          classInfo.id = "D3436E4900324346AC11E8CCEDDF95AB";
         }
       }
      
@@ -384,28 +384,28 @@ vars.getRequestGlobalVariable("inpParamGrandTotal_f", tabId + "|paramGrandTotal_
       }
       response.sendRedirect(strDireccion + request.getServletPath());
 
-     } else if (vars.commandIn("BUTTONDocAction104")) {
-        vars.setSessionValue("button104.strdocaction", vars.getStringParameter("inpdocaction"));
-        vars.setSessionValue("button104.strProcessing", vars.getStringParameter("inpprocessing", "Y"));
-        vars.setSessionValue("button104.strOrg", vars.getStringParameter("inpadOrgId"));
-        vars.setSessionValue("button104.strClient", vars.getStringParameter("inpadClientId"));
-        vars.setSessionValue("button104.inpdocstatus", vars.getRequiredStringParameter("inpdocstatus"));
+     } else if (vars.commandIn("BUTTONDocActionD3436E4900324346AC11E8CCEDDF95AB")) {
+        vars.setSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strdocaction", vars.getStringParameter("inpdocaction"));
+        vars.setSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strProcessing", vars.getStringParameter("inpprocessing", "Y"));
+        vars.setSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strOrg", vars.getStringParameter("inpadOrgId"));
+        vars.setSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strClient", vars.getStringParameter("inpadClientId"));
+        vars.setSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.inpdocstatus", vars.getRequiredStringParameter("inpdocstatus"));
 
         
         HashMap<String, String> p = new HashMap<String, String>();
         
         
         //Save in session needed params for combos if needed
-        vars.setSessionObject("button104.originalParams", FieldProviderFactory.getFieldProvider(p));
-        printPageButtonFS(response, vars, "104", request.getServletPath());    
-     } else if (vars.commandIn("BUTTON104")) {
+        vars.setSessionObject("buttonD3436E4900324346AC11E8CCEDDF95AB.originalParams", FieldProviderFactory.getFieldProvider(p));
+        printPageButtonFS(response, vars, "D3436E4900324346AC11E8CCEDDF95AB", request.getServletPath());    
+     } else if (vars.commandIn("BUTTOND3436E4900324346AC11E8CCEDDF95AB")) {
         String strC_Order_ID = vars.getGlobalVariable("inpcOrderId", windowId + "|C_Order_ID", "");
-        String strdocaction = vars.getSessionValue("button104.strdocaction");
-        String strProcessing = vars.getSessionValue("button104.strProcessing");
-        String strOrg = vars.getSessionValue("button104.strOrg");
-        String strClient = vars.getSessionValue("button104.strClient");
+        String strdocaction = vars.getSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strdocaction");
+        String strProcessing = vars.getSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strProcessing");
+        String strOrg = vars.getSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strOrg");
+        String strClient = vars.getSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.strClient");
         
-        String strdocstatus = vars.getSessionValue("button104.inpdocstatus");
+        String strdocstatus = vars.getSessionValue("buttonD3436E4900324346AC11E8CCEDDF95AB.inpdocstatus");
 String stradTableId = "259";
 
         if ((org.openbravo.erpCommon.utility.WindowAccessData.hasReadOnlyAccess(this, vars.getRole(), tabId)) || !(Utility.isElementInList(Utility.getContext(this, vars, "#User_Client", windowId, accesslevel),strClient)  && Utility.isElementInList(Utility.getContext(this, vars, "#User_Org", windowId, accesslevel),strOrg))){
@@ -413,7 +413,7 @@ String stradTableId = "259";
           vars.setMessage(tabId, myError);
           printPageClosePopUp(response, vars);
         }else{       
-          printPageButtonDocAction104(response, vars, strC_Order_ID, strdocaction, strProcessing, strdocstatus, stradTableId);
+          printPageButtonDocActionD3436E4900324346AC11E8CCEDDF95AB(response, vars, strC_Order_ID, strdocaction, strProcessing, strdocstatus, stradTableId);
         }
 
     } else if (vars.commandIn("BUTTONRM_AddOrphanLine23D1B163EC0B41F790CE39BF01DA320E")) {
@@ -446,7 +446,7 @@ String stradTableId = "259";
           printPageButtonRM_AddOrphanLine23D1B163EC0B41F790CE39BF01DA320E(response, vars, strC_Order_ID, strrmAddorphanline, strProcessing);
         }
 
-    } else if (vars.commandIn("SAVE_BUTTONDocAction104")) {
+    } else if (vars.commandIn("SAVE_BUTTONDocActionD3436E4900324346AC11E8CCEDDF95AB")) {
         String strC_Order_ID = vars.getGlobalVariable("inpKey", windowId + "|C_Order_ID", "");
         @SuppressWarnings("unused")
         String strdocaction = vars.getStringParameter("inpdocaction");
@@ -454,7 +454,7 @@ String stradTableId = "259";
         OBError myMessage = null;
         try {
           String pinstance = SequenceIdData.getUUID();
-          PInstanceProcessData.insertPInstance(this, pinstance, "104", (("C_Order_ID".equalsIgnoreCase("AD_Language"))?"0":strC_Order_ID), strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+          PInstanceProcessData.insertPInstance(this, pinstance, "D3436E4900324346AC11E8CCEDDF95AB", (("C_Order_ID".equalsIgnoreCase("AD_Language"))?"0":strC_Order_ID), strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
           
           HeaderData.updateDocAction(this, strdocaction, strC_Order_ID);
 
@@ -561,7 +561,7 @@ params.put("cReturnReasonId", strcReturnReasonId);
     HeaderData data = new HeaderData();
     ServletException ex = null;
     try {
-    data.rmPickfromshipment = vars.getStringParameter("inprmPickfromshipment");     data.docaction = vars.getRequiredStringParameter("inpdocaction");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.cDoctypetargetId = vars.getRequiredStringParameter("inpcDoctypetargetId");     data.cDoctypetargetIdr = vars.getStringParameter("inpcDoctypetargetId_R");     data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.generatetemplate = vars.getStringParameter("inpgeneratetemplate");     data.poreference = vars.getStringParameter("inpporeference");     data.dateordered = vars.getRequiredGlobalVariable("inpdateordered", windowId + "|DateOrdered");     data.cBpartnerId = vars.getRequiredGlobalVariable("inpcBpartnerId", windowId + "|C_BPartner_ID");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.cBpartnerLocationId = vars.getRequiredGlobalVariable("inpcBpartnerLocationId", windowId + "|C_BPartner_Location_ID");     data.cBpartnerLocationIdr = vars.getStringParameter("inpcBpartnerLocationId_R");     data.cReturnReasonId = vars.getStringParameter("inpcReturnReasonId");     data.cReturnReasonIdr = vars.getStringParameter("inpcReturnReasonId_R");     data.mWarehouseId = vars.getRequiredGlobalVariable("inpmWarehouseId", windowId + "|M_Warehouse_ID");     data.datepromised = vars.getRequiredGlobalVariable("inpdatepromised", windowId + "|DatePromised");     data.finPaymentmethodId = vars.getStringParameter("inpfinPaymentmethodId");     data.finPaymentmethodIdr = vars.getStringParameter("inpfinPaymentmethodId_R");     data.rmReceivematerials = vars.getStringParameter("inprmReceivematerials");     data.rmCreateinvoice = vars.getStringParameter("inprmCreateinvoice");     data.cPaymenttermId = vars.getRequiredStringParameter("inpcPaymenttermId");     data.cPaymenttermIdr = vars.getStringParameter("inpcPaymenttermId_R");     data.mPricelistId = vars.getRequiredGlobalVariable("inpmPricelistId", windowId + "|M_PriceList_ID");     data.mPricelistIdr = vars.getStringParameter("inpmPricelistId_R");     data.docstatus = vars.getRequiredGlobalVariable("inpdocstatus", windowId + "|DocStatus");    try {   data.grandtotal = vars.getRequiredNumericParameter("inpgrandtotal");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.totallines = vars.getRequiredNumericParameter("inptotallines");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getRequiredGlobalVariable("inpcCurrencyId", windowId + "|C_Currency_ID");     data.adUserId = vars.getStringParameter("inpadUserId");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cProjectIdr = vars.getStringParameter("inpcProjectId_R");     data.deliverynotes = vars.getStringParameter("inpdeliverynotes");     data.description = vars.getStringParameter("inpdescription");     data.salesrepId = vars.getStringParameter("inpsalesrepId");     data.billtoId = vars.getRequiredStringParameter("inpbilltoId");     data.cIncotermsId = vars.getStringParameter("inpcIncotermsId");     data.incotermsdescription = vars.getStringParameter("inpincotermsdescription");     data.isdiscountprinted = vars.getStringParameter("inpisdiscountprinted", "N");     data.cDoctypeId = vars.getRequiredGlobalVariable("inpcDoctypeId", windowId + "|C_DocType_ID");    try {   data.freightamt = vars.getRequiredNumericParameter("inpfreightamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.deliveryviarule = vars.getRequiredGlobalVariable("inpdeliveryviarule", windowId + "|DeliveryViaRule");     data.mShipperId = vars.getRequestGlobalVariable("inpmShipperId", windowId + "|M_Shipper_ID");     data.priorityrule = vars.getRequiredStringParameter("inppriorityrule");    try {   data.chargeamt = vars.getNumericParameter("inpchargeamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.cChargeId = vars.getStringParameter("inpcChargeId");     data.freightcostrule = vars.getRequiredGlobalVariable("inpfreightcostrule", windowId + "|FreightCostRule");     data.copyfrom = vars.getStringParameter("inpcopyfrom");     data.copyfrompo = vars.getStringParameter("inpcopyfrompo");     data.rmAddorphanline = vars.getStringParameter("inprmAddorphanline");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.adOrgtrxId = vars.getStringParameter("inpadOrgtrxId");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.dropshipBpartnerId = vars.getStringParameter("inpdropshipBpartnerId");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.issotrx = vars.getRequiredInputGlobalVariable("inpissotrx", windowId + "|IsSOTrx", "N");     data.paymentrule = vars.getRequiredStringParameter("inppaymentrule");     data.processed = vars.getRequiredInputGlobalVariable("inpprocessed", windowId + "|Processed", "N");     data.cOrderId = vars.getRequestGlobalVariable("inpcOrderId", windowId + "|C_Order_ID");     data.invoicerule = vars.getRequiredStringParameter("inpinvoicerule");     data.istaxincluded = vars.getStringParameter("inpistaxincluded", "N");     data.dropshipLocationId = vars.getStringParameter("inpdropshipLocationId");     data.dateprinted = vars.getStringParameter("inpdateprinted");     data.dropshipUserId = vars.getStringParameter("inpdropshipUserId");     data.isinvoiced = vars.getStringParameter("inpisinvoiced", "N");     data.posted = vars.getRequiredGlobalVariable("inpposted", windowId + "|Posted");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.isselected = vars.getStringParameter("inpisselected", "N");     data.deliveryLocationId = vars.getStringParameter("inpdeliveryLocationId");     data.processing = vars.getStringParameter("inpprocessing");     data.isselfservice = vars.getStringParameter("inpisselfservice", "N");     data.isdelivered = vars.getStringParameter("inpisdelivered", "N");     data.deliveryrule = vars.getRequiredStringParameter("inpdeliveryrule");     data.isprinted = vars.getStringParameter("inpisprinted", "N"); 
+    data.rmPickfromshipment = vars.getStringParameter("inprmPickfromshipment");     data.docaction = vars.getRequiredStringParameter("inpdocaction");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.cDoctypetargetId = vars.getRequiredStringParameter("inpcDoctypetargetId");     data.cDoctypetargetIdr = vars.getStringParameter("inpcDoctypetargetId_R");     data.generatetemplate = vars.getStringParameter("inpgeneratetemplate");     data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.poreference = vars.getStringParameter("inpporeference");     data.dateordered = vars.getRequiredGlobalVariable("inpdateordered", windowId + "|DateOrdered");     data.cBpartnerId = vars.getRequiredGlobalVariable("inpcBpartnerId", windowId + "|C_BPartner_ID");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.cBpartnerLocationId = vars.getRequiredGlobalVariable("inpcBpartnerLocationId", windowId + "|C_BPartner_Location_ID");     data.cBpartnerLocationIdr = vars.getStringParameter("inpcBpartnerLocationId_R");     data.cReturnReasonId = vars.getStringParameter("inpcReturnReasonId");     data.cReturnReasonIdr = vars.getStringParameter("inpcReturnReasonId_R");     data.mWarehouseId = vars.getRequiredGlobalVariable("inpmWarehouseId", windowId + "|M_Warehouse_ID");     data.datepromised = vars.getRequiredGlobalVariable("inpdatepromised", windowId + "|DatePromised");     data.finPaymentmethodId = vars.getStringParameter("inpfinPaymentmethodId");     data.finPaymentmethodIdr = vars.getStringParameter("inpfinPaymentmethodId_R");     data.rmReceivematerials = vars.getStringParameter("inprmReceivematerials");     data.cPaymenttermId = vars.getRequiredStringParameter("inpcPaymenttermId");     data.cPaymenttermIdr = vars.getStringParameter("inpcPaymenttermId_R");     data.rmCreateinvoice = vars.getStringParameter("inprmCreateinvoice");     data.mPricelistId = vars.getRequiredGlobalVariable("inpmPricelistId", windowId + "|M_PriceList_ID");     data.mPricelistIdr = vars.getStringParameter("inpmPricelistId_R");     data.docstatus = vars.getRequiredGlobalVariable("inpdocstatus", windowId + "|DocStatus");    try {   data.grandtotal = vars.getRequiredNumericParameter("inpgrandtotal");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.totallines = vars.getRequiredNumericParameter("inptotallines");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getRequiredGlobalVariable("inpcCurrencyId", windowId + "|C_Currency_ID");     data.adUserId = vars.getStringParameter("inpadUserId");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cProjectIdr = vars.getStringParameter("inpcProjectId_R");     data.deliverynotes = vars.getStringParameter("inpdeliverynotes");     data.description = vars.getStringParameter("inpdescription");     data.salesrepId = vars.getStringParameter("inpsalesrepId");     data.billtoId = vars.getRequiredStringParameter("inpbilltoId");     data.cIncotermsId = vars.getStringParameter("inpcIncotermsId");     data.incotermsdescription = vars.getStringParameter("inpincotermsdescription");     data.isdiscountprinted = vars.getStringParameter("inpisdiscountprinted", "N");     data.cDoctypeId = vars.getRequiredGlobalVariable("inpcDoctypeId", windowId + "|C_DocType_ID");    try {   data.freightamt = vars.getRequiredNumericParameter("inpfreightamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.deliveryviarule = vars.getRequiredGlobalVariable("inpdeliveryviarule", windowId + "|DeliveryViaRule");     data.mShipperId = vars.getRequestGlobalVariable("inpmShipperId", windowId + "|M_Shipper_ID");     data.priorityrule = vars.getRequiredStringParameter("inppriorityrule");    try {   data.chargeamt = vars.getNumericParameter("inpchargeamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.cChargeId = vars.getStringParameter("inpcChargeId");     data.freightcostrule = vars.getRequiredGlobalVariable("inpfreightcostrule", windowId + "|FreightCostRule");     data.copyfrom = vars.getStringParameter("inpcopyfrom");     data.copyfrompo = vars.getStringParameter("inpcopyfrompo");     data.rmAddorphanline = vars.getStringParameter("inprmAddorphanline");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.adOrgtrxId = vars.getStringParameter("inpadOrgtrxId");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.deliveryrule = vars.getRequiredStringParameter("inpdeliveryrule");     data.isdelivered = vars.getStringParameter("inpisdelivered", "N");     data.isselfservice = vars.getStringParameter("inpisselfservice", "N");     data.isinvoiced = vars.getStringParameter("inpisinvoiced", "N");     data.paymentrule = vars.getRequiredStringParameter("inppaymentrule");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.isselected = vars.getStringParameter("inpisselected", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.isprinted = vars.getStringParameter("inpisprinted", "N");     data.dateprinted = vars.getStringParameter("inpdateprinted");     data.dropshipUserId = vars.getStringParameter("inpdropshipUserId");     data.deliveryLocationId = vars.getStringParameter("inpdeliveryLocationId");     data.invoicerule = vars.getRequiredStringParameter("inpinvoicerule");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.posted = vars.getRequiredGlobalVariable("inpposted", windowId + "|Posted");     data.issotrx = vars.getRequiredInputGlobalVariable("inpissotrx", windowId + "|IsSOTrx", "N");     data.cOrderId = vars.getRequestGlobalVariable("inpcOrderId", windowId + "|C_Order_ID");     data.processed = vars.getRequiredInputGlobalVariable("inpprocessed", windowId + "|Processed", "N");     data.istaxincluded = vars.getStringParameter("inpistaxincluded", "N");     data.dropshipLocationId = vars.getStringParameter("inpdropshipLocationId");     data.dropshipBpartnerId = vars.getStringParameter("inpdropshipBpartnerId");     data.processing = vars.getStringParameter("inpprocessing"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -595,7 +595,7 @@ params.put("cReturnReasonId", strcReturnReasonId);
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|DateOrdered", data[0].getField("dateordered"));    vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].getField("cBpartnerId"));    vars.setSessionValue(windowId + "|C_BPartner_Location_ID", data[0].getField("cBpartnerLocationId"));    vars.setSessionValue(windowId + "|M_Warehouse_ID", data[0].getField("mWarehouseId"));    vars.setSessionValue(windowId + "|DatePromised", data[0].getField("datepromised"));    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].getField("mPricelistId"));    vars.setSessionValue(windowId + "|DocStatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|C_Currency_ID", data[0].getField("cCurrencyId"));    vars.setSessionValue(windowId + "|C_DocType_ID", data[0].getField("cDoctypeId"));    vars.setSessionValue(windowId + "|DeliveryViaRule", data[0].getField("deliveryviarule"));    vars.setSessionValue(windowId + "|M_Shipper_ID", data[0].getField("mShipperId"));    vars.setSessionValue(windowId + "|FreightCostRule", data[0].getField("freightcostrule"));    vars.setSessionValue(windowId + "|Processed", data[0].getField("processed"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|C_Order_ID", data[0].getField("cOrderId"));    vars.setSessionValue(windowId + "|IsSOTrx", data[0].getField("issotrx"));    vars.setSessionValue(windowId + "|Posted", data[0].getField("posted"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|DateOrdered", data[0].getField("dateordered"));    vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].getField("cBpartnerId"));    vars.setSessionValue(windowId + "|C_BPartner_Location_ID", data[0].getField("cBpartnerLocationId"));    vars.setSessionValue(windowId + "|M_Warehouse_ID", data[0].getField("mWarehouseId"));    vars.setSessionValue(windowId + "|DatePromised", data[0].getField("datepromised"));    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].getField("mPricelistId"));    vars.setSessionValue(windowId + "|DocStatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|C_Currency_ID", data[0].getField("cCurrencyId"));    vars.setSessionValue(windowId + "|C_DocType_ID", data[0].getField("cDoctypeId"));    vars.setSessionValue(windowId + "|DeliveryViaRule", data[0].getField("deliveryviarule"));    vars.setSessionValue(windowId + "|M_Shipper_ID", data[0].getField("mShipperId"));    vars.setSessionValue(windowId + "|FreightCostRule", data[0].getField("freightcostrule"));    vars.setSessionValue(windowId + "|IsSOTrx", data[0].getField("issotrx"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|Processed", data[0].getField("processed"));    vars.setSessionValue(windowId + "|C_Order_ID", data[0].getField("cOrderId"));    vars.setSessionValue(windowId + "|Posted", data[0].getField("posted"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {
@@ -1001,7 +1001,7 @@ String strParamGrandTotal_f = vars.getSessionValue(tabId + "|paramGrandTotal_f")
       ComboTableData comboTableData = null;
 xmlDocument.setParameter("RM_PickFromShipment_BTNname", Utility.getButtonName(this, vars, "BC1DF2A8AEAE4BF8AADB477D13D6002F", "RM_PickFromShipment_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_PickFromShipment = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
 xmlDocument.setParameter("RM_PickFromShipment_Modal", modalRM_PickFromShipment?"true":"false");
-xmlDocument.setParameter("DocAction_BTNname", Utility.getButtonName(this, vars, "FF80818130217A35013021A672400035", (dataField==null?data[0].getField("docaction"):dataField.getField("docaction")), "DocAction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocAction = org.openbravo.erpCommon.utility.Utility.isModalProcess("104"); 
+xmlDocument.setParameter("DocAction_BTNname", Utility.getButtonName(this, vars, "FF80818130217A35013021A672400035", (dataField==null?data[0].getField("docaction"):dataField.getField("docaction")), "DocAction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocAction = org.openbravo.erpCommon.utility.Utility.isModalProcess("D3436E4900324346AC11E8CCEDDF95AB"); 
 xmlDocument.setParameter("DocAction_Modal", modalDocAction?"true":"false");
 String userOrgList = "";
 if (editableTab) 
@@ -1046,8 +1046,8 @@ xmlDocument.setParameter("RM_AddOrphanLine_BTNname", Utility.getButtonName(this,
 xmlDocument.setParameter("RM_AddOrphanLine_Modal", modalRM_AddOrphanLine?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
-xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("DateAcct_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ServletException(ex);
@@ -1091,9 +1091,9 @@ xmlDocument.setParameter("DateAcct_Format", vars.getSessionValue("#AD_SqlDateFor
     out.close();
   }
 
-    private void printPageButtonDocAction104(HttpServletResponse response, VariablesSecureApp vars, String strC_Order_ID, String strdocaction, String strProcessing, String strdocstatus, String stradTableId)
+    private void printPageButtonDocActionD3436E4900324346AC11E8CCEDDF95AB(HttpServletResponse response, VariablesSecureApp vars, String strC_Order_ID, String strdocaction, String strProcessing, String strdocstatus, String stradTableId)
     throws IOException, ServletException {
-      log4j.debug("Output: Button process 104");
+      log4j.debug("Output: Button process D3436E4900324346AC11E8CCEDDF95AB");
       String[] discard = {"newDiscard"};
       response.setContentType("text/html; charset=UTF-8");
       PrintWriter out = response.getWriter();
@@ -1105,13 +1105,13 @@ xmlDocument.setParameter("DateAcct_Format", vars.getSessionValue("#AD_SqlDateFor
       xmlDocument.setParameter("css", vars.getTheme());
       xmlDocument.setParameter("language", "defaultLang=\"" + vars.getLanguage() + "\";");
       xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
-      xmlDocument.setParameter("processId", "104");
+      xmlDocument.setParameter("processId", "D3436E4900324346AC11E8CCEDDF95AB");
       xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
       xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
       
       {
-        OBError myMessage = vars.getMessage("104");
-        vars.removeMessage("104");
+        OBError myMessage = vars.getMessage("D3436E4900324346AC11E8CCEDDF95AB");
+        vars.removeMessage("D3436E4900324346AC11E8CCEDDF95AB");
         if (myMessage!=null) {
           xmlDocument.setParameter("messageType", myMessage.getType());
           xmlDocument.setParameter("messageTitle", myMessage.getTitle());
@@ -1125,8 +1125,8 @@ xmlDocument.setParameter("adTableId", stradTableId);
     } catch (Exception ex) {
       throw new ServletException(ex);
     }
-xmlDocument.setParameter("processId", "104");
-xmlDocument.setParameter("processDescription", "Process Order");
+xmlDocument.setParameter("processId", "D3436E4900324346AC11E8CCEDDF95AB");
+xmlDocument.setParameter("processDescription", "Procesar Pedido");
 xmlDocument.setParameter("docaction", (strdocaction.equals("--")?"CL":strdocaction));
 FieldProvider[] dataDocAction = ActionButtonUtility.docAction(this, vars, strdocaction, "FF80818130217A35013021A672400035", strdocstatus, strProcessing, stradTableId, tabId);
 xmlDocument.setData("reportdocaction", "liststructure", dataDocAction);

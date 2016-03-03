@@ -56,6 +56,7 @@ public class NoPermiso extends BaseOBObject implements Traceable, ClientEnabled,
     public static final String PROPERTY_PROCESSED = "processed";
     public static final String PROPERTY_PROCESADO = "procesado";
     public static final String PROPERTY_MOTIVOPERMISO = "motivoPermiso";
+    public static final String PROPERTY_NEOBSERVACION = "neObservacion";
     public static final String PROPERTY_IDCONTRATOEMPLEADO = "iDContratoEmpleado";
 
     public NoPermiso() {
@@ -206,6 +207,14 @@ public class NoPermiso extends BaseOBObject implements Traceable, ClientEnabled,
 
     public void setMotivoPermiso(String motivoPermiso) {
         set(PROPERTY_MOTIVOPERMISO, motivoPermiso);
+    }
+
+    public String getNeObservacion() {
+        return (String) get(PROPERTY_NEOBSERVACION);
+    }
+
+    public void setNeObservacion(String neObservacion) {
+        set(PROPERTY_NEOBSERVACION, neObservacion);
     }
 
     public noContratoEmpleado getIDContratoEmpleado() {

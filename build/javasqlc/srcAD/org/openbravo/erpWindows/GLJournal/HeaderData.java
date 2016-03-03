@@ -41,11 +41,11 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String currencyratetype;
   public String currencyrate;
   public String isopening;
-  public String totaldr;
   public String controlamt;
-  public String totalcr;
+  public String totaldr;
   public String docaction;
   public String docactionBtn;
+  public String totalcr;
   public String posted;
   public String postedBtn;
   public String docstatus;
@@ -63,12 +63,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCampaignId;
   public String user1Id;
   public String user2Id;
-  public String glJournalId;
+  public String glJournalbatchId;
   public String processed;
   public String processing;
-  public String postingtype;
   public String adClientId;
-  public String glJournalbatchId;
+  public String glJournalId;
+  public String postingtype;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -128,16 +128,16 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return currencyrate;
     else if (fieldName.equalsIgnoreCase("isopening"))
       return isopening;
-    else if (fieldName.equalsIgnoreCase("totaldr"))
-      return totaldr;
     else if (fieldName.equalsIgnoreCase("controlamt"))
       return controlamt;
-    else if (fieldName.equalsIgnoreCase("totalcr"))
-      return totalcr;
+    else if (fieldName.equalsIgnoreCase("totaldr"))
+      return totaldr;
     else if (fieldName.equalsIgnoreCase("docaction"))
       return docaction;
     else if (fieldName.equalsIgnoreCase("docaction_btn") || fieldName.equals("docactionBtn"))
       return docactionBtn;
+    else if (fieldName.equalsIgnoreCase("totalcr"))
+      return totalcr;
     else if (fieldName.equalsIgnoreCase("posted"))
       return posted;
     else if (fieldName.equalsIgnoreCase("posted_btn") || fieldName.equals("postedBtn"))
@@ -172,18 +172,18 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("gl_journal_id") || fieldName.equals("glJournalId"))
-      return glJournalId;
+    else if (fieldName.equalsIgnoreCase("gl_journalbatch_id") || fieldName.equals("glJournalbatchId"))
+      return glJournalbatchId;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
-    else if (fieldName.equalsIgnoreCase("postingtype"))
-      return postingtype;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
-    else if (fieldName.equalsIgnoreCase("gl_journalbatch_id") || fieldName.equals("glJournalbatchId"))
-      return glJournalbatchId;
+    else if (fieldName.equalsIgnoreCase("gl_journal_id") || fieldName.equals("glJournalId"))
+      return glJournalId;
+    else if (fieldName.equalsIgnoreCase("postingtype"))
+      return postingtype;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -240,11 +240,11 @@ Select for edit
       "GL_Journal.CurrencyRateType, " +
       "GL_Journal.CurrencyRate, " +
       "COALESCE(GL_Journal.IsOpening, 'N') AS IsOpening, " +
-      "GL_Journal.TotalDr, " +
       "GL_Journal.ControlAmt, " +
-      "GL_Journal.TotalCr, " +
+      "GL_Journal.TotalDr, " +
       "GL_Journal.DocAction, " +
       "list1.name as DocAction_BTN, " +
+      "GL_Journal.TotalCr, " +
       "GL_Journal.Posted, " +
       "list2.name as Posted_BTN, " +
       "GL_Journal.DocStatus, " +
@@ -262,12 +262,12 @@ Select for edit
       "GL_Journal.C_Campaign_ID, " +
       "GL_Journal.User1_ID, " +
       "GL_Journal.User2_ID, " +
-      "GL_Journal.GL_Journal_ID, " +
+      "GL_Journal.GL_JournalBatch_ID, " +
       "COALESCE(GL_Journal.Processed, 'N') AS Processed, " +
       "GL_Journal.Processing, " +
-      "GL_Journal.PostingType, " +
       "GL_Journal.AD_Client_ID, " +
-      "GL_Journal.GL_JournalBatch_ID, " +
+      "GL_Journal.GL_Journal_ID, " +
+      "GL_Journal.PostingType, " +
       "        ? AS LANGUAGE " +
       "        FROM GL_Journal left join (select AD_Org_ID, Name from AD_Org) table1 on (GL_Journal.AD_Org_ID = table1.AD_Org_ID) left join (select C_AcctSchema_ID, Name from C_AcctSchema) table2 on (GL_Journal.C_AcctSchema_ID = table2.C_AcctSchema_ID) left join (select C_DocType_ID, Name from C_DocType) table3 on (GL_Journal.C_DocType_ID = table3.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL3 on (table3.C_DocType_ID = tableTRL3.C_DocType_ID and tableTRL3.AD_Language = ?)  left join (select C_Period_ID, Name from C_Period) table5 on (GL_Journal.C_Period_ID =  table5.C_Period_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table6 on (GL_Journal.C_Currency_ID = table6.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND (CASE GL_Journal.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(GL_Journal.DocAction) END) = list1.value) left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND GL_Journal.Posted = TO_CHAR(list2.value)) left join (select C_BPartner_ID, Name from C_BPartner) table7 on (GL_Journal.C_Bpartner_ID = table7.C_BPartner_ID) left join (select M_Product_ID, Name from M_Product) table8 on (GL_Journal.M_Product_ID = table8.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL8 on (table8.M_Product_ID = tableTRL8.M_Product_ID and tableTRL8.AD_Language = ?) " +
       "        WHERE 2=2 " +
@@ -341,11 +341,11 @@ Select for edit
         objectHeaderData.currencyratetype = UtilSql.getValue(result, "currencyratetype");
         objectHeaderData.currencyrate = UtilSql.getValue(result, "currencyrate");
         objectHeaderData.isopening = UtilSql.getValue(result, "isopening");
-        objectHeaderData.totaldr = UtilSql.getValue(result, "totaldr");
         objectHeaderData.controlamt = UtilSql.getValue(result, "controlamt");
-        objectHeaderData.totalcr = UtilSql.getValue(result, "totalcr");
+        objectHeaderData.totaldr = UtilSql.getValue(result, "totaldr");
         objectHeaderData.docaction = UtilSql.getValue(result, "docaction");
         objectHeaderData.docactionBtn = UtilSql.getValue(result, "docaction_btn");
+        objectHeaderData.totalcr = UtilSql.getValue(result, "totalcr");
         objectHeaderData.posted = UtilSql.getValue(result, "posted");
         objectHeaderData.postedBtn = UtilSql.getValue(result, "posted_btn");
         objectHeaderData.docstatus = UtilSql.getValue(result, "docstatus");
@@ -363,12 +363,12 @@ Select for edit
         objectHeaderData.cCampaignId = UtilSql.getValue(result, "c_campaign_id");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.glJournalId = UtilSql.getValue(result, "gl_journal_id");
+        objectHeaderData.glJournalbatchId = UtilSql.getValue(result, "gl_journalbatch_id");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
-        objectHeaderData.postingtype = UtilSql.getValue(result, "postingtype");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectHeaderData.glJournalbatchId = UtilSql.getValue(result, "gl_journalbatch_id");
+        objectHeaderData.glJournalId = UtilSql.getValue(result, "gl_journal_id");
+        objectHeaderData.postingtype = UtilSql.getValue(result, "postingtype");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -429,11 +429,11 @@ Create a registry
     objectHeaderData[0].currencyratetype = currencyratetype;
     objectHeaderData[0].currencyrate = currencyrate;
     objectHeaderData[0].isopening = isopening;
-    objectHeaderData[0].totaldr = totaldr;
     objectHeaderData[0].controlamt = controlamt;
-    objectHeaderData[0].totalcr = totalcr;
+    objectHeaderData[0].totaldr = totaldr;
     objectHeaderData[0].docaction = docaction;
     objectHeaderData[0].docactionBtn = docactionBtn;
+    objectHeaderData[0].totalcr = totalcr;
     objectHeaderData[0].posted = posted;
     objectHeaderData[0].postedBtn = postedBtn;
     objectHeaderData[0].docstatus = docstatus;
@@ -451,12 +451,12 @@ Create a registry
     objectHeaderData[0].cCampaignId = cCampaignId;
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].glJournalId = glJournalId;
+    objectHeaderData[0].glJournalbatchId = glJournalbatchId;
     objectHeaderData[0].processed = processed;
     objectHeaderData[0].processing = processing;
-    objectHeaderData[0].postingtype = postingtype;
     objectHeaderData[0].adClientId = adClientId;
-    objectHeaderData[0].glJournalbatchId = glJournalbatchId;
+    objectHeaderData[0].glJournalId = glJournalId;
+    objectHeaderData[0].postingtype = postingtype;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -1124,8 +1124,8 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO GL_Journal " +
-      "        (AD_Org_ID, C_AcctSchema_ID, DocumentNo, Description, C_DocType_ID, DateDoc, DateAcct, C_Period_ID, C_Currency_ID, CurrencyRateType, CurrencyRate, IsOpening, TotalDr, ControlAmt, TotalCr, DocAction, Posted, DocStatus, IsActive, IsPrinted, GL_Category_ID, IsApproved, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Campaign_ID, User1_ID, User2_ID, GL_Journal_ID, Processed, Processing, PostingType, AD_Client_ID, GL_JournalBatch_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, C_AcctSchema_ID, DocumentNo, Description, C_DocType_ID, DateDoc, DateAcct, C_Period_ID, C_Currency_ID, CurrencyRateType, CurrencyRate, IsOpening, ControlAmt, TotalDr, DocAction, TotalCr, Posted, DocStatus, IsActive, IsPrinted, GL_Category_ID, IsApproved, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Campaign_ID, User1_ID, User2_ID, GL_JournalBatch_ID, Processed, Processing, AD_Client_ID, GL_Journal_ID, PostingType, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1145,10 +1145,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, currencyratetype);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, currencyrate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isopening);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, totaldr);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, controlamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, totalcr);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, totaldr);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docaction);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, totalcr);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
@@ -1163,12 +1163,12 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalbatchId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, postingtype);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalbatchId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, postingtype);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

@@ -72,13 +72,13 @@ public class Header extends HttpSecureAppServlet {
       } catch (PropertyException e) {
       }
      
-      if (command.contains("105")) {
+      if (command.contains("4F601E3E64A5413E91363C867A7E522E")) {
         SessionInfo.setProcessType("P");
-        SessionInfo.setProcessId("105");
-        SessionInfo.setModuleId("0");
+        SessionInfo.setProcessId("4F601E3E64A5413E91363C867A7E522E");
+        SessionInfo.setModuleId("5471BF586FB8424DB4B3F3374F166235");
         if (securedProcess) {
           classInfo.type = "P";
-          classInfo.id = "105";
+          classInfo.id = "4F601E3E64A5413E91363C867A7E522E";
         }
       }
      
@@ -388,25 +388,25 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
       }
       response.sendRedirect(strDireccion + request.getServletPath());
 
-     } else if (vars.commandIn("BUTTONGenerateList105")) {
-        vars.setSessionValue("button105.strgeneratelist", vars.getStringParameter("inpgeneratelist"));
-        vars.setSessionValue("button105.strProcessing", vars.getStringParameter("inpprocessing", "Y"));
-        vars.setSessionValue("button105.strOrg", vars.getStringParameter("inpadOrgId"));
-        vars.setSessionValue("button105.strClient", vars.getStringParameter("inpadClientId"));
+     } else if (vars.commandIn("BUTTONEM_Co_Inventario4F601E3E64A5413E91363C867A7E522E")) {
+        vars.setSessionValue("button4F601E3E64A5413E91363C867A7E522E.stremCoInventario", vars.getStringParameter("inpemCoInventario"));
+        vars.setSessionValue("button4F601E3E64A5413E91363C867A7E522E.strProcessing", vars.getStringParameter("inpprocessing", "Y"));
+        vars.setSessionValue("button4F601E3E64A5413E91363C867A7E522E.strOrg", vars.getStringParameter("inpadOrgId"));
+        vars.setSessionValue("button4F601E3E64A5413E91363C867A7E522E.strClient", vars.getStringParameter("inpadClientId"));
         
         
         HashMap<String, String> p = new HashMap<String, String>();
         
         
         //Save in session needed params for combos if needed
-        vars.setSessionObject("button105.originalParams", FieldProviderFactory.getFieldProvider(p));
-        printPageButtonFS(response, vars, "105", request.getServletPath());    
-     } else if (vars.commandIn("BUTTON105")) {
+        vars.setSessionObject("button4F601E3E64A5413E91363C867A7E522E.originalParams", FieldProviderFactory.getFieldProvider(p));
+        printPageButtonFS(response, vars, "4F601E3E64A5413E91363C867A7E522E", request.getServletPath());    
+     } else if (vars.commandIn("BUTTON4F601E3E64A5413E91363C867A7E522E")) {
         String strM_Inventory_ID = vars.getGlobalVariable("inpmInventoryId", windowId + "|M_Inventory_ID", "");
-        String strgeneratelist = vars.getSessionValue("button105.strgeneratelist");
-        String strProcessing = vars.getSessionValue("button105.strProcessing");
-        String strOrg = vars.getSessionValue("button105.strOrg");
-        String strClient = vars.getSessionValue("button105.strClient");
+        String stremCoInventario = vars.getSessionValue("button4F601E3E64A5413E91363C867A7E522E.stremCoInventario");
+        String strProcessing = vars.getSessionValue("button4F601E3E64A5413E91363C867A7E522E.strProcessing");
+        String strOrg = vars.getSessionValue("button4F601E3E64A5413E91363C867A7E522E.strOrg");
+        String strClient = vars.getSessionValue("button4F601E3E64A5413E91363C867A7E522E.strClient");
         
         
         if ((org.openbravo.erpCommon.utility.WindowAccessData.hasReadOnlyAccess(this, vars.getRole(), tabId)) || !(Utility.isElementInList(Utility.getContext(this, vars, "#User_Client", windowId, accesslevel),strClient)  && Utility.isElementInList(Utility.getContext(this, vars, "#User_Org", windowId, accesslevel),strOrg))){
@@ -414,7 +414,7 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
           vars.setMessage(tabId, myError);
           printPageClosePopUp(response, vars);
         }else{       
-          printPageButtonGenerateList105(response, vars, strM_Inventory_ID, strgeneratelist, strProcessing);
+          printPageButtonEM_Co_Inventario4F601E3E64A5413E91363C867A7E522E(response, vars, strM_Inventory_ID, stremCoInventario, strProcessing);
         }
 
      } else if (vars.commandIn("BUTTONUpdateQty106")) {
@@ -475,28 +475,16 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
           printPageButtonProcessing107(response, vars, strM_Inventory_ID, strprocessing, strProcessing);
         }
 
-    } else if (vars.commandIn("SAVE_BUTTONGenerateList105")) {
+    } else if (vars.commandIn("SAVE_BUTTONEM_Co_Inventario4F601E3E64A5413E91363C867A7E522E")) {
         String strM_Inventory_ID = vars.getGlobalVariable("inpKey", windowId + "|M_Inventory_ID", "");
         @SuppressWarnings("unused")
-        String strgeneratelist = vars.getStringParameter("inpgeneratelist");
+        String stremCoInventario = vars.getStringParameter("inpemCoInventario");
         String strProcessing = vars.getStringParameter("inpprocessing");
         OBError myMessage = null;
         try {
           String pinstance = SequenceIdData.getUUID();
-          PInstanceProcessData.insertPInstance(this, pinstance, "105", (("M_Inventory_ID".equalsIgnoreCase("AD_Language"))?"0":strM_Inventory_ID), strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
-          String strmLocatorId = vars.getStringParameter("inpmLocatorId");
-PInstanceProcessData.insertPInstanceParam(this, pinstance, "5", "M_Locator_ID", strmLocatorId, vars.getClient(), vars.getOrg(), vars.getUser());
-String strproductvalue = vars.getStringParameter("inpproductvalue");
-PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "ProductValue", strproductvalue, vars.getClient(), vars.getOrg(), vars.getUser());
-String strmProductCategoryId = vars.getStringParameter("inpmProductCategoryId");
-PInstanceProcessData.insertPInstanceParam(this, pinstance, "15", "M_Product_Category_ID", strmProductCategoryId, vars.getClient(), vars.getOrg(), vars.getUser());
-String strqtyrange = vars.getStringParameter("inpqtyrange");
-PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "QtyRange", strqtyrange, vars.getClient(), vars.getOrg(), vars.getUser());
-String strregularization = vars.getStringParameter("inpregularization", "N");
-PInstanceProcessData.insertPInstanceParam(this, pinstance, "30", "regularization", strregularization, vars.getClient(), vars.getOrg(), vars.getUser());
-String strabc = vars.getStringParameter("inpabc");
-PInstanceProcessData.insertPInstanceParam(this, pinstance, "40", "ABC", strabc, vars.getClient(), vars.getOrg(), vars.getUser());
-
+          PInstanceProcessData.insertPInstance(this, pinstance, "4F601E3E64A5413E91363C867A7E522E", (("M_Inventory_ID".equalsIgnoreCase("AD_Language"))?"0":strM_Inventory_ID), strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+          
           
           ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
           new ProcessRunner(bundle).execute(this);
@@ -643,7 +631,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "40", "ABC", strabc, 
     HeaderData data = new HeaderData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.name = vars.getRequiredStringParameter("inpname");     data.mWarehouseId = vars.getRequiredGlobalVariable("inpmWarehouseId", windowId + "|M_Warehouse_ID");     data.mWarehouseIdr = vars.getStringParameter("inpmWarehouseId_R");     data.description = vars.getStringParameter("inpdescription");     data.generatelist = vars.getStringParameter("inpgeneratelist");     data.updateqty = vars.getStringParameter("inpupdateqty");     data.processing = vars.getStringParameter("inpprocessing");     data.posted = vars.getRequiredStringParameter("inpposted");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cProjectIdr = vars.getStringParameter("inpcProjectId_R");     data.cCostcenterId = vars.getStringParameter("inpcCostcenterId");     data.aAssetId = vars.getStringParameter("inpaAssetId");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.adOrgtrxId = vars.getStringParameter("inpadOrgtrxId");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.mInventoryId = vars.getRequestGlobalVariable("inpmInventoryId", windowId + "|M_Inventory_ID");     data.isactive = vars.getStringParameter("inpisactive", "N"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.name = vars.getRequiredStringParameter("inpname");     data.mWarehouseId = vars.getRequiredGlobalVariable("inpmWarehouseId", windowId + "|M_Warehouse_ID");     data.mWarehouseIdr = vars.getStringParameter("inpmWarehouseId_R");     data.description = vars.getStringParameter("inpdescription");     data.emCoInventario = vars.getStringParameter("inpemCoInventario");     data.generatelist = vars.getStringParameter("inpgeneratelist");     data.updateqty = vars.getStringParameter("inpupdateqty");     data.processing = vars.getStringParameter("inpprocessing");     data.posted = vars.getRequiredStringParameter("inpposted");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cProjectIdr = vars.getStringParameter("inpcProjectId_R");     data.cCostcenterId = vars.getStringParameter("inpcCostcenterId");     data.aAssetId = vars.getStringParameter("inpaAssetId");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.adOrgtrxId = vars.getStringParameter("inpadOrgtrxId");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.mInventoryId = vars.getRequestGlobalVariable("inpmInventoryId", windowId + "|M_Inventory_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -962,7 +950,7 @@ String strParamMovementDate_f = vars.getSessionValue(tabId + "|paramMovementDate
     if (dataField==null) {
       if (boolNew || data==null || data.length==0) {
         refreshSessionNew(vars);
-        data = HeaderData.set("", Utility.getDefault(this, vars, "AD_Client_ID", "@AD_CLIENT_ID@", "168", "", dataField), Utility.getDefault(this, vars, "AD_Org_ID", "@AD_Org_ID@", "168", "", dataField), "Y", Utility.getDefault(this, vars, "CreatedBy", "", "168", "", dataField), HeaderData.selectDef3547_0(this, Utility.getDefault(this, vars, "CreatedBy", "", "168", "", dataField)), Utility.getDefault(this, vars, "UpdatedBy", "", "168", "", dataField), HeaderData.selectDef3549_1(this, Utility.getDefault(this, vars, "UpdatedBy", "", "168", "", dataField)), Utility.getDefault(this, vars, "Name", "@#Date@", "168", "", dataField), Utility.getDefault(this, vars, "Description", "", "168", "", dataField), Utility.getDefault(this, vars, "MovementDate", "@#Date@", "168", "", dataField), Utility.getDefault(this, vars, "Processed", "", "168", "N", dataField), Utility.getDefault(this, vars, "Processing", "", "168", "N", dataField), Utility.getDefault(this, vars, "M_Warehouse_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "UpdateQty", "", "168", "N", dataField), Utility.getDefault(this, vars, "GenerateList", "", "168", "N", dataField), Utility.getDefault(this, vars, "Posted", "", "168", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "234", Utility.getDefault(this, vars, "Posted", "", "168", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "234", Utility.getDefault(this, vars, "Posted", "", "168", "N", dataField))), Utility.getDefault(this, vars, "User2_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "User1_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Activity_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Campaign_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "AD_OrgTrx_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Project_ID", "", "168", "", dataField), HeaderData.selectDef9592_2(this, Utility.getDefault(this, vars, "C_Project_ID", "", "168", "", dataField)), Utility.getDefault(this, vars, "A_Asset_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Costcenter_ID", "", "168", "", dataField));
+        data = HeaderData.set(Utility.getDefault(this, vars, "EM_Co_Inventario", "", "168", "N", dataField), "", Utility.getDefault(this, vars, "AD_Client_ID", "@AD_CLIENT_ID@", "168", "", dataField), Utility.getDefault(this, vars, "AD_Org_ID", "@AD_Org_ID@", "168", "", dataField), "Y", Utility.getDefault(this, vars, "CreatedBy", "", "168", "", dataField), HeaderData.selectDef3547_0(this, Utility.getDefault(this, vars, "CreatedBy", "", "168", "", dataField)), Utility.getDefault(this, vars, "UpdatedBy", "", "168", "", dataField), HeaderData.selectDef3549_1(this, Utility.getDefault(this, vars, "UpdatedBy", "", "168", "", dataField)), Utility.getDefault(this, vars, "Name", "@#Date@", "168", "", dataField), Utility.getDefault(this, vars, "Description", "", "168", "", dataField), Utility.getDefault(this, vars, "MovementDate", "@#Date@", "168", "", dataField), Utility.getDefault(this, vars, "Processed", "", "168", "N", dataField), Utility.getDefault(this, vars, "Processing", "", "168", "N", dataField), Utility.getDefault(this, vars, "M_Warehouse_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "UpdateQty", "", "168", "N", dataField), Utility.getDefault(this, vars, "GenerateList", "", "168", "N", dataField), Utility.getDefault(this, vars, "Posted", "", "168", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "234", Utility.getDefault(this, vars, "Posted", "", "168", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "234", Utility.getDefault(this, vars, "Posted", "", "168", "N", dataField))), Utility.getDefault(this, vars, "User2_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "User1_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Activity_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Campaign_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "AD_OrgTrx_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Project_ID", "", "168", "", dataField), HeaderData.selectDef9592_2(this, Utility.getDefault(this, vars, "C_Project_ID", "", "168", "", dataField)), Utility.getDefault(this, vars, "A_Asset_ID", "", "168", "", dataField), Utility.getDefault(this, vars, "C_Costcenter_ID", "", "168", "", dataField));
         
       }
      }
@@ -1075,8 +1063,8 @@ comboTableData = new ComboTableData(vars, this, "18", "M_Warehouse_ID", "197", "
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("mWarehouseId"):dataField.getField("mWarehouseId")));
 xmlDocument.setData("reportM_Warehouse_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
-xmlDocument.setParameter("GenerateList_BTNname", Utility.getButtonName(this, vars, "2922", "GenerateList_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalGenerateList = org.openbravo.erpCommon.utility.Utility.isModalProcess("105"); 
-xmlDocument.setParameter("GenerateList_Modal", modalGenerateList?"true":"false");
+xmlDocument.setParameter("EM_Co_Inventario_BTNname", Utility.getButtonName(this, vars, "2C301175315E4104ACE2A2850C644355", "EM_Co_Inventario_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_Co_Inventario = org.openbravo.erpCommon.utility.Utility.isModalProcess("4F601E3E64A5413E91363C867A7E522E"); 
+xmlDocument.setParameter("EM_Co_Inventario_Modal", modalEM_Co_Inventario?"true":"false");
 xmlDocument.setParameter("UpdateQty_BTNname", Utility.getButtonName(this, vars, "2925", "UpdateQty_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalUpdateQty = org.openbravo.erpCommon.utility.Utility.isModalProcess("106"); 
 xmlDocument.setParameter("UpdateQty_Modal", modalUpdateQty?"true":"false");
 xmlDocument.setParameter("Processing_BTNname", Utility.getButtonName(this, vars, "2689", "Processing_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalProcessing = org.openbravo.erpCommon.utility.Utility.isModalProcess("107"); 
@@ -1128,13 +1116,13 @@ xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTime
     out.close();
   }
 
-    private void printPageButtonGenerateList105(HttpServletResponse response, VariablesSecureApp vars, String strM_Inventory_ID, String strgeneratelist, String strProcessing)
+    private void printPageButtonEM_Co_Inventario4F601E3E64A5413E91363C867A7E522E(HttpServletResponse response, VariablesSecureApp vars, String strM_Inventory_ID, String stremCoInventario, String strProcessing)
     throws IOException, ServletException {
-      log4j.debug("Output: Button process 105");
+      log4j.debug("Output: Button process 4F601E3E64A5413E91363C867A7E522E");
       String[] discard = {"newDiscard"};
       response.setContentType("text/html; charset=UTF-8");
       PrintWriter out = response.getWriter();
-      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/GenerateList105", discard).createXmlDocument();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/EM_Co_Inventario4F601E3E64A5413E91363C867A7E522E", discard).createXmlDocument();
       xmlDocument.setParameter("key", strM_Inventory_ID);
       xmlDocument.setParameter("processing", strProcessing);
       xmlDocument.setParameter("form", "Header_Edition.html");
@@ -1142,13 +1130,13 @@ xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTime
       xmlDocument.setParameter("css", vars.getTheme());
       xmlDocument.setParameter("language", "defaultLang=\"" + vars.getLanguage() + "\";");
       xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
-      xmlDocument.setParameter("processId", "105");
+      xmlDocument.setParameter("processId", "4F601E3E64A5413E91363C867A7E522E");
       xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
       xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
       
       {
-        OBError myMessage = vars.getMessage("105");
-        vars.removeMessage("105");
+        OBError myMessage = vars.getMessage("4F601E3E64A5413E91363C867A7E522E");
+        vars.removeMessage("4F601E3E64A5413E91363C867A7E522E");
         if (myMessage!=null) {
           xmlDocument.setParameter("messageType", myMessage.getType());
           xmlDocument.setParameter("messageTitle", myMessage.getTitle());
@@ -1157,26 +1145,6 @@ xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTime
       }
 
           try {
-    ComboTableData comboTableData = null;
-    xmlDocument.setParameter("M_Locator_ID", "");
-    xmlDocument.setParameter("M_Locator_IDR", HeaderData.selectActDefM_Locator_ID(this, ""));
-    xmlDocument.setParameter("ProductValue", "%");
-    xmlDocument.setParameter("M_Product_Category_ID", "0");
-    comboTableData = new ComboTableData(vars, this, "19", "M_Product_Category_ID", "", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
-    Utility.fillSQLParameters(this, vars, (FieldProvider) vars.getSessionObject("button105.originalParams"), comboTableData, windowId, "0");
-    xmlDocument.setData("reportM_Product_Category_ID", "liststructure", comboTableData.select(false));
-comboTableData = null;
-    xmlDocument.setParameter("QtyRange", "N");
-    comboTableData = new ComboTableData(vars, this, "17", "QtyRange", "212", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
-    Utility.fillSQLParameters(this, vars, (FieldProvider) vars.getSessionObject("button105.originalParams"), comboTableData, windowId, "N");
-    xmlDocument.setData("reportQtyRange", "liststructure", comboTableData.select(false));
-comboTableData = null;
-    xmlDocument.setParameter("regularization", "N");
-    xmlDocument.setParameter("ABC", "");
-    comboTableData = new ComboTableData(vars, this, "17", "ABC", "1000500000", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
-    Utility.fillSQLParameters(this, vars, (FieldProvider) vars.getSessionObject("button105.originalParams"), comboTableData, windowId, "");
-    xmlDocument.setData("reportABC", "liststructure", comboTableData.select(false));
-comboTableData = null;
     } catch (Exception ex) {
       throw new ServletException(ex);
     }

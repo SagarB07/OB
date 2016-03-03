@@ -18,6 +18,7 @@
 */
 package org.openbravo.model.financialmgmt.gl;
 
+import com.atrums.depositos.data.DP_FinaccTransactionV;
 import com.atrums.nomina.data.noPagoCabecera;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class GLItem extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY_TAX = "tax";
     public static final String PROPERTY_WITHHOLDING = "withholding";
     public static final String PROPERTY_APRMFINACCTRANSACTIONVLIST = "aPRMFinaccTransactionVList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_FINBANKSTATEMENTLINELIST = "fINBankStatementLineList";
     public static final String PROPERTY_FINFINACCTRANSACTIONLIST = "fINFinaccTransactionList";
     public static final String PROPERTY_FINPAYMENTDETAILLIST = "fINPaymentDetailList";
@@ -97,6 +99,7 @@ public class GLItem extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_ENABLEINCASH, false);
         setDefaultValue(PROPERTY_ENABLEINFINANCIALINVOICES, false);
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINBANKSTATEMENTLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINACCTRANSACTIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINPAYMENTDETAILLIST, new ArrayList<Object>());
@@ -247,6 +250,15 @@ public class GLItem extends BaseOBObject implements Traceable, ClientEnabled, Or
 
     public void setAPRMFinaccTransactionVList(List<APRM_FinaccTransactionV> aPRMFinaccTransactionVList) {
         set(PROPERTY_APRMFINACCTRANSACTIONVLIST, aPRMFinaccTransactionVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")

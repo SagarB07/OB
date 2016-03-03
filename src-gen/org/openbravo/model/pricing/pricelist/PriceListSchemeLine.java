@@ -78,7 +78,9 @@ public class PriceListSchemeLine extends BaseOBObject implements Traceable, Clie
     public static final String PROPERTY_LIMITPRICEMINMARGIN = "limitPriceMinMargin";
     public static final String PROPERTY_MAXPRICELIMITMARGIN = "maxPriceLimitMargin";
     public static final String PROPERTY_FIXEDLIMITPRICE = "fixedLimitPrice";
+    public static final String PROPERTY_REGASTO = "reGasto";
     public static final String PROPERTY_LISTPRICEMARGIN = "listPriceMargin";
+    public static final String PROPERTY_REGANANCIA = "reGanancia";
     public static final String PROPERTY_UNITPRICEMARGIN = "unitPriceMargin";
     public static final String PROPERTY_LIMITPRICEMARGIN = "limitPriceMargin";
 
@@ -91,7 +93,9 @@ public class PriceListSchemeLine extends BaseOBObject implements Traceable, Clie
         setDefaultValue(PROPERTY_STANDARDPRICEROUNDING, "C");
         setDefaultValue(PROPERTY_BASELIMITPRICE, "X");
         setDefaultValue(PROPERTY_PRICELIMITROUNDING, "C");
+        setDefaultValue(PROPERTY_REGASTO, new BigDecimal(0));
         setDefaultValue(PROPERTY_LISTPRICEMARGIN, new BigDecimal(0));
+        setDefaultValue(PROPERTY_REGANANCIA, new BigDecimal(0));
         setDefaultValue(PROPERTY_UNITPRICEMARGIN, new BigDecimal(0));
         setDefaultValue(PROPERTY_LIMITPRICEMARGIN, new BigDecimal(0));
     }
@@ -389,12 +393,28 @@ public class PriceListSchemeLine extends BaseOBObject implements Traceable, Clie
         set(PROPERTY_FIXEDLIMITPRICE, fixedLimitPrice);
     }
 
+    public BigDecimal getReGasto() {
+        return (BigDecimal) get(PROPERTY_REGASTO);
+    }
+
+    public void setReGasto(BigDecimal reGasto) {
+        set(PROPERTY_REGASTO, reGasto);
+    }
+
     public BigDecimal getListPriceMargin() {
         return (BigDecimal) get(PROPERTY_LISTPRICEMARGIN);
     }
 
     public void setListPriceMargin(BigDecimal listPriceMargin) {
         set(PROPERTY_LISTPRICEMARGIN, listPriceMargin);
+    }
+
+    public BigDecimal getReGanancia() {
+        return (BigDecimal) get(PROPERTY_REGANANCIA);
+    }
+
+    public void setReGanancia(BigDecimal reGanancia) {
+        set(PROPERTY_REGANANCIA, reGanancia);
     }
 
     public BigDecimal getUnitPriceMargin() {

@@ -61,6 +61,7 @@ public class Client extends BaseOBObject implements Traceable, OrganizationEnabl
     public static final String PROPERTY_SMTPAUTHENTIFICATION = "sMTPAuthentification";
     public static final String PROPERTY_CURRENCY = "currency";
     public static final String PROPERTY_ACCTDIMCENTRALLYMAINTAINED = "acctdimCentrallyMaintained";
+    public static final String PROPERTY_CONROESTAB = "coNroEstab";
     public static final String PROPERTY_PROJECTACCTDIMISENABLE = "projectAcctdimIsenable";
     public static final String PROPERTY_PROJECTACCTDIMHEADER = "projectAcctdimHeader";
     public static final String PROPERTY_PROJECTACCTDIMLINES = "projectAcctdimLines";
@@ -89,6 +90,12 @@ public class Client extends BaseOBObject implements Traceable, OrganizationEnabl
     public static final String PROPERTY_ORGACCTDIMHEADER = "orgAcctdimHeader";
     public static final String PROPERTY_ORGACCTDIMLINES = "orgAcctdimLines";
     public static final String PROPERTY_ORGACCTDIMBREAKDOWN = "orgAcctdimBreakdown";
+    public static final String PROPERTY_ATECFECONTRIESPECIAL = "atecfeContriespecial";
+    public static final String PROPERTY_ATECFETIPOAMBIENTE = "atecfeTipoambiente";
+    public static final String PROPERTY_ATECFENUMRESOLSRI = "atecfeNumresolsri";
+    public static final String PROPERTY_ATECFECODINUMERICO = "atecfeCodinumerico";
+    public static final String PROPERTY_ATECFETIPOEMISI = "atecfeTipoemisi";
+    public static final String PROPERTY_ATECFEOBLIGCONTABI = "atecfeObligcontabi";
     public static final String PROPERTY_ADCLIENTACCTDIMENSIONLIST = "aDClientAcctDimensionList";
     public static final String PROPERTY_CLIENTINFORMATIONLIST = "clientInformationList";
     public static final String PROPERTY_EMAILSERVERCONFIGURATIONLIST = "emailServerConfigurationList";
@@ -98,6 +105,7 @@ public class Client extends BaseOBObject implements Traceable, OrganizationEnabl
         setDefaultValue(PROPERTY_MULTILINGUALDOCUMENTS, false);
         setDefaultValue(PROPERTY_SMTPAUTHENTIFICATION, false);
         setDefaultValue(PROPERTY_ACCTDIMCENTRALLYMAINTAINED, false);
+        setDefaultValue(PROPERTY_CONROESTAB, "001");
         setDefaultValue(PROPERTY_PROJECTACCTDIMISENABLE, false);
         setDefaultValue(PROPERTY_PROJECTACCTDIMHEADER, false);
         setDefaultValue(PROPERTY_PROJECTACCTDIMLINES, false);
@@ -126,6 +134,8 @@ public class Client extends BaseOBObject implements Traceable, OrganizationEnabl
         setDefaultValue(PROPERTY_ORGACCTDIMHEADER, false);
         setDefaultValue(PROPERTY_ORGACCTDIMLINES, false);
         setDefaultValue(PROPERTY_ORGACCTDIMBREAKDOWN, false);
+        setDefaultValue(PROPERTY_ATECFECONTRIESPECIAL, false);
+        setDefaultValue(PROPERTY_ATECFEOBLIGCONTABI, false);
         setDefaultValue(PROPERTY_ADCLIENTACCTDIMENSIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EMAILSERVERCONFIGURATIONLIST, new ArrayList<Object>());
@@ -294,6 +304,14 @@ public class Client extends BaseOBObject implements Traceable, OrganizationEnabl
 
     public void setAcctdimCentrallyMaintained(Boolean acctdimCentrallyMaintained) {
         set(PROPERTY_ACCTDIMCENTRALLYMAINTAINED, acctdimCentrallyMaintained);
+    }
+
+    public String getCoNroEstab() {
+        return (String) get(PROPERTY_CONROESTAB);
+    }
+
+    public void setCoNroEstab(String coNroEstab) {
+        set(PROPERTY_CONROESTAB, coNroEstab);
     }
 
     public Boolean isProjectAcctdimIsenable() {
@@ -518,6 +536,54 @@ public class Client extends BaseOBObject implements Traceable, OrganizationEnabl
 
     public void setOrgAcctdimBreakdown(Boolean orgAcctdimBreakdown) {
         set(PROPERTY_ORGACCTDIMBREAKDOWN, orgAcctdimBreakdown);
+    }
+
+    public Boolean isAtecfeContriespecial() {
+        return (Boolean) get(PROPERTY_ATECFECONTRIESPECIAL);
+    }
+
+    public void setAtecfeContriespecial(Boolean atecfeContriespecial) {
+        set(PROPERTY_ATECFECONTRIESPECIAL, atecfeContriespecial);
+    }
+
+    public String getAtecfeTipoambiente() {
+        return (String) get(PROPERTY_ATECFETIPOAMBIENTE);
+    }
+
+    public void setAtecfeTipoambiente(String atecfeTipoambiente) {
+        set(PROPERTY_ATECFETIPOAMBIENTE, atecfeTipoambiente);
+    }
+
+    public String getAtecfeNumresolsri() {
+        return (String) get(PROPERTY_ATECFENUMRESOLSRI);
+    }
+
+    public void setAtecfeNumresolsri(String atecfeNumresolsri) {
+        set(PROPERTY_ATECFENUMRESOLSRI, atecfeNumresolsri);
+    }
+
+    public String getAtecfeCodinumerico() {
+        return (String) get(PROPERTY_ATECFECODINUMERICO);
+    }
+
+    public void setAtecfeCodinumerico(String atecfeCodinumerico) {
+        set(PROPERTY_ATECFECODINUMERICO, atecfeCodinumerico);
+    }
+
+    public String getAtecfeTipoemisi() {
+        return (String) get(PROPERTY_ATECFETIPOEMISI);
+    }
+
+    public void setAtecfeTipoemisi(String atecfeTipoemisi) {
+        set(PROPERTY_ATECFETIPOEMISI, atecfeTipoemisi);
+    }
+
+    public Boolean isAtecfeObligcontabi() {
+        return (Boolean) get(PROPERTY_ATECFEOBLIGCONTABI);
+    }
+
+    public void setAtecfeObligcontabi(Boolean atecfeObligcontabi) {
+        set(PROPERTY_ATECFEOBLIGCONTABI, atecfeObligcontabi);
     }
 
     @SuppressWarnings("unchecked")

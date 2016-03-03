@@ -29,6 +29,7 @@ import org.openbravo.base.structure.OrganizationEnabled;
 import org.openbravo.base.structure.Traceable;
 import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
+import org.openbravo.model.common.enterprise.DocumentType;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.financialmgmt.accounting.Costcenter;
 import org.openbravo.model.financialmgmt.accounting.UserDimension1;
@@ -70,6 +71,7 @@ public class InternalMovement extends BaseOBObject implements Traceable, ClientE
     public static final String PROPERTY_MOVEBETWEENLOCATORS = "moveBetweenLocators";
     public static final String PROPERTY_DOCUMENTNO = "documentNo";
     public static final String PROPERTY_COSTCENTER = "costCenter";
+    public static final String PROPERTY_CODOCTYPE = "coDoctype";
     public static final String PROPERTY_ASSET = "asset";
     public static final String PROPERTY_MATERIALMGMTINTERNALMOVEMENTLINELIST = "materialMgmtInternalMovementLineList";
 
@@ -268,6 +270,14 @@ public class InternalMovement extends BaseOBObject implements Traceable, ClientE
 
     public void setCostCenter(Costcenter costCenter) {
         set(PROPERTY_COSTCENTER, costCenter);
+    }
+
+    public DocumentType getCoDoctype() {
+        return (DocumentType) get(PROPERTY_CODOCTYPE);
+    }
+
+    public void setCoDoctype(DocumentType coDoctype) {
+        set(PROPERTY_CODOCTYPE, coDoctype);
     }
 
     public Asset getAsset() {

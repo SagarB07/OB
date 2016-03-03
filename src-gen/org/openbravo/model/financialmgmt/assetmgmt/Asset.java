@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.financialmgmt.assetmgmt;
 
+import com.atrums.activos.data.atecacActivoEmp;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -156,6 +158,7 @@ public class Asset extends BaseOBObject implements Traceable, ClientEnabled, Org
     public static final String PROPERTY_ORDERLINEACCOUNTINGDIMENSIONLIST = "orderLineAccountingDimensionList";
     public static final String PROPERTY_TIMEANDEXPENSESHEETLIST = "timeAndExpenseSheetList";
     public static final String PROPERTY_TIMEANDEXPENSESHEETLINELIST = "timeAndExpenseSheetLineList";
+    public static final String PROPERTY_ATECACACTIVOEMPLIST = "atecacActivoEmpList";
 
     public Asset() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -197,6 +200,7 @@ public class Asset extends BaseOBObject implements Traceable, ClientEnabled, Org
         setDefaultValue(PROPERTY_ORDERLINEACCOUNTINGDIMENSIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATECACACTIVOEMPLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -922,6 +926,15 @@ public class Asset extends BaseOBObject implements Traceable, ClientEnabled, Org
 
     public void setTimeAndExpenseSheetLineList(List<SheetLine> timeAndExpenseSheetLineList) {
         set(PROPERTY_TIMEANDEXPENSESHEETLINELIST, timeAndExpenseSheetLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atecacActivoEmp> getAtecacActivoEmpList() {
+      return (List<atecacActivoEmp>) get(PROPERTY_ATECACACTIVOEMPLIST);
+    }
+
+    public void setAtecacActivoEmpList(List<atecacActivoEmp> atecacActivoEmpList) {
+        set(PROPERTY_ATECACACTIVOEMPLIST, atecacActivoEmpList);
     }
 
 }

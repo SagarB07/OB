@@ -122,6 +122,7 @@ public class InvoiceLine extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_NDDIMENSION = "ndDimension";
     public static final String PROPERTY_EXPLODE = "explode";
     public static final String PROPERTY_BOMPARENT = "bOMParent";
+    public static final String PROPERTY_REVALUEPRODUCTO = "rEValueProducto";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
     public static final String PROPERTY_INVOICELINEBOMPARENTIDLIST = "invoiceLineBOMParentIDList";
     public static final String PROPERTY_INVOICELINEACCOUNTINGDIMENSIONLIST = "invoiceLineAccountingDimensionList";
@@ -599,6 +600,14 @@ public class InvoiceLine extends BaseOBObject implements Traceable, ClientEnable
 
     public void setBOMParent(InvoiceLine bOMParent) {
         set(PROPERTY_BOMPARENT, bOMParent);
+    }
+
+    public String getREValueProducto() {
+        return (String) get(PROPERTY_REVALUEPRODUCTO);
+    }
+
+    public void setREValueProducto(String rEValueProducto) {
+        set(PROPERTY_REVALUEPRODUCTO, rEValueProducto);
     }
 
     @SuppressWarnings("unchecked")

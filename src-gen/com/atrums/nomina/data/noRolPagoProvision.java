@@ -18,6 +18,8 @@
 */
 package com.atrums.nomina.data;
 
+import com.atrums.centrocostos.data.cco_registra_costos;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +74,7 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_NENUMCONTRATO = "neNumContrato";
     public static final String PROPERTY_NEOBSERVACION = "neObservacion";
     public static final String PROPERTY_NOROLPAGOPROVISIONLINELIST = "nORolPagoProvisionLineList";
+    public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
     public noRolPagoProvision() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -86,6 +89,7 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_POSTED, "N");
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -316,6 +320,15 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
 
     public void setNORolPagoProvisionLineList(List<noRolPagoProvisionLine> nORolPagoProvisionLineList) {
         set(PROPERTY_NOROLPAGOPROVISIONLINELIST, nORolPagoProvisionLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<cco_registra_costos> getCcoRegistraCostosList() {
+      return (List<cco_registra_costos>) get(PROPERTY_CCOREGISTRACOSTOSLIST);
+    }
+
+    public void setCcoRegistraCostosList(List<cco_registra_costos> ccoRegistraCostosList) {
+        set(PROPERTY_CCOREGISTRACOSTOSLIST, ccoRegistraCostosList);
     }
 
 }

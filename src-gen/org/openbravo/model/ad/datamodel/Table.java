@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.ad.datamodel;
 
+import com.atrums.depositos.data.DP_FinaccTransactionV;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -111,6 +113,7 @@ public class Table extends BaseOBObject implements Traceable, ClientEnabled, Org
     public static final String PROPERTY_APRMFINACCTRANSACTIONVFORCEDTABLEIDLIST = "aPRMFinaccTransactionVForcedTableIDList";
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
     public static final String PROPERTY_APRMRECONCILIATIONFORCEDTABLEIDLIST = "aPRMReconciliationForcedTableIDList";
+    public static final String PROPERTY_FINACCTRANSACTIONVFORCEDTABLEIDLIST = "finaccTransactionVForcedTableIDList";
     public static final String PROPERTY_DATAIMPORTFORMATLIST = "dataImportFormatList";
     public static final String PROPERTY_DATASETTABLELIST = "dataSetTableList";
     public static final String PROPERTY_DOCUMENTTYPELIST = "documentTypeList";
@@ -151,6 +154,7 @@ public class Table extends BaseOBObject implements Traceable, ClientEnabled, Org
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONVFORCEDTABLEIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMRECONCILIATIONFORCEDTABLEIDLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVFORCEDTABLEIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTFORMATLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATASETTABLELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DOCUMENTTYPELIST, new ArrayList<Object>());
@@ -549,6 +553,15 @@ public class Table extends BaseOBObject implements Traceable, ClientEnabled, Org
 
     public void setAPRMReconciliationForcedTableIDList(List<APRM_Reconciliation_v> aPRMReconciliationForcedTableIDList) {
         set(PROPERTY_APRMRECONCILIATIONFORCEDTABLEIDLIST, aPRMReconciliationForcedTableIDList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVForcedTableIDList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVFORCEDTABLEIDLIST);
+    }
+
+    public void setFinaccTransactionVForcedTableIDList(List<DP_FinaccTransactionV> finaccTransactionVForcedTableIDList) {
+        set(PROPERTY_FINACCTRANSACTIONVFORCEDTABLEIDLIST, finaccTransactionVForcedTableIDList);
     }
 
     @SuppressWarnings("unchecked")

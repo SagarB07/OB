@@ -48,6 +48,44 @@ public class Header extends HttpSecureAppServlet {
   }
   
   
+  @Override
+  public void service(HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
+    VariablesSecureApp vars = new VariablesSecureApp(request);
+    String command = vars.getCommand();
+    
+    boolean securedProcess = false;
+    if (command.contains("BUTTON")) {
+     SessionInfo.setUserId(vars.getSessionValue("#AD_User_ID"));
+     SessionInfo.setSessionId(vars.getSessionValue("#AD_Session_ID"));
+     
+      if (command.contains("152F2390FF594AD9822308A0AABC145C")) {
+        SessionInfo.setProcessType("P");
+        SessionInfo.setProcessId("152F2390FF594AD9822308A0AABC145C");
+        SessionInfo.setModuleId("47F02629C9864C5096C674A3DDB75FE8");
+      }
+     
+      try {
+        securedProcess = "Y".equals(org.openbravo.erpCommon.businessUtility.Preferences
+            .getPreferenceValue("SecuredProcess", true, vars.getClient(), vars.getOrg(), vars
+                .getUser(), vars.getRole(), windowId));
+      } catch (PropertyException e) {
+      }
+     
+
+     
+      if (securedProcess && command.contains("152F2390FF594AD9822308A0AABC145C")) {
+        classInfo.type = "P";
+        classInfo.id = "152F2390FF594AD9822308A0AABC145C";
+      }
+     
+    }
+    if (!securedProcess) {
+      setClassInfo("W", tabId, moduleId);
+    }
+    super.service(request, response);
+  }
+  
 
   public void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
     TableSQLData tableSQL = null;
@@ -333,8 +371,70 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
       }
       response.sendRedirect(strDireccion + request.getServletPath());
 
+    } else if (vars.commandIn("BUTTONEM_Atecfe_Docaction152F2390FF594AD9822308A0AABC145C")) {
+        vars.setSessionValue("button152F2390FF594AD9822308A0AABC145C.stremAtecfeDocaction", vars.getStringParameter("inpemAtecfeDocaction"));
+        vars.setSessionValue("button152F2390FF594AD9822308A0AABC145C.strProcessing", vars.getStringParameter("inpprocessing", "Y"));
+        vars.setSessionValue("button152F2390FF594AD9822308A0AABC145C.strOrg", vars.getStringParameter("inpadOrgId"));
+        vars.setSessionValue("button152F2390FF594AD9822308A0AABC145C.strClient", vars.getStringParameter("inpadClientId"));
+        
+        
+        HashMap<String, String> p = new HashMap<String, String>();
+        
+        
+        //Save in session needed params for combos if needed
+        vars.setSessionObject("button152F2390FF594AD9822308A0AABC145C.originalParams", FieldProviderFactory.getFieldProvider(p));
+        printPageButtonFS(response, vars, "152F2390FF594AD9822308A0AABC145C", request.getServletPath());
+      } else if (vars.commandIn("BUTTON152F2390FF594AD9822308A0AABC145C")) {
+        String strM_InOut_ID = vars.getGlobalVariable("inpmInoutId", windowId + "|M_InOut_ID", "");
+        String stremAtecfeDocaction = vars.getSessionValue("button152F2390FF594AD9822308A0AABC145C.stremAtecfeDocaction");
+        String strProcessing = vars.getSessionValue("button152F2390FF594AD9822308A0AABC145C.strProcessing");
+        String strOrg = vars.getSessionValue("button152F2390FF594AD9822308A0AABC145C.strOrg");
+        String strClient = vars.getSessionValue("button152F2390FF594AD9822308A0AABC145C.strClient");
+
+        
+        if ((org.openbravo.erpCommon.utility.WindowAccessData.hasReadOnlyAccess(this, vars.getRole(), tabId)) || !(Utility.isElementInList(Utility.getContext(this, vars, "#User_Client", windowId, accesslevel),strClient)  && Utility.isElementInList(Utility.getContext(this, vars, "#User_Org", windowId, accesslevel),strOrg))){
+          OBError myError = Utility.translateError(this, vars, vars.getLanguage(), Utility.messageBD(this, "NoWriteAccess", vars.getLanguage()));
+          vars.setMessage(tabId, myError);
+          printPageClosePopUp(response, vars);
+        }else{       
+          printPageButtonEM_Atecfe_Docaction152F2390FF594AD9822308A0AABC145C(response, vars, strM_InOut_ID, stremAtecfeDocaction, strProcessing);
+        }
 
 
+    } else if (vars.commandIn("SAVE_BUTTONEM_Atecfe_Docaction152F2390FF594AD9822308A0AABC145C")) {
+        String strM_InOut_ID = vars.getGlobalVariable("inpKey", windowId + "|M_InOut_ID", "");
+        
+        ProcessBundle pb = new ProcessBundle("152F2390FF594AD9822308A0AABC145C", vars).init(this);
+        HashMap<String, Object> params= new HashMap<String, Object>();
+       
+        params.put("M_InOut_ID", strM_InOut_ID);
+        params.put("adOrgId", vars.getStringParameter("inpadOrgId"));
+        params.put("adClientId", vars.getStringParameter("inpadClientId"));
+        params.put("tabId", tabId);
+        
+        
+        
+        pb.setParams(params);
+        OBError myMessage = null;
+        try {
+          new ProcessRunner(pb).execute(this);
+          myMessage = (OBError) pb.getResult();
+          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
+          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
+        } catch (Exception ex) {
+          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
+          log4j.error(ex);
+          if (!myMessage.isConnectionAvailable()) {
+            bdErrorConnection(response);
+            return;
+          } else vars.setMessage(tabId, myMessage);
+        }
+        //close popup
+        if (myMessage!=null) {
+          if (log4j.isDebugEnabled()) log4j.debug(myMessage.getMessage());
+          vars.setMessage(tabId, myMessage);
+        }
+        printPageClosePopUp(response, vars);
 
     } else if (vars.commandIn("BUTTONCreateFrom")) {
         String strM_InOut_ID = vars.getGlobalVariable("inpmInoutId", windowId + "|M_InOut_ID", "");
@@ -434,7 +534,7 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
     HeaderData data = new HeaderData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.mConditionGoodsId = vars.getStringParameter("inpmConditionGoodsId");     data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.mWarehouseId = vars.getRequiredGlobalVariable("inpmWarehouseId", windowId + "|M_Warehouse_ID");     data.cBpartnerId = vars.getRequiredGlobalVariable("inpcBpartnerId", windowId + "|C_BPartner_ID");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.cBpartnerLocationId = vars.getRequiredStringParameter("inpcBpartnerLocationId");     data.cBpartnerLocationIdr = vars.getStringParameter("inpcBpartnerLocationId_R");     data.description = vars.getStringParameter("inpdescription");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.deliveryLocationId = vars.getStringParameter("inpdeliveryLocationId");     data.deliveryLocationIdr = vars.getStringParameter("inpdeliveryLocationId_R");     data.docstatus = vars.getRequiredGlobalVariable("inpdocstatus", windowId + "|DocStatus");     data.adUserId = vars.getStringParameter("inpadUserId");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.cOrderId = vars.getStringParameter("inpcOrderId");     data.cOrderIdr = vars.getStringParameter("inpcOrderId_R");     data.poreference = vars.getStringParameter("inpporeference");     data.dateordered = vars.getStringParameter("inpdateordered");     data.salesrepId = vars.getStringParameter("inpsalesrepId");     data.createfrom = vars.getStringParameter("inpcreatefrom");     data.docaction = vars.getRequiredStringParameter("inpdocaction");     data.processGoodsJava = vars.getStringParameter("inpprocessGoodsJava");     data.posted = vars.getRequiredGlobalVariable("inpposted", windowId + "|Posted");     data.deliveryrule = vars.getRequiredStringParameter("inpdeliveryrule");     data.deliveryviarule = vars.getRequiredStringParameter("inpdeliveryviarule");    try {   data.freightamt = vars.getNumericParameter("inpfreightamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.freightcostrule = vars.getRequiredStringParameter("inpfreightcostrule");     data.mShipperId = vars.getStringParameter("inpmShipperId");     data.priorityrule = vars.getRequiredStringParameter("inppriorityrule");     data.pickdate = vars.getStringParameter("inppickdate");     data.trackingno = vars.getStringParameter("inptrackingno");    try {   data.nopackages = vars.getNumericParameter("inpnopackages");  } catch (ServletException paramEx) { ex = paramEx; }     data.movementtype = vars.getRequiredStringParameter("inpmovementtype");     data.cChargeId = vars.getStringParameter("inpcChargeId");    try {   data.chargeamt = vars.getNumericParameter("inpchargeamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.shipdate = vars.getStringParameter("inpshipdate");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.adOrgtrxId = vars.getStringParameter("inpadOrgtrxId");     data.mFreightcategoryId = vars.getStringParameter("inpmFreightcategoryId");     data.calculateFreight = vars.getStringParameter("inpcalculateFreight");     data.freightCurrencyId = vars.getRequestGlobalVariable("inpfreightCurrencyId", windowId + "|Freight_Currency_ID");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cProjectIdr = vars.getStringParameter("inpcProjectId_R");     data.cCostcenterId = vars.getStringParameter("inpcCostcenterId");     data.aAssetId = vars.getStringParameter("inpaAssetId");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.generatelines = vars.getStringParameter("inpgeneratelines");     data.islogistic = vars.getStringParameter("inpislogistic", "N");     data.updatelines = vars.getStringParameter("inpupdatelines");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.cInvoiceId = vars.getStringParameter("inpcInvoiceId");     data.generateto = vars.getStringParameter("inpgenerateto");     data.isprinted = vars.getStringParameter("inpisprinted", "N");     data.rmReceiptPickedit = vars.getStringParameter("inprmReceiptPickedit");     data.rmShipmentPickedit = vars.getStringParameter("inprmShipmentPickedit");     data.issotrx = vars.getRequiredInputGlobalVariable("inpissotrx", windowId + "|IsSOTrx", "N");     data.dateprinted = vars.getStringParameter("inpdateprinted");     data.processing = vars.getStringParameter("inpprocessing", "N");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.mInoutId = vars.getRequestGlobalVariable("inpmInoutId", windowId + "|M_InOut_ID");     data.isactive = vars.getStringParameter("inpisactive", "N"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.mConditionGoodsId = vars.getStringParameter("inpmConditionGoodsId");     data.mWarehouseId = vars.getRequiredGlobalVariable("inpmWarehouseId", windowId + "|M_Warehouse_ID");     data.cBpartnerId = vars.getRequiredGlobalVariable("inpcBpartnerId", windowId + "|C_BPartner_ID");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.cBpartnerLocationId = vars.getRequiredStringParameter("inpcBpartnerLocationId");     data.cBpartnerLocationIdr = vars.getStringParameter("inpcBpartnerLocationId_R");     data.description = vars.getStringParameter("inpdescription");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.deliveryLocationId = vars.getStringParameter("inpdeliveryLocationId");     data.deliveryLocationIdr = vars.getStringParameter("inpdeliveryLocationId_R");     data.emAtecfeDocstatus = vars.getRequiredGlobalVariable("inpemAtecfeDocstatus", windowId + "|EM_Atecfe_Docstatus");     data.docstatus = vars.getRequiredGlobalVariable("inpdocstatus", windowId + "|DocStatus");     data.adUserId = vars.getStringParameter("inpadUserId");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.cOrderId = vars.getStringParameter("inpcOrderId");     data.cOrderIdr = vars.getStringParameter("inpcOrderId_R");     data.poreference = vars.getStringParameter("inpporeference");     data.dateordered = vars.getStringParameter("inpdateordered");     data.salesrepId = vars.getStringParameter("inpsalesrepId");     data.createfrom = vars.getStringParameter("inpcreatefrom");     data.docaction = vars.getRequiredStringParameter("inpdocaction");     data.processGoodsJava = vars.getStringParameter("inpprocessGoodsJava");     data.posted = vars.getRequiredGlobalVariable("inpposted", windowId + "|Posted");     data.deliveryrule = vars.getRequiredStringParameter("inpdeliveryrule");     data.deliveryviarule = vars.getRequiredStringParameter("inpdeliveryviarule");     data.deliveryviaruler = vars.getStringParameter("inpdeliveryviarule_R");    try {   data.freightamt = vars.getNumericParameter("inpfreightamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.freightcostrule = vars.getRequiredStringParameter("inpfreightcostrule");     data.freightcostruler = vars.getStringParameter("inpfreightcostrule_R");     data.mShipperId = vars.getStringParameter("inpmShipperId");     data.mShipperIdr = vars.getStringParameter("inpmShipperId_R");     data.priorityrule = vars.getRequiredStringParameter("inppriorityrule");     data.pickdate = vars.getStringParameter("inppickdate");     data.trackingno = vars.getStringParameter("inptrackingno");    try {   data.nopackages = vars.getNumericParameter("inpnopackages");  } catch (ServletException paramEx) { ex = paramEx; }     data.movementtype = vars.getRequiredStringParameter("inpmovementtype");     data.cChargeId = vars.getStringParameter("inpcChargeId");    try {   data.chargeamt = vars.getNumericParameter("inpchargeamt");  } catch (ServletException paramEx) { ex = paramEx; }     data.shipdate = vars.getStringParameter("inpshipdate");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.emAtecfeDocaction = vars.getRequiredStringParameter("inpemAtecfeDocaction");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.adOrgtrxId = vars.getStringParameter("inpadOrgtrxId");     data.mFreightcategoryId = vars.getStringParameter("inpmFreightcategoryId");     data.calculateFreight = vars.getStringParameter("inpcalculateFreight");     data.freightCurrencyId = vars.getRequestGlobalVariable("inpfreightCurrencyId", windowId + "|Freight_Currency_ID");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cProjectIdr = vars.getStringParameter("inpcProjectId_R");     data.cCostcenterId = vars.getStringParameter("inpcCostcenterId");     data.aAssetId = vars.getStringParameter("inpaAssetId");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.emAtecfeMenobserrorSri = vars.getStringParameter("inpemAtecfeMenobserrorSri");     data.emAtecfeCodigoAcc = vars.getStringParameter("inpemAtecfeCodigoAcc");     data.cInvoiceId = vars.getStringParameter("inpcInvoiceId");     data.generatelines = vars.getStringParameter("inpgeneratelines");     data.isprinted = vars.getStringParameter("inpisprinted", "N");     data.issotrx = vars.getRequiredInputGlobalVariable("inpissotrx", windowId + "|IsSOTrx", "N");     data.rmReceiptPickedit = vars.getStringParameter("inprmReceiptPickedit");     data.rmShipmentPickedit = vars.getStringParameter("inprmShipmentPickedit");     data.dateprinted = vars.getStringParameter("inpdateprinted");     data.processing = vars.getStringParameter("inpprocessing", "N");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.mInoutId = vars.getRequestGlobalVariable("inpmInoutId", windowId + "|M_InOut_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.islogistic = vars.getStringParameter("inpislogistic", "N");     data.generateto = vars.getStringParameter("inpgenerateto");     data.updatelines = vars.getStringParameter("inpupdatelines"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -467,7 +567,7 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_Warehouse_ID", data[0].getField("mWarehouseId"));    vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].getField("cBpartnerId"));    vars.setSessionValue(windowId + "|DocStatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|Posted", data[0].getField("posted"));    vars.setSessionValue(windowId + "|Freight_Currency_ID", data[0].getField("freightCurrencyId"));    vars.setSessionValue(windowId + "|IsSOTrx", data[0].getField("issotrx"));    vars.setSessionValue(windowId + "|M_InOut_ID", data[0].getField("mInoutId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_Warehouse_ID", data[0].getField("mWarehouseId"));    vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].getField("cBpartnerId"));    vars.setSessionValue(windowId + "|EM_Atecfe_Docstatus", data[0].getField("emAtecfeDocstatus"));    vars.setSessionValue(windowId + "|DocStatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|Posted", data[0].getField("posted"));    vars.setSessionValue(windowId + "|Freight_Currency_ID", data[0].getField("freightCurrencyId"));    vars.setSessionValue(windowId + "|IsSOTrx", data[0].getField("issotrx"));    vars.setSessionValue(windowId + "|M_InOut_ID", data[0].getField("mInoutId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {
@@ -762,7 +862,7 @@ String strParamMovementDate_f = vars.getSessionValue(tabId + "|paramMovementDate
     if (dataField==null) {
       if (boolNew || data==null || data.length==0) {
         refreshSessionNew(vars);
-        data = HeaderData.set(Utility.getDefault(this, vars, "Freight_Currency_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "Process_Goods_Java", "CO", "169", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "135", Utility.getDefault(this, vars, "Process_Goods_Java", "CO", "169", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "135", Utility.getDefault(this, vars, "Process_Goods_Java", "CO", "169", "N", dataField))), Utility.getDefault(this, vars, "Description", "", "169", "", dataField), Utility.getDefault(this, vars, "MovementType", "", "169", "", dataField), Utility.getDefault(this, vars, "MovementDate", "@#Date@", "169", "", dataField), Utility.getDefault(this, vars, "Processed", "", "169", "N", dataField), Utility.getDefault(this, vars, "Processing", "", "169", "N", dataField), "", Utility.getDefault(this, vars, "AD_Client_ID", "@AD_CLIENT_ID@", "169", "", dataField), Utility.getDefault(this, vars, "AD_Org_ID", "@#AD_Org_ID@", "169", "", dataField), "Y", Utility.getDefault(this, vars, "CreatedBy", "", "169", "", dataField), HeaderData.selectDef3526_0(this, Utility.getDefault(this, vars, "CreatedBy", "", "169", "", dataField)), Utility.getDefault(this, vars, "UpdatedBy", "", "169", "", dataField), HeaderData.selectDef3528_1(this, Utility.getDefault(this, vars, "UpdatedBy", "", "169", "", dataField)), Utility.getDefault(this, vars, "IsSOTrx", "@IsSOTrx@", "169", "N", dataField), Utility.getDefault(this, vars, "DocumentNo", "", "169", "", dataField), Utility.getDefault(this, vars, "C_DocType_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "IsPrinted", "", "169", "N", dataField), Utility.getDefault(this, vars, "DateAcct", "@#Date@", "169", "", dataField), Utility.getDefault(this, vars, "C_BPartner_ID", "", "169", "", dataField), HeaderData.selectDef3795_2(this, Utility.getDefault(this, vars, "C_BPartner_ID", "", "169", "", dataField)), Utility.getDefault(this, vars, "C_BPartner_Location_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "AD_User_ID", "", "169", "", dataField), HeaderData.selectDef3798(this, Utility.getContext(this, vars, "m_warehouse_id", "169"), Utility.getContext(this, vars, "ad_org_id", "169")), Utility.getDefault(this, vars, "POReference", "", "169", "", dataField), Utility.getDefault(this, vars, "DeliveryRule", "A", "169", "", dataField), Utility.getDefault(this, vars, "FreightCostRule", "I", "169", "", dataField), Utility.getDefault(this, vars, "FreightAmt", "0", "169", "", dataField), Utility.getDefault(this, vars, "DeliveryViaRule", "P", "169", "", dataField), Utility.getDefault(this, vars, "M_Shipper_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Charge_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "ChargeAmt", "0", "169", "", dataField), Utility.getDefault(this, vars, "PriorityRule", "5", "169", "", dataField), Utility.getDefault(this, vars, "DatePrinted", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Order_ID", "", "169", "", dataField), HeaderData.selectDef3809_3(this, Utility.getDefault(this, vars, "C_Order_ID", "", "169", "", dataField)), Utility.getDefault(this, vars, "M_Condition_Goods_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "DateOrdered", "", "169", "", dataField), Utility.getDefault(this, vars, "DocStatus", "DR", "169", "", dataField), Utility.getDefault(this, vars, "DocAction", "CO", "169", "N", dataField), Utility.getDefault(this, vars, "CreateFrom", "", "169", "N", dataField), Utility.getDefault(this, vars, "GenerateTo", "", "169", "N", dataField), Utility.getDefault(this, vars, "C_Invoice_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "Posted", "", "169", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "234", Utility.getDefault(this, vars, "Posted", "", "169", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "234", Utility.getDefault(this, vars, "Posted", "", "169", "N", dataField))), Utility.getDefault(this, vars, "UpdateLines", "N", "169", "N", dataField), Utility.getDefault(this, vars, "Islogistic", "@ISLOGISTICAUX@", "169", "N", dataField), Utility.getDefault(this, vars, "GenerateLines", "N", "169", "N", dataField), Utility.getDefault(this, vars, "Delivery_Location_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "M_FreightCategory_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "Calculate_Freight", "", "169", "N", dataField), Utility.getDefault(this, vars, "SalesRep_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Costcenter_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "PickDate", "", "169", "", dataField), Utility.getDefault(this, vars, "TrackingNo", "", "169", "", dataField), Utility.getDefault(this, vars, "NoPackages", "", "169", "", dataField), Utility.getDefault(this, vars, "ShipDate", "", "169", "", dataField), Utility.getDefault(this, vars, "User2_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "User1_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Activity_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Campaign_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Project_ID", "", "169", "", dataField), HeaderData.selectDef9585_4(this, Utility.getDefault(this, vars, "C_Project_ID", "", "169", "", dataField)), Utility.getDefault(this, vars, "AD_OrgTrx_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "RM_Receipt_PickEdit", "", "169", "N", dataField), Utility.getDefault(this, vars, "RM_Shipment_Pickedit", "", "169", "N", dataField), Utility.getDefault(this, vars, "A_Asset_ID", "", "169", "", dataField));
+        data = HeaderData.set(Utility.getDefault(this, vars, "Freight_Currency_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "EM_Atecfe_Codigo_Acc", "", "169", "", dataField), Utility.getDefault(this, vars, "Process_Goods_Java", "CO", "169", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "135", Utility.getDefault(this, vars, "Process_Goods_Java", "CO", "169", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "135", Utility.getDefault(this, vars, "Process_Goods_Java", "CO", "169", "N", dataField))), Utility.getDefault(this, vars, "Description", "", "169", "", dataField), Utility.getDefault(this, vars, "MovementType", "", "169", "", dataField), Utility.getDefault(this, vars, "MovementDate", "@#Date@", "169", "", dataField), Utility.getDefault(this, vars, "Processed", "", "169", "N", dataField), Utility.getDefault(this, vars, "Processing", "", "169", "N", dataField), "", Utility.getDefault(this, vars, "AD_Client_ID", "@AD_CLIENT_ID@", "169", "", dataField), Utility.getDefault(this, vars, "AD_Org_ID", "@#AD_Org_ID@", "169", "", dataField), "Y", Utility.getDefault(this, vars, "CreatedBy", "", "169", "", dataField), HeaderData.selectDef3526_0(this, Utility.getDefault(this, vars, "CreatedBy", "", "169", "", dataField)), Utility.getDefault(this, vars, "UpdatedBy", "", "169", "", dataField), HeaderData.selectDef3528_1(this, Utility.getDefault(this, vars, "UpdatedBy", "", "169", "", dataField)), Utility.getDefault(this, vars, "IsSOTrx", "@IsSOTrx@", "169", "N", dataField), Utility.getDefault(this, vars, "DocumentNo", "", "169", "", dataField), Utility.getDefault(this, vars, "C_DocType_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "IsPrinted", "", "169", "N", dataField), Utility.getDefault(this, vars, "DateAcct", "@#Date@", "169", "", dataField), Utility.getDefault(this, vars, "C_BPartner_ID", "", "169", "", dataField), HeaderData.selectDef3795_2(this, Utility.getDefault(this, vars, "C_BPartner_ID", "", "169", "", dataField)), Utility.getDefault(this, vars, "C_BPartner_Location_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "AD_User_ID", "", "169", "", dataField), HeaderData.selectDef3798(this, Utility.getContext(this, vars, "m_warehouse_id", "169"), Utility.getContext(this, vars, "ad_org_id", "169")), Utility.getDefault(this, vars, "POReference", "", "169", "", dataField), Utility.getDefault(this, vars, "DeliveryRule", "A", "169", "", dataField), Utility.getDefault(this, vars, "FreightCostRule", "I", "169", "", dataField), Utility.getDefault(this, vars, "FreightAmt", "0", "169", "", dataField), Utility.getDefault(this, vars, "DeliveryViaRule", "P", "169", "", dataField), Utility.getDefault(this, vars, "M_Shipper_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Charge_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "ChargeAmt", "0", "169", "", dataField), Utility.getDefault(this, vars, "PriorityRule", "5", "169", "", dataField), Utility.getDefault(this, vars, "DatePrinted", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Order_ID", "", "169", "", dataField), HeaderData.selectDef3809_3(this, Utility.getDefault(this, vars, "C_Order_ID", "", "169", "", dataField)), Utility.getDefault(this, vars, "M_Condition_Goods_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "DateOrdered", "", "169", "", dataField), Utility.getDefault(this, vars, "DocStatus", "DR", "169", "", dataField), Utility.getDefault(this, vars, "DocAction", "CO", "169", "N", dataField), Utility.getDefault(this, vars, "EM_Atecfe_Menobserror_Sri", "", "169", "", dataField), Utility.getDefault(this, vars, "CreateFrom", "", "169", "N", dataField), Utility.getDefault(this, vars, "GenerateTo", "", "169", "N", dataField), Utility.getDefault(this, vars, "C_Invoice_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "Posted", "", "169", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "234", Utility.getDefault(this, vars, "Posted", "", "169", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "234", Utility.getDefault(this, vars, "Posted", "", "169", "N", dataField))), Utility.getDefault(this, vars, "EM_Atecfe_Docstatus", "PD", "169", "", dataField), Utility.getDefault(this, vars, "UpdateLines", "N", "169", "N", dataField), Utility.getDefault(this, vars, "Islogistic", "@ISLOGISTICAUX@", "169", "N", dataField), Utility.getDefault(this, vars, "GenerateLines", "N", "169", "N", dataField), Utility.getDefault(this, vars, "Delivery_Location_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "M_FreightCategory_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "Calculate_Freight", "", "169", "N", dataField), Utility.getDefault(this, vars, "SalesRep_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "EM_Atecfe_Docaction", "PR", "169", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "23FC4FD90F7F4E738E615DBB40A04F2D", Utility.getDefault(this, vars, "EM_Atecfe_Docaction", "PR", "169", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "23FC4FD90F7F4E738E615DBB40A04F2D", Utility.getDefault(this, vars, "EM_Atecfe_Docaction", "PR", "169", "N", dataField))), Utility.getDefault(this, vars, "C_Costcenter_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "PickDate", "", "169", "", dataField), Utility.getDefault(this, vars, "TrackingNo", "", "169", "", dataField), Utility.getDefault(this, vars, "NoPackages", "", "169", "", dataField), Utility.getDefault(this, vars, "ShipDate", "", "169", "", dataField), Utility.getDefault(this, vars, "User2_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "User1_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Activity_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Campaign_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "C_Project_ID", "", "169", "", dataField), HeaderData.selectDef9585_4(this, Utility.getDefault(this, vars, "C_Project_ID", "", "169", "", dataField)), Utility.getDefault(this, vars, "AD_OrgTrx_ID", "", "169", "", dataField), Utility.getDefault(this, vars, "RM_Receipt_PickEdit", "", "169", "N", dataField), Utility.getDefault(this, vars, "RM_Shipment_Pickedit", "", "169", "N", dataField), Utility.getDefault(this, vars, "A_Asset_ID", "", "169", "", dataField));
              data[0].documentno = "<" + Utility.getDocumentNo( this, vars, windowId, "M_InOut", "", data[0].cDoctypeId, false, false) + ">";
       }
      }
@@ -892,10 +992,24 @@ xmlDocument.setParameter("Process_Goods_Java_BTNname", Utility.getButtonName(thi
 xmlDocument.setParameter("Process_Goods_Java_Modal", modalProcess_Goods_Java?"true":"false");
 xmlDocument.setParameter("Posted_BTNname", Utility.getButtonName(this, vars, "234", (dataField==null?data[0].getField("posted"):dataField.getField("posted")), "Posted_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalPosted = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
 xmlDocument.setParameter("Posted_Modal", modalPosted?"true":"false");
+comboTableData = new ComboTableData(vars, this, "17", "DeliveryViaRule", "152", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("deliveryviarule"):dataField.getField("deliveryviarule")));
+xmlDocument.setData("reportDeliveryViaRule","liststructure", comboTableData.select(!strCommand.equals("NEW")));
+comboTableData = null;
 xmlDocument.setParameter("buttonFreightAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
+comboTableData = new ComboTableData(vars, this, "17", "FreightCostRule", "153", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("freightcostrule"):dataField.getField("freightcostrule")));
+xmlDocument.setData("reportFreightCostRule","liststructure", comboTableData.select(!strCommand.equals("NEW")));
+comboTableData = null;
+comboTableData = new ComboTableData(vars, this, "19", "M_Shipper_ID", "", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("mShipperId"):dataField.getField("mShipperId")));
+xmlDocument.setData("reportM_Shipper_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
+comboTableData = null;
 xmlDocument.setParameter("PickDate_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("PickDate_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("buttonChargeAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("ShipDate_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("ShipDate_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
+xmlDocument.setParameter("EM_Atecfe_Docaction_BTNname", Utility.getButtonName(this, vars, "23FC4FD90F7F4E738E615DBB40A04F2D", (dataField==null?data[0].getField("emAtecfeDocaction"):dataField.getField("emAtecfeDocaction")), "EM_Atecfe_Docaction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_Atecfe_Docaction = org.openbravo.erpCommon.utility.Utility.isModalProcess("152F2390FF594AD9822308A0AABC145C"); 
+xmlDocument.setParameter("EM_Atecfe_Docaction_Modal", modalEM_Atecfe_Docaction?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
@@ -944,6 +1058,43 @@ xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDate
 
 
 
+    void printPageButtonEM_Atecfe_Docaction152F2390FF594AD9822308A0AABC145C(HttpServletResponse response, VariablesSecureApp vars, String strM_InOut_ID, String stremAtecfeDocaction, String strProcessing)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 152F2390FF594AD9822308A0AABC145C");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/EM_Atecfe_Docaction152F2390FF594AD9822308A0AABC145C", discard).createXmlDocument();
+      xmlDocument.setParameter("key", strM_InOut_ID);
+      xmlDocument.setParameter("processing", strProcessing);
+      xmlDocument.setParameter("form", "Header_Edition.html");
+      xmlDocument.setParameter("window", windowId);
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("language", "defaultLang=\"" + vars.getLanguage() + "\";");
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("processId", "152F2390FF594AD9822308A0AABC145C");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      
+      {
+        OBError myMessage = vars.getMessage("152F2390FF594AD9822308A0AABC145C");
+        vars.removeMessage("152F2390FF594AD9822308A0AABC145C");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      
+      out.println(xmlDocument.print());
+      out.close();
+    }
 
 
     private String getDisplayLogicContext(VariablesSecureApp vars, boolean isNew) throws IOException, ServletException {
@@ -1044,6 +1195,9 @@ xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDate
                     
                         //BUTTON TEXT FILLING
                     data.processGoodsJavaBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "135", data.getField("Process_Goods_Java"));
+                    
+                        //BUTTON TEXT FILLING
+                    data.emAtecfeDocactionBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "23FC4FD90F7F4E738E615DBB40A04F2D", data.getField("EM_Atecfe_Docaction"));
                     
                 }
                 vars.setEditionData(tabId, data);

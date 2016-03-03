@@ -40,6 +40,34 @@
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="0CD06AFA024342CD94FDD9AB1ECDFC14">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="175B29D0A76E4AF38C85BB4DAAA94CFA">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="B0929F48AD3E4A91A6B6007029C28B00">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="C39AEE94DEFD40578FD6E847378E81D6">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="E559C81C580F4E5E92358907DC3D0ADB">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="F873A59683234449A3FC55BBFFD68649">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="FC3ABA2D7AA24776A8A314BE96830CA5">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
     <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="315">
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
@@ -88,11 +116,23 @@
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="00F6EA0904664744B181CEEDA53A75B2">
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="1CA823322A874B879DEAA2577476814A">
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="8982CE6EA9E8433E8FA23C11DEED4D6C">
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="55FEEAF4C31541338E4520382811534E">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="7007344071B143BFACAA643716EC90FF">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="DA01764D6DDB4B06881CB0A755366186">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="DISABLE_PARENT_KEY_PROPERTY" pkRow="FD885CC386AF483A9700F57A845A08CB">
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
@@ -1964,12 +2004,20 @@
       <oldValue/>
       <newValue><![CDATA[Table]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="65AD1337450F4409A3FED56B2DE61A6B">
+    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="40F231DEF7494FD5B797BA24ACD35969">
       <oldValue/>
       <newValue><![CDATA[Table]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="D86B7BF0279F496197C952B920396B63">
+    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="6D720BD5E89A41A7B11687B1CF81BEC2">
       <oldValue/>
       <newValue><![CDATA[Table]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TABLE" columnname="DATAORIGINTYPE" pkRow="E7E84EEB65BB444189BDBF593A454F4D">
+      <oldValue/>
+      <newValue><![CDATA[Table]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FORM" columnname="ISADVANCEDFEATURE" pkRow="DB11A21C046F48C2AF9457811EA8E290">
+      <oldValue/>
+      <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
   </vector>

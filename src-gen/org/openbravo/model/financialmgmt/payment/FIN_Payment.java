@@ -18,6 +18,9 @@
 */
 package org.openbravo.model.financialmgmt.payment;
 
+import com.atrums.centrocostos.data.cco_registra_costos;
+import com.atrums.depositos.data.DP_FinaccTransactionV;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,11 +99,16 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_APRMADDSCHEDULEDPAYMENTS = "aPRMAddScheduledpayments";
     public static final String PROPERTY_APRMEXECUTEPAYMENT = "aprmExecutepayment";
     public static final String PROPERTY_APRMREVERSEPAYMENT = "aPRMReversePayment";
+    public static final String PROPERTY_CONROCHEQUE = "coNroCheque";
+    public static final String PROPERTY_CONOMBREBANCO = "coNombreBanco";
     public static final String PROPERTY_COSTCENTER = "costCenter";
+    public static final String PROPERTY_ATECDPDEPOSITO = "atecdpDeposito";
+    public static final String PROPERTY_DPDEPOSITO = "dpDeposito";
     public static final String PROPERTY_APRMFINACCTRANSACTIONVLIST = "aPRMFinaccTransactionVList";
     public static final String PROPERTY_APRMPENDINGPAYMENTINVOICELIST = "aPRMPendingPaymentInvoiceList";
     public static final String PROPERTY_INVOICETAXCASHVATVLIST = "invoiceTaxCashVATVList";
     public static final String PROPERTY_CURRENCYCONVERSIONRATEDOCLIST = "currencyConversionRateDocList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_FINFINACCTRANSACTIONLIST = "fINFinaccTransactionList";
     public static final String PROPERTY_FINPAYMENTREVERSEDPAYMENTLIST = "fINPaymentReversedPaymentList";
     public static final String PROPERTY_FINPAYMENTCREDITLIST = "fINPaymentCreditList";
@@ -114,6 +122,7 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_FINANCIALMGMTPAYMENTEXECUTIONHISTORYVLIST = "financialMgmtPaymentExecutionHistoryVList";
     public static final String PROPERTY_FINANCIALMGMTPAYMENTRUNPAYMENTLIST = "financialMgmtPaymentRunPaymentList";
     public static final String PROPERTY_FINANCIALMGMTTAXPAYMENTLIST = "financialMgmtTaxPaymentList";
+    public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
     public FIN_Payment() {
         setDefaultValue(PROPERTY_CREATIONDATE, new Date());
@@ -138,6 +147,7 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
         setDefaultValue(PROPERTY_APRMPENDINGPAYMENTINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICETAXCASHVATVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CURRENCYCONVERSIONRATEDOCLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINACCTRANSACTIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINPAYMENTREVERSEDPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINPAYMENTCREDITLIST, new ArrayList<Object>());
@@ -151,6 +161,7 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
         setDefaultValue(PROPERTY_FINANCIALMGMTPAYMENTEXECUTIONHISTORYVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPAYMENTRUNPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -478,12 +489,44 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
         set(PROPERTY_APRMREVERSEPAYMENT, aPRMReversePayment);
     }
 
+    public String getCoNroCheque() {
+        return (String) get(PROPERTY_CONROCHEQUE);
+    }
+
+    public void setCoNroCheque(String coNroCheque) {
+        set(PROPERTY_CONROCHEQUE, coNroCheque);
+    }
+
+    public String getCoNombreBanco() {
+        return (String) get(PROPERTY_CONOMBREBANCO);
+    }
+
+    public void setCoNombreBanco(String coNombreBanco) {
+        set(PROPERTY_CONOMBREBANCO, coNombreBanco);
+    }
+
     public Costcenter getCostCenter() {
         return (Costcenter) get(PROPERTY_COSTCENTER);
     }
 
     public void setCostCenter(Costcenter costCenter) {
         set(PROPERTY_COSTCENTER, costCenter);
+    }
+
+    public String getAtecdpDeposito() {
+        return (String) get(PROPERTY_ATECDPDEPOSITO);
+    }
+
+    public void setAtecdpDeposito(String atecdpDeposito) {
+        set(PROPERTY_ATECDPDEPOSITO, atecdpDeposito);
+    }
+
+    public String getDpDeposito() {
+        return (String) get(PROPERTY_DPDEPOSITO);
+    }
+
+    public void setDpDeposito(String dpDeposito) {
+        set(PROPERTY_DPDEPOSITO, dpDeposito);
     }
 
     @SuppressWarnings("unchecked")
@@ -520,6 +563,15 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
 
     public void setCurrencyConversionRateDocList(List<ConversionRateDoc> currencyConversionRateDocList) {
         set(PROPERTY_CURRENCYCONVERSIONRATEDOCLIST, currencyConversionRateDocList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")
@@ -637,6 +689,15 @@ public class FIN_Payment extends BaseOBObject implements Traceable, ClientEnable
 
     public void setFinancialMgmtTaxPaymentList(List<TaxPayment> financialMgmtTaxPaymentList) {
         set(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, financialMgmtTaxPaymentList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<cco_registra_costos> getCcoRegistraCostosList() {
+      return (List<cco_registra_costos>) get(PROPERTY_CCOREGISTRACOSTOSLIST);
+    }
+
+    public void setCcoRegistraCostosList(List<cco_registra_costos> ccoRegistraCostosList) {
+        set(PROPERTY_CCOREGISTRACOSTOSLIST, ccoRegistraCostosList);
     }
 
 }

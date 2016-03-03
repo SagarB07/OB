@@ -29,6 +29,7 @@ import org.openbravo.base.structure.OrganizationEnabled;
 import org.openbravo.base.structure.Traceable;
 import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
+import org.openbravo.model.common.businesspartner.BusinessPartner;
 import org.openbravo.model.common.enterprise.Organization;
 /**
  * Entity class for entity City (stored in table C_City).
@@ -55,10 +56,12 @@ public class City extends BaseOBObject implements Traceable, ClientEnabled, Orga
     public static final String PROPERTY_AREACODE = "areaCode";
     public static final String PROPERTY_COUNTRY = "country";
     public static final String PROPERTY_REGION = "region";
+    public static final String PROPERTY_BUSINESSPARTNEREMCOCIUDADNACLIST = "businessPartnerEMCoCiudadnacList";
     public static final String PROPERTY_LOCATIONLIST = "locationList";
 
     public City() {
         setDefaultValue(PROPERTY_ACTIVE, true);
+        setDefaultValue(PROPERTY_BUSINESSPARTNEREMCOCIUDADNACLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LOCATIONLIST, new ArrayList<Object>());
     }
 
@@ -185,6 +188,15 @@ public class City extends BaseOBObject implements Traceable, ClientEnabled, Orga
 
     public void setRegion(Region region) {
         set(PROPERTY_REGION, region);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<BusinessPartner> getBusinessPartnerEMCoCiudadnacList() {
+      return (List<BusinessPartner>) get(PROPERTY_BUSINESSPARTNEREMCOCIUDADNACLIST);
+    }
+
+    public void setBusinessPartnerEMCoCiudadnacList(List<BusinessPartner> businessPartnerEMCoCiudadnacList) {
+        set(PROPERTY_BUSINESSPARTNEREMCOCIUDADNACLIST, businessPartnerEMCoCiudadnacList);
     }
 
     @SuppressWarnings("unchecked")

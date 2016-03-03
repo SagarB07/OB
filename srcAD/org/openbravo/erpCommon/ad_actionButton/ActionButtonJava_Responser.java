@@ -99,6 +99,9 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
     } else if (vars.commandIn("BUTTON136")) {
         
         printPageButton136(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTON152F2390FF594AD9822308A0AABC145C")) {
+        
+        printPageButton152F2390FF594AD9822308A0AABC145C(response, vars, strProcessId);
     } else if (vars.commandIn("BUTTON23D1B163EC0B41F790CE39BF01DA320E")) {
         
         printPageButton23D1B163EC0B41F790CE39BF01DA320E(response, vars, strProcessId);
@@ -210,11 +213,16 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
     } else if (vars.commandIn("BUTTONFF8080812F348A97012F349DC24F0007")) {
         
         printPageButtonFF8080812F348A97012F349DC24F0007(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTON6AAF37A95DC9442CA33C8FDD341DB658")) {
+        
+        printPageButton6AAF37A95DC9442CA33C8FDD341DB658(response, vars, strProcessId);
 
     } else if (vars.commandIn("SAVE_BUTTONActionButton107")) {
         process107(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButton136")) {
         process136(strProcessId, vars, request, response);
+    } else if (vars.commandIn("SAVE_BUTTONActionButton152F2390FF594AD9822308A0AABC145C")) {
+        process152F2390FF594AD9822308A0AABC145C(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButton23D1B163EC0B41F790CE39BF01DA320E")) {
         process23D1B163EC0B41F790CE39BF01DA320E(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButton3C386BC12832466790E50F2F8C5EBD85")) {
@@ -289,6 +297,8 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
         processFF8080812E2F8EAE012E2F94CF470014(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButtonFF8080812F348A97012F349DC24F0007")) {
         processFF8080812F348A97012F349DC24F0007(strProcessId, vars, request, response);
+    } else if (vars.commandIn("SAVE_BUTTONActionButton6AAF37A95DC9442CA33C8FDD341DB658")) {
+        process6AAF37A95DC9442CA33C8FDD341DB658(strProcessId, vars, request, response);
 
     } else pageErrorPopUp(response);
   }
@@ -374,6 +384,41 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
       {
         OBError myMessage = vars.getMessage("136");
         vars.removeMessage("136");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButton152F2390FF594AD9822308A0AABC145C(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 152F2390FF594AD9822308A0AABC145C");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButton152F2390FF594AD9822308A0AABC145C", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButtonJava_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("152F2390FF594AD9822308A0AABC145C");
+        vars.removeMessage("152F2390FF594AD9822308A0AABC145C");
         if (myMessage!=null) {
           xmlDocument.setParameter("messageType", myMessage.getType());
           xmlDocument.setParameter("messageTitle", myMessage.getTitle());
@@ -1818,6 +1863,41 @@ comboTableData = null;
       out.println(xmlDocument.print());
       out.close();
     }
+    void printPageButton6AAF37A95DC9442CA33C8FDD341DB658(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 6AAF37A95DC9442CA33C8FDD341DB658");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButton6AAF37A95DC9442CA33C8FDD341DB658", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButtonJava_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("6AAF37A95DC9442CA33C8FDD341DB658");
+        vars.removeMessage("6AAF37A95DC9442CA33C8FDD341DB658");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
 
 
     private void process107(String strProcessId, VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
@@ -1860,6 +1940,33 @@ comboTableData = null;
         OBError myMessage = null;
         try {
           new org.openbravo.erpCommon.ad_process.VerifyBOM().execute(pb);
+          myMessage = (OBError) pb.getResult();
+          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
+          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
+        } catch (Exception ex) {
+          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
+          log4j.error(ex);
+          if (!myMessage.isConnectionAvailable()) {
+            bdErrorConnection(response);
+            return;
+          }
+        }
+
+        processButtonHelper(request, response, vars, myMessage); 
+   }
+    private void process152F2390FF594AD9822308A0AABC145C(String strProcessId, VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
+        
+        
+        ProcessBundle pb = new ProcessBundle(strProcessId, vars).init(this);
+        HashMap<String, Object> params= new HashMap<String, Object>();
+       
+        
+        
+        pb.setParams(params);
+        OBError myMessage = null;
+        try {
+          new com.atrums.felectronica.process.ATECFE_GenerarXml().execute(pb);
           myMessage = (OBError) pb.getResult();
           myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
           myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
@@ -2953,6 +3060,33 @@ params.put("action", straction);
         OBError myMessage = null;
         try {
           new org.openbravo.advpaymentmngt.ad_actionbutton.DeleteTransaction().execute(pb);
+          myMessage = (OBError) pb.getResult();
+          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
+          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
+        } catch (Exception ex) {
+          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
+          log4j.error(ex);
+          if (!myMessage.isConnectionAvailable()) {
+            bdErrorConnection(response);
+            return;
+          }
+        }
+
+        processButtonHelper(request, response, vars, myMessage); 
+   }
+    private void process6AAF37A95DC9442CA33C8FDD341DB658(String strProcessId, VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
+        
+        
+        ProcessBundle pb = new ProcessBundle(strProcessId, vars).init(this);
+        HashMap<String, Object> params= new HashMap<String, Object>();
+       
+        
+        
+        pb.setParams(params);
+        OBError myMessage = null;
+        try {
+          new com.atrums.depositos.ad_actionbutton.DeleteTransaction().execute(pb);
           myMessage = (OBError) pb.getResult();
           myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
           myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));

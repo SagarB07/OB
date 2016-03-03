@@ -18,6 +18,11 @@
 */
 package org.openbravo.model.financialmgmt.calendar;
 
+import com.atrums.centrocostos.data.ccoCostosNomina;
+import com.atrums.centrocostos.data.cco_registra_costos;
+import com.atrums.contabilidad.data.CO_RETENCION_VENTA;
+import com.atrums.contabilidad.data.CO_Retencion_Compra;
+import com.atrums.declaraciontributaria.ecuador.data.atsProcesaAnexo;
 import com.atrums.nomina.data.NO_Registro_Hora_Extra;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noNovedad;
@@ -82,6 +87,9 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
+    public static final String PROPERTY_ATSPROCESAANEXOLIST = "aTSPROCESAANEXOList";
+    public static final String PROPERTY_RETENCIONVENTALIST = "rETENCIONVENTAList";
+    public static final String PROPERTY_RETENCIONCOMPRALIST = "retencionCompraList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_FINANCIALMGMTACCOUNTINGFACTLIST = "financialMgmtAccountingFactList";
@@ -98,6 +106,8 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY_ROLPAGOPROVISIONLIST = "rolPagoProvisionList";
     public static final String PROPERTY_PERIODCONTROLLOGPERIODNOLIST = "periodControlLogPeriodNoList";
     public static final String PROPERTY_PERIODCONTROLLOGLIST = "periodControlLogList";
+    public static final String PROPERTY_CCOCOSTOSNOMINALIST = "ccoCostosNominaList";
+    public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_NOVEDADLIST = "novedadList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
@@ -118,6 +128,9 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_OPENCLOSE, "O");
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATSPROCESAANEXOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONVENTALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_RETENCIONCOMPRALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTACCOUNTINGFACTLIST, new ArrayList<Object>());
@@ -134,6 +147,8 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PERIODCONTROLLOGPERIODNOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PERIODCONTROLLOGLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOCOSTOSNOMINALIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOVEDADLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
@@ -342,6 +357,33 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
     }
 
     @SuppressWarnings("unchecked")
+    public List<atsProcesaAnexo> getATSPROCESAANEXOList() {
+      return (List<atsProcesaAnexo>) get(PROPERTY_ATSPROCESAANEXOLIST);
+    }
+
+    public void setATSPROCESAANEXOList(List<atsProcesaAnexo> aTSPROCESAANEXOList) {
+        set(PROPERTY_ATSPROCESAANEXOLIST, aTSPROCESAANEXOList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_RETENCION_VENTA> getRETENCIONVENTAList() {
+      return (List<CO_RETENCION_VENTA>) get(PROPERTY_RETENCIONVENTALIST);
+    }
+
+    public void setRETENCIONVENTAList(List<CO_RETENCION_VENTA> rETENCIONVENTAList) {
+        set(PROPERTY_RETENCIONVENTALIST, rETENCIONVENTAList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_Retencion_Compra> getRetencionCompraList() {
+      return (List<CO_Retencion_Compra>) get(PROPERTY_RETENCIONCOMPRALIST);
+    }
+
+    public void setRetencionCompraList(List<CO_Retencion_Compra> retencionCompraList) {
+        set(PROPERTY_RETENCIONCOMPRALIST, retencionCompraList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<BudgetLine> getDataImportBudgetLineList() {
       return (List<BudgetLine>) get(PROPERTY_DATAIMPORTBUDGETLINELIST);
     }
@@ -483,6 +525,24 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
 
     public void setPeriodControlLogList(List<PeriodControlLog> periodControlLogList) {
         set(PROPERTY_PERIODCONTROLLOGLIST, periodControlLogList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<ccoCostosNomina> getCcoCostosNominaList() {
+      return (List<ccoCostosNomina>) get(PROPERTY_CCOCOSTOSNOMINALIST);
+    }
+
+    public void setCcoCostosNominaList(List<ccoCostosNomina> ccoCostosNominaList) {
+        set(PROPERTY_CCOCOSTOSNOMINALIST, ccoCostosNominaList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<cco_registra_costos> getCcoRegistraCostosList() {
+      return (List<cco_registra_costos>) get(PROPERTY_CCOREGISTRACOSTOSLIST);
+    }
+
+    public void setCcoRegistraCostosList(List<cco_registra_costos> ccoRegistraCostosList) {
+        set(PROPERTY_CCOREGISTRACOSTOSLIST, ccoRegistraCostosList);
     }
 
     @SuppressWarnings("unchecked")

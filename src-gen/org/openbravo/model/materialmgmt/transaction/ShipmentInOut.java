@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.materialmgmt.transaction;
 
+import com.atrums.centrocostos.data.cco_registra_costos;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -122,11 +124,18 @@ public class ShipmentInOut extends BaseOBObject implements Traceable, ClientEnab
     public static final String PROPERTY_CONDITIONGOODS = "conditionGoods";
     public static final String PROPERTY_ASSET = "asset";
     public static final String PROPERTY_COSTCENTER = "costcenter";
+    public static final String PROPERTY_ATECFEESTADOSRI = "aTECFEEstadoSRI";
+    public static final String PROPERTY_ATECFEDOCACTION = "atecfeDocaction";
+    public static final String PROPERTY_ATECFEMENSAJEDELSRI = "aTECFEMensajeDelSRI";
+    public static final String PROPERTY_ATECFECDIGODEACCESO = "aTECFECdigoDeAcceso";
     public static final String PROPERTY_PROCESSGOODSJAVA = "processGoodsJava";
+    public static final String PROPERTY_ATECFEDOCUMENTOXML = "atecfeDocumentoXml";
+    public static final String PROPERTY_ASVPEDIDOINVENTARIO = "asvPedidoInventario";
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_MATERIALMGMTSHIPMENTINOUTLINELIST = "materialMgmtShipmentInOutLineList";
     public static final String PROPERTY_RETURNMATERIALRECEIPTPICKEDITLIST = "returnMaterialReceiptPickEditList";
     public static final String PROPERTY_RETURNMATERIALSHIPMENTPICKEDITLIST = "returnMaterialShipmentPickEditList";
+    public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
 
     // Computed columns properties, these properties cannot be directly accessed, they need
@@ -154,10 +163,13 @@ public class ShipmentInOut extends BaseOBObject implements Traceable, ClientEnab
         setDefaultValue(PROPERTY_CALCULATEFREIGHT, false);
         setDefaultValue(PROPERTY_RECEIVEMATERIALS, false);
         setDefaultValue(PROPERTY_SENDMATERIALS, false);
+        setDefaultValue(PROPERTY_ATECFEESTADOSRI, "PD");
+        setDefaultValue(PROPERTY_ATECFEDOCACTION, "PR");
         setDefaultValue(PROPERTY_PROCESSGOODSJAVA, "CO");
         setDefaultValue(PROPERTY_MATERIALMGMTSHIPMENTINOUTLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_RETURNMATERIALRECEIPTPICKEDITLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_RETURNMATERIALSHIPMENTPICKEDITLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -669,12 +681,60 @@ public class ShipmentInOut extends BaseOBObject implements Traceable, ClientEnab
         set(PROPERTY_COSTCENTER, costcenter);
     }
 
+    public String getATECFEEstadoSRI() {
+        return (String) get(PROPERTY_ATECFEESTADOSRI);
+    }
+
+    public void setATECFEEstadoSRI(String aTECFEEstadoSRI) {
+        set(PROPERTY_ATECFEESTADOSRI, aTECFEEstadoSRI);
+    }
+
+    public String getAtecfeDocaction() {
+        return (String) get(PROPERTY_ATECFEDOCACTION);
+    }
+
+    public void setAtecfeDocaction(String atecfeDocaction) {
+        set(PROPERTY_ATECFEDOCACTION, atecfeDocaction);
+    }
+
+    public String getATECFEMensajeDelSRI() {
+        return (String) get(PROPERTY_ATECFEMENSAJEDELSRI);
+    }
+
+    public void setATECFEMensajeDelSRI(String aTECFEMensajeDelSRI) {
+        set(PROPERTY_ATECFEMENSAJEDELSRI, aTECFEMensajeDelSRI);
+    }
+
+    public String getATECFECdigoDeAcceso() {
+        return (String) get(PROPERTY_ATECFECDIGODEACCESO);
+    }
+
+    public void setATECFECdigoDeAcceso(String aTECFECdigoDeAcceso) {
+        set(PROPERTY_ATECFECDIGODEACCESO, aTECFECdigoDeAcceso);
+    }
+
     public String getProcessGoodsJava() {
         return (String) get(PROPERTY_PROCESSGOODSJAVA);
     }
 
     public void setProcessGoodsJava(String processGoodsJava) {
         set(PROPERTY_PROCESSGOODSJAVA, processGoodsJava);
+    }
+
+    public byte[] getAtecfeDocumentoXml() {
+        return (byte[]) get(PROPERTY_ATECFEDOCUMENTOXML);
+    }
+
+    public void setAtecfeDocumentoXml(byte[] atecfeDocumentoXml) {
+        set(PROPERTY_ATECFEDOCUMENTOXML, atecfeDocumentoXml);
+    }
+
+    public String getAsvPedidoInventario() {
+        return (String) get(PROPERTY_ASVPEDIDOINVENTARIO);
+    }
+
+    public void setAsvPedidoInventario(String asvPedidoInventario) {
+        set(PROPERTY_ASVPEDIDOINVENTARIO, asvPedidoInventario);
     }
 
     public Long getInvoiceStatus() {
@@ -718,6 +778,15 @@ public class ShipmentInOut extends BaseOBObject implements Traceable, ClientEnab
 
     public void setReturnMaterialShipmentPickEditList(List<ReturnMaterialShipmentPickEdit> returnMaterialShipmentPickEditList) {
         set(PROPERTY_RETURNMATERIALSHIPMENTPICKEDITLIST, returnMaterialShipmentPickEditList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<cco_registra_costos> getCcoRegistraCostosList() {
+      return (List<cco_registra_costos>) get(PROPERTY_CCOREGISTRACOSTOSLIST);
+    }
+
+    public void setCcoRegistraCostosList(List<cco_registra_costos> ccoRegistraCostosList) {
+        set(PROPERTY_CCOREGISTRACOSTOSLIST, ccoRegistraCostosList);
     }
 
 

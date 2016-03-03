@@ -18,6 +18,7 @@
 */
 package org.openbravo.model.common.currency;
 
+import com.atrums.depositos.data.DP_FinaccTransactionV;
 import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
@@ -137,6 +138,8 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
     public static final String PROPERTY_CURRENCYCONVERSIONRATEDOCLIST = "currencyConversionRateDocList";
     public static final String PROPERTY_CURRENCYCONVERSIONRATEDOCTOCURRENCYLIST = "currencyConversionRateDocToCurrencyList";
     public static final String PROPERTY_CURRENCYTRLLIST = "currencyTrlList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
+    public static final String PROPERTY_FINACCTRANSACTIONVFOREIGNCURRENCYLIST = "finaccTransactionVForeignCurrencyList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
@@ -223,6 +226,8 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
         setDefaultValue(PROPERTY_CURRENCYCONVERSIONRATEDOCLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CURRENCYCONVERSIONRATEDOCTOCURRENCYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CURRENCYTRLLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVFOREIGNCURRENCYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
@@ -555,6 +560,24 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
 
     public void setCurrencyTrlList(List<CurrencyTrl> currencyTrlList) {
         set(PROPERTY_CURRENCYTRLLIST, currencyTrlList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVForeignCurrencyList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVFOREIGNCURRENCYLIST);
+    }
+
+    public void setFinaccTransactionVForeignCurrencyList(List<DP_FinaccTransactionV> finaccTransactionVForeignCurrencyList) {
+        set(PROPERTY_FINACCTRANSACTIONVFOREIGNCURRENCYLIST, finaccTransactionVForeignCurrencyList);
     }
 
     @SuppressWarnings("unchecked")

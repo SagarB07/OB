@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.financialmgmt.payment;
 
+import com.atrums.conciliacionec.data.atecdpFinaccTransactionV;
+import com.atrums.depositos.data.DP_FinaccTransactionV;
 import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
@@ -93,8 +95,15 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
     public static final String PROPERTY_BANKFORMAT = "bankFormat";
     public static final String PROPERTY_APRMRECONCILE = "aPRMReconcile";
     public static final String PROPERTY_APRMADDTRANSACTIONS = "aPRMAddTransactions";
+    public static final String PROPERTY_READDTRANSACTIONS = "reAddtransactions";
     public static final String PROPERTY_TYPEWRITEOFF = "typewriteoff";
+    public static final String PROPERTY_ATECDPADDTRS = "atecdpAddtrs";
     public static final String PROPERTY_WRITEOFFLIMIT = "writeofflimit";
+    public static final String PROPERTY_CONUMEROCHEQUEDESDE = "coNumeroChequeDesde";
+    public static final String PROPERTY_CONUMEROCHEQUEHASTA = "coNumeroChequeHasta";
+    public static final String PROPERTY_ATECDPRECONCILE = "atecdpReconcile";
+    public static final String PROPERTY_CONUMEROCHEQUEAHORA = "coNumeroChequeAhora";
+    public static final String PROPERTY_DPADDTRANSACTIONS = "dpAddtransactions";
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRANSACTIONVLIST = "aPRMFinaccTransactionVList";
@@ -102,6 +111,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
     public static final String PROPERTY_APRMRECONCILIATIONLIST = "aPRMReconciliationList";
     public static final String PROPERTY_BUSINESSPARTNERLIST = "businessPartnerList";
     public static final String PROPERTY_BUSINESSPARTNERPOFINANCIALACCOUNTLIST = "businessPartnerPOFinancialAccountList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_FINBANKSTATEMENTLIST = "fINBankStatementList";
     public static final String PROPERTY_FINFINACCTRANSACTIONLIST = "fINFinaccTransactionList";
     public static final String PROPERTY_FINFINANCIALACCOUNTACCTLIST = "fINFinancialAccountAcctList";
@@ -114,6 +124,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
     public static final String PROPERTY_FINANCIALMGMTFINACCPAYMENTMETHODLIST = "financialMgmtFinAccPaymentMethodList";
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
     public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
+    public static final String PROPERTY_ATECDPFINACCTRANSACTIONVLIST = "atecdpFinaccTransactionVList";
     public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
@@ -139,12 +150,17 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         setDefaultValue(PROPERTY_APRMMATCHTRANSACTIONS, false);
         setDefaultValue(PROPERTY_APRMRECONCILE, false);
         setDefaultValue(PROPERTY_APRMADDTRANSACTIONS, false);
+        setDefaultValue(PROPERTY_READDTRANSACTIONS, false);
+        setDefaultValue(PROPERTY_ATECDPADDTRS, false);
+        setDefaultValue(PROPERTY_ATECDPRECONCILE, false);
+        setDefaultValue(PROPERTY_DPADDTRANSACTIONS, false);
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMRECONCILIATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERPOFINANCIALACCOUNTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINBANKSTATEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINACCTRANSACTIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINANCIALACCOUNTACCTLIST, new ArrayList<Object>());
@@ -157,6 +173,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         setDefaultValue(PROPERTY_FINANCIALMGMTFINACCPAYMENTMETHODLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATECDPFINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
@@ -456,6 +473,14 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         set(PROPERTY_APRMADDTRANSACTIONS, aPRMAddTransactions);
     }
 
+    public Boolean isReAddtransactions() {
+        return (Boolean) get(PROPERTY_READDTRANSACTIONS);
+    }
+
+    public void setReAddtransactions(Boolean reAddtransactions) {
+        set(PROPERTY_READDTRANSACTIONS, reAddtransactions);
+    }
+
     public String getTypewriteoff() {
         return (String) get(PROPERTY_TYPEWRITEOFF);
     }
@@ -464,12 +489,60 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         set(PROPERTY_TYPEWRITEOFF, typewriteoff);
     }
 
+    public Boolean isAtecdpAddtrs() {
+        return (Boolean) get(PROPERTY_ATECDPADDTRS);
+    }
+
+    public void setAtecdpAddtrs(Boolean atecdpAddtrs) {
+        set(PROPERTY_ATECDPADDTRS, atecdpAddtrs);
+    }
+
     public BigDecimal getWriteofflimit() {
         return (BigDecimal) get(PROPERTY_WRITEOFFLIMIT);
     }
 
     public void setWriteofflimit(BigDecimal writeofflimit) {
         set(PROPERTY_WRITEOFFLIMIT, writeofflimit);
+    }
+
+    public Long getCoNumeroChequeDesde() {
+        return (Long) get(PROPERTY_CONUMEROCHEQUEDESDE);
+    }
+
+    public void setCoNumeroChequeDesde(Long coNumeroChequeDesde) {
+        set(PROPERTY_CONUMEROCHEQUEDESDE, coNumeroChequeDesde);
+    }
+
+    public Long getCoNumeroChequeHasta() {
+        return (Long) get(PROPERTY_CONUMEROCHEQUEHASTA);
+    }
+
+    public void setCoNumeroChequeHasta(Long coNumeroChequeHasta) {
+        set(PROPERTY_CONUMEROCHEQUEHASTA, coNumeroChequeHasta);
+    }
+
+    public Boolean isAtecdpReconcile() {
+        return (Boolean) get(PROPERTY_ATECDPRECONCILE);
+    }
+
+    public void setAtecdpReconcile(Boolean atecdpReconcile) {
+        set(PROPERTY_ATECDPRECONCILE, atecdpReconcile);
+    }
+
+    public Long getCoNumeroChequeAhora() {
+        return (Long) get(PROPERTY_CONUMEROCHEQUEAHORA);
+    }
+
+    public void setCoNumeroChequeAhora(Long coNumeroChequeAhora) {
+        set(PROPERTY_CONUMEROCHEQUEAHORA, coNumeroChequeAhora);
+    }
+
+    public Boolean isDpAddtransactions() {
+        return (Boolean) get(PROPERTY_DPADDTRANSACTIONS);
+    }
+
+    public void setDpAddtransactions(Boolean dpAddtransactions) {
+        set(PROPERTY_DPADDTRANSACTIONS, dpAddtransactions);
     }
 
     public BigDecimal getLastreconbalance() {
@@ -548,6 +621,15 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
 
     public void setBusinessPartnerPOFinancialAccountList(List<BusinessPartner> businessPartnerPOFinancialAccountList) {
         set(PROPERTY_BUSINESSPARTNERPOFINANCIALACCOUNTLIST, businessPartnerPOFinancialAccountList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")
@@ -656,6 +738,15 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
 
     public void setRolPagoProvisionLineList(List<noRolPagoProvisionLine> rolPagoProvisionLineList) {
         set(PROPERTY_ROLPAGOPROVISIONLINELIST, rolPagoProvisionLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atecdpFinaccTransactionV> getAtecdpFinaccTransactionVList() {
+      return (List<atecdpFinaccTransactionV>) get(PROPERTY_ATECDPFINACCTRANSACTIONVLIST);
+    }
+
+    public void setAtecdpFinaccTransactionVList(List<atecdpFinaccTransactionV> atecdpFinaccTransactionVList) {
+        set(PROPERTY_ATECDPFINACCTRANSACTIONVLIST, atecdpFinaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")

@@ -18,6 +18,9 @@
 */
 package org.openbravo.model.financialmgmt.payment;
 
+import com.atrums.conciliacionec.data.atecdpFinaccTransactionV;
+import com.atrums.depositos.data.DP_FinaccTransactionV;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,10 +79,12 @@ public class FIN_Reconciliation extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
     public static final String PROPERTY_APRMRECDETAILVLIST = "aPRMRecDetailVList";
     public static final String PROPERTY_APRMRECONCILIATIONLIST = "aPRMReconciliationList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_FINBANKSTATEMENTLIST = "fINBankStatementList";
     public static final String PROPERTY_FINFINACCTRANSACTIONLIST = "fINFinaccTransactionList";
     public static final String PROPERTY_FINRECONCILIATIONLINETEMPLIST = "fINReconciliationLineTempList";
     public static final String PROPERTY_FINRECONCILIATIONLINEVLIST = "fINReconciliationLineVList";
+    public static final String PROPERTY_ATECDPFINACCTRANSACTIONVLIST = "atecdpFinaccTransactionVList";
 
     public FIN_Reconciliation() {
         setDefaultValue(PROPERTY_CREATIONDATE, new Date());
@@ -101,10 +106,12 @@ public class FIN_Reconciliation extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMRECDETAILVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMRECONCILIATIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINBANKSTATEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINACCTRANSACTIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINRECONCILIATIONLINETEMPLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINRECONCILIATIONLINEVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATECDPFINACCTRANSACTIONVLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -357,6 +364,15 @@ public class FIN_Reconciliation extends BaseOBObject implements Traceable, Clien
     }
 
     @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<FIN_BankStatement> getFINBankStatementList() {
       return (List<FIN_BankStatement>) get(PROPERTY_FINBANKSTATEMENTLIST);
     }
@@ -390,6 +406,15 @@ public class FIN_Reconciliation extends BaseOBObject implements Traceable, Clien
 
     public void setFINReconciliationLineVList(List<FIN_ReconciliationLine_v> fINReconciliationLineVList) {
         set(PROPERTY_FINRECONCILIATIONLINEVLIST, fINReconciliationLineVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<atecdpFinaccTransactionV> getAtecdpFinaccTransactionVList() {
+      return (List<atecdpFinaccTransactionV>) get(PROPERTY_ATECDPFINACCTRANSACTIONVLIST);
+    }
+
+    public void setAtecdpFinaccTransactionVList(List<atecdpFinaccTransactionV> atecdpFinaccTransactionVList) {
+        set(PROPERTY_ATECDPFINACCTRANSACTIONVLIST, atecdpFinaccTransactionVList);
     }
 
 }

@@ -28,17 +28,24 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String adOrgIdr;
   public String cDoctypetargetId;
   public String cDoctypetargetIdr;
-  public String documentno;
   public String dateinvoiced;
+  public String dateacct;
   public String cBpartnerId;
   public String cBpartnerIdr;
+  public String emCoNroEstab;
+  public String emCoPuntoEmision;
+  public String documentno;
   public String cBpartnerLocationId;
   public String cBpartnerLocationIdr;
+  public String emCoCodsustento;
+  public String emCoCodsustentor;
+  public String emCoNroAutSri;
+  public String emCoVencimientoAutSri;
   public String mPricelistId;
   public String mPricelistIdr;
-  public String dateacct;
   public String cPaymenttermId;
   public String cPaymenttermIdr;
+  public String emCoRise;
   public String finPaymentmethodId;
   public String finPaymentmethodIdr;
   public String description;
@@ -57,8 +64,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String outstandingamt;
   public String dateordered;
   public String dueamt;
-  public String daystilldue;
   public String salesrepId;
+  public String daystilldue;
   public String isdiscountprinted;
   public String cDoctypeId;
   public String withholdingamount;
@@ -74,6 +81,7 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String adOrgtrxId;
   public String updatepaymentmonitor;
   public String emAprmAddpayment;
+  public String emCoAddpayment;
   public String posted;
   public String postedBtn;
   public String emAprmProcessinvoice;
@@ -91,16 +99,21 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCampaignIdr;
   public String user1Id;
   public String user2Id;
-  public String adClientId;
-  public String istaxincluded;
-  public String isprinted;
-  public String paymentrule;
-  public String issotrx;
+  public String emAtsTotalbase0;
+  public String emAtsTotalbase12;
+  public String emAtsTotalexento;
+  public String emAtsTotaliva;
+  public String emAtsTotalice;
   public String dateprinted;
   public String processing;
   public String processed;
-  public String cInvoiceId;
+  public String istaxincluded;
   public String isselfservice;
+  public String cInvoiceId;
+  public String adClientId;
+  public String isprinted;
+  public String paymentrule;
+  public String issotrx;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -134,28 +147,42 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return cDoctypetargetId;
     else if (fieldName.equalsIgnoreCase("c_doctypetarget_idr") || fieldName.equals("cDoctypetargetIdr"))
       return cDoctypetargetIdr;
-    else if (fieldName.equalsIgnoreCase("documentno"))
-      return documentno;
     else if (fieldName.equalsIgnoreCase("dateinvoiced"))
       return dateinvoiced;
+    else if (fieldName.equalsIgnoreCase("dateacct"))
+      return dateacct;
     else if (fieldName.equalsIgnoreCase("c_bpartner_id") || fieldName.equals("cBpartnerId"))
       return cBpartnerId;
     else if (fieldName.equalsIgnoreCase("c_bpartner_idr") || fieldName.equals("cBpartnerIdr"))
       return cBpartnerIdr;
+    else if (fieldName.equalsIgnoreCase("em_co_nro_estab") || fieldName.equals("emCoNroEstab"))
+      return emCoNroEstab;
+    else if (fieldName.equalsIgnoreCase("em_co_punto_emision") || fieldName.equals("emCoPuntoEmision"))
+      return emCoPuntoEmision;
+    else if (fieldName.equalsIgnoreCase("documentno"))
+      return documentno;
     else if (fieldName.equalsIgnoreCase("c_bpartner_location_id") || fieldName.equals("cBpartnerLocationId"))
       return cBpartnerLocationId;
     else if (fieldName.equalsIgnoreCase("c_bpartner_location_idr") || fieldName.equals("cBpartnerLocationIdr"))
       return cBpartnerLocationIdr;
+    else if (fieldName.equalsIgnoreCase("em_co_codsustento") || fieldName.equals("emCoCodsustento"))
+      return emCoCodsustento;
+    else if (fieldName.equalsIgnoreCase("em_co_codsustentor") || fieldName.equals("emCoCodsustentor"))
+      return emCoCodsustentor;
+    else if (fieldName.equalsIgnoreCase("em_co_nro_aut_sri") || fieldName.equals("emCoNroAutSri"))
+      return emCoNroAutSri;
+    else if (fieldName.equalsIgnoreCase("em_co_vencimiento_aut_sri") || fieldName.equals("emCoVencimientoAutSri"))
+      return emCoVencimientoAutSri;
     else if (fieldName.equalsIgnoreCase("m_pricelist_id") || fieldName.equals("mPricelistId"))
       return mPricelistId;
     else if (fieldName.equalsIgnoreCase("m_pricelist_idr") || fieldName.equals("mPricelistIdr"))
       return mPricelistIdr;
-    else if (fieldName.equalsIgnoreCase("dateacct"))
-      return dateacct;
     else if (fieldName.equalsIgnoreCase("c_paymentterm_id") || fieldName.equals("cPaymenttermId"))
       return cPaymenttermId;
     else if (fieldName.equalsIgnoreCase("c_paymentterm_idr") || fieldName.equals("cPaymenttermIdr"))
       return cPaymenttermIdr;
+    else if (fieldName.equalsIgnoreCase("em_co_rise") || fieldName.equals("emCoRise"))
+      return emCoRise;
     else if (fieldName.equalsIgnoreCase("fin_paymentmethod_id") || fieldName.equals("finPaymentmethodId"))
       return finPaymentmethodId;
     else if (fieldName.equalsIgnoreCase("fin_paymentmethod_idr") || fieldName.equals("finPaymentmethodIdr"))
@@ -192,10 +219,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return dateordered;
     else if (fieldName.equalsIgnoreCase("dueamt"))
       return dueamt;
-    else if (fieldName.equalsIgnoreCase("daystilldue"))
-      return daystilldue;
     else if (fieldName.equalsIgnoreCase("salesrep_id") || fieldName.equals("salesrepId"))
       return salesrepId;
+    else if (fieldName.equalsIgnoreCase("daystilldue"))
+      return daystilldue;
     else if (fieldName.equalsIgnoreCase("isdiscountprinted"))
       return isdiscountprinted;
     else if (fieldName.equalsIgnoreCase("c_doctype_id") || fieldName.equals("cDoctypeId"))
@@ -226,6 +253,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return updatepaymentmonitor;
     else if (fieldName.equalsIgnoreCase("em_aprm_addpayment") || fieldName.equals("emAprmAddpayment"))
       return emAprmAddpayment;
+    else if (fieldName.equalsIgnoreCase("em_co_addpayment") || fieldName.equals("emCoAddpayment"))
+      return emCoAddpayment;
     else if (fieldName.equalsIgnoreCase("posted"))
       return posted;
     else if (fieldName.equalsIgnoreCase("posted_btn") || fieldName.equals("postedBtn"))
@@ -260,26 +289,36 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("istaxincluded"))
-      return istaxincluded;
-    else if (fieldName.equalsIgnoreCase("isprinted"))
-      return isprinted;
-    else if (fieldName.equalsIgnoreCase("paymentrule"))
-      return paymentrule;
-    else if (fieldName.equalsIgnoreCase("issotrx"))
-      return issotrx;
+    else if (fieldName.equalsIgnoreCase("em_ats_totalbase0") || fieldName.equals("emAtsTotalbase0"))
+      return emAtsTotalbase0;
+    else if (fieldName.equalsIgnoreCase("em_ats_totalbase12") || fieldName.equals("emAtsTotalbase12"))
+      return emAtsTotalbase12;
+    else if (fieldName.equalsIgnoreCase("em_ats_totalexento") || fieldName.equals("emAtsTotalexento"))
+      return emAtsTotalexento;
+    else if (fieldName.equalsIgnoreCase("em_ats_totaliva") || fieldName.equals("emAtsTotaliva"))
+      return emAtsTotaliva;
+    else if (fieldName.equalsIgnoreCase("em_ats_totalice") || fieldName.equals("emAtsTotalice"))
+      return emAtsTotalice;
     else if (fieldName.equalsIgnoreCase("dateprinted"))
       return dateprinted;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
-    else if (fieldName.equalsIgnoreCase("c_invoice_id") || fieldName.equals("cInvoiceId"))
-      return cInvoiceId;
+    else if (fieldName.equalsIgnoreCase("istaxincluded"))
+      return istaxincluded;
     else if (fieldName.equalsIgnoreCase("isselfservice"))
       return isselfservice;
+    else if (fieldName.equalsIgnoreCase("c_invoice_id") || fieldName.equals("cInvoiceId"))
+      return cInvoiceId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isprinted"))
+      return isprinted;
+    else if (fieldName.equalsIgnoreCase("paymentrule"))
+      return paymentrule;
+    else if (fieldName.equalsIgnoreCase("issotrx"))
+      return issotrx;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -323,17 +362,24 @@ Select for edit
       "(CASE WHEN C_Invoice.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, " +
       "C_Invoice.C_DocTypeTarget_ID, " +
       "(CASE WHEN C_Invoice.C_DocTypeTarget_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_DocTypeTarget_IDR, " +
-      "C_Invoice.DocumentNo, " +
       "C_Invoice.DateInvoiced, " +
+      "C_Invoice.DateAcct, " +
       "C_Invoice.C_BPartner_ID, " +
       "(CASE WHEN C_Invoice.C_BPartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_BPartner_IDR, " +
+      "C_Invoice.EM_Co_Nro_Estab, " +
+      "C_Invoice.EM_Co_Punto_Emision, " +
+      "C_Invoice.DocumentNo, " +
       "C_Invoice.C_BPartner_Location_ID, " +
       "(CASE WHEN C_Invoice.C_BPartner_Location_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Name), ''))),'') ) END) AS C_BPartner_Location_IDR, " +
+      "C_Invoice.em_co_codSustento, " +
+      "(CASE WHEN C_Invoice.em_co_codSustento IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS em_co_codSustentoR, " +
+      "C_Invoice.EM_Co_Nro_Aut_Sri, " +
+      "C_Invoice.EM_Co_Vencimiento_Aut_Sri, " +
       "C_Invoice.M_PriceList_ID, " +
       "(CASE WHEN C_Invoice.M_PriceList_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'') ) END) AS M_PriceList_IDR, " +
-      "C_Invoice.DateAcct, " +
       "C_Invoice.C_PaymentTerm_ID, " +
       "(CASE WHEN C_Invoice.C_PaymentTerm_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL7.Name IS NULL THEN TO_CHAR(table7.Name) ELSE TO_CHAR(tableTRL7.Name) END)), ''))),'') ) END) AS C_PaymentTerm_IDR, " +
+      "COALESCE(C_Invoice.em_co_rise, 'N') AS em_co_rise, " +
       "C_Invoice.FIN_Paymentmethod_ID, " +
       "(CASE WHEN C_Invoice.FIN_Paymentmethod_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Name), ''))),'') ) END) AS FIN_Paymentmethod_IDR, " +
       "C_Invoice.Description, " +
@@ -352,8 +398,8 @@ Select for edit
       "C_Invoice.OutstandingAmt, " +
       "C_Invoice.DateOrdered, " +
       "C_Invoice.DueAmt, " +
-      "C_Invoice.DaysTillDue, " +
       "C_Invoice.SalesRep_ID, " +
+      "C_Invoice.DaysTillDue, " +
       "COALESCE(C_Invoice.IsDiscountPrinted, 'N') AS IsDiscountPrinted, " +
       "C_Invoice.C_DocType_ID, " +
       "C_Invoice.Withholdingamount, " +
@@ -369,12 +415,13 @@ Select for edit
       "C_Invoice.AD_OrgTrx_ID, " +
       "C_Invoice.UpdatePaymentMonitor, " +
       "C_Invoice.EM_APRM_Addpayment, " +
+      "C_Invoice.EM_Co_Addpayment, " +
       "C_Invoice.Posted, " +
-      "list1.name as Posted_BTN, " +
+      "list2.name as Posted_BTN, " +
       "C_Invoice.EM_APRM_Processinvoice, " +
-      "list2.name as EM_APRM_Processinvoice_BTN, " +
+      "list3.name as EM_APRM_Processinvoice_BTN, " +
       "C_Invoice.DocAction, " +
-      "list3.name as DocAction_BTN, " +
+      "list4.name as DocAction_BTN, " +
       "C_Invoice.CreateFrom, " +
       "C_Invoice.CopyFrom, " +
       "C_Invoice.Calculate_Promotions, " +
@@ -386,18 +433,23 @@ Select for edit
       "(CASE WHEN C_Invoice.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table12.Name), ''))),'') ) END) AS C_Campaign_IDR, " +
       "C_Invoice.User1_ID, " +
       "C_Invoice.User2_ID, " +
-      "C_Invoice.AD_Client_ID, " +
-      "COALESCE(C_Invoice.IsTaxIncluded, 'N') AS IsTaxIncluded, " +
-      "COALESCE(C_Invoice.IsPrinted, 'N') AS IsPrinted, " +
-      "C_Invoice.PaymentRule, " +
-      "COALESCE(C_Invoice.IsSOTrx, 'N') AS IsSOTrx, " +
+      "C_Invoice.EM_Ats_Totalbase0, " +
+      "C_Invoice.EM_Ats_Totalbase12, " +
+      "C_Invoice.EM_Ats_Totalexento, " +
+      "C_Invoice.EM_Ats_Totaliva, " +
+      "C_Invoice.EM_Ats_Totalice, " +
       "C_Invoice.DatePrinted, " +
       "C_Invoice.Processing, " +
       "COALESCE(C_Invoice.Processed, 'N') AS Processed, " +
-      "C_Invoice.C_Invoice_ID, " +
+      "COALESCE(C_Invoice.IsTaxIncluded, 'N') AS IsTaxIncluded, " +
       "COALESCE(C_Invoice.IsSelfService, 'N') AS IsSelfService, " +
+      "C_Invoice.C_Invoice_ID, " +
+      "C_Invoice.AD_Client_ID, " +
+      "COALESCE(C_Invoice.IsPrinted, 'N') AS IsPrinted, " +
+      "C_Invoice.PaymentRule, " +
+      "COALESCE(C_Invoice.IsSOTrx, 'N') AS IsSOTrx, " +
       "        ? AS LANGUAGE " +
-      "        FROM C_Invoice left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Invoice.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (C_Invoice.C_DocTypeTarget_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table4 on (C_Invoice.C_BPartner_ID = table4.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table5 on (C_Invoice.C_BPartner_Location_ID = table5.C_BPartner_Location_ID) left join (select M_PriceList_ID, Name from M_PriceList) table6 on (C_Invoice.M_PriceList_ID = table6.M_PriceList_ID) left join (select C_PaymentTerm_ID, Name from C_PaymentTerm) table7 on (C_Invoice.C_PaymentTerm_ID = table7.C_PaymentTerm_ID) left join (select C_PaymentTerm_ID,AD_Language, Name from C_PaymentTerm_TRL) tableTRL7 on (table7.C_PaymentTerm_ID = tableTRL7.C_PaymentTerm_ID and tableTRL7.AD_Language = ?)  left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table9 on (C_Invoice.FIN_Paymentmethod_ID = table9.FIN_Paymentmethod_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table10 on (C_Invoice.C_Order_ID = table10.C_Order_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND C_Invoice.Posted = TO_CHAR(list1.value)) left join ad_ref_list_v list2 on (list2.ad_reference_id = '135' and list2.ad_language = ?  AND C_Invoice.EM_APRM_Processinvoice = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = '135' and list3.ad_language = ?  AND (CASE C_Invoice.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(C_Invoice.DocAction) END) = list3.value) left join (select C_Project_ID, Value, Name from C_Project) table11 on (C_Invoice.C_Project_ID = table11.C_Project_ID) left join (select C_Campaign_ID, Name from C_Campaign) table12 on (C_Invoice.C_Campaign_ID = table12.C_Campaign_ID)" +
+      "        FROM C_Invoice left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Invoice.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (C_Invoice.C_DocTypeTarget_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table4 on (C_Invoice.C_BPartner_ID = table4.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table5 on (C_Invoice.C_BPartner_Location_ID = table5.C_BPartner_Location_ID) left join ad_ref_list_v list1 on (C_Invoice.em_co_codSustento = list1.value and list1.ad_reference_id = '621494B5280946F6A7C4EAB0AAC3AFD5' and list1.ad_language = ?)  left join (select M_PriceList_ID, Name from M_PriceList) table6 on (C_Invoice.M_PriceList_ID = table6.M_PriceList_ID) left join (select C_PaymentTerm_ID, Name from C_PaymentTerm) table7 on (C_Invoice.C_PaymentTerm_ID = table7.C_PaymentTerm_ID) left join (select C_PaymentTerm_ID,AD_Language, Name from C_PaymentTerm_TRL) tableTRL7 on (table7.C_PaymentTerm_ID = tableTRL7.C_PaymentTerm_ID and tableTRL7.AD_Language = ?)  left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table9 on (C_Invoice.FIN_Paymentmethod_ID = table9.FIN_Paymentmethod_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table10 on (C_Invoice.C_Order_ID = table10.C_Order_ID) left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND C_Invoice.Posted = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = '135' and list3.ad_language = ?  AND C_Invoice.EM_APRM_Processinvoice = TO_CHAR(list3.value)) left join ad_ref_list_v list4 on (list4.ad_reference_id = '135' and list4.ad_language = ?  AND (CASE C_Invoice.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(C_Invoice.DocAction) END) = list4.value) left join (select C_Project_ID, Value, Name from C_Project) table11 on (C_Invoice.C_Project_ID = table11.C_Project_ID) left join (select C_Campaign_ID, Name from C_Campaign) table12 on (C_Invoice.C_Campaign_ID = table12.C_Campaign_ID)" +
       "        WHERE 2=2 " +
       " AND C_Invoice.IsSOTrx='N'" +
       "        AND 1=1 " +
@@ -420,6 +472,7 @@ Select for edit
     st = connectionProvider.getPreparedStatement(strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
@@ -453,17 +506,24 @@ Select for edit
         objectHeaderData.adOrgIdr = UtilSql.getValue(result, "ad_org_idr");
         objectHeaderData.cDoctypetargetId = UtilSql.getValue(result, "c_doctypetarget_id");
         objectHeaderData.cDoctypetargetIdr = UtilSql.getValue(result, "c_doctypetarget_idr");
-        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
         objectHeaderData.dateinvoiced = UtilSql.getDateValue(result, "dateinvoiced", "dd-MM-yyyy");
+        objectHeaderData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
         objectHeaderData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
         objectHeaderData.cBpartnerIdr = UtilSql.getValue(result, "c_bpartner_idr");
+        objectHeaderData.emCoNroEstab = UtilSql.getValue(result, "em_co_nro_estab");
+        objectHeaderData.emCoPuntoEmision = UtilSql.getValue(result, "em_co_punto_emision");
+        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
         objectHeaderData.cBpartnerLocationId = UtilSql.getValue(result, "c_bpartner_location_id");
         objectHeaderData.cBpartnerLocationIdr = UtilSql.getValue(result, "c_bpartner_location_idr");
+        objectHeaderData.emCoCodsustento = UtilSql.getValue(result, "em_co_codsustento");
+        objectHeaderData.emCoCodsustentor = UtilSql.getValue(result, "em_co_codsustentor");
+        objectHeaderData.emCoNroAutSri = UtilSql.getValue(result, "em_co_nro_aut_sri");
+        objectHeaderData.emCoVencimientoAutSri = UtilSql.getDateValue(result, "em_co_vencimiento_aut_sri", "dd-MM-yyyy");
         objectHeaderData.mPricelistId = UtilSql.getValue(result, "m_pricelist_id");
         objectHeaderData.mPricelistIdr = UtilSql.getValue(result, "m_pricelist_idr");
-        objectHeaderData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
         objectHeaderData.cPaymenttermId = UtilSql.getValue(result, "c_paymentterm_id");
         objectHeaderData.cPaymenttermIdr = UtilSql.getValue(result, "c_paymentterm_idr");
+        objectHeaderData.emCoRise = UtilSql.getValue(result, "em_co_rise");
         objectHeaderData.finPaymentmethodId = UtilSql.getValue(result, "fin_paymentmethod_id");
         objectHeaderData.finPaymentmethodIdr = UtilSql.getValue(result, "fin_paymentmethod_idr");
         objectHeaderData.description = UtilSql.getValue(result, "description");
@@ -482,8 +542,8 @@ Select for edit
         objectHeaderData.outstandingamt = UtilSql.getValue(result, "outstandingamt");
         objectHeaderData.dateordered = UtilSql.getDateValue(result, "dateordered", "dd-MM-yyyy");
         objectHeaderData.dueamt = UtilSql.getValue(result, "dueamt");
-        objectHeaderData.daystilldue = UtilSql.getValue(result, "daystilldue");
         objectHeaderData.salesrepId = UtilSql.getValue(result, "salesrep_id");
+        objectHeaderData.daystilldue = UtilSql.getValue(result, "daystilldue");
         objectHeaderData.isdiscountprinted = UtilSql.getValue(result, "isdiscountprinted");
         objectHeaderData.cDoctypeId = UtilSql.getValue(result, "c_doctype_id");
         objectHeaderData.withholdingamount = UtilSql.getValue(result, "withholdingamount");
@@ -499,6 +559,7 @@ Select for edit
         objectHeaderData.adOrgtrxId = UtilSql.getValue(result, "ad_orgtrx_id");
         objectHeaderData.updatepaymentmonitor = UtilSql.getValue(result, "updatepaymentmonitor");
         objectHeaderData.emAprmAddpayment = UtilSql.getValue(result, "em_aprm_addpayment");
+        objectHeaderData.emCoAddpayment = UtilSql.getValue(result, "em_co_addpayment");
         objectHeaderData.posted = UtilSql.getValue(result, "posted");
         objectHeaderData.postedBtn = UtilSql.getValue(result, "posted_btn");
         objectHeaderData.emAprmProcessinvoice = UtilSql.getValue(result, "em_aprm_processinvoice");
@@ -516,16 +577,21 @@ Select for edit
         objectHeaderData.cCampaignIdr = UtilSql.getValue(result, "c_campaign_idr");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectHeaderData.istaxincluded = UtilSql.getValue(result, "istaxincluded");
-        objectHeaderData.isprinted = UtilSql.getValue(result, "isprinted");
-        objectHeaderData.paymentrule = UtilSql.getValue(result, "paymentrule");
-        objectHeaderData.issotrx = UtilSql.getValue(result, "issotrx");
+        objectHeaderData.emAtsTotalbase0 = UtilSql.getValue(result, "em_ats_totalbase0");
+        objectHeaderData.emAtsTotalbase12 = UtilSql.getValue(result, "em_ats_totalbase12");
+        objectHeaderData.emAtsTotalexento = UtilSql.getValue(result, "em_ats_totalexento");
+        objectHeaderData.emAtsTotaliva = UtilSql.getValue(result, "em_ats_totaliva");
+        objectHeaderData.emAtsTotalice = UtilSql.getValue(result, "em_ats_totalice");
         objectHeaderData.dateprinted = UtilSql.getDateValue(result, "dateprinted", "dd-MM-yyyy");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
-        objectHeaderData.cInvoiceId = UtilSql.getValue(result, "c_invoice_id");
+        objectHeaderData.istaxincluded = UtilSql.getValue(result, "istaxincluded");
         objectHeaderData.isselfservice = UtilSql.getValue(result, "isselfservice");
+        objectHeaderData.cInvoiceId = UtilSql.getValue(result, "c_invoice_id");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.isprinted = UtilSql.getValue(result, "isprinted");
+        objectHeaderData.paymentrule = UtilSql.getValue(result, "paymentrule");
+        objectHeaderData.issotrx = UtilSql.getValue(result, "issotrx");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -560,7 +626,7 @@ Select for edit
 /**
 Create a registry
  */
-  public static HeaderData[] set(String lastcalculatedondate, String cWithholdingId, String withholdingamount, String taxdate, String daystilldue, String cInvoiceId, String adClientId, String adOrgId, String isactive, String created, String createdby, String createdbyr, String updatedby, String updatedbyr, String documentno, String cDoctypeId, String docstatus, String docaction, String docactionBtn, String processing, String processed, String cBpartnerId, String cBpartnerIdr, String cPaymenttermId, String cBpartnerLocationId, String cCurrencyId, String totallines, String grandtotal, String dateacct, String cCampaignId, String cProjectId, String cProjectIdr, String cActivityId, String salesrepId, String adUserId, String issotrx, String cDoctypetargetId, String description, String dateinvoiced, String dateprinted, String poreference, String cChargeId, String chargeamt, String mPricelistId, String paymentrule, String cOrderId, String cOrderIdr, String dateordered, String isdiscountprinted, String isprinted, String istaxincluded, String posted, String postedBtn, String generateto, String createfrom, String emAprmAddpayment, String finPaymentmethodId, String copyfrom, String isselfservice, String emAprmProcessinvoice, String emAprmProcessinvoiceBtn, String cCostcenterId, String adOrgtrxId, String user1Id, String user2Id, String finalsettlement, String daysoutstanding, String percentageoverdue, String totalpaid, String outstandingamt, String dueamt, String ispaid, String updatepaymentmonitor, String aAssetId, String calculatePromotions)    throws ServletException {
+  public static HeaderData[] set(String emAtsTotalexento, String lastcalculatedondate, String cWithholdingId, String withholdingamount, String taxdate, String emCoNroEstab, String daystilldue, String cInvoiceId, String adClientId, String adOrgId, String isactive, String created, String createdby, String createdbyr, String updatedby, String updatedbyr, String documentno, String cDoctypeId, String docstatus, String docaction, String docactionBtn, String processing, String processed, String cBpartnerId, String cBpartnerIdr, String emAtsTotaliva, String cPaymenttermId, String cBpartnerLocationId, String cCurrencyId, String totallines, String grandtotal, String dateacct, String cCampaignId, String cProjectId, String cProjectIdr, String cActivityId, String salesrepId, String adUserId, String issotrx, String cDoctypetargetId, String description, String dateinvoiced, String dateprinted, String poreference, String cChargeId, String chargeamt, String mPricelistId, String paymentrule, String emAtsTotalice, String cOrderId, String cOrderIdr, String dateordered, String isdiscountprinted, String isprinted, String emCoCodsustento, String istaxincluded, String posted, String postedBtn, String generateto, String createfrom, String emCoPuntoEmision, String emAprmAddpayment, String emAtsTotalbase0, String finPaymentmethodId, String copyfrom, String isselfservice, String emAprmProcessinvoice, String emAprmProcessinvoiceBtn, String cCostcenterId, String adOrgtrxId, String user1Id, String user2Id, String emAtsTotalbase12, String emCoRise, String finalsettlement, String daysoutstanding, String percentageoverdue, String totalpaid, String outstandingamt, String dueamt, String emCoNroAutSri, String ispaid, String updatepaymentmonitor, String emCoAddpayment, String aAssetId, String calculatePromotions, String emCoVencimientoAutSri)    throws ServletException {
     HeaderData objectHeaderData[] = new HeaderData[1];
     objectHeaderData[0] = new HeaderData();
     objectHeaderData[0].created = created;
@@ -573,17 +639,24 @@ Create a registry
     objectHeaderData[0].adOrgIdr = "";
     objectHeaderData[0].cDoctypetargetId = cDoctypetargetId;
     objectHeaderData[0].cDoctypetargetIdr = "";
-    objectHeaderData[0].documentno = documentno;
     objectHeaderData[0].dateinvoiced = dateinvoiced;
+    objectHeaderData[0].dateacct = dateacct;
     objectHeaderData[0].cBpartnerId = cBpartnerId;
     objectHeaderData[0].cBpartnerIdr = cBpartnerIdr;
+    objectHeaderData[0].emCoNroEstab = emCoNroEstab;
+    objectHeaderData[0].emCoPuntoEmision = emCoPuntoEmision;
+    objectHeaderData[0].documentno = documentno;
     objectHeaderData[0].cBpartnerLocationId = cBpartnerLocationId;
     objectHeaderData[0].cBpartnerLocationIdr = "";
+    objectHeaderData[0].emCoCodsustento = emCoCodsustento;
+    objectHeaderData[0].emCoCodsustentor = "";
+    objectHeaderData[0].emCoNroAutSri = emCoNroAutSri;
+    objectHeaderData[0].emCoVencimientoAutSri = emCoVencimientoAutSri;
     objectHeaderData[0].mPricelistId = mPricelistId;
     objectHeaderData[0].mPricelistIdr = "";
-    objectHeaderData[0].dateacct = dateacct;
     objectHeaderData[0].cPaymenttermId = cPaymenttermId;
     objectHeaderData[0].cPaymenttermIdr = "";
+    objectHeaderData[0].emCoRise = emCoRise;
     objectHeaderData[0].finPaymentmethodId = finPaymentmethodId;
     objectHeaderData[0].finPaymentmethodIdr = "";
     objectHeaderData[0].description = description;
@@ -602,8 +675,8 @@ Create a registry
     objectHeaderData[0].outstandingamt = outstandingamt;
     objectHeaderData[0].dateordered = dateordered;
     objectHeaderData[0].dueamt = dueamt;
-    objectHeaderData[0].daystilldue = daystilldue;
     objectHeaderData[0].salesrepId = salesrepId;
+    objectHeaderData[0].daystilldue = daystilldue;
     objectHeaderData[0].isdiscountprinted = isdiscountprinted;
     objectHeaderData[0].cDoctypeId = cDoctypeId;
     objectHeaderData[0].withholdingamount = withholdingamount;
@@ -619,6 +692,7 @@ Create a registry
     objectHeaderData[0].adOrgtrxId = adOrgtrxId;
     objectHeaderData[0].updatepaymentmonitor = updatepaymentmonitor;
     objectHeaderData[0].emAprmAddpayment = emAprmAddpayment;
+    objectHeaderData[0].emCoAddpayment = emCoAddpayment;
     objectHeaderData[0].posted = posted;
     objectHeaderData[0].postedBtn = postedBtn;
     objectHeaderData[0].emAprmProcessinvoice = emAprmProcessinvoice;
@@ -636,16 +710,21 @@ Create a registry
     objectHeaderData[0].cCampaignIdr = "";
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].adClientId = adClientId;
-    objectHeaderData[0].istaxincluded = istaxincluded;
-    objectHeaderData[0].isprinted = isprinted;
-    objectHeaderData[0].paymentrule = paymentrule;
-    objectHeaderData[0].issotrx = issotrx;
+    objectHeaderData[0].emAtsTotalbase0 = emAtsTotalbase0;
+    objectHeaderData[0].emAtsTotalbase12 = emAtsTotalbase12;
+    objectHeaderData[0].emAtsTotalexento = emAtsTotalexento;
+    objectHeaderData[0].emAtsTotaliva = emAtsTotaliva;
+    objectHeaderData[0].emAtsTotalice = emAtsTotalice;
     objectHeaderData[0].dateprinted = dateprinted;
     objectHeaderData[0].processing = processing;
     objectHeaderData[0].processed = processed;
-    objectHeaderData[0].cInvoiceId = cInvoiceId;
+    objectHeaderData[0].istaxincluded = istaxincluded;
     objectHeaderData[0].isselfservice = isselfservice;
+    objectHeaderData[0].cInvoiceId = cInvoiceId;
+    objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].isprinted = isprinted;
+    objectHeaderData[0].paymentrule = paymentrule;
+    objectHeaderData[0].issotrx = issotrx;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -1029,7 +1108,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Invoice" +
-      "        SET AD_Org_ID = (?) , C_DocTypeTarget_ID = (?) , DocumentNo = (?) , DateInvoiced = TO_DATE(?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , M_PriceList_ID = (?) , DateAcct = TO_DATE(?) , C_PaymentTerm_ID = (?) , FIN_Paymentmethod_ID = (?) , Description = (?) , C_Order_ID = (?) , POReference = (?) , DocStatus = (?) , GrandTotal = TO_NUMBER(?) , TotalLines = TO_NUMBER(?) , C_Currency_ID = (?) , Ispaid = (?) , AD_User_ID = (?) , Totalpaid = TO_NUMBER(?) , LastCalculatedOnDate = TO_DATE(?) , Taxdate = TO_DATE(?) , OutstandingAmt = TO_NUMBER(?) , DateOrdered = TO_DATE(?) , DueAmt = TO_NUMBER(?) , DaysTillDue = TO_NUMBER(?) , SalesRep_ID = (?) , IsDiscountPrinted = (?) , C_DocType_ID = (?) , Withholdingamount = TO_NUMBER(?) , C_Withholding_ID = (?) , Percentageoverdue = TO_NUMBER(?) , C_Activity_ID = (?) , Finalsettlement = TO_DATE(?) , Daysoutstanding = TO_NUMBER(?) , IsActive = (?) , ChargeAmt = TO_NUMBER(?) , C_Charge_ID = (?) , GenerateTo = (?) , AD_OrgTrx_ID = (?) , UpdatePaymentMonitor = (?) , EM_APRM_Addpayment = (?) , Posted = (?) , EM_APRM_Processinvoice = (?) , DocAction = (?) , CreateFrom = (?) , CopyFrom = (?) , Calculate_Promotions = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , AD_Client_ID = (?) , IsTaxIncluded = (?) , IsPrinted = (?) , PaymentRule = (?) , IsSOTrx = (?) , DatePrinted = TO_DATE(?) , Processing = (?) , Processed = (?) , C_Invoice_ID = (?) , IsSelfService = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_DocTypeTarget_ID = (?) , DateInvoiced = TO_DATE(?) , DateAcct = TO_DATE(?) , C_BPartner_ID = (?) , EM_Co_Nro_Estab = (?) , EM_Co_Punto_Emision = (?) , DocumentNo = (?) , C_BPartner_Location_ID = (?) , em_co_codSustento = (?) , EM_Co_Nro_Aut_Sri = (?) , EM_Co_Vencimiento_Aut_Sri = TO_DATE(?) , M_PriceList_ID = (?) , C_PaymentTerm_ID = (?) , em_co_rise = (?) , FIN_Paymentmethod_ID = (?) , Description = (?) , C_Order_ID = (?) , POReference = (?) , DocStatus = (?) , GrandTotal = TO_NUMBER(?) , TotalLines = TO_NUMBER(?) , C_Currency_ID = (?) , Ispaid = (?) , AD_User_ID = (?) , Totalpaid = TO_NUMBER(?) , LastCalculatedOnDate = TO_DATE(?) , OutstandingAmt = TO_NUMBER(?) , Taxdate = TO_DATE(?) , DateOrdered = TO_DATE(?) , DueAmt = TO_NUMBER(?) , DaysTillDue = TO_NUMBER(?) , SalesRep_ID = (?) , IsDiscountPrinted = (?) , C_DocType_ID = (?) , Withholdingamount = TO_NUMBER(?) , C_Withholding_ID = (?) , Percentageoverdue = TO_NUMBER(?) , C_Activity_ID = (?) , Finalsettlement = TO_DATE(?) , Daysoutstanding = TO_NUMBER(?) , IsActive = (?) , ChargeAmt = TO_NUMBER(?) , C_Charge_ID = (?) , GenerateTo = (?) , AD_OrgTrx_ID = (?) , UpdatePaymentMonitor = (?) , EM_Co_Addpayment = (?) , EM_APRM_Addpayment = (?) , Posted = (?) , EM_APRM_Processinvoice = (?) , DocAction = (?) , CreateFrom = (?) , CopyFrom = (?) , Calculate_Promotions = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , EM_Ats_Totalbase0 = TO_NUMBER(?) , EM_Ats_Totalbase12 = TO_NUMBER(?) , EM_Ats_Totalexento = TO_NUMBER(?) , EM_Ats_Totaliva = TO_NUMBER(?) , EM_Ats_Totalice = TO_NUMBER(?) , Processing = (?) , PaymentRule = (?) , IsPrinted = (?) , IsTaxIncluded = (?) , C_Invoice_ID = (?) , IsSelfService = (?) , AD_Client_ID = (?) , Processed = (?) , IsSOTrx = (?) , DatePrinted = TO_DATE(?) , updated = now(), updatedby = ? " +
       "        WHERE C_Invoice.C_Invoice_ID = ? " +
       "        AND C_Invoice.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -1048,13 +1127,19 @@ Select for action search
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypetargetId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateinvoiced);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroEstab);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoPuntoEmision);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoCodsustento);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroAutSri);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoVencimientoAutSri);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPaymenttermId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoRise);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentmethodId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
@@ -1067,8 +1152,8 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adUserId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, totalpaid);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lastcalculatedondate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, taxdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, outstandingamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, taxdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dueamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, daystilldue);
@@ -1087,6 +1172,7 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatepaymentmonitor);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoAddpayment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmAddpayment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcessinvoice);
@@ -1100,16 +1186,21 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, istaxincluded);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalbase0);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalbase12);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalexento);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotaliva);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalice);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, istaxincluded);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cInvoiceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselfservice);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cInvoiceId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -1138,8 +1229,8 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Invoice " +
-      "        (AD_Org_ID, C_DocTypeTarget_ID, DocumentNo, DateInvoiced, C_BPartner_ID, C_BPartner_Location_ID, M_PriceList_ID, DateAcct, C_PaymentTerm_ID, FIN_Paymentmethod_ID, Description, C_Order_ID, POReference, DocStatus, GrandTotal, TotalLines, C_Currency_ID, Ispaid, AD_User_ID, Totalpaid, LastCalculatedOnDate, Taxdate, OutstandingAmt, DateOrdered, DueAmt, DaysTillDue, SalesRep_ID, IsDiscountPrinted, C_DocType_ID, Withholdingamount, C_Withholding_ID, Percentageoverdue, C_Activity_ID, Finalsettlement, Daysoutstanding, IsActive, ChargeAmt, C_Charge_ID, GenerateTo, AD_OrgTrx_ID, UpdatePaymentMonitor, EM_APRM_Addpayment, Posted, EM_APRM_Processinvoice, DocAction, CreateFrom, CopyFrom, Calculate_Promotions, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Campaign_ID, User1_ID, User2_ID, AD_Client_ID, IsTaxIncluded, IsPrinted, PaymentRule, IsSOTrx, DatePrinted, Processing, Processed, C_Invoice_ID, IsSelfService, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), TO_DATE(?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_DATE(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, C_DocTypeTarget_ID, DateInvoiced, DateAcct, C_BPartner_ID, EM_Co_Nro_Estab, EM_Co_Punto_Emision, DocumentNo, C_BPartner_Location_ID, em_co_codSustento, EM_Co_Nro_Aut_Sri, EM_Co_Vencimiento_Aut_Sri, M_PriceList_ID, C_PaymentTerm_ID, em_co_rise, FIN_Paymentmethod_ID, Description, C_Order_ID, POReference, DocStatus, GrandTotal, TotalLines, C_Currency_ID, Ispaid, AD_User_ID, Totalpaid, LastCalculatedOnDate, Taxdate, OutstandingAmt, DateOrdered, DueAmt, SalesRep_ID, DaysTillDue, IsDiscountPrinted, C_DocType_ID, Withholdingamount, C_Withholding_ID, Percentageoverdue, C_Activity_ID, Finalsettlement, Daysoutstanding, IsActive, ChargeAmt, C_Charge_ID, GenerateTo, AD_OrgTrx_ID, UpdatePaymentMonitor, EM_APRM_Addpayment, EM_Co_Addpayment, Posted, EM_APRM_Processinvoice, DocAction, CreateFrom, CopyFrom, Calculate_Promotions, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Campaign_ID, User1_ID, User2_ID, EM_Ats_Totalbase0, EM_Ats_Totalbase12, EM_Ats_Totalexento, EM_Ats_Totaliva, EM_Ats_Totalice, DatePrinted, Processing, Processed, IsTaxIncluded, IsSelfService, C_Invoice_ID, AD_Client_ID, IsPrinted, PaymentRule, IsSOTrx, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_DATE(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_DATE(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1149,13 +1240,19 @@ Select for action search
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypetargetId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateinvoiced);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroEstab);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoPuntoEmision);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoCodsustento);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroAutSri);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoVencimientoAutSri);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPaymenttermId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoRise);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentmethodId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
@@ -1172,8 +1269,8 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, outstandingamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dueamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, daystilldue);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, salesrepId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, daystilldue);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdiscountprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, withholdingamount);
@@ -1189,6 +1286,7 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatepaymentmonitor);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmAddpayment);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoAddpayment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcessinvoice);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docaction);
@@ -1201,16 +1299,21 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, istaxincluded);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalbase0);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalbase12);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalexento);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotaliva);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtsTotalice);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cInvoiceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, istaxincluded);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isselfservice);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cInvoiceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

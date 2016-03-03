@@ -18,6 +18,10 @@
 */
 package org.openbravo.model.common.enterprise;
 
+import com.atrums.aserlaco.venta.data.asvPedidoInventario;
+import com.atrums.compras.buffer.data.couDetalleBuffer;
+import com.atrums.compras.buffer.data.couParamBuffer;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -97,6 +101,9 @@ public class Warehouse extends BaseOBObject implements Traceable, ClientEnabled,
     public static final String PROPERTY_TIMEANDEXPENSESHEETLIST = "timeAndExpenseSheetList";
     public static final String PROPERTY_WAREHOUSEACCOUNTSLIST = "warehouseAccountsList";
     public static final String PROPERTY_WAREHOUSESHIPPERLIST = "warehouseShipperList";
+    public static final String PROPERTY_ASVPEDIDOINVENTARIOLIST = "asvPedidoInventarioList";
+    public static final String PROPERTY_COUDETALLEBUFFERLIST = "couDetalleBufferList";
+    public static final String PROPERTY_COUPARAMBUFFERLIST = "couParamBufferList";
 
     public Warehouse() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -124,6 +131,9 @@ public class Warehouse extends BaseOBObject implements Traceable, ClientEnabled,
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSEACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_WAREHOUSESHIPPERLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ASVPEDIDOINVENTARIOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_COUDETALLEBUFFERLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_COUPARAMBUFFERLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -479,6 +489,33 @@ public class Warehouse extends BaseOBObject implements Traceable, ClientEnabled,
 
     public void setWarehouseShipperList(List<WarehouseShipper> warehouseShipperList) {
         set(PROPERTY_WAREHOUSESHIPPERLIST, warehouseShipperList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<asvPedidoInventario> getAsvPedidoInventarioList() {
+      return (List<asvPedidoInventario>) get(PROPERTY_ASVPEDIDOINVENTARIOLIST);
+    }
+
+    public void setAsvPedidoInventarioList(List<asvPedidoInventario> asvPedidoInventarioList) {
+        set(PROPERTY_ASVPEDIDOINVENTARIOLIST, asvPedidoInventarioList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<couDetalleBuffer> getCouDetalleBufferList() {
+      return (List<couDetalleBuffer>) get(PROPERTY_COUDETALLEBUFFERLIST);
+    }
+
+    public void setCouDetalleBufferList(List<couDetalleBuffer> couDetalleBufferList) {
+        set(PROPERTY_COUDETALLEBUFFERLIST, couDetalleBufferList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<couParamBuffer> getCouParamBufferList() {
+      return (List<couParamBuffer>) get(PROPERTY_COUPARAMBUFFERLIST);
+    }
+
+    public void setCouParamBufferList(List<couParamBuffer> couParamBufferList) {
+        set(PROPERTY_COUPARAMBUFFERLIST, couParamBufferList);
     }
 
 }

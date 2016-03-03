@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.ad.access;
 
+import com.atrums.felectronica.data.ATECFE_conf_firma_lineas;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,6 +117,7 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
     public static final String PROPERTY_LOCKED = "locked";
     public static final String PROPERTY_IMAGE = "image";
     public static final String PROPERTY_GRANTPORTALACCESS = "grantPortalAccess";
+    public static final String PROPERTY_ATECFECHECKEMAIL = "atecfeCheckEmail";
     public static final String PROPERTY_ADALERTLIST = "aDAlertList";
     public static final String PROPERTY_ADALERTRECIPIENTLIST = "aDAlertRecipientList";
     public static final String PROPERTY_ADPREFERENCELIST = "aDPreferenceList";
@@ -122,6 +125,7 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
     public static final String PROPERTY_ADUSERSUPERVISORLIST = "aDUserSupervisorList";
     public static final String PROPERTY_ADUSERROLESLIST = "aDUserRolesList";
     public static final String PROPERTY_AUDITTRAILLIST = "auditTrailList";
+    public static final String PROPERTY_ATECFECONFFIRMALINEASLIST = "aTECFEConfFirmaLineasList";
     public static final String PROPERTY_ACTIVEPROPOSALVLIST = "activeProposalVList";
     public static final String PROPERTY_BUSINESSPARTNERBANKACCOUNTLIST = "businessPartnerBankAccountList";
     public static final String PROPERTY_CONTACTEMAILINTERACTIONLIST = "contactEmailInteractionList";
@@ -165,6 +169,7 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_LOCKED, false);
         setDefaultValue(PROPERTY_GRANTPORTALACCESS, false);
+        setDefaultValue(PROPERTY_ATECFECHECKEMAIL, false);
         setDefaultValue(PROPERTY_ADALERTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ADALERTRECIPIENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ADPREFERENCELIST, new ArrayList<Object>());
@@ -172,6 +177,7 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
         setDefaultValue(PROPERTY_ADUSERSUPERVISORLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ADUSERROLESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_AUDITTRAILLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ATECFECONFFIRMALINEASLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ACTIVEPROPOSALVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERBANKACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CONTACTEMAILINTERACTIONLIST, new ArrayList<Object>());
@@ -528,6 +534,14 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
         set(PROPERTY_GRANTPORTALACCESS, grantPortalAccess);
     }
 
+    public Boolean isAtecfeCheckEmail() {
+        return (Boolean) get(PROPERTY_ATECFECHECKEMAIL);
+    }
+
+    public void setAtecfeCheckEmail(Boolean atecfeCheckEmail) {
+        set(PROPERTY_ATECFECHECKEMAIL, atecfeCheckEmail);
+    }
+
     @SuppressWarnings("unchecked")
     public List<Alert> getADAlertList() {
       return (List<Alert>) get(PROPERTY_ADALERTLIST);
@@ -589,6 +603,15 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
 
     public void setAuditTrailList(List<AuditTrail> auditTrailList) {
         set(PROPERTY_AUDITTRAILLIST, auditTrailList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<ATECFE_conf_firma_lineas> getATECFEConfFirmaLineasList() {
+      return (List<ATECFE_conf_firma_lineas>) get(PROPERTY_ATECFECONFFIRMALINEASLIST);
+    }
+
+    public void setATECFEConfFirmaLineasList(List<ATECFE_conf_firma_lineas> aTECFEConfFirmaLineasList) {
+        set(PROPERTY_ATECFECONFFIRMALINEASLIST, aTECFEConfFirmaLineasList);
     }
 
     @SuppressWarnings("unchecked")

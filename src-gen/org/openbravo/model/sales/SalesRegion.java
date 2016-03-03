@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.sales;
 
+import com.atrums.depositos.data.DP_FinaccTransactionV;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +36,8 @@ import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.common.businesspartner.Location;
 import org.openbravo.model.common.enterprise.Organization;
+import org.openbravo.model.common.geography.Country;
+import org.openbravo.model.common.geography.Region;
 import org.openbravo.model.dataimport.BudgetLine;
 import org.openbravo.model.dataimport.GLJournal;
 import org.openbravo.model.financialmgmt.accounting.AccountingFact;
@@ -67,10 +71,13 @@ public class SalesRegion extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_SUMMARYLEVEL = "summaryLevel";
     public static final String PROPERTY_SALESREPRESENTATIVE = "salesRepresentative";
     public static final String PROPERTY_DEFAULT = "default";
+    public static final String PROPERTY_RECOUNTRY = "reCountry";
+    public static final String PROPERTY_REREGION = "reRegion";
     public static final String PROPERTY_APRMFINACCTRANSACTIONACCTVLIST = "aPRMFinAccTransactionAcctVList";
     public static final String PROPERTY_APRMFINACCTRANSACTIONVLIST = "aPRMFinaccTransactionVList";
     public static final String PROPERTY_APRMFINACCTRXFULLACCTVLIST = "aPRMFinaccTrxFullAcctVList";
     public static final String PROPERTY_BUSINESSPARTNERLOCATIONLIST = "businessPartnerLocationList";
+    public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_FINFINACCTRANSACTIONLIST = "fINFinaccTransactionList";
@@ -91,6 +98,7 @@ public class SalesRegion extends BaseOBObject implements Traceable, ClientEnable
         setDefaultValue(PROPERTY_APRMFINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_APRMFINACCTRXFULLACCTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERLOCATIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINACCTRANSACTIONLIST, new ArrayList<Object>());
@@ -221,6 +229,22 @@ public class SalesRegion extends BaseOBObject implements Traceable, ClientEnable
         set(PROPERTY_DEFAULT, deflt);
     }
 
+    public Country getReCountry() {
+        return (Country) get(PROPERTY_RECOUNTRY);
+    }
+
+    public void setReCountry(Country reCountry) {
+        set(PROPERTY_RECOUNTRY, reCountry);
+    }
+
+    public Region getReRegion() {
+        return (Region) get(PROPERTY_REREGION);
+    }
+
+    public void setReRegion(Region reRegion) {
+        set(PROPERTY_REREGION, reRegion);
+    }
+
     @SuppressWarnings("unchecked")
     public List<FinAccTransactionAccounting> getAPRMFinAccTransactionAcctVList() {
       return (List<FinAccTransactionAccounting>) get(PROPERTY_APRMFINACCTRANSACTIONACCTVLIST);
@@ -255,6 +279,15 @@ public class SalesRegion extends BaseOBObject implements Traceable, ClientEnable
 
     public void setBusinessPartnerLocationList(List<Location> businessPartnerLocationList) {
         set(PROPERTY_BUSINESSPARTNERLOCATIONLIST, businessPartnerLocationList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<DP_FinaccTransactionV> getFinaccTransactionVList() {
+      return (List<DP_FinaccTransactionV>) get(PROPERTY_FINACCTRANSACTIONVLIST);
+    }
+
+    public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
+        set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
     }
 
     @SuppressWarnings("unchecked")

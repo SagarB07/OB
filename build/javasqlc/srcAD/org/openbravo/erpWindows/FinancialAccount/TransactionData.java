@@ -31,13 +31,13 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
   public String status;
   public String statusr;
   public String createdbyalgorithm;
-  public String isactive;
   public String statementdate;
-  public String dateacct;
+  public String isactive;
   public String emAprmModify;
+  public String dateacct;
+  public String finFinancialAccountId;
   public String finReconciliationId;
   public String finReconciliationIdr;
-  public String finFinancialAccountId;
   public String finPaymentId;
   public String description;
   public String cGlitemId;
@@ -46,11 +46,11 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
   public String cCurrencyIdr;
   public String depositamt;
   public String paymentamt;
+  public String processed;
   public String foreignCurrencyId;
   public String foreignCurrencyIdr;
-  public String processed;
-  public String foreignAmount;
   public String processing;
+  public String foreignAmount;
   public String posted;
   public String postedBtn;
   public String emAprmDelete;
@@ -70,8 +70,8 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
   public String cSalesregionIdr;
   public String user1Id;
   public String user2Id;
-  public String adClientId;
   public String finFinaccTransactionId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -111,20 +111,20 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
       return statusr;
     else if (fieldName.equalsIgnoreCase("createdbyalgorithm"))
       return createdbyalgorithm;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("statementdate"))
       return statementdate;
-    else if (fieldName.equalsIgnoreCase("dateacct"))
-      return dateacct;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("em_aprm_modify") || fieldName.equals("emAprmModify"))
       return emAprmModify;
+    else if (fieldName.equalsIgnoreCase("dateacct"))
+      return dateacct;
+    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
+      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("fin_reconciliation_id") || fieldName.equals("finReconciliationId"))
       return finReconciliationId;
     else if (fieldName.equalsIgnoreCase("fin_reconciliation_idr") || fieldName.equals("finReconciliationIdr"))
       return finReconciliationIdr;
-    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
-      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("fin_payment_id") || fieldName.equals("finPaymentId"))
       return finPaymentId;
     else if (fieldName.equalsIgnoreCase("description"))
@@ -141,16 +141,16 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
       return depositamt;
     else if (fieldName.equalsIgnoreCase("paymentamt"))
       return paymentamt;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
     else if (fieldName.equalsIgnoreCase("foreign_currency_id") || fieldName.equals("foreignCurrencyId"))
       return foreignCurrencyId;
     else if (fieldName.equalsIgnoreCase("foreign_currency_idr") || fieldName.equals("foreignCurrencyIdr"))
       return foreignCurrencyIdr;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
-    else if (fieldName.equalsIgnoreCase("foreign_amount") || fieldName.equals("foreignAmount"))
-      return foreignAmount;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
+    else if (fieldName.equalsIgnoreCase("foreign_amount") || fieldName.equals("foreignAmount"))
+      return foreignAmount;
     else if (fieldName.equalsIgnoreCase("posted"))
       return posted;
     else if (fieldName.equalsIgnoreCase("posted_btn") || fieldName.equals("postedBtn"))
@@ -189,10 +189,10 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("fin_finacc_transaction_id") || fieldName.equals("finFinaccTransactionId"))
       return finFinaccTransactionId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -239,13 +239,13 @@ Select for edit
       "FIN_Finacc_Transaction.Status, " +
       "(CASE WHEN FIN_Finacc_Transaction.Status IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list2.name),'') ) END) AS StatusR, " +
       "COALESCE(FIN_Finacc_Transaction.CreatedByAlgorithm, 'N') AS CreatedByAlgorithm, " +
-      "COALESCE(FIN_Finacc_Transaction.Isactive, 'N') AS Isactive, " +
       "FIN_Finacc_Transaction.Statementdate, " +
-      "FIN_Finacc_Transaction.DateAcct, " +
+      "COALESCE(FIN_Finacc_Transaction.Isactive, 'N') AS Isactive, " +
       "FIN_Finacc_Transaction.EM_APRM_Modify, " +
+      "FIN_Finacc_Transaction.DateAcct, " +
+      "FIN_Finacc_Transaction.Fin_Financial_Account_ID, " +
       "FIN_Finacc_Transaction.FIN_Reconciliation_ID, " +
       "(CASE WHEN FIN_Finacc_Transaction.FIN_Reconciliation_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table1.Statementdate, 'DD-MM-YYYY')),'') ) END) AS FIN_Reconciliation_IDR, " +
-      "FIN_Finacc_Transaction.Fin_Financial_Account_ID, " +
       "FIN_Finacc_Transaction.Fin_Payment_ID, " +
       "FIN_Finacc_Transaction.Description, " +
       "FIN_Finacc_Transaction.C_Glitem_ID, " +
@@ -254,11 +254,11 @@ Select for edit
       "(CASE WHEN FIN_Finacc_Transaction.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, " +
       "FIN_Finacc_Transaction.Depositamt, " +
       "FIN_Finacc_Transaction.Paymentamt, " +
+      "COALESCE(FIN_Finacc_Transaction.Processed, 'N') AS Processed, " +
       "FIN_Finacc_Transaction.Foreign_Currency_ID, " +
       "(CASE WHEN FIN_Finacc_Transaction.Foreign_Currency_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.ISO_Code), ''))),'') ) END) AS Foreign_Currency_IDR, " +
-      "COALESCE(FIN_Finacc_Transaction.Processed, 'N') AS Processed, " +
-      "FIN_Finacc_Transaction.Foreign_Amount, " +
       "COALESCE(FIN_Finacc_Transaction.Processing, 'N') AS Processing, " +
+      "FIN_Finacc_Transaction.Foreign_Amount, " +
       "FIN_Finacc_Transaction.Posted, " +
       "list3.name as Posted_BTN, " +
       "FIN_Finacc_Transaction.EM_APRM_Delete, " +
@@ -278,8 +278,8 @@ Select for edit
       "(CASE WHEN FIN_Finacc_Transaction.C_Salesregion_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table11.Name), ''))),'') ) END) AS C_Salesregion_IDR, " +
       "FIN_Finacc_Transaction.User1_ID, " +
       "FIN_Finacc_Transaction.User2_ID, " +
-      "FIN_Finacc_Transaction.AD_Client_ID, " +
       "FIN_Finacc_Transaction.Fin_Finacc_Transaction_ID, " +
+      "FIN_Finacc_Transaction.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM FIN_Finacc_Transaction left join ad_ref_list_v list1 on (FIN_Finacc_Transaction.Trxtype = list1.value and list1.ad_reference_id = '4EFC9773F30B4ACE97D225BD13CFF8CB' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (FIN_Finacc_Transaction.Status = list2.value and list2.ad_reference_id = '575BCB88A4694C27BC013DE9C73E6FE7' and list2.ad_language = ?)  left join (select FIN_Reconciliation_ID, DocumentNo, Statementdate from FIN_Reconciliation) table1 on (FIN_Finacc_Transaction.FIN_Reconciliation_ID = table1.FIN_Reconciliation_ID) left join (select C_Glitem_ID, Name from C_Glitem) table2 on (FIN_Finacc_Transaction.C_Glitem_ID = table2.C_Glitem_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (FIN_Finacc_Transaction.C_Currency_ID = table3.C_Currency_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table4 on (FIN_Finacc_Transaction.Foreign_Currency_ID =  table4.C_Currency_ID) left join ad_ref_list_v list3 on (list3.ad_reference_id = '234' and list3.ad_language = ?  AND FIN_Finacc_Transaction.Posted = TO_CHAR(list3.value)) left join (select C_BPartner_ID, Name from C_BPartner) table5 on (FIN_Finacc_Transaction.C_Bpartner_ID = table5.C_BPartner_ID) left join (select M_Product_ID, Name from M_Product) table6 on (FIN_Finacc_Transaction.M_Product_ID = table6.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL6 on (table6.M_Product_ID = tableTRL6.M_Product_ID and tableTRL6.AD_Language = ?)  left join (select C_Project_ID, Value, Name from C_Project) table8 on (FIN_Finacc_Transaction.C_Project_ID = table8.C_Project_ID) left join (select C_Campaign_ID, Name from C_Campaign) table9 on (FIN_Finacc_Transaction.C_Campaign_ID = table9.C_Campaign_ID) left join (select C_Activity_ID, Name from C_Activity) table10 on (FIN_Finacc_Transaction.C_Activity_ID = table10.C_Activity_ID) left join (select C_Salesregion_ID, Name from C_Salesregion) table11 on (FIN_Finacc_Transaction.C_Salesregion_ID = table11.C_Salesregion_ID)" +
       "        WHERE 2=2 " +
@@ -343,13 +343,13 @@ Select for edit
         objectTransactionData.status = UtilSql.getValue(result, "status");
         objectTransactionData.statusr = UtilSql.getValue(result, "statusr");
         objectTransactionData.createdbyalgorithm = UtilSql.getValue(result, "createdbyalgorithm");
-        objectTransactionData.isactive = UtilSql.getValue(result, "isactive");
         objectTransactionData.statementdate = UtilSql.getDateValue(result, "statementdate", "dd-MM-yyyy");
-        objectTransactionData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
+        objectTransactionData.isactive = UtilSql.getValue(result, "isactive");
         objectTransactionData.emAprmModify = UtilSql.getValue(result, "em_aprm_modify");
+        objectTransactionData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
+        objectTransactionData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectTransactionData.finReconciliationId = UtilSql.getValue(result, "fin_reconciliation_id");
         objectTransactionData.finReconciliationIdr = UtilSql.getValue(result, "fin_reconciliation_idr");
-        objectTransactionData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectTransactionData.finPaymentId = UtilSql.getValue(result, "fin_payment_id");
         objectTransactionData.description = UtilSql.getValue(result, "description");
         objectTransactionData.cGlitemId = UtilSql.getValue(result, "c_glitem_id");
@@ -358,11 +358,11 @@ Select for edit
         objectTransactionData.cCurrencyIdr = UtilSql.getValue(result, "c_currency_idr");
         objectTransactionData.depositamt = UtilSql.getValue(result, "depositamt");
         objectTransactionData.paymentamt = UtilSql.getValue(result, "paymentamt");
+        objectTransactionData.processed = UtilSql.getValue(result, "processed");
         objectTransactionData.foreignCurrencyId = UtilSql.getValue(result, "foreign_currency_id");
         objectTransactionData.foreignCurrencyIdr = UtilSql.getValue(result, "foreign_currency_idr");
-        objectTransactionData.processed = UtilSql.getValue(result, "processed");
-        objectTransactionData.foreignAmount = UtilSql.getValue(result, "foreign_amount");
         objectTransactionData.processing = UtilSql.getValue(result, "processing");
+        objectTransactionData.foreignAmount = UtilSql.getValue(result, "foreign_amount");
         objectTransactionData.posted = UtilSql.getValue(result, "posted");
         objectTransactionData.postedBtn = UtilSql.getValue(result, "posted_btn");
         objectTransactionData.emAprmDelete = UtilSql.getValue(result, "em_aprm_delete");
@@ -382,8 +382,8 @@ Select for edit
         objectTransactionData.cSalesregionIdr = UtilSql.getValue(result, "c_salesregion_idr");
         objectTransactionData.user1Id = UtilSql.getValue(result, "user1_id");
         objectTransactionData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectTransactionData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectTransactionData.finFinaccTransactionId = UtilSql.getValue(result, "fin_finacc_transaction_id");
+        objectTransactionData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectTransactionData.language = UtilSql.getValue(result, "language");
         objectTransactionData.adUserClient = "";
         objectTransactionData.adOrgClient = "";
@@ -434,13 +434,13 @@ Create a registry
     objectTransactionData[0].status = status;
     objectTransactionData[0].statusr = "";
     objectTransactionData[0].createdbyalgorithm = createdbyalgorithm;
-    objectTransactionData[0].isactive = isactive;
     objectTransactionData[0].statementdate = statementdate;
-    objectTransactionData[0].dateacct = dateacct;
+    objectTransactionData[0].isactive = isactive;
     objectTransactionData[0].emAprmModify = emAprmModify;
+    objectTransactionData[0].dateacct = dateacct;
+    objectTransactionData[0].finFinancialAccountId = finFinancialAccountId;
     objectTransactionData[0].finReconciliationId = finReconciliationId;
     objectTransactionData[0].finReconciliationIdr = "";
-    objectTransactionData[0].finFinancialAccountId = finFinancialAccountId;
     objectTransactionData[0].finPaymentId = finPaymentId;
     objectTransactionData[0].description = description;
     objectTransactionData[0].cGlitemId = cGlitemId;
@@ -449,11 +449,11 @@ Create a registry
     objectTransactionData[0].cCurrencyIdr = "";
     objectTransactionData[0].depositamt = depositamt;
     objectTransactionData[0].paymentamt = paymentamt;
+    objectTransactionData[0].processed = processed;
     objectTransactionData[0].foreignCurrencyId = foreignCurrencyId;
     objectTransactionData[0].foreignCurrencyIdr = "";
-    objectTransactionData[0].processed = processed;
-    objectTransactionData[0].foreignAmount = foreignAmount;
     objectTransactionData[0].processing = processing;
+    objectTransactionData[0].foreignAmount = foreignAmount;
     objectTransactionData[0].posted = posted;
     objectTransactionData[0].postedBtn = postedBtn;
     objectTransactionData[0].emAprmDelete = emAprmDelete;
@@ -473,8 +473,8 @@ Create a registry
     objectTransactionData[0].cSalesregionIdr = "";
     objectTransactionData[0].user1Id = user1Id;
     objectTransactionData[0].user2Id = user2Id;
-    objectTransactionData[0].adClientId = adClientId;
     objectTransactionData[0].finFinaccTransactionId = finFinaccTransactionId;
+    objectTransactionData[0].adClientId = adClientId;
     objectTransactionData[0].language = "";
     return objectTransactionData;
   }
@@ -948,8 +948,8 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Finacc_Transaction " +
-      "        (Line, Trxtype, AD_Org_ID, Status, CreatedByAlgorithm, Isactive, Statementdate, DateAcct, EM_APRM_Modify, FIN_Reconciliation_ID, Fin_Financial_Account_ID, Fin_Payment_ID, Description, C_Glitem_ID, C_Currency_ID, Depositamt, Paymentamt, Foreign_Currency_ID, Processed, Foreign_Amount, Processing, Posted, EM_APRM_Delete, Foreign_Convert_Rate, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, C_Salesregion_ID, User1_ID, User2_ID, AD_Client_ID, Fin_Finacc_Transaction_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (Line, Trxtype, AD_Org_ID, Status, CreatedByAlgorithm, Statementdate, Isactive, EM_APRM_Modify, DateAcct, Fin_Financial_Account_ID, FIN_Reconciliation_ID, Fin_Payment_ID, Description, C_Glitem_ID, C_Currency_ID, Depositamt, Paymentamt, Processed, Foreign_Currency_ID, Processing, Foreign_Amount, Posted, EM_APRM_Delete, Foreign_Convert_Rate, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, C_Salesregion_ID, User1_ID, User2_ID, Fin_Finacc_Transaction_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -962,22 +962,22 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, status);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdbyalgorithm);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, statementdate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmModify);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cGlitemId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, depositamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignAmount);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignAmount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmDelete);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignConvertRate);
@@ -990,8 +990,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cSalesregionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinaccTransactionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

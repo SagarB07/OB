@@ -76,20 +76,20 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String adOrgtrxId;
   public String user1Id;
   public String user2Id;
+  public String processed;
+  public String islogistic;
   public String generatelines;
   public String processing;
-  public String mInoutId;
-  public String isactive;
-  public String issotrx;
-  public String generateto;
-  public String processed;
   public String cInvoiceId;
-  public String islogistic;
-  public String updatelines;
+  public String mInoutId;
   public String rmShipmentPickedit;
-  public String adClientId;
+  public String isactive;
   public String dateprinted;
   public String isprinted;
+  public String adClientId;
+  public String updatelines;
+  public String issotrx;
+  public String generateto;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -219,34 +219,34 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("islogistic"))
+      return islogistic;
     else if (fieldName.equalsIgnoreCase("generatelines"))
       return generatelines;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
-    else if (fieldName.equalsIgnoreCase("m_inout_id") || fieldName.equals("mInoutId"))
-      return mInoutId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("issotrx"))
-      return issotrx;
-    else if (fieldName.equalsIgnoreCase("generateto"))
-      return generateto;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
     else if (fieldName.equalsIgnoreCase("c_invoice_id") || fieldName.equals("cInvoiceId"))
       return cInvoiceId;
-    else if (fieldName.equalsIgnoreCase("islogistic"))
-      return islogistic;
-    else if (fieldName.equalsIgnoreCase("updatelines"))
-      return updatelines;
+    else if (fieldName.equalsIgnoreCase("m_inout_id") || fieldName.equals("mInoutId"))
+      return mInoutId;
     else if (fieldName.equalsIgnoreCase("rm_shipment_pickedit") || fieldName.equals("rmShipmentPickedit"))
       return rmShipmentPickedit;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("dateprinted"))
       return dateprinted;
     else if (fieldName.equalsIgnoreCase("isprinted"))
       return isprinted;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("updatelines"))
+      return updatelines;
+    else if (fieldName.equalsIgnoreCase("issotrx"))
+      return issotrx;
+    else if (fieldName.equalsIgnoreCase("generateto"))
+      return generateto;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -338,20 +338,20 @@ Select for edit
       "M_InOut.AD_OrgTrx_ID, " +
       "M_InOut.User1_ID, " +
       "M_InOut.User2_ID, " +
+      "COALESCE(M_InOut.Processed, 'N') AS Processed, " +
+      "COALESCE(M_InOut.Islogistic, 'N') AS Islogistic, " +
       "M_InOut.GenerateLines, " +
       "COALESCE(M_InOut.Processing, 'N') AS Processing, " +
-      "M_InOut.M_InOut_ID, " +
-      "COALESCE(M_InOut.IsActive, 'N') AS IsActive, " +
-      "COALESCE(M_InOut.IsSOTrx, 'N') AS IsSOTrx, " +
-      "M_InOut.GenerateTo, " +
-      "COALESCE(M_InOut.Processed, 'N') AS Processed, " +
       "M_InOut.C_Invoice_ID, " +
-      "COALESCE(M_InOut.Islogistic, 'N') AS Islogistic, " +
-      "M_InOut.UpdateLines, " +
+      "M_InOut.M_InOut_ID, " +
       "M_InOut.RM_Shipment_Pickedit, " +
-      "M_InOut.AD_Client_ID, " +
+      "COALESCE(M_InOut.IsActive, 'N') AS IsActive, " +
       "M_InOut.DatePrinted, " +
       "COALESCE(M_InOut.IsPrinted, 'N') AS IsPrinted, " +
+      "M_InOut.AD_Client_ID, " +
+      "M_InOut.UpdateLines, " +
+      "COALESCE(M_InOut.IsSOTrx, 'N') AS IsSOTrx, " +
+      "M_InOut.GenerateTo, " +
       "        ? AS LANGUAGE " +
       "        FROM M_InOut left join (select AD_Org_ID, Name from AD_Org) table1 on (M_InOut.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (M_InOut.C_DocType_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select M_Condition_Goods_ID, Name from M_Condition_Goods) table4 on (M_InOut.M_Condition_Goods_ID = table4.M_Condition_Goods_ID) left join (select C_BPartner_ID, Name from C_BPartner) table5 on (M_InOut.C_BPartner_ID = table5.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table6 on (M_InOut.C_BPartner_Location_ID = table6.C_BPartner_Location_ID) left join (select C_Project_ID, Value, Name from C_Project) table7 on (M_InOut.C_Project_ID = table7.C_Project_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table8 on (M_InOut.C_Order_ID = table8.C_Order_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND (CASE M_InOut.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(M_InOut.DocAction) END) = list1.value) left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND M_InOut.Posted = TO_CHAR(list2.value))" +
       "        WHERE 2=2 " +
@@ -457,20 +457,20 @@ Select for edit
         objectHeaderData.adOrgtrxId = UtilSql.getValue(result, "ad_orgtrx_id");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
+        objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.islogistic = UtilSql.getValue(result, "islogistic");
         objectHeaderData.generatelines = UtilSql.getValue(result, "generatelines");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
-        objectHeaderData.mInoutId = UtilSql.getValue(result, "m_inout_id");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
-        objectHeaderData.issotrx = UtilSql.getValue(result, "issotrx");
-        objectHeaderData.generateto = UtilSql.getValue(result, "generateto");
-        objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.cInvoiceId = UtilSql.getValue(result, "c_invoice_id");
-        objectHeaderData.islogistic = UtilSql.getValue(result, "islogistic");
-        objectHeaderData.updatelines = UtilSql.getValue(result, "updatelines");
+        objectHeaderData.mInoutId = UtilSql.getValue(result, "m_inout_id");
         objectHeaderData.rmShipmentPickedit = UtilSql.getValue(result, "rm_shipment_pickedit");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.dateprinted = UtilSql.getDateValue(result, "dateprinted", "dd-MM-yyyy");
         objectHeaderData.isprinted = UtilSql.getValue(result, "isprinted");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.updatelines = UtilSql.getValue(result, "updatelines");
+        objectHeaderData.issotrx = UtilSql.getValue(result, "issotrx");
+        objectHeaderData.generateto = UtilSql.getValue(result, "generateto");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -566,20 +566,20 @@ Create a registry
     objectHeaderData[0].adOrgtrxId = adOrgtrxId;
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
+    objectHeaderData[0].processed = processed;
+    objectHeaderData[0].islogistic = islogistic;
     objectHeaderData[0].generatelines = generatelines;
     objectHeaderData[0].processing = processing;
-    objectHeaderData[0].mInoutId = mInoutId;
-    objectHeaderData[0].isactive = isactive;
-    objectHeaderData[0].issotrx = issotrx;
-    objectHeaderData[0].generateto = generateto;
-    objectHeaderData[0].processed = processed;
     objectHeaderData[0].cInvoiceId = cInvoiceId;
-    objectHeaderData[0].islogistic = islogistic;
-    objectHeaderData[0].updatelines = updatelines;
+    objectHeaderData[0].mInoutId = mInoutId;
     objectHeaderData[0].rmShipmentPickedit = rmShipmentPickedit;
-    objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].dateprinted = dateprinted;
     objectHeaderData[0].isprinted = isprinted;
+    objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].updatelines = updatelines;
+    objectHeaderData[0].issotrx = issotrx;
+    objectHeaderData[0].generateto = generateto;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -966,7 +966,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_InOut" +
-      "        SET RM_Receipt_PickEdit = (?) , AD_Org_ID = (?) , C_DocType_ID = (?) , DocumentNo = (?) , M_Condition_Goods_ID = (?) , MovementDate = TO_DATE(?) , C_BPartner_ID = (?) , Description = (?) , M_Warehouse_ID = (?) , C_BPartner_Location_ID = (?) , Delivery_Location_ID = (?) , DocStatus = (?) , AD_User_ID = (?) , C_Project_ID = (?) , DateAcct = TO_DATE(?) , C_Order_ID = (?) , POReference = (?) , DateOrdered = TO_DATE(?) , SalesRep_ID = (?) , CreateFrom = (?) , DocAction = (?) , Posted = (?) , DeliveryRule = (?) , DeliveryViaRule = (?) , FreightAmt = TO_NUMBER(?) , FreightCostRule = (?) , M_Shipper_ID = (?) , PriorityRule = (?) , PickDate = TO_TIMESTAMP(?, ?) , TrackingNo = (?) , NoPackages = TO_NUMBER(?) , MovementType = (?) , C_Charge_ID = (?) , ChargeAmt = TO_NUMBER(?) , ShipDate = TO_TIMESTAMP(?, ?) , M_FreightCategory_ID = (?) , Calculate_Freight = (?) , Freight_Currency_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User1_ID = (?) , User2_ID = (?) , GenerateLines = (?) , Processing = (?) , M_InOut_ID = (?) , IsActive = (?) , IsSOTrx = (?) , GenerateTo = (?) , Processed = (?) , C_Invoice_ID = (?) , Islogistic = (?) , UpdateLines = (?) , RM_Shipment_Pickedit = (?) , AD_Client_ID = (?) , DatePrinted = TO_DATE(?) , IsPrinted = (?) , updated = now(), updatedby = ? " +
+      "        SET RM_Receipt_PickEdit = (?) , AD_Org_ID = (?) , C_DocType_ID = (?) , DocumentNo = (?) , M_Condition_Goods_ID = (?) , MovementDate = TO_DATE(?) , C_BPartner_ID = (?) , Description = (?) , M_Warehouse_ID = (?) , C_BPartner_Location_ID = (?) , Delivery_Location_ID = (?) , DocStatus = (?) , AD_User_ID = (?) , C_Project_ID = (?) , DateAcct = TO_DATE(?) , C_Order_ID = (?) , POReference = (?) , DateOrdered = TO_DATE(?) , SalesRep_ID = (?) , CreateFrom = (?) , DocAction = (?) , Posted = (?) , DeliveryRule = (?) , DeliveryViaRule = (?) , FreightAmt = TO_NUMBER(?) , FreightCostRule = (?) , M_Shipper_ID = (?) , PriorityRule = (?) , PickDate = TO_TIMESTAMP(?, ?) , TrackingNo = (?) , NoPackages = TO_NUMBER(?) , MovementType = (?) , C_Charge_ID = (?) , ChargeAmt = TO_NUMBER(?) , ShipDate = TO_TIMESTAMP(?, ?) , M_FreightCategory_ID = (?) , Calculate_Freight = (?) , Freight_Currency_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User1_ID = (?) , User2_ID = (?) , Processed = (?) , Islogistic = (?) , GenerateLines = (?) , Processing = (?) , C_Invoice_ID = (?) , M_InOut_ID = (?) , RM_Shipment_Pickedit = (?) , IsActive = (?) , DatePrinted = TO_DATE(?) , IsPrinted = (?) , AD_Client_ID = (?) , UpdateLines = (?) , IsSOTrx = (?) , GenerateTo = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_InOut.M_InOut_ID = ? " +
       "        AND M_InOut.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -1028,20 +1028,20 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, islogistic);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatelines);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cInvoiceId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, islogistic);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatelines);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmShipmentPickedit);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatelines);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -1070,8 +1070,8 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_InOut " +
-      "        (RM_Receipt_PickEdit, AD_Org_ID, C_DocType_ID, DocumentNo, M_Condition_Goods_ID, MovementDate, C_BPartner_ID, Description, M_Warehouse_ID, C_BPartner_Location_ID, Delivery_Location_ID, DocStatus, AD_User_ID, C_Project_ID, DateAcct, C_Order_ID, POReference, DateOrdered, SalesRep_ID, CreateFrom, DocAction, Posted, DeliveryRule, DeliveryViaRule, FreightAmt, FreightCostRule, M_Shipper_ID, PriorityRule, PickDate, TrackingNo, NoPackages, MovementType, C_Charge_ID, ChargeAmt, ShipDate, M_FreightCategory_ID, Calculate_Freight, Freight_Currency_ID, C_Activity_ID, C_Campaign_ID, AD_OrgTrx_ID, User1_ID, User2_ID, GenerateLines, Processing, M_InOut_ID, IsActive, IsSOTrx, GenerateTo, Processed, C_Invoice_ID, Islogistic, UpdateLines, RM_Shipment_Pickedit, AD_Client_ID, DatePrinted, IsPrinted, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_TIMESTAMP(?, ?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), now(), ?, now(), ?)";
+      "        (RM_Receipt_PickEdit, AD_Org_ID, C_DocType_ID, DocumentNo, M_Condition_Goods_ID, MovementDate, C_BPartner_ID, Description, M_Warehouse_ID, C_BPartner_Location_ID, Delivery_Location_ID, DocStatus, AD_User_ID, C_Project_ID, DateAcct, C_Order_ID, POReference, DateOrdered, SalesRep_ID, CreateFrom, DocAction, Posted, DeliveryRule, DeliveryViaRule, FreightAmt, FreightCostRule, M_Shipper_ID, PriorityRule, PickDate, TrackingNo, NoPackages, MovementType, C_Charge_ID, ChargeAmt, ShipDate, M_FreightCategory_ID, Calculate_Freight, Freight_Currency_ID, C_Activity_ID, C_Campaign_ID, AD_OrgTrx_ID, User1_ID, User2_ID, Processed, Islogistic, GenerateLines, Processing, C_Invoice_ID, M_InOut_ID, RM_Shipment_Pickedit, IsActive, DatePrinted, IsPrinted, AD_Client_ID, UpdateLines, IsSOTrx, GenerateTo, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_TIMESTAMP(?, ?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1124,20 +1124,20 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, islogistic);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatelines);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cInvoiceId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, islogistic);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatelines);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmShipmentPickedit);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatelines);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

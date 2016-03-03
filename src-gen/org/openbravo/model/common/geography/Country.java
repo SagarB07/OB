@@ -32,15 +32,16 @@ import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.ad.system.Language;
 import org.openbravo.model.common.bank.Bank;
 import org.openbravo.model.common.businesspartner.BankAccount;
+import org.openbravo.model.common.businesspartner.BusinessPartner;
 import org.openbravo.model.common.currency.Currency;
 import org.openbravo.model.common.enterprise.Organization;
-import org.openbravo.model.dataimport.BusinessPartner;
 import org.openbravo.model.dataimport.Invoice;
 import org.openbravo.model.dataimport.Order;
 import org.openbravo.model.dataimport.Tax;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 import org.openbravo.model.financialmgmt.tax.TaxRate;
 import org.openbravo.model.financialmgmt.tax.TaxZone;
+import org.openbravo.model.sales.SalesRegion;
 import org.openbravo.model.shipping.ShippingCompanyFreight;
 /**
  * Entity class for entity Country (stored in table C_Country).
@@ -80,7 +81,9 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_NUMERICMASK = "numericmask";
     public static final String PROPERTY_DATEFORMAT = "dateformat";
     public static final String PROPERTY_DATETIMEFORMAT = "datetimeformat";
+    public static final String PROPERTY_ATSCODIGOSRI = "atsCodigoSri";
     public static final String PROPERTY_BANKLIST = "bankList";
+    public static final String PROPERTY_BUSINESSPARTNEREMCONACIONALIDADLIST = "businessPartnerEMCoNacionalidadList";
     public static final String PROPERTY_BUSINESSPARTNERBANKACCOUNTLIST = "businessPartnerBankAccountList";
     public static final String PROPERTY_CITYLIST = "cityList";
     public static final String PROPERTY_COUNTRYTRLLIST = "countryTrlList";
@@ -96,6 +99,7 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
     public static final String PROPERTY_FINANCIALMGMTTAXZONEDESTINATIONCOUNTRYLIST = "financialMgmtTaxZoneDestinationCountryList";
     public static final String PROPERTY_LOCATIONLIST = "locationList";
     public static final String PROPERTY_REGIONLIST = "regionList";
+    public static final String PROPERTY_SALESREGIONEMRECOUNTRYIDLIST = "salesRegionEMReCountryIDList";
     public static final String PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTLIST = "shippingShippingCompanyFreightList";
     public static final String PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTDESTINATIONCOUNTRYLIST = "shippingShippingCompanyFreightDestinationCountryList";
 
@@ -106,6 +110,7 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_ADDITIONALPOSTALCODE, false);
         setDefaultValue(PROPERTY_DEFAULT, false);
         setDefaultValue(PROPERTY_BANKLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_BUSINESSPARTNEREMCONACIONALIDADLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERBANKACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CITYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_COUNTRYTRLLIST, new ArrayList<Object>());
@@ -121,6 +126,7 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXZONEDESTINATIONCOUNTRYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LOCATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_REGIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_SALESREGIONEMRECOUNTRYIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SHIPPINGSHIPPINGCOMPANYFREIGHTDESTINATIONCOUNTRYLIST, new ArrayList<Object>());
     }
@@ -354,6 +360,14 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
         set(PROPERTY_DATETIMEFORMAT, datetimeformat);
     }
 
+    public String getAtsCodigoSri() {
+        return (String) get(PROPERTY_ATSCODIGOSRI);
+    }
+
+    public void setAtsCodigoSri(String atsCodigoSri) {
+        set(PROPERTY_ATSCODIGOSRI, atsCodigoSri);
+    }
+
     @SuppressWarnings("unchecked")
     public List<Bank> getBankList() {
       return (List<Bank>) get(PROPERTY_BANKLIST);
@@ -361,6 +375,15 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setBankList(List<Bank> bankList) {
         set(PROPERTY_BANKLIST, bankList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<BusinessPartner> getBusinessPartnerEMCoNacionalidadList() {
+      return (List<BusinessPartner>) get(PROPERTY_BUSINESSPARTNEREMCONACIONALIDADLIST);
+    }
+
+    public void setBusinessPartnerEMCoNacionalidadList(List<BusinessPartner> businessPartnerEMCoNacionalidadList) {
+        set(PROPERTY_BUSINESSPARTNEREMCONACIONALIDADLIST, businessPartnerEMCoNacionalidadList);
     }
 
     @SuppressWarnings("unchecked")
@@ -391,11 +414,11 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
     }
 
     @SuppressWarnings("unchecked")
-    public List<BusinessPartner> getDataImportBusinessPartnerList() {
-      return (List<BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST);
+    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerList() {
+      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST);
     }
 
-    public void setDataImportBusinessPartnerList(List<BusinessPartner> dataImportBusinessPartnerList) {
+    public void setDataImportBusinessPartnerList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerList) {
         set(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST, dataImportBusinessPartnerList);
     }
 
@@ -496,6 +519,15 @@ public class Country extends BaseOBObject implements Traceable, ClientEnabled, O
 
     public void setRegionList(List<Region> regionList) {
         set(PROPERTY_REGIONLIST, regionList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<SalesRegion> getSalesRegionEMReCountryIDList() {
+      return (List<SalesRegion>) get(PROPERTY_SALESREGIONEMRECOUNTRYIDLIST);
+    }
+
+    public void setSalesRegionEMReCountryIDList(List<SalesRegion> salesRegionEMReCountryIDList) {
+        set(PROPERTY_SALESREGIONEMRECOUNTRYIDLIST, salesRegionEMReCountryIDList);
     }
 
     @SuppressWarnings("unchecked")

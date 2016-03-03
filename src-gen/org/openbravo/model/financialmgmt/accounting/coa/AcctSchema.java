@@ -18,6 +18,7 @@
 */
 package org.openbravo.model.financialmgmt.accounting.coa;
 
+import com.atrums.contabilidad.data.CO_TipoRetencionAcct;
 import com.atrums.nomina.data.noCbEmpleadoAcct;
 import com.atrums.nomina.data.noTipoIngEgrAcct;
 import com.atrums.nomina.data.no_tipo_rub_liqu_emp_acct;
@@ -112,6 +113,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_BUSINESSPARTNEREMNECACCTSCHEMAIDLIST = "businessPartnerEmNeCAcctschemaIdList";
     public static final String PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTLIST = "businessPartnerCategoryAccountList";
     public static final String PROPERTY_CACCTSCHEMAPROCESSLIST = "cAcctSchemaProcessList";
+    public static final String PROPERTY_TIPORETENCIONACCTLIST = "tipoRetencionAcctList";
     public static final String PROPERTY_CLIENTINFORMATIONPRIMARYACCOUNTINGSCHEMALIST = "clientInformationPrimaryAccountingSchemaList";
     public static final String PROPERTY_CLIENTINFORMATIONSECONDACCOUNTINGSCHEMALIST = "clientInformationSecondAccountingSchemaList";
     public static final String PROPERTY_CLIENTINFORMATIONTHIRDACCOUNTINGSCHEMALIST = "clientInformationThirdAccountingSchemaList";
@@ -174,6 +176,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
         setDefaultValue(PROPERTY_BUSINESSPARTNEREMNECACCTSCHEMAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERCATEGORYACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CACCTSCHEMAPROCESSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_TIPORETENCIONACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONPRIMARYACCOUNTINGSCHEMALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONSECONDACCOUNTINGSCHEMALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONTHIRDACCOUNTINGSCHEMALIST, new ArrayList<Object>());
@@ -511,6 +514,15 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setCAcctSchemaProcessList(List<AcctSchemaProcess> cAcctSchemaProcessList) {
         set(PROPERTY_CACCTSCHEMAPROCESSLIST, cAcctSchemaProcessList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CO_TipoRetencionAcct> getTipoRetencionAcctList() {
+      return (List<CO_TipoRetencionAcct>) get(PROPERTY_TIPORETENCIONACCTLIST);
+    }
+
+    public void setTipoRetencionAcctList(List<CO_TipoRetencionAcct> tipoRetencionAcctList) {
+        set(PROPERTY_TIPORETENCIONACCTLIST, tipoRetencionAcctList);
     }
 
     @SuppressWarnings("unchecked")
