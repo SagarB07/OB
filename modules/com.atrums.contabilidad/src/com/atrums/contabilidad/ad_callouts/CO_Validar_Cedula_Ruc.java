@@ -95,6 +95,8 @@ public class CO_Validar_Cedula_Ruc extends HttpSecureAppServlet {
   private String validarDocumento(VariablesSecureApp vars, String numero, String tipoIdentificacion) {
     boolean valor = true;
     String mensaje = "";
+    
+    
 
     if (tipoIdentificacion.equals("02") || tipoIdentificacion.equals("01")) {
 

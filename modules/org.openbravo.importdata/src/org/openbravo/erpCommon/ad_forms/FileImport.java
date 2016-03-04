@@ -51,8 +51,7 @@ public class FileImport extends HttpSecureAppServlet {
     boolHist = false;
   }
 
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
     VariablesSecureApp vars = new VariablesSecureApp(request);
     if (log4j.isDebugEnabled())
       log4j.debug("Command: " + vars.getStringParameter("Command"));
@@ -252,8 +251,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
     if (log4j.isDebugEnabled())
       log4j.debug("Output: file importing Frame 1");
     XmlDocument xmlDocument = null;
-    xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_forms/FileImport")
-        .createXmlDocument();
+    xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_forms/FileImport").createXmlDocument();
 
     ToolBar toolbar = new ToolBar(this, vars.getLanguage(), "FileImport", false, "", "", "", false,
         "ad_forms", strReplaceWith, false, true);
@@ -330,10 +328,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
    * @throws ServletException
    * @throws IOException
    */
-  private void printSampleImport(VariablesSecureApp vars, FieldProvider[] data2,
-      HttpServletRequest request, HttpServletResponse response, String strAdImpformatId,
-      String strFirstLineHeader) throws ServletException, IOException {
-
+  private void printSampleImport(VariablesSecureApp vars, FieldProvider[] data2,HttpServletRequest request, HttpServletResponse response, String strAdImpformatId,String strFirstLineHeader) throws ServletException, IOException {
     int count = 0;
     StringBuilder sb = new StringBuilder();
     if (data2 != null) {
