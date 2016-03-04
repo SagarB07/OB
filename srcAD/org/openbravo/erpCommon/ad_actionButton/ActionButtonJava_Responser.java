@@ -3078,28 +3078,28 @@ params.put("action", straction);
       ServletException {
         
         
-//        ProcessBundle pb = new ProcessBundle(strProcessId, vars).init(this);
-//        HashMap<String, Object> params= new HashMap<String, Object>();
-//       
-//        
-//        
-//        pb.setParams(params);
-//        OBError myMessage = null;
-//        try {
-//          new com.atrums.depositos.ad_actionbutton.DeleteTransaction().execute(pb);
-//          myMessage = (OBError) pb.getResult();
-//          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
-//          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
-//        } catch (Exception ex) {
-//          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
-//          log4j.error(ex);
-//          if (!myMessage.isConnectionAvailable()) {
-//            bdErrorConnection(response);
-//            return;
-//          }
-//        }
+        ProcessBundle pb = new ProcessBundle(strProcessId, vars).init(this);
+        HashMap<String, Object> params= new HashMap<String, Object>();
+       
+        
+        
+        pb.setParams(params);
+        OBError myMessage = null;
+        try {
+          new com.atrums.depositos.ad_actionbutton.DeleteTransaction().execute(pb);
+          myMessage = (OBError) pb.getResult();
+          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
+          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
+        } catch (Exception ex) {
+          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
+          log4j.error(ex);
+          if (!myMessage.isConnectionAvailable()) {
+            bdErrorConnection(response);
+            return;
+          }
+        }
 
-   //     processButtonHelper(request, response, vars, myMessage); 
+        processButtonHelper(request, response, vars, myMessage); 
    }
 
 

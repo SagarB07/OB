@@ -25,8 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.openbravo.base.secureApp.VariablesSecureApp;
-import org.openbravo.erpCommon.utility.reporting.printing.PrintController;
-import org.openbravo.model.common.enterprise.DocumentType;
+
+import com.atrums.reporting.utility.reporting.DocumentType;
+import com.atrums.reporting.utility.reporting.printing.PrintController;
 
 @SuppressWarnings("serial")
 public class PrintRetencionCompra extends PrintController
@@ -48,22 +49,22 @@ public class PrintRetencionCompra extends PrintController
     public void doPost(HttpServletRequest request, HttpServletResponse response)
 	    throws IOException, ServletException
     {
-//	VariablesSecureApp vars = new VariablesSecureApp(request);
-//
-//	DocumentType documentType = DocumentType.RETENCION;
-//	// The prefix PRINTINVOICES is a fixed name based on the KEY of the
-//	// AD_PROCESS
-//	String sessionValuePrefix = "PRINTRETENCION";
-//	String strDocumentId = null;
-//
-//	strDocumentId = vars.getSessionValue(sessionValuePrefix
-//		+ ".inpcoRetencionCompraId_R");
-//	if (strDocumentId.equals(""))
-//	    strDocumentId = vars.getSessionValue(sessionValuePrefix
-//		    + ".inpcoretencioncompraid");
-//
-//	post(request, response, vars, documentType, sessionValuePrefix,
-//	     strDocumentId);
+	VariablesSecureApp vars = new VariablesSecureApp(request);
+
+	DocumentType documentType = DocumentType.RETENCION;
+	// The prefix PRINTINVOICES is a fixed name based on the KEY of the
+	// AD_PROCESS
+	String sessionValuePrefix = "PRINTRETENCION";
+	String strDocumentId = null;
+
+	strDocumentId = vars.getSessionValue(sessionValuePrefix
+		+ ".inpcoRetencionCompraId_R");
+	if (strDocumentId.equals(""))
+	    strDocumentId = vars.getSessionValue(sessionValuePrefix
+		    + ".inpcoretencioncompraid");
+
+	post(request, response, vars, documentType, sessionValuePrefix,
+	     strDocumentId);
     }
 
     public String getServletInfo()

@@ -25,10 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.openbravo.base.secureApp.VariablesSecureApp;
-import org.openbravo.erpCommon.utility.reporting.printing.PrintController;
-import org.openbravo.model.common.enterprise.DocumentType;
 
-
+import com.atrums.reporting.utility.reporting.DocumentType;
+import com.atrums.reporting.utility.reporting.printing.PrintController;
 
 @SuppressWarnings("serial")
 public class PrintMovimiento extends PrintController
@@ -52,20 +51,20 @@ public class PrintMovimiento extends PrintController
     {
 	VariablesSecureApp vars = new VariablesSecureApp(request);
 
-//	DocumentType documentType = DocumentType.MOVIMIENTO;
-//	// The prefix PRINTINVOICES is a fixed name based on the KEY of the
-//	// AD_PROCESS
-//	String sessionValuePrefix = "PRINTMOVIMIENTO";
-//	String strDocumentId = null;
-//
-//	strDocumentId = vars.getSessionValue(sessionValuePrefix
-//		+ ".inpmMovementId_R");
-//	if (strDocumentId.equals(""))
-//	    strDocumentId = vars.getSessionValue(sessionValuePrefix
-//		    + ".inpmmovementid");
-//
-//	post(request, response, vars, documentType, sessionValuePrefix,
-//	     strDocumentId);
+	DocumentType documentType = DocumentType.MOVIMIENTO;
+	// The prefix PRINTINVOICES is a fixed name based on the KEY of the
+	// AD_PROCESS
+	String sessionValuePrefix = "PRINTMOVIMIENTO";
+	String strDocumentId = null;
+
+	strDocumentId = vars.getSessionValue(sessionValuePrefix
+		+ ".inpmMovementId_R");
+	if (strDocumentId.equals(""))
+	    strDocumentId = vars.getSessionValue(sessionValuePrefix
+		    + ".inpmmovementid");
+
+	post(request, response, vars, documentType, sessionValuePrefix,
+	     strDocumentId);
     }
 
     public String getServletInfo()
