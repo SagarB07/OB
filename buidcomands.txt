@@ -1,0 +1,2 @@
+ant smartbuild -Dlocal=no -Dforce=yes
+ant install.source
