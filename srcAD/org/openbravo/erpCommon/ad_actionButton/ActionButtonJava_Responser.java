@@ -114,6 +114,9 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
     } else if (vars.commandIn("BUTTON58763832F5F3485CAD33B8B9FCD6C640")) {
         
         printPageButton58763832F5F3485CAD33B8B9FCD6C640(response, vars, strProcessId);
+    } else if (vars.commandIn("BUTTONE264309FF8244A94936502BF51829109")) {
+        
+        printPageButtonE264309FF8244A94936502BF51829109(response, vars, strProcessId);
     } else if (vars.commandIn("BUTTON64B3FF29AC174F4B94538BD0A3CE1CD3")) {
         
         printPageButton64B3FF29AC174F4B94538BD0A3CE1CD3(response, vars, strProcessId);
@@ -153,9 +156,6 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
     } else if (vars.commandIn("BUTTOND85D5B5E368A49B1A6293BA4AE15F0F9")) {
         
         printPageButtonD85D5B5E368A49B1A6293BA4AE15F0F9(response, vars, strProcessId);
-    } else if (vars.commandIn("BUTTONE264309FF8244A94936502BF51829109")) {
-        
-        printPageButtonE264309FF8244A94936502BF51829109(response, vars, strProcessId);
     } else if (vars.commandIn("BUTTONEFDBF909811544DAAE4E876AA781E5DC")) {
         
         printPageButtonEFDBF909811544DAAE4E876AA781E5DC(response, vars, strProcessId);
@@ -231,6 +231,8 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
         process58591E3E0F7648E4A09058E037CE49FC(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButton58763832F5F3485CAD33B8B9FCD6C640")) {
         process58763832F5F3485CAD33B8B9FCD6C640(strProcessId, vars, request, response);
+    } else if (vars.commandIn("SAVE_BUTTONActionButtonE264309FF8244A94936502BF51829109")) {
+        processE264309FF8244A94936502BF51829109(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButton64B3FF29AC174F4B94538BD0A3CE1CD3")) {
         process64B3FF29AC174F4B94538BD0A3CE1CD3(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButton6FBD65B0FDB74D1AB07F0EADF18D48AE")) {
@@ -257,8 +259,6 @@ public class ActionButtonJava_Responser extends HttpSecureAppServlet {
         processCD7283DF804B449C97DA09446669EEEF(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButtonD85D5B5E368A49B1A6293BA4AE15F0F9")) {
         processD85D5B5E368A49B1A6293BA4AE15F0F9(strProcessId, vars, request, response);
-    } else if (vars.commandIn("SAVE_BUTTONActionButtonE264309FF8244A94936502BF51829109")) {
-        processE264309FF8244A94936502BF51829109(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButtonEFDBF909811544DAAE4E876AA781E5DC")) {
         processEFDBF909811544DAAE4E876AA781E5DC(strProcessId, vars, request, response);
     } else if (vars.commandIn("SAVE_BUTTONActionButtonFB740AB61B0E42B198D2C88D3A0D0CE6")) {
@@ -589,6 +589,62 @@ comboTableData = null;
       }
 
           try {
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      out.println(xmlDocument.print());
+      out.close();
+    }
+    void printPageButtonE264309FF8244A94936502BF51829109(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process E264309FF8244A94936502BF51829109");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButtonE264309FF8244A94936502BF51829109", discard).createXmlDocument();
+      xmlDocument.setParameter("processing", "Y");
+      xmlDocument.setParameter("form", "ActionButtonJava_Responser.html");
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      xmlDocument.setParameter("processId", strProcessId);
+			xmlDocument.setParameter("trlFormType", "PROCESS");
+          
+      {
+        OBError myMessage = vars.getMessage("E264309FF8244A94936502BF51829109");
+        vars.removeMessage("E264309FF8244A94936502BF51829109");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("AD_Client_ID", Utility.getContext(this, vars, "AD_Client_ID", ""));
+    comboTableData = new ComboTableData(vars, this, "19", "AD_Client_ID", "", "103", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, Utility.getContext(this, vars, "AD_Client_ID", ""));
+    xmlDocument.setData("reportAD_Client_ID", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("AD_Org_ID", "");
+    comboTableData = new ComboTableData(vars, this, "19", "AD_Org_ID", "", "4A2C613871134B76899BA0464F3CBF76", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportAD_Org_ID", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("AD_Table_ID", "");
+    comboTableData = new ComboTableData(vars, this, "18", "AD_Table_ID", "800022", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportAD_Table_ID", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("DeletePosting", "");
+    xmlDocument.setParameter("datefrom", "");
+    xmlDocument.setParameter("datefrom_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+    xmlDocument.setParameter("dateto", "");
+    xmlDocument.setParameter("dateto_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       throw new ServletException(ex);
     }
@@ -1060,62 +1116,6 @@ comboTableData = null;
     xmlDocument.setData("reportAD_Client_ID", "liststructure", comboTableData.select(false));
 comboTableData = null;
     xmlDocument.setParameter("ExportAuditInfo", "");
-    } catch (Exception ex) {
-      throw new ServletException(ex);
-    }
-
-      out.println(xmlDocument.print());
-      out.close();
-    }
-    void printPageButtonE264309FF8244A94936502BF51829109(HttpServletResponse response, VariablesSecureApp vars, String strProcessId)
-    throws IOException, ServletException {
-      log4j.debug("Output: Button process E264309FF8244A94936502BF51829109");
-      String[] discard = {"newDiscard"};
-      response.setContentType("text/html; charset=UTF-8");
-      PrintWriter out = response.getWriter();
-      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/ActionButtonE264309FF8244A94936502BF51829109", discard).createXmlDocument();
-      xmlDocument.setParameter("processing", "Y");
-      xmlDocument.setParameter("form", "ActionButtonJava_Responser.html");
-      xmlDocument.setParameter("css", vars.getTheme());
-      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
-      xmlDocument.setParameter("language", "defaultLang = \"" + vars.getLanguage() + "\";\n");
-      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
-      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
-      xmlDocument.setParameter("processId", strProcessId);
-			xmlDocument.setParameter("trlFormType", "PROCESS");
-          
-      {
-        OBError myMessage = vars.getMessage("E264309FF8244A94936502BF51829109");
-        vars.removeMessage("E264309FF8244A94936502BF51829109");
-        if (myMessage!=null) {
-          xmlDocument.setParameter("messageType", myMessage.getType());
-          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
-          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
-        }
-      }
-
-          try {
-    ComboTableData comboTableData = null;
-    xmlDocument.setParameter("AD_Client_ID", Utility.getContext(this, vars, "AD_Client_ID", ""));
-    comboTableData = new ComboTableData(vars, this, "19", "AD_Client_ID", "", "103", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
-    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, Utility.getContext(this, vars, "AD_Client_ID", ""));
-    xmlDocument.setData("reportAD_Client_ID", "liststructure", comboTableData.select(false));
-comboTableData = null;
-    xmlDocument.setParameter("AD_Org_ID", "");
-    comboTableData = new ComboTableData(vars, this, "19", "AD_Org_ID", "", "4A2C613871134B76899BA0464F3CBF76", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
-    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
-    xmlDocument.setData("reportAD_Org_ID", "liststructure", comboTableData.select(false));
-comboTableData = null;
-    xmlDocument.setParameter("AD_Table_ID", "");
-    comboTableData = new ComboTableData(vars, this, "18", "AD_Table_ID", "800022", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
-    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
-    xmlDocument.setData("reportAD_Table_ID", "liststructure", comboTableData.select(false));
-comboTableData = null;
-    xmlDocument.setParameter("DeletePosting", "");
-    xmlDocument.setParameter("datefrom", "");
-    xmlDocument.setParameter("datefrom_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-    xmlDocument.setParameter("dateto", "");
-    xmlDocument.setParameter("dateto_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       throw new ServletException(ex);
     }
@@ -2103,6 +2103,45 @@ params.put("mChValueId", strmChValueId);
 
         processButtonHelper(request, response, vars, myMessage); 
    }
+    private void processE264309FF8244A94936502BF51829109(String strProcessId, VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
+        
+        
+        ProcessBundle pb = new ProcessBundle(strProcessId, vars).init(this);
+        HashMap<String, Object> params= new HashMap<String, Object>();
+       
+        String stradClientId = vars.getStringParameter("inpadClientId");
+params.put("adClientId", stradClientId);
+String stradOrgId = vars.getStringParameter("inpadOrgId");
+params.put("adOrgId", stradOrgId);
+String stradTableId = vars.getStringParameter("inpadTableId");
+params.put("adTableId", stradTableId);
+String strdeleteposting = vars.getStringParameter("inpdeleteposting", "N");
+params.put("deleteposting", strdeleteposting);
+String strdatefrom = vars.getStringParameter("inpdatefrom");
+params.put("datefrom", strdatefrom);
+String strdateto = vars.getStringParameter("inpdateto");
+params.put("dateto", strdateto);
+
+        
+        pb.setParams(params);
+        OBError myMessage = null;
+        try {
+          new org.openbravo.erpCommon.ad_process.ResetAccountingProcess().execute(pb);
+          myMessage = (OBError) pb.getResult();
+          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
+          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
+        } catch (Exception ex) {
+          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
+          log4j.error(ex);
+          if (!myMessage.isConnectionAvailable()) {
+            bdErrorConnection(response);
+            return;
+          }
+        }
+
+        processButtonHelper(request, response, vars, myMessage); 
+   }
     private void process64B3FF29AC174F4B94538BD0A3CE1CD3(String strProcessId, VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
       ServletException {
         
@@ -2452,45 +2491,6 @@ params.put("exportauditinfo", strexportauditinfo);
         OBError myMessage = null;
         try {
           new org.openbravo.service.db.ExportClientProcess().execute(pb);
-          myMessage = (OBError) pb.getResult();
-          myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
-          myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));
-        } catch (Exception ex) {
-          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
-          log4j.error(ex);
-          if (!myMessage.isConnectionAvailable()) {
-            bdErrorConnection(response);
-            return;
-          }
-        }
-
-        processButtonHelper(request, response, vars, myMessage); 
-   }
-    private void processE264309FF8244A94936502BF51829109(String strProcessId, VariablesSecureApp vars, HttpServletRequest request, HttpServletResponse response) throws IOException,
-      ServletException {
-        
-        
-        ProcessBundle pb = new ProcessBundle(strProcessId, vars).init(this);
-        HashMap<String, Object> params= new HashMap<String, Object>();
-       
-        String stradClientId = vars.getStringParameter("inpadClientId");
-params.put("adClientId", stradClientId);
-String stradOrgId = vars.getStringParameter("inpadOrgId");
-params.put("adOrgId", stradOrgId);
-String stradTableId = vars.getStringParameter("inpadTableId");
-params.put("adTableId", stradTableId);
-String strdeleteposting = vars.getStringParameter("inpdeleteposting", "N");
-params.put("deleteposting", strdeleteposting);
-String strdatefrom = vars.getStringParameter("inpdatefrom");
-params.put("datefrom", strdatefrom);
-String strdateto = vars.getStringParameter("inpdateto");
-params.put("dateto", strdateto);
-
-        
-        pb.setParams(params);
-        OBError myMessage = null;
-        try {
-          new org.openbravo.erpCommon.ad_process.ResetAccountingProcess().execute(pb);
           myMessage = (OBError) pb.getResult();
           myMessage.setMessage(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getMessage()));
           myMessage.setTitle(Utility.parseTranslation(this, vars, vars.getLanguage(), myMessage.getTitle()));

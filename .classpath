@@ -4,6 +4,22 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OpenbravoTrl"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OpenbravoWAD"/>
 	<classpathentry including="**/*.ext|**/*.ftl|**/*.java|**/*.oaw|**/*.properties|**/*.xml|**/*.xpt|**/*.xslt" kind="src" path="src"/>
+	<classpathentry kind="src" path="modules/com.atrums.remica/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.reportes.cobranzas/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.reporting/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.ventas.notas/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.aserlaco.venta/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.centrocostos/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.declaraciontributaria.ecuador/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.reportes.estadoscuenta/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.conciliacionec/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.reportes.remica/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.reportes.bodegas/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.direccion/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.importaciones/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.bancos.estadocuenta/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.depositos/src"/>
+	<classpathentry kind="src" path="modules/com.atrums.activos/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.felectronica/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.contabilidad.procesocontable/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.contabilidad/src"/>

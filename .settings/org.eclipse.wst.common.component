@@ -14,6 +14,22 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.felectronica/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.contabilidad.procesocontable/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.contabilidad/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.remica/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.reportes.cobranzas/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.reporting/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.ventas.notas/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.aserlaco.venta/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.centrocostos/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.declaraciontributaria.ecuador/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.reportes.estadoscuenta/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.conciliacionec/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.reportes.remica/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.reportes.bodegas/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.direccion/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.importaciones/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.bancos.estadocuenta/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.depositos/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.activos/src"/>
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/OpenbravoCore/OpenbravoCore">
 <dependency-type>uses</dependency-type>
 </dependent-module>

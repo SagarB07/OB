@@ -39,9 +39,9 @@ static Logger log4j = Logger.getLogger(ImportedBankStatementsData.class);
   public String emAprmProcessBs;
   public String emAprmProcessBsBtn;
   public String finFinancialAccountId;
-  public String finBankstatementId;
   public String processed;
   public String processing;
+  public String finBankstatementId;
   public String adOrgId;
   public String adClientId;
   public String language;
@@ -99,12 +99,12 @@ static Logger log4j = Logger.getLogger(ImportedBankStatementsData.class);
       return emAprmProcessBsBtn;
     else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
       return finFinancialAccountId;
-    else if (fieldName.equalsIgnoreCase("fin_bankstatement_id") || fieldName.equals("finBankstatementId"))
-      return finBankstatementId;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
+    else if (fieldName.equalsIgnoreCase("fin_bankstatement_id") || fieldName.equals("finBankstatementId"))
+      return finBankstatementId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
@@ -163,9 +163,9 @@ Select for edit
       "FIN_BankStatement.EM_APRM_Process_BS, " +
       "list2.name as EM_APRM_Process_BS_BTN, " +
       "FIN_BankStatement.FIN_Financial_Account_ID, " +
-      "FIN_BankStatement.FIN_Bankstatement_ID, " +
       "COALESCE(FIN_BankStatement.Processed, 'N') AS Processed, " +
       "COALESCE(FIN_BankStatement.Processing, 'N') AS Processing, " +
+      "FIN_BankStatement.FIN_Bankstatement_ID, " +
       "FIN_BankStatement.AD_Org_ID, " +
       "FIN_BankStatement.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
@@ -238,9 +238,9 @@ Select for edit
         objectImportedBankStatementsData.emAprmProcessBs = UtilSql.getValue(result, "em_aprm_process_bs");
         objectImportedBankStatementsData.emAprmProcessBsBtn = UtilSql.getValue(result, "em_aprm_process_bs_btn");
         objectImportedBankStatementsData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
-        objectImportedBankStatementsData.finBankstatementId = UtilSql.getValue(result, "fin_bankstatement_id");
         objectImportedBankStatementsData.processed = UtilSql.getValue(result, "processed");
         objectImportedBankStatementsData.processing = UtilSql.getValue(result, "processing");
+        objectImportedBankStatementsData.finBankstatementId = UtilSql.getValue(result, "fin_bankstatement_id");
         objectImportedBankStatementsData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectImportedBankStatementsData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectImportedBankStatementsData.language = UtilSql.getValue(result, "language");
@@ -301,9 +301,9 @@ Create a registry
     objectImportedBankStatementsData[0].emAprmProcessBs = emAprmProcessBs;
     objectImportedBankStatementsData[0].emAprmProcessBsBtn = emAprmProcessBsBtn;
     objectImportedBankStatementsData[0].finFinancialAccountId = finFinancialAccountId;
-    objectImportedBankStatementsData[0].finBankstatementId = finBankstatementId;
     objectImportedBankStatementsData[0].processed = processed;
     objectImportedBankStatementsData[0].processing = processing;
+    objectImportedBankStatementsData[0].finBankstatementId = finBankstatementId;
     objectImportedBankStatementsData[0].adOrgId = adOrgId;
     objectImportedBankStatementsData[0].adClientId = adClientId;
     objectImportedBankStatementsData[0].language = "";
@@ -506,7 +506,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_BankStatement" +
-      "        SET DocumentNo = (?) , C_Doctype_ID = (?) , Name = (?) , Isactive = (?) , Importdate = TO_DATE(?) , Statementdate = TO_DATE(?) , Filename = (?) , FIN_Reconciliation_ID = (?) , Notes = (?) , Posted = (?) , EM_APRM_Process_BS = (?) , FIN_Financial_Account_ID = (?) , FIN_Bankstatement_ID = (?) , Processed = (?) , Processing = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET DocumentNo = (?) , C_Doctype_ID = (?) , Name = (?) , Isactive = (?) , Importdate = TO_DATE(?) , Statementdate = TO_DATE(?) , Filename = (?) , FIN_Reconciliation_ID = (?) , Notes = (?) , Posted = (?) , EM_APRM_Process_BS = (?) , FIN_Financial_Account_ID = (?) , Processed = (?) , Processing = (?) , FIN_Bankstatement_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_BankStatement.FIN_Bankstatement_ID = ? " +
       "                 AND FIN_BankStatement.FIN_Financial_Account_ID = ? " +
       "        AND FIN_BankStatement.AD_Client_ID IN (";
@@ -536,9 +536,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcessBs);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finBankstatementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finBankstatementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
@@ -570,7 +570,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_BankStatement " +
-      "        (DocumentNo, C_Doctype_ID, Name, Isactive, Importdate, Statementdate, Filename, FIN_Reconciliation_ID, Notes, Posted, EM_APRM_Process_BS, FIN_Financial_Account_ID, FIN_Bankstatement_ID, Processed, Processing, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (DocumentNo, C_Doctype_ID, Name, Isactive, Importdate, Statementdate, Filename, FIN_Reconciliation_ID, Notes, Posted, EM_APRM_Process_BS, FIN_Financial_Account_ID, Processed, Processing, FIN_Bankstatement_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -591,9 +591,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmProcessBs);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finBankstatementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finBankstatementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);

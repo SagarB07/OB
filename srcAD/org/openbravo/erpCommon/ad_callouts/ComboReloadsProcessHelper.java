@@ -486,11 +486,11 @@ public class ComboReloadsProcessHelper extends CalloutHelper {
     
         try {
           
-      if (CalloutHelper.commandInCommandList(command, "inp#adLanguage")) {
+      if (CalloutHelper.commandInCommandList(command, "inp#userClient")) {
         if (!isFirst) resultado.append(", \n");
-        comboTableData = new ComboTableData(vars, this, "18", "AD_Table_ID", "800022", "", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+        comboTableData = new ComboTableData(vars, this, "19", "AD_Client_ID", "", "103", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
         comboTableData.fillParameters(null, windowId, "");
-        resultField = "inpadTableId";
+        resultField = "inpadClientId";
 
         resultado.append("new Array(\"" + resultField + "\", ");
         resultado.append(generateArray(comboTableData.select(false), vars.getStringParameter(resultField)));
@@ -499,11 +499,11 @@ public class ComboReloadsProcessHelper extends CalloutHelper {
         isFirst=false;
       }
     
-      if (CalloutHelper.commandInCommandList(command, "inp#userClient")) {
+      if (CalloutHelper.commandInCommandList(command, "inp#adLanguage")) {
         if (!isFirst) resultado.append(", \n");
-        comboTableData = new ComboTableData(vars, this, "19", "AD_Client_ID", "", "103", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+        comboTableData = new ComboTableData(vars, this, "18", "AD_Table_ID", "800022", "", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
         comboTableData.fillParameters(null, windowId, "");
-        resultField = "inpadClientId";
+        resultField = "inpadTableId";
 
         resultado.append("new Array(\"" + resultField + "\", ");
         resultado.append(generateArray(comboTableData.select(false), vars.getStringParameter(resultField)));

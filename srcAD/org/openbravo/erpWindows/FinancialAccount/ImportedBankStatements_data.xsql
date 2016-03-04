@@ -26,9 +26,9 @@ list1.name as Posted_BTN,
 FIN_BankStatement.EM_APRM_Process_BS, 
 list2.name as EM_APRM_Process_BS_BTN, 
 FIN_BankStatement.FIN_Financial_Account_ID, 
-FIN_BankStatement.FIN_Bankstatement_ID, 
 COALESCE(FIN_BankStatement.Processed, 'N') AS Processed, 
 COALESCE(FIN_BankStatement.Processing, 'N') AS Processing, 
+FIN_BankStatement.FIN_Bankstatement_ID, 
 FIN_BankStatement.AD_Org_ID, 
 FIN_BankStatement.AD_Client_ID, 
  
@@ -136,13 +136,13 @@ FIN_BankStatement.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE FIN_BankStatement
-        SET DocumentNo = (?) , C_Doctype_ID = (?) , Name = (?) , Isactive = (?) , Importdate = TO_DATE(?) , Statementdate = TO_DATE(?) , Filename = (?) , FIN_Reconciliation_ID = (?) , Notes = (?) , Posted = (?) , EM_APRM_Process_BS = (?) , FIN_Financial_Account_ID = (?) , FIN_Bankstatement_ID = (?) , Processed = (?) , Processing = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET DocumentNo = (?) , C_Doctype_ID = (?) , Name = (?) , Isactive = (?) , Importdate = TO_DATE(?) , Statementdate = TO_DATE(?) , Filename = (?) , FIN_Reconciliation_ID = (?) , Notes = (?) , Posted = (?) , EM_APRM_Process_BS = (?) , FIN_Financial_Account_ID = (?) , Processed = (?) , Processing = (?) , FIN_Bankstatement_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE FIN_BankStatement.FIN_Bankstatement_ID = ? 
                  AND FIN_BankStatement.FIN_Financial_Account_ID = ? 
         AND FIN_BankStatement.AD_Client_ID IN ('1') 
         AND FIN_BankStatement.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="importdate"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="filename"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="notes"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessBs"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="finBankstatementId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="importdate"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="filename"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="notes"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessBs"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="finBankstatementId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="finBankstatementId"></Parameter>
     
@@ -154,10 +154,10 @@ FIN_BankStatement.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO FIN_BankStatement 
-        (DocumentNo, C_Doctype_ID, Name, Isactive, Importdate, Statementdate, Filename, FIN_Reconciliation_ID, Notes, Posted, EM_APRM_Process_BS, FIN_Financial_Account_ID, FIN_Bankstatement_ID, Processed, Processing, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (DocumentNo, C_Doctype_ID, Name, Isactive, Importdate, Statementdate, Filename, FIN_Reconciliation_ID, Notes, Posted, EM_APRM_Process_BS, FIN_Financial_Account_ID, Processed, Processing, FIN_Bankstatement_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="importdate"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="filename"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="notes"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessBs"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="finBankstatementId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="importdate"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="filename"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="notes"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessBs"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="finBankstatementId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -526,7 +526,7 @@ params.put("action", straction);
     ImportedBankStatementsData data = new ImportedBankStatementsData();
     ServletException ex = null;
     try {
-    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.importdate = vars.getRequiredStringParameter("inpimportdate");     data.statementdate = vars.getRequiredStringParameter("inpstatementdate");     data.filename = vars.getStringParameter("inpfilename");     data.finReconciliationId = vars.getStringParameter("inpfinReconciliationId");     data.notes = vars.getStringParameter("inpnotes");     data.posted = vars.getRequiredStringParameter("inpposted");     data.emAprmProcessBs = vars.getRequestGlobalVariable("inpemAprmProcessBs", windowId + "|EM_APRM_Process_BS");     data.finFinancialAccountId = vars.getRequiredStringParameter("inpfinFinancialAccountId");     data.finBankstatementId = vars.getRequestGlobalVariable("inpfinBankstatementId", windowId + "|FIN_Bankstatement_ID");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.processing = vars.getStringParameter("inpprocessing", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.importdate = vars.getRequiredStringParameter("inpimportdate");     data.statementdate = vars.getRequiredStringParameter("inpstatementdate");     data.filename = vars.getStringParameter("inpfilename");     data.finReconciliationId = vars.getStringParameter("inpfinReconciliationId");     data.notes = vars.getStringParameter("inpnotes");     data.posted = vars.getRequiredStringParameter("inpposted");     data.emAprmProcessBs = vars.getRequestGlobalVariable("inpemAprmProcessBs", windowId + "|EM_APRM_Process_BS");     data.finFinancialAccountId = vars.getRequiredStringParameter("inpfinFinancialAccountId");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.processing = vars.getStringParameter("inpprocessing", "N");     data.finBankstatementId = vars.getRequestGlobalVariable("inpfinBankstatementId", windowId + "|FIN_Bankstatement_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -579,7 +579,7 @@ params.put("action", straction);
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|EM_APRM_Process_BS", data[0].getField("emAprmProcessBs"));    vars.setSessionValue(windowId + "|FIN_Bankstatement_ID", data[0].getField("finBankstatementId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|EM_APRM_Process_BS", data[0].getField("emAprmProcessBs"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|FIN_Bankstatement_ID", data[0].getField("finBankstatementId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPFIN_Financial_Account_ID) throws IOException,ServletException {
@@ -1163,10 +1163,10 @@ comboTableData = null;
                 else {                    
                     
                         //BUTTON TEXT FILLING
-                    data.emAprmProcessBsBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "EC75B6F5A9504DB6B3F3356EA85F15EE", data.getField("EM_APRM_Process_BS"));
+                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
                     
                         //BUTTON TEXT FILLING
-                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
+                    data.emAprmProcessBsBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "EC75B6F5A9504DB6B3F3356EA85F15EE", data.getField("EM_APRM_Process_BS"));
                     
                 }
                 vars.setEditionData(tabId, data);
