@@ -178,17 +178,7 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
         boolean newContact = data[i].contactname != null;
 
         con = conn.getTransactionConnection();
-        if (!validarTipoPersona(data[i].tipoPersona)){
-        	causaProblema = "invalid_tpersona";
-        	personaProblema =data[i].numeroIdentificacion;
-        	int var = 10/0;
-        }
-        
-        if (validarDocumento(data[i].numeroIdentificacion,data[i].tipoIdentifiacion)  != "VALIDO" ){
-        	causaProblema = "invalid_tIdentificacion";
-        	personaProblema =validarDocumento(data[i].numeroIdentificacion,data[i].tipoIdentifiacion) +": " +data[i].numeroIdentificacion  ;
-        	int var = 10/0;
-        }
+ 
         
         // create/update BPartner
         if (newBPartner) { // Insert new BPartner
@@ -293,9 +283,19 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
 
         // Update I_BPARTNER
         try {
-          no = ImportBPartnerData.setImported(con, conn, C_BPartner_ID, (C_BPartner_Location_ID
-              .equals("0")) ? "" : C_BPartner_Location_ID, (AD_User_ID.equals("0")) ? ""
-              : AD_User_ID, I_BPartner_ID);
+            if (!validarTipoPersona(data[i].tipoPersona)){
+            	causaProblema = "invalid_tpersona";
+            	personaProblema =data[i].numeroIdentificacion;
+            	int var = 10/0;
+            }
+            
+            if (validarDocumento(data[i].numeroIdentificacion,data[i].tipoIdentifiacion)  != "VALIDO" ){
+            	causaProblema = "invalid_tIdentificacion";
+            	personaProblema =validarDocumento(data[i].numeroIdentificacion,data[i].tipoIdentifiacion) +": " +data[i].numeroIdentificacion  ;
+            	int var = 10/0;
+            }	
+        	
+          no = ImportBPartnerData.setImported(con, conn, C_BPartner_ID, (C_BPartner_Location_ID.equals("0")) ? "" : C_BPartner_Location_ID, (AD_User_ID.equals("0")) ? "": AD_User_ID, I_BPartner_ID);
           conn.releaseCommitConnection(con);
         } catch (ServletException ex) {
           if (log4j.isDebugEnabled())
@@ -304,9 +304,44 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
           conn.releaseRollbackConnection(con);
           no = ImportBPartnerData.updateSetImportedError(conn, ex.toString(), I_BPartner_ID);
           continue;
+        }catch (Exception se){
+        	log4j.debug("Update Imported - " + se.toString());
+            noInsert--;
+//            conn.releaseRollbackConnection(con);
+//            no = ImportBPartnerData.updateSetImportedError(conn, se.toString(), I_BPartner_ID);
+  
+            if (causaProblema.equals("invalid_tpersona")){
+                conn.releaseRollbackConnection(con);
+                no = ImportBPartnerData.updateSetImportedError(conn, "El dato en el campo TIPO PERSONA es invalido", I_BPartner_ID);
+              }else {
+        	       if (causaProblema.equals("invalid_tIdentificacion")){
+        	    	  conn.releaseRollbackConnection(con);
+        	    	  no = ImportBPartnerData.updateSetImportedError(conn, "Error de verificación de campo cédula", I_BPartner_ID);
+        	      }else
+        	    	  {
+        		      se.printStackTrace();
+        		      addLog(Utility.messageBD(conn, "ProcessRunError", vars.getLanguage()));
+        		      conn.releaseRollbackConnection(con);
+        	    	  no = ImportBPartnerData.updateSetImportedError(conn, "ProcessRunError", I_BPartner_ID);
+        			   
+        		      }
+            	  }
+              
+            
+            continue;
+            
+            
+            
+            
+        	
         }
+        
       }
 
+      
+      
+      
+      
       // Set Error to indicator to not imported
       noBPartnerError = ImportBPartnerData.updateNotImported(conn, getAD_Client_ID());
     } catch (Exception se) {

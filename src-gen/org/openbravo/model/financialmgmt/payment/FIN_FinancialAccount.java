@@ -112,6 +112,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
     public static final String PROPERTY_BUSINESSPARTNERLIST = "businessPartnerList";
     public static final String PROPERTY_BUSINESSPARTNERPOFINANCIALACCOUNTLIST = "businessPartnerPOFinancialAccountList";
     public static final String PROPERTY_FINACCTRANSACTIONVLIST = "finaccTransactionVList";
+    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINANCIALACCOUNTIDLIST = "dataImportBusinessPartnerEmIdtFinancialAccountIdList";
     public static final String PROPERTY_FINBANKSTATEMENTLIST = "fINBankStatementList";
     public static final String PROPERTY_FINFINACCTRANSACTIONLIST = "fINFinaccTransactionList";
     public static final String PROPERTY_FINFINANCIALACCOUNTACCTLIST = "fINFinancialAccountAcctList";
@@ -161,6 +162,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         setDefaultValue(PROPERTY_BUSINESSPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERPOFINANCIALACCOUNTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINACCTRANSACTIONVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINANCIALACCOUNTIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINBANKSTATEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINACCTRANSACTIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINFINANCIALACCOUNTACCTLIST, new ArrayList<Object>());
@@ -630,6 +632,15 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
 
     public void setFinaccTransactionVList(List<DP_FinaccTransactionV> finaccTransactionVList) {
         set(PROPERTY_FINACCTRANSACTIONVLIST, finaccTransactionVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEmIdtFinancialAccountIdList() {
+      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINANCIALACCOUNTIDLIST);
+    }
+
+    public void setDataImportBusinessPartnerEmIdtFinancialAccountIdList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEmIdtFinancialAccountIdList) {
+        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINANCIALACCOUNTIDLIST, dataImportBusinessPartnerEmIdtFinancialAccountIdList);
     }
 
     @SuppressWarnings("unchecked")

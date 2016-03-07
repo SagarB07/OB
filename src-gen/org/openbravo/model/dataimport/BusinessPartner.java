@@ -35,6 +35,7 @@ import org.openbravo.model.common.businesspartner.TaxCategory;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.common.geography.Country;
 import org.openbravo.model.common.geography.Region;
+import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 import org.openbravo.model.financialmgmt.payment.FIN_PaymentMethod;
 import org.openbravo.model.financialmgmt.payment.PaymentTerm;
 import org.openbravo.model.pricing.pricelist.PriceList;
@@ -581,11 +582,11 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IDTFINPAYMENTMETHOD, idtFinPaymentmethod);
     }
 
-    public String getIdtFinancialAccount() {
-        return (String) get(PROPERTY_IDTFINANCIALACCOUNT);
+    public FIN_FinancialAccount getIdtFinancialAccount() {
+        return (FIN_FinancialAccount) get(PROPERTY_IDTFINANCIALACCOUNT);
     }
 
-    public void setIdtFinancialAccount(String idtFinancialAccount) {
+    public void setIdtFinancialAccount(FIN_FinancialAccount idtFinancialAccount) {
         set(PROPERTY_IDTFINANCIALACCOUNT, idtFinancialAccount);
     }
 
