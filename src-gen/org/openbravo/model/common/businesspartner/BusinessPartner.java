@@ -309,6 +309,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_DATAIMPORTBANKSTATEMENTLIST = "dataImportBankStatementList";
     public static final String PROPERTY_DATAIMPORTBUDGETLINELIST = "dataImportBudgetLineList";
     public static final String PROPERTY_DATAIMPORTBUSINESSPARTNERLIST = "dataImportBusinessPartnerList";
+    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSALESREPIDLIST = "dataImportBusinessPartnerEmIdtSalesrepIdList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
@@ -465,6 +466,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_DATAIMPORTBANKSTATEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUDGETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSALESREPIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTORDERLIST, new ArrayList<Object>());
@@ -1828,6 +1830,15 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setDataImportBusinessPartnerList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerList) {
         set(PROPERTY_DATAIMPORTBUSINESSPARTNERLIST, dataImportBusinessPartnerList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEmIdtSalesrepIdList() {
+      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSALESREPIDLIST);
+    }
+
+    public void setDataImportBusinessPartnerEmIdtSalesrepIdList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEmIdtSalesrepIdList) {
+        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSALESREPIDLIST, dataImportBusinessPartnerEmIdtSalesrepIdList);
     }
 
     @SuppressWarnings("unchecked")

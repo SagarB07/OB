@@ -54,6 +54,7 @@ public class TaxCategory extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_DESCRIPTION = "description";
     public static final String PROPERTY_BUSINESSPARTNERTAXCATEGORYLIST = "businessPartnerTaxCategoryList";
     public static final String PROPERTY_BUSINESSPARTNERSOBPTAXCATEGORYLIST = "businessPartnerSOBPTaxCategoryList";
+    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSOBPTAXCATEGORYIDLIST = "dataImportBusinessPartnerEmIdtSoBpTaxcategoryIdList";
     public static final String PROPERTY_DATAIMPORTTAXLIST = "dataImportTaxList";
     public static final String PROPERTY_FINANCIALMGMTTAXRATELIST = "financialMgmtTaxRateList";
 
@@ -63,6 +64,7 @@ public class TaxCategory extends BaseOBObject implements Traceable, ClientEnable
         setDefaultValue(PROPERTY_UPDATED, new Date());
         setDefaultValue(PROPERTY_BUSINESSPARTNERTAXCATEGORYLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERSOBPTAXCATEGORYLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSOBPTAXCATEGORYIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTTAXLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXRATELIST, new ArrayList<Object>());
     }
@@ -168,6 +170,15 @@ public class TaxCategory extends BaseOBObject implements Traceable, ClientEnable
 
     public void setBusinessPartnerSOBPTaxCategoryList(List<BusinessPartner> businessPartnerSOBPTaxCategoryList) {
         set(PROPERTY_BUSINESSPARTNERSOBPTAXCATEGORYLIST, businessPartnerSOBPTaxCategoryList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEmIdtSoBpTaxcategoryIdList() {
+      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSOBPTAXCATEGORYIDLIST);
+    }
+
+    public void setDataImportBusinessPartnerEmIdtSoBpTaxcategoryIdList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEmIdtSoBpTaxcategoryIdList) {
+        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTSOBPTAXCATEGORYIDLIST, dataImportBusinessPartnerEmIdtSoBpTaxcategoryIdList);
     }
 
     @SuppressWarnings("unchecked")

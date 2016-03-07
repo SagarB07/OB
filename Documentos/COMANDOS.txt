@@ -1,2 +1,3 @@
 ant smartbuild -Dlocal=no -Dforce=yes
+ant export.database
    
