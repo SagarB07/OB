@@ -20,6 +20,7 @@ package com.atrums.importdata.data;
 
 import com.atrums.nomina.data.NoTipoIngresoEgreso;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.openbravo.base.structure.ActiveEnabled;
@@ -52,6 +53,7 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_UPDATEDBY = "updatedBy";
     public static final String PROPERTY_TIPOINGRESOEGRESO = "tipoIngresoEgreso";
     public static final String PROPERTY_PERIOD = "period";
+    public static final String PROPERTY_VALOR = "valor";
 
     public IdtNovedad() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -148,6 +150,14 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setPeriod(Period period) {
         set(PROPERTY_PERIOD, period);
+    }
+
+    public BigDecimal getValor() {
+        return (BigDecimal) get(PROPERTY_VALOR);
+    }
+
+    public void setValor(BigDecimal valor) {
+        set(PROPERTY_VALOR, valor);
     }
 
 }
