@@ -89,7 +89,6 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_BUSINESSPARTNERLIST = "businessPartnerList";
     public static final String PROPERTY_BUSINESSPARTNERPOPAYMENTMETHODLIST = "businessPartnerPOPaymentMethodList";
     public static final String PROPERTY_INVOICETAXCASHVATVLIST = "invoiceTaxCashVATVList";
-    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINPAYMENTMETHODIDLIST = "dataImportBusinessPartnerEmIdtFinPaymentmethodIdList";
     public static final String PROPERTY_FINDOUBTFULDEBTVLIST = "fINDoubtfulDebtVList";
     public static final String PROPERTY_FINPAYMENTLIST = "fINPaymentList";
     public static final String PROPERTY_FINPAYMENTDETAILVLIST = "fINPaymentDetailVList";
@@ -131,7 +130,6 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
         setDefaultValue(PROPERTY_BUSINESSPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERPOPAYMENTMETHODLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICETAXCASHVATVLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINPAYMENTMETHODIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINDOUBTFULDEBTVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINPAYMENTDETAILVLIST, new ArrayList<Object>());
@@ -441,15 +439,6 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
 
     public void setInvoiceTaxCashVATVList(List<InvoiceTaxCashVAT_V> invoiceTaxCashVATVList) {
         set(PROPERTY_INVOICETAXCASHVATVLIST, invoiceTaxCashVATVList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEmIdtFinPaymentmethodIdList() {
-      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINPAYMENTMETHODIDLIST);
-    }
-
-    public void setDataImportBusinessPartnerEmIdtFinPaymentmethodIdList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEmIdtFinPaymentmethodIdList) {
-        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTFINPAYMENTMETHODIDLIST, dataImportBusinessPartnerEmIdtFinPaymentmethodIdList);
     }
 
     @SuppressWarnings("unchecked")

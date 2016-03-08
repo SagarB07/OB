@@ -74,7 +74,6 @@ public class PriceList extends BaseOBObject implements Traceable, ClientEnabled,
     public static final String PROPERTY_BUSINESSPARTNERPURCHASEPRICELISTLIST = "businessPartnerPurchasePricelistList";
     public static final String PROPERTY_CLIENTINFORMATIONLIST = "clientInformationList";
     public static final String PROPERTY_CREATEPOLINESPELIST = "createPOLinesPEList";
-    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTMPRICELISTIDLIST = "dataImportBusinessPartnerEmIdtMPricelistIdList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
     public static final String PROPERTY_EXTERNALPOSLIST = "externalPOSList";
@@ -101,7 +100,6 @@ public class PriceList extends BaseOBObject implements Traceable, ClientEnabled,
         setDefaultValue(PROPERTY_BUSINESSPARTNERPURCHASEPRICELISTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CLIENTINFORMATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CREATEPOLINESPELIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTMPRICELISTIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EXTERNALPOSLIST, new ArrayList<Object>());
@@ -293,15 +291,6 @@ public class PriceList extends BaseOBObject implements Traceable, ClientEnabled,
 
     public void setCreatePOLinesPEList(List<CreatePOLinesPE> createPOLinesPEList) {
         set(PROPERTY_CREATEPOLINESPELIST, createPOLinesPEList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEmIdtMPricelistIdList() {
-      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTMPRICELISTIDLIST);
-    }
-
-    public void setDataImportBusinessPartnerEmIdtMPricelistIdList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEmIdtMPricelistIdList) {
-        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTMPRICELISTIDLIST, dataImportBusinessPartnerEmIdtMPricelistIdList);
     }
 
     @SuppressWarnings("unchecked")

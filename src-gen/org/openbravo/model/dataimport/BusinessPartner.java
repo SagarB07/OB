@@ -18,7 +18,6 @@
 */
 package org.openbravo.model.dataimport;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.openbravo.base.structure.ActiveEnabled;
@@ -31,13 +30,9 @@ import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.common.businesspartner.Category;
 import org.openbravo.model.common.businesspartner.Greeting;
 import org.openbravo.model.common.businesspartner.Location;
-import org.openbravo.model.common.businesspartner.TaxCategory;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.common.geography.Country;
 import org.openbravo.model.common.geography.Region;
-import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
-import org.openbravo.model.financialmgmt.payment.FIN_PaymentMethod;
-import org.openbravo.model.pricing.pricelist.PriceList;
 /**
  * Entity class for entity DataImportBusinessPartner (stored in table I_BPartner).
  *
@@ -94,39 +89,17 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_IMPORTERRORMESSAGE = "importErrorMessage";
     public static final String PROPERTY_IMPORTPROCESSCOMPLETE = "importProcessComplete";
     public static final String PROPERTY_IDTAPELLIDOS = "iDTApellidos";
-    public static final String PROPERTY_IDTBPFECVENCTAUTRTSRI = "idtBpFecVenctAutRtSri";
-    public static final String PROPERTY_IDTBPNROAUTRTSRI = "idtBpNroAutRtSri";
-    public static final String PROPERTY_IDTBPNROESTAB = "idtBpNroEstab";
-    public static final String PROPERTY_IDTBPPUNTOEMISION = "idtBpPuntoEmision";
-    public static final String PROPERTY_IDTCINVOICESCHEDULE = "idtCInvoiceschedule";
-    public static final String PROPERTY_IDTCPAYMENTTERM = "idtCPaymentterm";
-    public static final String PROPERTY_IDTCALIFICACION = "idtCalificacion";
-    public static final String PROPERTY_IDTCUSTOMERBLOCKING = "idtCustomerBlocking";
     public static final String PROPERTY_IDTEMAIL = "iDTEmail";
-    public static final String PROPERTY_IDTFINPAYMENTMETHOD = "idtFinPaymentmethod";
-    public static final String PROPERTY_IDTFINANCIALACCOUNT = "idtFinancialAccount";
-    public static final String PROPERTY_IDTFIXMONTHDAY = "idtFixmonthday";
-    public static final String PROPERTY_IDTFIXMONTHDAY2 = "idtFixmonthday2";
-    public static final String PROPERTY_IDTFIXMONTHDAY3 = "idtFixmonthday3";
     public static final String PROPERTY_IDTGENERO = "iDTGenero";
-    public static final String PROPERTY_IDTINVOICERULE = "idtInvoicerule";
-    public static final String PROPERTY_IDTISCUSTOMER = "idtIscustomer";
-    public static final String PROPERTY_IDTMPRICELIST = "idtMPricelist";
     public static final String PROPERTY_IDTNATURALJURIDICO = "iDTNaturalJuridico";
     public static final String PROPERTY_IDTNOMBRES = "iDTNombres";
-    public static final String PROPERTY_IDTSALESREP = "idtSalesrep";
-    public static final String PROPERTY_IDTSOBPTAXCATEGORY = "idtSoBpTaxcategory";
-    public static final String PROPERTY_IDTSOCREDITLIMIT = "idtSoCreditlimit";
     public static final String PROPERTY_IDTTIPOIDENTIFICACION = "iDTTipoIdentificacion";
-    public static final String PROPERTY_IDTURL = "idtUrl";
 
     public BusinessPartner() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_PROCESSED, false);
         setDefaultValue(PROPERTY_IMPORTPROCESSCOMPLETE, false);
-        setDefaultValue(PROPERTY_IDTCUSTOMERBLOCKING, false);
-        setDefaultValue(PROPERTY_IDTISCUSTOMER, false);
     }
 
     @Override
@@ -502,70 +475,6 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IDTAPELLIDOS, iDTApellidos);
     }
 
-    public Date getIdtBpFecVenctAutRtSri() {
-        return (Date) get(PROPERTY_IDTBPFECVENCTAUTRTSRI);
-    }
-
-    public void setIdtBpFecVenctAutRtSri(Date idtBpFecVenctAutRtSri) {
-        set(PROPERTY_IDTBPFECVENCTAUTRTSRI, idtBpFecVenctAutRtSri);
-    }
-
-    public String getIdtBpNroAutRtSri() {
-        return (String) get(PROPERTY_IDTBPNROAUTRTSRI);
-    }
-
-    public void setIdtBpNroAutRtSri(String idtBpNroAutRtSri) {
-        set(PROPERTY_IDTBPNROAUTRTSRI, idtBpNroAutRtSri);
-    }
-
-    public String getIdtBpNroEstab() {
-        return (String) get(PROPERTY_IDTBPNROESTAB);
-    }
-
-    public void setIdtBpNroEstab(String idtBpNroEstab) {
-        set(PROPERTY_IDTBPNROESTAB, idtBpNroEstab);
-    }
-
-    public String getIdtBpPuntoEmision() {
-        return (String) get(PROPERTY_IDTBPPUNTOEMISION);
-    }
-
-    public void setIdtBpPuntoEmision(String idtBpPuntoEmision) {
-        set(PROPERTY_IDTBPPUNTOEMISION, idtBpPuntoEmision);
-    }
-
-    public String getIdtCInvoiceschedule() {
-        return (String) get(PROPERTY_IDTCINVOICESCHEDULE);
-    }
-
-    public void setIdtCInvoiceschedule(String idtCInvoiceschedule) {
-        set(PROPERTY_IDTCINVOICESCHEDULE, idtCInvoiceschedule);
-    }
-
-    public String getIdtCPaymentterm() {
-        return (String) get(PROPERTY_IDTCPAYMENTTERM);
-    }
-
-    public void setIdtCPaymentterm(String idtCPaymentterm) {
-        set(PROPERTY_IDTCPAYMENTTERM, idtCPaymentterm);
-    }
-
-    public String getIdtCalificacion() {
-        return (String) get(PROPERTY_IDTCALIFICACION);
-    }
-
-    public void setIdtCalificacion(String idtCalificacion) {
-        set(PROPERTY_IDTCALIFICACION, idtCalificacion);
-    }
-
-    public Boolean isIdtCustomerBlocking() {
-        return (Boolean) get(PROPERTY_IDTCUSTOMERBLOCKING);
-    }
-
-    public void setIdtCustomerBlocking(Boolean idtCustomerBlocking) {
-        set(PROPERTY_IDTCUSTOMERBLOCKING, idtCustomerBlocking);
-    }
-
     public String getIDTEmail() {
         return (String) get(PROPERTY_IDTEMAIL);
     }
@@ -574,76 +483,12 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IDTEMAIL, iDTEmail);
     }
 
-    public FIN_PaymentMethod getIdtFinPaymentmethod() {
-        return (FIN_PaymentMethod) get(PROPERTY_IDTFINPAYMENTMETHOD);
-    }
-
-    public void setIdtFinPaymentmethod(FIN_PaymentMethod idtFinPaymentmethod) {
-        set(PROPERTY_IDTFINPAYMENTMETHOD, idtFinPaymentmethod);
-    }
-
-    public FIN_FinancialAccount getIdtFinancialAccount() {
-        return (FIN_FinancialAccount) get(PROPERTY_IDTFINANCIALACCOUNT);
-    }
-
-    public void setIdtFinancialAccount(FIN_FinancialAccount idtFinancialAccount) {
-        set(PROPERTY_IDTFINANCIALACCOUNT, idtFinancialAccount);
-    }
-
-    public Long getIdtFixmonthday() {
-        return (Long) get(PROPERTY_IDTFIXMONTHDAY);
-    }
-
-    public void setIdtFixmonthday(Long idtFixmonthday) {
-        set(PROPERTY_IDTFIXMONTHDAY, idtFixmonthday);
-    }
-
-    public Long getIdtFixmonthday2() {
-        return (Long) get(PROPERTY_IDTFIXMONTHDAY2);
-    }
-
-    public void setIdtFixmonthday2(Long idtFixmonthday2) {
-        set(PROPERTY_IDTFIXMONTHDAY2, idtFixmonthday2);
-    }
-
-    public Long getIdtFixmonthday3() {
-        return (Long) get(PROPERTY_IDTFIXMONTHDAY3);
-    }
-
-    public void setIdtFixmonthday3(Long idtFixmonthday3) {
-        set(PROPERTY_IDTFIXMONTHDAY3, idtFixmonthday3);
-    }
-
     public String getIDTGenero() {
         return (String) get(PROPERTY_IDTGENERO);
     }
 
     public void setIDTGenero(String iDTGenero) {
         set(PROPERTY_IDTGENERO, iDTGenero);
-    }
-
-    public String getIdtInvoicerule() {
-        return (String) get(PROPERTY_IDTINVOICERULE);
-    }
-
-    public void setIdtInvoicerule(String idtInvoicerule) {
-        set(PROPERTY_IDTINVOICERULE, idtInvoicerule);
-    }
-
-    public Boolean isIdtIscustomer() {
-        return (Boolean) get(PROPERTY_IDTISCUSTOMER);
-    }
-
-    public void setIdtIscustomer(Boolean idtIscustomer) {
-        set(PROPERTY_IDTISCUSTOMER, idtIscustomer);
-    }
-
-    public PriceList getIdtMPricelist() {
-        return (PriceList) get(PROPERTY_IDTMPRICELIST);
-    }
-
-    public void setIdtMPricelist(PriceList idtMPricelist) {
-        set(PROPERTY_IDTMPRICELIST, idtMPricelist);
     }
 
     public String getIDTNaturalJuridico() {
@@ -662,44 +507,12 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IDTNOMBRES, iDTNombres);
     }
 
-    public org.openbravo.model.common.businesspartner.BusinessPartner getIdtSalesrep() {
-        return (org.openbravo.model.common.businesspartner.BusinessPartner) get(PROPERTY_IDTSALESREP);
-    }
-
-    public void setIdtSalesrep(org.openbravo.model.common.businesspartner.BusinessPartner idtSalesrep) {
-        set(PROPERTY_IDTSALESREP, idtSalesrep);
-    }
-
-    public TaxCategory getIdtSoBpTaxcategory() {
-        return (TaxCategory) get(PROPERTY_IDTSOBPTAXCATEGORY);
-    }
-
-    public void setIdtSoBpTaxcategory(TaxCategory idtSoBpTaxcategory) {
-        set(PROPERTY_IDTSOBPTAXCATEGORY, idtSoBpTaxcategory);
-    }
-
-    public BigDecimal getIdtSoCreditlimit() {
-        return (BigDecimal) get(PROPERTY_IDTSOCREDITLIMIT);
-    }
-
-    public void setIdtSoCreditlimit(BigDecimal idtSoCreditlimit) {
-        set(PROPERTY_IDTSOCREDITLIMIT, idtSoCreditlimit);
-    }
-
     public String getIDTTipoIdentificacion() {
         return (String) get(PROPERTY_IDTTIPOIDENTIFICACION);
     }
 
     public void setIDTTipoIdentificacion(String iDTTipoIdentificacion) {
         set(PROPERTY_IDTTIPOIDENTIFICACION, iDTTipoIdentificacion);
-    }
-
-    public String getIdtUrl() {
-        return (String) get(PROPERTY_IDTURL);
-    }
-
-    public void setIdtUrl(String idtUrl) {
-        set(PROPERTY_IDTURL, idtUrl);
     }
 
 }

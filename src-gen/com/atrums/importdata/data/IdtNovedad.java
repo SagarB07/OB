@@ -32,15 +32,15 @@ import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.financialmgmt.calendar.Period;
 /**
- * Entity class for entity IDT_Novedad (stored in table IDT_Novedad).
+ * Entity class for entity IDT_Imp_Novedades (stored in table idt_novedad).
  *
  * NOTE: This class should not be instantiated directly. To instantiate this
  * class the {@link org.openbravo.base.provider.OBProvider} should be used.
  */
 public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled, OrganizationEnabled, ActiveEnabled {
     private static final long serialVersionUID = 1L;
-    public static final String TABLE_NAME = "IDT_Novedad";
-    public static final String ENTITY_NAME = "IDT_Novedad";
+    public static final String TABLE_NAME = "idt_novedad";
+    public static final String ENTITY_NAME = "IDT_Imp_Novedades";
     public static final String PROPERTY_ID = "id";
     public static final String PROPERTY_CLIENT = "client";
     public static final String PROPERTY_ORGANIZATION = "organization";

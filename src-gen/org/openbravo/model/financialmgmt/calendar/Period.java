@@ -23,6 +23,7 @@ import com.atrums.centrocostos.data.cco_registra_costos;
 import com.atrums.contabilidad.data.CO_RETENCION_VENTA;
 import com.atrums.contabilidad.data.CO_Retencion_Compra;
 import com.atrums.declaraciontributaria.ecuador.data.atsProcesaAnexo;
+import com.atrums.importdata.data.IdtNovedad;
 import com.atrums.nomina.data.NO_Registro_Hora_Extra;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noNovedad;
@@ -99,6 +100,7 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLIST = "financialMgmtGLJournalList";
     public static final String PROPERTY_FINANCIALMGMTPERIODCONTROLLIST = "financialMgmtPeriodControlList";
     public static final String PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST = "financialMgmtPeriodControlVList";
+    public static final String PROPERTY_IDTIMPNOVEDADESLIST = "iDTImpNovedadesList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
     public static final String PROPERTY_RECOMISIONESLIST = "reComisionesList";
     public static final String PROPERTY_REGISTROHORAEXTRALIST = "registroHoraExtraList";
@@ -140,6 +142,7 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPERIODCONTROLLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTIMPNOVEDADESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_RECOMISIONESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_REGISTROHORAEXTRALIST, new ArrayList<Object>());
@@ -462,6 +465,15 @@ public class Period extends BaseOBObject implements Traceable, ClientEnabled, Or
 
     public void setFinancialMgmtPeriodControlVList(List<PeriodControlV> financialMgmtPeriodControlVList) {
         set(PROPERTY_FINANCIALMGMTPERIODCONTROLVLIST, financialMgmtPeriodControlVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtNovedad> getIDTImpNovedadesList() {
+      return (List<IdtNovedad>) get(PROPERTY_IDTIMPNOVEDADESLIST);
+    }
+
+    public void setIDTImpNovedadesList(List<IdtNovedad> iDTImpNovedadesList) {
+        set(PROPERTY_IDTIMPNOVEDADESLIST, iDTImpNovedadesList);
     }
 
     @SuppressWarnings("unchecked")
