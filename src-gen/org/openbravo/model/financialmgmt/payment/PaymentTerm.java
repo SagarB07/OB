@@ -71,7 +71,6 @@ public class PaymentTerm extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_MATURITYDATE3 = "maturityDate3";
     public static final String PROPERTY_BUSINESSPARTNERLIST = "businessPartnerList";
     public static final String PROPERTY_BUSINESSPARTNERPOPAYMENTTERMSLIST = "businessPartnerPOPaymentTermsList";
-    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTCPAYMENTTERMIDLIST = "dataImportBusinessPartnerEmIdtCPaymenttermIdList";
     public static final String PROPERTY_DATAIMPORTINVOICELIST = "dataImportInvoiceList";
     public static final String PROPERTY_DATAIMPORTORDERLIST = "dataImportOrderList";
     public static final String PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST = "financialMgmtPaymentTermLineList";
@@ -91,7 +90,6 @@ public class PaymentTerm extends BaseOBObject implements Traceable, ClientEnable
         setDefaultValue(PROPERTY_VALID, false);
         setDefaultValue(PROPERTY_BUSINESSPARTNERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_BUSINESSPARTNERPOPAYMENTTERMSLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTCPAYMENTTERMIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTINVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST, new ArrayList<Object>());
@@ -301,15 +299,6 @@ public class PaymentTerm extends BaseOBObject implements Traceable, ClientEnable
 
     public void setBusinessPartnerPOPaymentTermsList(List<BusinessPartner> businessPartnerPOPaymentTermsList) {
         set(PROPERTY_BUSINESSPARTNERPOPAYMENTTERMSLIST, businessPartnerPOPaymentTermsList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEmIdtCPaymenttermIdList() {
-      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTCPAYMENTTERMIDLIST);
-    }
-
-    public void setDataImportBusinessPartnerEmIdtCPaymenttermIdList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEmIdtCPaymenttermIdList) {
-        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTCPAYMENTTERMIDLIST, dataImportBusinessPartnerEmIdtCPaymenttermIdList);
     }
 
     @SuppressWarnings("unchecked")

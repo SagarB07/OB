@@ -37,7 +37,6 @@ import org.openbravo.model.common.geography.Country;
 import org.openbravo.model.common.geography.Region;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 import org.openbravo.model.financialmgmt.payment.FIN_PaymentMethod;
-import org.openbravo.model.financialmgmt.payment.PaymentTerm;
 import org.openbravo.model.pricing.pricelist.PriceList;
 /**
  * Entity class for entity DataImportBusinessPartner (stored in table I_BPartner).
@@ -502,11 +501,11 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IDTAPELLIDOS, iDTApellidos);
     }
 
-    public String getIdtBpFecVenctAutRtSri() {
-        return (String) get(PROPERTY_IDTBPFECVENCTAUTRTSRI);
+    public Date getIdtBpFecVenctAutRtSri() {
+        return (Date) get(PROPERTY_IDTBPFECVENCTAUTRTSRI);
     }
 
-    public void setIdtBpFecVenctAutRtSri(String idtBpFecVenctAutRtSri) {
+    public void setIdtBpFecVenctAutRtSri(Date idtBpFecVenctAutRtSri) {
         set(PROPERTY_IDTBPFECVENCTAUTRTSRI, idtBpFecVenctAutRtSri);
     }
 
@@ -542,11 +541,11 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         set(PROPERTY_IDTCINVOICESCHEDULE, idtCInvoiceschedule);
     }
 
-    public PaymentTerm getIdtCPaymentterm() {
-        return (PaymentTerm) get(PROPERTY_IDTCPAYMENTTERM);
+    public String getIdtCPaymentterm() {
+        return (String) get(PROPERTY_IDTCPAYMENTTERM);
     }
 
-    public void setIdtCPaymentterm(PaymentTerm idtCPaymentterm) {
+    public void setIdtCPaymentterm(String idtCPaymentterm) {
         set(PROPERTY_IDTCPAYMENTTERM, idtCPaymentterm);
     }
 
