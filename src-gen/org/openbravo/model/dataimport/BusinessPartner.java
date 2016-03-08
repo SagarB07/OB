@@ -118,6 +118,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_IDTSOBPTAXCATEGORY = "idtSoBpTaxcategory";
     public static final String PROPERTY_IDTSOCREDITLIMIT = "idtSoCreditlimit";
     public static final String PROPERTY_IDTTIPOIDENTIFICACION = "iDTTipoIdentificacion";
+    public static final String PROPERTY_IDTURL = "idtUrl";
 
     public BusinessPartner() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -691,6 +692,14 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setIDTTipoIdentificacion(String iDTTipoIdentificacion) {
         set(PROPERTY_IDTTIPOIDENTIFICACION, iDTTipoIdentificacion);
+    }
+
+    public String getIdtUrl() {
+        return (String) get(PROPERTY_IDTURL);
+    }
+
+    public void setIdtUrl(String idtUrl) {
+        set(PROPERTY_IDTURL, idtUrl);
     }
 
 }

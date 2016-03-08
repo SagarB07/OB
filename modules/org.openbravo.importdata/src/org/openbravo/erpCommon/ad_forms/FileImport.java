@@ -167,7 +167,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
             constant = constant + 1;
           } else
           strValues.append(parseField(data2[i].getField(String.valueOf(j - constant)),data[j].fieldlength, data[j].datatype, data[j].dataformat, data[j].decimalpoint,data[j].referencename));
-         System.out.println(data2[i].getField(String.valueOf(j - constant)));
+         //System.out.println(data2[i].getField(String.valueOf(j - constant)));
          
           strValues.append("'");
           strFields.append(strValues);
