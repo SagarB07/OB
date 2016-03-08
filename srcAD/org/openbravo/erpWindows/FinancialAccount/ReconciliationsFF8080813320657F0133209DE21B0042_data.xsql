@@ -20,12 +20,12 @@ FIN_Reconciliation.C_Doctype_ID,
 FIN_Reconciliation.Widget, 
 FIN_Reconciliation.Dateto, 
 FIN_Reconciliation.Statementdate, 
+COALESCE(FIN_Reconciliation.Printdetailed, 'N') AS Printdetailed, 
 FIN_Reconciliation.Startingbalance, 
 FIN_Reconciliation.EM_APRM_PrintDetailed, 
-COALESCE(FIN_Reconciliation.Printdetailed, 'N') AS Printdetailed, 
+FIN_Reconciliation.Endingbalance, 
 FIN_Reconciliation.EM_APRM_PrintSummary, 
 COALESCE(FIN_Reconciliation.Printsummary, 'N') AS Printsummary, 
-FIN_Reconciliation.Endingbalance, 
 FIN_Reconciliation.Docstatus, 
 COALESCE(FIN_Reconciliation.Processing, 'N') AS Processing, 
 COALESCE(FIN_Reconciliation.Processed, 'N') AS Processed, 
@@ -141,13 +141,13 @@ FIN_Reconciliation.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE FIN_Reconciliation
-        SET AD_Org_ID = (?) , Isactive = (?) , FIN_Financial_Account_ID = (?) , DocumentNo = (?) , C_Doctype_ID = (?) , Widget = (?) , Dateto = TO_DATE(?) , Statementdate = TO_DATE(?) , Startingbalance = TO_NUMBER(?) , EM_APRM_PrintDetailed = (?) , Printdetailed = (?) , EM_APRM_PrintSummary = (?) , Printsummary = (?) , Endingbalance = TO_NUMBER(?) , Docstatus = (?) , Processing = (?) , Processed = (?) , Posted = (?) , EM_APRM_Process_Reconciliation = (?) , EM_Aprm_Process_Rec = (?) , FIN_Reconciliation_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Isactive = (?) , FIN_Financial_Account_ID = (?) , DocumentNo = (?) , C_Doctype_ID = (?) , Widget = (?) , Dateto = TO_DATE(?) , Statementdate = TO_DATE(?) , Printdetailed = (?) , Startingbalance = TO_NUMBER(?) , EM_APRM_PrintDetailed = (?) , Endingbalance = TO_NUMBER(?) , EM_APRM_PrintSummary = (?) , Printsummary = (?) , Docstatus = (?) , Processing = (?) , Processed = (?) , Posted = (?) , EM_APRM_Process_Reconciliation = (?) , EM_Aprm_Process_Rec = (?) , FIN_Reconciliation_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE FIN_Reconciliation.FIN_Reconciliation_ID = ? 
                  AND FIN_Reconciliation.FIN_Financial_Account_ID = ? 
         AND FIN_Reconciliation.AD_Client_ID IN ('1') 
         AND FIN_Reconciliation.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="widget"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="startingbalance"></Parameter> <Parameter name="emAprmPrintdetailed"></Parameter> <Parameter name="printdetailed"></Parameter> <Parameter name="emAprmPrintsummary"></Parameter> <Parameter name="printsummary"></Parameter> <Parameter name="endingbalance"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessReconciliation"></Parameter> <Parameter name="emAprmProcessRec"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="widget"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="printdetailed"></Parameter> <Parameter name="startingbalance"></Parameter> <Parameter name="emAprmPrintdetailed"></Parameter> <Parameter name="endingbalance"></Parameter> <Parameter name="emAprmPrintsummary"></Parameter> <Parameter name="printsummary"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessReconciliation"></Parameter> <Parameter name="emAprmProcessRec"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="finReconciliationId"></Parameter>
     
@@ -159,10 +159,10 @@ FIN_Reconciliation.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO FIN_Reconciliation 
-        (AD_Org_ID, Isactive, FIN_Financial_Account_ID, DocumentNo, C_Doctype_ID, Widget, Dateto, Statementdate, Startingbalance, EM_APRM_PrintDetailed, Printdetailed, EM_APRM_PrintSummary, Printsummary, Endingbalance, Docstatus, Processing, Processed, Posted, EM_APRM_Process_Reconciliation, EM_Aprm_Process_Rec, FIN_Reconciliation_ID, AD_Client_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, Isactive, FIN_Financial_Account_ID, DocumentNo, C_Doctype_ID, Widget, Dateto, Statementdate, Printdetailed, Startingbalance, EM_APRM_PrintDetailed, Endingbalance, EM_APRM_PrintSummary, Printsummary, Docstatus, Processing, Processed, Posted, EM_APRM_Process_Reconciliation, EM_Aprm_Process_Rec, FIN_Reconciliation_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="widget"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="startingbalance"></Parameter> <Parameter name="emAprmPrintdetailed"></Parameter> <Parameter name="printdetailed"></Parameter> <Parameter name="emAprmPrintsummary"></Parameter> <Parameter name="printsummary"></Parameter> <Parameter name="endingbalance"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessReconciliation"></Parameter> <Parameter name="emAprmProcessRec"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="widget"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="printdetailed"></Parameter> <Parameter name="startingbalance"></Parameter> <Parameter name="emAprmPrintdetailed"></Parameter> <Parameter name="endingbalance"></Parameter> <Parameter name="emAprmPrintsummary"></Parameter> <Parameter name="printsummary"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="emAprmProcessReconciliation"></Parameter> <Parameter name="emAprmProcessRec"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

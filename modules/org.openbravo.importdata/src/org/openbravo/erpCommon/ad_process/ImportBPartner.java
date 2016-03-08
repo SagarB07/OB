@@ -176,7 +176,7 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
         boolean newLocation = data[i].addr != null;
         String AD_User_ID = data[i].adUserId;
         boolean newContact = data[i].contactname != null;
-
+        	 
         con = conn.getTransactionConnection();
  
         

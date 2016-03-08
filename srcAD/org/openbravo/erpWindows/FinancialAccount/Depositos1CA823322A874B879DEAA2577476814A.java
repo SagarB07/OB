@@ -1036,12 +1036,12 @@ String strParamPaymentamt_f = vars.getSessionValue(tabId + "|paramPaymentamt_f")
     try {
       ComboTableData comboTableData = null;
 xmlDocument.setParameter("Statementdate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("EM_Aprm_Modify_BTNname", Utility.getButtonName(this, vars, "CD2BBEC9D14F4792A0AC97A1085CDAAC", "EM_Aprm_Modify_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_Aprm_Modify = org.openbravo.erpCommon.utility.Utility.isModalProcess("15C8708DFC464C2D91286E59624FDD18"); 
-xmlDocument.setParameter("EM_Aprm_Modify_Modal", modalEM_Aprm_Modify?"true":"false");
 comboTableData = new ComboTableData(vars, this, "19", "FIN_Payment_ID", "", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("finPaymentId"):dataField.getField("finPaymentId")));
 xmlDocument.setData("reportFIN_Payment_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
+xmlDocument.setParameter("EM_Aprm_Modify_BTNname", Utility.getButtonName(this, vars, "CD2BBEC9D14F4792A0AC97A1085CDAAC", "EM_Aprm_Modify_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_Aprm_Modify = org.openbravo.erpCommon.utility.Utility.isModalProcess("15C8708DFC464C2D91286E59624FDD18"); 
+xmlDocument.setParameter("EM_Aprm_Modify_Modal", modalEM_Aprm_Modify?"true":"false");
 comboTableData = new ComboTableData(vars, this, "17", "Status", "575BCB88A4694C27BC013DE9C73E6FE7", "7A86F689FB1C46F19DBE338D6DECD703", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("status"):dataField.getField("status")));
 xmlDocument.setData("reportStatus","liststructure", comboTableData.select(!strCommand.equals("NEW")));
@@ -1062,11 +1062,11 @@ xmlDocument.setData("reportC_Glitem_ID","liststructure", comboTableData.select(!
 comboTableData = null;
 xmlDocument.setParameter("Dateacct_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonForeign_Amount", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttonForeign_Convert_Rate", Utility.messageBD(this, "Calc", vars.getLanguage()));
 comboTableData = new ComboTableData(vars, this, "19", "FIN_Reconciliation_ID", "", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("finReconciliationId"):dataField.getField("finReconciliationId")));
 xmlDocument.setData("reportFIN_Reconciliation_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
+xmlDocument.setParameter("buttonForeign_Convert_Rate", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Delete_Btn_BTNname", Utility.getButtonName(this, vars, "B69B23AA55CD46F0B7CF8CB6B60EF7F8", "Delete_Btn_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));

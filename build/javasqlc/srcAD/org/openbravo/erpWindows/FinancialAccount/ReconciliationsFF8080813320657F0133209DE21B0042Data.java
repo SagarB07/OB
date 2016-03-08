@@ -33,12 +33,12 @@ static Logger log4j = Logger.getLogger(ReconciliationsFF8080813320657F0133209DE2
   public String widget;
   public String dateto;
   public String statementdate;
+  public String printdetailed;
   public String startingbalance;
   public String emAprmPrintdetailed;
-  public String printdetailed;
+  public String endingbalance;
   public String emAprmPrintsummary;
   public String printsummary;
-  public String endingbalance;
   public String docstatus;
   public String processing;
   public String processed;
@@ -92,18 +92,18 @@ static Logger log4j = Logger.getLogger(ReconciliationsFF8080813320657F0133209DE2
       return dateto;
     else if (fieldName.equalsIgnoreCase("statementdate"))
       return statementdate;
+    else if (fieldName.equalsIgnoreCase("printdetailed"))
+      return printdetailed;
     else if (fieldName.equalsIgnoreCase("startingbalance"))
       return startingbalance;
     else if (fieldName.equalsIgnoreCase("em_aprm_printdetailed") || fieldName.equals("emAprmPrintdetailed"))
       return emAprmPrintdetailed;
-    else if (fieldName.equalsIgnoreCase("printdetailed"))
-      return printdetailed;
+    else if (fieldName.equalsIgnoreCase("endingbalance"))
+      return endingbalance;
     else if (fieldName.equalsIgnoreCase("em_aprm_printsummary") || fieldName.equals("emAprmPrintsummary"))
       return emAprmPrintsummary;
     else if (fieldName.equalsIgnoreCase("printsummary"))
       return printsummary;
-    else if (fieldName.equalsIgnoreCase("endingbalance"))
-      return endingbalance;
     else if (fieldName.equalsIgnoreCase("docstatus"))
       return docstatus;
     else if (fieldName.equalsIgnoreCase("processing"))
@@ -172,12 +172,12 @@ Select for edit
       "FIN_Reconciliation.Widget, " +
       "FIN_Reconciliation.Dateto, " +
       "FIN_Reconciliation.Statementdate, " +
+      "COALESCE(FIN_Reconciliation.Printdetailed, 'N') AS Printdetailed, " +
       "FIN_Reconciliation.Startingbalance, " +
       "FIN_Reconciliation.EM_APRM_PrintDetailed, " +
-      "COALESCE(FIN_Reconciliation.Printdetailed, 'N') AS Printdetailed, " +
+      "FIN_Reconciliation.Endingbalance, " +
       "FIN_Reconciliation.EM_APRM_PrintSummary, " +
       "COALESCE(FIN_Reconciliation.Printsummary, 'N') AS Printsummary, " +
-      "FIN_Reconciliation.Endingbalance, " +
       "FIN_Reconciliation.Docstatus, " +
       "COALESCE(FIN_Reconciliation.Processing, 'N') AS Processing, " +
       "COALESCE(FIN_Reconciliation.Processed, 'N') AS Processed, " +
@@ -252,12 +252,12 @@ Select for edit
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.widget = UtilSql.getValue(result, "widget");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.dateto = UtilSql.getDateValue(result, "dateto", "dd-MM-yyyy");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.statementdate = UtilSql.getDateValue(result, "statementdate", "dd-MM-yyyy");
+        objectReconciliationsFF8080813320657F0133209DE21B0042Data.printdetailed = UtilSql.getValue(result, "printdetailed");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.startingbalance = UtilSql.getValue(result, "startingbalance");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.emAprmPrintdetailed = UtilSql.getValue(result, "em_aprm_printdetailed");
-        objectReconciliationsFF8080813320657F0133209DE21B0042Data.printdetailed = UtilSql.getValue(result, "printdetailed");
+        objectReconciliationsFF8080813320657F0133209DE21B0042Data.endingbalance = UtilSql.getValue(result, "endingbalance");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.emAprmPrintsummary = UtilSql.getValue(result, "em_aprm_printsummary");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.printsummary = UtilSql.getValue(result, "printsummary");
-        objectReconciliationsFF8080813320657F0133209DE21B0042Data.endingbalance = UtilSql.getValue(result, "endingbalance");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.docstatus = UtilSql.getValue(result, "docstatus");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.processing = UtilSql.getValue(result, "processing");
         objectReconciliationsFF8080813320657F0133209DE21B0042Data.processed = UtilSql.getValue(result, "processed");
@@ -320,12 +320,12 @@ Create a registry
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].widget = widget;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].dateto = dateto;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].statementdate = statementdate;
+    objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].printdetailed = printdetailed;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].startingbalance = startingbalance;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].emAprmPrintdetailed = emAprmPrintdetailed;
-    objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].printdetailed = printdetailed;
+    objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].endingbalance = endingbalance;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].emAprmPrintsummary = emAprmPrintsummary;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].printsummary = printsummary;
-    objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].endingbalance = endingbalance;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].docstatus = docstatus;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].processing = processing;
     objectReconciliationsFF8080813320657F0133209DE21B0042Data[0].processed = processed;
@@ -536,7 +536,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Reconciliation" +
-      "        SET AD_Org_ID = (?) , Isactive = (?) , FIN_Financial_Account_ID = (?) , DocumentNo = (?) , C_Doctype_ID = (?) , Widget = (?) , Dateto = TO_DATE(?) , Statementdate = TO_DATE(?) , Startingbalance = TO_NUMBER(?) , EM_APRM_PrintDetailed = (?) , Printdetailed = (?) , EM_APRM_PrintSummary = (?) , Printsummary = (?) , Endingbalance = TO_NUMBER(?) , Docstatus = (?) , Processing = (?) , Processed = (?) , Posted = (?) , EM_APRM_Process_Reconciliation = (?) , EM_Aprm_Process_Rec = (?) , FIN_Reconciliation_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Isactive = (?) , FIN_Financial_Account_ID = (?) , DocumentNo = (?) , C_Doctype_ID = (?) , Widget = (?) , Dateto = TO_DATE(?) , Statementdate = TO_DATE(?) , Printdetailed = (?) , Startingbalance = TO_NUMBER(?) , EM_APRM_PrintDetailed = (?) , Endingbalance = TO_NUMBER(?) , EM_APRM_PrintSummary = (?) , Printsummary = (?) , Docstatus = (?) , Processing = (?) , Processed = (?) , Posted = (?) , EM_APRM_Process_Reconciliation = (?) , EM_Aprm_Process_Rec = (?) , FIN_Reconciliation_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Reconciliation.FIN_Reconciliation_ID = ? " +
       "                 AND FIN_Reconciliation.FIN_Financial_Account_ID = ? " +
       "        AND FIN_Reconciliation.AD_Client_ID IN (";
@@ -562,12 +562,12 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, widget);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, statementdate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, printdetailed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, startingbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmPrintdetailed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, printdetailed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, endingbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmPrintsummary);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, printsummary);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, endingbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
@@ -605,8 +605,8 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Reconciliation " +
-      "        (AD_Org_ID, Isactive, FIN_Financial_Account_ID, DocumentNo, C_Doctype_ID, Widget, Dateto, Statementdate, Startingbalance, EM_APRM_PrintDetailed, Printdetailed, EM_APRM_PrintSummary, Printsummary, Endingbalance, Docstatus, Processing, Processed, Posted, EM_APRM_Process_Reconciliation, EM_Aprm_Process_Rec, FIN_Reconciliation_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, Isactive, FIN_Financial_Account_ID, DocumentNo, C_Doctype_ID, Widget, Dateto, Statementdate, Printdetailed, Startingbalance, EM_APRM_PrintDetailed, Endingbalance, EM_APRM_PrintSummary, Printsummary, Docstatus, Processing, Processed, Posted, EM_APRM_Process_Reconciliation, EM_Aprm_Process_Rec, FIN_Reconciliation_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -622,12 +622,12 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, widget);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, statementdate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, printdetailed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, startingbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmPrintdetailed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, printdetailed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, endingbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmPrintsummary);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, printsummary);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, endingbalance);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
