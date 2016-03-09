@@ -106,9 +106,6 @@ static Logger log4j = Logger.getLogger(ImportBPartnerData.class);
         objectImportBPartnerData.tipoPersona = UtilSql.getValue(result, "em_idt_natural_juridico");
         objectImportBPartnerData.tipoIdentifiacion = UtilSql.getValue(result, "em_idt_tipo_identificacion");
         objectImportBPartnerData.numeroIdentificacion = UtilSql.getValue(result, "taxid");
-        
-        
-        
         objectImportBPartnerData.iBpartnerId = UtilSql.getValue(result, "i_bpartner_id");
         objectImportBPartnerData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
         objectImportBPartnerData.cBpartnerLocationId = UtilSql.getValue(result, "c_bpartner_location_id");

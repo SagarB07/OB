@@ -176,6 +176,8 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         constant = 0;
        // if (log4j.isDebugEnabled())
          // log4j.debug("##########iteration - " + (i + 1) + " - strFields = " + strFields);
+        
+        //Actualiza la tabla cuand esta ya se ingreso los registros base
         try {
           FileImportData.update(con, this, strTable, strFields.toString(), (strTable + "_id = '"+ sequence + "'"));
         } catch (ServletException ex) {

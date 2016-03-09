@@ -30,6 +30,7 @@ import org.openbravo.base.structure.OrganizationEnabled;
 import org.openbravo.base.structure.Traceable;
 import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
+import org.openbravo.model.common.businesspartner.BusinessPartner;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.financialmgmt.calendar.Period;
 /**
@@ -43,6 +44,7 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
     public static final String TABLE_NAME = "Idt_novedad";
     public static final String ENTITY_NAME = "IDT_Imp_Novedades";
     public static final String PROPERTY_ID = "id";
+    public static final String PROPERTY_BPARTNER = "bpartner";
     public static final String PROPERTY_CLIENT = "client";
     public static final String PROPERTY_ORGANIZATION = "organization";
     public static final String PROPERTY_CEDULA = "cedula";
@@ -53,10 +55,17 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_UPDATEDBY = "updatedBy";
     public static final String PROPERTY_TIPOINGRESOEGRESO = "tipoIngresoEgreso";
     public static final String PROPERTY_PERIOD = "period";
+    public static final String PROPERTY_IMPORTERRORMESSAGE = "importErrorMessage";
+    public static final String PROPERTY_IMPORTPROCESSCOMPLETE = "importProcessComplete";
+    public static final String PROPERTY_PROCESSNOW = "processNow";
+    public static final String PROPERTY_PROCESSED = "processed";
     public static final String PROPERTY_VALOR = "valor";
 
     public IdtNovedad() {
         setDefaultValue(PROPERTY_ACTIVE, true);
+        setDefaultValue(PROPERTY_IMPORTPROCESSCOMPLETE, false);
+        setDefaultValue(PROPERTY_PROCESSNOW, false);
+        setDefaultValue(PROPERTY_PROCESSED, false);
     }
 
     @Override
@@ -70,6 +79,14 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setId(String id) {
         set(PROPERTY_ID, id);
+    }
+
+    public BusinessPartner getBpartner() {
+        return (BusinessPartner) get(PROPERTY_BPARTNER);
+    }
+
+    public void setBpartner(BusinessPartner bpartner) {
+        set(PROPERTY_BPARTNER, bpartner);
     }
 
     public Client getClient() {
@@ -150,6 +167,38 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setPeriod(Period period) {
         set(PROPERTY_PERIOD, period);
+    }
+
+    public String getImportErrorMessage() {
+        return (String) get(PROPERTY_IMPORTERRORMESSAGE);
+    }
+
+    public void setImportErrorMessage(String importErrorMessage) {
+        set(PROPERTY_IMPORTERRORMESSAGE, importErrorMessage);
+    }
+
+    public Boolean isImportProcessComplete() {
+        return (Boolean) get(PROPERTY_IMPORTPROCESSCOMPLETE);
+    }
+
+    public void setImportProcessComplete(Boolean importProcessComplete) {
+        set(PROPERTY_IMPORTPROCESSCOMPLETE, importProcessComplete);
+    }
+
+    public Boolean isProcessNow() {
+        return (Boolean) get(PROPERTY_PROCESSNOW);
+    }
+
+    public void setProcessNow(Boolean processNow) {
+        set(PROPERTY_PROCESSNOW, processNow);
+    }
+
+    public Boolean isProcessed() {
+        return (Boolean) get(PROPERTY_PROCESSED);
+    }
+
+    public void setProcessed(Boolean processed) {
+        set(PROPERTY_PROCESSED, processed);
     }
 
     public BigDecimal getValor() {

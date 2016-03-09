@@ -5780,6 +5780,20 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpCommon.ad_process.ImportBPartnerServlet
+      </display-name>
+      <servlet-name>
+        PB42D747927834DBF9788363188CDB1BD
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpCommon.ad_process.ImportBPartnerServlet
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
         com.atrums.depositos.ad_actionbutton.AddTransaction
       </display-name>
       <servlet-name>
