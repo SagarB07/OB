@@ -1,9 +1,6 @@
--- Function: idt_importarnovedad(character varying)
-
--- DROP FUNCTION idt_importarnovedad(character varying);
-
-CREATE OR REPLACE FUNCTION idt_importarnovedad(p_pinstance_id character varying)
-  RETURNS void AS
+ --NO GENERA ROL
+CREATE OR REPLACE FUNCTION i_importarNovedad()
+  RETURNS  Boolean AS
 $BODY$
 DECLARE
 
@@ -23,7 +20,7 @@ VARVALIDADO = FALSE;
 	FOR ITERADOR IN 
 	(
 	select cedula,no_tipo_ingreso_egreso_id, c_period_id, idt_novedad_id
-	from idt_novedad where novprocesada = 'N'
+	from idt_novedad where processed = 'N'
 	
 	)
 		
@@ -58,12 +55,12 @@ VARVALIDADO = FALSE;
 	
 	IF (VAREXIST = 0) THEN 
 		FOR ITERADORVALIDA IN (
-			SELECT DISTINCT ON (C_BPARTNER_ID) C_BPARTNER_ID FROM idt_novedad WHERE novprocesada = 'N'
+			SELECT DISTINCT ON (C_BPARTNER_ID) C_BPARTNER_ID FROM idt_novedad WHERE processed = 'N'
 		)
 	
 		LOOP
 		
-	--	SELECT SUM (VALOR) FROM IDT_NOVEDAD WHERE C_BPARTNER_ID	=ITERADORVALIDA.C_BPARTNER_ID AND novprocesada = 'N';
+	--	SELECT SUM (VALOR) FROM IDT_NOVEDAD WHERE C_BPARTNER_ID	=ITERADORVALIDA.C_BPARTNER_ID AND processed = 'N';
 	
 		SELECT C_PERIOD_ID INTO VAR_PARTNER_ID FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID LIMIT 1;
 		
@@ -74,20 +71,34 @@ VARVALIDADO = FALSE;
 		SELECT C_PERIOD_ID FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID LIMIT 1) ;	
 		
 		UPDATE NO_NOVEDAD_LINEA SET 
-		VALOR = (SELECT SUM (VALOR) FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID AND novprocesada = 'N')
+		VALOR = (SELECT SUM (VALOR) FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID AND processed = 'N')
 		WHERE NO_NOVEDAD_ID = VAR_CABNOVEDAD AND C_BPARTNER_ID = VAR_PARTNER_ID;
 		
-		DELETE FROM IDT_NOVEDAD WHERE C_BPARTNER_ID	= ITERADORVALIDA.C_BPARTNER_ID;
+		UPDATE IDT_NOVEDAD SET processed = 'Y' WHERE C_BPARTNER_ID	= ITERADORVALIDA.C_BPARTNER_ID;
 		
 		
 		END LOOP;
 	
-	end if;
--- 	raise exception '%', '@IDT_VAL_RUBRO@';
+	
+	
+	
+	VARVALIDADO = TRUE;
+	ELSE
+	
+	VARVALIDADO = FALSE;
 
--- -- 	RETURN;
-END ; $BODY$
+	END IF;
+	
+	
+	
+	
+  
+  RETURN VARVALIDADO;
+END;
+
+$BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-ALTER FUNCTION idt_importarnovedad(character varying)
-  OWNER TO postgres;
+
+  
+
