@@ -1,42 +1,59 @@
- --NO GENERA ROL
-CREATE OR REPLACE FUNCTION i_importarNovedad()
-  RETURNS  Boolean AS
-$BODY$
-DECLARE
+    
+/*==============================================================*/
+/* Table: idt_novedad                                       */
+/*==============================================================*/
 
-VAR_CEDULA character varying(32);
-VAREXIST NUMERIC;
-ITERADOR  RECORD;
+create table idt_novedad (
+   idt_novedad_id 		character varying(32) NOT NULL,
+   ad_client_id         character varying(32),   
+   ad_org_id 			character varying(32),
+   cedula				character varying(32),
+   isactive 			character(1) DEFAULT 'Y'::bpchar,
+   created				timestamp without time zone,
+   createdby			character varying(32),
+   updated				timestamp without time zone,
+   updatedby			character varying(32),
+   no_tipo_ingreso_egreso_id		character varying(32),
+   c_period_id			character varying(32),
+   valor numeric(10,2),
+   c_bpartner_id character varying(32),
+  i_errormsg character varying(2000), -- --OBTG:NVARCHAR--
+  i_isimported character(1) DEFAULT 'N'::bpchar,
+  procnovedad character(1),
+  novprocesada character(1) DEFAULT 'N'::bpchar,
+   constraint PK_idt_novedad primary key (idt_novedad_id)
+);
 
-BEGIN
+/*==============================================================*/
+/* Index: idt_novedad                                     */
+/*==============================================================*/
+create unique index idt_novedad_PK on idt_novedad (
+idt_novedad_id
+);
+alter table idt_novedad
+   add constraint IDT_FK_novedad_c_bpartner foreign key (c_bpartner_id)
+      references c_bpartner (c_bpartner_id)
+      on delete restrict on update restrict;
 
-	FOR ITERADOR IN 
-	(
-	select cedula,no_tipo_ingreso_egreso_id, c_period_id, idt_novedad_id
-	from idt_novedad where processed = 'N'
-	
-	)
-		
-	LOOP
-		SELECT COUNT(1) INTO  VAREXIST FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA;
-		
-		IF (VAREXIST = 0) THEN 
-			UPDATE IDT_NOVEDAD SET i_errormsg = 'Error no existe tercero con el numero de cedula' || ITERADOR.cedula
-			WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-		
-		ELSE
-			UPDATE IDT_NOVEDAD SET i_errormsg = NULL, C_BPARTNER_ID = (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA)
-			WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-		
-		END IF;
-	END LOOP;
-  
-  RETURN TRUE;
-END;
 
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
+alter table idt_novedad
+   add constraint IDT_FK_novedad_ad_client foreign key (ad_client_id)
+      references ad_client (ad_client_id)
+      on delete restrict on update restrict;
+	  
+alter table idt_novedad
+   add constraint IDT_FK_novedad_ad_org foreign key (ad_org_id)
+      references ad_org (ad_org_id)
+      on delete restrict on update restrict;	  
 
-  
+alter table idt_novedad
+   add constraint IDT_FK_novedad_c_period foreign key (c_period_id)
+      references c_period (c_period_id)
+      on delete restrict on update restrict;	
+
+alter table idt_novedad
+   add constraint IDT_FK_novedad_t_ing_egr foreign key (no_tipo_ingreso_egreso_id)
+      references no_tipo_ingreso_egreso (no_tipo_ingreso_egreso_id)
+      on delete restrict on update restrict;		  
+
 
