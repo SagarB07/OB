@@ -27,8 +27,8 @@ static Logger log4j = Logger.getLogger(ProductData.class);
   public String managevariants;
   public String adOrgId;
   public String value;
-  public String name;
   public String emReNombreproducto;
+  public String name;
   public String emReCodigoalterno;
   public String emRePartidaarancelaria;
   public String adImageId;
@@ -83,8 +83,8 @@ static Logger log4j = Logger.getLogger(ProductData.class);
   public String ispicklistprintdetails;
   public String isverified;
   public String processing;
-  public String isquantityvariable;
   public String sExpensetypeId;
+  public String isquantityvariable;
   public String sResourceId;
   public String isdeferredrevenue;
   public String isdeferredexpense;
@@ -114,19 +114,19 @@ static Logger log4j = Logger.getLogger(ProductData.class);
   public String updateinvariants;
   public String emAsvProEnvLoc;
   public String stockMin;
-  public String name2;
-  public String ispriceprinted;
-  public String mFreightcategoryId;
-  public String downloadurl;
   public String guaranteedays;
-  public String versionno;
+  public String downloadurl;
+  public String sku;
+  public String mFreightcategoryId;
+  public String name2;
   public String help;
+  public String ispriceprinted;
   public String documentnote;
   public String classification;
-  public String adClientId;
-  public String sku;
-  public String mProductId;
   public String enforceAttribute;
+  public String adClientId;
+  public String versionno;
+  public String mProductId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -158,10 +158,10 @@ static Logger log4j = Logger.getLogger(ProductData.class);
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("value"))
       return value;
-    else if (fieldName.equalsIgnoreCase("name"))
-      return name;
     else if (fieldName.equalsIgnoreCase("em_re_nombreproducto") || fieldName.equals("emReNombreproducto"))
       return emReNombreproducto;
+    else if (fieldName.equalsIgnoreCase("name"))
+      return name;
     else if (fieldName.equalsIgnoreCase("em_re_codigoalterno") || fieldName.equals("emReCodigoalterno"))
       return emReCodigoalterno;
     else if (fieldName.equalsIgnoreCase("em_re_partidaarancelaria") || fieldName.equals("emRePartidaarancelaria"))
@@ -270,10 +270,10 @@ static Logger log4j = Logger.getLogger(ProductData.class);
       return isverified;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
-    else if (fieldName.equalsIgnoreCase("isquantityvariable"))
-      return isquantityvariable;
     else if (fieldName.equalsIgnoreCase("s_expensetype_id") || fieldName.equals("sExpensetypeId"))
       return sExpensetypeId;
+    else if (fieldName.equalsIgnoreCase("isquantityvariable"))
+      return isquantityvariable;
     else if (fieldName.equalsIgnoreCase("s_resource_id") || fieldName.equals("sResourceId"))
       return sResourceId;
     else if (fieldName.equalsIgnoreCase("isdeferredrevenue"))
@@ -332,32 +332,32 @@ static Logger log4j = Logger.getLogger(ProductData.class);
       return emAsvProEnvLoc;
     else if (fieldName.equalsIgnoreCase("stock_min") || fieldName.equals("stockMin"))
       return stockMin;
-    else if (fieldName.equalsIgnoreCase("name2"))
-      return name2;
-    else if (fieldName.equalsIgnoreCase("ispriceprinted"))
-      return ispriceprinted;
-    else if (fieldName.equalsIgnoreCase("m_freightcategory_id") || fieldName.equals("mFreightcategoryId"))
-      return mFreightcategoryId;
-    else if (fieldName.equalsIgnoreCase("downloadurl"))
-      return downloadurl;
     else if (fieldName.equalsIgnoreCase("guaranteedays"))
       return guaranteedays;
-    else if (fieldName.equalsIgnoreCase("versionno"))
-      return versionno;
+    else if (fieldName.equalsIgnoreCase("downloadurl"))
+      return downloadurl;
+    else if (fieldName.equalsIgnoreCase("sku"))
+      return sku;
+    else if (fieldName.equalsIgnoreCase("m_freightcategory_id") || fieldName.equals("mFreightcategoryId"))
+      return mFreightcategoryId;
+    else if (fieldName.equalsIgnoreCase("name2"))
+      return name2;
     else if (fieldName.equalsIgnoreCase("help"))
       return help;
+    else if (fieldName.equalsIgnoreCase("ispriceprinted"))
+      return ispriceprinted;
     else if (fieldName.equalsIgnoreCase("documentnote"))
       return documentnote;
     else if (fieldName.equalsIgnoreCase("classification"))
       return classification;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("sku"))
-      return sku;
-    else if (fieldName.equalsIgnoreCase("m_product_id") || fieldName.equals("mProductId"))
-      return mProductId;
     else if (fieldName.equalsIgnoreCase("enforce_attribute") || fieldName.equals("enforceAttribute"))
       return enforceAttribute;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("versionno"))
+      return versionno;
+    else if (fieldName.equalsIgnoreCase("m_product_id") || fieldName.equals("mProductId"))
+      return mProductId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -400,8 +400,8 @@ Select for edit
       "        M_Product.ManageVariants, " +
       "M_Product.AD_Org_ID, " +
       "M_Product.Value, " +
-      "M_Product.Name, " +
       "M_Product.EM_Re_Nombreproducto, " +
+      "M_Product.Name, " +
       "M_Product.EM_Re_Codigoalterno, " +
       "M_Product.EM_Re_Partidaarancelaria, " +
       "M_Product.AD_Image_ID, " +
@@ -456,8 +456,8 @@ Select for edit
       "COALESCE(M_Product.IsPickListPrintDetails, 'N') AS IsPickListPrintDetails, " +
       "COALESCE(M_Product.IsVerified, 'N') AS IsVerified, " +
       "M_Product.Processing, " +
-      "COALESCE(M_Product.Isquantityvariable, 'N') AS Isquantityvariable, " +
       "M_Product.S_ExpenseType_ID, " +
+      "COALESCE(M_Product.Isquantityvariable, 'N') AS Isquantityvariable, " +
       "M_Product.S_Resource_ID, " +
       "COALESCE(M_Product.Isdeferredrevenue, 'N') AS Isdeferredrevenue, " +
       "COALESCE(M_Product.Isdeferredexpense, 'N') AS Isdeferredexpense, " +
@@ -487,19 +487,19 @@ Select for edit
       "M_Product.Updateinvariants, " +
       "COALESCE(M_Product.EM_Asv_Pro_Env_Loc, 'N') AS EM_Asv_Pro_Env_Loc, " +
       "M_Product.Stock_Min, " +
-      "M_Product.Name2, " +
-      "COALESCE(M_Product.Ispriceprinted, 'N') AS Ispriceprinted, " +
-      "M_Product.M_FreightCategory_ID, " +
-      "M_Product.DownloadURL, " +
       "M_Product.GuaranteeDays, " +
-      "M_Product.VersionNo, " +
+      "M_Product.DownloadURL, " +
+      "M_Product.SKU, " +
+      "M_Product.M_FreightCategory_ID, " +
+      "M_Product.Name2, " +
       "M_Product.Help, " +
+      "COALESCE(M_Product.Ispriceprinted, 'N') AS Ispriceprinted, " +
       "M_Product.DocumentNote, " +
       "M_Product.Classification, " +
-      "M_Product.AD_Client_ID, " +
-      "M_Product.SKU, " +
-      "M_Product.M_Product_ID, " +
       "COALESCE(M_Product.Enforce_Attribute, 'N') AS Enforce_Attribute, " +
+      "M_Product.AD_Client_ID, " +
+      "M_Product.VersionNo, " +
+      "M_Product.M_Product_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Product left join (select C_UOM_ID, Name from C_UOM) table1 on (M_Product.C_UOM_ID = table1.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL1 on (table1.C_UOM_ID = tableTRL1.C_UOM_ID and tableTRL1.AD_Language = ?)  left join (select M_Product_Category_ID, Name from M_Product_Category) table3 on (M_Product.M_Product_Category_ID = table3.M_Product_Category_ID) left join (select M_Product_Category_ID,AD_Language, Name from M_Product_Category_TRL) tableTRL3 on (table3.M_Product_Category_ID = tableTRL3.M_Product_Category_ID and tableTRL3.AD_Language = ?)  left join (select NO_Area_Empresa_ID, Nombre from no_area_empresa) table5 on (M_Product.em_asv_area_empresa_id =  table5.NO_Area_Empresa_ID) left join (select C_TaxCategory_ID, Name from C_TaxCategory) table6 on (M_Product.C_TaxCategory_ID = table6.C_TaxCategory_ID) left join (select C_TaxCategory_ID,AD_Language, Name from C_TaxCategory_TRL) tableTRL6 on (table6.C_TaxCategory_ID = tableTRL6.C_TaxCategory_ID and tableTRL6.AD_Language = ?)  left join (select M_Product_ID, Name from M_Product) table8 on (M_Product.Generic_Product_ID =  table8.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL8 on (table8.M_Product_ID = tableTRL8.M_Product_ID and tableTRL8.AD_Language = ?)  left join ad_ref_list_v list1 on (M_Product.ProductType = list1.value and list1.ad_reference_id = '270' and list1.ad_language = ?)  left join (select C_UOM_ID, Name from C_UOM) table10 on (M_Product.C_Uom_Weight_ID =  table10.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL10 on (table10.C_UOM_ID = tableTRL10.C_UOM_ID and tableTRL10.AD_Language = ?)  left join ad_ref_list_v list2 on (M_Product.Costtype = list2.value and list2.ad_reference_id = '800025' and list2.ad_language = ?)  left join (select M_Brand_ID, Name from M_Brand) table12 on (M_Product.M_Brand_ID = table12.M_Brand_ID) left join (select MA_Processplan_ID, Name from MA_Processplan) table13 on (M_Product.MA_Processplan_ID = table13.MA_Processplan_ID) left join ad_ref_list_v list3 on (M_Product.Revplantype = list3.value and list3.ad_reference_id = '73625A8F22EF4CD7808603156BA606D7' and list3.ad_language = ?)  left join ad_ref_list_v list4 on (M_Product.DefaultPeriod = list4.value and list4.ad_reference_id = '6669508E338F4A10BA3E0D241D133E62' and list4.ad_language = ?)  left join ad_ref_list_v list5 on (M_Product.Expplantype = list5.value and list5.ad_reference_id = '73625A8F22EF4CD7808603156BA606D7' and list5.ad_language = ?)  left join ad_ref_list_v list6 on (M_Product.DefaultPeriod_Exp = list6.value and list6.ad_reference_id = '6669508E338F4A10BA3E0D241D133E62' and list6.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -561,8 +561,8 @@ Select for edit
         objectProductData.managevariants = UtilSql.getValue(result, "managevariants");
         objectProductData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectProductData.value = UtilSql.getValue(result, "value");
-        objectProductData.name = UtilSql.getValue(result, "name");
         objectProductData.emReNombreproducto = UtilSql.getValue(result, "em_re_nombreproducto");
+        objectProductData.name = UtilSql.getValue(result, "name");
         objectProductData.emReCodigoalterno = UtilSql.getValue(result, "em_re_codigoalterno");
         objectProductData.emRePartidaarancelaria = UtilSql.getValue(result, "em_re_partidaarancelaria");
         objectProductData.adImageId = UtilSql.getValue(result, "ad_image_id");
@@ -617,8 +617,8 @@ Select for edit
         objectProductData.ispicklistprintdetails = UtilSql.getValue(result, "ispicklistprintdetails");
         objectProductData.isverified = UtilSql.getValue(result, "isverified");
         objectProductData.processing = UtilSql.getValue(result, "processing");
-        objectProductData.isquantityvariable = UtilSql.getValue(result, "isquantityvariable");
         objectProductData.sExpensetypeId = UtilSql.getValue(result, "s_expensetype_id");
+        objectProductData.isquantityvariable = UtilSql.getValue(result, "isquantityvariable");
         objectProductData.sResourceId = UtilSql.getValue(result, "s_resource_id");
         objectProductData.isdeferredrevenue = UtilSql.getValue(result, "isdeferredrevenue");
         objectProductData.isdeferredexpense = UtilSql.getValue(result, "isdeferredexpense");
@@ -648,19 +648,19 @@ Select for edit
         objectProductData.updateinvariants = UtilSql.getValue(result, "updateinvariants");
         objectProductData.emAsvProEnvLoc = UtilSql.getValue(result, "em_asv_pro_env_loc");
         objectProductData.stockMin = UtilSql.getValue(result, "stock_min");
-        objectProductData.name2 = UtilSql.getValue(result, "name2");
-        objectProductData.ispriceprinted = UtilSql.getValue(result, "ispriceprinted");
-        objectProductData.mFreightcategoryId = UtilSql.getValue(result, "m_freightcategory_id");
-        objectProductData.downloadurl = UtilSql.getValue(result, "downloadurl");
         objectProductData.guaranteedays = UtilSql.getValue(result, "guaranteedays");
-        objectProductData.versionno = UtilSql.getValue(result, "versionno");
+        objectProductData.downloadurl = UtilSql.getValue(result, "downloadurl");
+        objectProductData.sku = UtilSql.getValue(result, "sku");
+        objectProductData.mFreightcategoryId = UtilSql.getValue(result, "m_freightcategory_id");
+        objectProductData.name2 = UtilSql.getValue(result, "name2");
         objectProductData.help = UtilSql.getValue(result, "help");
+        objectProductData.ispriceprinted = UtilSql.getValue(result, "ispriceprinted");
         objectProductData.documentnote = UtilSql.getValue(result, "documentnote");
         objectProductData.classification = UtilSql.getValue(result, "classification");
-        objectProductData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectProductData.sku = UtilSql.getValue(result, "sku");
-        objectProductData.mProductId = UtilSql.getValue(result, "m_product_id");
         objectProductData.enforceAttribute = UtilSql.getValue(result, "enforce_attribute");
+        objectProductData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectProductData.versionno = UtilSql.getValue(result, "versionno");
+        objectProductData.mProductId = UtilSql.getValue(result, "m_product_id");
         objectProductData.language = UtilSql.getValue(result, "language");
         objectProductData.adUserClient = "";
         objectProductData.adOrgClient = "";
@@ -714,8 +714,8 @@ Select for relation
       "        M_Product.ManageVariants, " +
       "M_Product.AD_Org_ID, " +
       "M_Product.Value, " +
-      "M_Product.Name, " +
       "M_Product.EM_Re_Nombreproducto, " +
+      "M_Product.Name, " +
       "M_Product.EM_Re_Codigoalterno, " +
       "M_Product.EM_Re_Partidaarancelaria, " +
       "M_Product.AD_Image_ID, " +
@@ -770,8 +770,8 @@ Select for relation
       "COALESCE(M_Product.IsPickListPrintDetails, 'N') AS IsPickListPrintDetails, " +
       "COALESCE(M_Product.IsVerified, 'N') AS IsVerified, " +
       "M_Product.Processing, " +
-      "COALESCE(M_Product.Isquantityvariable, 'N') AS Isquantityvariable, " +
       "M_Product.S_ExpenseType_ID, " +
+      "COALESCE(M_Product.Isquantityvariable, 'N') AS Isquantityvariable, " +
       "M_Product.S_Resource_ID, " +
       "COALESCE(M_Product.Isdeferredrevenue, 'N') AS Isdeferredrevenue, " +
       "COALESCE(M_Product.Isdeferredexpense, 'N') AS Isdeferredexpense, " +
@@ -801,19 +801,19 @@ Select for relation
       "M_Product.Updateinvariants, " +
       "COALESCE(M_Product.EM_Asv_Pro_Env_Loc, 'N') AS EM_Asv_Pro_Env_Loc, " +
       "M_Product.Stock_Min, " +
-      "M_Product.Name2, " +
-      "COALESCE(M_Product.Ispriceprinted, 'N') AS Ispriceprinted, " +
-      "M_Product.M_FreightCategory_ID, " +
-      "M_Product.DownloadURL, " +
       "M_Product.GuaranteeDays, " +
-      "M_Product.VersionNo, " +
+      "M_Product.DownloadURL, " +
+      "M_Product.SKU, " +
+      "M_Product.M_FreightCategory_ID, " +
+      "M_Product.Name2, " +
       "M_Product.Help, " +
+      "COALESCE(M_Product.Ispriceprinted, 'N') AS Ispriceprinted, " +
       "M_Product.DocumentNote, " +
       "M_Product.Classification, " +
-      "M_Product.AD_Client_ID, " +
-      "M_Product.SKU, " +
-      "M_Product.M_Product_ID, " +
       "COALESCE(M_Product.Enforce_Attribute, 'N') AS Enforce_Attribute, " +
+      "M_Product.AD_Client_ID, " +
+      "M_Product.VersionNo, " +
+      "M_Product.M_Product_ID, " +
       "        '' AS TR_BGCOLOR, '' as total_count," +
       "        ? AS LANGUAGE, '' AS AD_USER_CLIENT, '' AS AD_ORG_CLIENT" +
       "        FROM M_Product left join (select C_UOM_ID, Name from C_UOM) table1 on (M_Product.C_UOM_ID = table1.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL1 on (table1.C_UOM_ID = tableTRL1.C_UOM_ID and tableTRL1.AD_Language = ?)  left join (select M_Product_Category_ID, Name from M_Product_Category) table3 on (M_Product.M_Product_Category_ID = table3.M_Product_Category_ID) left join (select M_Product_Category_ID,AD_Language, Name from M_Product_Category_TRL) tableTRL3 on (table3.M_Product_Category_ID = tableTRL3.M_Product_Category_ID and tableTRL3.AD_Language = ?)  left join (select NO_Area_Empresa_ID, Nombre from no_area_empresa) table5 on (M_Product.em_asv_area_empresa_id =  table5.NO_Area_Empresa_ID) left join (select C_TaxCategory_ID, Name from C_TaxCategory) table6 on (M_Product.C_TaxCategory_ID = table6.C_TaxCategory_ID) left join (select C_TaxCategory_ID,AD_Language, Name from C_TaxCategory_TRL) tableTRL6 on (table6.C_TaxCategory_ID = tableTRL6.C_TaxCategory_ID and tableTRL6.AD_Language = ?)  left join (select M_Product_ID, Name from M_Product) table8 on (M_Product.Generic_Product_ID =  table8.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL8 on (table8.M_Product_ID = tableTRL8.M_Product_ID and tableTRL8.AD_Language = ?)  left join ad_ref_list_v list1 on (M_Product.ProductType = list1.value and list1.ad_reference_id = '270' and list1.ad_language = ?)  left join (select C_UOM_ID, Name from C_UOM) table10 on (M_Product.C_Uom_Weight_ID =  table10.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL10 on (table10.C_UOM_ID = tableTRL10.C_UOM_ID and tableTRL10.AD_Language = ?)  left join ad_ref_list_v list2 on (M_Product.Costtype = list2.value and list2.ad_reference_id = '800025' and list2.ad_language = ?)  left join (select M_Brand_ID, Name from M_Brand) table12 on (M_Product.M_Brand_ID = table12.M_Brand_ID) left join (select MA_Processplan_ID, Name from MA_Processplan) table13 on (M_Product.MA_Processplan_ID = table13.MA_Processplan_ID) left join ad_ref_list_v list3 on (M_Product.Revplantype = list3.value and list3.ad_reference_id = '73625A8F22EF4CD7808603156BA606D7' and list3.ad_language = ?)  left join ad_ref_list_v list4 on (M_Product.DefaultPeriod = list4.value and list4.ad_reference_id = '6669508E338F4A10BA3E0D241D133E62' and list4.ad_language = ?)  left join ad_ref_list_v list5 on (M_Product.Expplantype = list5.value and list5.ad_reference_id = '73625A8F22EF4CD7808603156BA606D7' and list5.ad_language = ?)  left join ad_ref_list_v list6 on (M_Product.DefaultPeriod_Exp = list6.value and list6.ad_reference_id = '6669508E338F4A10BA3E0D241D133E62' and list6.ad_language = ?) " +
@@ -907,8 +907,8 @@ Select for relation
         objectProductData.managevariants = UtilSql.getValue(result, "managevariants");
         objectProductData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectProductData.value = UtilSql.getValue(result, "value");
-        objectProductData.name = UtilSql.getValue(result, "name");
         objectProductData.emReNombreproducto = UtilSql.getValue(result, "em_re_nombreproducto");
+        objectProductData.name = UtilSql.getValue(result, "name");
         objectProductData.emReCodigoalterno = UtilSql.getValue(result, "em_re_codigoalterno");
         objectProductData.emRePartidaarancelaria = UtilSql.getValue(result, "em_re_partidaarancelaria");
         objectProductData.adImageId = UtilSql.getValue(result, "ad_image_id");
@@ -963,8 +963,8 @@ Select for relation
         objectProductData.ispicklistprintdetails = UtilSql.getValue(result, "ispicklistprintdetails");
         objectProductData.isverified = UtilSql.getValue(result, "isverified");
         objectProductData.processing = UtilSql.getValue(result, "processing");
-        objectProductData.isquantityvariable = UtilSql.getValue(result, "isquantityvariable");
         objectProductData.sExpensetypeId = UtilSql.getValue(result, "s_expensetype_id");
+        objectProductData.isquantityvariable = UtilSql.getValue(result, "isquantityvariable");
         objectProductData.sResourceId = UtilSql.getValue(result, "s_resource_id");
         objectProductData.isdeferredrevenue = UtilSql.getValue(result, "isdeferredrevenue");
         objectProductData.isdeferredexpense = UtilSql.getValue(result, "isdeferredexpense");
@@ -994,19 +994,19 @@ Select for relation
         objectProductData.updateinvariants = UtilSql.getValue(result, "updateinvariants");
         objectProductData.emAsvProEnvLoc = UtilSql.getValue(result, "em_asv_pro_env_loc");
         objectProductData.stockMin = UtilSql.getValue(result, "stock_min");
-        objectProductData.name2 = UtilSql.getValue(result, "name2");
-        objectProductData.ispriceprinted = UtilSql.getValue(result, "ispriceprinted");
-        objectProductData.mFreightcategoryId = UtilSql.getValue(result, "m_freightcategory_id");
-        objectProductData.downloadurl = UtilSql.getValue(result, "downloadurl");
         objectProductData.guaranteedays = UtilSql.getValue(result, "guaranteedays");
-        objectProductData.versionno = UtilSql.getValue(result, "versionno");
+        objectProductData.downloadurl = UtilSql.getValue(result, "downloadurl");
+        objectProductData.sku = UtilSql.getValue(result, "sku");
+        objectProductData.mFreightcategoryId = UtilSql.getValue(result, "m_freightcategory_id");
+        objectProductData.name2 = UtilSql.getValue(result, "name2");
         objectProductData.help = UtilSql.getValue(result, "help");
+        objectProductData.ispriceprinted = UtilSql.getValue(result, "ispriceprinted");
         objectProductData.documentnote = UtilSql.getValue(result, "documentnote");
         objectProductData.classification = UtilSql.getValue(result, "classification");
-        objectProductData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectProductData.sku = UtilSql.getValue(result, "sku");
-        objectProductData.mProductId = UtilSql.getValue(result, "m_product_id");
         objectProductData.enforceAttribute = UtilSql.getValue(result, "enforce_attribute");
+        objectProductData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectProductData.versionno = UtilSql.getValue(result, "versionno");
+        objectProductData.mProductId = UtilSql.getValue(result, "m_product_id");
         objectProductData.trBgcolor = UtilSql.getValue(result, "tr_bgcolor");
         objectProductData.totalCount = UtilSql.getValue(result, "total_count");
         objectProductData.language = UtilSql.getValue(result, "language");
@@ -1052,8 +1052,8 @@ Create a registry
     objectProductData[0].managevariants = managevariants;
     objectProductData[0].adOrgId = adOrgId;
     objectProductData[0].value = value;
-    objectProductData[0].name = name;
     objectProductData[0].emReNombreproducto = emReNombreproducto;
+    objectProductData[0].name = name;
     objectProductData[0].emReCodigoalterno = emReCodigoalterno;
     objectProductData[0].emRePartidaarancelaria = emRePartidaarancelaria;
     objectProductData[0].adImageId = adImageId;
@@ -1108,8 +1108,8 @@ Create a registry
     objectProductData[0].ispicklistprintdetails = ispicklistprintdetails;
     objectProductData[0].isverified = isverified;
     objectProductData[0].processing = processing;
-    objectProductData[0].isquantityvariable = isquantityvariable;
     objectProductData[0].sExpensetypeId = sExpensetypeId;
+    objectProductData[0].isquantityvariable = isquantityvariable;
     objectProductData[0].sResourceId = sResourceId;
     objectProductData[0].isdeferredrevenue = isdeferredrevenue;
     objectProductData[0].isdeferredexpense = isdeferredexpense;
@@ -1139,19 +1139,19 @@ Create a registry
     objectProductData[0].updateinvariants = updateinvariants;
     objectProductData[0].emAsvProEnvLoc = emAsvProEnvLoc;
     objectProductData[0].stockMin = stockMin;
-    objectProductData[0].name2 = name2;
-    objectProductData[0].ispriceprinted = ispriceprinted;
-    objectProductData[0].mFreightcategoryId = mFreightcategoryId;
-    objectProductData[0].downloadurl = downloadurl;
     objectProductData[0].guaranteedays = guaranteedays;
-    objectProductData[0].versionno = versionno;
+    objectProductData[0].downloadurl = downloadurl;
+    objectProductData[0].sku = sku;
+    objectProductData[0].mFreightcategoryId = mFreightcategoryId;
+    objectProductData[0].name2 = name2;
     objectProductData[0].help = help;
+    objectProductData[0].ispriceprinted = ispriceprinted;
     objectProductData[0].documentnote = documentnote;
     objectProductData[0].classification = classification;
-    objectProductData[0].adClientId = adClientId;
-    objectProductData[0].sku = sku;
-    objectProductData[0].mProductId = mProductId;
     objectProductData[0].enforceAttribute = enforceAttribute;
+    objectProductData[0].adClientId = adClientId;
+    objectProductData[0].versionno = versionno;
+    objectProductData[0].mProductId = mProductId;
     objectProductData[0].trBgcolor = "";
     objectProductData[0].totalCount = "";
     objectProductData[0].language = "";
@@ -1354,7 +1354,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Product" +
-      "        SET ManageVariants = (?) , AD_Org_ID = (?) , Value = (?) , Name = (?) , EM_Re_Nombreproducto = (?) , EM_Re_Codigoalterno = (?) , EM_Re_Partidaarancelaria = (?) , AD_Image_ID = (?) , C_UOM_ID = (?) , M_Product_Category_ID = (?) , em_asv_area_empresa_id = (?) , C_TaxCategory_ID = (?) , IsGeneric = (?) , IsPurchased = (?) , IsSold = (?) , Generic_Product_ID = (?) , Description = (?) , ProductType = (?) , IsStocked = (?) , Weight = TO_NUMBER(?) , C_Uom_Weight_ID = (?) , Costtype = (?) , Coststd = TO_NUMBER(?) , M_AttributeSet_ID = (?) , Attrsetvaluetype = (?) , M_AttributeSetInstance_ID = (?) , IsActive = (?) , UPC = (?) , M_Brand_ID = (?) , SalesRep_ID = (?) , C_BPartner_ID = (?) , ImageURL = (?) , DescriptionURL = (?) , Production = (?) , MA_Processplan_ID = (?) , IsSummary = (?) , M_Locator_ID = (?) , Volume = TO_NUMBER(?) , ShelfWidth = TO_NUMBER(?) , ShelfHeight = TO_NUMBER(?) , ShelfDepth = TO_NUMBER(?) , UnitsPerPallet = TO_NUMBER(?) , Discontinued = (?) , DiscontinuedBy = TO_DATE(?) , IsBOM = (?) , IsInvoicePrintDetails = (?) , IsPickListPrintDetails = (?) , IsVerified = (?) , Processing = (?) , Isquantityvariable = (?) , S_ExpenseType_ID = (?) , S_Resource_ID = (?) , Isdeferredrevenue = (?) , Isdeferredexpense = (?) , Bookusingpoprice = (?) , Characteristic_Desc = (?) , Revplantype = (?) , Periodnumber = TO_NUMBER(?) , DefaultPeriod = (?) , Expplantype = (?) , Periodnumber_Exp = TO_NUMBER(?) , DefaultPeriod_Exp = (?) , Calculated = (?) , Capacity = TO_NUMBER(?) , Delaymin = TO_NUMBER(?) , MRP_Planner_ID = (?) , MRP_Planningmethod_ID = (?) , Qtymax = TO_NUMBER(?) , Qtymin = TO_NUMBER(?) , Qtystd = TO_NUMBER(?) , Qtytype = (?) , Stockmin = TO_NUMBER(?) , CreateVariants = (?) , Updateinvariants = (?) , EM_Asv_Pro_Env_Loc = (?) , Stock_Min = TO_NUMBER(?) , Name2 = (?) , Ispriceprinted = (?) , M_FreightCategory_ID = (?) , DownloadURL = (?) , GuaranteeDays = TO_NUMBER(?) , VersionNo = (?) , Help = (?) , DocumentNote = (?) , Classification = (?) , AD_Client_ID = (?) , SKU = (?) , M_Product_ID = (?) , Enforce_Attribute = (?) , updated = now(), updatedby = ? " +
+      "        SET ManageVariants = (?) , AD_Org_ID = (?) , Value = (?) , EM_Re_Nombreproducto = (?) , Name = (?) , EM_Re_Codigoalterno = (?) , EM_Re_Partidaarancelaria = (?) , AD_Image_ID = (?) , C_UOM_ID = (?) , M_Product_Category_ID = (?) , em_asv_area_empresa_id = (?) , C_TaxCategory_ID = (?) , IsGeneric = (?) , IsPurchased = (?) , IsSold = (?) , Generic_Product_ID = (?) , Description = (?) , ProductType = (?) , IsStocked = (?) , Weight = TO_NUMBER(?) , C_Uom_Weight_ID = (?) , Costtype = (?) , Coststd = TO_NUMBER(?) , M_AttributeSet_ID = (?) , Attrsetvaluetype = (?) , M_AttributeSetInstance_ID = (?) , IsActive = (?) , UPC = (?) , M_Brand_ID = (?) , SalesRep_ID = (?) , C_BPartner_ID = (?) , ImageURL = (?) , DescriptionURL = (?) , Production = (?) , MA_Processplan_ID = (?) , IsSummary = (?) , M_Locator_ID = (?) , Volume = TO_NUMBER(?) , ShelfWidth = TO_NUMBER(?) , ShelfHeight = TO_NUMBER(?) , ShelfDepth = TO_NUMBER(?) , UnitsPerPallet = TO_NUMBER(?) , Discontinued = (?) , DiscontinuedBy = TO_DATE(?) , IsBOM = (?) , IsInvoicePrintDetails = (?) , IsPickListPrintDetails = (?) , IsVerified = (?) , Processing = (?) , S_ExpenseType_ID = (?) , Isquantityvariable = (?) , S_Resource_ID = (?) , Isdeferredrevenue = (?) , Isdeferredexpense = (?) , Bookusingpoprice = (?) , Characteristic_Desc = (?) , Revplantype = (?) , Periodnumber = TO_NUMBER(?) , DefaultPeriod = (?) , Expplantype = (?) , Periodnumber_Exp = TO_NUMBER(?) , DefaultPeriod_Exp = (?) , Calculated = (?) , Capacity = TO_NUMBER(?) , Delaymin = TO_NUMBER(?) , MRP_Planner_ID = (?) , MRP_Planningmethod_ID = (?) , Qtymax = TO_NUMBER(?) , Qtymin = TO_NUMBER(?) , Qtystd = TO_NUMBER(?) , Qtytype = (?) , Stockmin = TO_NUMBER(?) , CreateVariants = (?) , Updateinvariants = (?) , EM_Asv_Pro_Env_Loc = (?) , Stock_Min = TO_NUMBER(?) , GuaranteeDays = TO_NUMBER(?) , DownloadURL = (?) , SKU = (?) , M_FreightCategory_ID = (?) , Name2 = (?) , Help = (?) , Ispriceprinted = (?) , DocumentNote = (?) , Classification = (?) , Enforce_Attribute = (?) , AD_Client_ID = (?) , VersionNo = (?) , M_Product_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Product.M_Product_ID = ? " +
       "        AND M_Product.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -1374,8 +1374,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, managevariants);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, value);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReNombreproducto);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReCodigoalterno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emRePartidaarancelaria);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
@@ -1420,8 +1420,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, ispicklistprintdetails);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isverified);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isquantityvariable);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sExpensetypeId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isquantityvariable);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sResourceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdeferredrevenue);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdeferredexpense);
@@ -1447,19 +1447,19 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updateinvariants);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAsvProEnvLoc);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, stockMin);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name2);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, ispriceprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mFreightcategoryId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, downloadurl);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, guaranteedays);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, versionno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, downloadurl);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, sku);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mFreightcategoryId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name2);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, help);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, ispriceprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentnote);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, classification);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, sku);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, enforceAttribute);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, versionno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -1488,8 +1488,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Product " +
-      "        (ManageVariants, AD_Org_ID, Value, Name, EM_Re_Nombreproducto, EM_Re_Codigoalterno, EM_Re_Partidaarancelaria, AD_Image_ID, C_UOM_ID, M_Product_Category_ID, em_asv_area_empresa_id, C_TaxCategory_ID, IsGeneric, IsPurchased, IsSold, Generic_Product_ID, Description, ProductType, IsStocked, Weight, C_Uom_Weight_ID, Costtype, Coststd, M_AttributeSet_ID, Attrsetvaluetype, M_AttributeSetInstance_ID, IsActive, UPC, M_Brand_ID, SalesRep_ID, C_BPartner_ID, ImageURL, DescriptionURL, Production, MA_Processplan_ID, IsSummary, M_Locator_ID, Volume, ShelfWidth, ShelfHeight, ShelfDepth, UnitsPerPallet, Discontinued, DiscontinuedBy, IsBOM, IsInvoicePrintDetails, IsPickListPrintDetails, IsVerified, Processing, Isquantityvariable, S_ExpenseType_ID, S_Resource_ID, Isdeferredrevenue, Isdeferredexpense, Bookusingpoprice, Characteristic_Desc, Revplantype, Periodnumber, DefaultPeriod, Expplantype, Periodnumber_Exp, DefaultPeriod_Exp, Calculated, Capacity, Delaymin, MRP_Planner_ID, MRP_Planningmethod_ID, Qtymax, Qtymin, Qtystd, Qtytype, Stockmin, CreateVariants, Updateinvariants, EM_Asv_Pro_Env_Loc, Stock_Min, Name2, Ispriceprinted, M_FreightCategory_ID, DownloadURL, GuaranteeDays, VersionNo, Help, DocumentNote, Classification, AD_Client_ID, SKU, M_Product_ID, Enforce_Attribute, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (ManageVariants, AD_Org_ID, Value, EM_Re_Nombreproducto, Name, EM_Re_Codigoalterno, EM_Re_Partidaarancelaria, AD_Image_ID, C_UOM_ID, M_Product_Category_ID, em_asv_area_empresa_id, C_TaxCategory_ID, IsGeneric, IsPurchased, IsSold, Generic_Product_ID, Description, ProductType, IsStocked, Weight, C_Uom_Weight_ID, Costtype, Coststd, M_AttributeSet_ID, Attrsetvaluetype, M_AttributeSetInstance_ID, IsActive, UPC, M_Brand_ID, SalesRep_ID, C_BPartner_ID, ImageURL, DescriptionURL, Production, MA_Processplan_ID, IsSummary, M_Locator_ID, Volume, ShelfWidth, ShelfHeight, ShelfDepth, UnitsPerPallet, Discontinued, DiscontinuedBy, IsBOM, IsInvoicePrintDetails, IsPickListPrintDetails, IsVerified, Processing, S_ExpenseType_ID, Isquantityvariable, S_Resource_ID, Isdeferredrevenue, Isdeferredexpense, Bookusingpoprice, Characteristic_Desc, Revplantype, Periodnumber, DefaultPeriod, Expplantype, Periodnumber_Exp, DefaultPeriod_Exp, Calculated, Capacity, Delaymin, MRP_Planner_ID, MRP_Planningmethod_ID, Qtymax, Qtymin, Qtystd, Qtytype, Stockmin, CreateVariants, Updateinvariants, EM_Asv_Pro_Env_Loc, Stock_Min, GuaranteeDays, DownloadURL, SKU, M_FreightCategory_ID, Name2, Help, Ispriceprinted, DocumentNote, Classification, Enforce_Attribute, AD_Client_ID, VersionNo, M_Product_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1500,8 +1500,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, managevariants);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, value);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReNombreproducto);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReCodigoalterno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emRePartidaarancelaria);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
@@ -1546,8 +1546,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, ispicklistprintdetails);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isverified);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isquantityvariable);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sExpensetypeId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isquantityvariable);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sResourceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdeferredrevenue);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdeferredexpense);
@@ -1573,19 +1573,19 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updateinvariants);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAsvProEnvLoc);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, stockMin);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name2);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, ispriceprinted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mFreightcategoryId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, downloadurl);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, guaranteedays);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, versionno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, downloadurl);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, sku);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mFreightcategoryId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name2);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, help);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, ispriceprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentnote);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, classification);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, sku);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, enforceAttribute);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, versionno);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

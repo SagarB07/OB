@@ -220,7 +220,6 @@ public class Invoice extends BaseOBObject implements Traceable, ClientEnabled, O
         setDefaultValue(PROPERTY_CALCULATEPROMOTIONS, false);
         setDefaultValue(PROPERTY_APRMPROCESSINVOICE, "CO");
         setDefaultValue(PROPERTY_CASHVAT, false);
-        setDefaultValue(PROPERTY_COCODSUSTENTO, "06");
         setDefaultValue(PROPERTY_ATECFEDOCSTATUS, "PD");
         setDefaultValue(PROPERTY_CORISE, false);
         setDefaultValue(PROPERTY_ATECFEDOCACTION, "PR");

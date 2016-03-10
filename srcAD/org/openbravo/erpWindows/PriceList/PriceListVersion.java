@@ -491,7 +491,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "DeleteOld", st
     PriceListVersionData data = new PriceListVersionData();
     ServletException ex = null;
     try {
-    data.name = vars.getRequiredStringParameter("inpname");     data.validfrom = vars.getRequiredStringParameter("inpvalidfrom");     data.mDiscountschemaId = vars.getRequiredStringParameter("inpmDiscountschemaId");     data.mDiscountschemaIdr = vars.getStringParameter("inpmDiscountschemaId_R");     data.mPricelistVersionBaseId = vars.getStringParameter("inpmPricelistVersionBaseId");     data.mPricelistVersionBaseIdr = vars.getStringParameter("inpmPricelistVersionBaseId_R");     data.description = vars.getStringParameter("inpdescription");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.proccreate = vars.getStringParameter("inpproccreate");     data.mPricelistVersionGenerate = vars.getRequiredStringParameter("inpmPricelistVersionGenerate");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.mPricelistVersionId = vars.getRequestGlobalVariable("inpmPricelistVersionId", windowId + "|M_PriceList_Version_ID");     data.mPricelistId = vars.getRequiredStringParameter("inpmPricelistId");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID"); 
+    data.name = vars.getRequiredStringParameter("inpname");     data.validfrom = vars.getRequiredStringParameter("inpvalidfrom");     data.mDiscountschemaId = vars.getRequiredStringParameter("inpmDiscountschemaId");     data.mDiscountschemaIdr = vars.getStringParameter("inpmDiscountschemaId_R");     data.mPricelistVersionBaseId = vars.getStringParameter("inpmPricelistVersionBaseId");     data.mPricelistVersionBaseIdr = vars.getStringParameter("inpmPricelistVersionBaseId_R");     data.description = vars.getStringParameter("inpdescription");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.proccreate = vars.getStringParameter("inpproccreate");     data.mPricelistVersionGenerate = vars.getRequiredStringParameter("inpmPricelistVersionGenerate");     data.mPricelistVersionId = vars.getRequestGlobalVariable("inpmPricelistVersionId", windowId + "|M_PriceList_Version_ID");     data.mPricelistId = vars.getRequiredStringParameter("inpmPricelistId");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -523,7 +523,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "DeleteOld", st
       
       PriceListData[] data = PriceListData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPM_PriceList_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|IsSOPriceList", data[0].issopricelist);    vars.setSessionValue(windowId + "|Costbased", data[0].costbased);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].mPricelistId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|IsSOPriceList", data[0].issopricelist);    vars.setSessionValue(windowId + "|Costbased", data[0].costbased);    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].mPricelistId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
       vars.setSessionValue(windowId + "|M_PriceList_ID", strPM_PriceList_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -542,7 +542,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "DeleteOld", st
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|M_PriceList_Version_ID", data[0].getField("mPricelistVersionId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_PriceList_Version_ID", data[0].getField("mPricelistVersionId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPM_PriceList_ID) throws IOException,ServletException {

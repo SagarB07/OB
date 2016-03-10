@@ -21,10 +21,10 @@ M_Production.Validating,
 COALESCE(M_Production.Processed, 'N') AS Processed, 
 M_Production.Posted, 
 list1.name as Posted_BTN, 
-M_Production.AD_Client_ID, 
-COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, 
 M_Production.M_Production_ID, 
+COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, 
 COALESCE(M_Production.IsActive, 'N') AS IsActive, 
+M_Production.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM M_Production left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Production.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Production.Posted = TO_CHAR(list1.value))
@@ -97,13 +97,13 @@ COALESCE(M_Production.IsActive, 'N') AS IsActive,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Production
-        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Starttime = TO_TIMESTAMP(?,'HH24:MI:SS') , Endtime = TO_TIMESTAMP(?,'HH24:MI:SS') , DocumentNo = (?) , Validating = (?) , Processed = (?) , Posted = (?) , AD_Client_ID = (?) , IsSOTrx = (?) , M_Production_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Starttime = TO_TIMESTAMP(?,'HH24:MI:SS') , Endtime = TO_TIMESTAMP(?,'HH24:MI:SS') , DocumentNo = (?) , Validating = (?) , Processed = (?) , Posted = (?) , M_Production_ID = (?) , IsSOTrx = (?) , IsActive = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE M_Production.M_Production_ID = ? 
         
         AND M_Production.AD_Client_ID IN ('1') 
         AND M_Production.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="starttime"></Parameter> <Parameter name="endtime"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="validating"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="isactive"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="starttime"></Parameter> <Parameter name="endtime"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="validating"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mProductionId"></Parameter>
     
@@ -115,10 +115,10 @@ COALESCE(M_Production.IsActive, 'N') AS IsActive,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Production 
-        (AD_Org_ID, MovementDate, Starttime, Endtime, DocumentNo, Validating, Processed, Posted, AD_Client_ID, IsSOTrx, M_Production_ID, IsActive, created, createdby, updated, updatedBy)
+        (AD_Org_ID, MovementDate, Starttime, Endtime, DocumentNo, Validating, Processed, Posted, M_Production_ID, IsSOTrx, IsActive, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), TO_DATE(?), TO_TIMESTAMP(?, 'HH24:MI:SS'), TO_TIMESTAMP(?, 'HH24:MI:SS'), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="starttime"></Parameter> <Parameter name="endtime"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="validating"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="isactive"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="starttime"></Parameter> <Parameter name="endtime"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="validating"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -34,10 +34,10 @@ static Logger log4j = Logger.getLogger(WorkEffortData.class);
   public String processed;
   public String posted;
   public String postedBtn;
-  public String adClientId;
-  public String issotrx;
   public String mProductionId;
+  public String issotrx;
   public String isactive;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -83,14 +83,14 @@ static Logger log4j = Logger.getLogger(WorkEffortData.class);
       return posted;
     else if (fieldName.equalsIgnoreCase("posted_btn") || fieldName.equals("postedBtn"))
       return postedBtn;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("issotrx"))
-      return issotrx;
     else if (fieldName.equalsIgnoreCase("m_production_id") || fieldName.equals("mProductionId"))
       return mProductionId;
+    else if (fieldName.equalsIgnoreCase("issotrx"))
+      return issotrx;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -140,10 +140,10 @@ Select for edit
       "COALESCE(M_Production.Processed, 'N') AS Processed, " +
       "M_Production.Posted, " +
       "list1.name as Posted_BTN, " +
-      "M_Production.AD_Client_ID, " +
-      "COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, " +
       "M_Production.M_Production_ID, " +
+      "COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, " +
       "COALESCE(M_Production.IsActive, 'N') AS IsActive, " +
+      "M_Production.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Production left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Production.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Production.Posted = TO_CHAR(list1.value))" +
       "        WHERE 2=2 " +
@@ -203,10 +203,10 @@ Select for edit
         objectWorkEffortData.processed = UtilSql.getValue(result, "processed");
         objectWorkEffortData.posted = UtilSql.getValue(result, "posted");
         objectWorkEffortData.postedBtn = UtilSql.getValue(result, "posted_btn");
-        objectWorkEffortData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectWorkEffortData.issotrx = UtilSql.getValue(result, "issotrx");
         objectWorkEffortData.mProductionId = UtilSql.getValue(result, "m_production_id");
+        objectWorkEffortData.issotrx = UtilSql.getValue(result, "issotrx");
         objectWorkEffortData.isactive = UtilSql.getValue(result, "isactive");
+        objectWorkEffortData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectWorkEffortData.language = UtilSql.getValue(result, "language");
         objectWorkEffortData.adUserClient = "";
         objectWorkEffortData.adOrgClient = "";
@@ -260,10 +260,10 @@ Create a registry
     objectWorkEffortData[0].processed = processed;
     objectWorkEffortData[0].posted = posted;
     objectWorkEffortData[0].postedBtn = postedBtn;
-    objectWorkEffortData[0].adClientId = adClientId;
-    objectWorkEffortData[0].issotrx = issotrx;
     objectWorkEffortData[0].mProductionId = mProductionId;
+    objectWorkEffortData[0].issotrx = issotrx;
     objectWorkEffortData[0].isactive = isactive;
+    objectWorkEffortData[0].adClientId = adClientId;
     objectWorkEffortData[0].language = "";
     return objectWorkEffortData;
   }
@@ -348,7 +348,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Production" +
-      "        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Starttime = TO_TIMESTAMP(?,'HH24:MI:SS') , Endtime = TO_TIMESTAMP(?,'HH24:MI:SS') , DocumentNo = (?) , Validating = (?) , Processed = (?) , Posted = (?) , AD_Client_ID = (?) , IsSOTrx = (?) , M_Production_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Starttime = TO_TIMESTAMP(?,'HH24:MI:SS') , Endtime = TO_TIMESTAMP(?,'HH24:MI:SS') , DocumentNo = (?) , Validating = (?) , Processed = (?) , Posted = (?) , M_Production_ID = (?) , IsSOTrx = (?) , IsActive = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Production.M_Production_ID = ? " +
       "        AND M_Production.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -373,10 +373,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, validating);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -405,7 +405,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Production " +
-      "        (AD_Org_ID, MovementDate, Starttime, Endtime, DocumentNo, Validating, Processed, Posted, AD_Client_ID, IsSOTrx, M_Production_ID, IsActive, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, MovementDate, Starttime, Endtime, DocumentNo, Validating, Processed, Posted, M_Production_ID, IsSOTrx, IsActive, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), TO_TIMESTAMP(?, 'HH24:MI:SS'), TO_TIMESTAMP(?, 'HH24:MI:SS'), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -422,10 +422,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, validating);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

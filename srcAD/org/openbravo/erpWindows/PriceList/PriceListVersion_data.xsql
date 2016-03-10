@@ -21,10 +21,10 @@ M_PriceList_Version.Description,
 COALESCE(M_PriceList_Version.IsActive, 'N') AS IsActive, 
 M_PriceList_Version.ProcCreate, 
 M_PriceList_Version.M_Pricelist_Version_Generate, 
-M_PriceList_Version.AD_Client_ID, 
 M_PriceList_Version.M_PriceList_Version_ID, 
 M_PriceList_Version.M_PriceList_ID, 
 M_PriceList_Version.AD_Org_ID, 
+M_PriceList_Version.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM M_PriceList_Version left join (select M_DiscountSchema_ID, Name from M_DiscountSchema) table1 on (M_PriceList_Version.M_DiscountSchema_ID = table1.M_DiscountSchema_ID) left join (select M_PriceList_Version_ID, Name from M_PriceList_Version) table2 on (M_PriceList_Version.M_Pricelist_Version_Base_ID =  table2.M_PriceList_Version_ID)
@@ -127,13 +127,13 @@ M_PriceList_Version.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_PriceList_Version
-        SET Name = (?) , ValidFrom = TO_DATE(?) , M_DiscountSchema_ID = (?) , M_Pricelist_Version_Base_ID = (?) , Description = (?) , IsActive = (?) , ProcCreate = (?) , M_Pricelist_Version_Generate = (?) , AD_Client_ID = (?) , M_PriceList_Version_ID = (?) , M_PriceList_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET Name = (?) , ValidFrom = TO_DATE(?) , M_DiscountSchema_ID = (?) , M_Pricelist_Version_Base_ID = (?) , Description = (?) , IsActive = (?) , ProcCreate = (?) , M_Pricelist_Version_Generate = (?) , M_PriceList_Version_ID = (?) , M_PriceList_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE M_PriceList_Version.M_PriceList_Version_ID = ? 
                  AND M_PriceList_Version.M_PriceList_ID = ? 
         AND M_PriceList_Version.AD_Client_ID IN ('1') 
         AND M_PriceList_Version.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="name"></Parameter> <Parameter name="validfrom"></Parameter> <Parameter name="mDiscountschemaId"></Parameter> <Parameter name="mPricelistVersionBaseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="proccreate"></Parameter> <Parameter name="mPricelistVersionGenerate"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="name"></Parameter> <Parameter name="validfrom"></Parameter> <Parameter name="mDiscountschemaId"></Parameter> <Parameter name="mPricelistVersionBaseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="proccreate"></Parameter> <Parameter name="mPricelistVersionGenerate"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mPricelistVersionId"></Parameter>
     
@@ -145,10 +145,10 @@ M_PriceList_Version.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_PriceList_Version 
-        (Name, ValidFrom, M_DiscountSchema_ID, M_Pricelist_Version_Base_ID, Description, IsActive, ProcCreate, M_Pricelist_Version_Generate, AD_Client_ID, M_PriceList_Version_ID, M_PriceList_ID, AD_Org_ID, created, createdby, updated, updatedBy)
+        (Name, ValidFrom, M_DiscountSchema_ID, M_Pricelist_Version_Base_ID, Description, IsActive, ProcCreate, M_Pricelist_Version_Generate, M_PriceList_Version_ID, M_PriceList_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="name"></Parameter> <Parameter name="validfrom"></Parameter> <Parameter name="mDiscountschemaId"></Parameter> <Parameter name="mPricelistVersionBaseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="proccreate"></Parameter> <Parameter name="mPricelistVersionGenerate"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="name"></Parameter> <Parameter name="validfrom"></Parameter> <Parameter name="mDiscountschemaId"></Parameter> <Parameter name="mPricelistVersionBaseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="proccreate"></Parameter> <Parameter name="mPricelistVersionGenerate"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

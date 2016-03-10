@@ -487,7 +487,7 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
     WorkEffortData data = new WorkEffortData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.starttime = vars.getRequiredStringParameter("inpstarttime");     data.endtime = vars.getRequiredStringParameter("inpendtime");     data.documentno = vars.getStringParameter("inpdocumentno");     data.validating = vars.getStringParameter("inpvalidating");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.posted = vars.getRequiredStringParameter("inpposted");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.issotrx = vars.getStringParameter("inpissotrx", "N");     data.mProductionId = vars.getRequestGlobalVariable("inpmProductionId", windowId + "|M_Production_ID");     data.isactive = vars.getStringParameter("inpisactive", "N"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.starttime = vars.getRequiredStringParameter("inpstarttime");     data.endtime = vars.getRequiredStringParameter("inpendtime");     data.documentno = vars.getStringParameter("inpdocumentno");     data.validating = vars.getStringParameter("inpvalidating");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.posted = vars.getRequiredStringParameter("inpposted");     data.mProductionId = vars.getRequestGlobalVariable("inpmProductionId", windowId + "|M_Production_ID");     data.issotrx = vars.getStringParameter("inpissotrx", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -518,7 +518,7 @@ vars.getRequestGlobalVariable("inpParamMovementDate_f", tabId + "|paramMovementD
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_Production_ID", data[0].getField("mProductionId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|M_Production_ID", data[0].getField("mProductionId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

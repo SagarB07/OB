@@ -395,7 +395,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|IsSOPriceList", data[0].getField("issopricelist"));    vars.setSessionValue(windowId + "|Costbased", data[0].getField("costbased"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].getField("mPricelistId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|IsSOPriceList", data[0].getField("issopricelist"));    vars.setSessionValue(windowId + "|Costbased", data[0].getField("costbased"));    vars.setSessionValue(windowId + "|M_PriceList_ID", data[0].getField("mPricelistId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

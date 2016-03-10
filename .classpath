@@ -8,7 +8,6 @@
 	<classpathentry kind="src" path="modules/com.atrums.reportes.cobranzas/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.reporting/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.ventas.notas/src"/>
-	<classpathentry kind="src" path="modules/com.atrums.aserlaco.venta/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.centrocostos/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.declaraciontributaria.ecuador/src"/>
 	<classpathentry kind="src" path="modules/com.atrums.reportes.estadoscuenta/src"/>

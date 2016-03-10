@@ -970,12 +970,12 @@ xmlDocument.setData("reportC_Doctype_ID","liststructure", comboTableData.select(
 comboTableData = null;
 xmlDocument.setParameter("Dateto_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("Statementdate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("buttonStartingbalance", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("EM_APRM_PrintDetailed_BTNname", Utility.getButtonName(this, vars, "B44441304C1349479806A081D0CF1DC7", "EM_APRM_PrintDetailed_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_APRM_PrintDetailed = org.openbravo.erpCommon.utility.Utility.isModalProcess("3C4A5FB206B74C3CA9FE20116FCA0464"); 
 xmlDocument.setParameter("EM_APRM_PrintDetailed_Modal", modalEM_APRM_PrintDetailed?"true":"false");
-xmlDocument.setParameter("buttonStartingbalance", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttonEndingbalance", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("EM_APRM_PrintSummary_BTNname", Utility.getButtonName(this, vars, "2ED1B6259CE04EBE9EA73C51D365BE29", "EM_APRM_PrintSummary_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_APRM_PrintSummary = org.openbravo.erpCommon.utility.Utility.isModalProcess("BBA11D1A061346459AF6148920FE6629"); 
 xmlDocument.setParameter("EM_APRM_PrintSummary_Modal", modalEM_APRM_PrintSummary?"true":"false");
+xmlDocument.setParameter("buttonEndingbalance", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Posted_BTNname", Utility.getButtonName(this, vars, "234", (dataField==null?data[0].getField("posted"):dataField.getField("posted")), "Posted_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalPosted = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
 xmlDocument.setParameter("Posted_Modal", modalPosted?"true":"false");
 xmlDocument.setParameter("EM_Aprm_Process_Rec_BTNname", Utility.getButtonName(this, vars, "FF8080812E443491012E443C053A001A", (dataField==null?data[0].getField("emAprmProcessRec"):dataField.getField("emAprmProcessRec")), "EM_Aprm_Process_Rec_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalEM_Aprm_Process_Rec = org.openbravo.erpCommon.utility.Utility.isModalProcess("FF8080812E2F8EAE012E2F94CF470014"); 

@@ -48,13 +48,13 @@ static Logger log4j = Logger.getLogger(ProductionRunData.class);
   public String runtime;
   public String closephase;
   public String validating;
-  public String adOrgId;
-  public String mProductionplanId;
   public String description;
+  public String mProductionplanId;
+  public String adOrgId;
   public String mProductId;
-  public String isactive;
   public String adClientId;
   public String mLocatorId;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -128,20 +128,20 @@ static Logger log4j = Logger.getLogger(ProductionRunData.class);
       return closephase;
     else if (fieldName.equalsIgnoreCase("validating"))
       return validating;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("m_productionplan_id") || fieldName.equals("mProductionplanId"))
-      return mProductionplanId;
     else if (fieldName.equalsIgnoreCase("description"))
       return description;
+    else if (fieldName.equalsIgnoreCase("m_productionplan_id") || fieldName.equals("mProductionplanId"))
+      return mProductionplanId;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
     else if (fieldName.equalsIgnoreCase("m_product_id") || fieldName.equals("mProductId"))
       return mProductId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("m_locator_id") || fieldName.equals("mLocatorId"))
       return mLocatorId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -205,13 +205,13 @@ Select for edit
       "M_ProductionPlan.Runtime, " +
       "COALESCE(M_ProductionPlan.Closephase, 'N') AS Closephase, " +
       "M_ProductionPlan.Validating, " +
-      "M_ProductionPlan.AD_Org_ID, " +
-      "M_ProductionPlan.M_ProductionPlan_ID, " +
       "M_ProductionPlan.Description, " +
+      "M_ProductionPlan.M_ProductionPlan_ID, " +
+      "M_ProductionPlan.AD_Org_ID, " +
       "M_ProductionPlan.M_Product_ID, " +
-      "COALESCE(M_ProductionPlan.IsActive, 'N') AS IsActive, " +
       "M_ProductionPlan.AD_Client_ID, " +
       "M_ProductionPlan.M_Locator_ID, " +
+      "COALESCE(M_ProductionPlan.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
       "        FROM M_ProductionPlan left join (select MA_Wrphase_ID, MA_Workrequirement_ID, SeqNo, MA_Process_ID from MA_Wrphase) table1 on (M_ProductionPlan.MA_Wrphase_ID = table1.MA_Wrphase_ID) left join (select MA_Workrequirement_ID, DocumentNo, StartDate from MA_Workrequirement) table2 on (table1.MA_Workrequirement_ID = table2.MA_Workrequirement_ID) left join (select MA_Process_ID, Name from MA_Process) table3 on (table1.MA_Process_ID = table3.MA_Process_ID) left join (select MA_Costcenter_Version_ID, DocumentNo, MA_Costcenter_ID, ValidFrom from MA_Costcenter_Version) table4 on (M_ProductionPlan.MA_Costcenter_Version_ID = table4.MA_Costcenter_Version_ID) left join (select MA_Costcenter_ID, Name from MA_Costcenter) table5 on (table4.MA_Costcenter_ID = table5.MA_Costcenter_ID)" +
       "        WHERE 2=2 " +
@@ -283,13 +283,13 @@ Select for edit
         objectProductionRunData.runtime = UtilSql.getValue(result, "runtime");
         objectProductionRunData.closephase = UtilSql.getValue(result, "closephase");
         objectProductionRunData.validating = UtilSql.getValue(result, "validating");
-        objectProductionRunData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectProductionRunData.mProductionplanId = UtilSql.getValue(result, "m_productionplan_id");
         objectProductionRunData.description = UtilSql.getValue(result, "description");
+        objectProductionRunData.mProductionplanId = UtilSql.getValue(result, "m_productionplan_id");
+        objectProductionRunData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectProductionRunData.mProductId = UtilSql.getValue(result, "m_product_id");
-        objectProductionRunData.isactive = UtilSql.getValue(result, "isactive");
         objectProductionRunData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectProductionRunData.mLocatorId = UtilSql.getValue(result, "m_locator_id");
+        objectProductionRunData.isactive = UtilSql.getValue(result, "isactive");
         objectProductionRunData.language = UtilSql.getValue(result, "language");
         objectProductionRunData.adUserClient = "";
         objectProductionRunData.adOrgClient = "";
@@ -357,13 +357,13 @@ Create a registry
     objectProductionRunData[0].runtime = runtime;
     objectProductionRunData[0].closephase = closephase;
     objectProductionRunData[0].validating = validating;
-    objectProductionRunData[0].adOrgId = adOrgId;
-    objectProductionRunData[0].mProductionplanId = mProductionplanId;
     objectProductionRunData[0].description = description;
+    objectProductionRunData[0].mProductionplanId = mProductionplanId;
+    objectProductionRunData[0].adOrgId = adOrgId;
     objectProductionRunData[0].mProductId = mProductId;
-    objectProductionRunData[0].isactive = isactive;
     objectProductionRunData[0].adClientId = adClientId;
     objectProductionRunData[0].mLocatorId = mLocatorId;
+    objectProductionRunData[0].isactive = isactive;
     objectProductionRunData[0].language = "";
     return objectProductionRunData;
   }
@@ -600,7 +600,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_ProductionPlan" +
-      "        SET M_Production_ID = (?) , Productionplandate = TO_DATE(?) , Line = TO_NUMBER(?) , MA_Wrphase_ID = (?) , Starttime = TO_TIMESTAMP(?,'HH24:MI:SS') , Endtime = TO_TIMESTAMP(?,'HH24:MI:SS') , MA_Costcenter_Version_ID = (?) , Calccost = TO_NUMBER(?) , Neededquantity = TO_NUMBER(?) , ProductionQty = TO_NUMBER(?) , Secondaryunit = (?) , Conversionrate = TO_NUMBER(?) , Secondaryqty = TO_NUMBER(?) , Rejectedquantity = TO_NUMBER(?) , MA_Costcenteruse = TO_NUMBER(?) , Usedmaterial = (?) , Outsourced = (?) , Processed = (?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Closephase = (?) , Validating = (?) , AD_Org_ID = (?) , M_ProductionPlan_ID = (?) , Description = (?) , M_Product_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , M_Locator_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET M_Production_ID = (?) , Productionplandate = TO_DATE(?) , Line = TO_NUMBER(?) , MA_Wrphase_ID = (?) , Starttime = TO_TIMESTAMP(?,'HH24:MI:SS') , Endtime = TO_TIMESTAMP(?,'HH24:MI:SS') , MA_Costcenter_Version_ID = (?) , Calccost = TO_NUMBER(?) , Neededquantity = TO_NUMBER(?) , ProductionQty = TO_NUMBER(?) , Secondaryunit = (?) , Conversionrate = TO_NUMBER(?) , Secondaryqty = TO_NUMBER(?) , Rejectedquantity = TO_NUMBER(?) , MA_Costcenteruse = TO_NUMBER(?) , Usedmaterial = (?) , Outsourced = (?) , Processed = (?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Closephase = (?) , Validating = (?) , Description = (?) , M_ProductionPlan_ID = (?) , AD_Org_ID = (?) , M_Product_ID = (?) , AD_Client_ID = (?) , M_Locator_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_ProductionPlan.M_ProductionPlan_ID = ? " +
       "        AND M_ProductionPlan.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -639,13 +639,13 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, runtime);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, closephase);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, validating);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionplanId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionplanId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionplanId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -674,7 +674,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_ProductionPlan " +
-      "        (M_Production_ID, Productionplandate, Line, MA_Wrphase_ID, Starttime, Endtime, MA_Costcenter_Version_ID, Calccost, Neededquantity, ProductionQty, Secondaryunit, Conversionrate, Secondaryqty, Rejectedquantity, MA_Costcenteruse, Usedmaterial, Outsourced, Processed, Estimatedtime, Runtime, Closephase, Validating, AD_Org_ID, M_ProductionPlan_ID, Description, M_Product_ID, IsActive, AD_Client_ID, M_Locator_ID, created, createdby, updated, updatedBy)" +
+      "        (M_Production_ID, Productionplandate, Line, MA_Wrphase_ID, Starttime, Endtime, MA_Costcenter_Version_ID, Calccost, Neededquantity, ProductionQty, Secondaryunit, Conversionrate, Secondaryqty, Rejectedquantity, MA_Costcenteruse, Usedmaterial, Outsourced, Processed, Estimatedtime, Runtime, Closephase, Validating, Description, M_ProductionPlan_ID, AD_Org_ID, M_Product_ID, AD_Client_ID, M_Locator_ID, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), TO_NUMBER(?), (?), TO_TIMESTAMP(?, 'HH24:MI:SS'), TO_TIMESTAMP(?, 'HH24:MI:SS'), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -705,13 +705,13 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, runtime);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, closephase);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, validating);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionplanId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionplanId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

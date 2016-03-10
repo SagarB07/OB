@@ -517,7 +517,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "docstatus", st
     ProvisionMensual6FF22921D16B4043A16ACDCD4C751290Data data = new ProvisionMensual6FF22921D16B4043A16ACDCD4C751290Data();
     ServletException ex = null;
     try {
-    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cPeriodId = vars.getRequiredStringParameter("inpcPeriodId");     data.cPeriodIdr = vars.getStringParameter("inpcPeriodId_R");    try {   data.valor = vars.getRequiredNumericParameter("inpvalor");  } catch (ServletException paramEx) { ex = paramEx; }     data.processed = vars.getStringParameter("inpprocessed", "N");     data.docstatus = vars.getRequiredStringParameter("inpdocstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.pago = vars.getStringParameter("inppago", "N");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.docaccionno = vars.getRequiredGlobalVariable("inpdocaccionno", windowId + "|Docaccionno");     data.processing = vars.getRequiredStringParameter("inpprocessing");     data.posted = vars.getRequiredStringParameter("inpposted");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.noRolProvisionLineMesId = vars.getRequestGlobalVariable("inpnoRolProvisionLineMesId", windowId + "|NO_Rol_Provision_Line_Mes_ID");     data.noRolPagoProvisionLineId = vars.getRequiredGlobalVariable("inpnoRolPagoProvisionLineId", windowId + "|NO_Rol_Pago_Provision_Line_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cPeriodId = vars.getRequiredStringParameter("inpcPeriodId");     data.cPeriodIdr = vars.getStringParameter("inpcPeriodId_R");    try {   data.valor = vars.getRequiredNumericParameter("inpvalor");  } catch (ServletException paramEx) { ex = paramEx; }     data.docstatus = vars.getRequiredStringParameter("inpdocstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.pago = vars.getStringParameter("inppago", "N");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.docaccionno = vars.getRequiredGlobalVariable("inpdocaccionno", windowId + "|Docaccionno");     data.processing = vars.getRequiredStringParameter("inpprocessing");     data.posted = vars.getRequiredStringParameter("inpposted");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.noRolProvisionLineMesId = vars.getRequestGlobalVariable("inpnoRolProvisionLineMesId", windowId + "|NO_Rol_Provision_Line_Mes_ID");     data.noRolPagoProvisionLineId = vars.getRequiredGlobalVariable("inpnoRolPagoProvisionLineId", windowId + "|NO_Rol_Pago_Provision_Line_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -549,7 +549,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "docstatus", st
       
       Linea00E24D4D2F074977B69197B0A12B8189Data[] data = Linea00E24D4D2F074977B69197B0A12B8189Data.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), vars.getSessionValue(windowId + "|NO_Rol_Pago_Provision_ID"), strPNO_Rol_Pago_Provision_Line_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|Docaccionno", data[0].docaccionno);    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|NO_Rol_Pago_Provision_Line_ID", data[0].noRolPagoProvisionLineId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
+          vars.setSessionValue(windowId + "|Docaccionno", data[0].docaccionno);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|NO_Rol_Pago_Provision_Line_ID", data[0].noRolPagoProvisionLineId);    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);
       vars.setSessionValue(windowId + "|NO_Rol_Pago_Provision_Line_ID", strPNO_Rol_Pago_Provision_Line_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -568,7 +568,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "docstatus", st
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|Docaccionno", data[0].getField("docaccionno"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Rol_Provision_Line_Mes_ID", data[0].getField("noRolProvisionLineMesId"));    vars.setSessionValue(windowId + "|NO_Rol_Pago_Provision_Line_ID", data[0].getField("noRolPagoProvisionLineId"));
+          vars.setSessionValue(windowId + "|Docaccionno", data[0].getField("docaccionno"));    vars.setSessionValue(windowId + "|NO_Rol_Pago_Provision_Line_ID", data[0].getField("noRolPagoProvisionLineId"));    vars.setSessionValue(windowId + "|NO_Rol_Provision_Line_Mes_ID", data[0].getField("noRolProvisionLineMesId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPNO_Rol_Pago_Provision_Line_ID) throws IOException,ServletException {
@@ -1150,10 +1150,10 @@ comboTableData = null;
                 else {                    
                     
                         //BUTTON TEXT FILLING
-                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
+                    data.docaccionnoBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "31D050E5C2D843B99AD7E9470D9E8579", data.getField("Docaccionno"));
                     
                         //BUTTON TEXT FILLING
-                    data.docaccionnoBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "31D050E5C2D843B99AD7E9470D9E8579", data.getField("Docaccionno"));
+                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
                     
                 }
                 vars.setEditionData(tabId, data);

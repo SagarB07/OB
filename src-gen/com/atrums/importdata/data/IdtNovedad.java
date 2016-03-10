@@ -44,7 +44,6 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
     public static final String TABLE_NAME = "Idt_novedad";
     public static final String ENTITY_NAME = "IDT_Imp_Novedades";
     public static final String PROPERTY_ID = "id";
-    public static final String PROPERTY_BPARTNER = "bpartner";
     public static final String PROPERTY_CLIENT = "client";
     public static final String PROPERTY_ORGANIZATION = "organization";
     public static final String PROPERTY_CEDULA = "cedula";
@@ -55,17 +54,18 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_UPDATEDBY = "updatedBy";
     public static final String PROPERTY_TIPOINGRESOEGRESO = "tipoIngresoEgreso";
     public static final String PROPERTY_PERIOD = "period";
+    public static final String PROPERTY_VALOR = "valor";
+    public static final String PROPERTY_EMPLEADO = "empleado";
     public static final String PROPERTY_IMPORTERRORMESSAGE = "importErrorMessage";
     public static final String PROPERTY_IMPORTPROCESSCOMPLETE = "importProcessComplete";
-    public static final String PROPERTY_PROCESSNOW = "processNow";
-    public static final String PROPERTY_PROCESSED = "processed";
-    public static final String PROPERTY_VALOR = "valor";
+    public static final String PROPERTY_PROCNOVEDAD = "procnovedad";
+    public static final String PROPERTY_NOVPROCESADA = "novprocesada";
 
     public IdtNovedad() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_IMPORTPROCESSCOMPLETE, false);
-        setDefaultValue(PROPERTY_PROCESSNOW, false);
-        setDefaultValue(PROPERTY_PROCESSED, false);
+        setDefaultValue(PROPERTY_PROCNOVEDAD, false);
+        setDefaultValue(PROPERTY_NOVPROCESADA, false);
     }
 
     @Override
@@ -79,14 +79,6 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setId(String id) {
         set(PROPERTY_ID, id);
-    }
-
-    public BusinessPartner getBpartner() {
-        return (BusinessPartner) get(PROPERTY_BPARTNER);
-    }
-
-    public void setBpartner(BusinessPartner bpartner) {
-        set(PROPERTY_BPARTNER, bpartner);
     }
 
     public Client getClient() {
@@ -169,6 +161,22 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
         set(PROPERTY_PERIOD, period);
     }
 
+    public BigDecimal getValor() {
+        return (BigDecimal) get(PROPERTY_VALOR);
+    }
+
+    public void setValor(BigDecimal valor) {
+        set(PROPERTY_VALOR, valor);
+    }
+
+    public BusinessPartner getEmpleado() {
+        return (BusinessPartner) get(PROPERTY_EMPLEADO);
+    }
+
+    public void setEmpleado(BusinessPartner empleado) {
+        set(PROPERTY_EMPLEADO, empleado);
+    }
+
     public String getImportErrorMessage() {
         return (String) get(PROPERTY_IMPORTERRORMESSAGE);
     }
@@ -185,28 +193,20 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
         set(PROPERTY_IMPORTPROCESSCOMPLETE, importProcessComplete);
     }
 
-    public Boolean isProcessNow() {
-        return (Boolean) get(PROPERTY_PROCESSNOW);
+    public Boolean isProcnovedad() {
+        return (Boolean) get(PROPERTY_PROCNOVEDAD);
     }
 
-    public void setProcessNow(Boolean processNow) {
-        set(PROPERTY_PROCESSNOW, processNow);
+    public void setProcnovedad(Boolean procnovedad) {
+        set(PROPERTY_PROCNOVEDAD, procnovedad);
     }
 
-    public Boolean isProcessed() {
-        return (Boolean) get(PROPERTY_PROCESSED);
+    public Boolean isNovprocesada() {
+        return (Boolean) get(PROPERTY_NOVPROCESADA);
     }
 
-    public void setProcessed(Boolean processed) {
-        set(PROPERTY_PROCESSED, processed);
-    }
-
-    public BigDecimal getValor() {
-        return (BigDecimal) get(PROPERTY_VALOR);
-    }
-
-    public void setValor(BigDecimal valor) {
-        set(PROPERTY_VALOR, valor);
+    public void setNovprocesada(Boolean novprocesada) {
+        set(PROPERTY_NOVPROCESADA, novprocesada);
     }
 
 }
