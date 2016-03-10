@@ -21,9 +21,9 @@ no_vacacion_linea.Estado,
 (CASE WHEN no_vacacion_linea.Estado IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS EstadoR, 
 COALESCE(no_vacacion_linea.Isactive, 'N') AS Isactive, 
 no_vacacion_linea.dias, 
-no_vacacion_linea.NO_Vacacion_Linea_ID, 
 no_vacacion_linea.AD_Client_ID, 
 COALESCE(no_vacacion_linea.Procesado, 'N') AS Procesado, 
+no_vacacion_linea.NO_Vacacion_Linea_ID, 
  
         ? AS LANGUAGE 
         FROM no_vacacion_linea left join ad_ref_list_v list1 on (no_vacacion_linea.Estado = list1.value and list1.ad_reference_id = '6EE3EA7321544309803D4992D165F316' and list1.ad_language = ?) 
@@ -138,13 +138,13 @@ COALESCE(no_vacacion_linea.Procesado, 'N') AS Procesado,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_vacacion_linea
-        SET AD_Org_ID = (?) , NO_Vacacion_ID = (?) , Procesar = (?) , Line = TO_NUMBER(?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Estado = (?) , Isactive = (?) , dias = TO_NUMBER(?) , NO_Vacacion_Linea_ID = (?) , AD_Client_ID = (?) , Procesado = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , NO_Vacacion_ID = (?) , Procesar = (?) , Line = TO_NUMBER(?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Estado = (?) , Isactive = (?) , dias = TO_NUMBER(?) , AD_Client_ID = (?) , Procesado = (?) , NO_Vacacion_Linea_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_vacacion_linea.NO_Vacacion_Linea_ID = ? 
                  AND no_vacacion_linea.NO_Vacacion_ID = ? 
         AND no_vacacion_linea.AD_Client_ID IN ('1') 
         AND no_vacacion_linea.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="line"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="noVacacionLineaId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="line"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="noVacacionLineaId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noVacacionLineaId"></Parameter>
     
@@ -156,10 +156,10 @@ COALESCE(no_vacacion_linea.Procesado, 'N') AS Procesado,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_vacacion_linea 
-        (AD_Org_ID, NO_Vacacion_ID, Procesar, Line, Fecha_Inicio, Fecha_Fin, Estado, Isactive, dias, NO_Vacacion_Linea_ID, AD_Client_ID, Procesado, created, createdby, updated, updatedBy)
+        (AD_Org_ID, NO_Vacacion_ID, Procesar, Line, Fecha_Inicio, Fecha_Fin, Estado, Isactive, dias, AD_Client_ID, Procesado, NO_Vacacion_Linea_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), (?), (?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="line"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="noVacacionLineaId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="line"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="noVacacionLineaId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -29,9 +29,9 @@ GL_JournalBatch.CopyFrom,
 GL_JournalBatch.Processing, 
 COALESCE(GL_JournalBatch.IsActive, 'N') AS IsActive, 
 GL_JournalBatch.GL_Category_ID, 
-GL_JournalBatch.PostingType, 
-COALESCE(GL_JournalBatch.Processed, 'N') AS Processed, 
 GL_JournalBatch.AD_Client_ID, 
+COALESCE(GL_JournalBatch.Processed, 'N') AS Processed, 
+GL_JournalBatch.PostingType, 
 GL_JournalBatch.GL_JournalBatch_ID, 
  
         ? AS LANGUAGE 
@@ -123,13 +123,13 @@ GL_JournalBatch.GL_JournalBatch_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE GL_JournalBatch
-        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , DateDoc = TO_DATE(?) , DateAcct = TO_DATE(?) , C_Period_ID = (?) , C_Currency_ID = (?) , IsTemplate = (?) , ControlAmt = TO_NUMBER(?) , TotalDr = TO_NUMBER(?) , TotalCr = TO_NUMBER(?) , CopyFrom = (?) , Processing = (?) , IsActive = (?) , GL_Category_ID = (?) , PostingType = (?) , Processed = (?) , AD_Client_ID = (?) , GL_JournalBatch_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , DateDoc = TO_DATE(?) , DateAcct = TO_DATE(?) , C_Period_ID = (?) , C_Currency_ID = (?) , IsTemplate = (?) , ControlAmt = TO_NUMBER(?) , TotalDr = TO_NUMBER(?) , TotalCr = TO_NUMBER(?) , CopyFrom = (?) , Processing = (?) , IsActive = (?) , GL_Category_ID = (?) , AD_Client_ID = (?) , Processed = (?) , PostingType = (?) , GL_JournalBatch_ID = (?) , updated = now(), updatedby = ? 
         WHERE GL_JournalBatch.GL_JournalBatch_ID = ? 
         
         AND GL_JournalBatch.AD_Client_ID IN ('1') 
         AND GL_JournalBatch.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="istemplate"></Parameter> <Parameter name="controlamt"></Parameter> <Parameter name="totaldr"></Parameter> <Parameter name="totalcr"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="glCategoryId"></Parameter> <Parameter name="postingtype"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="glJournalbatchId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="istemplate"></Parameter> <Parameter name="controlamt"></Parameter> <Parameter name="totaldr"></Parameter> <Parameter name="totalcr"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="glCategoryId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="postingtype"></Parameter> <Parameter name="glJournalbatchId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="glJournalbatchId"></Parameter>
     
@@ -141,10 +141,10 @@ GL_JournalBatch.GL_JournalBatch_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO GL_JournalBatch 
-        (AD_Org_ID, DocumentNo, Description, DateDoc, DateAcct, C_Period_ID, C_Currency_ID, IsTemplate, ControlAmt, TotalDr, TotalCr, CopyFrom, Processing, IsActive, GL_Category_ID, PostingType, Processed, AD_Client_ID, GL_JournalBatch_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, DocumentNo, Description, DateDoc, DateAcct, C_Period_ID, C_Currency_ID, IsTemplate, ControlAmt, TotalDr, TotalCr, CopyFrom, Processing, IsActive, GL_Category_ID, AD_Client_ID, Processed, PostingType, GL_JournalBatch_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="istemplate"></Parameter> <Parameter name="controlamt"></Parameter> <Parameter name="totaldr"></Parameter> <Parameter name="totalcr"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="glCategoryId"></Parameter> <Parameter name="postingtype"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="glJournalbatchId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="datedoc"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="istemplate"></Parameter> <Parameter name="controlamt"></Parameter> <Parameter name="totaldr"></Parameter> <Parameter name="totalcr"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="glCategoryId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="postingtype"></Parameter> <Parameter name="glJournalbatchId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

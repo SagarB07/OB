@@ -19,8 +19,8 @@ no_registra_quincena.C_Period_ID,
 COALESCE(no_registra_quincena.Isactive, 'N') AS Isactive, 
 no_registra_quincena.Processed, 
 no_registra_quincena.Anadir_Anticipo, 
-no_registra_quincena.NO_Registra_Quincena_ID, 
 no_registra_quincena.AD_Client_ID, 
+no_registra_quincena.NO_Registra_Quincena_ID, 
  
         ? AS LANGUAGE 
         FROM no_registra_quincena left join (select AD_Org_ID, Name from AD_Org) table1 on (no_registra_quincena.AD_Org_ID = table1.AD_Org_ID) left join (select C_Period_ID, Name from C_Period) table2 on (no_registra_quincena.C_Period_ID =  table2.C_Period_ID)
@@ -103,13 +103,13 @@ no_registra_quincena.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_registra_quincena
-        SET AD_Org_ID = (?) , Nombre = (?) , C_Period_ID = (?) , Isactive = (?) , Processed = (?) , Anadir_Anticipo = (?) , NO_Registra_Quincena_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Nombre = (?) , C_Period_ID = (?) , Isactive = (?) , Processed = (?) , Anadir_Anticipo = (?) , AD_Client_ID = (?) , NO_Registra_Quincena_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_registra_quincena.NO_Registra_Quincena_ID = ? 
         
         AND no_registra_quincena.AD_Client_ID IN ('1') 
         AND no_registra_quincena.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="nombre"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="anadirAnticipo"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="nombre"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="anadirAnticipo"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noRegistraQuincenaId"></Parameter>
     
@@ -121,10 +121,10 @@ no_registra_quincena.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_registra_quincena 
-        (AD_Org_ID, Nombre, C_Period_ID, Isactive, Processed, Anadir_Anticipo, NO_Registra_Quincena_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Nombre, C_Period_ID, Isactive, Processed, Anadir_Anticipo, AD_Client_ID, NO_Registra_Quincena_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="nombre"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="anadirAnticipo"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="nombre"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="anadirAnticipo"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

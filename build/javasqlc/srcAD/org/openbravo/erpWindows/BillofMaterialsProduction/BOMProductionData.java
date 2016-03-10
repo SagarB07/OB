@@ -43,10 +43,10 @@ static Logger log4j = Logger.getLogger(BOMProductionData.class);
   public String user1Id;
   public String user2Id;
   public String mProductionId;
-  public String processed;
-  public String issotrx;
   public String isactive;
   public String adClientId;
+  public String issotrx;
+  public String processed;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -110,14 +110,14 @@ static Logger log4j = Logger.getLogger(BOMProductionData.class);
       return user2Id;
     else if (fieldName.equalsIgnoreCase("m_production_id") || fieldName.equals("mProductionId"))
       return mProductionId;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
-    else if (fieldName.equalsIgnoreCase("issotrx"))
-      return issotrx;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("issotrx"))
+      return issotrx;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -176,10 +176,10 @@ Select for edit
       "M_Production.User1_ID, " +
       "M_Production.User2_ID, " +
       "M_Production.M_Production_ID, " +
-      "COALESCE(M_Production.Processed, 'N') AS Processed, " +
-      "COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, " +
       "COALESCE(M_Production.IsActive, 'N') AS IsActive, " +
       "M_Production.AD_Client_ID, " +
+      "COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, " +
+      "COALESCE(M_Production.Processed, 'N') AS Processed, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Production left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Production.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Production.Posted = TO_CHAR(list1.value)) left join (select C_Project_ID, Value, Name from C_Project) table2 on (M_Production.C_Project_ID = table2.C_Project_ID)" +
       "        WHERE 2=2 " +
@@ -248,10 +248,10 @@ Select for edit
         objectBOMProductionData.user1Id = UtilSql.getValue(result, "user1_id");
         objectBOMProductionData.user2Id = UtilSql.getValue(result, "user2_id");
         objectBOMProductionData.mProductionId = UtilSql.getValue(result, "m_production_id");
-        objectBOMProductionData.processed = UtilSql.getValue(result, "processed");
-        objectBOMProductionData.issotrx = UtilSql.getValue(result, "issotrx");
         objectBOMProductionData.isactive = UtilSql.getValue(result, "isactive");
         objectBOMProductionData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectBOMProductionData.issotrx = UtilSql.getValue(result, "issotrx");
+        objectBOMProductionData.processed = UtilSql.getValue(result, "processed");
         objectBOMProductionData.language = UtilSql.getValue(result, "language");
         objectBOMProductionData.adUserClient = "";
         objectBOMProductionData.adOrgClient = "";
@@ -314,10 +314,10 @@ Create a registry
     objectBOMProductionData[0].user1Id = user1Id;
     objectBOMProductionData[0].user2Id = user2Id;
     objectBOMProductionData[0].mProductionId = mProductionId;
-    objectBOMProductionData[0].processed = processed;
-    objectBOMProductionData[0].issotrx = issotrx;
     objectBOMProductionData[0].isactive = isactive;
     objectBOMProductionData[0].adClientId = adClientId;
+    objectBOMProductionData[0].issotrx = issotrx;
+    objectBOMProductionData[0].processed = processed;
     objectBOMProductionData[0].language = "";
     return objectBOMProductionData;
   }
@@ -440,7 +440,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Production" +
-      "        SET AD_Org_ID = (?) , Name = (?) , MovementDate = TO_DATE(?) , IsCreated = (?) , Description = (?) , AD_OrgTrx_ID = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Production_ID = (?) , Processed = (?) , IsSOTrx = (?) , IsActive = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , MovementDate = TO_DATE(?) , IsCreated = (?) , Description = (?) , AD_OrgTrx_ID = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Production_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , IsSOTrx = (?) , Processed = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Production.M_Production_ID = ? " +
       "        AND M_Production.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -473,10 +473,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -505,7 +505,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Production " +
-      "        (AD_Org_ID, Name, MovementDate, IsCreated, Description, AD_OrgTrx_ID, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Production_ID, Processed, IsSOTrx, IsActive, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, MovementDate, IsCreated, Description, AD_OrgTrx_ID, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Production_ID, IsActive, AD_Client_ID, IsSOTrx, Processed, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -530,10 +530,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

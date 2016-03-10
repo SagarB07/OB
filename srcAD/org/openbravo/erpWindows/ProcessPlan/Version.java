@@ -393,7 +393,7 @@ vars.getGlobalVariable("inpmaProcessplanId", windowId + "|MA_Processplan_ID");
     VersionData data = new VersionData();
     ServletException ex = null;
     try {
-    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.datefrom = vars.getRequiredStringParameter("inpdatefrom");     data.dateto = vars.getRequiredStringParameter("inpdateto");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.estimatedtime = vars.getNumericParameter("inpestimatedtime");  } catch (ServletException paramEx) { ex = paramEx; }     data.maProcessplanVersionId = vars.getRequestGlobalVariable("inpmaProcessplanVersionId", windowId + "|MA_Processplan_Version_ID");     data.maProcessplanId = vars.getRequiredStringParameter("inpmaProcessplanId");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.datefrom = vars.getRequiredStringParameter("inpdatefrom");     data.dateto = vars.getRequiredStringParameter("inpdateto");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.estimatedtime = vars.getNumericParameter("inpestimatedtime");  } catch (ServletException paramEx) { ex = paramEx; }     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.maProcessplanId = vars.getRequiredStringParameter("inpmaProcessplanId");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.maProcessplanVersionId = vars.getRequestGlobalVariable("inpmaProcessplanVersionId", windowId + "|MA_Processplan_Version_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -425,7 +425,7 @@ vars.getGlobalVariable("inpmaProcessplanId", windowId + "|MA_Processplan_ID");
       
       ProcessPlanData[] data = ProcessPlanData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPMA_Processplan_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|Explodephases", data[0].explodephases);    vars.setSessionValue(windowId + "|MA_Processplan_ID", data[0].maProcessplanId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|Explodephases", data[0].explodephases);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|MA_Processplan_ID", data[0].maProcessplanId);
       vars.setSessionValue(windowId + "|MA_Processplan_ID", strPMA_Processplan_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -444,7 +444,7 @@ vars.getGlobalVariable("inpmaProcessplanId", windowId + "|MA_Processplan_ID");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|MA_Processplan_Version_ID", data[0].getField("maProcessplanVersionId"));
+          vars.setSessionValue(windowId + "|MA_Processplan_Version_ID", data[0].getField("maProcessplanVersionId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPMA_Processplan_ID) throws IOException,ServletException {

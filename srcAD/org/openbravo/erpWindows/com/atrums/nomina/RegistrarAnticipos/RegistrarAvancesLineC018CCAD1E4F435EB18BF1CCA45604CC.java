@@ -519,7 +519,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", stres
     RegistrarAvancesLineC018CCAD1E4F435EB18BF1CCA45604CCData data = new RegistrarAvancesLineC018CCAD1E4F435EB18BF1CCA45604CCData();
     ServletException ex = null;
     try {
-    data.cBpartnerId = vars.getRequestGlobalVariable("inpcBpartnerId", windowId + "|C_Bpartner_ID");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.noTipoIngresoEgresoId = vars.getStringParameter("inpnoTipoIngresoEgresoId");     data.noTipoIngresoEgresoIdr = vars.getStringParameter("inpnoTipoIngresoEgresoId_R");    try {   data.valor = vars.getNumericParameter("inpvalor");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getRequiredStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.includeRolPago = vars.getStringParameter("inpincludeRolPago", "N");     data.docstatus = vars.getRequiredStringParameter("inpdocstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.docactionno = vars.getRequiredGlobalVariable("inpdocactionno", windowId + "|Docactionno");     data.processing = vars.getStringParameter("inpprocessing");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.posted = vars.getStringParameter("inpposted");     data.documentno = vars.getStringParameter("inpdocumentno");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.noRegistraQuincenaId = vars.getStringParameter("inpnoRegistraQuincenaId");     data.noRegistraQuincLineId = vars.getRequestGlobalVariable("inpnoRegistraQuincLineId", windowId + "|NO_Registra_Quinc_Line_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID"); 
+    data.cBpartnerId = vars.getRequestGlobalVariable("inpcBpartnerId", windowId + "|C_Bpartner_ID");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.noTipoIngresoEgresoId = vars.getStringParameter("inpnoTipoIngresoEgresoId");     data.noTipoIngresoEgresoIdr = vars.getStringParameter("inpnoTipoIngresoEgresoId_R");    try {   data.valor = vars.getNumericParameter("inpvalor");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getRequiredStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.includeRolPago = vars.getStringParameter("inpincludeRolPago", "N");     data.docstatus = vars.getRequiredStringParameter("inpdocstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.docactionno = vars.getRequiredGlobalVariable("inpdocactionno", windowId + "|Docactionno");     data.processing = vars.getStringParameter("inpprocessing");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.posted = vars.getStringParameter("inpposted");     data.documentno = vars.getStringParameter("inpdocumentno");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.noRegistraQuincLineId = vars.getRequestGlobalVariable("inpnoRegistraQuincLineId", windowId + "|NO_Registra_Quinc_Line_ID");     data.noRegistraQuincenaId = vars.getStringParameter("inpnoRegistraQuincenaId");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -551,7 +551,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", stres
       
       RegistrarAnticiposD6E6846C2564435F9B297860CB950D31Data[] data = RegistrarAnticiposD6E6846C2564435F9B297860CB950D31Data.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPNO_Registra_Quincena_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|NO_Registra_Quincena_ID", data[0].noRegistraQuincenaId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|NO_Registra_Quincena_ID", data[0].noRegistraQuincenaId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
       vars.setSessionValue(windowId + "|NO_Registra_Quincena_ID", strPNO_Registra_Quincena_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -570,7 +570,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", stres
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].getField("cBpartnerId"));    vars.setSessionValue(windowId + "|Docactionno", data[0].getField("docactionno"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|NO_Registra_Quinc_Line_ID", data[0].getField("noRegistraQuincLineId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|C_BPartner_ID", data[0].getField("cBpartnerId"));    vars.setSessionValue(windowId + "|Docactionno", data[0].getField("docactionno"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Registra_Quinc_Line_ID", data[0].getField("noRegistraQuincLineId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPNO_Registra_Quincena_ID) throws IOException,ServletException {
@@ -1160,10 +1160,10 @@ comboTableData = null;
                 else {                    
                     
                         //BUTTON TEXT FILLING
-                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
+                    data.docactionnoBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "7A4D156C7DD94868A3D05363B9EF1AB1", data.getField("Docactionno"));
                     
                         //BUTTON TEXT FILLING
-                    data.docactionnoBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "7A4D156C7DD94868A3D05363B9EF1AB1", data.getField("Docactionno"));
+                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
                     
                 }
                 vars.setEditionData(tabId, data);

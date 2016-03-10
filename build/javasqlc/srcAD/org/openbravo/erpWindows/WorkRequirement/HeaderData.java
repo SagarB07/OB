@@ -47,8 +47,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String createworkrequirement;
   public String adClientId;
   public String name;
-  public String isactive;
   public String maWorkrequirementId;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -120,10 +120,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return adClientId;
     else if (fieldName.equalsIgnoreCase("name"))
       return name;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("ma_workrequirement_id") || fieldName.equals("maWorkrequirementId"))
       return maWorkrequirementId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -186,8 +186,8 @@ Select for edit
       "MA_WorkRequirement.Createworkrequirement, " +
       "MA_WorkRequirement.AD_Client_ID, " +
       "MA_WorkRequirement.Name, " +
-      "COALESCE(MA_WorkRequirement.IsActive, 'N') AS IsActive, " +
       "MA_WorkRequirement.MA_Workrequirement_ID, " +
+      "COALESCE(MA_WorkRequirement.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_WorkRequirement left join (select AD_Org_ID, Name from AD_Org) table1 on (MA_WorkRequirement.AD_Org_ID = table1.AD_Org_ID) left join (select C_Doctype_ID, Name from C_Doctype) table2 on (MA_WorkRequirement.C_Doctype_ID = table2.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select MA_Processplan_ID, Name from MA_Processplan) table4 on (MA_WorkRequirement.MA_Processplan_ID = table4.MA_Processplan_ID)" +
       "        WHERE 2=2 " +
@@ -259,8 +259,8 @@ Select for edit
         objectHeaderData.createworkrequirement = UtilSql.getValue(result, "createworkrequirement");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.name = UtilSql.getValue(result, "name");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.maWorkrequirementId = UtilSql.getValue(result, "ma_workrequirement_id");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -327,8 +327,8 @@ Create a registry
     objectHeaderData[0].createworkrequirement = createworkrequirement;
     objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].name = name;
-    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].maWorkrequirementId = maWorkrequirementId;
+    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -452,7 +452,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_WorkRequirement" +
-      "        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , MA_Processplan_ID = (?) , Quantity = TO_NUMBER(?) , Launchdate = TO_DATE(?) , StartDate = TO_DATE(?) , EndDate = TO_DATE(?) , Conversionrate = TO_NUMBER(?) , Secondaryqty = TO_NUMBER(?) , Explodephases = (?) , Secondaryunit = (?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Processed = (?) , Explote = (?) , Closed = (?) , Createworkrequirement = (?) , AD_Client_ID = (?) , Name = (?) , IsActive = (?) , MA_Workrequirement_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , MA_Processplan_ID = (?) , Quantity = TO_NUMBER(?) , Launchdate = TO_DATE(?) , StartDate = TO_DATE(?) , EndDate = TO_DATE(?) , Conversionrate = TO_NUMBER(?) , Secondaryqty = TO_NUMBER(?) , Explodephases = (?) , Secondaryunit = (?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Processed = (?) , Explote = (?) , Closed = (?) , Createworkrequirement = (?) , AD_Client_ID = (?) , Name = (?) , MA_Workrequirement_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_WorkRequirement.MA_Workrequirement_ID = ? " +
       "        AND MA_WorkRequirement.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -489,8 +489,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createworkrequirement);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -519,7 +519,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_WorkRequirement " +
-      "        (AD_Org_ID, C_Doctype_ID, DocumentNo, MA_Processplan_ID, Quantity, Launchdate, StartDate, EndDate, Conversionrate, Secondaryqty, Explodephases, Secondaryunit, Estimatedtime, Runtime, Processed, Explote, Closed, Createworkrequirement, AD_Client_ID, Name, IsActive, MA_Workrequirement_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, C_Doctype_ID, DocumentNo, MA_Processplan_ID, Quantity, Launchdate, StartDate, EndDate, Conversionrate, Secondaryqty, Explodephases, Secondaryunit, Estimatedtime, Runtime, Processed, Explote, Closed, Createworkrequirement, AD_Client_ID, Name, MA_Workrequirement_ID, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -548,8 +548,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createworkrequirement);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

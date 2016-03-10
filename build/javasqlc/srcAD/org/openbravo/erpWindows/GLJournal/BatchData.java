@@ -42,9 +42,9 @@ static Logger log4j = Logger.getLogger(BatchData.class);
   public String processing;
   public String isactive;
   public String glCategoryId;
-  public String postingtype;
-  public String processed;
   public String adClientId;
+  public String processed;
+  public String postingtype;
   public String glJournalbatchId;
   public String language;
   public String adUserClient;
@@ -107,12 +107,12 @@ static Logger log4j = Logger.getLogger(BatchData.class);
       return isactive;
     else if (fieldName.equalsIgnoreCase("gl_category_id") || fieldName.equals("glCategoryId"))
       return glCategoryId;
-    else if (fieldName.equalsIgnoreCase("postingtype"))
-      return postingtype;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("postingtype"))
+      return postingtype;
     else if (fieldName.equalsIgnoreCase("gl_journalbatch_id") || fieldName.equals("glJournalbatchId"))
       return glJournalbatchId;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -172,9 +172,9 @@ Select for edit
       "GL_JournalBatch.Processing, " +
       "COALESCE(GL_JournalBatch.IsActive, 'N') AS IsActive, " +
       "GL_JournalBatch.GL_Category_ID, " +
-      "GL_JournalBatch.PostingType, " +
-      "COALESCE(GL_JournalBatch.Processed, 'N') AS Processed, " +
       "GL_JournalBatch.AD_Client_ID, " +
+      "COALESCE(GL_JournalBatch.Processed, 'N') AS Processed, " +
+      "GL_JournalBatch.PostingType, " +
       "GL_JournalBatch.GL_JournalBatch_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM GL_JournalBatch left join (select AD_Org_ID, Name from AD_Org) table1 on (GL_JournalBatch.AD_Org_ID = table1.AD_Org_ID) left join (select C_Period_ID, Name from C_Period) table2 on (GL_JournalBatch.C_Period_ID =  table2.C_Period_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (GL_JournalBatch.C_Currency_ID = table3.C_Currency_ID)" +
@@ -241,9 +241,9 @@ Select for edit
         objectBatchData.processing = UtilSql.getValue(result, "processing");
         objectBatchData.isactive = UtilSql.getValue(result, "isactive");
         objectBatchData.glCategoryId = UtilSql.getValue(result, "gl_category_id");
-        objectBatchData.postingtype = UtilSql.getValue(result, "postingtype");
-        objectBatchData.processed = UtilSql.getValue(result, "processed");
         objectBatchData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectBatchData.processed = UtilSql.getValue(result, "processed");
+        objectBatchData.postingtype = UtilSql.getValue(result, "postingtype");
         objectBatchData.glJournalbatchId = UtilSql.getValue(result, "gl_journalbatch_id");
         objectBatchData.language = UtilSql.getValue(result, "language");
         objectBatchData.adUserClient = "";
@@ -306,9 +306,9 @@ Create a registry
     objectBatchData[0].processing = processing;
     objectBatchData[0].isactive = isactive;
     objectBatchData[0].glCategoryId = glCategoryId;
-    objectBatchData[0].postingtype = postingtype;
-    objectBatchData[0].processed = processed;
     objectBatchData[0].adClientId = adClientId;
+    objectBatchData[0].processed = processed;
+    objectBatchData[0].postingtype = postingtype;
     objectBatchData[0].glJournalbatchId = glJournalbatchId;
     objectBatchData[0].language = "";
     return objectBatchData;
@@ -472,7 +472,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE GL_JournalBatch" +
-      "        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , DateDoc = TO_DATE(?) , DateAcct = TO_DATE(?) , C_Period_ID = (?) , C_Currency_ID = (?) , IsTemplate = (?) , ControlAmt = TO_NUMBER(?) , TotalDr = TO_NUMBER(?) , TotalCr = TO_NUMBER(?) , CopyFrom = (?) , Processing = (?) , IsActive = (?) , GL_Category_ID = (?) , PostingType = (?) , Processed = (?) , AD_Client_ID = (?) , GL_JournalBatch_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , DateDoc = TO_DATE(?) , DateAcct = TO_DATE(?) , C_Period_ID = (?) , C_Currency_ID = (?) , IsTemplate = (?) , ControlAmt = TO_NUMBER(?) , TotalDr = TO_NUMBER(?) , TotalCr = TO_NUMBER(?) , CopyFrom = (?) , Processing = (?) , IsActive = (?) , GL_Category_ID = (?) , AD_Client_ID = (?) , Processed = (?) , PostingType = (?) , GL_JournalBatch_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE GL_JournalBatch.GL_JournalBatch_ID = ? " +
       "        AND GL_JournalBatch.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -504,9 +504,9 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, glCategoryId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, postingtype);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, postingtype);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalbatchId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalbatchId);
@@ -536,7 +536,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO GL_JournalBatch " +
-      "        (AD_Org_ID, DocumentNo, Description, DateDoc, DateAcct, C_Period_ID, C_Currency_ID, IsTemplate, ControlAmt, TotalDr, TotalCr, CopyFrom, Processing, IsActive, GL_Category_ID, PostingType, Processed, AD_Client_ID, GL_JournalBatch_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, DocumentNo, Description, DateDoc, DateAcct, C_Period_ID, C_Currency_ID, IsTemplate, ControlAmt, TotalDr, TotalCr, CopyFrom, Processing, IsActive, GL_Category_ID, AD_Client_ID, Processed, PostingType, GL_JournalBatch_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -560,9 +560,9 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, glCategoryId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, postingtype);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, postingtype);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, glJournalbatchId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

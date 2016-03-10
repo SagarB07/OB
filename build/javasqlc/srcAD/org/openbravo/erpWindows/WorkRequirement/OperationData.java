@@ -43,10 +43,10 @@ static Logger log4j = Logger.getLogger(OperationData.class);
   public String outsourced;
   public String preptime;
   public String usedmaterial;
+  public String name;
+  public String maWrphaseId;
   public String maWorkrequirementId;
   public String isactive;
-  public String maWrphaseId;
-  public String name;
   public String adOrgId;
   public String adClientId;
   public String language;
@@ -112,14 +112,14 @@ static Logger log4j = Logger.getLogger(OperationData.class);
       return preptime;
     else if (fieldName.equalsIgnoreCase("usedmaterial"))
       return usedmaterial;
+    else if (fieldName.equalsIgnoreCase("name"))
+      return name;
+    else if (fieldName.equalsIgnoreCase("ma_wrphase_id") || fieldName.equals("maWrphaseId"))
+      return maWrphaseId;
     else if (fieldName.equalsIgnoreCase("ma_workrequirement_id") || fieldName.equals("maWorkrequirementId"))
       return maWorkrequirementId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("ma_wrphase_id") || fieldName.equals("maWrphaseId"))
-      return maWrphaseId;
-    else if (fieldName.equalsIgnoreCase("name"))
-      return name;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
@@ -182,10 +182,10 @@ Select for edit
       "COALESCE(MA_WRPhase.Outsourced, 'N') AS Outsourced, " +
       "MA_WRPhase.Preptime, " +
       "COALESCE(MA_WRPhase.Usedmaterial, 'N') AS Usedmaterial, " +
+      "MA_WRPhase.Name, " +
+      "MA_WRPhase.MA_Wrphase_ID, " +
       "MA_WRPhase.MA_Workrequirement_ID, " +
       "COALESCE(MA_WRPhase.IsActive, 'N') AS IsActive, " +
-      "MA_WRPhase.MA_Wrphase_ID, " +
-      "MA_WRPhase.Name, " +
       "MA_WRPhase.AD_Org_ID, " +
       "MA_WRPhase.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
@@ -259,10 +259,10 @@ Select for edit
         objectOperationData.outsourced = UtilSql.getValue(result, "outsourced");
         objectOperationData.preptime = UtilSql.getValue(result, "preptime");
         objectOperationData.usedmaterial = UtilSql.getValue(result, "usedmaterial");
+        objectOperationData.name = UtilSql.getValue(result, "name");
+        objectOperationData.maWrphaseId = UtilSql.getValue(result, "ma_wrphase_id");
         objectOperationData.maWorkrequirementId = UtilSql.getValue(result, "ma_workrequirement_id");
         objectOperationData.isactive = UtilSql.getValue(result, "isactive");
-        objectOperationData.maWrphaseId = UtilSql.getValue(result, "ma_wrphase_id");
-        objectOperationData.name = UtilSql.getValue(result, "name");
         objectOperationData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectOperationData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectOperationData.language = UtilSql.getValue(result, "language");
@@ -327,10 +327,10 @@ Create a registry
     objectOperationData[0].outsourced = outsourced;
     objectOperationData[0].preptime = preptime;
     objectOperationData[0].usedmaterial = usedmaterial;
+    objectOperationData[0].name = name;
+    objectOperationData[0].maWrphaseId = maWrphaseId;
     objectOperationData[0].maWorkrequirementId = maWorkrequirementId;
     objectOperationData[0].isactive = isactive;
-    objectOperationData[0].maWrphaseId = maWrphaseId;
-    objectOperationData[0].name = name;
     objectOperationData[0].adOrgId = adOrgId;
     objectOperationData[0].adClientId = adClientId;
     objectOperationData[0].language = "";
@@ -571,7 +571,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_WRPhase" +
-      "        SET SeqNo = TO_NUMBER(?) , MA_Sequence_ID = (?) , MA_Process_ID = (?) , Startdate = TO_DATE(?) , Enddate = TO_DATE(?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Quantity = TO_NUMBER(?) , Donequantity = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Description = (?) , Noqty = (?) , Groupuse = (?) , Closed = (?) , Outsourced = (?) , Preptime = TO_NUMBER(?) , Usedmaterial = (?) , MA_Workrequirement_ID = (?) , IsActive = (?) , MA_Wrphase_ID = (?) , Name = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET SeqNo = TO_NUMBER(?) , MA_Sequence_ID = (?) , MA_Process_ID = (?) , Startdate = TO_DATE(?) , Enddate = TO_DATE(?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Quantity = TO_NUMBER(?) , Donequantity = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Description = (?) , Noqty = (?) , Groupuse = (?) , Closed = (?) , Outsourced = (?) , Preptime = TO_NUMBER(?) , Usedmaterial = (?) , Name = (?) , MA_Wrphase_ID = (?) , MA_Workrequirement_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_WRPhase.MA_Wrphase_ID = ? " +
       "                 AND MA_WRPhase.MA_Workrequirement_ID = ? " +
       "        AND MA_WRPhase.AD_Client_ID IN (";
@@ -606,10 +606,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, outsourced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, preptime);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, usedmaterial);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWrphaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWrphaseId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
@@ -641,7 +641,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_WRPhase " +
-      "        (SeqNo, MA_Sequence_ID, MA_Process_ID, Startdate, Enddate, Estimatedtime, Runtime, Quantity, Donequantity, CostCenterUse, Description, Noqty, Groupuse, Closed, Outsourced, Preptime, Usedmaterial, MA_Workrequirement_ID, IsActive, MA_Wrphase_ID, Name, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (SeqNo, MA_Sequence_ID, MA_Process_ID, Startdate, Enddate, Estimatedtime, Runtime, Quantity, Donequantity, CostCenterUse, Description, Noqty, Groupuse, Closed, Outsourced, Preptime, Usedmaterial, Name, MA_Wrphase_ID, MA_Workrequirement_ID, IsActive, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -667,10 +667,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, outsourced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, preptime);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, usedmaterial);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWrphaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWrphaseId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);

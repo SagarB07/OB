@@ -39,11 +39,11 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
   public String pPurchasepricevarianceAcct;
   public String pTradediscountrecAcct;
   public String pTradediscountgrantAcct;
-  public String adClientId;
   public String mProductCategoryAcctId;
   public String mProductCategoryId;
-  public String isactive;
   public String adOrgId;
+  public String adClientId;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -99,16 +99,16 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
       return pTradediscountrecAcct;
     else if (fieldName.equalsIgnoreCase("p_tradediscountgrant_acct") || fieldName.equals("pTradediscountgrantAcct"))
       return pTradediscountgrantAcct;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("m_product_category_acct_id") || fieldName.equals("mProductCategoryAcctId"))
       return mProductCategoryAcctId;
     else if (fieldName.equalsIgnoreCase("m_product_category_id") || fieldName.equals("mProductCategoryId"))
       return mProductCategoryId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -163,11 +163,11 @@ Select for edit
       "M_Product_Category_Acct.P_PurchasePriceVariance_Acct, " +
       "M_Product_Category_Acct.P_TradeDiscountRec_Acct, " +
       "M_Product_Category_Acct.P_TradeDiscountGrant_Acct, " +
-      "M_Product_Category_Acct.AD_Client_ID, " +
       "M_Product_Category_Acct.M_Product_Category_Acct_ID, " +
       "M_Product_Category_Acct.M_Product_Category_ID, " +
-      "COALESCE(M_Product_Category_Acct.IsActive, 'N') AS IsActive, " +
       "M_Product_Category_Acct.AD_Org_ID, " +
+      "M_Product_Category_Acct.AD_Client_ID, " +
+      "COALESCE(M_Product_Category_Acct.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Product_Category_Acct left join (select C_AcctSchema_ID, Name from C_AcctSchema) table1 on (M_Product_Category_Acct.C_AcctSchema_ID = table1.C_AcctSchema_ID)" +
       "        WHERE 2=2 " +
@@ -235,11 +235,11 @@ Select for edit
         objectAccountingData.pPurchasepricevarianceAcct = UtilSql.getValue(result, "p_purchasepricevariance_acct");
         objectAccountingData.pTradediscountrecAcct = UtilSql.getValue(result, "p_tradediscountrec_acct");
         objectAccountingData.pTradediscountgrantAcct = UtilSql.getValue(result, "p_tradediscountgrant_acct");
-        objectAccountingData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectAccountingData.mProductCategoryAcctId = UtilSql.getValue(result, "m_product_category_acct_id");
         objectAccountingData.mProductCategoryId = UtilSql.getValue(result, "m_product_category_id");
-        objectAccountingData.isactive = UtilSql.getValue(result, "isactive");
         objectAccountingData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectAccountingData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectAccountingData.isactive = UtilSql.getValue(result, "isactive");
         objectAccountingData.language = UtilSql.getValue(result, "language");
         objectAccountingData.adUserClient = "";
         objectAccountingData.adOrgClient = "";
@@ -298,11 +298,11 @@ Create a registry
     objectAccountingData[0].pPurchasepricevarianceAcct = pPurchasepricevarianceAcct;
     objectAccountingData[0].pTradediscountrecAcct = pTradediscountrecAcct;
     objectAccountingData[0].pTradediscountgrantAcct = pTradediscountgrantAcct;
-    objectAccountingData[0].adClientId = adClientId;
     objectAccountingData[0].mProductCategoryAcctId = mProductCategoryAcctId;
     objectAccountingData[0].mProductCategoryId = mProductCategoryId;
-    objectAccountingData[0].isactive = isactive;
     objectAccountingData[0].adOrgId = adOrgId;
+    objectAccountingData[0].adClientId = adClientId;
+    objectAccountingData[0].isactive = isactive;
     objectAccountingData[0].language = "";
     return objectAccountingData;
   }
@@ -505,7 +505,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Product_Category_Acct" +
-      "        SET C_AcctSchema_ID = (?) , P_Asset_Acct = (?) , P_Expense_Acct = (?) , P_Def_Expense_Acct = (?) , P_Revenue_Acct = (?) , P_Def_Revenue_Acct = (?) , P_Cogs_Acct = (?) , P_InvoicePriceVariance_Acct = (?) , P_Revenue_Return_Acct = (?) , P_Cogs_Return_Acct = (?) , Processing = (?) , P_PurchasePriceVariance_Acct = (?) , P_TradeDiscountRec_Acct = (?) , P_TradeDiscountGrant_Acct = (?) , AD_Client_ID = (?) , M_Product_Category_Acct_ID = (?) , M_Product_Category_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET C_AcctSchema_ID = (?) , P_Asset_Acct = (?) , P_Expense_Acct = (?) , P_Def_Expense_Acct = (?) , P_Revenue_Acct = (?) , P_Def_Revenue_Acct = (?) , P_Cogs_Acct = (?) , P_InvoicePriceVariance_Acct = (?) , P_Revenue_Return_Acct = (?) , P_Cogs_Return_Acct = (?) , Processing = (?) , P_PurchasePriceVariance_Acct = (?) , P_TradeDiscountRec_Acct = (?) , P_TradeDiscountGrant_Acct = (?) , M_Product_Category_Acct_ID = (?) , M_Product_Category_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Product_Category_Acct.M_Product_Category_Acct_ID = ? " +
       "                 AND M_Product_Category_Acct.M_Product_Category_ID = ? " +
       "        AND M_Product_Category_Acct.AD_Client_ID IN (";
@@ -537,11 +537,11 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pPurchasepricevarianceAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pTradediscountrecAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pTradediscountgrantAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryAcctId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryAcctId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryId);
@@ -571,7 +571,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Product_Category_Acct " +
-      "        (C_AcctSchema_ID, P_Asset_Acct, P_Expense_Acct, P_Def_Expense_Acct, P_Revenue_Acct, P_Def_Revenue_Acct, P_Cogs_Acct, P_InvoicePriceVariance_Acct, P_Revenue_Return_Acct, P_Cogs_Return_Acct, Processing, P_PurchasePriceVariance_Acct, P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct, AD_Client_ID, M_Product_Category_Acct_ID, M_Product_Category_ID, IsActive, AD_Org_ID, created, createdby, updated, updatedBy)" +
+      "        (C_AcctSchema_ID, P_Asset_Acct, P_Expense_Acct, P_Def_Expense_Acct, P_Revenue_Acct, P_Def_Revenue_Acct, P_Cogs_Acct, P_InvoicePriceVariance_Acct, P_Revenue_Return_Acct, P_Cogs_Return_Acct, Processing, P_PurchasePriceVariance_Acct, P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct, M_Product_Category_Acct_ID, M_Product_Category_ID, AD_Org_ID, AD_Client_ID, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -594,11 +594,11 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pPurchasepricevarianceAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pTradediscountrecAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pTradediscountgrantAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryAcctId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

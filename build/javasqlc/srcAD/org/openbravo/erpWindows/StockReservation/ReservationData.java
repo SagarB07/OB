@@ -24,9 +24,9 @@ static Logger log4j = Logger.getLogger(ReservationData.class);
   public String updatedTimeStamp;
   public String updatedby;
   public String updatedbyr;
-  public String managereservationPe;
   public String resProcess;
   public String resProcessBtn;
+  public String managereservationPe;
   public String adOrgId;
   public String adOrgIdr;
   public String mProductId;
@@ -42,12 +42,12 @@ static Logger log4j = Logger.getLogger(ReservationData.class);
   public String mLocatorIdr;
   public String mAttributesetinstanceId;
   public String mAttributesetinstanceIdr;
-  public String isactive;
-  public String resStatus;
-  public String adClientId;
-  public String mReservationId;
-  public String reservedqty;
   public String releasedqty;
+  public String resStatus;
+  public String isactive;
+  public String mReservationId;
+  public String adClientId;
+  public String reservedqty;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -73,12 +73,12 @@ static Logger log4j = Logger.getLogger(ReservationData.class);
       return updatedby;
     else if (fieldName.equalsIgnoreCase("updatedbyr"))
       return updatedbyr;
-    else if (fieldName.equalsIgnoreCase("managereservation_pe") || fieldName.equals("managereservationPe"))
-      return managereservationPe;
     else if (fieldName.equalsIgnoreCase("res_process") || fieldName.equals("resProcess"))
       return resProcess;
     else if (fieldName.equalsIgnoreCase("res_process_btn") || fieldName.equals("resProcessBtn"))
       return resProcessBtn;
+    else if (fieldName.equalsIgnoreCase("managereservation_pe") || fieldName.equals("managereservationPe"))
+      return managereservationPe;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_org_idr") || fieldName.equals("adOrgIdr"))
@@ -109,18 +109,18 @@ static Logger log4j = Logger.getLogger(ReservationData.class);
       return mAttributesetinstanceId;
     else if (fieldName.equalsIgnoreCase("m_attributesetinstance_idr") || fieldName.equals("mAttributesetinstanceIdr"))
       return mAttributesetinstanceIdr;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("res_status") || fieldName.equals("resStatus"))
-      return resStatus;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("m_reservation_id") || fieldName.equals("mReservationId"))
-      return mReservationId;
-    else if (fieldName.equalsIgnoreCase("reservedqty"))
-      return reservedqty;
     else if (fieldName.equalsIgnoreCase("releasedqty"))
       return releasedqty;
+    else if (fieldName.equalsIgnoreCase("res_status") || fieldName.equals("resStatus"))
+      return resStatus;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("m_reservation_id") || fieldName.equals("mReservationId"))
+      return mReservationId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("reservedqty"))
+      return reservedqty;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -160,9 +160,9 @@ Select for edit
       "        to_char(M_Reservation.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  " +
       "        M_Reservation.UpdatedBy, " +
       "        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = M_Reservation.UpdatedBy) as UpdatedByR," +
-      "        M_Reservation.Managereservation_Pe, " +
-      "M_Reservation.RES_Process, " +
+      "        M_Reservation.RES_Process, " +
       "list1.name as RES_Process_BTN, " +
+      "M_Reservation.Managereservation_Pe, " +
       "M_Reservation.AD_Org_ID, " +
       "(CASE WHEN M_Reservation.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, " +
       "M_Reservation.M_Product_ID, " +
@@ -178,12 +178,12 @@ Select for edit
       "(CASE WHEN M_Reservation.M_Locator_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Value), ''))),'') ) END) AS M_Locator_IDR, " +
       "M_Reservation.M_Attributesetinstance_ID, " +
       "(CASE WHEN M_Reservation.M_Attributesetinstance_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table10.Description), ''))),'') ) END) AS M_Attributesetinstance_IDR, " +
-      "COALESCE(M_Reservation.Isactive, 'N') AS Isactive, " +
-      "M_Reservation.RES_Status, " +
-      "M_Reservation.AD_Client_ID, " +
-      "M_Reservation.M_Reservation_ID, " +
-      "M_Reservation.Reservedqty, " +
       "M_Reservation.ReleasedQty, " +
+      "M_Reservation.RES_Status, " +
+      "COALESCE(M_Reservation.Isactive, 'N') AS Isactive, " +
+      "M_Reservation.M_Reservation_ID, " +
+      "M_Reservation.AD_Client_ID, " +
+      "M_Reservation.Reservedqty, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Reservation left join ad_ref_list_v list1 on (list1.ad_reference_id = '440DDA64A43F4799AAFF48BC86DC8F78' and list1.ad_language = ?  AND M_Reservation.RES_Process = TO_CHAR(list1.value)) left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Reservation.AD_Org_ID = table1.AD_Org_ID) left join (select M_Product_ID, Name from M_Product) table2 on (M_Reservation.M_Product_ID = table2.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL2 on (table2.M_Product_ID = tableTRL2.M_Product_ID and tableTRL2.AD_Language = ?)  left join (select C_Uom_ID, Name from C_Uom) table4 on (M_Reservation.C_Uom_ID = table4.C_Uom_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL4 on (table4.C_UOM_ID = tableTRL4.C_UOM_ID and tableTRL4.AD_Language = ?)  left join (select C_Orderline_ID, C_Order_ID, Line, LineNetAmt from C_Orderline) table6 on (M_Reservation.C_Orderline_ID = table6.C_Orderline_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table7 on (table6.C_Order_ID = table7.C_Order_ID) left join (select M_Warehouse_ID, Name from M_Warehouse) table8 on (M_Reservation.M_Warehouse_ID = table8.M_Warehouse_ID) left join (select M_Locator_ID, Value from M_Locator) table9 on (M_Reservation.M_Locator_ID = table9.M_Locator_ID) left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table10 on (M_Reservation.M_Attributesetinstance_ID = table10.M_AttributeSetInstance_ID)" +
       "        WHERE 2=2 " +
@@ -234,9 +234,9 @@ Select for edit
         objectReservationData.updatedTimeStamp = UtilSql.getValue(result, "updated_time_stamp");
         objectReservationData.updatedby = UtilSql.getValue(result, "updatedby");
         objectReservationData.updatedbyr = UtilSql.getValue(result, "updatedbyr");
-        objectReservationData.managereservationPe = UtilSql.getValue(result, "managereservation_pe");
         objectReservationData.resProcess = UtilSql.getValue(result, "res_process");
         objectReservationData.resProcessBtn = UtilSql.getValue(result, "res_process_btn");
+        objectReservationData.managereservationPe = UtilSql.getValue(result, "managereservation_pe");
         objectReservationData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectReservationData.adOrgIdr = UtilSql.getValue(result, "ad_org_idr");
         objectReservationData.mProductId = UtilSql.getValue(result, "m_product_id");
@@ -252,12 +252,12 @@ Select for edit
         objectReservationData.mLocatorIdr = UtilSql.getValue(result, "m_locator_idr");
         objectReservationData.mAttributesetinstanceId = UtilSql.getValue(result, "m_attributesetinstance_id");
         objectReservationData.mAttributesetinstanceIdr = UtilSql.getValue(result, "m_attributesetinstance_idr");
-        objectReservationData.isactive = UtilSql.getValue(result, "isactive");
-        objectReservationData.resStatus = UtilSql.getValue(result, "res_status");
-        objectReservationData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectReservationData.mReservationId = UtilSql.getValue(result, "m_reservation_id");
-        objectReservationData.reservedqty = UtilSql.getValue(result, "reservedqty");
         objectReservationData.releasedqty = UtilSql.getValue(result, "releasedqty");
+        objectReservationData.resStatus = UtilSql.getValue(result, "res_status");
+        objectReservationData.isactive = UtilSql.getValue(result, "isactive");
+        objectReservationData.mReservationId = UtilSql.getValue(result, "m_reservation_id");
+        objectReservationData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectReservationData.reservedqty = UtilSql.getValue(result, "reservedqty");
         objectReservationData.language = UtilSql.getValue(result, "language");
         objectReservationData.adUserClient = "";
         objectReservationData.adOrgClient = "";
@@ -301,9 +301,9 @@ Create a registry
     objectReservationData[0].updatedTimeStamp = "";
     objectReservationData[0].updatedby = updatedby;
     objectReservationData[0].updatedbyr = updatedbyr;
-    objectReservationData[0].managereservationPe = managereservationPe;
     objectReservationData[0].resProcess = resProcess;
     objectReservationData[0].resProcessBtn = resProcessBtn;
+    objectReservationData[0].managereservationPe = managereservationPe;
     objectReservationData[0].adOrgId = adOrgId;
     objectReservationData[0].adOrgIdr = "";
     objectReservationData[0].mProductId = mProductId;
@@ -319,12 +319,12 @@ Create a registry
     objectReservationData[0].mLocatorIdr = mLocatorIdr;
     objectReservationData[0].mAttributesetinstanceId = mAttributesetinstanceId;
     objectReservationData[0].mAttributesetinstanceIdr = mAttributesetinstanceIdr;
-    objectReservationData[0].isactive = isactive;
-    objectReservationData[0].resStatus = resStatus;
-    objectReservationData[0].adClientId = adClientId;
-    objectReservationData[0].mReservationId = mReservationId;
-    objectReservationData[0].reservedqty = reservedqty;
     objectReservationData[0].releasedqty = releasedqty;
+    objectReservationData[0].resStatus = resStatus;
+    objectReservationData[0].isactive = isactive;
+    objectReservationData[0].mReservationId = mReservationId;
+    objectReservationData[0].adClientId = adClientId;
+    objectReservationData[0].reservedqty = reservedqty;
     objectReservationData[0].language = "";
     return objectReservationData;
   }
@@ -562,7 +562,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Reservation" +
-      "        SET Managereservation_Pe = (?) , RES_Process = (?) , AD_Org_ID = (?) , M_Product_ID = (?) , Quantity = TO_NUMBER(?) , C_Uom_ID = (?) , C_Orderline_ID = (?) , M_Warehouse_ID = (?) , M_Locator_ID = (?) , M_Attributesetinstance_ID = (?) , Isactive = (?) , RES_Status = (?) , AD_Client_ID = (?) , M_Reservation_ID = (?) , Reservedqty = TO_NUMBER(?) , ReleasedQty = TO_NUMBER(?) , updated = now(), updatedby = ? " +
+      "        SET RES_Process = (?) , Managereservation_Pe = (?) , AD_Org_ID = (?) , M_Product_ID = (?) , Quantity = TO_NUMBER(?) , C_Uom_ID = (?) , C_Orderline_ID = (?) , M_Warehouse_ID = (?) , M_Locator_ID = (?) , M_Attributesetinstance_ID = (?) , ReleasedQty = TO_NUMBER(?) , RES_Status = (?) , Isactive = (?) , M_Reservation_ID = (?) , AD_Client_ID = (?) , Reservedqty = TO_NUMBER(?) , updated = now(), updatedby = ? " +
       "        WHERE M_Reservation.M_Reservation_ID = ? " +
       "        AND M_Reservation.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -579,8 +579,8 @@ Select for auxiliar field
     int iParameter = 0;
     try {
     st = connectionProvider.getPreparedStatement(conn, strSql);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, managereservationPe);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, resProcess);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, managereservationPe);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, quantity);
@@ -589,12 +589,12 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mAttributesetinstanceId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, resStatus);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mReservationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, reservedqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, releasedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, resStatus);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mReservationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, reservedqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mReservationId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -623,8 +623,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Reservation " +
-      "        (Managereservation_Pe, RES_Process, AD_Org_ID, M_Product_ID, Quantity, C_Uom_ID, C_Orderline_ID, M_Warehouse_ID, M_Locator_ID, M_Attributesetinstance_ID, Isactive, RES_Status, AD_Client_ID, M_Reservation_ID, Reservedqty, ReleasedQty, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), now(), ?, now(), ?)";
+      "        (RES_Process, Managereservation_Pe, AD_Org_ID, M_Product_ID, Quantity, C_Uom_ID, C_Orderline_ID, M_Warehouse_ID, M_Locator_ID, M_Attributesetinstance_ID, ReleasedQty, RES_Status, Isactive, M_Reservation_ID, AD_Client_ID, Reservedqty, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -632,8 +632,8 @@ Select for auxiliar field
     int iParameter = 0;
     try {
     st = connectionProvider.getPreparedStatement(conn, strSql);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, managereservationPe);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, resProcess);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, managereservationPe);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, quantity);
@@ -642,12 +642,12 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mAttributesetinstanceId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, resStatus);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mReservationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, reservedqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, releasedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, resStatus);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mReservationId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, reservedqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

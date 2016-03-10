@@ -29,12 +29,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String movementdate;
   public String name;
   public String processing;
-  public String isactive;
-  public String adClientId;
-  public String status;
-  public String mInternalConsumptionId;
-  public String processed;
   public String posted;
+  public String processed;
+  public String mInternalConsumptionId;
+  public String status;
+  public String adClientId;
+  public String isactive;
   public String description;
   public String language;
   public String adUserClient;
@@ -71,18 +71,18 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return name;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("status"))
-      return status;
-    else if (fieldName.equalsIgnoreCase("m_internal_consumption_id") || fieldName.equals("mInternalConsumptionId"))
-      return mInternalConsumptionId;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
     else if (fieldName.equalsIgnoreCase("posted"))
       return posted;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("m_internal_consumption_id") || fieldName.equals("mInternalConsumptionId"))
+      return mInternalConsumptionId;
+    else if (fieldName.equalsIgnoreCase("status"))
+      return status;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("description"))
       return description;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -129,12 +129,12 @@ Select for edit
       "M_Internal_Consumption.MovementDate, " +
       "M_Internal_Consumption.Name, " +
       "M_Internal_Consumption.Processing, " +
-      "COALESCE(M_Internal_Consumption.IsActive, 'N') AS IsActive, " +
-      "M_Internal_Consumption.AD_Client_ID, " +
-      "M_Internal_Consumption.Status, " +
-      "M_Internal_Consumption.M_Internal_Consumption_ID, " +
-      "COALESCE(M_Internal_Consumption.Processed, 'N') AS Processed, " +
       "COALESCE(M_Internal_Consumption.Posted, 'N') AS Posted, " +
+      "COALESCE(M_Internal_Consumption.Processed, 'N') AS Processed, " +
+      "M_Internal_Consumption.M_Internal_Consumption_ID, " +
+      "M_Internal_Consumption.Status, " +
+      "M_Internal_Consumption.AD_Client_ID, " +
+      "COALESCE(M_Internal_Consumption.IsActive, 'N') AS IsActive, " +
       "M_Internal_Consumption.Description, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Internal_Consumption left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Internal_Consumption.AD_Org_ID = table1.AD_Org_ID)" +
@@ -188,12 +188,12 @@ Select for edit
         objectHeaderData.movementdate = UtilSql.getDateValue(result, "movementdate", "dd-MM-yyyy");
         objectHeaderData.name = UtilSql.getValue(result, "name");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectHeaderData.status = UtilSql.getValue(result, "status");
-        objectHeaderData.mInternalConsumptionId = UtilSql.getValue(result, "m_internal_consumption_id");
-        objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.posted = UtilSql.getValue(result, "posted");
+        objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.mInternalConsumptionId = UtilSql.getValue(result, "m_internal_consumption_id");
+        objectHeaderData.status = UtilSql.getValue(result, "status");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.description = UtilSql.getValue(result, "description");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
@@ -243,12 +243,12 @@ Create a registry
     objectHeaderData[0].movementdate = movementdate;
     objectHeaderData[0].name = name;
     objectHeaderData[0].processing = processing;
-    objectHeaderData[0].isactive = isactive;
-    objectHeaderData[0].adClientId = adClientId;
-    objectHeaderData[0].status = status;
-    objectHeaderData[0].mInternalConsumptionId = mInternalConsumptionId;
-    objectHeaderData[0].processed = processed;
     objectHeaderData[0].posted = posted;
+    objectHeaderData[0].processed = processed;
+    objectHeaderData[0].mInternalConsumptionId = mInternalConsumptionId;
+    objectHeaderData[0].status = status;
+    objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].description = description;
     objectHeaderData[0].language = "";
     return objectHeaderData;
@@ -334,7 +334,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Internal_Consumption" +
-      "        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , Processing = (?) , IsActive = (?) , AD_Client_ID = (?) , Status = (?) , M_Internal_Consumption_ID = (?) , Processed = (?) , Posted = (?) , Description = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , Processing = (?) , Posted = (?) , Processed = (?) , M_Internal_Consumption_ID = (?) , Status = (?) , AD_Client_ID = (?) , IsActive = (?) , Description = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Internal_Consumption.M_Internal_Consumption_ID = ? " +
       "        AND M_Internal_Consumption.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -355,12 +355,12 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, movementdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, status);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInternalConsumptionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInternalConsumptionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, status);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInternalConsumptionId);
@@ -390,7 +390,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Internal_Consumption " +
-      "        (AD_Org_ID, MovementDate, Name, Processing, IsActive, AD_Client_ID, Status, M_Internal_Consumption_ID, Processed, Posted, Description, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, MovementDate, Name, Processing, Posted, Processed, M_Internal_Consumption_ID, Status, AD_Client_ID, IsActive, Description, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -403,12 +403,12 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, movementdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, status);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInternalConsumptionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInternalConsumptionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, status);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

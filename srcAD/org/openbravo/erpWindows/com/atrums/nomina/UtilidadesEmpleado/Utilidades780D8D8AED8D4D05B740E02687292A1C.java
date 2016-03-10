@@ -495,7 +495,7 @@ vars.getRequestGlobalVariable("inpParamUtilidad_Total_f", tabId + "|paramUtilida
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|DocAction", data[0].getField("docaction"));    vars.setSessionValue(windowId + "|NO_Utilidad_ID", data[0].getField("noUtilidadId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|DocAction", data[0].getField("docaction"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Utilidad_ID", data[0].getField("noUtilidadId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

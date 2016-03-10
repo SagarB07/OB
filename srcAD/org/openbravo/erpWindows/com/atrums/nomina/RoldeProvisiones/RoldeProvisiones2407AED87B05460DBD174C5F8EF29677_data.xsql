@@ -24,18 +24,18 @@ no_rol_pago_provision.Documentno,
 no_rol_pago_provision.Total_Neto, 
 no_rol_pago_provision.Docstatus, 
 COALESCE(no_rol_pago_provision.Isactive, 'N') AS Isactive, 
+COALESCE(no_rol_pago_provision.Processed, 'N') AS Processed, 
 no_rol_pago_provision.Docaccionno, 
 list1.name as Docaccionno_BTN, 
-COALESCE(no_rol_pago_provision.Processed, 'N') AS Processed, 
 no_rol_pago_provision.Payment, 
 no_rol_pago_provision.Total_Ingreso, 
 no_rol_pago_provision.Total_Egreso, 
 no_rol_pago_provision.C_Period_ID, 
 COALESCE(no_rol_pago_provision.IN_Payment, 'N') AS IN_Payment, 
 no_rol_pago_provision.Dateacct, 
-COALESCE(no_rol_pago_provision.Ispago, 'N') AS Ispago, 
-no_rol_pago_provision.AD_Client_ID, 
 no_rol_pago_provision.NO_Rol_Pago_Provision_ID, 
+no_rol_pago_provision.AD_Client_ID, 
+COALESCE(no_rol_pago_provision.Ispago, 'N') AS Ispago, 
  
         ? AS LANGUAGE 
         FROM no_rol_pago_provision left join (select AD_Org_ID, Name from AD_Org) table1 on (no_rol_pago_provision.AD_Org_ID = table1.AD_Org_ID) left join (select NO_Area_Empresa_ID, Nombre from no_area_empresa) table2 on (no_rol_pago_provision.NO_Area_Empresa_ID =  table2.NO_Area_Empresa_ID) left join (select C_BPartner_ID, Name from C_BPartner) table3 on (no_rol_pago_provision.C_Bpartner_ID = table3.C_BPartner_ID) left join (select C_DocType_ID, Name from C_DocType) table4 on (no_rol_pago_provision.C_Doctype_ID =  table4.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL4 on (table4.C_DocType_ID = tableTRL4.C_DocType_ID and tableTRL4.AD_Language = ?)  left join ad_ref_list_v list1 on (list1.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list1.ad_language = ?  AND no_rol_pago_provision.Docaccionno = TO_CHAR(list1.value))
@@ -128,13 +128,13 @@ no_rol_pago_provision.NO_Rol_Pago_Provision_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_rol_pago_provision
-        SET AD_Org_ID = (?) , NO_Area_Empresa_ID = (?) , C_Bpartner_ID = (?) , em_ne_num_contrato = (?) , C_Doctype_ID = (?) , Documentno = (?) , Total_Neto = TO_NUMBER(?) , Docstatus = (?) , Isactive = (?) , Docaccionno = (?) , Processed = (?) , Payment = (?) , Total_Ingreso = TO_NUMBER(?) , Total_Egreso = TO_NUMBER(?) , C_Period_ID = (?) , IN_Payment = (?) , Dateacct = TO_DATE(?) , Ispago = (?) , AD_Client_ID = (?) , NO_Rol_Pago_Provision_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , NO_Area_Empresa_ID = (?) , C_Bpartner_ID = (?) , em_ne_num_contrato = (?) , C_Doctype_ID = (?) , Documentno = (?) , Total_Neto = TO_NUMBER(?) , Docstatus = (?) , Isactive = (?) , Processed = (?) , Docaccionno = (?) , Payment = (?) , Total_Ingreso = TO_NUMBER(?) , Total_Egreso = TO_NUMBER(?) , C_Period_ID = (?) , IN_Payment = (?) , Dateacct = TO_DATE(?) , NO_Rol_Pago_Provision_ID = (?) , AD_Client_ID = (?) , Ispago = (?) , updated = now(), updatedby = ? 
         WHERE no_rol_pago_provision.NO_Rol_Pago_Provision_ID = ? 
         
         AND no_rol_pago_provision.AD_Client_ID IN ('1') 
         AND no_rol_pago_provision.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeNumContrato"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="payment"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="inPayment"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="ispago"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeNumContrato"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="payment"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="inPayment"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="ispago"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noRolPagoProvisionId"></Parameter>
     
@@ -146,10 +146,10 @@ no_rol_pago_provision.NO_Rol_Pago_Provision_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_rol_pago_provision 
-        (AD_Org_ID, NO_Area_Empresa_ID, C_Bpartner_ID, em_ne_num_contrato, C_Doctype_ID, Documentno, Total_Neto, Docstatus, Isactive, Docaccionno, Processed, Payment, Total_Ingreso, Total_Egreso, C_Period_ID, IN_Payment, Dateacct, Ispago, AD_Client_ID, NO_Rol_Pago_Provision_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, NO_Area_Empresa_ID, C_Bpartner_ID, em_ne_num_contrato, C_Doctype_ID, Documentno, Total_Neto, Docstatus, Isactive, Processed, Docaccionno, Payment, Total_Ingreso, Total_Egreso, C_Period_ID, IN_Payment, Dateacct, NO_Rol_Pago_Provision_ID, AD_Client_ID, Ispago, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeNumContrato"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="payment"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="inPayment"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="ispago"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeNumContrato"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="payment"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="inPayment"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="ispago"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

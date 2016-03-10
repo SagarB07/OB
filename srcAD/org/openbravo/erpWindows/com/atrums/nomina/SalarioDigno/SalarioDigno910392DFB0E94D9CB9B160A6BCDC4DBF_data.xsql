@@ -21,8 +21,8 @@ no_salario_digno.DocAction,
 no_salario_digno.Genera_Datos, 
 no_salario_digno.Genera_Csv, 
 COALESCE(no_salario_digno.Isactive, 'N') AS Isactive, 
-no_salario_digno.AD_Client_ID, 
 no_salario_digno.NO_Salario_Digno_ID, 
+no_salario_digno.AD_Client_ID, 
 no_salario_digno.AD_Org_ID, 
  
         ? AS LANGUAGE 
@@ -95,13 +95,13 @@ no_salario_digno.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_salario_digno
-        SET C_Year_ID = (?) , Salario_Digno_Mensual = TO_NUMBER(?) , Descripcion = (?) , Processed = (?) , Docstatus = (?) , DocAction = (?) , Genera_Datos = (?) , Genera_Csv = (?) , Isactive = (?) , AD_Client_ID = (?) , NO_Salario_Digno_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET C_Year_ID = (?) , Salario_Digno_Mensual = TO_NUMBER(?) , Descripcion = (?) , Processed = (?) , Docstatus = (?) , DocAction = (?) , Genera_Datos = (?) , Genera_Csv = (?) , Isactive = (?) , NO_Salario_Digno_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_salario_digno.NO_Salario_Digno_ID = ? 
         
         AND no_salario_digno.AD_Client_ID IN ('1') 
         AND no_salario_digno.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="cYearId"></Parameter> <Parameter name="salarioDignoMensual"></Parameter> <Parameter name="descripcion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="generaDatos"></Parameter> <Parameter name="generaCsv"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noSalarioDignoId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cYearId"></Parameter> <Parameter name="salarioDignoMensual"></Parameter> <Parameter name="descripcion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="generaDatos"></Parameter> <Parameter name="generaCsv"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noSalarioDignoId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noSalarioDignoId"></Parameter>
     
@@ -113,10 +113,10 @@ no_salario_digno.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_salario_digno 
-        (C_Year_ID, Salario_Digno_Mensual, Descripcion, Processed, Docstatus, DocAction, Genera_Datos, Genera_Csv, Isactive, AD_Client_ID, NO_Salario_Digno_ID, AD_Org_ID, created, createdby, updated, updatedBy)
+        (C_Year_ID, Salario_Digno_Mensual, Descripcion, Processed, Docstatus, DocAction, Genera_Datos, Genera_Csv, Isactive, NO_Salario_Digno_ID, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)
         VALUES ((?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="cYearId"></Parameter> <Parameter name="salarioDignoMensual"></Parameter> <Parameter name="descripcion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="generaDatos"></Parameter> <Parameter name="generaCsv"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noSalarioDignoId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cYearId"></Parameter> <Parameter name="salarioDignoMensual"></Parameter> <Parameter name="descripcion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="generaDatos"></Parameter> <Parameter name="generaCsv"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noSalarioDignoId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

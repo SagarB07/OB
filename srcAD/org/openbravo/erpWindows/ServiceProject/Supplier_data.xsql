@@ -19,13 +19,13 @@ C_Project_Vendor.GenerateOrder,
 C_Project_Vendor.C_Incoterms_ID, 
 (CASE WHEN C_Project_Vendor.C_Incoterms_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS C_Incoterms_IDR, 
 C_Project_Vendor.Incoterms_Description, 
-C_Project_Vendor.AD_Org_ID, 
-C_Project_Vendor.AD_Client_ID, 
+C_Project_Vendor.Note, 
 C_Project_Vendor.C_Project_Vendor_ID, 
 C_Project_Vendor.M_PriceList_Version_ID, 
-C_Project_Vendor.Note, 
-C_Project_Vendor.C_Project_ID, 
+C_Project_Vendor.AD_Client_ID, 
+C_Project_Vendor.AD_Org_ID, 
 COALESCE(C_Project_Vendor.IsActive, 'N') AS IsActive, 
+C_Project_Vendor.C_Project_ID, 
  
         ? AS LANGUAGE 
         FROM C_Project_Vendor left join (select C_BPartner_ID, Name from C_BPartner) table1 on (C_Project_Vendor.C_BPartner_ID = table1.C_BPartner_ID) left join (select M_PriceList_ID, Name from M_PriceList) table2 on (C_Project_Vendor.M_PriceList_ID = table2.M_PriceList_ID) left join (select C_Incoterms_ID, Name from C_Incoterms) table3 on (C_Project_Vendor.C_Incoterms_ID = table3.C_Incoterms_ID)
@@ -136,13 +136,13 @@ COALESCE(C_Project_Vendor.IsActive, 'N') AS IsActive,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_Project_Vendor
-        SET C_BPartner_ID = (?) , M_PriceList_ID = (?) , GenerateOrder = (?) , C_Incoterms_ID = (?) , Incoterms_Description = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , C_Project_Vendor_ID = (?) , M_PriceList_Version_ID = (?) , Note = (?) , C_Project_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? 
+        SET C_BPartner_ID = (?) , M_PriceList_ID = (?) , GenerateOrder = (?) , C_Incoterms_ID = (?) , Incoterms_Description = (?) , Note = (?) , C_Project_Vendor_ID = (?) , M_PriceList_Version_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , IsActive = (?) , C_Project_ID = (?) , updated = now(), updatedby = ? 
         WHERE C_Project_Vendor.C_Project_Vendor_ID = ? 
                  AND C_Project_Vendor.C_Project_ID = ? 
         AND C_Project_Vendor.AD_Client_ID IN ('1') 
         AND C_Project_Vendor.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="cIncotermsId"></Parameter> <Parameter name="incotermsDescription"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cProjectVendorId"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="note"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="isactive"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="cIncotermsId"></Parameter> <Parameter name="incotermsDescription"></Parameter> <Parameter name="note"></Parameter> <Parameter name="cProjectVendorId"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cProjectVendorId"></Parameter>
     
@@ -154,10 +154,10 @@ COALESCE(C_Project_Vendor.IsActive, 'N') AS IsActive,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_Project_Vendor 
-        (C_BPartner_ID, M_PriceList_ID, GenerateOrder, C_Incoterms_ID, Incoterms_Description, AD_Org_ID, AD_Client_ID, C_Project_Vendor_ID, M_PriceList_Version_ID, Note, C_Project_ID, IsActive, created, createdby, updated, updatedBy)
+        (C_BPartner_ID, M_PriceList_ID, GenerateOrder, C_Incoterms_ID, Incoterms_Description, Note, C_Project_Vendor_ID, M_PriceList_Version_ID, AD_Client_ID, AD_Org_ID, IsActive, C_Project_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="cIncotermsId"></Parameter> <Parameter name="incotermsDescription"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cProjectVendorId"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="note"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="isactive"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="cIncotermsId"></Parameter> <Parameter name="incotermsDescription"></Parameter> <Parameter name="note"></Parameter> <Parameter name="cProjectVendorId"></Parameter> <Parameter name="mPricelistVersionId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

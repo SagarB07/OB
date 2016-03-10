@@ -28,9 +28,9 @@ COALESCE(C_TaxPayment.Generatepayment, 'N') AS Generatepayment,
 C_TaxPayment.CreateFrom, 
 C_TaxPayment.Processed, 
 list1.name as Processed_BTN, 
-C_TaxPayment.C_Taxpayment_ID, 
-COALESCE(C_TaxPayment.Processing, 'N') AS Processing, 
 C_TaxPayment.AD_Client_ID, 
+COALESCE(C_TaxPayment.Processing, 'N') AS Processing, 
+C_TaxPayment.C_Taxpayment_ID, 
 C_TaxPayment.C_Settlement_ID, 
 COALESCE(C_TaxPayment.IsActive, 'N') AS IsActive, 
  
@@ -129,13 +129,13 @@ COALESCE(C_TaxPayment.IsActive, 'N') AS IsActive,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_TaxPayment
-        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_AcctSchema_ID = (?) , C_Currency_ID = (?) , Datefrom = TO_DATE(?) , Dateto = TO_DATE(?) , GL_Journal_ID = (?) , Generatepayment = (?) , CreateFrom = (?) , Processed = (?) , Processing = (?) , IsActive = (?) , C_Taxpayment_ID = (?) , AD_Client_ID = (?) , C_Settlement_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_AcctSchema_ID = (?) , C_Currency_ID = (?) , Datefrom = TO_DATE(?) , Dateto = TO_DATE(?) , GL_Journal_ID = (?) , Generatepayment = (?) , CreateFrom = (?) , Processed = (?) , AD_Client_ID = (?) , Processing = (?) , C_Taxpayment_ID = (?) , C_Settlement_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? 
         WHERE C_TaxPayment.C_Taxpayment_ID = ? 
         
         AND C_TaxPayment.AD_Client_ID IN ('1') 
         AND C_TaxPayment.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="glJournalId"></Parameter> <Parameter name="generatepayment"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cTaxpaymentId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cSettlementId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="glJournalId"></Parameter> <Parameter name="generatepayment"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="cTaxpaymentId"></Parameter> <Parameter name="cSettlementId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cTaxpaymentId"></Parameter>
     
@@ -147,10 +147,10 @@ COALESCE(C_TaxPayment.IsActive, 'N') AS IsActive,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_TaxPayment 
-        (AD_Org_ID, Name, C_BPartner_ID, C_AcctSchema_ID, C_Currency_ID, Datefrom, Dateto, GL_Journal_ID, Generatepayment, CreateFrom, Processed, C_Taxpayment_ID, Processing, AD_Client_ID, C_Settlement_ID, IsActive, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Name, C_BPartner_ID, C_AcctSchema_ID, C_Currency_ID, Datefrom, Dateto, GL_Journal_ID, Generatepayment, CreateFrom, Processed, AD_Client_ID, Processing, C_Taxpayment_ID, C_Settlement_ID, IsActive, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="glJournalId"></Parameter> <Parameter name="generatepayment"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="cTaxpaymentId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cSettlementId"></Parameter> <Parameter name="isactive"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="glJournalId"></Parameter> <Parameter name="generatepayment"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="cTaxpaymentId"></Parameter> <Parameter name="cSettlementId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

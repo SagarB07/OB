@@ -16,12 +16,12 @@
 M_Internal_Consumption.MovementDate, 
 M_Internal_Consumption.Name, 
 M_Internal_Consumption.Processing, 
-COALESCE(M_Internal_Consumption.IsActive, 'N') AS IsActive, 
-M_Internal_Consumption.AD_Client_ID, 
-M_Internal_Consumption.Status, 
-M_Internal_Consumption.M_Internal_Consumption_ID, 
-COALESCE(M_Internal_Consumption.Processed, 'N') AS Processed, 
 COALESCE(M_Internal_Consumption.Posted, 'N') AS Posted, 
+COALESCE(M_Internal_Consumption.Processed, 'N') AS Processed, 
+M_Internal_Consumption.M_Internal_Consumption_ID, 
+M_Internal_Consumption.Status, 
+M_Internal_Consumption.AD_Client_ID, 
+COALESCE(M_Internal_Consumption.IsActive, 'N') AS IsActive, 
 M_Internal_Consumption.Description, 
  
         ? AS LANGUAGE 
@@ -94,13 +94,13 @@ M_Internal_Consumption.Description,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Internal_Consumption
-        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , Processing = (?) , IsActive = (?) , AD_Client_ID = (?) , Status = (?) , M_Internal_Consumption_ID = (?) , Processed = (?) , Posted = (?) , Description = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , Processing = (?) , Posted = (?) , Processed = (?) , M_Internal_Consumption_ID = (?) , Status = (?) , AD_Client_ID = (?) , IsActive = (?) , Description = (?) , updated = now(), updatedby = ? 
         WHERE M_Internal_Consumption.M_Internal_Consumption_ID = ? 
         
         AND M_Internal_Consumption.AD_Client_ID IN ('1') 
         AND M_Internal_Consumption.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="status"></Parameter> <Parameter name="mInternalConsumptionId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="description"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mInternalConsumptionId"></Parameter> <Parameter name="status"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="description"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mInternalConsumptionId"></Parameter>
     
@@ -112,10 +112,10 @@ M_Internal_Consumption.Description,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Internal_Consumption 
-        (AD_Org_ID, MovementDate, Name, Processing, IsActive, AD_Client_ID, Status, M_Internal_Consumption_ID, Processed, Posted, Description, created, createdby, updated, updatedBy)
+        (AD_Org_ID, MovementDate, Name, Processing, Posted, Processed, M_Internal_Consumption_ID, Status, AD_Client_ID, IsActive, Description, created, createdby, updated, updatedBy)
         VALUES ((?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="status"></Parameter> <Parameter name="mInternalConsumptionId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="description"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mInternalConsumptionId"></Parameter> <Parameter name="status"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="description"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -47,9 +47,9 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCampaignIdr;
   public String user1Id;
   public String user2Id;
-  public String mMovementId;
-  public String processed;
   public String adClientId;
+  public String processed;
+  public String mMovementId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -121,12 +121,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("m_movement_id") || fieldName.equals("mMovementId"))
-      return mMovementId;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("m_movement_id") || fieldName.equals("mMovementId"))
+      return mMovementId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -189,9 +189,9 @@ Select for edit
       "(CASE WHEN M_Movement.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Name), ''))),'') ) END) AS C_Campaign_IDR, " +
       "M_Movement.User1_ID, " +
       "M_Movement.User2_ID, " +
-      "M_Movement.M_Movement_ID, " +
-      "COALESCE(M_Movement.Processed, 'N') AS Processed, " +
       "M_Movement.AD_Client_ID, " +
+      "COALESCE(M_Movement.Processed, 'N') AS Processed, " +
+      "M_Movement.M_Movement_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Movement left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Movement.AD_Org_ID = table1.AD_Org_ID) left join (select C_DocType_ID, Name from C_DocType) table2 on (M_Movement.EM_Co_Doctype_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Movement.Posted = TO_CHAR(list1.value)) left join (select C_Activity_ID, Name from C_Activity) table4 on (M_Movement.C_Activity_ID = table4.C_Activity_ID) left join (select C_Campaign_ID, Name from C_Campaign) table5 on (M_Movement.C_Campaign_ID = table5.C_Campaign_ID)" +
       "        WHERE 2=2 " +
@@ -264,9 +264,9 @@ Select for edit
         objectHeaderData.cCampaignIdr = UtilSql.getValue(result, "c_campaign_idr");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.mMovementId = UtilSql.getValue(result, "m_movement_id");
-        objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.processed = UtilSql.getValue(result, "processed");
+        objectHeaderData.mMovementId = UtilSql.getValue(result, "m_movement_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -333,9 +333,9 @@ Create a registry
     objectHeaderData[0].cCampaignIdr = "";
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].mMovementId = mMovementId;
-    objectHeaderData[0].processed = processed;
     objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].processed = processed;
+    objectHeaderData[0].mMovementId = mMovementId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -496,7 +496,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Movement" +
-      "        SET AD_Org_ID = (?) , EM_Co_Doctype_ID = (?) , MovementDate = TO_DATE(?) , DocumentNo = (?) , Name = (?) , Description = (?) , Move_FromTo_Locator = (?) , Processing = (?) , Posted = (?) , IsActive = (?) , AD_OrgTrx_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Movement_ID = (?) , Processed = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , EM_Co_Doctype_ID = (?) , MovementDate = TO_DATE(?) , DocumentNo = (?) , Name = (?) , Description = (?) , Move_FromTo_Locator = (?) , Processing = (?) , Posted = (?) , IsActive = (?) , AD_OrgTrx_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , AD_Client_ID = (?) , Processed = (?) , M_Movement_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Movement.M_Movement_ID = ? " +
       "        AND M_Movement.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -531,9 +531,9 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -562,7 +562,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Movement " +
-      "        (AD_Org_ID, EM_Co_Doctype_ID, MovementDate, DocumentNo, Name, Description, Move_FromTo_Locator, Processing, Posted, IsActive, AD_OrgTrx_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Movement_ID, Processed, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, EM_Co_Doctype_ID, MovementDate, DocumentNo, Name, Description, Move_FromTo_Locator, Processing, Posted, IsActive, AD_OrgTrx_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, AD_Client_ID, Processed, M_Movement_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -589,9 +589,9 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMovementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

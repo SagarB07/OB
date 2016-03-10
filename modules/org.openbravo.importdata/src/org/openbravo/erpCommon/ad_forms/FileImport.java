@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.openbravo.base.secureApp.HttpSecureAppServlet;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 import org.openbravo.data.FieldProvider;
+import org.openbravo.database.ConnectionProvider;
 import org.openbravo.erpCommon.businessUtility.WindowTabs;
 import org.openbravo.erpCommon.utility.ComboTableData;
 import org.openbravo.erpCommon.utility.LeftTabsBar;
@@ -128,6 +129,46 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
     texto.append("</td></table>");
     return texto.toString();
   }
+  
+  private StringBuffer obtenerCodigos (Connection conn, ConnectionProvider connectionProvider,StringBuffer campo, String valorCampo){
+	  StringBuffer dato = new StringBuffer("");
+	  Integer valCampoingEgre = campo.indexOf("NO_Tipo_Ingreso_Egreso_ID");
+	  Integer valPeriodo = campo.indexOf("C_Period_ID");
+	  Integer valValor = campo.indexOf("Valor");
+	  
+	  if (valCampoingEgre > 0 && valPeriodo < 0 &&  valValor < 0 ){
+		  dato.append("'");
+			try {
+					  String valoRetorno= FileImportData.obtenerIDCampoRubro(conn, connectionProvider, valorCampo);
+					  dato.append(valoRetorno);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		  dato.append("'");
+	  }
+	  
+	  if (valPeriodo > 0 &&  valValor < 0){
+		  dato.append("'");
+			try {
+					  String valoRetorno= FileImportData.obtenerIDPeriodo(conn, connectionProvider, valorCampo);
+					  dato.append(valoRetorno);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		  dato.append("'");
+	  }
+	  if (valValor > 0){
+		  dato.append("'");
+		  dato.append(valValor);
+		  dato.append("'");
+	  }
+	  
+	  campo.append(dato);
+	  return campo;
+  }
+  
 
   private OBError importarFichero(VariablesSecureApp vars, FieldProvider[] data2, HttpServletRequest request, HttpServletResponse response, String strAdImpformatId)    throws ServletException, IOException {
     Connection con = null;
@@ -170,7 +211,18 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
          //System.out.println(data2[i].getField(String.valueOf(j - constant)));
          
           strValues.append("'");
-          strFields.append(strValues);
+          String valorCampoTemporal = strValues.toString();
+          if (strTable.equals("Idt_novedad")){
+        	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
+        	  strFields = obtenerCodigos (con, this,strFields, valorCampoTemporal );
+        	  if (strFields.toString().equals(auxStrFields.toString())){
+        		  strFields.append(strValues);  
+        	  }
+        	  System.out.print("00");
+          }
+        	  //strFields.append(strValues);  
+          
+          
           strValues.delete(0, strValues.length());
         }
         constant = 0;
@@ -187,8 +239,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
                 "Error while inserting data. Please check if the CSV file contains a header", vars
                     .getLanguage()));
           } else {
-            myMessage.setTitle(Utility.messageBD(this, "Error while inserting data", vars
-                .getLanguage()));
+            myMessage.setTitle(Utility.messageBD(this, ex.toString(), vars.getLanguage()));
           }
           String strMessage = myMessage.getMessage();
           myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())

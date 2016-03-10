@@ -30,10 +30,10 @@ M_Production.C_Campaign_ID,
 M_Production.User1_ID, 
 M_Production.User2_ID, 
 M_Production.M_Production_ID, 
-COALESCE(M_Production.Processed, 'N') AS Processed, 
-COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, 
 COALESCE(M_Production.IsActive, 'N') AS IsActive, 
 M_Production.AD_Client_ID, 
+COALESCE(M_Production.IsSOTrx, 'N') AS IsSOTrx, 
+COALESCE(M_Production.Processed, 'N') AS Processed, 
  
         ? AS LANGUAGE 
         FROM M_Production left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Production.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Production.Posted = TO_CHAR(list1.value)) left join (select C_Project_ID, Value, Name from C_Project) table2 on (M_Production.C_Project_ID = table2.C_Project_ID)
@@ -114,13 +114,13 @@ M_Production.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Production
-        SET AD_Org_ID = (?) , Name = (?) , MovementDate = TO_DATE(?) , IsCreated = (?) , Description = (?) , AD_OrgTrx_ID = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Production_ID = (?) , Processed = (?) , IsSOTrx = (?) , IsActive = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , MovementDate = TO_DATE(?) , IsCreated = (?) , Description = (?) , AD_OrgTrx_ID = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_Production_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , IsSOTrx = (?) , Processed = (?) , updated = now(), updatedby = ? 
         WHERE M_Production.M_Production_ID = ? 
         
         AND M_Production.AD_Client_ID IN ('1') 
         AND M_Production.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="iscreated"></Parameter> <Parameter name="description"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="iscreated"></Parameter> <Parameter name="description"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mProductionId"></Parameter>
     
@@ -132,10 +132,10 @@ M_Production.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Production 
-        (AD_Org_ID, Name, MovementDate, IsCreated, Description, AD_OrgTrx_ID, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Production_ID, Processed, IsSOTrx, IsActive, AD_Client_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Name, MovementDate, IsCreated, Description, AD_OrgTrx_ID, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, M_Production_ID, IsActive, AD_Client_ID, IsSOTrx, Processed, created, createdby, updated, updatedBy)
         VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="iscreated"></Parameter> <Parameter name="description"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="iscreated"></Parameter> <Parameter name="description"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mProductionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -18,8 +18,8 @@ no_rol_provision_line_mes.Valor,
 no_rol_provision_line_mes.Docstatus, 
 (CASE WHEN no_rol_provision_line_mes.Docstatus IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS DocstatusR, 
 COALESCE(no_rol_provision_line_mes.Processed, 'N') AS Processed, 
-no_rol_provision_line_mes.Dateacct, 
 COALESCE(no_rol_provision_line_mes.Pago, 'N') AS Pago, 
+no_rol_provision_line_mes.Dateacct, 
 no_rol_provision_line_mes.C_Doctype_ID, 
 (CASE WHEN no_rol_provision_line_mes.C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
 no_rol_provision_line_mes.Docaccionno, 
@@ -28,10 +28,10 @@ no_rol_provision_line_mes.Processing,
 no_rol_provision_line_mes.Posted, 
 list3.name as Posted_BTN, 
 COALESCE(no_rol_provision_line_mes.Isactive, 'N') AS Isactive, 
-no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID, 
-no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID, 
 no_rol_provision_line_mes.AD_Client_ID, 
 no_rol_provision_line_mes.AD_Org_ID, 
+no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID, 
+no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID, 
  
         ? AS LANGUAGE 
         FROM no_rol_provision_line_mes left join (select C_Period_ID, Name from C_Period) table1 on (no_rol_provision_line_mes.C_Period_ID =  table1.C_Period_ID) left join ad_ref_list_v list1 on (no_rol_provision_line_mes.Docstatus = list1.value and list1.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list1.ad_language = ?)  left join (select C_DocType_ID, Name from C_DocType) table2 on (no_rol_provision_line_mes.C_Doctype_ID =  table2.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join ad_ref_list_v list2 on (list2.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list2.ad_language = ?  AND no_rol_provision_line_mes.Docaccionno = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = '234' and list3.ad_language = ?  AND no_rol_provision_line_mes.Posted = TO_CHAR(list3.value))
@@ -149,13 +149,13 @@ no_rol_provision_line_mes.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_rol_provision_line_mes
-        SET Documentno = (?) , C_Period_ID = (?) , Valor = TO_NUMBER(?) , Docstatus = (?) , Processed = (?) , Dateacct = TO_DATE(?) , Pago = (?) , C_Doctype_ID = (?) , Docaccionno = (?) , Processing = (?) , Posted = (?) , Isactive = (?) , NO_Rol_Provision_Line_Mes_ID = (?) , NO_Rol_Pago_Provision_Line_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET Documentno = (?) , C_Period_ID = (?) , Valor = TO_NUMBER(?) , Docstatus = (?) , Processed = (?) , Pago = (?) , Dateacct = TO_DATE(?) , C_Doctype_ID = (?) , Docaccionno = (?) , Processing = (?) , Posted = (?) , Isactive = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , NO_Rol_Provision_Line_Mes_ID = (?) , NO_Rol_Pago_Provision_Line_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_rol_provision_line_mes.NO_Rol_Provision_Line_Mes_ID = ? 
                  AND no_rol_provision_line_mes.NO_Rol_Pago_Provision_Line_ID = ? 
         AND no_rol_provision_line_mes.AD_Client_ID IN ('1') 
         AND no_rol_provision_line_mes.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="documentno"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="pago"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noRolProvisionLineMesId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="documentno"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="pago"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRolProvisionLineMesId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noRolProvisionLineMesId"></Parameter>
     
@@ -167,10 +167,10 @@ no_rol_provision_line_mes.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_rol_provision_line_mes 
-        (Documentno, C_Period_ID, Valor, Docstatus, Processed, Dateacct, Pago, C_Doctype_ID, Docaccionno, Processing, Posted, Isactive, NO_Rol_Provision_Line_Mes_ID, NO_Rol_Pago_Provision_Line_ID, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), TO_NUMBER(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+        (Documentno, C_Period_ID, Valor, Docstatus, Processed, Pago, Dateacct, C_Doctype_ID, Docaccionno, Processing, Posted, Isactive, AD_Client_ID, AD_Org_ID, NO_Rol_Provision_Line_Mes_ID, NO_Rol_Pago_Provision_Line_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), TO_NUMBER(?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="documentno"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="pago"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noRolProvisionLineMesId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="documentno"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="pago"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRolProvisionLineMesId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

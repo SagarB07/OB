@@ -49,8 +49,8 @@ static Logger log4j = Logger.getLogger(GeneralLedgerConfigurationData.class);
   public String isequitypositive;
   public String isrevenuepositive;
   public String isexpensepositive;
-  public String hascombination;
   public String adClientId;
+  public String hascombination;
   public String cAcctschemaId;
   public String language;
   public String adUserClient;
@@ -127,10 +127,10 @@ static Logger log4j = Logger.getLogger(GeneralLedgerConfigurationData.class);
       return isrevenuepositive;
     else if (fieldName.equalsIgnoreCase("isexpensepositive"))
       return isexpensepositive;
-    else if (fieldName.equalsIgnoreCase("hascombination"))
-      return hascombination;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("hascombination"))
+      return hascombination;
     else if (fieldName.equalsIgnoreCase("c_acctschema_id") || fieldName.equals("cAcctschemaId"))
       return cAcctschemaId;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -197,8 +197,8 @@ Select for edit
       "COALESCE(C_AcctSchema.IsEquityPositive, 'N') AS IsEquityPositive, " +
       "COALESCE(C_AcctSchema.IsRevenuePositive, 'N') AS IsRevenuePositive, " +
       "COALESCE(C_AcctSchema.IsExpensePositive, 'N') AS IsExpensePositive, " +
-      "COALESCE(C_AcctSchema.HasCombination, 'N') AS HasCombination, " +
       "C_AcctSchema.AD_Client_ID, " +
+      "COALESCE(C_AcctSchema.HasCombination, 'N') AS HasCombination, " +
       "C_AcctSchema.C_AcctSchema_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_AcctSchema left join (select AD_Org_ID, Name from AD_Org) table1 on (C_AcctSchema.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (C_AcctSchema.C_Currency_ID = table2.C_Currency_ID)" +
@@ -272,8 +272,8 @@ Select for edit
         objectGeneralLedgerConfigurationData.isequitypositive = UtilSql.getValue(result, "isequitypositive");
         objectGeneralLedgerConfigurationData.isrevenuepositive = UtilSql.getValue(result, "isrevenuepositive");
         objectGeneralLedgerConfigurationData.isexpensepositive = UtilSql.getValue(result, "isexpensepositive");
-        objectGeneralLedgerConfigurationData.hascombination = UtilSql.getValue(result, "hascombination");
         objectGeneralLedgerConfigurationData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectGeneralLedgerConfigurationData.hascombination = UtilSql.getValue(result, "hascombination");
         objectGeneralLedgerConfigurationData.cAcctschemaId = UtilSql.getValue(result, "c_acctschema_id");
         objectGeneralLedgerConfigurationData.language = UtilSql.getValue(result, "language");
         objectGeneralLedgerConfigurationData.adUserClient = "";
@@ -343,8 +343,8 @@ Create a registry
     objectGeneralLedgerConfigurationData[0].isequitypositive = isequitypositive;
     objectGeneralLedgerConfigurationData[0].isrevenuepositive = isrevenuepositive;
     objectGeneralLedgerConfigurationData[0].isexpensepositive = isexpensepositive;
-    objectGeneralLedgerConfigurationData[0].hascombination = hascombination;
     objectGeneralLedgerConfigurationData[0].adClientId = adClientId;
+    objectGeneralLedgerConfigurationData[0].hascombination = hascombination;
     objectGeneralLedgerConfigurationData[0].cAcctschemaId = cAcctschemaId;
     objectGeneralLedgerConfigurationData[0].language = "";
     return objectGeneralLedgerConfigurationData;
@@ -430,7 +430,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_AcctSchema" +
-      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , GAAP = (?) , C_Currency_ID = (?) , C_Period_ID = (?) , Separator = (?) , Allownegative = (?) , IsAccrual = (?) , CostingMethod = (?) , AutoPeriodControl = (?) , Period_OpenHistory = TO_NUMBER(?) , Period_OpenFuture = TO_NUMBER(?) , HasAlias = (?) , IsTradeDiscountPosted = (?) , IsDiscountCorrectsTax = (?) , Iscentrallymaintained = (?) , IsAssetPositive = (?) , IsLiabilityPositive = (?) , IsEquityPositive = (?) , IsRevenuePositive = (?) , IsExpensePositive = (?) , HasCombination = (?) , AD_Client_ID = (?) , C_AcctSchema_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , GAAP = (?) , C_Currency_ID = (?) , C_Period_ID = (?) , Separator = (?) , Allownegative = (?) , IsAccrual = (?) , CostingMethod = (?) , AutoPeriodControl = (?) , Period_OpenHistory = TO_NUMBER(?) , Period_OpenFuture = TO_NUMBER(?) , HasAlias = (?) , IsTradeDiscountPosted = (?) , IsDiscountCorrectsTax = (?) , Iscentrallymaintained = (?) , IsAssetPositive = (?) , IsLiabilityPositive = (?) , IsEquityPositive = (?) , IsRevenuePositive = (?) , IsExpensePositive = (?) , AD_Client_ID = (?) , HasCombination = (?) , C_AcctSchema_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_AcctSchema.C_AcctSchema_ID = ? " +
       "        AND C_AcctSchema.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -470,8 +470,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isequitypositive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isrevenuepositive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isexpensepositive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, hascombination);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, hascombination);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
@@ -501,7 +501,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_AcctSchema " +
-      "        (AD_Org_ID, Name, Description, IsActive, GAAP, C_Currency_ID, C_Period_ID, Separator, Allownegative, IsAccrual, CostingMethod, AutoPeriodControl, Period_OpenHistory, Period_OpenFuture, HasAlias, IsTradeDiscountPosted, IsDiscountCorrectsTax, Iscentrallymaintained, IsAssetPositive, IsLiabilityPositive, IsEquityPositive, IsRevenuePositive, IsExpensePositive, HasCombination, AD_Client_ID, C_AcctSchema_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, Description, IsActive, GAAP, C_Currency_ID, C_Period_ID, Separator, Allownegative, IsAccrual, CostingMethod, AutoPeriodControl, Period_OpenHistory, Period_OpenFuture, HasAlias, IsTradeDiscountPosted, IsDiscountCorrectsTax, Iscentrallymaintained, IsAssetPositive, IsLiabilityPositive, IsEquityPositive, IsRevenuePositive, IsExpensePositive, AD_Client_ID, HasCombination, C_AcctSchema_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -533,8 +533,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isequitypositive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isrevenuepositive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isexpensepositive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, hascombination);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, hascombination);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

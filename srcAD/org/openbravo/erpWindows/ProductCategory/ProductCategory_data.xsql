@@ -19,8 +19,8 @@ M_Product_Category.Description,
 COALESCE(M_Product_Category.IsDefault, 'N') AS IsDefault, 
 COALESCE(M_Product_Category.IsActive, 'N') AS IsActive, 
 COALESCE(M_Product_Category.Issummary, 'N') AS Issummary, 
-M_Product_Category.AD_Image_ID, 
 M_Product_Category.PlannedMargin, 
+M_Product_Category.AD_Image_ID, 
 M_Product_Category.A_Asset_Group_ID, 
 M_Product_Category.M_Product_Category_ID, 
 M_Product_Category.AD_Client_ID, 
@@ -95,13 +95,13 @@ M_Product_Category.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Product_Category
-        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , Description = (?) , IsDefault = (?) , IsActive = (?) , Issummary = (?) , AD_Image_ID = (?) , PlannedMargin = TO_NUMBER(?) , A_Asset_Group_ID = (?) , M_Product_Category_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , Description = (?) , IsDefault = (?) , IsActive = (?) , Issummary = (?) , PlannedMargin = TO_NUMBER(?) , AD_Image_ID = (?) , A_Asset_Group_ID = (?) , M_Product_Category_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE M_Product_Category.M_Product_Category_ID = ? 
         
         AND M_Product_Category.AD_Client_ID IN ('1') 
         AND M_Product_Category.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="adImageId"></Parameter> <Parameter name="plannedmargin"></Parameter> <Parameter name="aAssetGroupId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="plannedmargin"></Parameter> <Parameter name="adImageId"></Parameter> <Parameter name="aAssetGroupId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mProductCategoryId"></Parameter>
     
@@ -113,10 +113,10 @@ M_Product_Category.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Product_Category 
-        (AD_Org_ID, Value, Name, Description, IsDefault, IsActive, Issummary, AD_Image_ID, PlannedMargin, A_Asset_Group_ID, M_Product_Category_ID, AD_Client_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, Value, Name, Description, IsDefault, IsActive, Issummary, PlannedMargin, AD_Image_ID, A_Asset_Group_ID, M_Product_Category_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="adImageId"></Parameter> <Parameter name="plannedmargin"></Parameter> <Parameter name="aAssetGroupId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="plannedmargin"></Parameter> <Parameter name="adImageId"></Parameter> <Parameter name="aAssetGroupId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

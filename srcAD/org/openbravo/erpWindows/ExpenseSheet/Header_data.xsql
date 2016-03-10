@@ -27,12 +27,12 @@ S_TimeExpense.A_Asset_ID,
 S_TimeExpense.C_Costcenter_ID, 
 S_TimeExpense.User1_ID, 
 S_TimeExpense.User2_ID, 
-COALESCE(S_TimeExpense.IsActive, 'N') AS IsActive, 
-S_TimeExpense.AD_Client_ID, 
 S_TimeExpense.Description, 
+S_TimeExpense.S_TimeExpense_ID, 
+COALESCE(S_TimeExpense.IsActive, 'N') AS IsActive, 
 S_TimeExpense.Processing, 
 list1.name as Processing_BTN, 
-S_TimeExpense.S_TimeExpense_ID, 
+S_TimeExpense.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM S_TimeExpense left join (select AD_Org_ID, Name from AD_Org) table1 on (S_TimeExpense.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (S_TimeExpense.C_BPartner_ID =  table2.C_BPartner_ID) left join (select C_Project_ID, Value, Name from C_Project) table3 on (S_TimeExpense.C_Project_ID = table3.C_Project_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '1005900000' and list1.ad_language = ?  AND S_TimeExpense.Processing = TO_CHAR(list1.value))
@@ -113,13 +113,13 @@ S_TimeExpense.S_TimeExpense_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE S_TimeExpense
-        SET AD_Org_ID = (?) , DocumentNo = (?) , C_BPartner_ID = (?) , DateReport = TO_DATE(?) , Processed = (?) , M_Pricelist_ID = (?) , M_Warehouse_ID = (?) , Posted = (?) , C_Project_ID = (?) , A_Asset_ID = (?) , C_Costcenter_ID = (?) , User1_ID = (?) , User2_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , Description = (?) , Processing = (?) , S_TimeExpense_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , DocumentNo = (?) , C_BPartner_ID = (?) , DateReport = TO_DATE(?) , Processed = (?) , M_Pricelist_ID = (?) , M_Warehouse_ID = (?) , Posted = (?) , C_Project_ID = (?) , A_Asset_ID = (?) , C_Costcenter_ID = (?) , User1_ID = (?) , User2_ID = (?) , Description = (?) , S_TimeExpense_ID = (?) , IsActive = (?) , Processing = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE S_TimeExpense.S_TimeExpense_ID = ? 
         
         AND S_TimeExpense.AD_Client_ID IN ('1') 
         AND S_TimeExpense.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="datereport"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="sTimeexpenseId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="datereport"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="description"></Parameter> <Parameter name="sTimeexpenseId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="sTimeexpenseId"></Parameter>
     
@@ -131,10 +131,10 @@ S_TimeExpense.S_TimeExpense_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO S_TimeExpense 
-        (AD_Org_ID, DocumentNo, C_BPartner_ID, DateReport, Processed, M_Pricelist_ID, M_Warehouse_ID, Posted, C_Project_ID, A_Asset_ID, C_Costcenter_ID, User1_ID, User2_ID, IsActive, AD_Client_ID, Description, Processing, S_TimeExpense_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, DocumentNo, C_BPartner_ID, DateReport, Processed, M_Pricelist_ID, M_Warehouse_ID, Posted, C_Project_ID, A_Asset_ID, C_Costcenter_ID, User1_ID, User2_ID, Description, S_TimeExpense_ID, IsActive, Processing, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="datereport"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="sTimeexpenseId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="datereport"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="description"></Parameter> <Parameter name="sTimeexpenseId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

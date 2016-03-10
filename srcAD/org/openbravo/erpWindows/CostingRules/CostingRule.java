@@ -466,7 +466,7 @@ vars.getRequestGlobalVariable("inpParamDatefrom_f", tabId + "|paramDatefrom_f");
     CostingRuleData data = new CostingRuleData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.mCostingAlgorithmId = vars.getRequiredStringParameter("inpmCostingAlgorithmId");     data.mCostingAlgorithmIdr = vars.getStringParameter("inpmCostingAlgorithmId_R");     data.datefrom = vars.getStringParameter("inpdatefrom");     data.warehouseDimension = vars.getStringParameter("inpwarehouseDimension", "N");     data.processRule = vars.getStringParameter("inpprocessRule");     data.mCostingRuleId = vars.getRequestGlobalVariable("inpmCostingRuleId", windowId + "|M_Costing_Rule_ID");     data.isvalidated = vars.getStringParameter("inpisvalidated", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.mCostingAlgorithmId = vars.getRequiredStringParameter("inpmCostingAlgorithmId");     data.mCostingAlgorithmIdr = vars.getStringParameter("inpmCostingAlgorithmId_R");     data.datefrom = vars.getStringParameter("inpdatefrom");     data.warehouseDimension = vars.getStringParameter("inpwarehouseDimension", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.mCostingRuleId = vars.getRequestGlobalVariable("inpmCostingRuleId", windowId + "|M_Costing_Rule_ID");     data.isvalidated = vars.getStringParameter("inpisvalidated", "N");     data.processRule = vars.getStringParameter("inpprocessRule"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -498,7 +498,7 @@ vars.getRequestGlobalVariable("inpParamDatefrom_f", tabId + "|paramDatefrom_f");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|M_Costing_Rule_ID", data[0].getField("mCostingRuleId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_Costing_Rule_ID", data[0].getField("mCostingRuleId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

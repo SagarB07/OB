@@ -34,8 +34,8 @@ MA_WorkRequirement.Closed,
 MA_WorkRequirement.Createworkrequirement, 
 MA_WorkRequirement.AD_Client_ID, 
 MA_WorkRequirement.Name, 
-COALESCE(MA_WorkRequirement.IsActive, 'N') AS IsActive, 
 MA_WorkRequirement.MA_Workrequirement_ID, 
+COALESCE(MA_WorkRequirement.IsActive, 'N') AS IsActive, 
  
         ? AS LANGUAGE 
         FROM MA_WorkRequirement left join (select AD_Org_ID, Name from AD_Org) table1 on (MA_WorkRequirement.AD_Org_ID = table1.AD_Org_ID) left join (select C_Doctype_ID, Name from C_Doctype) table2 on (MA_WorkRequirement.C_Doctype_ID = table2.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL2 on (table2.C_DocType_ID = tableTRL2.C_DocType_ID and tableTRL2.AD_Language = ?)  left join (select MA_Processplan_ID, Name from MA_Processplan) table4 on (MA_WorkRequirement.MA_Processplan_ID = table4.MA_Processplan_ID)
@@ -118,13 +118,13 @@ MA_WorkRequirement.MA_Workrequirement_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_WorkRequirement
-        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , MA_Processplan_ID = (?) , Quantity = TO_NUMBER(?) , Launchdate = TO_DATE(?) , StartDate = TO_DATE(?) , EndDate = TO_DATE(?) , Conversionrate = TO_NUMBER(?) , Secondaryqty = TO_NUMBER(?) , Explodephases = (?) , Secondaryunit = (?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Processed = (?) , Explote = (?) , Closed = (?) , Createworkrequirement = (?) , AD_Client_ID = (?) , Name = (?) , IsActive = (?) , MA_Workrequirement_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , MA_Processplan_ID = (?) , Quantity = TO_NUMBER(?) , Launchdate = TO_DATE(?) , StartDate = TO_DATE(?) , EndDate = TO_DATE(?) , Conversionrate = TO_NUMBER(?) , Secondaryqty = TO_NUMBER(?) , Explodephases = (?) , Secondaryunit = (?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Processed = (?) , Explote = (?) , Closed = (?) , Createworkrequirement = (?) , AD_Client_ID = (?) , Name = (?) , MA_Workrequirement_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? 
         WHERE MA_WorkRequirement.MA_Workrequirement_ID = ? 
         
         AND MA_WorkRequirement.AD_Client_ID IN ('1') 
         AND MA_WorkRequirement.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="launchdate"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="conversionrate"></Parameter> <Parameter name="secondaryqty"></Parameter> <Parameter name="explodephases"></Parameter> <Parameter name="secondaryunit"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="explote"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="createworkrequirement"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="launchdate"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="conversionrate"></Parameter> <Parameter name="secondaryqty"></Parameter> <Parameter name="explodephases"></Parameter> <Parameter name="secondaryunit"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="explote"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="createworkrequirement"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maWorkrequirementId"></Parameter>
     
@@ -136,10 +136,10 @@ MA_WorkRequirement.MA_Workrequirement_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_WorkRequirement 
-        (AD_Org_ID, C_Doctype_ID, DocumentNo, MA_Processplan_ID, Quantity, Launchdate, StartDate, EndDate, Conversionrate, Secondaryqty, Explodephases, Secondaryunit, Estimatedtime, Runtime, Processed, Explote, Closed, Createworkrequirement, AD_Client_ID, Name, IsActive, MA_Workrequirement_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, C_Doctype_ID, DocumentNo, MA_Processplan_ID, Quantity, Launchdate, StartDate, EndDate, Conversionrate, Secondaryqty, Explodephases, Secondaryunit, Estimatedtime, Runtime, Processed, Explote, Closed, Createworkrequirement, AD_Client_ID, Name, MA_Workrequirement_ID, IsActive, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="launchdate"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="conversionrate"></Parameter> <Parameter name="secondaryqty"></Parameter> <Parameter name="explodephases"></Parameter> <Parameter name="secondaryunit"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="explote"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="createworkrequirement"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="launchdate"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="conversionrate"></Parameter> <Parameter name="secondaryqty"></Parameter> <Parameter name="explodephases"></Parameter> <Parameter name="secondaryunit"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="explote"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="createworkrequirement"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

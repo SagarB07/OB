@@ -464,7 +464,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "action", strac
     HeaderData data = new HeaderData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.name = vars.getRequiredStringParameter("inpname");     data.processing = vars.getStringParameter("inpprocessing");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.status = vars.getRequiredGlobalVariable("inpstatus", windowId + "|Status");     data.mInternalConsumptionId = vars.getRequestGlobalVariable("inpmInternalConsumptionId", windowId + "|M_Internal_Consumption_ID");     data.processed = vars.getRequiredInputGlobalVariable("inpprocessed", windowId + "|Processed", "N");     data.posted = vars.getStringParameter("inpposted", "N");     data.description = vars.getStringParameter("inpdescription"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.movementdate = vars.getRequiredStringParameter("inpmovementdate");     data.name = vars.getRequiredStringParameter("inpname");     data.processing = vars.getStringParameter("inpprocessing");     data.posted = vars.getStringParameter("inpposted", "N");     data.processed = vars.getRequiredInputGlobalVariable("inpprocessed", windowId + "|Processed", "N");     data.mInternalConsumptionId = vars.getRequestGlobalVariable("inpmInternalConsumptionId", windowId + "|M_Internal_Consumption_ID");     data.status = vars.getRequiredGlobalVariable("inpstatus", windowId + "|Status");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.description = vars.getStringParameter("inpdescription"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -495,7 +495,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "action", strac
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Status", data[0].getField("status"));    vars.setSessionValue(windowId + "|Processed", data[0].getField("processed"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|M_Internal_Consumption_ID", data[0].getField("mInternalConsumptionId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_Internal_Consumption_ID", data[0].getField("mInternalConsumptionId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|Processed", data[0].getField("processed"));    vars.setSessionValue(windowId + "|Status", data[0].getField("status"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

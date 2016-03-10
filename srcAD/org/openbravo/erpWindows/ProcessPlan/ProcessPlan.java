@@ -494,7 +494,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "MA_Processplan
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Explodephases", data[0].getField("explodephases"));    vars.setSessionValue(windowId + "|MA_Processplan_ID", data[0].getField("maProcessplanId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Explodephases", data[0].getField("explodephases"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|MA_Processplan_ID", data[0].getField("maProcessplanId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

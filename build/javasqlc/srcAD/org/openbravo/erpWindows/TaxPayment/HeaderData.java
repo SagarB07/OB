@@ -41,9 +41,9 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String createfrom;
   public String processed;
   public String processedBtn;
-  public String cTaxpaymentId;
-  public String processing;
   public String adClientId;
+  public String processing;
+  public String cTaxpaymentId;
   public String cSettlementId;
   public String isactive;
   public String language;
@@ -105,12 +105,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return processed;
     else if (fieldName.equalsIgnoreCase("processed_btn") || fieldName.equals("processedBtn"))
       return processedBtn;
-    else if (fieldName.equalsIgnoreCase("c_taxpayment_id") || fieldName.equals("cTaxpaymentId"))
-      return cTaxpaymentId;
-    else if (fieldName.equalsIgnoreCase("processing"))
-      return processing;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("processing"))
+      return processing;
+    else if (fieldName.equalsIgnoreCase("c_taxpayment_id") || fieldName.equals("cTaxpaymentId"))
+      return cTaxpaymentId;
     else if (fieldName.equalsIgnoreCase("c_settlement_id") || fieldName.equals("cSettlementId"))
       return cSettlementId;
     else if (fieldName.equalsIgnoreCase("isactive"))
@@ -171,9 +171,9 @@ Select for edit
       "C_TaxPayment.CreateFrom, " +
       "C_TaxPayment.Processed, " +
       "list1.name as Processed_BTN, " +
-      "C_TaxPayment.C_Taxpayment_ID, " +
-      "COALESCE(C_TaxPayment.Processing, 'N') AS Processing, " +
       "C_TaxPayment.AD_Client_ID, " +
+      "COALESCE(C_TaxPayment.Processing, 'N') AS Processing, " +
+      "C_TaxPayment.C_Taxpayment_ID, " +
       "C_TaxPayment.C_Settlement_ID, " +
       "COALESCE(C_TaxPayment.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
@@ -241,9 +241,9 @@ Select for edit
         objectHeaderData.createfrom = UtilSql.getValue(result, "createfrom");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.processedBtn = UtilSql.getValue(result, "processed_btn");
-        objectHeaderData.cTaxpaymentId = UtilSql.getValue(result, "c_taxpayment_id");
-        objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.processing = UtilSql.getValue(result, "processing");
+        objectHeaderData.cTaxpaymentId = UtilSql.getValue(result, "c_taxpayment_id");
         objectHeaderData.cSettlementId = UtilSql.getValue(result, "c_settlement_id");
         objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.language = UtilSql.getValue(result, "language");
@@ -306,9 +306,9 @@ Create a registry
     objectHeaderData[0].createfrom = createfrom;
     objectHeaderData[0].processed = processed;
     objectHeaderData[0].processedBtn = processedBtn;
-    objectHeaderData[0].cTaxpaymentId = cTaxpaymentId;
-    objectHeaderData[0].processing = processing;
     objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].processing = processing;
+    objectHeaderData[0].cTaxpaymentId = cTaxpaymentId;
     objectHeaderData[0].cSettlementId = cSettlementId;
     objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].language = "";
@@ -507,7 +507,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_TaxPayment" +
-      "        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_AcctSchema_ID = (?) , C_Currency_ID = (?) , Datefrom = TO_DATE(?) , Dateto = TO_DATE(?) , GL_Journal_ID = (?) , Generatepayment = (?) , CreateFrom = (?) , Processed = (?) , Processing = (?) , IsActive = (?) , C_Taxpayment_ID = (?) , AD_Client_ID = (?) , C_Settlement_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_AcctSchema_ID = (?) , C_Currency_ID = (?) , Datefrom = TO_DATE(?) , Dateto = TO_DATE(?) , GL_Journal_ID = (?) , Generatepayment = (?) , CreateFrom = (?) , Processed = (?) , AD_Client_ID = (?) , Processing = (?) , C_Taxpayment_ID = (?) , C_Settlement_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_TaxPayment.C_Taxpayment_ID = ? " +
       "        AND C_TaxPayment.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -535,11 +535,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatepayment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createfrom);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cTaxpaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cTaxpaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cSettlementId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cTaxpaymentId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -568,7 +568,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_TaxPayment " +
-      "        (AD_Org_ID, Name, C_BPartner_ID, C_AcctSchema_ID, C_Currency_ID, Datefrom, Dateto, GL_Journal_ID, Generatepayment, CreateFrom, Processed, C_Taxpayment_ID, Processing, AD_Client_ID, C_Settlement_ID, IsActive, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, C_BPartner_ID, C_AcctSchema_ID, C_Currency_ID, Datefrom, Dateto, GL_Journal_ID, Generatepayment, CreateFrom, Processed, AD_Client_ID, Processing, C_Taxpayment_ID, C_Settlement_ID, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -588,9 +588,9 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatepayment);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createfrom);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cTaxpaymentId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cTaxpaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cSettlementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);

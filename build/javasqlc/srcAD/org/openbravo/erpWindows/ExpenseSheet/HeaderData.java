@@ -40,12 +40,12 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCostcenterId;
   public String user1Id;
   public String user2Id;
-  public String isactive;
-  public String adClientId;
   public String description;
+  public String sTimeexpenseId;
+  public String isactive;
   public String processing;
   public String processingBtn;
-  public String sTimeexpenseId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -103,18 +103,18 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("description"))
       return description;
+    else if (fieldName.equalsIgnoreCase("s_timeexpense_id") || fieldName.equals("sTimeexpenseId"))
+      return sTimeexpenseId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
     else if (fieldName.equalsIgnoreCase("processing_btn") || fieldName.equals("processingBtn"))
       return processingBtn;
-    else if (fieldName.equalsIgnoreCase("s_timeexpense_id") || fieldName.equals("sTimeexpenseId"))
-      return sTimeexpenseId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -170,12 +170,12 @@ Select for edit
       "S_TimeExpense.C_Costcenter_ID, " +
       "S_TimeExpense.User1_ID, " +
       "S_TimeExpense.User2_ID, " +
-      "COALESCE(S_TimeExpense.IsActive, 'N') AS IsActive, " +
-      "S_TimeExpense.AD_Client_ID, " +
       "S_TimeExpense.Description, " +
+      "S_TimeExpense.S_TimeExpense_ID, " +
+      "COALESCE(S_TimeExpense.IsActive, 'N') AS IsActive, " +
       "S_TimeExpense.Processing, " +
       "list1.name as Processing_BTN, " +
-      "S_TimeExpense.S_TimeExpense_ID, " +
+      "S_TimeExpense.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM S_TimeExpense left join (select AD_Org_ID, Name from AD_Org) table1 on (S_TimeExpense.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (S_TimeExpense.C_BPartner_ID =  table2.C_BPartner_ID) left join (select C_Project_ID, Value, Name from C_Project) table3 on (S_TimeExpense.C_Project_ID = table3.C_Project_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '1005900000' and list1.ad_language = ?  AND S_TimeExpense.Processing = TO_CHAR(list1.value))" +
       "        WHERE 2=2 " +
@@ -240,12 +240,12 @@ Select for edit
         objectHeaderData.cCostcenterId = UtilSql.getValue(result, "c_costcenter_id");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.description = UtilSql.getValue(result, "description");
+        objectHeaderData.sTimeexpenseId = UtilSql.getValue(result, "s_timeexpense_id");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.processingBtn = UtilSql.getValue(result, "processing_btn");
-        objectHeaderData.sTimeexpenseId = UtilSql.getValue(result, "s_timeexpense_id");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -305,12 +305,12 @@ Create a registry
     objectHeaderData[0].cCostcenterId = cCostcenterId;
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].isactive = isactive;
-    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].description = description;
+    objectHeaderData[0].sTimeexpenseId = sTimeexpenseId;
+    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].processing = processing;
     objectHeaderData[0].processingBtn = processingBtn;
-    objectHeaderData[0].sTimeexpenseId = sTimeexpenseId;
+    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -433,7 +433,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE S_TimeExpense" +
-      "        SET AD_Org_ID = (?) , DocumentNo = (?) , C_BPartner_ID = (?) , DateReport = TO_DATE(?) , Processed = (?) , M_Pricelist_ID = (?) , M_Warehouse_ID = (?) , Posted = (?) , C_Project_ID = (?) , A_Asset_ID = (?) , C_Costcenter_ID = (?) , User1_ID = (?) , User2_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , Description = (?) , Processing = (?) , S_TimeExpense_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , DocumentNo = (?) , C_BPartner_ID = (?) , DateReport = TO_DATE(?) , Processed = (?) , M_Pricelist_ID = (?) , M_Warehouse_ID = (?) , Posted = (?) , C_Project_ID = (?) , A_Asset_ID = (?) , C_Costcenter_ID = (?) , User1_ID = (?) , User2_ID = (?) , Description = (?) , S_TimeExpense_ID = (?) , IsActive = (?) , Processing = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE S_TimeExpense.S_TimeExpense_ID = ? " +
       "        AND S_TimeExpense.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -463,11 +463,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCostcenterId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sTimeexpenseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sTimeexpenseId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -496,7 +496,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO S_TimeExpense " +
-      "        (AD_Org_ID, DocumentNo, C_BPartner_ID, DateReport, Processed, M_Pricelist_ID, M_Warehouse_ID, Posted, C_Project_ID, A_Asset_ID, C_Costcenter_ID, User1_ID, User2_ID, IsActive, AD_Client_ID, Description, Processing, S_TimeExpense_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, DocumentNo, C_BPartner_ID, DateReport, Processed, M_Pricelist_ID, M_Warehouse_ID, Posted, C_Project_ID, A_Asset_ID, C_Costcenter_ID, User1_ID, User2_ID, Description, S_TimeExpense_ID, IsActive, Processing, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -518,11 +518,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCostcenterId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sTimeexpenseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

@@ -29,8 +29,8 @@ FIN_Doubtful_Debt_Run.Process_Debt,
 COALESCE(FIN_Doubtful_Debt_Run.Processed, 'N') AS Processed, 
 FIN_Doubtful_Debt_Run.EM_APRM_Process, 
 list1.name as EM_APRM_Process_BTN, 
-FIN_Doubtful_Debt_Run.AD_Client_ID, 
 FIN_Doubtful_Debt_Run.FIN_Doubtful_Debt_Run_ID, 
+FIN_Doubtful_Debt_Run.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM FIN_Doubtful_Debt_Run left join (select AD_Org_ID, Name from AD_Org) table1 on (FIN_Doubtful_Debt_Run.AD_Org_ID = table1.AD_Org_ID) left join (select FIN_Doubtful_Debt_Method_ID, Name from FIN_Doubtful_Debt_Method) table2 on (FIN_Doubtful_Debt_Run.FIN_Doubtful_Debt_Method_ID = table2.FIN_Doubtful_Debt_Method_ID) left join (select C_BPartner_ID, Name from C_BPartner) table3 on (FIN_Doubtful_Debt_Run.C_Bpartner_ID = table3.C_BPartner_ID) left join (select C_Bp_Group_ID, Name from C_Bp_Group) table4 on (FIN_Doubtful_Debt_Run.C_Bp_Group_ID = table4.C_Bp_Group_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '798239EB069F41A9BA8EE040C63DDBBC' and list1.ad_language = ?  AND FIN_Doubtful_Debt_Run.EM_APRM_Process = TO_CHAR(list1.value))
@@ -111,13 +111,13 @@ FIN_Doubtful_Debt_Run.FIN_Doubtful_Debt_Run_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE FIN_Doubtful_Debt_Run
-        SET AD_Org_ID = (?) , FIN_Doubtful_Debt_Method_ID = (?) , Description = (?) , Rundate = TO_DATE(?) , Dateacct = TO_DATE(?) , Daysoverdue = TO_NUMBER(?) , Percentage = TO_NUMBER(?) , C_Bpartner_ID = (?) , Isactive = (?) , C_Bp_Group_ID = (?) , Process_Debt = (?) , Processed = (?) , EM_APRM_Process = (?) , AD_Client_ID = (?) , FIN_Doubtful_Debt_Run_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , FIN_Doubtful_Debt_Method_ID = (?) , Description = (?) , Rundate = TO_DATE(?) , Dateacct = TO_DATE(?) , Daysoverdue = TO_NUMBER(?) , Percentage = TO_NUMBER(?) , C_Bpartner_ID = (?) , Isactive = (?) , C_Bp_Group_ID = (?) , Process_Debt = (?) , Processed = (?) , EM_APRM_Process = (?) , FIN_Doubtful_Debt_Run_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE FIN_Doubtful_Debt_Run.FIN_Doubtful_Debt_Run_ID = ? 
         
         AND FIN_Doubtful_Debt_Run.AD_Client_ID IN ('1') 
         AND FIN_Doubtful_Debt_Run.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="finDoubtfulDebtMethodId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="rundate"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="daysoverdue"></Parameter> <Parameter name="percentage"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="processDebt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="emAprmProcess"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="finDoubtfulDebtMethodId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="rundate"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="daysoverdue"></Parameter> <Parameter name="percentage"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="processDebt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="emAprmProcess"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="finDoubtfulDebtRunId"></Parameter>
     
@@ -129,10 +129,10 @@ FIN_Doubtful_Debt_Run.FIN_Doubtful_Debt_Run_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO FIN_Doubtful_Debt_Run 
-        (AD_Org_ID, FIN_Doubtful_Debt_Method_ID, Description, Rundate, Dateacct, Daysoverdue, Percentage, C_Bpartner_ID, Isactive, C_Bp_Group_ID, Process_Debt, Processed, EM_APRM_Process, AD_Client_ID, FIN_Doubtful_Debt_Run_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, FIN_Doubtful_Debt_Method_ID, Description, Rundate, Dateacct, Daysoverdue, Percentage, C_Bpartner_ID, Isactive, C_Bp_Group_ID, Process_Debt, Processed, EM_APRM_Process, FIN_Doubtful_Debt_Run_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="finDoubtfulDebtMethodId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="rundate"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="daysoverdue"></Parameter> <Parameter name="percentage"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="processDebt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="emAprmProcess"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="finDoubtfulDebtMethodId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="rundate"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="daysoverdue"></Parameter> <Parameter name="percentage"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cBpGroupId"></Parameter> <Parameter name="processDebt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="emAprmProcess"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

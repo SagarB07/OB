@@ -21,8 +21,8 @@ atrdep_cabecera_reten.Fecha_Inicio,
 atrdep_cabecera_reten.Fecha_Fin, 
 atrdep_cabecera_reten.Generar_Xml, 
 atrdep_cabecera_reten.Nombrerdep, 
-atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID, 
 atrdep_cabecera_reten.AD_Client_ID, 
+atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID, 
  
         ? AS LANGUAGE 
         FROM atrdep_cabecera_reten left join (select AD_Org_ID, Name from AD_Org) table1 on (atrdep_cabecera_reten.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (atrdep_cabecera_reten.Anios = list1.value and list1.ad_reference_id = 'DBE0CE97929A4EB3A2093E35875EA82B' and list1.ad_language = ?) 
@@ -95,13 +95,13 @@ atrdep_cabecera_reten.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE atrdep_cabecera_reten
-        SET AD_Org_ID = (?) , Isactive = (?) , Anios = (?) , Generar = (?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Generar_Xml = (?) , Nombrerdep = (?) , Atrdep_Cabecera_Reten_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Isactive = (?) , Anios = (?) , Generar = (?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Generar_Xml = (?) , Nombrerdep = (?) , AD_Client_ID = (?) , Atrdep_Cabecera_Reten_ID = (?) , updated = now(), updatedby = ? 
         WHERE atrdep_cabecera_reten.Atrdep_Cabecera_Reten_ID = ? 
         
         AND atrdep_cabecera_reten.AD_Client_ID IN ('1') 
         AND atrdep_cabecera_reten.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="anios"></Parameter> <Parameter name="generar"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="generarXml"></Parameter> <Parameter name="nombrerdep"></Parameter> <Parameter name="atrdepCabeceraRetenId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="anios"></Parameter> <Parameter name="generar"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="generarXml"></Parameter> <Parameter name="nombrerdep"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="atrdepCabeceraRetenId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="atrdepCabeceraRetenId"></Parameter>
     
@@ -113,10 +113,10 @@ atrdep_cabecera_reten.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO atrdep_cabecera_reten 
-        (AD_Org_ID, Isactive, Anios, Generar, Fecha_Inicio, Fecha_Fin, Generar_Xml, Nombrerdep, Atrdep_Cabecera_Reten_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Isactive, Anios, Generar, Fecha_Inicio, Fecha_Fin, Generar_Xml, Nombrerdep, AD_Client_ID, Atrdep_Cabecera_Reten_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="anios"></Parameter> <Parameter name="generar"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="generarXml"></Parameter> <Parameter name="nombrerdep"></Parameter> <Parameter name="atrdepCabeceraRetenId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="anios"></Parameter> <Parameter name="generar"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="generarXml"></Parameter> <Parameter name="nombrerdep"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="atrdepCabeceraRetenId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

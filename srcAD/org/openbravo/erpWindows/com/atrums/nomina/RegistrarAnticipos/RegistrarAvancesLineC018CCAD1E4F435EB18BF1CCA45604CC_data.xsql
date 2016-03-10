@@ -32,9 +32,9 @@ list3.name as Posted_BTN,
 no_registra_quinc_line.Documentno, 
 no_registra_quinc_line.C_Doctype_ID, 
 (CASE WHEN no_registra_quinc_line.C_Doctype_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
-no_registra_quinc_line.NO_Registra_Quincena_ID, 
-no_registra_quinc_line.NO_Registra_Quinc_Line_ID, 
 no_registra_quinc_line.AD_Client_ID, 
+no_registra_quinc_line.NO_Registra_Quinc_Line_ID, 
+no_registra_quinc_line.NO_Registra_Quincena_ID, 
 no_registra_quinc_line.AD_Org_ID, 
  
         ? AS LANGUAGE 
@@ -150,13 +150,13 @@ no_registra_quinc_line.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_registra_quinc_line
-        SET C_Bpartner_ID = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Processed = (?) , Include_Rol_Pago = (?) , docstatus = (?) , Docactionno = (?) , Processing = (?) , Dateacct = TO_DATE(?) , Posted = (?) , Documentno = (?) , C_Doctype_ID = (?) , NO_Registra_Quincena_ID = (?) , NO_Registra_Quinc_Line_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET C_Bpartner_ID = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Processed = (?) , Include_Rol_Pago = (?) , docstatus = (?) , Docactionno = (?) , Processing = (?) , Dateacct = TO_DATE(?) , Posted = (?) , Documentno = (?) , C_Doctype_ID = (?) , AD_Client_ID = (?) , NO_Registra_Quinc_Line_ID = (?) , NO_Registra_Quincena_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_registra_quinc_line.NO_Registra_Quinc_Line_ID = ? 
                  AND no_registra_quinc_line.NO_Registra_Quincena_ID = ? 
         AND no_registra_quinc_line.AD_Client_ID IN ('1') 
         AND no_registra_quinc_line.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noRegistraQuincLineId"></Parameter>
     
@@ -168,10 +168,10 @@ no_registra_quinc_line.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_registra_quinc_line 
-        (C_Bpartner_ID, NO_Tipo_Ingreso_Egreso_ID, Valor, C_Currency_ID, Isactive, Processed, Include_Rol_Pago, docstatus, Docactionno, Processing, Dateacct, Posted, Documentno, C_Doctype_ID, NO_Registra_Quincena_ID, NO_Registra_Quinc_Line_ID, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)
+        (C_Bpartner_ID, NO_Tipo_Ingreso_Egreso_ID, Valor, C_Currency_ID, Isactive, Processed, Include_Rol_Pago, docstatus, Docactionno, Processing, Dateacct, Posted, Documentno, C_Doctype_ID, AD_Client_ID, NO_Registra_Quinc_Line_ID, NO_Registra_Quincena_ID, AD_Org_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

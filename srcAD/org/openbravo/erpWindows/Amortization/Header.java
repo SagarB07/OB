@@ -493,7 +493,7 @@ vars.getRequestGlobalVariable("inpParamEndDate_f", tabId + "|paramEndDate_f");
     HeaderData data = new HeaderData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.startdate = vars.getStringParameter("inpstartdate");    try {   data.totalamortization = vars.getNumericParameter("inptotalamortization");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getRequiredStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.processed = vars.getRequiredStringParameter("inpprocessed");     data.posted = vars.getRequiredStringParameter("inpposted");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.cCampaignIdr = vars.getStringParameter("inpcCampaignId_R");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.cActivityIdr = vars.getStringParameter("inpcActivityId_R");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.enddate = vars.getStringParameter("inpenddate");     data.processing = vars.getStringParameter("inpprocessing", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.aAmortizationId = vars.getRequestGlobalVariable("inpaAmortizationId", windowId + "|A_Amortization_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.startdate = vars.getStringParameter("inpstartdate");    try {   data.totalamortization = vars.getNumericParameter("inptotalamortization");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getRequiredStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.processed = vars.getRequiredStringParameter("inpprocessed");     data.posted = vars.getRequiredStringParameter("inpposted");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.cProjectId = vars.getStringParameter("inpcProjectId");     data.cCampaignId = vars.getStringParameter("inpcCampaignId");     data.cCampaignIdr = vars.getStringParameter("inpcCampaignId_R");     data.cActivityId = vars.getStringParameter("inpcActivityId");     data.cActivityIdr = vars.getStringParameter("inpcActivityId_R");     data.user1Id = vars.getStringParameter("inpuser1Id");     data.user2Id = vars.getStringParameter("inpuser2Id");     data.enddate = vars.getStringParameter("inpenddate");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.processing = vars.getStringParameter("inpprocessing", "N");     data.aAmortizationId = vars.getRequestGlobalVariable("inpaAmortizationId", windowId + "|A_Amortization_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -525,7 +525,7 @@ vars.getRequestGlobalVariable("inpParamEndDate_f", tabId + "|paramEndDate_f");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|A_Amortization_ID", data[0].getField("aAmortizationId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|A_Amortization_ID", data[0].getField("aAmortizationId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {
@@ -1126,10 +1126,10 @@ xmlDocument.setParameter("EndDate_Format", vars.getSessionValue("#AD_SqlDateForm
                 else {                    
                     
                         //BUTTON TEXT FILLING
-                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
+                    data.processedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "800024", data.getField("Processed"));
                     
                         //BUTTON TEXT FILLING
-                    data.processedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "800024", data.getField("Processed"));
+                    data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
                     
                 }
                 vars.setEditionData(tabId, data);

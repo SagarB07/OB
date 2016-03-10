@@ -364,7 +364,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
     ProductCategoryData data = new ProductCategoryData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.value = vars.getStringParameter("inpvalue");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.isdefault = vars.getStringParameter("inpisdefault", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.issummary = vars.getStringParameter("inpissummary", "N");     data.adImageId = vars.getStringParameter("inpadImageId");    try {   data.plannedmargin = vars.getRequiredNumericParameter("inpplannedmargin");  } catch (ServletException paramEx) { ex = paramEx; }     data.aAssetGroupId = vars.getStringParameter("inpaAssetGroupId");     data.mProductCategoryId = vars.getRequestGlobalVariable("inpmProductCategoryId", windowId + "|M_Product_Category_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.value = vars.getStringParameter("inpvalue");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.isdefault = vars.getStringParameter("inpisdefault", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.issummary = vars.getStringParameter("inpissummary", "N");    try {   data.plannedmargin = vars.getRequiredNumericParameter("inpplannedmargin");  } catch (ServletException paramEx) { ex = paramEx; }     data.adImageId = vars.getStringParameter("inpadImageId");     data.aAssetGroupId = vars.getStringParameter("inpaAssetGroupId");     data.mProductCategoryId = vars.getRequestGlobalVariable("inpmProductCategoryId", windowId + "|M_Product_Category_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -395,7 +395,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|M_Product_Category_ID", data[0].getField("mProductCategoryId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|M_Product_Category_ID", data[0].getField("mProductCategoryId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

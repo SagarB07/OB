@@ -29,10 +29,10 @@ C_ProjectProposal.CopyFrom,
 C_ProjectProposal.Projectwon, 
 C_ProjectProposal.PaymentRule, 
 C_ProjectProposal.C_Projectproposal_ID, 
+C_ProjectProposal.AD_Org_ID, 
 C_ProjectProposal.C_Project_ID, 
 C_ProjectProposal.AD_Client_ID, 
 COALESCE(C_ProjectProposal.IsActive, 'N') AS IsActive, 
-C_ProjectProposal.AD_Org_ID, 
  
         ? AS LANGUAGE 
         FROM C_ProjectProposal left join (select C_BPartner_ID, Name from C_BPartner) table1 on (C_ProjectProposal.C_BPartner_ID = table1.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table2 on (C_ProjectProposal.C_BPartner_Location_ID = table2.C_BPartner_Location_ID) left join (select AD_User_ID, Name from AD_User) table3 on (C_ProjectProposal.AD_User_ID = table3.AD_User_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table4 on (C_ProjectProposal.FIN_Paymentmethod_ID = table4.FIN_Paymentmethod_ID) left join (select C_PaymentTerm_ID, Name from C_PaymentTerm) table5 on (C_ProjectProposal.C_PaymentTerm_ID = table5.C_PaymentTerm_ID) left join (select C_PaymentTerm_ID,AD_Language, Name from C_PaymentTerm_TRL) tableTRL5 on (table5.C_PaymentTerm_ID = tableTRL5.C_PaymentTerm_ID and tableTRL5.AD_Language = ?) 
@@ -144,13 +144,13 @@ C_ProjectProposal.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_ProjectProposal
-        SET C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , Datesend = TO_DATE(?) , AD_User_ID = (?) , IsSOTrx = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , HeaderNote = (?) , FootNote = (?) , CopyFrom = (?) , Projectwon = (?) , PaymentRule = (?) , C_Projectproposal_ID = (?) , C_Project_ID = (?) , AD_Client_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , Datesend = TO_DATE(?) , AD_User_ID = (?) , IsSOTrx = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , HeaderNote = (?) , FootNote = (?) , CopyFrom = (?) , Projectwon = (?) , PaymentRule = (?) , C_Projectproposal_ID = (?) , AD_Org_ID = (?) , C_Project_ID = (?) , AD_Client_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? 
         WHERE C_ProjectProposal.C_Projectproposal_ID = ? 
                  AND C_ProjectProposal.C_Project_ID = ? 
         AND C_ProjectProposal.AD_Client_ID IN ('1') 
         AND C_ProjectProposal.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpartnerLocationId"></Parameter> <Parameter name="datesend"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cPaymenttermId"></Parameter> <Parameter name="headernote"></Parameter> <Parameter name="footnote"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="projectwon"></Parameter> <Parameter name="paymentrule"></Parameter> <Parameter name="cProjectproposalId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpartnerLocationId"></Parameter> <Parameter name="datesend"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cPaymenttermId"></Parameter> <Parameter name="headernote"></Parameter> <Parameter name="footnote"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="projectwon"></Parameter> <Parameter name="paymentrule"></Parameter> <Parameter name="cProjectproposalId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cProjectproposalId"></Parameter>
     
@@ -162,10 +162,10 @@ C_ProjectProposal.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_ProjectProposal 
-        (C_BPartner_ID, C_BPartner_Location_ID, Datesend, AD_User_ID, IsSOTrx, FIN_Paymentmethod_ID, C_PaymentTerm_ID, HeaderNote, FootNote, CopyFrom, Projectwon, PaymentRule, C_Projectproposal_ID, C_Project_ID, AD_Client_ID, IsActive, AD_Org_ID, created, createdby, updated, updatedBy)
+        (C_BPartner_ID, C_BPartner_Location_ID, Datesend, AD_User_ID, IsSOTrx, FIN_Paymentmethod_ID, C_PaymentTerm_ID, HeaderNote, FootNote, CopyFrom, Projectwon, PaymentRule, C_Projectproposal_ID, AD_Org_ID, C_Project_ID, AD_Client_ID, IsActive, created, createdby, updated, updatedBy)
         VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpartnerLocationId"></Parameter> <Parameter name="datesend"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cPaymenttermId"></Parameter> <Parameter name="headernote"></Parameter> <Parameter name="footnote"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="projectwon"></Parameter> <Parameter name="paymentrule"></Parameter> <Parameter name="cProjectproposalId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="cBpartnerLocationId"></Parameter> <Parameter name="datesend"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="issotrx"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cPaymenttermId"></Parameter> <Parameter name="headernote"></Parameter> <Parameter name="footnote"></Parameter> <Parameter name="copyfrom"></Parameter> <Parameter name="projectwon"></Parameter> <Parameter name="paymentrule"></Parameter> <Parameter name="cProjectproposalId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

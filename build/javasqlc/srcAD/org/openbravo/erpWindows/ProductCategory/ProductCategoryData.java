@@ -32,8 +32,8 @@ static Logger log4j = Logger.getLogger(ProductCategoryData.class);
   public String isdefault;
   public String isactive;
   public String issummary;
-  public String adImageId;
   public String plannedmargin;
+  public String adImageId;
   public String aAssetGroupId;
   public String mProductCategoryId;
   public String adClientId;
@@ -78,10 +78,10 @@ static Logger log4j = Logger.getLogger(ProductCategoryData.class);
       return isactive;
     else if (fieldName.equalsIgnoreCase("issummary"))
       return issummary;
-    else if (fieldName.equalsIgnoreCase("ad_image_id") || fieldName.equals("adImageId"))
-      return adImageId;
     else if (fieldName.equalsIgnoreCase("plannedmargin"))
       return plannedmargin;
+    else if (fieldName.equalsIgnoreCase("ad_image_id") || fieldName.equals("adImageId"))
+      return adImageId;
     else if (fieldName.equalsIgnoreCase("a_asset_group_id") || fieldName.equals("aAssetGroupId"))
       return aAssetGroupId;
     else if (fieldName.equalsIgnoreCase("m_product_category_id") || fieldName.equals("mProductCategoryId"))
@@ -135,8 +135,8 @@ Select for edit
       "COALESCE(M_Product_Category.IsDefault, 'N') AS IsDefault, " +
       "COALESCE(M_Product_Category.IsActive, 'N') AS IsActive, " +
       "COALESCE(M_Product_Category.Issummary, 'N') AS Issummary, " +
-      "M_Product_Category.AD_Image_ID, " +
       "M_Product_Category.PlannedMargin, " +
+      "M_Product_Category.AD_Image_ID, " +
       "M_Product_Category.A_Asset_Group_ID, " +
       "M_Product_Category.M_Product_Category_ID, " +
       "M_Product_Category.AD_Client_ID, " +
@@ -195,8 +195,8 @@ Select for edit
         objectProductCategoryData.isdefault = UtilSql.getValue(result, "isdefault");
         objectProductCategoryData.isactive = UtilSql.getValue(result, "isactive");
         objectProductCategoryData.issummary = UtilSql.getValue(result, "issummary");
-        objectProductCategoryData.adImageId = UtilSql.getValue(result, "ad_image_id");
         objectProductCategoryData.plannedmargin = UtilSql.getValue(result, "plannedmargin");
+        objectProductCategoryData.adImageId = UtilSql.getValue(result, "ad_image_id");
         objectProductCategoryData.aAssetGroupId = UtilSql.getValue(result, "a_asset_group_id");
         objectProductCategoryData.mProductCategoryId = UtilSql.getValue(result, "m_product_category_id");
         objectProductCategoryData.adClientId = UtilSql.getValue(result, "ad_client_id");
@@ -251,8 +251,8 @@ Create a registry
     objectProductCategoryData[0].isdefault = isdefault;
     objectProductCategoryData[0].isactive = isactive;
     objectProductCategoryData[0].issummary = issummary;
-    objectProductCategoryData[0].adImageId = adImageId;
     objectProductCategoryData[0].plannedmargin = plannedmargin;
+    objectProductCategoryData[0].adImageId = adImageId;
     objectProductCategoryData[0].aAssetGroupId = aAssetGroupId;
     objectProductCategoryData[0].mProductCategoryId = mProductCategoryId;
     objectProductCategoryData[0].adClientId = adClientId;
@@ -340,7 +340,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Product_Category" +
-      "        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , Description = (?) , IsDefault = (?) , IsActive = (?) , Issummary = (?) , AD_Image_ID = (?) , PlannedMargin = TO_NUMBER(?) , A_Asset_Group_ID = (?) , M_Product_Category_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , Description = (?) , IsDefault = (?) , IsActive = (?) , Issummary = (?) , PlannedMargin = TO_NUMBER(?) , AD_Image_ID = (?) , A_Asset_Group_ID = (?) , M_Product_Category_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Product_Category.M_Product_Category_ID = ? " +
       "        AND M_Product_Category.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -364,8 +364,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefault);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issummary);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedmargin);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
@@ -397,8 +397,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Product_Category " +
-      "        (AD_Org_ID, Value, Name, Description, IsDefault, IsActive, Issummary, AD_Image_ID, PlannedMargin, A_Asset_Group_ID, M_Product_Category_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, Value, Name, Description, IsDefault, IsActive, Issummary, PlannedMargin, AD_Image_ID, A_Asset_Group_ID, M_Product_Category_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -413,8 +413,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefault);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issummary);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedmargin);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductCategoryId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);

@@ -1267,13 +1267,13 @@ comboTableData = null;
                 else {                    
                     
                         //BUTTON TEXT FILLING
+                    data.emAtecfeDocactionBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "23FC4FD90F7F4E738E615DBB40A04F2D", data.getField("EM_Atecfe_Docaction"));
+                    
+                        //BUTTON TEXT FILLING
                     data.docactionreBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "CB29EF103ACC49108693B711ACEF6261", data.getField("Docactionre"));
                     
                         //BUTTON TEXT FILLING
                     data.postedBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "234", data.getField("Posted"));
-                    
-                        //BUTTON TEXT FILLING
-                    data.emAtecfeDocactionBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "23FC4FD90F7F4E738E615DBB40A04F2D", data.getField("EM_Atecfe_Docaction"));
                     
                 }
                 vars.setEditionData(tabId, data);

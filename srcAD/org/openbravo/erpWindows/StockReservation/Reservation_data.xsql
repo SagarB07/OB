@@ -11,9 +11,9 @@
         to_char(M_Reservation.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
         M_Reservation.UpdatedBy, 
         (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = M_Reservation.UpdatedBy) as UpdatedByR,
-        M_Reservation.Managereservation_Pe, 
-M_Reservation.RES_Process, 
+        M_Reservation.RES_Process, 
 list1.name as RES_Process_BTN, 
+M_Reservation.Managereservation_Pe, 
 M_Reservation.AD_Org_ID, 
 (CASE WHEN M_Reservation.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
 M_Reservation.M_Product_ID, 
@@ -29,12 +29,12 @@ M_Reservation.M_Locator_ID,
 (CASE WHEN M_Reservation.M_Locator_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Value), ''))),'') ) END) AS M_Locator_IDR, 
 M_Reservation.M_Attributesetinstance_ID, 
 (CASE WHEN M_Reservation.M_Attributesetinstance_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table10.Description), ''))),'') ) END) AS M_Attributesetinstance_IDR, 
-COALESCE(M_Reservation.Isactive, 'N') AS Isactive, 
-M_Reservation.RES_Status, 
-M_Reservation.AD_Client_ID, 
-M_Reservation.M_Reservation_ID, 
-M_Reservation.Reservedqty, 
 M_Reservation.ReleasedQty, 
+M_Reservation.RES_Status, 
+COALESCE(M_Reservation.Isactive, 'N') AS Isactive, 
+M_Reservation.M_Reservation_ID, 
+M_Reservation.AD_Client_ID, 
+M_Reservation.Reservedqty, 
  
         ? AS LANGUAGE 
         FROM M_Reservation left join ad_ref_list_v list1 on (list1.ad_reference_id = '440DDA64A43F4799AAFF48BC86DC8F78' and list1.ad_language = ?  AND M_Reservation.RES_Process = TO_CHAR(list1.value)) left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Reservation.AD_Org_ID = table1.AD_Org_ID) left join (select M_Product_ID, Name from M_Product) table2 on (M_Reservation.M_Product_ID = table2.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL2 on (table2.M_Product_ID = tableTRL2.M_Product_ID and tableTRL2.AD_Language = ?)  left join (select C_Uom_ID, Name from C_Uom) table4 on (M_Reservation.C_Uom_ID = table4.C_Uom_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL4 on (table4.C_UOM_ID = tableTRL4.C_UOM_ID and tableTRL4.AD_Language = ?)  left join (select C_Orderline_ID, C_Order_ID, Line, LineNetAmt from C_Orderline) table6 on (M_Reservation.C_Orderline_ID = table6.C_Orderline_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table7 on (table6.C_Order_ID = table7.C_Order_ID) left join (select M_Warehouse_ID, Name from M_Warehouse) table8 on (M_Reservation.M_Warehouse_ID = table8.M_Warehouse_ID) left join (select M_Locator_ID, Value from M_Locator) table9 on (M_Reservation.M_Locator_ID = table9.M_Locator_ID) left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table10 on (M_Reservation.M_Attributesetinstance_ID = table10.M_AttributeSetInstance_ID)
@@ -142,13 +142,13 @@ M_Reservation.ReleasedQty,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Reservation
-        SET Managereservation_Pe = (?) , RES_Process = (?) , AD_Org_ID = (?) , M_Product_ID = (?) , Quantity = TO_NUMBER(?) , C_Uom_ID = (?) , C_Orderline_ID = (?) , M_Warehouse_ID = (?) , M_Locator_ID = (?) , M_Attributesetinstance_ID = (?) , Isactive = (?) , RES_Status = (?) , AD_Client_ID = (?) , M_Reservation_ID = (?) , Reservedqty = TO_NUMBER(?) , ReleasedQty = TO_NUMBER(?) , updated = now(), updatedby = ? 
+        SET RES_Process = (?) , Managereservation_Pe = (?) , AD_Org_ID = (?) , M_Product_ID = (?) , Quantity = TO_NUMBER(?) , C_Uom_ID = (?) , C_Orderline_ID = (?) , M_Warehouse_ID = (?) , M_Locator_ID = (?) , M_Attributesetinstance_ID = (?) , ReleasedQty = TO_NUMBER(?) , RES_Status = (?) , Isactive = (?) , M_Reservation_ID = (?) , AD_Client_ID = (?) , Reservedqty = TO_NUMBER(?) , updated = now(), updatedby = ? 
         WHERE M_Reservation.M_Reservation_ID = ? 
         
         AND M_Reservation.AD_Client_ID IN ('1') 
         AND M_Reservation.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="managereservationPe"></Parameter> <Parameter name="resProcess"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="resStatus"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mReservationId"></Parameter> <Parameter name="reservedqty"></Parameter> <Parameter name="releasedqty"></Parameter> 
+    <Parameter name="resProcess"></Parameter> <Parameter name="managereservationPe"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="releasedqty"></Parameter> <Parameter name="resStatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mReservationId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="reservedqty"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mReservationId"></Parameter>
     
@@ -160,10 +160,10 @@ M_Reservation.ReleasedQty,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Reservation 
-        (Managereservation_Pe, RES_Process, AD_Org_ID, M_Product_ID, Quantity, C_Uom_ID, C_Orderline_ID, M_Warehouse_ID, M_Locator_ID, M_Attributesetinstance_ID, Isactive, RES_Status, AD_Client_ID, M_Reservation_ID, Reservedqty, ReleasedQty, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), now(), ?, now(), ?)
+        (RES_Process, Managereservation_Pe, AD_Org_ID, M_Product_ID, Quantity, C_Uom_ID, C_Orderline_ID, M_Warehouse_ID, M_Locator_ID, M_Attributesetinstance_ID, ReleasedQty, RES_Status, Isactive, M_Reservation_ID, AD_Client_ID, Reservedqty, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="managereservationPe"></Parameter> <Parameter name="resProcess"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="resStatus"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mReservationId"></Parameter> <Parameter name="reservedqty"></Parameter> <Parameter name="releasedqty"></Parameter> 
+    <Parameter name="resProcess"></Parameter> <Parameter name="managereservationPe"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="releasedqty"></Parameter> <Parameter name="resStatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mReservationId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="reservedqty"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

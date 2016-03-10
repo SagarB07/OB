@@ -496,7 +496,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", stres
     Linea030D19C3A2434EC5A02B5113AF75FB84Data data = new Linea030D19C3A2434EC5A02B5113AF75FB84Data();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.noVacacionId = vars.getStringParameter("inpnoVacacionId");     data.procesar = vars.getStringParameter("inpprocesar");    try {   data.line = vars.getNumericParameter("inpline");  } catch (ServletException paramEx) { ex = paramEx; }     data.fechaInicio = vars.getRequiredStringParameter("inpfechaInicio");     data.fechaFin = vars.getRequiredStringParameter("inpfechaFin");     data.estado = vars.getRequiredStringParameter("inpestado");     data.estador = vars.getStringParameter("inpestado_R");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.dias = vars.getNumericParameter("inpdias");  } catch (ServletException paramEx) { ex = paramEx; }     data.noVacacionLineaId = vars.getRequestGlobalVariable("inpnoVacacionLineaId", windowId + "|NO_Vacacion_Linea_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.procesado = vars.getStringParameter("inpprocesado", "N"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.noVacacionId = vars.getStringParameter("inpnoVacacionId");     data.procesar = vars.getStringParameter("inpprocesar");    try {   data.line = vars.getNumericParameter("inpline");  } catch (ServletException paramEx) { ex = paramEx; }     data.fechaInicio = vars.getRequiredStringParameter("inpfechaInicio");     data.fechaFin = vars.getRequiredStringParameter("inpfechaFin");     data.estado = vars.getRequiredStringParameter("inpestado");     data.estador = vars.getStringParameter("inpestado_R");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.dias = vars.getNumericParameter("inpdias");  } catch (ServletException paramEx) { ex = paramEx; }     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.procesado = vars.getStringParameter("inpprocesado", "N");     data.noVacacionLineaId = vars.getRequestGlobalVariable("inpnoVacacionLineaId", windowId + "|NO_Vacacion_Linea_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -528,7 +528,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", stres
       
       Vacaciones842CC2DF626D478498EF81923785A8F5Data[] data = Vacaciones842CC2DF626D478498EF81923785A8F5Data.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPNO_Vacacion_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|NO_Vacacion_ID", data[0].noVacacionId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|NO_Vacacion_ID", data[0].noVacacionId);
       vars.setSessionValue(windowId + "|NO_Vacacion_ID", strPNO_Vacacion_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -547,7 +547,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", stres
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|NO_Vacacion_Linea_ID", data[0].getField("noVacacionLineaId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Vacacion_Linea_ID", data[0].getField("noVacacionLineaId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPNO_Vacacion_ID) throws IOException,ServletException {

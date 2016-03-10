@@ -18,8 +18,8 @@ M_Inventory.Name,
 M_Inventory.M_Warehouse_ID, 
 (CASE WHEN M_Inventory.M_Warehouse_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS M_Warehouse_IDR, 
 M_Inventory.Description, 
-M_Inventory.EM_Co_Inventario, 
 M_Inventory.GenerateList, 
+M_Inventory.EM_Co_Inventario, 
 M_Inventory.UpdateQty, 
 M_Inventory.Processing, 
 M_Inventory.Posted, 
@@ -33,10 +33,10 @@ M_Inventory.User1_ID,
 M_Inventory.C_Campaign_ID, 
 M_Inventory.AD_OrgTrx_ID, 
 M_Inventory.User2_ID, 
-M_Inventory.M_Inventory_ID, 
 COALESCE(M_Inventory.IsActive, 'N') AS IsActive, 
-COALESCE(M_Inventory.Processed, 'N') AS Processed, 
 M_Inventory.AD_Client_ID, 
+M_Inventory.M_Inventory_ID, 
+COALESCE(M_Inventory.Processed, 'N') AS Processed, 
  
         ? AS LANGUAGE 
         FROM M_Inventory left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Inventory.AD_Org_ID = table1.AD_Org_ID) left join (select M_Warehouse_ID, Name from M_Warehouse) table2 on (M_Inventory.M_Warehouse_ID =  table2.M_Warehouse_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Inventory.Posted = TO_CHAR(list1.value)) left join (select C_Project_ID, Value, Name from C_Project) table3 on (M_Inventory.C_Project_ID = table3.C_Project_ID)
@@ -125,13 +125,13 @@ M_Inventory.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Inventory
-        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , M_Warehouse_ID = (?) , Description = (?) , EM_Co_Inventario = (?) , GenerateList = (?) , UpdateQty = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User2_ID = (?) , M_Inventory_ID = (?) , IsActive = (?) , Processed = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , M_Warehouse_ID = (?) , Description = (?) , GenerateList = (?) , EM_Co_Inventario = (?) , UpdateQty = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User2_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , M_Inventory_ID = (?) , Processed = (?) , updated = now(), updatedby = ? 
         WHERE M_Inventory.M_Inventory_ID = ? 
         
         AND M_Inventory.AD_Client_ID IN ('1') 
         AND M_Inventory.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="emCoInventario"></Parameter> <Parameter name="generatelist"></Parameter> <Parameter name="updateqty"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mInventoryId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="generatelist"></Parameter> <Parameter name="emCoInventario"></Parameter> <Parameter name="updateqty"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mInventoryId"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mInventoryId"></Parameter>
     
@@ -143,10 +143,10 @@ M_Inventory.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Inventory 
-        (AD_Org_ID, MovementDate, Name, M_Warehouse_ID, Description, EM_Co_Inventario, GenerateList, UpdateQty, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, User1_ID, C_Campaign_ID, AD_OrgTrx_ID, User2_ID, M_Inventory_ID, IsActive, Processed, AD_Client_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, MovementDate, Name, M_Warehouse_ID, Description, GenerateList, EM_Co_Inventario, UpdateQty, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, User1_ID, C_Campaign_ID, AD_OrgTrx_ID, User2_ID, IsActive, AD_Client_ID, M_Inventory_ID, Processed, created, createdby, updated, updatedBy)
         VALUES ((?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="emCoInventario"></Parameter> <Parameter name="generatelist"></Parameter> <Parameter name="updateqty"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="mInventoryId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="movementdate"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mWarehouseId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="generatelist"></Parameter> <Parameter name="emCoInventario"></Parameter> <Parameter name="updateqty"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="adOrgtrxId"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mInventoryId"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

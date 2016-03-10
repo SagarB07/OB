@@ -31,8 +31,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String mWarehouseId;
   public String mWarehouseIdr;
   public String description;
-  public String emCoInventario;
   public String generatelist;
+  public String emCoInventario;
   public String updateqty;
   public String processing;
   public String posted;
@@ -46,10 +46,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cCampaignId;
   public String adOrgtrxId;
   public String user2Id;
-  public String mInventoryId;
   public String isactive;
-  public String processed;
   public String adClientId;
+  public String mInventoryId;
+  public String processed;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -89,10 +89,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return mWarehouseIdr;
     else if (fieldName.equalsIgnoreCase("description"))
       return description;
-    else if (fieldName.equalsIgnoreCase("em_co_inventario") || fieldName.equals("emCoInventario"))
-      return emCoInventario;
     else if (fieldName.equalsIgnoreCase("generatelist"))
       return generatelist;
+    else if (fieldName.equalsIgnoreCase("em_co_inventario") || fieldName.equals("emCoInventario"))
+      return emCoInventario;
     else if (fieldName.equalsIgnoreCase("updateqty"))
       return updateqty;
     else if (fieldName.equalsIgnoreCase("processing"))
@@ -119,14 +119,14 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return adOrgtrxId;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("m_inventory_id") || fieldName.equals("mInventoryId"))
-      return mInventoryId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("m_inventory_id") || fieldName.equals("mInventoryId"))
+      return mInventoryId;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -173,8 +173,8 @@ Select for edit
       "M_Inventory.M_Warehouse_ID, " +
       "(CASE WHEN M_Inventory.M_Warehouse_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS M_Warehouse_IDR, " +
       "M_Inventory.Description, " +
-      "M_Inventory.EM_Co_Inventario, " +
       "M_Inventory.GenerateList, " +
+      "M_Inventory.EM_Co_Inventario, " +
       "M_Inventory.UpdateQty, " +
       "M_Inventory.Processing, " +
       "M_Inventory.Posted, " +
@@ -188,10 +188,10 @@ Select for edit
       "M_Inventory.C_Campaign_ID, " +
       "M_Inventory.AD_OrgTrx_ID, " +
       "M_Inventory.User2_ID, " +
-      "M_Inventory.M_Inventory_ID, " +
       "COALESCE(M_Inventory.IsActive, 'N') AS IsActive, " +
-      "COALESCE(M_Inventory.Processed, 'N') AS Processed, " +
       "M_Inventory.AD_Client_ID, " +
+      "M_Inventory.M_Inventory_ID, " +
+      "COALESCE(M_Inventory.Processed, 'N') AS Processed, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Inventory left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Inventory.AD_Org_ID = table1.AD_Org_ID) left join (select M_Warehouse_ID, Name from M_Warehouse) table2 on (M_Inventory.M_Warehouse_ID =  table2.M_Warehouse_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_Inventory.Posted = TO_CHAR(list1.value)) left join (select C_Project_ID, Value, Name from C_Project) table3 on (M_Inventory.C_Project_ID = table3.C_Project_ID)" +
       "        WHERE 2=2 " +
@@ -247,8 +247,8 @@ Select for edit
         objectHeaderData.mWarehouseId = UtilSql.getValue(result, "m_warehouse_id");
         objectHeaderData.mWarehouseIdr = UtilSql.getValue(result, "m_warehouse_idr");
         objectHeaderData.description = UtilSql.getValue(result, "description");
-        objectHeaderData.emCoInventario = UtilSql.getValue(result, "em_co_inventario");
         objectHeaderData.generatelist = UtilSql.getValue(result, "generatelist");
+        objectHeaderData.emCoInventario = UtilSql.getValue(result, "em_co_inventario");
         objectHeaderData.updateqty = UtilSql.getValue(result, "updateqty");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
         objectHeaderData.posted = UtilSql.getValue(result, "posted");
@@ -262,10 +262,10 @@ Select for edit
         objectHeaderData.cCampaignId = UtilSql.getValue(result, "c_campaign_id");
         objectHeaderData.adOrgtrxId = UtilSql.getValue(result, "ad_orgtrx_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.mInventoryId = UtilSql.getValue(result, "m_inventory_id");
         objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
-        objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectHeaderData.mInventoryId = UtilSql.getValue(result, "m_inventory_id");
+        objectHeaderData.processed = UtilSql.getValue(result, "processed");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -316,8 +316,8 @@ Create a registry
     objectHeaderData[0].mWarehouseId = mWarehouseId;
     objectHeaderData[0].mWarehouseIdr = "";
     objectHeaderData[0].description = description;
-    objectHeaderData[0].emCoInventario = emCoInventario;
     objectHeaderData[0].generatelist = generatelist;
+    objectHeaderData[0].emCoInventario = emCoInventario;
     objectHeaderData[0].updateqty = updateqty;
     objectHeaderData[0].processing = processing;
     objectHeaderData[0].posted = posted;
@@ -331,10 +331,10 @@ Create a registry
     objectHeaderData[0].cCampaignId = cCampaignId;
     objectHeaderData[0].adOrgtrxId = adOrgtrxId;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].mInventoryId = mInventoryId;
     objectHeaderData[0].isactive = isactive;
-    objectHeaderData[0].processed = processed;
     objectHeaderData[0].adClientId = adClientId;
+    objectHeaderData[0].mInventoryId = mInventoryId;
+    objectHeaderData[0].processed = processed;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -495,7 +495,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Inventory" +
-      "        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , M_Warehouse_ID = (?) , Description = (?) , EM_Co_Inventario = (?) , GenerateList = (?) , UpdateQty = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User2_ID = (?) , M_Inventory_ID = (?) , IsActive = (?) , Processed = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , MovementDate = TO_DATE(?) , Name = (?) , M_Warehouse_ID = (?) , Description = (?) , GenerateList = (?) , EM_Co_Inventario = (?) , UpdateQty = (?) , Processing = (?) , Posted = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User2_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , M_Inventory_ID = (?) , Processed = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Inventory.M_Inventory_ID = ? " +
       "        AND M_Inventory.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -517,8 +517,8 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoInventario);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatelist);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoInventario);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updateqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
@@ -530,10 +530,10 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInventoryId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInventoryId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInventoryId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -562,7 +562,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Inventory " +
-      "        (AD_Org_ID, MovementDate, Name, M_Warehouse_ID, Description, EM_Co_Inventario, GenerateList, UpdateQty, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, User1_ID, C_Campaign_ID, AD_OrgTrx_ID, User2_ID, M_Inventory_ID, IsActive, Processed, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, MovementDate, Name, M_Warehouse_ID, Description, GenerateList, EM_Co_Inventario, UpdateQty, Processing, Posted, C_Project_ID, C_Costcenter_ID, A_Asset_ID, C_Activity_ID, User1_ID, C_Campaign_ID, AD_OrgTrx_ID, User2_ID, IsActive, AD_Client_ID, M_Inventory_ID, Processed, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -576,8 +576,8 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoInventario);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatelist);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoInventario);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updateqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
@@ -589,10 +589,10 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInventoryId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInventoryId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

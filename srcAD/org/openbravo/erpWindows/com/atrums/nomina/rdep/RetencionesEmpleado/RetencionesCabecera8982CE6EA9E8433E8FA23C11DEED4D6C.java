@@ -461,7 +461,7 @@ vars.getRequestGlobalVariable("inpParamAnios", tabId + "|paramAnios");
     RetencionesCabecera8982CE6EA9E8433E8FA23C11DEED4D6CData data = new RetencionesCabecera8982CE6EA9E8433E8FA23C11DEED4D6CData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.anios = vars.getRequiredStringParameter("inpanios");     data.aniosr = vars.getStringParameter("inpanios_R");     data.generar = vars.getRequiredStringParameter("inpgenerar");     data.fechaInicio = vars.getRequiredStringParameter("inpfechaInicio");     data.fechaFin = vars.getRequiredStringParameter("inpfechaFin");     data.generarXml = vars.getStringParameter("inpgenerarXml");     data.nombrerdep = vars.getRequiredStringParameter("inpnombrerdep");     data.atrdepCabeceraRetenId = vars.getRequestGlobalVariable("inpatrdepCabeceraRetenId", windowId + "|Atrdep_Cabecera_Reten_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.anios = vars.getRequiredStringParameter("inpanios");     data.aniosr = vars.getStringParameter("inpanios_R");     data.generar = vars.getRequiredStringParameter("inpgenerar");     data.fechaInicio = vars.getRequiredStringParameter("inpfechaInicio");     data.fechaFin = vars.getRequiredStringParameter("inpfechaFin");     data.generarXml = vars.getStringParameter("inpgenerarXml");     data.nombrerdep = vars.getRequiredStringParameter("inpnombrerdep");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.atrdepCabeceraRetenId = vars.getRequestGlobalVariable("inpatrdepCabeceraRetenId", windowId + "|Atrdep_Cabecera_Reten_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -492,7 +492,7 @@ vars.getRequestGlobalVariable("inpParamAnios", tabId + "|paramAnios");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|Atrdep_Cabecera_Reten_ID", data[0].getField("atrdepCabeceraRetenId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Atrdep_Cabecera_Reten_ID", data[0].getField("atrdepCabeceraRetenId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

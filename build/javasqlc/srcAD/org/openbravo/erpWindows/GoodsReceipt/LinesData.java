@@ -54,11 +54,11 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String explode;
   public String bomParentId;
   public String emAsvPedidoDetalleId;
-  public String isinvoiced;
-  public String mInoutId;
-  public String isactive;
-  public String isdescription;
   public String adClientId;
+  public String isdescription;
+  public String isactive;
+  public String mInoutId;
+  public String isinvoiced;
   public String mInoutlineId;
   public String language;
   public String adUserClient;
@@ -145,16 +145,16 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return bomParentId;
     else if (fieldName.equalsIgnoreCase("em_asv_pedido_detalle_id") || fieldName.equals("emAsvPedidoDetalleId"))
       return emAsvPedidoDetalleId;
-    else if (fieldName.equalsIgnoreCase("isinvoiced"))
-      return isinvoiced;
-    else if (fieldName.equalsIgnoreCase("m_inout_id") || fieldName.equals("mInoutId"))
-      return mInoutId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("isdescription"))
-      return isdescription;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("isdescription"))
+      return isdescription;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("m_inout_id") || fieldName.equals("mInoutId"))
+      return mInoutId;
+    else if (fieldName.equalsIgnoreCase("isinvoiced"))
+      return isinvoiced;
     else if (fieldName.equalsIgnoreCase("m_inoutline_id") || fieldName.equals("mInoutlineId"))
       return mInoutlineId;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -226,11 +226,11 @@ Select for edit
       "M_InOutLine.Explode, " +
       "M_InOutLine.BOM_Parent_ID, " +
       "M_InOutLine.em_asv_pedido_detalle_id, " +
-      "COALESCE(M_InOutLine.IsInvoiced, 'N') AS IsInvoiced, " +
-      "M_InOutLine.M_InOut_ID, " +
-      "COALESCE(M_InOutLine.IsActive, 'N') AS IsActive, " +
-      "COALESCE(M_InOutLine.IsDescription, 'N') AS IsDescription, " +
       "M_InOutLine.AD_Client_ID, " +
+      "COALESCE(M_InOutLine.IsDescription, 'N') AS IsDescription, " +
+      "COALESCE(M_InOutLine.IsActive, 'N') AS IsActive, " +
+      "M_InOutLine.M_InOut_ID, " +
+      "COALESCE(M_InOutLine.IsInvoiced, 'N') AS IsInvoiced, " +
       "M_InOutLine.M_InOutLine_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_InOutLine left join (select M_Product_ID, Name from M_Product) table1 on (M_InOutLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select C_UOM_ID, Name from C_UOM) table3 on (M_InOutLine.C_UOM_ID = table3.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL3 on (table3.C_UOM_ID = tableTRL3.C_UOM_ID and tableTRL3.AD_Language = ?)  left join (select M_Locator_ID, Value from M_Locator) table5 on (M_InOutLine.M_Locator_ID = table5.M_Locator_ID) left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_UOM) table6 on (M_InOutLine.M_Product_Uom_Id =  table6.M_Product_Uom_Id) left join ad_ref_list_v list1 on (table6.C_UOM_ID = list1.value and list1.ad_reference_id = '' and list1.ad_language = ?)  left join (select AD_Org_ID, Name from AD_Org) table7 on (M_InOutLine.AD_Org_ID = table7.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table8 on (M_InOutLine.C_Bpartner_ID = table8.C_BPartner_ID) left join (select C_Project_ID, Value, Name from C_Project) table9 on (M_InOutLine.C_Project_ID = table9.C_Project_ID)" +
@@ -317,11 +317,11 @@ Select for edit
         objectLinesData.explode = UtilSql.getValue(result, "explode");
         objectLinesData.bomParentId = UtilSql.getValue(result, "bom_parent_id");
         objectLinesData.emAsvPedidoDetalleId = UtilSql.getValue(result, "em_asv_pedido_detalle_id");
-        objectLinesData.isinvoiced = UtilSql.getValue(result, "isinvoiced");
-        objectLinesData.mInoutId = UtilSql.getValue(result, "m_inout_id");
-        objectLinesData.isactive = UtilSql.getValue(result, "isactive");
-        objectLinesData.isdescription = UtilSql.getValue(result, "isdescription");
         objectLinesData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectLinesData.isdescription = UtilSql.getValue(result, "isdescription");
+        objectLinesData.isactive = UtilSql.getValue(result, "isactive");
+        objectLinesData.mInoutId = UtilSql.getValue(result, "m_inout_id");
+        objectLinesData.isinvoiced = UtilSql.getValue(result, "isinvoiced");
         objectLinesData.mInoutlineId = UtilSql.getValue(result, "m_inoutline_id");
         objectLinesData.language = UtilSql.getValue(result, "language");
         objectLinesData.adUserClient = "";
@@ -396,11 +396,11 @@ Create a registry
     objectLinesData[0].explode = explode;
     objectLinesData[0].bomParentId = bomParentId;
     objectLinesData[0].emAsvPedidoDetalleId = emAsvPedidoDetalleId;
-    objectLinesData[0].isinvoiced = isinvoiced;
-    objectLinesData[0].mInoutId = mInoutId;
-    objectLinesData[0].isactive = isactive;
-    objectLinesData[0].isdescription = isdescription;
     objectLinesData[0].adClientId = adClientId;
+    objectLinesData[0].isdescription = isdescription;
+    objectLinesData[0].isactive = isactive;
+    objectLinesData[0].mInoutId = mInoutId;
+    objectLinesData[0].isinvoiced = isinvoiced;
     objectLinesData[0].mInoutlineId = mInoutlineId;
     objectLinesData[0].language = "";
     return objectLinesData;
@@ -1216,7 +1216,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_InOutLine" +
-      "        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , M_Condition_Goods_ID = (?) , M_AttributeSetInstance_ID = (?) , MovementQty = TO_NUMBER(?) , C_UOM_ID = (?) , M_Locator_ID = (?) , Description = (?) , C_OrderLine_ID = (?) , M_Product_Uom_Id = (?) , QuantityOrder = TO_NUMBER(?) , Canceled_Inoutline_ID = (?) , Manage_Prereservation = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , em_asv_pedido_detalle_id = (?) , IsInvoiced = (?) , M_InOut_ID = (?) , IsActive = (?) , IsDescription = (?) , AD_Client_ID = (?) , M_InOutLine_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , M_Condition_Goods_ID = (?) , MovementQty = TO_NUMBER(?) , C_UOM_ID = (?) , M_Locator_ID = (?) , Description = (?) , C_OrderLine_ID = (?) , M_Product_Uom_Id = (?) , QuantityOrder = TO_NUMBER(?) , Canceled_Inoutline_ID = (?) , Manage_Prereservation = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , em_asv_pedido_detalle_id = (?) , IsDescription = (?) , AD_Client_ID = (?) , IsActive = (?) , M_InOut_ID = (?) , M_InOutLine_ID = (?) , IsInvoiced = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_InOutLine.M_InOutLine_ID = ? " +
       "                 AND M_InOutLine.M_InOut_ID = ? " +
       "        AND M_InOutLine.AD_Client_ID IN (";
@@ -1236,8 +1236,8 @@ Select for parent field
     st = connectionProvider.getPreparedStatement(conn, strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, line);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mConditionGoodsId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mAttributesetinstanceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mConditionGoodsId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, movementqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cUomId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mLocatorId);
@@ -1257,12 +1257,12 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, explode);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bomParentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAsvPedidoDetalleId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdescription);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutlineId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
@@ -1292,7 +1292,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_InOutLine " +
-      "        (Line, M_Product_ID, M_Condition_Goods_ID, M_AttributeSetInstance_ID, MovementQty, C_UOM_ID, M_Locator_ID, Description, C_OrderLine_ID, M_Product_Uom_Id, QuantityOrder, Canceled_Inoutline_ID, Manage_Prereservation, AD_Org_ID, C_Bpartner_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, em_asv_pedido_detalle_id, IsInvoiced, M_InOut_ID, IsActive, IsDescription, AD_Client_ID, M_InOutLine_ID, created, createdby, updated, updatedBy)" +
+      "        (Line, M_Product_ID, M_Condition_Goods_ID, M_AttributeSetInstance_ID, MovementQty, C_UOM_ID, M_Locator_ID, Description, C_OrderLine_ID, M_Product_Uom_Id, QuantityOrder, Canceled_Inoutline_ID, Manage_Prereservation, AD_Org_ID, C_Bpartner_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, em_asv_pedido_detalle_id, AD_Client_ID, IsDescription, IsActive, M_InOut_ID, IsInvoiced, M_InOutLine_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -1324,11 +1324,11 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, explode);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bomParentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAsvPedidoDetalleId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdescription);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdescription);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

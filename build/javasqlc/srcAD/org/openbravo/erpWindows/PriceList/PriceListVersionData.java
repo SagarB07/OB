@@ -34,10 +34,10 @@ static Logger log4j = Logger.getLogger(PriceListVersionData.class);
   public String isactive;
   public String proccreate;
   public String mPricelistVersionGenerate;
-  public String mPricelistVersionId;
   public String mPricelistId;
   public String adOrgId;
   public String adClientId;
+  public String mPricelistVersionId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -83,14 +83,14 @@ static Logger log4j = Logger.getLogger(PriceListVersionData.class);
       return proccreate;
     else if (fieldName.equalsIgnoreCase("m_pricelist_version_generate") || fieldName.equals("mPricelistVersionGenerate"))
       return mPricelistVersionGenerate;
-    else if (fieldName.equalsIgnoreCase("m_pricelist_version_id") || fieldName.equals("mPricelistVersionId"))
-      return mPricelistVersionId;
     else if (fieldName.equalsIgnoreCase("m_pricelist_id") || fieldName.equals("mPricelistId"))
       return mPricelistId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("m_pricelist_version_id") || fieldName.equals("mPricelistVersionId"))
+      return mPricelistVersionId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -140,10 +140,10 @@ Select for edit
       "COALESCE(M_PriceList_Version.IsActive, 'N') AS IsActive, " +
       "M_PriceList_Version.ProcCreate, " +
       "M_PriceList_Version.M_Pricelist_Version_Generate, " +
-      "M_PriceList_Version.M_PriceList_Version_ID, " +
       "M_PriceList_Version.M_PriceList_ID, " +
       "M_PriceList_Version.AD_Org_ID, " +
       "M_PriceList_Version.AD_Client_ID, " +
+      "M_PriceList_Version.M_PriceList_Version_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_PriceList_Version left join (select M_DiscountSchema_ID, Name from M_DiscountSchema) table1 on (M_PriceList_Version.M_DiscountSchema_ID = table1.M_DiscountSchema_ID) left join (select M_PriceList_Version_ID, Name from M_PriceList_Version) table2 on (M_PriceList_Version.M_Pricelist_Version_Base_ID =  table2.M_PriceList_Version_ID)" +
       "        WHERE 2=2 " +
@@ -206,10 +206,10 @@ Select for edit
         objectPriceListVersionData.isactive = UtilSql.getValue(result, "isactive");
         objectPriceListVersionData.proccreate = UtilSql.getValue(result, "proccreate");
         objectPriceListVersionData.mPricelistVersionGenerate = UtilSql.getValue(result, "m_pricelist_version_generate");
-        objectPriceListVersionData.mPricelistVersionId = UtilSql.getValue(result, "m_pricelist_version_id");
         objectPriceListVersionData.mPricelistId = UtilSql.getValue(result, "m_pricelist_id");
         objectPriceListVersionData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectPriceListVersionData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectPriceListVersionData.mPricelistVersionId = UtilSql.getValue(result, "m_pricelist_version_id");
         objectPriceListVersionData.language = UtilSql.getValue(result, "language");
         objectPriceListVersionData.adUserClient = "";
         objectPriceListVersionData.adOrgClient = "";
@@ -263,10 +263,10 @@ Create a registry
     objectPriceListVersionData[0].isactive = isactive;
     objectPriceListVersionData[0].proccreate = proccreate;
     objectPriceListVersionData[0].mPricelistVersionGenerate = mPricelistVersionGenerate;
-    objectPriceListVersionData[0].mPricelistVersionId = mPricelistVersionId;
     objectPriceListVersionData[0].mPricelistId = mPricelistId;
     objectPriceListVersionData[0].adOrgId = adOrgId;
     objectPriceListVersionData[0].adClientId = adClientId;
+    objectPriceListVersionData[0].mPricelistVersionId = mPricelistVersionId;
     objectPriceListVersionData[0].language = "";
     return objectPriceListVersionData;
   }
@@ -467,7 +467,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_PriceList_Version" +
-      "        SET Name = (?) , ValidFrom = TO_DATE(?) , M_DiscountSchema_ID = (?) , M_Pricelist_Version_Base_ID = (?) , Description = (?) , IsActive = (?) , ProcCreate = (?) , M_Pricelist_Version_Generate = (?) , M_PriceList_Version_ID = (?) , M_PriceList_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Name = (?) , ValidFrom = TO_DATE(?) , M_DiscountSchema_ID = (?) , M_Pricelist_Version_Base_ID = (?) , Description = (?) , IsActive = (?) , ProcCreate = (?) , M_Pricelist_Version_Generate = (?) , M_PriceList_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , M_PriceList_Version_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_PriceList_Version.M_PriceList_Version_ID = ? " +
       "                 AND M_PriceList_Version.M_PriceList_ID = ? " +
       "        AND M_PriceList_Version.AD_Client_ID IN (";
@@ -493,10 +493,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, proccreate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionGenerate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
@@ -526,7 +526,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_PriceList_Version " +
-      "        (Name, ValidFrom, M_DiscountSchema_ID, M_Pricelist_Version_Base_ID, Description, IsActive, ProcCreate, M_Pricelist_Version_Generate, M_PriceList_Version_ID, M_PriceList_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Name, ValidFrom, M_DiscountSchema_ID, M_Pricelist_Version_Base_ID, Description, IsActive, ProcCreate, M_Pricelist_Version_Generate, M_PriceList_ID, AD_Org_ID, AD_Client_ID, M_PriceList_Version_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -543,10 +543,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, proccreate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionGenerate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

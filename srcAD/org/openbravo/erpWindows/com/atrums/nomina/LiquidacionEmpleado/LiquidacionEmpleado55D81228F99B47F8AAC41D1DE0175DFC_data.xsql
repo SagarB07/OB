@@ -22,9 +22,9 @@ no_liquidacion_empleado.Tipo_Liquidacion,
 (CASE WHEN no_liquidacion_empleado.Tipo_Liquidacion IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS Tipo_LiquidacionR, 
 no_liquidacion_empleado.Fecha_Inicio, 
 no_liquidacion_empleado.Fecha_Fin, 
+no_liquidacion_empleado.Total_Ingreso, 
 no_liquidacion_empleado.C_Period_ID, 
 (CASE WHEN no_liquidacion_empleado.C_Period_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Name), ''))),'') ) END) AS C_Period_IDR, 
-no_liquidacion_empleado.Total_Ingreso, 
 no_liquidacion_empleado.Total_Egreso, 
 no_liquidacion_empleado.Total_Neto, 
 no_liquidacion_empleado.C_Currency_ID, 
@@ -40,8 +40,8 @@ list4.name as Posted_BTN,
 COALESCE(no_liquidacion_empleado.Processed, 'N') AS Processed, 
 no_liquidacion_empleado.Dateacct, 
 no_liquidacion_empleado.Generarpagos, 
-no_liquidacion_empleado.AD_Client_ID, 
 no_liquidacion_empleado.NO_Liquidacion_Empleado_ID, 
+no_liquidacion_empleado.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM no_liquidacion_empleado left join (select AD_Org_ID, Name from AD_Org) table1 on (no_liquidacion_empleado.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (no_liquidacion_empleado.C_Bpartner_ID = table2.C_BPartner_ID) left join (select C_DocType_ID, Name from C_DocType) table3 on (no_liquidacion_empleado.C_Doctype_ID =  table3.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL3 on (table3.C_DocType_ID = tableTRL3.C_DocType_ID and tableTRL3.AD_Language = ?)  left join ad_ref_list_v list1 on (no_liquidacion_empleado.Tipo_Liquidacion = list1.value and list1.ad_reference_id = 'F73D4D2BFC084F93AD6EC37BE5857EE4' and list1.ad_language = ?)  left join (select C_Period_ID, Name from C_Period) table5 on (no_liquidacion_empleado.C_Period_ID =  table5.C_Period_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table6 on (no_liquidacion_empleado.C_Currency_ID = table6.C_Currency_ID) left join ad_ref_list_v list2 on (no_liquidacion_empleado.Docstatus = list2.value and list2.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (list3.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list3.ad_language = ?  AND no_liquidacion_empleado.Docaccionno = TO_CHAR(list3.value)) left join ad_ref_list_v list4 on (list4.ad_reference_id = '234' and list4.ad_language = ?  AND no_liquidacion_empleado.Posted = TO_CHAR(list4.value))
@@ -146,13 +146,13 @@ no_liquidacion_empleado.NO_Liquidacion_Empleado_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_liquidacion_empleado
-        SET AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Doctype_ID = (?) , Documentno = (?) , Tipo_Liquidacion = (?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , C_Period_ID = (?) , Total_Ingreso = TO_NUMBER(?) , Total_Egreso = TO_NUMBER(?) , Total_Neto = TO_NUMBER(?) , C_Currency_ID = (?) , Docstatus = (?) , Isactive = (?) , Processing = (?) , Docaccionno = (?) , Posted = (?) , Processed = (?) , Dateacct = TO_DATE(?) , Generarpagos = (?) , AD_Client_ID = (?) , NO_Liquidacion_Empleado_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Doctype_ID = (?) , Documentno = (?) , Tipo_Liquidacion = (?) , Fecha_Inicio = TO_DATE(?) , Fecha_Fin = TO_DATE(?) , Total_Ingreso = TO_NUMBER(?) , C_Period_ID = (?) , Total_Egreso = TO_NUMBER(?) , Total_Neto = TO_NUMBER(?) , C_Currency_ID = (?) , Docstatus = (?) , Isactive = (?) , Processing = (?) , Docaccionno = (?) , Posted = (?) , Processed = (?) , Dateacct = TO_DATE(?) , Generarpagos = (?) , NO_Liquidacion_Empleado_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_liquidacion_empleado.NO_Liquidacion_Empleado_ID = ? 
         
         AND no_liquidacion_empleado.AD_Client_ID IN ('1') 
         AND no_liquidacion_empleado.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="tipoLiquidacion"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="generarpagos"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noLiquidacionEmpleadoId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="tipoLiquidacion"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="generarpagos"></Parameter> <Parameter name="noLiquidacionEmpleadoId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noLiquidacionEmpleadoId"></Parameter>
     
@@ -164,10 +164,10 @@ no_liquidacion_empleado.NO_Liquidacion_Empleado_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_liquidacion_empleado 
-        (AD_Org_ID, C_Bpartner_ID, C_Doctype_ID, Documentno, Tipo_Liquidacion, Fecha_Inicio, Fecha_Fin, C_Period_ID, Total_Ingreso, Total_Egreso, Total_Neto, C_Currency_ID, Docstatus, Isactive, Processing, Docaccionno, Posted, Processed, Dateacct, Generarpagos, AD_Client_ID, NO_Liquidacion_Empleado_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, C_Bpartner_ID, C_Doctype_ID, Documentno, Tipo_Liquidacion, Fecha_Inicio, Fecha_Fin, Total_Ingreso, C_Period_ID, Total_Egreso, Total_Neto, C_Currency_ID, Docstatus, Isactive, Processing, Docaccionno, Posted, Processed, Dateacct, Generarpagos, NO_Liquidacion_Empleado_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="tipoLiquidacion"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="generarpagos"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noLiquidacionEmpleadoId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="tipoLiquidacion"></Parameter> <Parameter name="fechaInicio"></Parameter> <Parameter name="fechaFin"></Parameter> <Parameter name="totalIngreso"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="totalEgreso"></Parameter> <Parameter name="totalNeto"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="generarpagos"></Parameter> <Parameter name="noLiquidacionEmpleadoId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

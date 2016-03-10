@@ -490,7 +490,7 @@ vars.getGlobalVariable("inpcProjectId", windowId + "|C_Project_ID");
     SupplierData data = new SupplierData();
     ServletException ex = null;
     try {
-    data.cBpartnerId = vars.getRequiredStringParameter("inpcBpartnerId");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.mPricelistId = vars.getStringParameter("inpmPricelistId");     data.mPricelistIdr = vars.getStringParameter("inpmPricelistId_R");     data.generateorder = vars.getStringParameter("inpgenerateorder");     data.cIncotermsId = vars.getStringParameter("inpcIncotermsId");     data.cIncotermsIdr = vars.getStringParameter("inpcIncotermsId_R");     data.incotermsDescription = vars.getStringParameter("inpincotermsDescription");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.cProjectVendorId = vars.getRequestGlobalVariable("inpcProjectVendorId", windowId + "|C_Project_Vendor_ID");     data.mPricelistVersionId = vars.getStringParameter("inpmPricelistVersionId");     data.note = vars.getStringParameter("inpnote");     data.cProjectId = vars.getRequiredStringParameter("inpcProjectId");     data.isactive = vars.getStringParameter("inpisactive", "N"); 
+    data.cBpartnerId = vars.getRequiredStringParameter("inpcBpartnerId");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.mPricelistId = vars.getStringParameter("inpmPricelistId");     data.mPricelistIdr = vars.getStringParameter("inpmPricelistId_R");     data.generateorder = vars.getStringParameter("inpgenerateorder");     data.cIncotermsId = vars.getStringParameter("inpcIncotermsId");     data.cIncotermsIdr = vars.getStringParameter("inpcIncotermsId_R");     data.incotermsDescription = vars.getStringParameter("inpincotermsDescription");     data.note = vars.getStringParameter("inpnote");     data.cProjectVendorId = vars.getRequestGlobalVariable("inpcProjectVendorId", windowId + "|C_Project_Vendor_ID");     data.mPricelistVersionId = vars.getStringParameter("inpmPricelistVersionId");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.cProjectId = vars.getRequiredStringParameter("inpcProjectId"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -544,7 +544,7 @@ vars.getGlobalVariable("inpcProjectId", windowId + "|C_Project_ID");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|C_Project_Vendor_ID", data[0].getField("cProjectVendorId"));
+          vars.setSessionValue(windowId + "|C_Project_Vendor_ID", data[0].getField("cProjectVendorId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPC_Project_ID) throws IOException,ServletException {

@@ -26,11 +26,11 @@ M_Product_Category_Acct.Processing,
 M_Product_Category_Acct.P_PurchasePriceVariance_Acct, 
 M_Product_Category_Acct.P_TradeDiscountRec_Acct, 
 M_Product_Category_Acct.P_TradeDiscountGrant_Acct, 
-M_Product_Category_Acct.AD_Client_ID, 
 M_Product_Category_Acct.M_Product_Category_Acct_ID, 
 M_Product_Category_Acct.M_Product_Category_ID, 
-COALESCE(M_Product_Category_Acct.IsActive, 'N') AS IsActive, 
 M_Product_Category_Acct.AD_Org_ID, 
+M_Product_Category_Acct.AD_Client_ID, 
+COALESCE(M_Product_Category_Acct.IsActive, 'N') AS IsActive, 
  
         ? AS LANGUAGE 
         FROM M_Product_Category_Acct left join (select C_AcctSchema_ID, Name from C_AcctSchema) table1 on (M_Product_Category_Acct.C_AcctSchema_ID = table1.C_AcctSchema_ID)
@@ -135,13 +135,13 @@ M_Product_Category_Acct.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Product_Category_Acct
-        SET C_AcctSchema_ID = (?) , P_Asset_Acct = (?) , P_Expense_Acct = (?) , P_Def_Expense_Acct = (?) , P_Revenue_Acct = (?) , P_Def_Revenue_Acct = (?) , P_Cogs_Acct = (?) , P_InvoicePriceVariance_Acct = (?) , P_Revenue_Return_Acct = (?) , P_Cogs_Return_Acct = (?) , Processing = (?) , P_PurchasePriceVariance_Acct = (?) , P_TradeDiscountRec_Acct = (?) , P_TradeDiscountGrant_Acct = (?) , AD_Client_ID = (?) , M_Product_Category_Acct_ID = (?) , M_Product_Category_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET C_AcctSchema_ID = (?) , P_Asset_Acct = (?) , P_Expense_Acct = (?) , P_Def_Expense_Acct = (?) , P_Revenue_Acct = (?) , P_Def_Revenue_Acct = (?) , P_Cogs_Acct = (?) , P_InvoicePriceVariance_Acct = (?) , P_Revenue_Return_Acct = (?) , P_Cogs_Return_Acct = (?) , Processing = (?) , P_PurchasePriceVariance_Acct = (?) , P_TradeDiscountRec_Acct = (?) , P_TradeDiscountGrant_Acct = (?) , M_Product_Category_Acct_ID = (?) , M_Product_Category_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? 
         WHERE M_Product_Category_Acct.M_Product_Category_Acct_ID = ? 
                  AND M_Product_Category_Acct.M_Product_Category_ID = ? 
         AND M_Product_Category_Acct.AD_Client_ID IN ('1') 
         AND M_Product_Category_Acct.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="cAcctschemaId"></Parameter> <Parameter name="pAssetAcct"></Parameter> <Parameter name="pExpenseAcct"></Parameter> <Parameter name="pDefExpenseAcct"></Parameter> <Parameter name="pRevenueAcct"></Parameter> <Parameter name="pDefRevenueAcct"></Parameter> <Parameter name="pCogsAcct"></Parameter> <Parameter name="pInvoicepricevarianceAcct"></Parameter> <Parameter name="pRevenueReturnAcct"></Parameter> <Parameter name="pCogsReturnAcct"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="pPurchasepricevarianceAcct"></Parameter> <Parameter name="pTradediscountrecAcct"></Parameter> <Parameter name="pTradediscountgrantAcct"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mProductCategoryAcctId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cAcctschemaId"></Parameter> <Parameter name="pAssetAcct"></Parameter> <Parameter name="pExpenseAcct"></Parameter> <Parameter name="pDefExpenseAcct"></Parameter> <Parameter name="pRevenueAcct"></Parameter> <Parameter name="pDefRevenueAcct"></Parameter> <Parameter name="pCogsAcct"></Parameter> <Parameter name="pInvoicepricevarianceAcct"></Parameter> <Parameter name="pRevenueReturnAcct"></Parameter> <Parameter name="pCogsReturnAcct"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="pPurchasepricevarianceAcct"></Parameter> <Parameter name="pTradediscountrecAcct"></Parameter> <Parameter name="pTradediscountgrantAcct"></Parameter> <Parameter name="mProductCategoryAcctId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mProductCategoryAcctId"></Parameter>
     
@@ -153,10 +153,10 @@ M_Product_Category_Acct.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Product_Category_Acct 
-        (C_AcctSchema_ID, P_Asset_Acct, P_Expense_Acct, P_Def_Expense_Acct, P_Revenue_Acct, P_Def_Revenue_Acct, P_Cogs_Acct, P_InvoicePriceVariance_Acct, P_Revenue_Return_Acct, P_Cogs_Return_Acct, Processing, P_PurchasePriceVariance_Acct, P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct, AD_Client_ID, M_Product_Category_Acct_ID, M_Product_Category_ID, IsActive, AD_Org_ID, created, createdby, updated, updatedBy)
+        (C_AcctSchema_ID, P_Asset_Acct, P_Expense_Acct, P_Def_Expense_Acct, P_Revenue_Acct, P_Def_Revenue_Acct, P_Cogs_Acct, P_InvoicePriceVariance_Acct, P_Revenue_Return_Acct, P_Cogs_Return_Acct, Processing, P_PurchasePriceVariance_Acct, P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct, M_Product_Category_Acct_ID, M_Product_Category_ID, AD_Org_ID, AD_Client_ID, IsActive, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="cAcctschemaId"></Parameter> <Parameter name="pAssetAcct"></Parameter> <Parameter name="pExpenseAcct"></Parameter> <Parameter name="pDefExpenseAcct"></Parameter> <Parameter name="pRevenueAcct"></Parameter> <Parameter name="pDefRevenueAcct"></Parameter> <Parameter name="pCogsAcct"></Parameter> <Parameter name="pInvoicepricevarianceAcct"></Parameter> <Parameter name="pRevenueReturnAcct"></Parameter> <Parameter name="pCogsReturnAcct"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="pPurchasepricevarianceAcct"></Parameter> <Parameter name="pTradediscountrecAcct"></Parameter> <Parameter name="pTradediscountgrantAcct"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mProductCategoryAcctId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cAcctschemaId"></Parameter> <Parameter name="pAssetAcct"></Parameter> <Parameter name="pExpenseAcct"></Parameter> <Parameter name="pDefExpenseAcct"></Parameter> <Parameter name="pRevenueAcct"></Parameter> <Parameter name="pDefRevenueAcct"></Parameter> <Parameter name="pCogsAcct"></Parameter> <Parameter name="pInvoicepricevarianceAcct"></Parameter> <Parameter name="pRevenueReturnAcct"></Parameter> <Parameter name="pCogsReturnAcct"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="pPurchasepricevarianceAcct"></Parameter> <Parameter name="pTradediscountrecAcct"></Parameter> <Parameter name="pTradediscountgrantAcct"></Parameter> <Parameter name="mProductCategoryAcctId"></Parameter> <Parameter name="mProductCategoryId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

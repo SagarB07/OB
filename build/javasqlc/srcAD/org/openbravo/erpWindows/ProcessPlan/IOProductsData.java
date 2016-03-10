@@ -45,8 +45,8 @@ static Logger log4j = Logger.getLogger(IOProductsData.class);
   public String copyproduct;
   public String mWarehouseRuleId;
   public String mWarehouseRuleIdr;
-  public String maSequenceId;
   public String maSequenceproductId;
+  public String maSequenceId;
   public String adOrgId;
   public String adClientId;
   public String language;
@@ -116,10 +116,10 @@ static Logger log4j = Logger.getLogger(IOProductsData.class);
       return mWarehouseRuleId;
     else if (fieldName.equalsIgnoreCase("m_warehouse_rule_idr") || fieldName.equals("mWarehouseRuleIdr"))
       return mWarehouseRuleIdr;
-    else if (fieldName.equalsIgnoreCase("ma_sequence_id") || fieldName.equals("maSequenceId"))
-      return maSequenceId;
     else if (fieldName.equalsIgnoreCase("ma_sequenceproduct_id") || fieldName.equals("maSequenceproductId"))
       return maSequenceproductId;
+    else if (fieldName.equalsIgnoreCase("ma_sequence_id") || fieldName.equals("maSequenceId"))
+      return maSequenceId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
@@ -184,8 +184,8 @@ Select for edit
       "MA_SequenceProduct.Copyproduct, " +
       "MA_SequenceProduct.M_Warehouse_Rule_ID, " +
       "(CASE WHEN MA_SequenceProduct.M_Warehouse_Rule_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'') ) END) AS M_Warehouse_Rule_IDR, " +
-      "MA_SequenceProduct.MA_Sequence_ID, " +
       "MA_SequenceProduct.MA_Sequenceproduct_ID, " +
+      "MA_SequenceProduct.MA_Sequence_ID, " +
       "MA_SequenceProduct.AD_Org_ID, " +
       "MA_SequenceProduct.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
@@ -265,8 +265,8 @@ Select for edit
         objectIOProductsData.copyproduct = UtilSql.getValue(result, "copyproduct");
         objectIOProductsData.mWarehouseRuleId = UtilSql.getValue(result, "m_warehouse_rule_id");
         objectIOProductsData.mWarehouseRuleIdr = UtilSql.getValue(result, "m_warehouse_rule_idr");
-        objectIOProductsData.maSequenceId = UtilSql.getValue(result, "ma_sequence_id");
         objectIOProductsData.maSequenceproductId = UtilSql.getValue(result, "ma_sequenceproduct_id");
+        objectIOProductsData.maSequenceId = UtilSql.getValue(result, "ma_sequence_id");
         objectIOProductsData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectIOProductsData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectIOProductsData.language = UtilSql.getValue(result, "language");
@@ -333,8 +333,8 @@ Create a registry
     objectIOProductsData[0].copyproduct = copyproduct;
     objectIOProductsData[0].mWarehouseRuleId = mWarehouseRuleId;
     objectIOProductsData[0].mWarehouseRuleIdr = "";
-    objectIOProductsData[0].maSequenceId = maSequenceId;
     objectIOProductsData[0].maSequenceproductId = maSequenceproductId;
+    objectIOProductsData[0].maSequenceId = maSequenceId;
     objectIOProductsData[0].adOrgId = adOrgId;
     objectIOProductsData[0].adClientId = adClientId;
     objectIOProductsData[0].language = "";
@@ -382,10 +382,10 @@ Select for auxiliar field
 /**
 Select for auxiliar field
  */
-  public static String selectActPFF8081813219E68E013219ECFE930004_Value(ConnectionProvider connectionProvider, String MA_SEQUENCEPRODUCT_ID)    throws ServletException {
+  public static String selectActPFF8081813219E68E013219ECFE930004_Name(ConnectionProvider connectionProvider, String MA_SEQUENCEPRODUCT_ID)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
-      "        SELECT M_PRODUCT.VALUE||' - '||MA_SEQUENCE.VALUE||' - '||MA_SEQUENCE.SEQNO AS value FROM MA_SEQUENCEPRODUCT JOIN MA_SEQUENCE ON MA_SEQUENCE.MA_SEQUENCE_ID = MA_SEQUENCEPRODUCT.MA_SEQUENCE_ID LEFT JOIN M_PRODUCT ON MA_SEQUENCEPRODUCT.M_PRODUCT_ID = M_PRODUCT.M_PRODUCT_ID WHERE MA_SEQUENCEPRODUCT_ID = ? ";
+      "        SELECT M_PRODUCT.NAME||' - '||MA_SEQUENCE.NAME||' - '||MA_SEQUENCE.SEQNO AS name FROM MA_SEQUENCEPRODUCT JOIN MA_SEQUENCE ON MA_SEQUENCE.MA_SEQUENCE_ID = MA_SEQUENCEPRODUCT.MA_SEQUENCE_ID LEFT JOIN M_PRODUCT ON MA_SEQUENCEPRODUCT.M_PRODUCT_ID = M_PRODUCT.M_PRODUCT_ID WHERE MA_SEQUENCEPRODUCT_ID = ? ";
 
     ResultSet result;
     String strReturn = "";
@@ -398,7 +398,7 @@ Select for auxiliar field
 
       result = st.executeQuery();
       if(result.next()) {
-        strReturn = UtilSql.getValue(result, "value");
+        strReturn = UtilSql.getValue(result, "name");
       }
       result.close();
     } catch(SQLException e){
@@ -420,10 +420,10 @@ Select for auxiliar field
 /**
 Select for auxiliar field
  */
-  public static String selectActPFF8081813219E68E013219ECFE930004_Name(ConnectionProvider connectionProvider, String MA_SEQUENCEPRODUCT_ID)    throws ServletException {
+  public static String selectActPFF8081813219E68E013219ECFE930004_Value(ConnectionProvider connectionProvider, String MA_SEQUENCEPRODUCT_ID)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
-      "        SELECT M_PRODUCT.NAME||' - '||MA_SEQUENCE.NAME||' - '||MA_SEQUENCE.SEQNO AS name FROM MA_SEQUENCEPRODUCT JOIN MA_SEQUENCE ON MA_SEQUENCE.MA_SEQUENCE_ID = MA_SEQUENCEPRODUCT.MA_SEQUENCE_ID LEFT JOIN M_PRODUCT ON MA_SEQUENCEPRODUCT.M_PRODUCT_ID = M_PRODUCT.M_PRODUCT_ID WHERE MA_SEQUENCEPRODUCT_ID = ? ";
+      "        SELECT M_PRODUCT.VALUE||' - '||MA_SEQUENCE.VALUE||' - '||MA_SEQUENCE.SEQNO AS value FROM MA_SEQUENCEPRODUCT JOIN MA_SEQUENCE ON MA_SEQUENCE.MA_SEQUENCE_ID = MA_SEQUENCEPRODUCT.MA_SEQUENCE_ID LEFT JOIN M_PRODUCT ON MA_SEQUENCEPRODUCT.M_PRODUCT_ID = M_PRODUCT.M_PRODUCT_ID WHERE MA_SEQUENCEPRODUCT_ID = ? ";
 
     ResultSet result;
     String strReturn = "";
@@ -436,7 +436,7 @@ Select for auxiliar field
 
       result = st.executeQuery();
       if(result.next()) {
-        strReturn = UtilSql.getValue(result, "name");
+        strReturn = UtilSql.getValue(result, "value");
       }
       result.close();
     } catch(SQLException e){
@@ -728,7 +728,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_SequenceProduct" +
-      "        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , Productiontype = (?) , Quantity = TO_NUMBER(?) , C_UOM_ID = (?) , Uniqueattconsum = (?) , Componentcost = TO_NUMBER(?) , Decrease = TO_NUMBER(?) , Rejected = TO_NUMBER(?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Cost = TO_NUMBER(?) , IsActive = (?) , Divisiongroupqty = TO_NUMBER(?) , Copyproduct = (?) , M_Warehouse_Rule_ID = (?) , MA_Sequence_ID = (?) , MA_Sequenceproduct_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , Productiontype = (?) , Quantity = TO_NUMBER(?) , C_UOM_ID = (?) , Uniqueattconsum = (?) , Componentcost = TO_NUMBER(?) , Decrease = TO_NUMBER(?) , Rejected = TO_NUMBER(?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Cost = TO_NUMBER(?) , IsActive = (?) , Divisiongroupqty = TO_NUMBER(?) , Copyproduct = (?) , M_Warehouse_Rule_ID = (?) , MA_Sequenceproduct_ID = (?) , MA_Sequence_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_SequenceProduct.MA_Sequenceproduct_ID = ? " +
       "                 AND MA_SequenceProduct.MA_Sequence_ID = ? " +
       "        AND MA_SequenceProduct.AD_Client_ID IN (";
@@ -762,8 +762,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, divisiongroupqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, copyproduct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseRuleId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceproductId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
@@ -795,7 +795,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_SequenceProduct " +
-      "        (Line, M_Product_ID, Productiontype, Quantity, C_UOM_ID, Uniqueattconsum, Componentcost, Decrease, Rejected, QuantityOrder, M_Product_Uom_Id, Cost, IsActive, Divisiongroupqty, Copyproduct, M_Warehouse_Rule_ID, MA_Sequence_ID, MA_Sequenceproduct_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Line, M_Product_ID, Productiontype, Quantity, C_UOM_ID, Uniqueattconsum, Componentcost, Decrease, Rejected, QuantityOrder, M_Product_Uom_Id, Cost, IsActive, Divisiongroupqty, Copyproduct, M_Warehouse_Rule_ID, MA_Sequenceproduct_ID, MA_Sequence_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -820,8 +820,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, divisiongroupqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, copyproduct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseRuleId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceproductId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);

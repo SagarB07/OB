@@ -462,7 +462,7 @@ vars.getRequestGlobalVariable("inpParamC_Period_ID", tabId + "|paramC_Period_ID"
     RegistrarAnticiposD6E6846C2564435F9B297860CB950D31Data data = new RegistrarAnticiposD6E6846C2564435F9B297860CB950D31Data();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.nombre = vars.getStringParameter("inpnombre");     data.cPeriodId = vars.getStringParameter("inpcPeriodId");     data.cPeriodIdr = vars.getStringParameter("inpcPeriodId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processed = vars.getStringParameter("inpprocessed");     data.anadirAnticipo = vars.getStringParameter("inpanadirAnticipo");     data.noRegistraQuincenaId = vars.getRequestGlobalVariable("inpnoRegistraQuincenaId", windowId + "|NO_Registra_Quincena_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.nombre = vars.getStringParameter("inpnombre");     data.cPeriodId = vars.getStringParameter("inpcPeriodId");     data.cPeriodIdr = vars.getStringParameter("inpcPeriodId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processed = vars.getStringParameter("inpprocessed");     data.anadirAnticipo = vars.getStringParameter("inpanadirAnticipo");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.noRegistraQuincenaId = vars.getRequestGlobalVariable("inpnoRegistraQuincenaId", windowId + "|NO_Registra_Quincena_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -493,7 +493,7 @@ vars.getRequestGlobalVariable("inpParamC_Period_ID", tabId + "|paramC_Period_ID"
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Registra_Quincena_ID", data[0].getField("noRegistraQuincenaId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|NO_Registra_Quincena_ID", data[0].getField("noRegistraQuincenaId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

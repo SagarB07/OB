@@ -30,10 +30,10 @@ MA_WRPhase.Closed,
 COALESCE(MA_WRPhase.Outsourced, 'N') AS Outsourced, 
 MA_WRPhase.Preptime, 
 COALESCE(MA_WRPhase.Usedmaterial, 'N') AS Usedmaterial, 
+MA_WRPhase.Name, 
+MA_WRPhase.MA_Wrphase_ID, 
 MA_WRPhase.MA_Workrequirement_ID, 
 COALESCE(MA_WRPhase.IsActive, 'N') AS IsActive, 
-MA_WRPhase.MA_Wrphase_ID, 
-MA_WRPhase.Name, 
 MA_WRPhase.AD_Org_ID, 
 MA_WRPhase.AD_Client_ID, 
  
@@ -147,13 +147,13 @@ MA_WRPhase.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_WRPhase
-        SET SeqNo = TO_NUMBER(?) , MA_Sequence_ID = (?) , MA_Process_ID = (?) , Startdate = TO_DATE(?) , Enddate = TO_DATE(?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Quantity = TO_NUMBER(?) , Donequantity = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Description = (?) , Noqty = (?) , Groupuse = (?) , Closed = (?) , Outsourced = (?) , Preptime = TO_NUMBER(?) , Usedmaterial = (?) , MA_Workrequirement_ID = (?) , IsActive = (?) , MA_Wrphase_ID = (?) , Name = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET SeqNo = TO_NUMBER(?) , MA_Sequence_ID = (?) , MA_Process_ID = (?) , Startdate = TO_DATE(?) , Enddate = TO_DATE(?) , Estimatedtime = TO_NUMBER(?) , Runtime = TO_NUMBER(?) , Quantity = TO_NUMBER(?) , Donequantity = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Description = (?) , Noqty = (?) , Groupuse = (?) , Closed = (?) , Outsourced = (?) , Preptime = TO_NUMBER(?) , Usedmaterial = (?) , Name = (?) , MA_Wrphase_ID = (?) , MA_Workrequirement_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE MA_WRPhase.MA_Wrphase_ID = ? 
                  AND MA_WRPhase.MA_Workrequirement_ID = ? 
         AND MA_WRPhase.AD_Client_ID IN ('1') 
         AND MA_WRPhase.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="seqno"></Parameter> <Parameter name="maSequenceId"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="donequantity"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="description"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="maWrphaseId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="seqno"></Parameter> <Parameter name="maSequenceId"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="donequantity"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="description"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maWrphaseId"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maWrphaseId"></Parameter>
     
@@ -165,10 +165,10 @@ MA_WRPhase.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_WRPhase 
-        (SeqNo, MA_Sequence_ID, MA_Process_ID, Startdate, Enddate, Estimatedtime, Runtime, Quantity, Donequantity, CostCenterUse, Description, Noqty, Groupuse, Closed, Outsourced, Preptime, Usedmaterial, MA_Workrequirement_ID, IsActive, MA_Wrphase_ID, Name, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (SeqNo, MA_Sequence_ID, MA_Process_ID, Startdate, Enddate, Estimatedtime, Runtime, Quantity, Donequantity, CostCenterUse, Description, Noqty, Groupuse, Closed, Outsourced, Preptime, Usedmaterial, Name, MA_Wrphase_ID, MA_Workrequirement_ID, IsActive, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES (TO_NUMBER(?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="seqno"></Parameter> <Parameter name="maSequenceId"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="donequantity"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="description"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="maWrphaseId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="seqno"></Parameter> <Parameter name="maSequenceId"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="runtime"></Parameter> <Parameter name="quantity"></Parameter> <Parameter name="donequantity"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="description"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="closed"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maWrphaseId"></Parameter> <Parameter name="maWorkrequirementId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -34,13 +34,13 @@ FIN_Doubtful_Debt.C_Campaign_ID,
 (CASE WHEN FIN_Doubtful_Debt.C_Campaign_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.Name), ''))),'') ) END) AS C_Campaign_IDR, 
 FIN_Doubtful_Debt.User1_ID, 
 FIN_Doubtful_Debt.User2_ID, 
-COALESCE(FIN_Doubtful_Debt.Processed, 'N') AS Processed, 
-COALESCE(FIN_Doubtful_Debt.Processing, 'N') AS Processing, 
-FIN_Doubtful_Debt.AD_Client_ID, 
 FIN_Doubtful_Debt.C_Currency_ID, 
+COALESCE(FIN_Doubtful_Debt.Processing, 'N') AS Processing, 
 FIN_Doubtful_Debt.FIN_Doubtful_Debt_ID, 
-COALESCE(FIN_Doubtful_Debt.Isactive, 'N') AS Isactive, 
 FIN_Doubtful_Debt.FIN_Doubtful_Debt_Run_ID, 
+COALESCE(FIN_Doubtful_Debt.Isactive, 'N') AS Isactive, 
+FIN_Doubtful_Debt.AD_Client_ID, 
+COALESCE(FIN_Doubtful_Debt.Processed, 'N') AS Processed, 
  
         ? AS LANGUAGE 
         FROM FIN_Doubtful_Debt left join (select C_Doctype_ID, Name from C_Doctype) table1 on (FIN_Doubtful_Debt.C_Doctype_ID = table1.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL1 on (table1.C_DocType_ID = tableTRL1.C_DocType_ID and tableTRL1.AD_Language = ?)  left join (select FIN_Payment_Schedule_ID, Duedate, Amount from FIN_Payment_Schedule) table3 on (FIN_Doubtful_Debt.FIN_Payment_Schedule_ID = table3.FIN_Payment_Schedule_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND FIN_Doubtful_Debt.Posted = TO_CHAR(list1.value)) left join (select C_BPartner_ID, Name from C_BPartner) table4 on (FIN_Doubtful_Debt.C_Bpartner_ID = table4.C_BPartner_ID) left join (select M_Product_ID, Name from M_Product) table5 on (FIN_Doubtful_Debt.M_Product_ID = table5.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL5 on (table5.M_Product_ID = tableTRL5.M_Product_ID and tableTRL5.AD_Language = ?)  left join (select C_Activity_ID, Name from C_Activity) table7 on (FIN_Doubtful_Debt.C_Activity_ID = table7.C_Activity_ID) left join (select C_Campaign_ID, Name from C_Campaign) table8 on (FIN_Doubtful_Debt.C_Campaign_ID = table8.C_Campaign_ID)
@@ -163,13 +163,13 @@ FIN_Doubtful_Debt.FIN_Doubtful_Debt_Run_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE FIN_Doubtful_Debt
-        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , DateAcct = TO_DATE(?) , FIN_Payment_Schedule_ID = (?) , Description = (?) , Amount = TO_NUMBER(?) , Posted = (?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , Processed = (?) , Processing = (?) , AD_Client_ID = (?) , C_Currency_ID = (?) , FIN_Doubtful_Debt_ID = (?) , Isactive = (?) , FIN_Doubtful_Debt_Run_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , DateAcct = TO_DATE(?) , FIN_Payment_Schedule_ID = (?) , Description = (?) , Amount = TO_NUMBER(?) , Posted = (?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , User1_ID = (?) , User2_ID = (?) , C_Currency_ID = (?) , Processing = (?) , FIN_Doubtful_Debt_ID = (?) , FIN_Doubtful_Debt_Run_ID = (?) , Isactive = (?) , AD_Client_ID = (?) , Processed = (?) , updated = now(), updatedby = ? 
         WHERE FIN_Doubtful_Debt.FIN_Doubtful_Debt_ID = ? 
                  AND FIN_Doubtful_Debt.FIN_Doubtful_Debt_Run_ID = ? 
         AND FIN_Doubtful_Debt.AD_Client_ID IN ('1') 
         AND FIN_Doubtful_Debt.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="finPaymentScheduleId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="amount"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="finDoubtfulDebtId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="finPaymentScheduleId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="amount"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="finDoubtfulDebtId"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="finDoubtfulDebtId"></Parameter>
     
@@ -181,10 +181,10 @@ FIN_Doubtful_Debt.FIN_Doubtful_Debt_Run_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO FIN_Doubtful_Debt 
-        (AD_Org_ID, C_Doctype_ID, DocumentNo, DateAcct, FIN_Payment_Schedule_ID, Description, Amount, Posted, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, Processed, Processing, AD_Client_ID, C_Currency_ID, FIN_Doubtful_Debt_ID, Isactive, FIN_Doubtful_Debt_Run_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, C_Doctype_ID, DocumentNo, DateAcct, FIN_Payment_Schedule_ID, Description, Amount, Posted, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Activity_ID, C_Campaign_ID, User1_ID, User2_ID, C_Currency_ID, Processing, FIN_Doubtful_Debt_ID, FIN_Doubtful_Debt_Run_ID, Isactive, AD_Client_ID, Processed, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), TO_DATE(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="finPaymentScheduleId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="amount"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="finDoubtfulDebtId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="finPaymentScheduleId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="amount"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="finDoubtfulDebtId"></Parameter> <Parameter name="finDoubtfulDebtRunId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

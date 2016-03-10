@@ -47,13 +47,13 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String mrpSalesforecastlineId;
   public String mrpSalesforecastlineIdr;
   public String recalculatestock;
-  public String isexploded;
-  public String isplanned;
-  public String mrpRunProductionId;
-  public String isactive;
-  public String adOrgId;
-  public String adClientId;
   public String mrpRunProductionlineId;
+  public String adClientId;
+  public String isexploded;
+  public String adOrgId;
+  public String isplanned;
+  public String isactive;
+  public String mrpRunProductionId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -125,20 +125,20 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return mrpSalesforecastlineIdr;
     else if (fieldName.equalsIgnoreCase("recalculatestock"))
       return recalculatestock;
-    else if (fieldName.equalsIgnoreCase("isexploded"))
-      return isexploded;
-    else if (fieldName.equalsIgnoreCase("isplanned"))
-      return isplanned;
-    else if (fieldName.equalsIgnoreCase("mrp_run_production_id") || fieldName.equals("mrpRunProductionId"))
-      return mrpRunProductionId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("mrp_run_productionline_id") || fieldName.equals("mrpRunProductionlineId"))
       return mrpRunProductionlineId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isexploded"))
+      return isexploded;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
+    else if (fieldName.equalsIgnoreCase("isplanned"))
+      return isplanned;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("mrp_run_production_id") || fieldName.equals("mrpRunProductionId"))
+      return mrpRunProductionId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -201,13 +201,13 @@ Select for edit
       "MRP_Run_ProductionLine.MRP_Salesforecastline_ID, " +
       "(CASE WHEN MRP_Run_ProductionLine.MRP_Salesforecastline_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL13.Name IS NULL THEN TO_CHAR(table13.Name) ELSE TO_CHAR(tableTRL13.Name) END)), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table16.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table15.DateDoc, 'DD-MM-YYYY')),'') ) END) AS MRP_Salesforecastline_IDR, " +
       "MRP_Run_ProductionLine.Recalculatestock, " +
-      "COALESCE(MRP_Run_ProductionLine.Isexploded, 'N') AS Isexploded, " +
-      "COALESCE(MRP_Run_ProductionLine.Isplanned, 'N') AS Isplanned, " +
-      "MRP_Run_ProductionLine.MRP_Run_Production_ID, " +
-      "COALESCE(MRP_Run_ProductionLine.IsActive, 'N') AS IsActive, " +
-      "MRP_Run_ProductionLine.AD_Org_ID, " +
-      "MRP_Run_ProductionLine.AD_Client_ID, " +
       "MRP_Run_ProductionLine.MRP_Run_Productionline_ID, " +
+      "MRP_Run_ProductionLine.AD_Client_ID, " +
+      "COALESCE(MRP_Run_ProductionLine.Isexploded, 'N') AS Isexploded, " +
+      "MRP_Run_ProductionLine.AD_Org_ID, " +
+      "COALESCE(MRP_Run_ProductionLine.Isplanned, 'N') AS Isplanned, " +
+      "COALESCE(MRP_Run_ProductionLine.IsActive, 'N') AS IsActive, " +
+      "MRP_Run_ProductionLine.MRP_Run_Production_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MRP_Run_ProductionLine left join (select M_Product_ID, Name from M_Product) table1 on (MRP_Run_ProductionLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join ad_ref_list_v list1 on (MRP_Run_ProductionLine.Inouttrxtype = list1.value and list1.ad_reference_id = '800098' and list1.ad_language = ?)  left join (select MRP_Run_Productionline_ID, M_Product_ID from MRP_Run_ProductionLine) table3 on (MRP_Run_ProductionLine.Parent_ID =  table3.MRP_Run_Productionline_ID) left join (select M_Requisitionline_ID, M_Requisition_ID, M_Product_ID, Qty, Needbydate from M_Requisitionline) table4 on (MRP_Run_ProductionLine.M_Requisitionline_ID = table4.M_Requisitionline_ID) left join (select M_Requisition_ID, DocumentNo from M_Requisition) table5 on (table4.M_Requisition_ID = table5.M_Requisition_ID) left join (select M_Product_ID, Name from M_Product) table6 on (table4.M_Product_ID = table6.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL6 on (table6.M_Product_ID = tableTRL6.M_Product_ID and tableTRL6.AD_Language = ?)  left join (select MA_Processplan_ID, Name from MA_Processplan) table8 on (MRP_Run_ProductionLine.MA_Processplan_ID = table8.MA_Processplan_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table9 on (MRP_Run_ProductionLine.C_OrderLine_ID = table9.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table10 on (table9.C_Order_ID = table10.C_Order_ID) left join (select MA_Workrequirement_ID, DocumentNo, StartDate from MA_Workrequirement) table11 on (MRP_Run_ProductionLine.MA_Workrequirement_ID = table11.MA_Workrequirement_ID) left join (select MRP_Salesforecastline_ID, M_Product_ID, MRP_Salesforecast_ID from MRP_Salesforecastline) table12 on (MRP_Run_ProductionLine.MRP_Salesforecastline_ID = table12.MRP_Salesforecastline_ID) left join (select M_Product_ID, Name from M_Product) table13 on (table12.M_Product_ID = table13.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL13 on (table13.M_Product_ID = tableTRL13.M_Product_ID and tableTRL13.AD_Language = ?)  left join (select MRP_Salesforecast_ID, C_BPartner_ID, DateDoc from MRP_Salesforecast) table15 on (table12.MRP_Salesforecast_ID = table15.MRP_Salesforecast_ID) left join (select C_BPartner_ID, Name from C_BPartner) table16 on (table15.C_BPartner_ID = table16.C_BPartner_ID)" +
       "        WHERE 2=2 " +
@@ -287,13 +287,13 @@ Select for edit
         objectLinesData.mrpSalesforecastlineId = UtilSql.getValue(result, "mrp_salesforecastline_id");
         objectLinesData.mrpSalesforecastlineIdr = UtilSql.getValue(result, "mrp_salesforecastline_idr");
         objectLinesData.recalculatestock = UtilSql.getValue(result, "recalculatestock");
-        objectLinesData.isexploded = UtilSql.getValue(result, "isexploded");
-        objectLinesData.isplanned = UtilSql.getValue(result, "isplanned");
-        objectLinesData.mrpRunProductionId = UtilSql.getValue(result, "mrp_run_production_id");
-        objectLinesData.isactive = UtilSql.getValue(result, "isactive");
-        objectLinesData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectLinesData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectLinesData.mrpRunProductionlineId = UtilSql.getValue(result, "mrp_run_productionline_id");
+        objectLinesData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectLinesData.isexploded = UtilSql.getValue(result, "isexploded");
+        objectLinesData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectLinesData.isplanned = UtilSql.getValue(result, "isplanned");
+        objectLinesData.isactive = UtilSql.getValue(result, "isactive");
+        objectLinesData.mrpRunProductionId = UtilSql.getValue(result, "mrp_run_production_id");
         objectLinesData.language = UtilSql.getValue(result, "language");
         objectLinesData.adUserClient = "";
         objectLinesData.adOrgClient = "";
@@ -360,13 +360,13 @@ Create a registry
     objectLinesData[0].mrpSalesforecastlineId = mrpSalesforecastlineId;
     objectLinesData[0].mrpSalesforecastlineIdr = "";
     objectLinesData[0].recalculatestock = recalculatestock;
-    objectLinesData[0].isexploded = isexploded;
-    objectLinesData[0].isplanned = isplanned;
-    objectLinesData[0].mrpRunProductionId = mrpRunProductionId;
-    objectLinesData[0].isactive = isactive;
-    objectLinesData[0].adOrgId = adOrgId;
-    objectLinesData[0].adClientId = adClientId;
     objectLinesData[0].mrpRunProductionlineId = mrpRunProductionlineId;
+    objectLinesData[0].adClientId = adClientId;
+    objectLinesData[0].isexploded = isexploded;
+    objectLinesData[0].adOrgId = adOrgId;
+    objectLinesData[0].isplanned = isplanned;
+    objectLinesData[0].isactive = isactive;
+    objectLinesData[0].mrpRunProductionId = mrpRunProductionId;
     objectLinesData[0].language = "";
     return objectLinesData;
   }
@@ -608,7 +608,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MRP_Run_ProductionLine" +
-      "        SET Planneddate = TO_DATE(?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , Neededqty = TO_NUMBER(?) , Inouttrxtype = (?) , Parent_ID = (?) , Cumqty = TO_NUMBER(?) , Plannedorderdate = TO_DATE(?) , Isfixed = (?) , M_Requisitionline_ID = (?) , MA_Processplan_ID = (?) , C_OrderLine_ID = (?) , MA_Workrequirement_ID = (?) , MRP_Salesforecastline_ID = (?) , Recalculatestock = (?) , Isexploded = (?) , Isplanned = (?) , MRP_Run_Production_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , MRP_Run_Productionline_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Planneddate = TO_DATE(?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , Neededqty = TO_NUMBER(?) , Inouttrxtype = (?) , Parent_ID = (?) , Cumqty = TO_NUMBER(?) , Plannedorderdate = TO_DATE(?) , Isfixed = (?) , M_Requisitionline_ID = (?) , MA_Processplan_ID = (?) , C_OrderLine_ID = (?) , MA_Workrequirement_ID = (?) , MRP_Salesforecastline_ID = (?) , Recalculatestock = (?) , MRP_Run_Productionline_ID = (?) , AD_Client_ID = (?) , Isexploded = (?) , AD_Org_ID = (?) , Isplanned = (?) , IsActive = (?) , MRP_Run_Production_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MRP_Run_ProductionLine.MRP_Run_Productionline_ID = ? " +
       "                 AND MRP_Run_ProductionLine.MRP_Run_Production_ID = ? " +
       "        AND MRP_Run_ProductionLine.AD_Client_ID IN (";
@@ -641,13 +641,13 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpSalesforecastlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, recalculatestock);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isexploded);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isplanned);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionlineId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isexploded);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isplanned);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
@@ -677,7 +677,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MRP_Run_ProductionLine " +
-      "        (Planneddate, M_Product_ID, Qty, Neededqty, Inouttrxtype, Parent_ID, Cumqty, Plannedorderdate, Isfixed, M_Requisitionline_ID, MA_Processplan_ID, C_OrderLine_ID, MA_Workrequirement_ID, MRP_Salesforecastline_ID, Recalculatestock, Isexploded, Isplanned, MRP_Run_Production_ID, IsActive, AD_Org_ID, AD_Client_ID, MRP_Run_Productionline_ID, created, createdby, updated, updatedBy)" +
+      "        (Planneddate, M_Product_ID, Qty, Neededqty, Inouttrxtype, Parent_ID, Cumqty, Plannedorderdate, Isfixed, M_Requisitionline_ID, MA_Processplan_ID, C_OrderLine_ID, MA_Workrequirement_ID, MRP_Salesforecastline_ID, Recalculatestock, MRP_Run_Productionline_ID, AD_Client_ID, Isexploded, AD_Org_ID, Isplanned, IsActive, MRP_Run_Production_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_DATE(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -701,13 +701,13 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maWorkrequirementId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpSalesforecastlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, recalculatestock);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isexploded);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isplanned);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionlineId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isexploded);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isplanned);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

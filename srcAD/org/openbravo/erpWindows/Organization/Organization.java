@@ -496,7 +496,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Cascade", strc
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|IsPeriodControlAllowed", data[0].getField("isperiodcontrolallowed"));    vars.setSessionValue(windowId + "|C_Calendar_ID", data[0].getField("cCalendarId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|IsPeriodControlAllowed", data[0].getField("isperiodcontrolallowed"));    vars.setSessionValue(windowId + "|C_Calendar_ID", data[0].getField("cCalendarId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {
