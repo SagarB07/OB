@@ -1,5 +1,5 @@
  --NO GENERA ROL
-CREATE OR REPLACE FUNCTION i_importarNovedad()
+CREATE OR REPLACE FUNCTION idt_importarNovedad()
   RETURNS  Boolean AS
 $BODY$
 DECLARE
