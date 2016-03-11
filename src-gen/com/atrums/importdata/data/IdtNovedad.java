@@ -58,13 +58,12 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_EMPLEADO = "empleado";
     public static final String PROPERTY_IMPORTERRORMESSAGE = "importErrorMessage";
     public static final String PROPERTY_IMPORTPROCESSCOMPLETE = "importProcessComplete";
-    public static final String PROPERTY_PROCNOVEDAD = "procnovedad";
     public static final String PROPERTY_NOVPROCESADA = "novprocesada";
+    public static final String PROPERTY_PROCNOVEDAD = "procnovedad";
 
     public IdtNovedad() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_IMPORTPROCESSCOMPLETE, false);
-        setDefaultValue(PROPERTY_PROCNOVEDAD, false);
         setDefaultValue(PROPERTY_NOVPROCESADA, false);
     }
 
@@ -193,20 +192,20 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
         set(PROPERTY_IMPORTPROCESSCOMPLETE, importProcessComplete);
     }
 
-    public Boolean isProcnovedad() {
-        return (Boolean) get(PROPERTY_PROCNOVEDAD);
-    }
-
-    public void setProcnovedad(Boolean procnovedad) {
-        set(PROPERTY_PROCNOVEDAD, procnovedad);
-    }
-
     public Boolean isNovprocesada() {
         return (Boolean) get(PROPERTY_NOVPROCESADA);
     }
 
     public void setNovprocesada(Boolean novprocesada) {
         set(PROPERTY_NOVPROCESADA, novprocesada);
+    }
+
+    public String getProcnovedad() {
+        return (String) get(PROPERTY_PROCNOVEDAD);
+    }
+
+    public void setProcnovedad(String procnovedad) {
+        set(PROPERTY_PROCNOVEDAD, procnovedad);
     }
 
 }

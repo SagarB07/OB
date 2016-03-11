@@ -1174,6 +1174,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="processB184D07D43C449BA9357A7B9D5F75271" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure i_importarNovedad</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL i_importarNovedad(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="processB670ED126EC0470A966FB31C6EEB8647" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[

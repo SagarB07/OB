@@ -1,5 +1,4 @@
 ant smartbuild -Dlocal=no -Dforce=yes
-ant export.database
- 
+
 ant smartbuild  
 ant update.database
