@@ -8268,12 +8268,12 @@ procedure
   }
 
 /**
-procedure i_importarNovedad
+procedure idt_importarNovedad
  */
   public static ActionButtonData processB184D07D43C449BA9357A7B9D5F75271(ConnectionProvider connectionProvider, String adPinstanceId)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
-      "        CALL i_importarNovedad(?)";
+      "        CALL idt_importarNovedad(?)";
 
     ActionButtonData objectActionButtonData = new ActionButtonData();
     CallableStatement st = null;
