@@ -65,6 +65,7 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_IMPORTPROCESSCOMPLETE, false);
         setDefaultValue(PROPERTY_NOVPROCESADA, false);
+        setDefaultValue(PROPERTY_PROCNOVEDAD, false);
     }
 
     @Override
@@ -200,11 +201,11 @@ public class IdtNovedad extends BaseOBObject implements Traceable, ClientEnabled
         set(PROPERTY_NOVPROCESADA, novprocesada);
     }
 
-    public String getProcnovedad() {
-        return (String) get(PROPERTY_PROCNOVEDAD);
+    public Boolean isProcnovedad() {
+        return (Boolean) get(PROPERTY_PROCNOVEDAD);
     }
 
-    public void setProcnovedad(String procnovedad) {
+    public void setProcnovedad(Boolean procnovedad) {
         set(PROPERTY_PROCNOVEDAD, procnovedad);
     }
 
