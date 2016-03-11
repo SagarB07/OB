@@ -1,12 +1,17 @@
  --NO GENERA ROL
-CREATE OR REPLACE FUNCTION idt_importarNovedad()
-  RETURNS  Boolean AS
+CREATE OR REPLACE FUNCTION idt_importarNovedad(p_pinstance_id character varying)
+  RETURNS  void AS
 $BODY$
 DECLARE
+v_ResultStr VARCHAR(2000):='';
+    v_Message VARCHAR(2000):='';
+    v_Result NUMERIC:=1;
+    v_Record_ID VARCHAR(32);
 
 VAR_CEDULA character varying(32);
 VAR_CABNOVEDAD character varying(32);
 VAR_PARTNER_ID character varying(32);
+
 
 VAREXIST NUMERIC;
 VARVALIDADO BOOLEAN;
@@ -15,6 +20,10 @@ ITERADOR  RECORD;
 ITERADORVALIDA RECORD; 
 
 BEGIN
+
+ RAISE NOTICE '%','Updating PInstance - Processing ' || p_PInstance_ID;
+    v_ResultStr:='PInstanceNotFound';
+    PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
 VARVALIDADO = FALSE;
 
 	FOR ITERADOR IN 
@@ -93,7 +102,14 @@ VARVALIDADO = FALSE;
 	
 	
   
-  RETURN VARVALIDADO;
+  RETURN;
+   EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        RAISE NOTICE '%',v_ResultStr ;
+
+        PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
 END;
 
 $BODY$
