@@ -364,7 +364,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
     IndirectCostData data = new IndirectCostData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.costType = vars.getRequiredStringParameter("inpcostType");     data.costTyper = vars.getStringParameter("inpcostType_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.maIndirectCostId = vars.getRequestGlobalVariable("inpmaIndirectCostId", windowId + "|MA_Indirect_Cost_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.costType = vars.getRequiredStringParameter("inpcostType");     data.costTyper = vars.getStringParameter("inpcostType_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.maIndirectCostId = vars.getRequestGlobalVariable("inpmaIndirectCostId", windowId + "|MA_Indirect_Cost_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -395,7 +395,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|MA_Indirect_Cost_ID", data[0].getField("maIndirectCostId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|MA_Indirect_Cost_ID", data[0].getField("maIndirectCostId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

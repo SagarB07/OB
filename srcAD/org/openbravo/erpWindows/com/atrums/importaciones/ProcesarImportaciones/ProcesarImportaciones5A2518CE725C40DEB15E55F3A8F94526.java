@@ -463,7 +463,7 @@ PInstanceProcessData.insertPInstanceParamDate(this, pinstance, "10", "date", str
     ProcesarImportaciones5A2518CE725C40DEB15E55F3A8F94526Data data = new ProcesarImportaciones5A2518CE725C40DEB15E55F3A8F94526Data();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.procesado = vars.getStringParameter("inpprocesado", "N");     data.value = vars.getStringParameter("inpvalue");     data.name = vars.getRequiredStringParameter("inpname");     data.ccoCuentaCostosId = vars.getStringParameter("inpccoCuentaCostosId");     data.ccoCuentaCostosIdr = vars.getStringParameter("inpccoCuentaCostosId_R");    try {   data.total = vars.getNumericParameter("inptotal");  } catch (ServletException paramEx) { ex = paramEx; }     data.procesar = vars.getRequiredGlobalVariable("inpprocesar", windowId + "|Procesar");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.impTotalProcesarId = vars.getRequestGlobalVariable("inpimpTotalProcesarId", windowId + "|IMP_Total_Procesar_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.procesado = vars.getStringParameter("inpprocesado", "N");     data.value = vars.getStringParameter("inpvalue");     data.name = vars.getRequiredStringParameter("inpname");     data.ccoCuentaCostosId = vars.getStringParameter("inpccoCuentaCostosId");     data.ccoCuentaCostosIdr = vars.getStringParameter("inpccoCuentaCostosId_R");    try {   data.total = vars.getNumericParameter("inptotal");  } catch (ServletException paramEx) { ex = paramEx; }     data.procesar = vars.getRequiredGlobalVariable("inpprocesar", windowId + "|Procesar");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.impTotalProcesarId = vars.getRequestGlobalVariable("inpimpTotalProcesarId", windowId + "|IMP_Total_Procesar_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -494,7 +494,7 @@ PInstanceProcessData.insertPInstanceParamDate(this, pinstance, "10", "date", str
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Procesar", data[0].getField("procesar"));    vars.setSessionValue(windowId + "|IMP_Total_Procesar_ID", data[0].getField("impTotalProcesarId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|Procesar", data[0].getField("procesar"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|IMP_Total_Procesar_ID", data[0].getField("impTotalProcesarId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

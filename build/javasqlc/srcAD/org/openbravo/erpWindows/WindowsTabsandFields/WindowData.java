@@ -36,11 +36,11 @@ static Logger log4j = Logger.getLogger(WindowData.class);
   public String processing;
   public String isadvancedfeature;
   public String isactive;
-  public String adWindowId;
-  public String isdefault;
-  public String adImageId;
   public String adOrgId;
   public String adClientId;
+  public String adWindowId;
+  public String adImageId;
+  public String isdefault;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -90,16 +90,16 @@ static Logger log4j = Logger.getLogger(WindowData.class);
       return isadvancedfeature;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_window_id") || fieldName.equals("adWindowId"))
-      return adWindowId;
-    else if (fieldName.equalsIgnoreCase("isdefault"))
-      return isdefault;
-    else if (fieldName.equalsIgnoreCase("ad_image_id") || fieldName.equals("adImageId"))
-      return adImageId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("ad_window_id") || fieldName.equals("adWindowId"))
+      return adWindowId;
+    else if (fieldName.equalsIgnoreCase("ad_image_id") || fieldName.equals("adImageId"))
+      return adImageId;
+    else if (fieldName.equalsIgnoreCase("isdefault"))
+      return isdefault;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -151,11 +151,11 @@ Select for edit
       "AD_Window.Processing, " +
       "COALESCE(AD_Window.IsAdvancedFeature, 'N') AS IsAdvancedFeature, " +
       "COALESCE(AD_Window.IsActive, 'N') AS IsActive, " +
-      "AD_Window.AD_Window_ID, " +
-      "COALESCE(AD_Window.IsDefault, 'N') AS IsDefault, " +
-      "AD_Window.AD_Image_ID, " +
       "AD_Window.AD_Org_ID, " +
       "AD_Window.AD_Client_ID, " +
+      "AD_Window.AD_Window_ID, " +
+      "AD_Window.AD_Image_ID, " +
+      "COALESCE(AD_Window.IsDefault, 'N') AS IsDefault, " +
       "        ? AS LANGUAGE " +
       "        FROM AD_Window left join (select AD_Module_ID, Name, Version, AD_Language from AD_Module) table1 on (AD_Window.AD_Module_ID = table1.AD_Module_ID) left join (select AD_Language, Name from AD_Language) table2 on (table1.AD_Language =  table2.AD_Language) left join ad_ref_list_v list1 on (AD_Window.WindowType = list1.value and list1.ad_reference_id = '108' and list1.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -216,11 +216,11 @@ Select for edit
         objectWindowData.processing = UtilSql.getValue(result, "processing");
         objectWindowData.isadvancedfeature = UtilSql.getValue(result, "isadvancedfeature");
         objectWindowData.isactive = UtilSql.getValue(result, "isactive");
-        objectWindowData.adWindowId = UtilSql.getValue(result, "ad_window_id");
-        objectWindowData.isdefault = UtilSql.getValue(result, "isdefault");
-        objectWindowData.adImageId = UtilSql.getValue(result, "ad_image_id");
         objectWindowData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectWindowData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectWindowData.adWindowId = UtilSql.getValue(result, "ad_window_id");
+        objectWindowData.adImageId = UtilSql.getValue(result, "ad_image_id");
+        objectWindowData.isdefault = UtilSql.getValue(result, "isdefault");
         objectWindowData.language = UtilSql.getValue(result, "language");
         objectWindowData.adUserClient = "";
         objectWindowData.adOrgClient = "";
@@ -283,11 +283,11 @@ Select for relation
       "AD_Window.Processing, " +
       "COALESCE(AD_Window.IsAdvancedFeature, 'N') AS IsAdvancedFeature, " +
       "COALESCE(AD_Window.IsActive, 'N') AS IsActive, " +
-      "AD_Window.AD_Window_ID, " +
-      "COALESCE(AD_Window.IsDefault, 'N') AS IsDefault, " +
-      "AD_Window.AD_Image_ID, " +
       "AD_Window.AD_Org_ID, " +
       "AD_Window.AD_Client_ID, " +
+      "AD_Window.AD_Window_ID, " +
+      "AD_Window.AD_Image_ID, " +
+      "COALESCE(AD_Window.IsDefault, 'N') AS IsDefault, " +
       "        '' AS TR_BGCOLOR, '' as total_count," +
       "        ? AS LANGUAGE, '' AS AD_USER_CLIENT, '' AS AD_ORG_CLIENT" +
       "        FROM AD_Window left join (select AD_Module_ID, Name, Version, AD_Language from AD_Module) table1 on (AD_Window.AD_Module_ID = table1.AD_Module_ID) left join (select AD_Language, Name from AD_Language) table2 on (table1.AD_Language =  table2.AD_Language) left join ad_ref_list_v list1 on (AD_Window.WindowType = list1.value and list1.ad_reference_id = '108' and list1.ad_language = ?) " +
@@ -368,11 +368,11 @@ Select for relation
         objectWindowData.processing = UtilSql.getValue(result, "processing");
         objectWindowData.isadvancedfeature = UtilSql.getValue(result, "isadvancedfeature");
         objectWindowData.isactive = UtilSql.getValue(result, "isactive");
-        objectWindowData.adWindowId = UtilSql.getValue(result, "ad_window_id");
-        objectWindowData.isdefault = UtilSql.getValue(result, "isdefault");
-        objectWindowData.adImageId = UtilSql.getValue(result, "ad_image_id");
         objectWindowData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectWindowData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectWindowData.adWindowId = UtilSql.getValue(result, "ad_window_id");
+        objectWindowData.adImageId = UtilSql.getValue(result, "ad_image_id");
+        objectWindowData.isdefault = UtilSql.getValue(result, "isdefault");
         objectWindowData.trBgcolor = UtilSql.getValue(result, "tr_bgcolor");
         objectWindowData.totalCount = UtilSql.getValue(result, "total_count");
         objectWindowData.language = UtilSql.getValue(result, "language");
@@ -427,11 +427,11 @@ Create a registry
     objectWindowData[0].processing = processing;
     objectWindowData[0].isadvancedfeature = isadvancedfeature;
     objectWindowData[0].isactive = isactive;
-    objectWindowData[0].adWindowId = adWindowId;
-    objectWindowData[0].isdefault = isdefault;
-    objectWindowData[0].adImageId = adImageId;
     objectWindowData[0].adOrgId = adOrgId;
     objectWindowData[0].adClientId = adClientId;
+    objectWindowData[0].adWindowId = adWindowId;
+    objectWindowData[0].adImageId = adImageId;
+    objectWindowData[0].isdefault = isdefault;
     objectWindowData[0].trBgcolor = "";
     objectWindowData[0].totalCount = "";
     objectWindowData[0].language = "";
@@ -556,7 +556,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE AD_Window" +
-      "        SET AD_Module_ID = (?) , Name = (?) , WindowType = (?) , Description = (?) , Help = (?) , IsSOTrx = (?) , Isthreadsafe = (?) , Processing = (?) , IsAdvancedFeature = (?) , IsActive = (?) , AD_Window_ID = (?) , IsDefault = (?) , AD_Image_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Module_ID = (?) , Name = (?) , WindowType = (?) , Description = (?) , Help = (?) , IsSOTrx = (?) , Isthreadsafe = (?) , Processing = (?) , IsAdvancedFeature = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , AD_Window_ID = (?) , AD_Image_ID = (?) , IsDefault = (?) , updated = now(), updatedby = ? " +
       "        WHERE AD_Window.AD_Window_ID = ? " +
       "        AND AD_Window.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -583,11 +583,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isadvancedfeature);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adWindowId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefault);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adWindowId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefault);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adWindowId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -616,7 +616,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO AD_Window " +
-      "        (AD_Module_ID, Name, WindowType, Description, Help, IsSOTrx, Isthreadsafe, Processing, IsAdvancedFeature, IsActive, AD_Window_ID, IsDefault, AD_Image_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Module_ID, Name, WindowType, Description, Help, IsSOTrx, Isthreadsafe, Processing, IsAdvancedFeature, IsActive, AD_Org_ID, AD_Client_ID, AD_Window_ID, AD_Image_ID, IsDefault, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -635,11 +635,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isadvancedfeature);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adWindowId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefault);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adWindowId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adImageId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefault);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

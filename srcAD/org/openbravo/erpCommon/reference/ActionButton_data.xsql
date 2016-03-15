@@ -1174,14 +1174,6 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
-  <SqlMethod name="processB184D07D43C449BA9357A7B9D5F75271" type="callableStatement" return="object" object="ActionButtonData">
-      <SqlMethodComment>procedure idt_importarNovedad</SqlMethodComment>
-      <Sql><![CDATA[
-        CALL idt_importarNovedad(?)
-      ]]></Sql>
-      <Parameter name="adPinstanceId"></Parameter>
-   </SqlMethod>
-
   <SqlMethod name="processB670ED126EC0470A966FB31C6EEB8647" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
@@ -1210,6 +1202,14 @@
       <SqlMethodComment>procedure no_genera_utilidades</SqlMethodComment>
       <Sql><![CDATA[
         CALL no_genera_utilidades(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processC8E7FE4ABBA24D5C81E497EA7CA28A61" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure idt_importarNovedad</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL idt_importarNovedad(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>

@@ -55,12 +55,12 @@ static Logger log4j = Logger.getLogger(TableData.class);
   public String developmentstatusr;
   public String isactive;
   public String ischangelog;
-  public String adOrgId;
-  public String adTableId;
-  public String issecurityenabled;
   public String adClientId;
+  public String adTableId;
   public String isdefaultacct;
   public String sqlRecordIdentifier;
+  public String adOrgId;
+  public String issecurityenabled;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -148,18 +148,18 @@ static Logger log4j = Logger.getLogger(TableData.class);
       return isactive;
     else if (fieldName.equalsIgnoreCase("ischangelog"))
       return ischangelog;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("ad_table_id") || fieldName.equals("adTableId"))
-      return adTableId;
-    else if (fieldName.equalsIgnoreCase("issecurityenabled"))
-      return issecurityenabled;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("ad_table_id") || fieldName.equals("adTableId"))
+      return adTableId;
     else if (fieldName.equalsIgnoreCase("isdefaultacct"))
       return isdefaultacct;
     else if (fieldName.equalsIgnoreCase("sql_record_identifier") || fieldName.equals("sqlRecordIdentifier"))
       return sqlRecordIdentifier;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
+    else if (fieldName.equalsIgnoreCase("issecurityenabled"))
+      return issecurityenabled;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -230,12 +230,12 @@ Select for edit
       "(CASE WHEN AD_Table.Developmentstatus IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list4.name),'') ) END) AS DevelopmentstatusR, " +
       "COALESCE(AD_Table.IsActive, 'N') AS IsActive, " +
       "COALESCE(AD_Table.IsChangeLog, 'N') AS IsChangeLog, " +
-      "AD_Table.AD_Org_ID, " +
-      "AD_Table.AD_Table_ID, " +
-      "COALESCE(AD_Table.IsSecurityEnabled, 'N') AS IsSecurityEnabled, " +
       "AD_Table.AD_Client_ID, " +
+      "AD_Table.AD_Table_ID, " +
       "COALESCE(AD_Table.IsDefaultAcct, 'N') AS IsDefaultAcct, " +
       "AD_Table.SQL_Record_Identifier, " +
+      "AD_Table.AD_Org_ID, " +
+      "COALESCE(AD_Table.IsSecurityEnabled, 'N') AS IsSecurityEnabled, " +
       "        ? AS LANGUAGE " +
       "        FROM AD_Table left join (select AD_Package_ID, Name from AD_Package) table1 on (AD_Table.AD_Package_ID = table1.AD_Package_ID) left join ad_ref_list_v list1 on (AD_Table.DataOriginType = list1.value and list1.ad_reference_id = 'AE201981DDC0467FB59F64CA978C749F' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (AD_Table.AccessLevel = list2.value and list2.ad_reference_id = '5' and list2.ad_language = ?)  left join (select AD_Window_ID, Name from AD_Window) table2 on (AD_Table.AD_Window_ID = table2.AD_Window_ID) left join (select AD_Window_ID,AD_Language, Name from AD_Window_TRL) tableTRL2 on (table2.AD_Window_ID = tableTRL2.AD_Window_ID and tableTRL2.AD_Language = ?)  left join (select AD_Window_ID, Name from AD_Window) table4 on (AD_Table.PO_Window_ID =  table4.AD_Window_ID) left join (select AD_Window_ID,AD_Language, Name from AD_Window_TRL) tableTRL4 on (table4.AD_Window_ID = tableTRL4.AD_Window_ID and tableTRL4.AD_Language = ?)  left join (select AD_Column_ID, ColumnName from AD_Column) table6 on (AD_Table.Acctdate_Column_ID =  table6.AD_Column_ID) left join ad_ref_list_v list3 on (AD_Table.Treetype = list3.value and list3.ad_reference_id = '120' and list3.ad_language = ?)  left join ad_ref_list_v list4 on (AD_Table.Developmentstatus = list4.value and list4.ad_reference_id = '800103' and list4.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -320,12 +320,12 @@ Select for edit
         objectTableData.developmentstatusr = UtilSql.getValue(result, "developmentstatusr");
         objectTableData.isactive = UtilSql.getValue(result, "isactive");
         objectTableData.ischangelog = UtilSql.getValue(result, "ischangelog");
-        objectTableData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectTableData.adTableId = UtilSql.getValue(result, "ad_table_id");
-        objectTableData.issecurityenabled = UtilSql.getValue(result, "issecurityenabled");
         objectTableData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectTableData.adTableId = UtilSql.getValue(result, "ad_table_id");
         objectTableData.isdefaultacct = UtilSql.getValue(result, "isdefaultacct");
         objectTableData.sqlRecordIdentifier = UtilSql.getValue(result, "sql_record_identifier");
+        objectTableData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectTableData.issecurityenabled = UtilSql.getValue(result, "issecurityenabled");
         objectTableData.language = UtilSql.getValue(result, "language");
         objectTableData.adUserClient = "";
         objectTableData.adOrgClient = "";
@@ -407,12 +407,12 @@ Select for relation
       "(CASE WHEN AD_Table.Developmentstatus IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list4.name),'') ) END) AS DevelopmentstatusR, " +
       "COALESCE(AD_Table.IsActive, 'N') AS IsActive, " +
       "COALESCE(AD_Table.IsChangeLog, 'N') AS IsChangeLog, " +
-      "AD_Table.AD_Org_ID, " +
-      "AD_Table.AD_Table_ID, " +
-      "COALESCE(AD_Table.IsSecurityEnabled, 'N') AS IsSecurityEnabled, " +
       "AD_Table.AD_Client_ID, " +
+      "AD_Table.AD_Table_ID, " +
       "COALESCE(AD_Table.IsDefaultAcct, 'N') AS IsDefaultAcct, " +
       "AD_Table.SQL_Record_Identifier, " +
+      "AD_Table.AD_Org_ID, " +
+      "COALESCE(AD_Table.IsSecurityEnabled, 'N') AS IsSecurityEnabled, " +
       "        '' AS TR_BGCOLOR, '' as total_count," +
       "        ? AS LANGUAGE, '' AS AD_USER_CLIENT, '' AS AD_ORG_CLIENT" +
       "        FROM AD_Table left join (select AD_Package_ID, Name from AD_Package) table1 on (AD_Table.AD_Package_ID = table1.AD_Package_ID) left join ad_ref_list_v list1 on (AD_Table.DataOriginType = list1.value and list1.ad_reference_id = 'AE201981DDC0467FB59F64CA978C749F' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (AD_Table.AccessLevel = list2.value and list2.ad_reference_id = '5' and list2.ad_language = ?)  left join (select AD_Window_ID, Name from AD_Window) table2 on (AD_Table.AD_Window_ID = table2.AD_Window_ID) left join (select AD_Window_ID,AD_Language, Name from AD_Window_TRL) tableTRL2 on (table2.AD_Window_ID = tableTRL2.AD_Window_ID and tableTRL2.AD_Language = ?)  left join (select AD_Window_ID, Name from AD_Window) table4 on (AD_Table.PO_Window_ID =  table4.AD_Window_ID) left join (select AD_Window_ID,AD_Language, Name from AD_Window_TRL) tableTRL4 on (table4.AD_Window_ID = tableTRL4.AD_Window_ID and tableTRL4.AD_Language = ?)  left join (select AD_Column_ID, ColumnName from AD_Column) table6 on (AD_Table.Acctdate_Column_ID =  table6.AD_Column_ID) left join ad_ref_list_v list3 on (AD_Table.Treetype = list3.value and list3.ad_reference_id = '120' and list3.ad_language = ?)  left join ad_ref_list_v list4 on (AD_Table.Developmentstatus = list4.value and list4.ad_reference_id = '800103' and list4.ad_language = ?) " +
@@ -513,12 +513,12 @@ Select for relation
         objectTableData.developmentstatusr = UtilSql.getValue(result, "developmentstatusr");
         objectTableData.isactive = UtilSql.getValue(result, "isactive");
         objectTableData.ischangelog = UtilSql.getValue(result, "ischangelog");
-        objectTableData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectTableData.adTableId = UtilSql.getValue(result, "ad_table_id");
-        objectTableData.issecurityenabled = UtilSql.getValue(result, "issecurityenabled");
         objectTableData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectTableData.adTableId = UtilSql.getValue(result, "ad_table_id");
         objectTableData.isdefaultacct = UtilSql.getValue(result, "isdefaultacct");
         objectTableData.sqlRecordIdentifier = UtilSql.getValue(result, "sql_record_identifier");
+        objectTableData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectTableData.issecurityenabled = UtilSql.getValue(result, "issecurityenabled");
         objectTableData.trBgcolor = UtilSql.getValue(result, "tr_bgcolor");
         objectTableData.totalCount = UtilSql.getValue(result, "total_count");
         objectTableData.language = UtilSql.getValue(result, "language");
@@ -592,12 +592,12 @@ Create a registry
     objectTableData[0].developmentstatusr = "";
     objectTableData[0].isactive = isactive;
     objectTableData[0].ischangelog = ischangelog;
-    objectTableData[0].adOrgId = adOrgId;
-    objectTableData[0].adTableId = adTableId;
-    objectTableData[0].issecurityenabled = issecurityenabled;
     objectTableData[0].adClientId = adClientId;
+    objectTableData[0].adTableId = adTableId;
     objectTableData[0].isdefaultacct = isdefaultacct;
     objectTableData[0].sqlRecordIdentifier = sqlRecordIdentifier;
+    objectTableData[0].adOrgId = adOrgId;
+    objectTableData[0].issecurityenabled = issecurityenabled;
     objectTableData[0].trBgcolor = "";
     objectTableData[0].totalCount = "";
     objectTableData[0].language = "";
@@ -686,7 +686,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE AD_Table" +
-      "        SET AD_Package_ID = (?) , Name = (?) , DataOriginType = (?) , TableName = (?) , Classname = (?) , Obserds_Datasource_ID = (?) , AccessLevel = (?) , Description = (?) , Help = (?) , AD_Window_ID = (?) , PO_Window_ID = (?) , IsView = (?) , IsDeleteable = (?) , IsHighVolume = (?) , IsFullyAudited = (?) , IsAuditInserts = (?) , Acctdate_Column_ID = (?) , ImportTable = (?) , Acctclassname = (?) , Treetype = (?) , Developmentstatus = (?) , IsActive = (?) , IsChangeLog = (?) , AD_Org_ID = (?) , AD_Table_ID = (?) , IsSecurityEnabled = (?) , AD_Client_ID = (?) , IsDefaultAcct = (?) , SQL_Record_Identifier = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Package_ID = (?) , Name = (?) , DataOriginType = (?) , TableName = (?) , Classname = (?) , Obserds_Datasource_ID = (?) , AccessLevel = (?) , Description = (?) , Help = (?) , AD_Window_ID = (?) , PO_Window_ID = (?) , IsView = (?) , IsDeleteable = (?) , IsHighVolume = (?) , IsFullyAudited = (?) , IsAuditInserts = (?) , Acctdate_Column_ID = (?) , ImportTable = (?) , Acctclassname = (?) , Treetype = (?) , Developmentstatus = (?) , IsActive = (?) , IsChangeLog = (?) , AD_Client_ID = (?) , AD_Table_ID = (?) , IsDefaultAcct = (?) , SQL_Record_Identifier = (?) , AD_Org_ID = (?) , IsSecurityEnabled = (?) , updated = now(), updatedby = ? " +
       "        WHERE AD_Table.AD_Table_ID = ? " +
       "        AND AD_Table.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -726,12 +726,12 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, developmentstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, ischangelog);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adTableId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issecurityenabled);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adTableId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefaultacct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sqlRecordIdentifier);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issecurityenabled);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adTableId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -760,7 +760,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO AD_Table " +
-      "        (AD_Package_ID, Name, DataOriginType, TableName, Classname, Obserds_Datasource_ID, AccessLevel, Description, Help, AD_Window_ID, PO_Window_ID, IsView, IsDeleteable, IsHighVolume, IsFullyAudited, IsAuditInserts, Acctdate_Column_ID, ImportTable, Acctclassname, Treetype, Developmentstatus, IsActive, IsChangeLog, AD_Org_ID, AD_Table_ID, IsSecurityEnabled, AD_Client_ID, IsDefaultAcct, SQL_Record_Identifier, created, createdby, updated, updatedBy)" +
+      "        (AD_Package_ID, Name, DataOriginType, TableName, Classname, Obserds_Datasource_ID, AccessLevel, Description, Help, AD_Window_ID, PO_Window_ID, IsView, IsDeleteable, IsHighVolume, IsFullyAudited, IsAuditInserts, Acctdate_Column_ID, ImportTable, Acctclassname, Treetype, Developmentstatus, IsActive, IsChangeLog, AD_Client_ID, AD_Table_ID, IsDefaultAcct, SQL_Record_Identifier, AD_Org_ID, IsSecurityEnabled, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -792,12 +792,12 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, developmentstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, ischangelog);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adTableId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issecurityenabled);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adTableId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isdefaultacct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sqlRecordIdentifier);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, issecurityenabled);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

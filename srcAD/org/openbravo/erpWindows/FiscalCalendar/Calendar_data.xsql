@@ -16,8 +16,8 @@
 C_Calendar.Name, 
 C_Calendar.Description, 
 COALESCE(C_Calendar.IsActive, 'N') AS IsActive, 
-C_Calendar.AD_Client_ID, 
 C_Calendar.C_Calendar_ID, 
+C_Calendar.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM C_Calendar left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Calendar.AD_Org_ID = table1.AD_Org_ID)
@@ -89,13 +89,13 @@ C_Calendar.C_Calendar_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_Calendar
-        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , AD_Client_ID = (?) , C_Calendar_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , C_Calendar_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE C_Calendar.C_Calendar_ID = ? 
         
         AND C_Calendar.AD_Client_ID IN ('1') 
         AND C_Calendar.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cCalendarId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cCalendarId"></Parameter>
     
@@ -107,10 +107,10 @@ C_Calendar.C_Calendar_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_Calendar 
-        (AD_Org_ID, Name, Description, IsActive, AD_Client_ID, C_Calendar_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Name, Description, IsActive, C_Calendar_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cCalendarId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -527,7 +527,7 @@ vars.getGlobalVariable("inpmaIndirectCostId", windowId + "|MA_Indirect_Cost_ID")
       
       IndirectCostData[] data = IndirectCostData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPMA_Indirect_Cost_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|MA_Indirect_Cost_ID", data[0].maIndirectCostId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|MA_Indirect_Cost_ID", data[0].maIndirectCostId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
       vars.setSessionValue(windowId + "|MA_Indirect_Cost_ID", strPMA_Indirect_Cost_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -546,7 +546,7 @@ vars.getGlobalVariable("inpmaIndirectCostId", windowId + "|MA_Indirect_Cost_ID")
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|MA_Indirect_Cost_Value_ID", data[0].getField("maIndirectCostValueId"));
+          vars.setSessionValue(windowId + "|MA_Indirect_Cost_Value_ID", data[0].getField("maIndirectCostValueId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPMA_Indirect_Cost_ID) throws IOException,ServletException {

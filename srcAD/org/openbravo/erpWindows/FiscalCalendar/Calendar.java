@@ -364,7 +364,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
     CalendarData data = new CalendarData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.cCalendarId = vars.getRequestGlobalVariable("inpcCalendarId", windowId + "|C_Calendar_ID"); 
+    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.name = vars.getRequiredStringParameter("inpname");     data.description = vars.getStringParameter("inpdescription");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.cCalendarId = vars.getRequestGlobalVariable("inpcCalendarId", windowId + "|C_Calendar_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -395,7 +395,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|C_Calendar_ID", data[0].getField("cCalendarId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|C_Calendar_ID", data[0].getField("cCalendarId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

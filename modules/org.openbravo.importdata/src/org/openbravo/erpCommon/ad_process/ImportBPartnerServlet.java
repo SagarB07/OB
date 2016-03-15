@@ -40,13 +40,16 @@ public class ImportBPartnerServlet extends HttpSecureAppServlet {
     boolHist = false;
   }
 
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { 
-	  
-	VariablesSecureApp vars = new VariablesSecureApp(request);
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
+    VariablesSecureApp vars = new VariablesSecureApp(request);
+
     String process = ImportData.processId(this, "ImportBPartnerServlet");
     if (vars.commandIn("DEFAULT")) {
       String strTabId = vars.getGlobalVariable("inpTabId", "ImportBPartnerServlet|tabId");
       String strWindowId = vars.getGlobalVariable("inpwindowId", "ImportBPartnerServlet|windowId");
+      // String strKey = vars.getGlobalVariable("inpKey",
+      // "ImportBPartnerServlet|key");
       String strKey = "00";
       String strDeleteOld = vars.getStringParameter("inpDeleteOld", "N");
       printPage(response, vars, process, strWindowId, strTabId, strKey, strDeleteOld);
@@ -61,6 +64,9 @@ public class ImportBPartnerServlet extends HttpSecureAppServlet {
 
       ImportBPartner bp = new ImportBPartner(this, process, strRecord, strDeleteOld.equals("Y"));
       bp.startProcess(vars);
+      // String strMessage = bp.getLog();
+      // if (!strMessage.equals("")) vars.setSessionValue(strWindowId +
+      // "|" + strTabName + ".message", strMessage);
       OBError myError = bp.getError();
       vars.setMessage(strTabId, myError);
       printPageClosePopUp(response, vars, strWindowPath);
@@ -68,9 +74,11 @@ public class ImportBPartnerServlet extends HttpSecureAppServlet {
       pageErrorPopUp(response);
   }
 
-  private void printPage(HttpServletResponse response, VariablesSecureApp vars,String strProcessId, String strWindowId, String strTabId, String strRecordId, String strDeleteOld) throws IOException, ServletException {
+  private void printPage(HttpServletResponse response, VariablesSecureApp vars,
+      String strProcessId, String strWindowId, String strTabId, String strRecordId,
+      String strDeleteOld) throws IOException, ServletException {
     if (log4j.isDebugEnabled())
-    log4j.debug("Output: process ImportBPartnerServlet");
+      log4j.debug("Output: process ImportBPartnerServlet");
     ActionButtonDefaultData[] data = null;
     String strHelp = "", strDescription = "";
     if (vars.getLanguage().equals("en_US"))
@@ -83,18 +91,21 @@ public class ImportBPartnerServlet extends HttpSecureAppServlet {
     }
     String[] discard = { "" };
     if (strHelp.equals(""))
-    discard[0] = new String("helpDiscard");
-    XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_process/ImportBPartnerServlet").createXmlDocument();
+      discard[0] = new String("helpDiscard");
+    XmlDocument xmlDocument = xmlEngine.readXmlTemplate(
+        "org/openbravo/erpCommon/ad_process/ImportBPartnerServlet").createXmlDocument();
     xmlDocument.setParameter("language", "defaultLang=\"" + vars.getLanguage() + "\";");
     xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
     xmlDocument.setParameter("theme", vars.getTheme());
-    xmlDocument.setParameter("question", Utility.messageBD(this, "StartProcess?", vars.getLanguage()));
+    xmlDocument.setParameter("question", Utility.messageBD(this, "StartProcess?", vars
+        .getLanguage()));
     xmlDocument.setParameter("description", strDescription);
     xmlDocument.setParameter("help", strHelp);
     xmlDocument.setParameter("windowId", strWindowId);
     xmlDocument.setParameter("tabId", strTabId);
     xmlDocument.setParameter("recordId", strRecordId);
     xmlDocument.setParameter("deleteOld", strDeleteOld);
+
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
     out.println(xmlDocument.print());

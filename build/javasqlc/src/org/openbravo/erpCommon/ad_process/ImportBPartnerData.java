@@ -26,21 +26,12 @@ static Logger log4j = Logger.getLogger(ImportBPartnerData.class);
   public String city;
   public String postal;
   public String regionname;
-  public String tipoIdentifiacion;
-  public String tipoPersona;
-  public String numeroIdentificacion;
 
   public String getInitRecordNumber() {
     return InitRecordNumber;
   }
 
   public String getField(String fieldName) {
-	if (fieldName.equalsIgnoreCase("taxid") || fieldName.equals("numeroIdentificacion"))
-			return numeroIdentificacion; 
-	if (fieldName.equalsIgnoreCase("em_idt_tipo_identificacion") || fieldName.equals("tipoIdentifiacion"))
-			return tipoIdentifiacion;
-	if (fieldName.equalsIgnoreCase("em_idt_natural_juridico") || fieldName.equals("tipoPersona"))
-		return tipoPersona;
     if (fieldName.equalsIgnoreCase("i_bpartner_id") || fieldName.equals("iBpartnerId"))
       return iBpartnerId;
     else if (fieldName.equalsIgnoreCase("c_bpartner_id") || fieldName.equals("cBpartnerId"))
@@ -76,7 +67,7 @@ static Logger log4j = Logger.getLogger(ImportBPartnerData.class);
   public static ImportBPartnerData[] select(ConnectionProvider connectionProvider, String ad_client_id, int firstRegister, int numberRegisters)    throws ServletException {
     String strSql = "";
     strSql = strSql + 
-      "        SELECT I_BPartner_ID, C_BPartner_ID, C_BPartner_Location_ID, em_idt_natural_juridico,em_idt_tipo_identificacion,taxid," +
+      "        SELECT I_BPartner_ID, C_BPartner_ID, C_BPartner_Location_ID," +
       "        COALESCE (Address1,Address2,City) AS Addr, AD_User_ID, ContactName," +
       "		Address1, Address2, City, Postal, RegionName" +
       "			  FROM I_BPartner" +
@@ -103,9 +94,6 @@ static Logger log4j = Logger.getLogger(ImportBPartnerData.class);
       while(continueResult && result.next()) {
         countRecord++;
         ImportBPartnerData objectImportBPartnerData = new ImportBPartnerData();
-        objectImportBPartnerData.tipoPersona = UtilSql.getValue(result, "em_idt_natural_juridico");
-        objectImportBPartnerData.tipoIdentifiacion = UtilSql.getValue(result, "em_idt_tipo_identificacion");
-        objectImportBPartnerData.numeroIdentificacion = UtilSql.getValue(result, "taxid");
         objectImportBPartnerData.iBpartnerId = UtilSql.getValue(result, "i_bpartner_id");
         objectImportBPartnerData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
         objectImportBPartnerData.cBpartnerLocationId = UtilSql.getValue(result, "c_bpartner_location_id");

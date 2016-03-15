@@ -32,10 +32,10 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
   public String isactive;
   public String aDisposalGain;
   public String aDisposalLoss;
-  public String aAssetGroupId;
-  public String adOrgId;
-  public String adClientId;
   public String aAssetGroupAcctId;
+  public String adClientId;
+  public String adOrgId;
+  public String aAssetGroupId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -77,14 +77,14 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
       return aDisposalGain;
     else if (fieldName.equalsIgnoreCase("a_disposal_loss") || fieldName.equals("aDisposalLoss"))
       return aDisposalLoss;
-    else if (fieldName.equalsIgnoreCase("a_asset_group_id") || fieldName.equals("aAssetGroupId"))
-      return aAssetGroupId;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("a_asset_group_acct_id") || fieldName.equals("aAssetGroupAcctId"))
       return aAssetGroupAcctId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
+    else if (fieldName.equalsIgnoreCase("a_asset_group_id") || fieldName.equals("aAssetGroupId"))
+      return aAssetGroupId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -132,10 +132,10 @@ Select for edit
       "COALESCE(A_Asset_Group_Acct.IsActive, 'N') AS IsActive, " +
       "A_Asset_Group_Acct.A_Disposal_Gain, " +
       "A_Asset_Group_Acct.A_Disposal_Loss, " +
-      "A_Asset_Group_Acct.A_Asset_Group_ID, " +
-      "A_Asset_Group_Acct.AD_Org_ID, " +
-      "A_Asset_Group_Acct.AD_Client_ID, " +
       "A_Asset_Group_Acct.A_Asset_Group_Acct_ID, " +
+      "A_Asset_Group_Acct.AD_Client_ID, " +
+      "A_Asset_Group_Acct.AD_Org_ID, " +
+      "A_Asset_Group_Acct.A_Asset_Group_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM A_Asset_Group_Acct left join (select C_AcctSchema_ID, Name from C_AcctSchema) table1 on (A_Asset_Group_Acct.C_AcctSchema_ID = table1.C_AcctSchema_ID)" +
       "        WHERE 2=2 " +
@@ -196,10 +196,10 @@ Select for edit
         objectAccountingData.isactive = UtilSql.getValue(result, "isactive");
         objectAccountingData.aDisposalGain = UtilSql.getValue(result, "a_disposal_gain");
         objectAccountingData.aDisposalLoss = UtilSql.getValue(result, "a_disposal_loss");
-        objectAccountingData.aAssetGroupId = UtilSql.getValue(result, "a_asset_group_id");
-        objectAccountingData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectAccountingData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectAccountingData.aAssetGroupAcctId = UtilSql.getValue(result, "a_asset_group_acct_id");
+        objectAccountingData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectAccountingData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectAccountingData.aAssetGroupId = UtilSql.getValue(result, "a_asset_group_id");
         objectAccountingData.language = UtilSql.getValue(result, "language");
         objectAccountingData.adUserClient = "";
         objectAccountingData.adOrgClient = "";
@@ -251,10 +251,10 @@ Create a registry
     objectAccountingData[0].isactive = isactive;
     objectAccountingData[0].aDisposalGain = aDisposalGain;
     objectAccountingData[0].aDisposalLoss = aDisposalLoss;
-    objectAccountingData[0].aAssetGroupId = aAssetGroupId;
-    objectAccountingData[0].adOrgId = adOrgId;
-    objectAccountingData[0].adClientId = adClientId;
     objectAccountingData[0].aAssetGroupAcctId = aAssetGroupAcctId;
+    objectAccountingData[0].adClientId = adClientId;
+    objectAccountingData[0].adOrgId = adOrgId;
+    objectAccountingData[0].aAssetGroupId = aAssetGroupId;
     objectAccountingData[0].language = "";
     return objectAccountingData;
   }
@@ -455,7 +455,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE A_Asset_Group_Acct" +
-      "        SET C_AcctSchema_ID = (?) , A_Accumdepreciation_Acct = (?) , A_Depreciation_Acct = (?) , Processing = (?) , IsActive = (?) , A_Disposal_Gain = (?) , A_Disposal_Loss = (?) , A_Asset_Group_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , A_Asset_Group_Acct_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET C_AcctSchema_ID = (?) , A_Accumdepreciation_Acct = (?) , A_Depreciation_Acct = (?) , Processing = (?) , IsActive = (?) , A_Disposal_Gain = (?) , A_Disposal_Loss = (?) , A_Asset_Group_Acct_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , A_Asset_Group_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE A_Asset_Group_Acct.A_Asset_Group_Acct_ID = ? " +
       "                 AND A_Asset_Group_Acct.A_Asset_Group_ID = ? " +
       "        AND A_Asset_Group_Acct.AD_Client_ID IN (";
@@ -480,10 +480,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalGain);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalLoss);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupAcctId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupAcctId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
@@ -513,7 +513,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO A_Asset_Group_Acct " +
-      "        (C_AcctSchema_ID, A_Accumdepreciation_Acct, A_Depreciation_Acct, Processing, IsActive, A_Disposal_Gain, A_Disposal_Loss, A_Asset_Group_ID, AD_Org_ID, AD_Client_ID, A_Asset_Group_Acct_ID, created, createdby, updated, updatedBy)" +
+      "        (C_AcctSchema_ID, A_Accumdepreciation_Acct, A_Depreciation_Acct, Processing, IsActive, A_Disposal_Gain, A_Disposal_Loss, A_Asset_Group_Acct_ID, AD_Client_ID, AD_Org_ID, A_Asset_Group_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -529,10 +529,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalGain);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalLoss);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupAcctId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

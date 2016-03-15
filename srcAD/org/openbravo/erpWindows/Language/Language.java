@@ -461,7 +461,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
     LanguageData data = new LanguageData();
     ServletException ex = null;
     try {
-    data.adLanguage = vars.getRequiredStringParameter("inpadLanguage");     data.name = vars.getRequiredStringParameter("inpname");     data.languageiso = vars.getStringParameter("inplanguageiso");     data.countrycode = vars.getStringParameter("inpcountrycode");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.issystemlanguage = vars.getStringParameter("inpissystemlanguage", "N");     data.translatedby = vars.getStringParameter("inptranslatedby");     data.isrtl = vars.getStringParameter("inpisrtl", "N");     data.processing = vars.getStringParameter("inpprocessing");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");    try {   data.pixelsize = vars.getNumericParameter("inppixelsize");  } catch (ServletException paramEx) { ex = paramEx; }     data.adLanguageId = vars.getRequestGlobalVariable("inpadLanguageId", windowId + "|AD_Language_ID"); 
+    data.adLanguage = vars.getRequiredStringParameter("inpadLanguage");     data.name = vars.getRequiredStringParameter("inpname");     data.languageiso = vars.getStringParameter("inplanguageiso");     data.countrycode = vars.getStringParameter("inpcountrycode");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.issystemlanguage = vars.getStringParameter("inpissystemlanguage", "N");     data.translatedby = vars.getStringParameter("inptranslatedby");     data.isrtl = vars.getStringParameter("inpisrtl", "N");     data.processing = vars.getStringParameter("inpprocessing");     data.adLanguageId = vars.getRequestGlobalVariable("inpadLanguageId", windowId + "|AD_Language_ID");    try {   data.pixelsize = vars.getNumericParameter("inppixelsize");  } catch (ServletException paramEx) { ex = paramEx; }     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -492,7 +492,7 @@ vars.getRequestGlobalVariable("inpParamName", tabId + "|paramName");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Language_ID", data[0].getField("adLanguageId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Language_ID", data[0].getField("adLanguageId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

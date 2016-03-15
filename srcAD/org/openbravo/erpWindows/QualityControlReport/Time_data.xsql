@@ -16,10 +16,10 @@ MA_Measure_Time.MA_Measure_Group_ID,
 (CASE WHEN MA_Measure_Time.MA_Measure_Group_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table3.Measuredate, 'DD-MM-YYYY')),'') ) END) AS MA_Measure_Group_IDR, 
 MA_Measure_Time.Explode, 
 COALESCE(MA_Measure_Time.Processed, 'N') AS Processed, 
-MA_Measure_Time.MA_Measure_Time_ID, 
 COALESCE(MA_Measure_Time.IsActive, 'N') AS IsActive, 
 MA_Measure_Time.AD_Org_ID, 
 MA_Measure_Time.AD_Client_ID, 
+MA_Measure_Time.MA_Measure_Time_ID, 
  
         ? AS LANGUAGE 
         FROM MA_Measure_Time left join (select MA_Measure_Group_ID, MA_CCP_Group_ID, MA_Measure_Shift_ID from MA_Measure_Group) table1 on (MA_Measure_Time.MA_Measure_Group_ID = table1.MA_Measure_Group_ID) left join (select MA_CCP_Group_ID, Name from MA_CCP_Group) table2 on (table1.MA_CCP_Group_ID = table2.MA_CCP_Group_ID) left join (select MA_Measure_Shift_ID, Measuredate from MA_Measure_Shift) table3 on (table1.MA_Measure_Shift_ID = table3.MA_Measure_Shift_ID)
@@ -122,13 +122,13 @@ MA_Measure_Time.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_Measure_Time
-        SET Measurehour = TO_TIMESTAMP(?,'HH24:MI:SS') , MA_Measure_Group_ID = (?) , Explode = (?) , Processed = (?) , MA_Measure_Time_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET Measurehour = TO_TIMESTAMP(?,'HH24:MI:SS') , MA_Measure_Group_ID = (?) , Explode = (?) , Processed = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , MA_Measure_Time_ID = (?) , updated = now(), updatedby = ? 
         WHERE MA_Measure_Time.MA_Measure_Time_ID = ? 
                  AND MA_Measure_Time.MA_Measure_Group_ID = ? 
         AND MA_Measure_Time.AD_Client_ID IN ('1') 
         AND MA_Measure_Time.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="measurehour"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="maMeasureTimeId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="measurehour"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maMeasureTimeId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maMeasureTimeId"></Parameter>
     
@@ -140,10 +140,10 @@ MA_Measure_Time.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_Measure_Time 
-        (Measurehour, MA_Measure_Group_ID, Explode, Processed, MA_Measure_Time_ID, IsActive, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (Measurehour, MA_Measure_Group_ID, Explode, Processed, IsActive, AD_Org_ID, AD_Client_ID, MA_Measure_Time_ID, created, createdby, updated, updatedBy)
         VALUES (TO_TIMESTAMP(?, 'HH24:MI:SS'), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="measurehour"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="maMeasureTimeId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="measurehour"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maMeasureTimeId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

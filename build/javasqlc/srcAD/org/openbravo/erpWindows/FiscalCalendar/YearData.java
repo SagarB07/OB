@@ -31,9 +31,9 @@ static Logger log4j = Logger.getLogger(YearData.class);
   public String processing;
   public String createRegFactAcct;
   public String dropRegFactAcct;
-  public String adOrgId;
   public String cCalendarId;
   public String adClientId;
+  public String adOrgId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -73,12 +73,12 @@ static Logger log4j = Logger.getLogger(YearData.class);
       return createRegFactAcct;
     else if (fieldName.equalsIgnoreCase("drop_reg_fact_acct") || fieldName.equals("dropRegFactAcct"))
       return dropRegFactAcct;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
     else if (fieldName.equalsIgnoreCase("c_calendar_id") || fieldName.equals("cCalendarId"))
       return cCalendarId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -125,9 +125,9 @@ Select for edit
       "C_Year.Processing, " +
       "C_Year.Create_Reg_Fact_Acct, " +
       "C_Year.Drop_Reg_Fact_Acct, " +
-      "C_Year.AD_Org_ID, " +
       "C_Year.C_Calendar_ID, " +
       "C_Year.AD_Client_ID, " +
+      "C_Year.AD_Org_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_Year" +
       "        WHERE 2=2 " +
@@ -187,9 +187,9 @@ Select for edit
         objectYearData.processing = UtilSql.getValue(result, "processing");
         objectYearData.createRegFactAcct = UtilSql.getValue(result, "create_reg_fact_acct");
         objectYearData.dropRegFactAcct = UtilSql.getValue(result, "drop_reg_fact_acct");
-        objectYearData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectYearData.cCalendarId = UtilSql.getValue(result, "c_calendar_id");
         objectYearData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectYearData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectYearData.language = UtilSql.getValue(result, "language");
         objectYearData.adUserClient = "";
         objectYearData.adOrgClient = "";
@@ -240,9 +240,9 @@ Create a registry
     objectYearData[0].processing = processing;
     objectYearData[0].createRegFactAcct = createRegFactAcct;
     objectYearData[0].dropRegFactAcct = dropRegFactAcct;
-    objectYearData[0].adOrgId = adOrgId;
     objectYearData[0].cCalendarId = cCalendarId;
     objectYearData[0].adClientId = adClientId;
+    objectYearData[0].adOrgId = adOrgId;
     objectYearData[0].language = "";
     return objectYearData;
   }
@@ -481,7 +481,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Year" +
-      "        SET Year = (?) , C_Year_ID = (?) , Description = (?) , IsActive = (?) , Processing = (?) , Create_Reg_Fact_Acct = (?) , Drop_Reg_Fact_Acct = (?) , AD_Org_ID = (?) , C_Calendar_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Year = (?) , C_Year_ID = (?) , Description = (?) , IsActive = (?) , Processing = (?) , Create_Reg_Fact_Acct = (?) , Drop_Reg_Fact_Acct = (?) , C_Calendar_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_Year.C_Year_ID = ? " +
       "                 AND C_Year.C_Calendar_ID = ? " +
       "        AND C_Year.AD_Client_ID IN (";
@@ -506,9 +506,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createRegFactAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropRegFactAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCalendarId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cYearId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCalendarId);
@@ -538,7 +538,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Year " +
-      "        (Year, C_Year_ID, Description, IsActive, Processing, Create_Reg_Fact_Acct, Drop_Reg_Fact_Acct, AD_Org_ID, C_Calendar_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Year, C_Year_ID, Description, IsActive, Processing, Create_Reg_Fact_Acct, Drop_Reg_Fact_Acct, C_Calendar_ID, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -554,9 +554,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createRegFactAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dropRegFactAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCalendarId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

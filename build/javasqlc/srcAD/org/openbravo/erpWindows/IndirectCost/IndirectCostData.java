@@ -31,8 +31,8 @@ static Logger log4j = Logger.getLogger(IndirectCostData.class);
   public String costType;
   public String costTyper;
   public String isactive;
-  public String adClientId;
   public String maIndirectCostId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -72,10 +72,10 @@ static Logger log4j = Logger.getLogger(IndirectCostData.class);
       return costTyper;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("ma_indirect_cost_id") || fieldName.equals("maIndirectCostId"))
       return maIndirectCostId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -122,8 +122,8 @@ Select for edit
       "MA_Indirect_Cost.Cost_Type, " +
       "(CASE WHEN MA_Indirect_Cost.Cost_Type IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS Cost_TypeR, " +
       "COALESCE(MA_Indirect_Cost.IsActive, 'N') AS IsActive, " +
-      "MA_Indirect_Cost.AD_Client_ID, " +
       "MA_Indirect_Cost.MA_Indirect_Cost_ID, " +
+      "MA_Indirect_Cost.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_Indirect_Cost left join (select AD_Org_ID, Name from AD_Org) table1 on (MA_Indirect_Cost.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (MA_Indirect_Cost.Cost_Type = list1.value and list1.ad_reference_id = '800089' and list1.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -179,8 +179,8 @@ Select for edit
         objectIndirectCostData.costType = UtilSql.getValue(result, "cost_type");
         objectIndirectCostData.costTyper = UtilSql.getValue(result, "cost_typer");
         objectIndirectCostData.isactive = UtilSql.getValue(result, "isactive");
-        objectIndirectCostData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectIndirectCostData.maIndirectCostId = UtilSql.getValue(result, "ma_indirect_cost_id");
+        objectIndirectCostData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectIndirectCostData.language = UtilSql.getValue(result, "language");
         objectIndirectCostData.adUserClient = "";
         objectIndirectCostData.adOrgClient = "";
@@ -231,8 +231,8 @@ Create a registry
     objectIndirectCostData[0].costType = costType;
     objectIndirectCostData[0].costTyper = "";
     objectIndirectCostData[0].isactive = isactive;
-    objectIndirectCostData[0].adClientId = adClientId;
     objectIndirectCostData[0].maIndirectCostId = maIndirectCostId;
+    objectIndirectCostData[0].adClientId = adClientId;
     objectIndirectCostData[0].language = "";
     return objectIndirectCostData;
   }
@@ -317,7 +317,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_Indirect_Cost" +
-      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , Cost_Type = (?) , IsActive = (?) , AD_Client_ID = (?) , MA_Indirect_Cost_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , Cost_Type = (?) , IsActive = (?) , MA_Indirect_Cost_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_Indirect_Cost.MA_Indirect_Cost_ID = ? " +
       "        AND MA_Indirect_Cost.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -339,8 +339,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, costType);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maIndirectCostId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maIndirectCostId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -369,7 +369,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_Indirect_Cost " +
-      "        (AD_Org_ID, Name, Description, Cost_Type, IsActive, AD_Client_ID, MA_Indirect_Cost_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, Description, Cost_Type, IsActive, MA_Indirect_Cost_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -383,8 +383,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, costType);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maIndirectCostId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

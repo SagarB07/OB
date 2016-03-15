@@ -18,8 +18,8 @@ MA_Indirect_Cost.Description,
 MA_Indirect_Cost.Cost_Type, 
 (CASE WHEN MA_Indirect_Cost.Cost_Type IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS Cost_TypeR, 
 COALESCE(MA_Indirect_Cost.IsActive, 'N') AS IsActive, 
-MA_Indirect_Cost.AD_Client_ID, 
 MA_Indirect_Cost.MA_Indirect_Cost_ID, 
+MA_Indirect_Cost.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM MA_Indirect_Cost left join (select AD_Org_ID, Name from AD_Org) table1 on (MA_Indirect_Cost.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (MA_Indirect_Cost.Cost_Type = list1.value and list1.ad_reference_id = '800089' and list1.ad_language = ?) 
@@ -92,13 +92,13 @@ MA_Indirect_Cost.MA_Indirect_Cost_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_Indirect_Cost
-        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , Cost_Type = (?) , IsActive = (?) , AD_Client_ID = (?) , MA_Indirect_Cost_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , Cost_Type = (?) , IsActive = (?) , MA_Indirect_Cost_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE MA_Indirect_Cost.MA_Indirect_Cost_ID = ? 
         
         AND MA_Indirect_Cost.AD_Client_ID IN ('1') 
         AND MA_Indirect_Cost.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="costType"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maIndirectCostId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="costType"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="maIndirectCostId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maIndirectCostId"></Parameter>
     
@@ -110,10 +110,10 @@ MA_Indirect_Cost.MA_Indirect_Cost_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_Indirect_Cost 
-        (AD_Org_ID, Name, Description, Cost_Type, IsActive, AD_Client_ID, MA_Indirect_Cost_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Name, Description, Cost_Type, IsActive, MA_Indirect_Cost_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="costType"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maIndirectCostId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="costType"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="maIndirectCostId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

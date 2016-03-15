@@ -18,7 +18,7 @@
 */
 package com.atrums.nomina.data;
 
-import com.atrums.importdata.data.IdtNovedad;
+import com.atrums.importaciondatos.IdtImportacionDatos;
 import com.atrums.nomina.empleados.data.nePerfilRubroLine;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class NoTipoIngresoEgreso extends BaseOBObject implements Traceable, Clie
     public static final String PROPERTY_ESINGRESOVARIABLE = "esIngresoVariable";
     public static final String PROPERTY_ESFONDORESERVA = "esFondoReserva";
     public static final String PROPERTY_ESSUELDO = "esSueldo";
-    public static final String PROPERTY_IDTIMPNOVEDADESLIST = "iDTImpNovedadesList";
+    public static final String PROPERTY_IDTNOVEDADLIST = "iDTNovedadList";
     public static final String PROPERTY_NOROLPAGOPROVISIONLINELIST = "nORolPagoProvisionLineList";
     public static final String PROPERTY_NOCBEMPLEADOACCTLIST = "noCbEmpleadoAcctList";
     public static final String PROPERTY_NOEMPLEADOINGEGRLIST = "noEmpleadoIngEgrList";
@@ -92,7 +92,7 @@ public class NoTipoIngresoEgreso extends BaseOBObject implements Traceable, Clie
         setDefaultValue(PROPERTY_ESINGRESOVARIABLE, false);
         setDefaultValue(PROPERTY_ESFONDORESERVA, false);
         setDefaultValue(PROPERTY_ESSUELDO, false);
-        setDefaultValue(PROPERTY_IDTIMPNOVEDADESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTNOVEDADLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOCBEMPLEADOACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOEMPLEADOINGEGRLIST, new ArrayList<Object>());
@@ -310,12 +310,12 @@ public class NoTipoIngresoEgreso extends BaseOBObject implements Traceable, Clie
     }
 
     @SuppressWarnings("unchecked")
-    public List<IdtNovedad> getIDTImpNovedadesList() {
-      return (List<IdtNovedad>) get(PROPERTY_IDTIMPNOVEDADESLIST);
+    public List<IdtImportacionDatos> getIDTNovedadList() {
+      return (List<IdtImportacionDatos>) get(PROPERTY_IDTNOVEDADLIST);
     }
 
-    public void setIDTImpNovedadesList(List<IdtNovedad> iDTImpNovedadesList) {
-        set(PROPERTY_IDTIMPNOVEDADESLIST, iDTImpNovedadesList);
+    public void setIDTNovedadList(List<IdtImportacionDatos> iDTNovedadList) {
+        set(PROPERTY_IDTNOVEDADLIST, iDTNovedadList);
     }
 
     @SuppressWarnings("unchecked")

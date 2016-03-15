@@ -21,8 +21,8 @@ imp_total_procesar.CCO_Cuenta_Costos_ID,
 imp_total_procesar.Total, 
 imp_total_procesar.Procesar, 
 COALESCE(imp_total_procesar.Isactive, 'N') AS Isactive, 
-imp_total_procesar.AD_Client_ID, 
 imp_total_procesar.IMP_Total_Procesar_ID, 
+imp_total_procesar.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM imp_total_procesar left join (select AD_Org_ID, Name from AD_Org) table1 on (imp_total_procesar.AD_Org_ID = table1.AD_Org_ID) left join (select CCO_Cuenta_Costos_ID, Name from CCO_Cuenta_Costos) table2 on (imp_total_procesar.CCO_Cuenta_Costos_ID = table2.CCO_Cuenta_Costos_ID)
@@ -94,13 +94,13 @@ imp_total_procesar.IMP_Total_Procesar_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE imp_total_procesar
-        SET AD_Org_ID = (?) , Procesado = (?) , Value = (?) , Name = (?) , CCO_Cuenta_Costos_ID = (?) , Total = TO_NUMBER(?) , Procesar = (?) , Isactive = (?) , AD_Client_ID = (?) , IMP_Total_Procesar_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Procesado = (?) , Value = (?) , Name = (?) , CCO_Cuenta_Costos_ID = (?) , Total = TO_NUMBER(?) , Procesar = (?) , Isactive = (?) , IMP_Total_Procesar_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE imp_total_procesar.IMP_Total_Procesar_ID = ? 
         
         AND imp_total_procesar.AD_Client_ID IN ('1') 
         AND imp_total_procesar.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="ccoCuentaCostosId"></Parameter> <Parameter name="total"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="impTotalProcesarId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="ccoCuentaCostosId"></Parameter> <Parameter name="total"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="impTotalProcesarId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="impTotalProcesarId"></Parameter>
     
@@ -112,10 +112,10 @@ imp_total_procesar.IMP_Total_Procesar_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO imp_total_procesar 
-        (AD_Org_ID, Procesado, Value, Name, CCO_Cuenta_Costos_ID, Total, Procesar, Isactive, AD_Client_ID, IMP_Total_Procesar_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Procesado, Value, Name, CCO_Cuenta_Costos_ID, Total, Procesar, Isactive, IMP_Total_Procesar_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="ccoCuentaCostosId"></Parameter> <Parameter name="total"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="impTotalProcesarId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="ccoCuentaCostosId"></Parameter> <Parameter name="total"></Parameter> <Parameter name="procesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="impTotalProcesarId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

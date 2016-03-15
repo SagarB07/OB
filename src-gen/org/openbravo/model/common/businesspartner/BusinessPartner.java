@@ -25,7 +25,7 @@ import com.atrums.contabilidad.data.CO_BpRetencionCompra;
 import com.atrums.contabilidad.data.CO_Retencion_Compra;
 import com.atrums.contabilidad.data.CoRetencionVentaView;
 import com.atrums.depositos.data.DP_FinaccTransactionV;
-import com.atrums.importdata.data.IdtNovedad;
+import com.atrums.importaciondatos.IdtImportacionDatos;
 import com.atrums.nomina.data.NO_Registro_Hora_Extra;
 import com.atrums.nomina.data.NoEmpleadoIngresoEgreso;
 import com.atrums.nomina.data.NoPermiso;
@@ -342,7 +342,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
     public static final String PROPERTY_FINANCIALMGMTTAXPAYMENTLIST = "financialMgmtTaxPaymentList";
     public static final String PROPERTY_FINANCIALMGMTWITHHOLDINGBENEFICIARYLIST = "financialMgmtWithholdingBeneficiaryList";
-    public static final String PROPERTY_IDTIMPNOVEDADESLIST = "iDTImpNovedadesList";
+    public static final String PROPERTY_IDTNOVEDADLIST = "iDTNovedadList";
     public static final String PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST = "inOutLineAccountingDimensionList";
     public static final String PROPERTY_INVOICELIST = "invoiceList";
     public static final String PROPERTY_INVOICELINELIST = "invoiceLineList";
@@ -499,7 +499,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTWITHHOLDINGBENEFICIARYLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_IDTIMPNOVEDADESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTNOVEDADLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELINELIST, new ArrayList<Object>());
@@ -2122,12 +2122,12 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     }
 
     @SuppressWarnings("unchecked")
-    public List<IdtNovedad> getIDTImpNovedadesList() {
-      return (List<IdtNovedad>) get(PROPERTY_IDTIMPNOVEDADESLIST);
+    public List<IdtImportacionDatos> getIDTNovedadList() {
+      return (List<IdtImportacionDatos>) get(PROPERTY_IDTNOVEDADLIST);
     }
 
-    public void setIDTImpNovedadesList(List<IdtNovedad> iDTImpNovedadesList) {
-        set(PROPERTY_IDTIMPNOVEDADESLIST, iDTImpNovedadesList);
+    public void setIDTNovedadList(List<IdtImportacionDatos> iDTNovedadList) {
+        set(PROPERTY_IDTNOVEDADLIST, iDTNovedadList);
     }
 
     @SuppressWarnings("unchecked")

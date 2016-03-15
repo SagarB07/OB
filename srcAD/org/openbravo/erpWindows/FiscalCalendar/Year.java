@@ -493,7 +493,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "CREATEADJUSTME
     YearData data = new YearData();
     ServletException ex = null;
     try {
-    data.year = vars.getRequiredStringParameter("inpyear");     data.cYearId = vars.getRequestGlobalVariable("inpcYearId", windowId + "|C_Year_ID");     data.description = vars.getStringParameter("inpdescription");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processing = vars.getStringParameter("inpprocessing");     data.createRegFactAcct = vars.getStringParameter("inpcreateRegFactAcct");     data.dropRegFactAcct = vars.getStringParameter("inpdropRegFactAcct");     data.adOrgId = vars.getRequiredStringParameter("inpadOrgId");     data.cCalendarId = vars.getRequiredStringParameter("inpcCalendarId");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.year = vars.getRequiredStringParameter("inpyear");     data.cYearId = vars.getRequestGlobalVariable("inpcYearId", windowId + "|C_Year_ID");     data.description = vars.getStringParameter("inpdescription");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.processing = vars.getStringParameter("inpprocessing");     data.createRegFactAcct = vars.getStringParameter("inpcreateRegFactAcct");     data.dropRegFactAcct = vars.getStringParameter("inpdropRegFactAcct");     data.cCalendarId = vars.getRequiredStringParameter("inpcCalendarId");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredStringParameter("inpadOrgId"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -525,7 +525,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "CREATEADJUSTME
       
       CalendarData[] data = CalendarData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPC_Calendar_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|C_Calendar_ID", data[0].cCalendarId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|C_Calendar_ID", data[0].cCalendarId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
       vars.setSessionValue(windowId + "|C_Calendar_ID", strPC_Calendar_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work

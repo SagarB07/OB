@@ -35,7 +35,8 @@ public class ImportBPartner extends ImportProcess {
   private String m_Record_ID = "";
   private boolean m_deleteOldImported;
 
-  public ImportBPartner(ConnectionProvider conn, String AD_Process_ID, String recordId,boolean deleteOld) {
+  public ImportBPartner(ConnectionProvider conn, String AD_Process_ID, String recordId,
+      boolean deleteOld) {
     super(conn);
     m_AD_Process_ID = AD_Process_ID;
     m_Record_ID = recordId;
@@ -55,15 +56,11 @@ public class ImportBPartner extends ImportProcess {
       log4j.debug("Creating parameters");
   }
 
-  @SuppressWarnings("unused")
-protected OBError doIt(VariablesSecureApp vars) throws ServletException {
+  protected OBError doIt(VariablesSecureApp vars) throws ServletException {
     int no = 0;
-    String causaProblema = "";
-    String personaProblema = "";
     ConnectionProvider conn = null;
     Connection con = null;
     OBError myError = new OBError();
-    
 
     try {
       conn = getConnection();
@@ -176,7 +173,9 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
         boolean newLocation = data[i].addr != null;
         String AD_User_ID = data[i].adUserId;
         boolean newContact = data[i].contactname != null;
+
         con = conn.getTransactionConnection();
+
         // create/update BPartner
         if (newBPartner) { // Insert new BPartner
           C_BPartner_ID = SequenceIdData.getUUID();
@@ -280,19 +279,9 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
 
         // Update I_BPARTNER
         try {
-            if (!validarTipoPersona(data[i].tipoPersona)){
-            	causaProblema = "invalid_tpersona";
-            	personaProblema =data[i].numeroIdentificacion;
-            	int var = 10/0;
-            }
-            
-            if (validarDocumento(data[i].numeroIdentificacion,data[i].tipoIdentifiacion)  != "VALIDO" ){
-            	causaProblema = "invalid_tIdentificacion";
-            	personaProblema =validarDocumento(data[i].numeroIdentificacion,data[i].tipoIdentifiacion) +": " +data[i].numeroIdentificacion  ;
-            	int var = 10/0;
-            }	
-        	
-          no = ImportBPartnerData.setImported(con, conn, C_BPartner_ID, (C_BPartner_Location_ID.equals("0")) ? "" : C_BPartner_Location_ID, (AD_User_ID.equals("0")) ? "": AD_User_ID, I_BPartner_ID);
+          no = ImportBPartnerData.setImported(con, conn, C_BPartner_ID, (C_BPartner_Location_ID
+              .equals("0")) ? "" : C_BPartner_Location_ID, (AD_User_ID.equals("0")) ? ""
+              : AD_User_ID, I_BPartner_ID);
           conn.releaseCommitConnection(con);
         } catch (ServletException ex) {
           if (log4j.isDebugEnabled())
@@ -301,74 +290,25 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
           conn.releaseRollbackConnection(con);
           no = ImportBPartnerData.updateSetImportedError(conn, ex.toString(), I_BPartner_ID);
           continue;
-        }catch (Exception se){
-        	log4j.debug("Update Imported - " + se.toString());
-            noInsert--;
-//            conn.releaseRollbackConnection(con);
-//            no = ImportBPartnerData.updateSetImportedError(conn, se.toString(), I_BPartner_ID);
-  
-            if (causaProblema.equals("invalid_tpersona")){
-                conn.releaseRollbackConnection(con);
-                no = ImportBPartnerData.updateSetImportedError(conn, "El dato en el campo TIPO PERSONA es invalido", I_BPartner_ID);
-              }else {
-        	       if (causaProblema.equals("invalid_tIdentificacion")){
-        	    	  conn.releaseRollbackConnection(con);
-        	    	  no = ImportBPartnerData.updateSetImportedError(conn, "Error de verificación de campo cédula", I_BPartner_ID);
-        	      }else
-        	    	  {
-        		      se.printStackTrace();
-        		      addLog(Utility.messageBD(conn, "ProcessRunError", vars.getLanguage()));
-        		      conn.releaseRollbackConnection(con);
-        	    	  no = ImportBPartnerData.updateSetImportedError(conn, "ProcessRunError", I_BPartner_ID);
-        			   
-        		      }
-            	  }
-              
-            
-            continue;
-            
-            
-            
-            
-        	
         }
-        
       }
 
-      
-      
-      
-      
       // Set Error to indicator to not imported
       noBPartnerError = ImportBPartnerData.updateNotImported(conn, getAD_Client_ID());
     } catch (Exception se) {
-      if (causaProblema.equals("invalid_tpersona")){
-    	  myError.setType("Error");
-    	  myError.setTitle("Error de verificación para le persona con número de identificación:   "+personaProblema);
-    	  myError.setMessage("El dato en el campo TIPO PERSONA es invalido" );
-    	  
-    	  
-      }else {
-	       if (causaProblema.equals("invalid_tIdentificacion")){
-	    	  myError.setType("Error");
-	    	  myError.setTitle("Error de verificación de campo cédula");
-	    	  myError.setMessage(personaProblema);
-	      }else
-	    	  {
-		      se.printStackTrace();
-		      addLog(Utility.messageBD(conn, "ProcessRunError", vars.getLanguage()));
-		      myError.setType("Error");
-		      myError.setTitle(Utility.messageBD(conn, "Error", vars.getLanguage()));
-		      myError.setMessage(Utility.messageBD(conn, "ProcessRunError", vars.getLanguage()));
-			      try {
-			        conn.releaseCommitConnection(con);
-			      } catch (Exception e) {
-		      }
-    	  }
+      se.printStackTrace();
+      addLog(Utility.messageBD(conn, "ProcessRunError", vars.getLanguage()));
+      myError.setType("Error");
+      myError.setTitle(Utility.messageBD(conn, "Error", vars.getLanguage()));
+      myError.setMessage(Utility.messageBD(conn, "ProcessRunError", vars.getLanguage()));
+      try {
+        conn.releaseCommitConnection(con);
+      } catch (Exception e) {
       }
       return myError;
     }
-    addLog(Utility.messageBD(conn, "Business partners not imported", vars.getLanguage()) + ": "+ noBPartnerError + "; ");
+    addLog(Utility.messageBD(conn, "Business partners not imported", vars.getLanguage()) + ": "
+        + noBPartnerError + "; ");
     addLog("Business partners inserted: " + noInsert + "; ");
     addLog("Business partners updated: " + noUpdate);
 
@@ -389,231 +329,6 @@ protected OBError doIt(VariablesSecureApp vars) throws ServletException {
 
   } // doIt
 
-@SuppressWarnings("unused")
-private String validarDocumento(String numero, String tipoIdentificacion) {
-	    boolean valor = true;
-	    String mensaje = "VALIDO";
-	    
-	    if (tipoIdentificacion.equals("01")||tipoIdentificacion.equals("02")||tipoIdentificacion.equals("03")||tipoIdentificacion.equals("07") ){
-	    	
-	    if (tipoIdentificacion.equals("02") || tipoIdentificacion.equals("01")) {
-
-	      try {
-	        int suma = 0;
-	        int residuo = 0;
-	        boolean privada = false;
-	        boolean publica = false;
-	        boolean natural = false;
-	        int numeroProvincias = 24;
-	        int digitoVerificador = 0;
-	        int modulo = 11;
-
-	        int d1, d2, d3, d4, d5, d6, d7, d8, d9, d10;
-	        int p1, p2, p3, p4, p5, p6, p7, p8, p9;
-
-	        d1 = d2 = d3 = d4 = d5 = d6 = d7 = d8 = d9 = d10 = 0;
-	        p1 = p2 = p3 = p4 = p5 = p6 = p7 = p8 = p9 = 0;
-
-	        if (numero.length() < 10) {
-	          // mensaje = "  No es válido";
-	          mensaje = " CI/RUC no válido";
-
-	          valor = false;
-	        }
-
-	        // Los primeros dos digitos corresponden al codigo de la
-	        // provincia
-	        int provincia = Integer.parseInt(numero.substring(0, 2));
-
-	        if (provincia <= 0 || provincia > numeroProvincias) {
-	          mensaje = " CI/RUC no válido";
-	          // JOptionPane
-	          // .showMessageDialog(Motor.getVentana(), "El c" + Motor.o
-	          // + "digo de la provincia (dos primeros d" + Motor.i +
-	          // "gitos) es inv" + Motor.a
-	          // + "lido");
-	          valor = false;
-	        }
-
-	        // Aqui almacenamos los digitos de la cedula en variables.
-	        d1 = Integer.parseInt(numero.substring(0, 1));
-	        d2 = Integer.parseInt(numero.substring(1, 2));
-	        d3 = Integer.parseInt(numero.substring(2, 3));
-	        d4 = Integer.parseInt(numero.substring(3, 4));
-	        d5 = Integer.parseInt(numero.substring(4, 5));
-	        d6 = Integer.parseInt(numero.substring(5, 6));
-	        d7 = Integer.parseInt(numero.substring(6, 7));
-	        d8 = Integer.parseInt(numero.substring(7, 8));
-	        d9 = Integer.parseInt(numero.substring(8, 9));
-	        d10 = Integer.parseInt(numero.substring(9, 10));
-
-	        // El tercer digito es:
-	        // 9 para sociedades privadas y extranjeros
-	        // 6 para sociedades publicas
-	        // menor que 6 (0,1,2,3,4,5) para personas naturales
-	        if (d3 == 7 || d3 == 8) {
-	          mensaje = " CI/RUC no válido";
-	          // JOptionPane.showMessageDialog(Motor.getVentana(),
-	          // "El tercer d" + Motor.i
-	          // + "gito ingresado es inv" + Motor.a + "lido");
-	          valor = false;
-	        }
-
-	        // Solo para personas naturales (modulo 10)
-	        if (d3 < 6) {
-	          natural = true;
-	          modulo = 10;
-	          p1 = d1 * 2;
-	          if (p1 >= 10)
-	            p1 -= 9;
-	          p2 = d2 * 1;
-	          if (p2 >= 10)
-	            p2 -= 9;
-	          p3 = d3 * 2;
-	          if (p3 >= 10)
-	            p3 -= 9;
-	          p4 = d4 * 1;
-	          if (p4 >= 10)
-	            p4 -= 9;
-	          p5 = d5 * 2;
-	          if (p5 >= 10)
-	            p5 -= 9;
-	          p6 = d6 * 1;
-	          if (p6 >= 10)
-	            p6 -= 9;
-	          p7 = d7 * 2;
-	          if (p7 >= 10)
-	            p7 -= 9;
-	          p8 = d8 * 1;
-	          if (p8 >= 10)
-	            p8 -= 9;
-	          p9 = d9 * 2;
-	          if (p9 >= 10)
-	            p9 -= 9;
-	        }
-
-	        // Solo para sociedades publicas (modulo 11)
-	        // Aqui el digito verficador esta en la posicion 9, en las otras
-	        // 2
-	        // en la pos. 10
-	        if (d3 == 6) {
-	          publica = true;
-	          p1 = d1 * 3;
-	          p2 = d2 * 2;
-	          p3 = d3 * 7;
-	          p4 = d4 * 6;
-	          p5 = d5 * 5;
-	          p6 = d6 * 4;
-	          p7 = d7 * 3;
-	          p8 = d8 * 2;
-	          p9 = 0;
-	        }
-
-	        /* Solo para entidades privadas (modulo 11) */
-	        if (d3 == 9) {
-	          privada = true;
-	          p1 = d1 * 4;
-	          p2 = d2 * 3;
-	          p3 = d3 * 2;
-	          p4 = d4 * 7;
-	          p5 = d5 * 6;
-	          p6 = d6 * 5;
-	          p7 = d7 * 4;
-	          p8 = d8 * 3;
-	          p9 = d9 * 2;
-	        }
-
-	        suma = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;
-	        residuo = suma % modulo;
-
-	        // Si residuo=0, dig.ver.=0, caso contrario 10 - residuo
-	        digitoVerificador = residuo == 0 ? 0 : modulo - residuo;
-	        int longitud = numero.length(); // Longitud del string
-
-	        // ahora comparamos el elemento de la posicion 10 con el dig.
-	        // ver.
-
-	        if (publica == true) {
-	          if (digitoVerificador != d9) {
-	            mensaje = "  El RUC de la empresa del sector público es incorrecto";
-	            valor = false;
-	          }
-	          if (!numero.substring(9, longitud).equals("0001")) {
-	            mensaje = "  El RUC de la empresa del sector público debe terminar con 0001";
-	            valor = false;
-	          }
-	          if (!tipoIdentificacion.equals("01")) {
-	            mensaje = "Tipo identificacion incorrecto";
-	            valor = false;
-	          }
-	        }
-
-	        if (privada == true) {
-	          if (digitoVerificador != d10) {
-	            mensaje = "  El RUC de la empresa del sector privado es incorrecto";
-	            valor = false;
-	          }
-	          if (!numero.substring(10, longitud).equals("001")) {
-	            mensaje = "  El RUC de la empresa del sector privado debe terminar con 001";
-	            valor = false;
-	          }
-	          if (!tipoIdentificacion.equals("01")) {
-	            mensaje = "Tipo identificacion incorrecto";
-	            valor = false;
-	          }
-	        }
-
-	        if (natural == true) {
-	          if (digitoVerificador != d10) {
-
-	            mensaje = "  El número de cédula de la persona natural es incorrecto";
-	            valor = false;
-	          }
-	          if (numero.length() > 10 && !numero.substring(10, longitud).equals("001")) {
-
-	            mensaje = "  El ruc de la persona natural debe terminar con 001";
-	            valor = false;
-	          }
-
-	          if (mensaje.equals("VALIDO")) {
-
-	            if (numero.length() > 10 && tipoIdentificacion.equals("02")) {
-	              mensaje = "Tipo identificacion incorrecto";
-	              valor = false;
-	            } else if (numero.length() == 10 && tipoIdentificacion.equals("01")) {
-	              mensaje = "Tipo identificacion incorrecto";
-	              valor = false;
-	            }
-
-	          }
-
-	        }
-	      } catch (Exception e) {
-	        valor = false;
-	        mensaje = " CI/RUC no válido";
-	      }
-	    }
-	    return mensaje;
-	    }else {
-	    	
-	    	return "TIPO DE IDENTIFICACIÓN INVALIDO";
-	    }
-	  }
-  
-  
-  private Boolean validarTipoPersona (String tipoPersona){
-	  if (tipoPersona.equals("PN")){
-		  return true;
-	  }
-	  if (tipoPersona.equals("PJ")){
-		  return true;
-	  }
-	  else{
-		  return false;
-	  }
-	  
-  }
-  
   private String parseAddressName(ImportBPartnerData addressData) {
     String result = ".";
 

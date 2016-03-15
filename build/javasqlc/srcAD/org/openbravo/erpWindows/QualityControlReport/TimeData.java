@@ -29,10 +29,10 @@ static Logger log4j = Logger.getLogger(TimeData.class);
   public String maMeasureGroupIdr;
   public String explode;
   public String processed;
-  public String maMeasureTimeId;
   public String isactive;
   public String adOrgId;
   public String adClientId;
+  public String maMeasureTimeId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -68,14 +68,14 @@ static Logger log4j = Logger.getLogger(TimeData.class);
       return explode;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
-    else if (fieldName.equalsIgnoreCase("ma_measure_time_id") || fieldName.equals("maMeasureTimeId"))
-      return maMeasureTimeId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("ma_measure_time_id") || fieldName.equals("maMeasureTimeId"))
+      return maMeasureTimeId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -120,10 +120,10 @@ Select for edit
       "(CASE WHEN MA_Measure_Time.MA_Measure_Group_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table3.Measuredate, 'DD-MM-YYYY')),'') ) END) AS MA_Measure_Group_IDR, " +
       "MA_Measure_Time.Explode, " +
       "COALESCE(MA_Measure_Time.Processed, 'N') AS Processed, " +
-      "MA_Measure_Time.MA_Measure_Time_ID, " +
       "COALESCE(MA_Measure_Time.IsActive, 'N') AS IsActive, " +
       "MA_Measure_Time.AD_Org_ID, " +
       "MA_Measure_Time.AD_Client_ID, " +
+      "MA_Measure_Time.MA_Measure_Time_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_Measure_Time left join (select MA_Measure_Group_ID, MA_CCP_Group_ID, MA_Measure_Shift_ID from MA_Measure_Group) table1 on (MA_Measure_Time.MA_Measure_Group_ID = table1.MA_Measure_Group_ID) left join (select MA_CCP_Group_ID, Name from MA_CCP_Group) table2 on (table1.MA_CCP_Group_ID = table2.MA_CCP_Group_ID) left join (select MA_Measure_Shift_ID, Measuredate from MA_Measure_Shift) table3 on (table1.MA_Measure_Shift_ID = table3.MA_Measure_Shift_ID)" +
       "        WHERE 2=2 " +
@@ -181,10 +181,10 @@ Select for edit
         objectTimeData.maMeasureGroupIdr = UtilSql.getValue(result, "ma_measure_group_idr");
         objectTimeData.explode = UtilSql.getValue(result, "explode");
         objectTimeData.processed = UtilSql.getValue(result, "processed");
-        objectTimeData.maMeasureTimeId = UtilSql.getValue(result, "ma_measure_time_id");
         objectTimeData.isactive = UtilSql.getValue(result, "isactive");
         objectTimeData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectTimeData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectTimeData.maMeasureTimeId = UtilSql.getValue(result, "ma_measure_time_id");
         objectTimeData.language = UtilSql.getValue(result, "language");
         objectTimeData.adUserClient = "";
         objectTimeData.adOrgClient = "";
@@ -233,10 +233,10 @@ Create a registry
     objectTimeData[0].maMeasureGroupIdr = "";
     objectTimeData[0].explode = explode;
     objectTimeData[0].processed = processed;
-    objectTimeData[0].maMeasureTimeId = maMeasureTimeId;
     objectTimeData[0].isactive = isactive;
     objectTimeData[0].adOrgId = adOrgId;
     objectTimeData[0].adClientId = adClientId;
+    objectTimeData[0].maMeasureTimeId = maMeasureTimeId;
     objectTimeData[0].language = "";
     return objectTimeData;
   }
@@ -437,7 +437,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_Measure_Time" +
-      "        SET Measurehour = TO_TIMESTAMP(?,'HH24:MI:SS') , MA_Measure_Group_ID = (?) , Explode = (?) , Processed = (?) , MA_Measure_Time_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Measurehour = TO_TIMESTAMP(?,'HH24:MI:SS') , MA_Measure_Group_ID = (?) , Explode = (?) , Processed = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , MA_Measure_Time_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_Measure_Time.MA_Measure_Time_ID = ? " +
       "                 AND MA_Measure_Time.MA_Measure_Group_ID = ? " +
       "        AND MA_Measure_Time.AD_Client_ID IN (";
@@ -459,10 +459,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, explode);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureTimeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureTimeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureTimeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureGroupId);
@@ -492,7 +492,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_Measure_Time " +
-      "        (Measurehour, MA_Measure_Group_ID, Explode, Processed, MA_Measure_Time_ID, IsActive, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Measurehour, MA_Measure_Group_ID, Explode, Processed, IsActive, AD_Org_ID, AD_Client_ID, MA_Measure_Time_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_TIMESTAMP(?, 'HH24:MI:SS'), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -505,10 +505,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, explode);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureTimeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureTimeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

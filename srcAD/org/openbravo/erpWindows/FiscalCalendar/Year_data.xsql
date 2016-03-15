@@ -18,9 +18,9 @@ COALESCE(C_Year.IsActive, 'N') AS IsActive,
 C_Year.Processing, 
 C_Year.Create_Reg_Fact_Acct, 
 C_Year.Drop_Reg_Fact_Acct, 
-C_Year.AD_Org_ID, 
 C_Year.C_Calendar_ID, 
 C_Year.AD_Client_ID, 
+C_Year.AD_Org_ID, 
  
         ? AS LANGUAGE 
         FROM C_Year
@@ -132,13 +132,13 @@ C_Year.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_Year
-        SET Year = (?) , C_Year_ID = (?) , Description = (?) , IsActive = (?) , Processing = (?) , Create_Reg_Fact_Acct = (?) , Drop_Reg_Fact_Acct = (?) , AD_Org_ID = (?) , C_Calendar_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET Year = (?) , C_Year_ID = (?) , Description = (?) , IsActive = (?) , Processing = (?) , Create_Reg_Fact_Acct = (?) , Drop_Reg_Fact_Acct = (?) , C_Calendar_ID = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
         WHERE C_Year.C_Year_ID = ? 
                  AND C_Year.C_Calendar_ID = ? 
         AND C_Year.AD_Client_ID IN ('1') 
         AND C_Year.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="year"></Parameter> <Parameter name="cYearId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="createRegFactAcct"></Parameter> <Parameter name="dropRegFactAcct"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="year"></Parameter> <Parameter name="cYearId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="createRegFactAcct"></Parameter> <Parameter name="dropRegFactAcct"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cYearId"></Parameter>
     
@@ -150,10 +150,10 @@ C_Year.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_Year 
-        (Year, C_Year_ID, Description, IsActive, Processing, Create_Reg_Fact_Acct, Drop_Reg_Fact_Acct, AD_Org_ID, C_Calendar_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (Year, C_Year_ID, Description, IsActive, Processing, Create_Reg_Fact_Acct, Drop_Reg_Fact_Acct, C_Calendar_ID, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="year"></Parameter> <Parameter name="cYearId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="createRegFactAcct"></Parameter> <Parameter name="dropRegFactAcct"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="year"></Parameter> <Parameter name="cYearId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="createRegFactAcct"></Parameter> <Parameter name="dropRegFactAcct"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

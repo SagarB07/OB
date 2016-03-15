@@ -29,10 +29,10 @@ static Logger log4j = Logger.getLogger(CheckPointSetData.class);
   public String maMeasureShiftIdr;
   public String maCcpGroupId;
   public String maCcpGroupIdr;
-  public String isactive;
-  public String adOrgId;
-  public String adClientId;
   public String maMeasureGroupId;
+  public String isactive;
+  public String adClientId;
+  public String adOrgId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -68,14 +68,14 @@ static Logger log4j = Logger.getLogger(CheckPointSetData.class);
       return maCcpGroupId;
     else if (fieldName.equalsIgnoreCase("ma_ccp_group_idr") || fieldName.equals("maCcpGroupIdr"))
       return maCcpGroupIdr;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("ma_measure_group_id") || fieldName.equals("maMeasureGroupId"))
       return maMeasureGroupId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -120,10 +120,10 @@ Select for edit
       "(CASE WHEN MA_Measure_Group.MA_Measure_Shift_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(table1.Measuredate, 'DD-MM-YYYY')),'') ) END) AS MA_Measure_Shift_IDR, " +
       "MA_Measure_Group.MA_CCP_Group_ID, " +
       "(CASE WHEN MA_Measure_Group.MA_CCP_Group_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS MA_CCP_Group_IDR, " +
-      "COALESCE(MA_Measure_Group.IsActive, 'N') AS IsActive, " +
-      "MA_Measure_Group.AD_Org_ID, " +
-      "MA_Measure_Group.AD_Client_ID, " +
       "MA_Measure_Group.MA_Measure_Group_ID, " +
+      "COALESCE(MA_Measure_Group.IsActive, 'N') AS IsActive, " +
+      "MA_Measure_Group.AD_Client_ID, " +
+      "MA_Measure_Group.AD_Org_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_Measure_Group left join (select MA_Measure_Shift_ID, Measuredate from MA_Measure_Shift) table1 on (MA_Measure_Group.MA_Measure_Shift_ID = table1.MA_Measure_Shift_ID) left join (select MA_CCP_Group_ID, Name from MA_CCP_Group) table2 on (MA_Measure_Group.MA_CCP_Group_ID = table2.MA_CCP_Group_ID)" +
       "        WHERE 2=2 " +
@@ -181,10 +181,10 @@ Select for edit
         objectCheckPointSetData.maMeasureShiftIdr = UtilSql.getValue(result, "ma_measure_shift_idr");
         objectCheckPointSetData.maCcpGroupId = UtilSql.getValue(result, "ma_ccp_group_id");
         objectCheckPointSetData.maCcpGroupIdr = UtilSql.getValue(result, "ma_ccp_group_idr");
-        objectCheckPointSetData.isactive = UtilSql.getValue(result, "isactive");
-        objectCheckPointSetData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectCheckPointSetData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectCheckPointSetData.maMeasureGroupId = UtilSql.getValue(result, "ma_measure_group_id");
+        objectCheckPointSetData.isactive = UtilSql.getValue(result, "isactive");
+        objectCheckPointSetData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectCheckPointSetData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectCheckPointSetData.language = UtilSql.getValue(result, "language");
         objectCheckPointSetData.adUserClient = "";
         objectCheckPointSetData.adOrgClient = "";
@@ -233,10 +233,10 @@ Create a registry
     objectCheckPointSetData[0].maMeasureShiftIdr = "";
     objectCheckPointSetData[0].maCcpGroupId = maCcpGroupId;
     objectCheckPointSetData[0].maCcpGroupIdr = "";
-    objectCheckPointSetData[0].isactive = isactive;
-    objectCheckPointSetData[0].adOrgId = adOrgId;
-    objectCheckPointSetData[0].adClientId = adClientId;
     objectCheckPointSetData[0].maMeasureGroupId = maMeasureGroupId;
+    objectCheckPointSetData[0].isactive = isactive;
+    objectCheckPointSetData[0].adClientId = adClientId;
+    objectCheckPointSetData[0].adOrgId = adOrgId;
     objectCheckPointSetData[0].language = "";
     return objectCheckPointSetData;
   }
@@ -475,7 +475,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_Measure_Group" +
-      "        SET SeqNo = TO_NUMBER(?) , MA_Measure_Shift_ID = (?) , MA_CCP_Group_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , MA_Measure_Group_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET SeqNo = TO_NUMBER(?) , MA_Measure_Shift_ID = (?) , MA_CCP_Group_ID = (?) , MA_Measure_Group_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_Measure_Group.MA_Measure_Group_ID = ? " +
       "                 AND MA_Measure_Group.MA_Measure_Shift_ID = ? " +
       "        AND MA_Measure_Group.AD_Client_ID IN (";
@@ -496,10 +496,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, seqno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureShiftId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maCcpGroupId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureGroupId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureShiftId);
@@ -529,7 +529,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_Measure_Group " +
-      "        (SeqNo, MA_Measure_Shift_ID, MA_CCP_Group_ID, IsActive, AD_Org_ID, AD_Client_ID, MA_Measure_Group_ID, created, createdby, updated, updatedBy)" +
+      "        (SeqNo, MA_Measure_Shift_ID, MA_CCP_Group_ID, MA_Measure_Group_ID, IsActive, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -541,10 +541,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, seqno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureShiftId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maCcpGroupId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maMeasureGroupId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

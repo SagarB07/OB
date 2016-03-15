@@ -393,7 +393,7 @@ vars.getGlobalVariable("inpmaMeasureShiftId", windowId + "|MA_Measure_Shift_ID")
     CheckPointSetData data = new CheckPointSetData();
     ServletException ex = null;
     try {
-   try {   data.seqno = vars.getNumericParameter("inpseqno");  } catch (ServletException paramEx) { ex = paramEx; }     data.maMeasureShiftId = vars.getRequiredStringParameter("inpmaMeasureShiftId");     data.maMeasureShiftIdr = vars.getStringParameter("inpmaMeasureShiftId_R");     data.maCcpGroupId = vars.getRequiredStringParameter("inpmaCcpGroupId");     data.maCcpGroupIdr = vars.getStringParameter("inpmaCcpGroupId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.maMeasureGroupId = vars.getRequestGlobalVariable("inpmaMeasureGroupId", windowId + "|MA_Measure_Group_ID"); 
+   try {   data.seqno = vars.getNumericParameter("inpseqno");  } catch (ServletException paramEx) { ex = paramEx; }     data.maMeasureShiftId = vars.getRequiredStringParameter("inpmaMeasureShiftId");     data.maMeasureShiftIdr = vars.getStringParameter("inpmaMeasureShiftId_R");     data.maCcpGroupId = vars.getRequiredStringParameter("inpmaCcpGroupId");     data.maCcpGroupIdr = vars.getStringParameter("inpmaCcpGroupId_R");     data.maMeasureGroupId = vars.getRequestGlobalVariable("inpmaMeasureGroupId", windowId + "|MA_Measure_Group_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -425,7 +425,7 @@ vars.getGlobalVariable("inpmaMeasureShiftId", windowId + "|MA_Measure_Shift_ID")
       
       DateandShiftData[] data = DateandShiftData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPMA_Measure_Shift_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|MA_Measure_Shift_ID", data[0].maMeasureShiftId);
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|MA_Measure_Shift_ID", data[0].maMeasureShiftId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);
       vars.setSessionValue(windowId + "|MA_Measure_Shift_ID", strPMA_Measure_Shift_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -444,7 +444,7 @@ vars.getGlobalVariable("inpmaMeasureShiftId", windowId + "|MA_Measure_Shift_ID")
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|MA_Measure_Group_ID", data[0].getField("maMeasureGroupId"));
+          vars.setSessionValue(windowId + "|MA_Measure_Group_ID", data[0].getField("maMeasureGroupId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPMA_Measure_Shift_ID) throws IOException,ServletException {

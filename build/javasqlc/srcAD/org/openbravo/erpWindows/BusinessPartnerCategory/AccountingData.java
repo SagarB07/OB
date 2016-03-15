@@ -30,8 +30,8 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
   public String cPrepaymentAcct;
   public String writeoffAcct;
   public String writeoffRevAcct;
-  public String isactive;
   public String vLiabilityAcct;
+  public String isactive;
   public String vPrepaymentAcct;
   public String notinvoicedreceiptsAcct;
   public String processing;
@@ -51,9 +51,9 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
   public String baddebtrevenueAcct;
   public String allowancefordoubtfulAcct;
   public String cBpGroupAcctId;
-  public String cBpGroupId;
   public String adOrgId;
   public String adClientId;
+  public String cBpGroupId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -91,10 +91,10 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
       return writeoffAcct;
     else if (fieldName.equalsIgnoreCase("writeoff_rev_acct") || fieldName.equals("writeoffRevAcct"))
       return writeoffRevAcct;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("v_liability_acct") || fieldName.equals("vLiabilityAcct"))
       return vLiabilityAcct;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("v_prepayment_acct") || fieldName.equals("vPrepaymentAcct"))
       return vPrepaymentAcct;
     else if (fieldName.equalsIgnoreCase("notinvoicedreceipts_acct") || fieldName.equals("notinvoicedreceiptsAcct"))
@@ -133,12 +133,12 @@ static Logger log4j = Logger.getLogger(AccountingData.class);
       return allowancefordoubtfulAcct;
     else if (fieldName.equalsIgnoreCase("c_bp_group_acct_id") || fieldName.equals("cBpGroupAcctId"))
       return cBpGroupAcctId;
-    else if (fieldName.equalsIgnoreCase("c_bp_group_id") || fieldName.equals("cBpGroupId"))
-      return cBpGroupId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("c_bp_group_id") || fieldName.equals("cBpGroupId"))
+      return cBpGroupId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -184,8 +184,8 @@ Select for edit
       "C_BP_Group_Acct.C_Prepayment_Acct, " +
       "C_BP_Group_Acct.WriteOff_Acct, " +
       "C_BP_Group_Acct.Writeoff_Rev_Acct, " +
-      "COALESCE(C_BP_Group_Acct.IsActive, 'N') AS IsActive, " +
       "C_BP_Group_Acct.V_Liability_Acct, " +
+      "COALESCE(C_BP_Group_Acct.IsActive, 'N') AS IsActive, " +
       "C_BP_Group_Acct.V_Prepayment_Acct, " +
       "C_BP_Group_Acct.NotInvoicedReceipts_Acct, " +
       "C_BP_Group_Acct.Processing, " +
@@ -205,9 +205,9 @@ Select for edit
       "C_BP_Group_Acct.Baddebtrevenue_Acct, " +
       "C_BP_Group_Acct.AllowanceForDoubtful_Acct, " +
       "C_BP_Group_Acct.C_Bp_Group_Acct_ID, " +
-      "C_BP_Group_Acct.C_BP_Group_ID, " +
       "C_BP_Group_Acct.AD_Org_ID, " +
       "C_BP_Group_Acct.AD_Client_ID, " +
+      "C_BP_Group_Acct.C_BP_Group_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_BP_Group_Acct left join (select C_AcctSchema_ID, Name from C_AcctSchema) table1 on (C_BP_Group_Acct.C_AcctSchema_ID = table1.C_AcctSchema_ID)" +
       "        WHERE 2=2 " +
@@ -266,8 +266,8 @@ Select for edit
         objectAccountingData.cPrepaymentAcct = UtilSql.getValue(result, "c_prepayment_acct");
         objectAccountingData.writeoffAcct = UtilSql.getValue(result, "writeoff_acct");
         objectAccountingData.writeoffRevAcct = UtilSql.getValue(result, "writeoff_rev_acct");
-        objectAccountingData.isactive = UtilSql.getValue(result, "isactive");
         objectAccountingData.vLiabilityAcct = UtilSql.getValue(result, "v_liability_acct");
+        objectAccountingData.isactive = UtilSql.getValue(result, "isactive");
         objectAccountingData.vPrepaymentAcct = UtilSql.getValue(result, "v_prepayment_acct");
         objectAccountingData.notinvoicedreceiptsAcct = UtilSql.getValue(result, "notinvoicedreceipts_acct");
         objectAccountingData.processing = UtilSql.getValue(result, "processing");
@@ -287,9 +287,9 @@ Select for edit
         objectAccountingData.baddebtrevenueAcct = UtilSql.getValue(result, "baddebtrevenue_acct");
         objectAccountingData.allowancefordoubtfulAcct = UtilSql.getValue(result, "allowancefordoubtful_acct");
         objectAccountingData.cBpGroupAcctId = UtilSql.getValue(result, "c_bp_group_acct_id");
-        objectAccountingData.cBpGroupId = UtilSql.getValue(result, "c_bp_group_id");
         objectAccountingData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectAccountingData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectAccountingData.cBpGroupId = UtilSql.getValue(result, "c_bp_group_id");
         objectAccountingData.language = UtilSql.getValue(result, "language");
         objectAccountingData.adUserClient = "";
         objectAccountingData.adOrgClient = "";
@@ -339,8 +339,8 @@ Create a registry
     objectAccountingData[0].cPrepaymentAcct = cPrepaymentAcct;
     objectAccountingData[0].writeoffAcct = writeoffAcct;
     objectAccountingData[0].writeoffRevAcct = writeoffRevAcct;
-    objectAccountingData[0].isactive = isactive;
     objectAccountingData[0].vLiabilityAcct = vLiabilityAcct;
+    objectAccountingData[0].isactive = isactive;
     objectAccountingData[0].vPrepaymentAcct = vPrepaymentAcct;
     objectAccountingData[0].notinvoicedreceiptsAcct = notinvoicedreceiptsAcct;
     objectAccountingData[0].processing = processing;
@@ -360,9 +360,9 @@ Create a registry
     objectAccountingData[0].baddebtrevenueAcct = baddebtrevenueAcct;
     objectAccountingData[0].allowancefordoubtfulAcct = allowancefordoubtfulAcct;
     objectAccountingData[0].cBpGroupAcctId = cBpGroupAcctId;
-    objectAccountingData[0].cBpGroupId = cBpGroupId;
     objectAccountingData[0].adOrgId = adOrgId;
     objectAccountingData[0].adClientId = adClientId;
+    objectAccountingData[0].cBpGroupId = cBpGroupId;
     objectAccountingData[0].language = "";
     return objectAccountingData;
   }
@@ -563,7 +563,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_BP_Group_Acct" +
-      "        SET C_AcctSchema_ID = (?) , C_Receivable_Acct = (?) , C_Prepayment_Acct = (?) , WriteOff_Acct = (?) , Writeoff_Rev_Acct = (?) , IsActive = (?) , V_Liability_Acct = (?) , V_Prepayment_Acct = (?) , NotInvoicedReceipts_Acct = (?) , Processing = (?) , Status = (?) , NotInvoicedReceivables_Acct = (?) , NotInvoicedRevenue_Acct = (?) , PayDiscount_Exp_Acct = (?) , PayDiscount_Rev_Acct = (?) , RealizedGain_Acct = (?) , RealizedLoss_Acct = (?) , UnEarnedRevenue_Acct = (?) , UnrealizedGain_Acct = (?) , UnrealizedLoss_Acct = (?) , V_Liability_Services_Acct = (?) , Doubtfuldebt_Acct = (?) , BadDebtExpense_Acct = (?) , Baddebtrevenue_Acct = (?) , AllowanceForDoubtful_Acct = (?) , C_Bp_Group_Acct_ID = (?) , C_BP_Group_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET C_AcctSchema_ID = (?) , C_Receivable_Acct = (?) , C_Prepayment_Acct = (?) , WriteOff_Acct = (?) , Writeoff_Rev_Acct = (?) , V_Liability_Acct = (?) , IsActive = (?) , V_Prepayment_Acct = (?) , NotInvoicedReceipts_Acct = (?) , Processing = (?) , Status = (?) , NotInvoicedReceivables_Acct = (?) , NotInvoicedRevenue_Acct = (?) , PayDiscount_Exp_Acct = (?) , PayDiscount_Rev_Acct = (?) , RealizedGain_Acct = (?) , RealizedLoss_Acct = (?) , UnEarnedRevenue_Acct = (?) , UnrealizedGain_Acct = (?) , UnrealizedLoss_Acct = (?) , V_Liability_Services_Acct = (?) , Doubtfuldebt_Acct = (?) , BadDebtExpense_Acct = (?) , Baddebtrevenue_Acct = (?) , AllowanceForDoubtful_Acct = (?) , C_Bp_Group_Acct_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , C_BP_Group_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_BP_Group_Acct.C_Bp_Group_Acct_ID = ? " +
       "                 AND C_BP_Group_Acct.C_BP_Group_ID = ? " +
       "        AND C_BP_Group_Acct.AD_Client_ID IN (";
@@ -586,8 +586,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPrepaymentAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, writeoffAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, writeoffRevAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, vLiabilityAcct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, vPrepaymentAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, notinvoicedreceiptsAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
@@ -607,9 +607,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, baddebtrevenueAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, allowancefordoubtfulAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupAcctId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupAcctId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupId);
@@ -639,7 +639,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_BP_Group_Acct " +
-      "        (C_AcctSchema_ID, C_Receivable_Acct, C_Prepayment_Acct, WriteOff_Acct, Writeoff_Rev_Acct, IsActive, V_Liability_Acct, V_Prepayment_Acct, NotInvoicedReceipts_Acct, Processing, Status, NotInvoicedReceivables_Acct, NotInvoicedRevenue_Acct, PayDiscount_Exp_Acct, PayDiscount_Rev_Acct, RealizedGain_Acct, RealizedLoss_Acct, UnEarnedRevenue_Acct, UnrealizedGain_Acct, UnrealizedLoss_Acct, V_Liability_Services_Acct, Doubtfuldebt_Acct, BadDebtExpense_Acct, Baddebtrevenue_Acct, AllowanceForDoubtful_Acct, C_Bp_Group_Acct_ID, C_BP_Group_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (C_AcctSchema_ID, C_Receivable_Acct, C_Prepayment_Acct, WriteOff_Acct, Writeoff_Rev_Acct, V_Liability_Acct, IsActive, V_Prepayment_Acct, NotInvoicedReceipts_Acct, Processing, Status, NotInvoicedReceivables_Acct, NotInvoicedRevenue_Acct, PayDiscount_Exp_Acct, PayDiscount_Rev_Acct, RealizedGain_Acct, RealizedLoss_Acct, UnEarnedRevenue_Acct, UnrealizedGain_Acct, UnrealizedLoss_Acct, V_Liability_Services_Acct, Doubtfuldebt_Acct, BadDebtExpense_Acct, Baddebtrevenue_Acct, AllowanceForDoubtful_Acct, C_Bp_Group_Acct_ID, AD_Org_ID, AD_Client_ID, C_BP_Group_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -653,8 +653,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPrepaymentAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, writeoffAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, writeoffRevAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, vLiabilityAcct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, vPrepaymentAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, notinvoicedreceiptsAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
@@ -674,9 +674,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, baddebtrevenueAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, allowancefordoubtfulAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupAcctId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

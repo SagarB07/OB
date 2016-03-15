@@ -160,9 +160,9 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 		  dato.append("'");
 	  }
 	  if (valValor > 0){
-		  dato.append("'");
-		  dato.append(valValor);
-		  dato.append("'");
+		  //dato.append("'");
+		  dato.append(valorCampo);
+		  //dato.append("'");
 	  }
 	  
 	  campo.append(dato);
@@ -212,13 +212,13 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
          
           strValues.append("'");
           String valorCampoTemporal = strValues.toString();
-          if (strTable.equals("Idt_novedad")){
+          if (strTable.equals("IDT_novedad")){
         	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
         	  strFields = obtenerCodigos (con, this,strFields, valorCampoTemporal );
         	  if (strFields.toString().equals(auxStrFields.toString())){
         		  strFields.append(strValues);  
         	  }
-        	  System.out.print("00");
+        	//  System.out.print("00");
           }
         	  //strFields.append(strValues);  
           
@@ -410,11 +410,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
           } else
         	  
         try {
-        	System.out.println(data2[i].getField(String.valueOf(j - constant)));
-        	System.out.println(data[j].fieldlength);
-        	System.out.println(data[j].datatype);
-        	System.out.println(data[j].dataformat);
-        	System.out.println(data[j].decimalpoint);
+
             sb.append(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
 
         }catch (Exception ex){

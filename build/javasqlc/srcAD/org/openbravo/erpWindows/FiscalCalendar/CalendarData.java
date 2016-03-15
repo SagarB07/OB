@@ -29,8 +29,8 @@ static Logger log4j = Logger.getLogger(CalendarData.class);
   public String name;
   public String description;
   public String isactive;
-  public String adClientId;
   public String cCalendarId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -66,10 +66,10 @@ static Logger log4j = Logger.getLogger(CalendarData.class);
       return description;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("c_calendar_id") || fieldName.equals("cCalendarId"))
       return cCalendarId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -114,8 +114,8 @@ Select for edit
       "C_Calendar.Name, " +
       "C_Calendar.Description, " +
       "COALESCE(C_Calendar.IsActive, 'N') AS IsActive, " +
-      "C_Calendar.AD_Client_ID, " +
       "C_Calendar.C_Calendar_ID, " +
+      "C_Calendar.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_Calendar left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Calendar.AD_Org_ID = table1.AD_Org_ID)" +
       "        WHERE 2=2 " +
@@ -168,8 +168,8 @@ Select for edit
         objectCalendarData.name = UtilSql.getValue(result, "name");
         objectCalendarData.description = UtilSql.getValue(result, "description");
         objectCalendarData.isactive = UtilSql.getValue(result, "isactive");
-        objectCalendarData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectCalendarData.cCalendarId = UtilSql.getValue(result, "c_calendar_id");
+        objectCalendarData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectCalendarData.language = UtilSql.getValue(result, "language");
         objectCalendarData.adUserClient = "";
         objectCalendarData.adOrgClient = "";
@@ -218,8 +218,8 @@ Create a registry
     objectCalendarData[0].name = name;
     objectCalendarData[0].description = description;
     objectCalendarData[0].isactive = isactive;
-    objectCalendarData[0].adClientId = adClientId;
     objectCalendarData[0].cCalendarId = cCalendarId;
+    objectCalendarData[0].adClientId = adClientId;
     objectCalendarData[0].language = "";
     return objectCalendarData;
   }
@@ -304,7 +304,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Calendar" +
-      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , AD_Client_ID = (?) , C_Calendar_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , C_Calendar_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_Calendar.C_Calendar_ID = ? " +
       "        AND C_Calendar.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -325,8 +325,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCalendarId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCalendarId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -355,7 +355,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Calendar " +
-      "        (AD_Org_ID, Name, Description, IsActive, AD_Client_ID, C_Calendar_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, Description, IsActive, C_Calendar_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -368,8 +368,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, name);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCalendarId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

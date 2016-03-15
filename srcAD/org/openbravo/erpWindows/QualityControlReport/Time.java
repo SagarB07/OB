@@ -489,7 +489,7 @@ vars.getGlobalVariable("inpmaMeasureGroupId", windowId + "|MA_Measure_Group_ID")
     TimeData data = new TimeData();
     ServletException ex = null;
     try {
-    data.measurehour = vars.getRequiredStringParameter("inpmeasurehour");     data.maMeasureGroupId = vars.getRequiredStringParameter("inpmaMeasureGroupId");     data.maMeasureGroupIdr = vars.getStringParameter("inpmaMeasureGroupId_R");     data.explode = vars.getStringParameter("inpexplode");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.maMeasureTimeId = vars.getRequestGlobalVariable("inpmaMeasureTimeId", windowId + "|MA_Measure_Time_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
+    data.measurehour = vars.getRequiredStringParameter("inpmeasurehour");     data.maMeasureGroupId = vars.getRequiredStringParameter("inpmaMeasureGroupId");     data.maMeasureGroupIdr = vars.getStringParameter("inpmaMeasureGroupId_R");     data.explode = vars.getStringParameter("inpexplode");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.maMeasureTimeId = vars.getRequestGlobalVariable("inpmaMeasureTimeId", windowId + "|MA_Measure_Time_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -521,7 +521,7 @@ vars.getGlobalVariable("inpmaMeasureGroupId", windowId + "|MA_Measure_Group_ID")
       
       CheckPointSetData[] data = CheckPointSetData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), vars.getSessionValue(windowId + "|MA_Measure_Shift_ID"), strPMA_Measure_Group_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|MA_Measure_Group_ID", data[0].maMeasureGroupId);
+          vars.setSessionValue(windowId + "|MA_Measure_Group_ID", data[0].maMeasureGroupId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);
       vars.setSessionValue(windowId + "|MA_Measure_Group_ID", strPMA_Measure_Group_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
@@ -540,7 +540,7 @@ vars.getGlobalVariable("inpmaMeasureGroupId", windowId + "|MA_Measure_Group_ID")
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|MA_Measure_Time_ID", data[0].getField("maMeasureTimeId"));
+          vars.setSessionValue(windowId + "|MA_Measure_Time_ID", data[0].getField("maMeasureTimeId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars, String strPMA_Measure_Group_ID) throws IOException,ServletException {

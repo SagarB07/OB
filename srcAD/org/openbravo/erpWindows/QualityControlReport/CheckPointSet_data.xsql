@@ -16,10 +16,10 @@ MA_Measure_Group.MA_Measure_Shift_ID,
 (CASE WHEN MA_Measure_Group.MA_Measure_Shift_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(table1.Measuredate, 'DD-MM-YYYY')),'') ) END) AS MA_Measure_Shift_IDR, 
 MA_Measure_Group.MA_CCP_Group_ID, 
 (CASE WHEN MA_Measure_Group.MA_CCP_Group_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS MA_CCP_Group_IDR, 
-COALESCE(MA_Measure_Group.IsActive, 'N') AS IsActive, 
-MA_Measure_Group.AD_Org_ID, 
-MA_Measure_Group.AD_Client_ID, 
 MA_Measure_Group.MA_Measure_Group_ID, 
+COALESCE(MA_Measure_Group.IsActive, 'N') AS IsActive, 
+MA_Measure_Group.AD_Client_ID, 
+MA_Measure_Group.AD_Org_ID, 
  
         ? AS LANGUAGE 
         FROM MA_Measure_Group left join (select MA_Measure_Shift_ID, Measuredate from MA_Measure_Shift) table1 on (MA_Measure_Group.MA_Measure_Shift_ID = table1.MA_Measure_Shift_ID) left join (select MA_CCP_Group_ID, Name from MA_CCP_Group) table2 on (MA_Measure_Group.MA_CCP_Group_ID = table2.MA_CCP_Group_ID)
@@ -131,13 +131,13 @@ MA_Measure_Group.MA_Measure_Group_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_Measure_Group
-        SET SeqNo = TO_NUMBER(?) , MA_Measure_Shift_ID = (?) , MA_CCP_Group_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , MA_Measure_Group_ID = (?) , updated = now(), updatedby = ? 
+        SET SeqNo = TO_NUMBER(?) , MA_Measure_Shift_ID = (?) , MA_CCP_Group_ID = (?) , MA_Measure_Group_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
         WHERE MA_Measure_Group.MA_Measure_Group_ID = ? 
                  AND MA_Measure_Group.MA_Measure_Shift_ID = ? 
         AND MA_Measure_Group.AD_Client_ID IN ('1') 
         AND MA_Measure_Group.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="seqno"></Parameter> <Parameter name="maMeasureShiftId"></Parameter> <Parameter name="maCcpGroupId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> 
+    <Parameter name="seqno"></Parameter> <Parameter name="maMeasureShiftId"></Parameter> <Parameter name="maCcpGroupId"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maMeasureGroupId"></Parameter>
     
@@ -149,10 +149,10 @@ MA_Measure_Group.MA_Measure_Group_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_Measure_Group 
-        (SeqNo, MA_Measure_Shift_ID, MA_CCP_Group_ID, IsActive, AD_Org_ID, AD_Client_ID, MA_Measure_Group_ID, created, createdby, updated, updatedBy)
+        (SeqNo, MA_Measure_Shift_ID, MA_CCP_Group_ID, MA_Measure_Group_ID, IsActive, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)
         VALUES (TO_NUMBER(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="seqno"></Parameter> <Parameter name="maMeasureShiftId"></Parameter> <Parameter name="maCcpGroupId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> 
+    <Parameter name="seqno"></Parameter> <Parameter name="maMeasureShiftId"></Parameter> <Parameter name="maCcpGroupId"></Parameter> <Parameter name="maMeasureGroupId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

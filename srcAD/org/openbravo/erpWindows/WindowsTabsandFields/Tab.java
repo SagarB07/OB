@@ -592,7 +592,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "AD_Tab_ID", st
       
       WindowData[] data = WindowData.selectEdit(this, vars.getSessionValue("#AD_SqlDateTimeFormat"), vars.getLanguage(), strPAD_Window_ID, Utility.getContext(this, vars, "#User_Client", windowId), Utility.getContext(this, vars, "#AccessibleOrgTree", windowId, accesslevel));
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|WindowType", data[0].windowtype);    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|AD_Window_ID", data[0].adWindowId);
+          vars.setSessionValue(windowId + "|WindowType", data[0].windowtype);    vars.setSessionValue(windowId + "|AD_Window_ID", data[0].adWindowId);    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].adClientId);    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].adOrgId);
       vars.setSessionValue(windowId + "|AD_Window_ID", strPAD_Window_ID); //to ensure key parent is set for EM_* cols
 
       FieldProvider dataField = null; // Define this so that auxiliar inputs using SQL will work
