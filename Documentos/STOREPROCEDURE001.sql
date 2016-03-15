@@ -1,18 +1,17 @@
+--delete from idt_novedad
+
  --NO GENERA ROL
 CREATE OR REPLACE FUNCTION idt_importarNovedad(p_pinstance_id character varying)
   RETURNS  void AS
 $BODY$
 DECLARE
+v_Message VARCHAR(2000):='';
 v_ResultStr VARCHAR(2000):='';
-    v_Message VARCHAR(2000):='';
-    v_Result NUMERIC:=1;
-    v_Record_ID VARCHAR(32);
-
+v_Result NUMERIC:=1;
+v_Record_ID VARCHAR(32);
 VAR_CEDULA character varying(32);
 VAR_CABNOVEDAD character varying(32);
 VAR_PARTNER_ID character varying(32);
-
-
 VAREXIST NUMERIC;
 VARVALIDADO BOOLEAN;
 VAREXISTNOV NUMERIC;
@@ -84,12 +83,8 @@ VARVALIDADO = FALSE;
 		WHERE NO_NOVEDAD_ID = VAR_CABNOVEDAD AND C_BPARTNER_ID = VAR_PARTNER_ID;
 		
 		DELETE FROM IDT_NOVEDAD  WHERE C_BPARTNER_ID	= ITERADORVALIDA.C_BPARTNER_ID;
-		
-		
+	
 		END LOOP;
-	
-	
-	
 	
 	VARVALIDADO = TRUE;
 	ELSE
@@ -97,16 +92,28 @@ VARVALIDADO = FALSE;
 	VARVALIDADO = FALSE;
 
 	END IF;
+	--IDT_EjecucionError
 	
-	
-	
-	
+	if VARVALIDADO = true then 
+	v_Message:='@IDT_EjecucionCorrecta@';
+	 RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+     PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
+	  else 
+	  v_Message:='@IDT_EjecucionError@';
+	  RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+     PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+	 end if;
+	  
+      
   
   RETURN;
    EXCEPTION
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;
-        RAISE NOTICE '%',v_ResultStr ;
+        
+		RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+      PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+		
 
         PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
         RETURN;
