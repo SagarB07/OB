@@ -11,26 +11,26 @@
         to_char(IDT_novedad.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
         IDT_novedad.UpdatedBy, 
         (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = IDT_novedad.UpdatedBy) as UpdatedByR,
-        IDT_novedad.AD_Org_ID, 
-(CASE WHEN IDT_novedad.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
+        IDT_novedad.I_Errormsg, 
+IDT_novedad.C_Bpartner_ID, 
+(CASE WHEN IDT_novedad.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS C_Bpartner_IDR, 
+IDT_novedad.AD_Org_ID, 
+(CASE WHEN IDT_novedad.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS AD_Org_IDR, 
 IDT_novedad.Cedula, 
 COALESCE(IDT_novedad.Isactive, 'N') AS Isactive, 
 IDT_novedad.NO_Tipo_Ingreso_Egreso_ID, 
-(CASE WHEN IDT_novedad.NO_Tipo_Ingreso_Egreso_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS NO_Tipo_Ingreso_Egreso_IDR, 
+(CASE WHEN IDT_novedad.NO_Tipo_Ingreso_Egreso_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS NO_Tipo_Ingreso_Egreso_IDR, 
 IDT_novedad.C_Period_ID, 
-(CASE WHEN IDT_novedad.C_Period_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS C_Period_IDR, 
+(CASE WHEN IDT_novedad.C_Period_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Period_IDR, 
 IDT_novedad.Valor, 
-IDT_novedad.C_Bpartner_ID, 
-(CASE WHEN IDT_novedad.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Bpartner_IDR, 
-IDT_novedad.I_Errormsg, 
 COALESCE(IDT_novedad.I_Isimported, 'N') AS I_Isimported, 
 COALESCE(IDT_novedad.Novprocesada, 'N') AS Novprocesada, 
 IDT_novedad.Procnovedad, 
-IDT_novedad.IDT_Novedad_ID, 
 IDT_novedad.AD_Client_ID, 
+IDT_novedad.IDT_Novedad_ID, 
  
         ? AS LANGUAGE 
-        FROM IDT_novedad left join (select AD_Org_ID, Name from AD_Org) table1 on (IDT_novedad.AD_Org_ID = table1.AD_Org_ID) left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table2 on (IDT_novedad.NO_Tipo_Ingreso_Egreso_ID = table2.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Period_ID, Name from C_Period) table3 on (IDT_novedad.C_Period_ID = table3.C_Period_ID) left join (select C_BPartner_ID, Name from C_BPartner) table4 on (IDT_novedad.C_Bpartner_ID = table4.C_BPartner_ID)
+        FROM IDT_novedad left join (select C_BPartner_ID, Name from C_BPartner) table1 on (IDT_novedad.C_Bpartner_ID = table1.C_BPartner_ID) left join (select AD_Org_ID, Name from AD_Org) table2 on (IDT_novedad.AD_Org_ID = table2.AD_Org_ID) left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table3 on (IDT_novedad.NO_Tipo_Ingreso_Egreso_ID = table3.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Period_ID, Name from C_Period) table4 on (IDT_novedad.C_Period_ID = table4.C_Period_ID)
         WHERE 2=2 
 
         AND 1=1 
@@ -107,13 +107,13 @@ IDT_novedad.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE IDT_novedad
-        SET AD_Org_ID = (?) , Cedula = (?) , Isactive = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , C_Period_ID = (?) , Valor = TO_NUMBER(?) , C_Bpartner_ID = (?) , I_Errormsg = (?) , I_Isimported = (?) , Novprocesada = (?) , Procnovedad = (?) , IDT_Novedad_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET I_Errormsg = (?) , C_Bpartner_ID = (?) , AD_Org_ID = (?) , Cedula = (?) , Isactive = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , C_Period_ID = (?) , Valor = TO_NUMBER(?) , I_Isimported = (?) , Novprocesada = (?) , Procnovedad = (?) , AD_Client_ID = (?) , IDT_Novedad_ID = (?) , updated = now(), updatedby = ? 
         WHERE IDT_novedad.IDT_Novedad_ID = ? 
         
         AND IDT_novedad.AD_Client_ID IN ('1') 
         AND IDT_novedad.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cedula"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="iErrormsg"></Parameter> <Parameter name="iIsimported"></Parameter> <Parameter name="novprocesada"></Parameter> <Parameter name="procnovedad"></Parameter> <Parameter name="idtNovedadId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="iErrormsg"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cedula"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="iIsimported"></Parameter> <Parameter name="novprocesada"></Parameter> <Parameter name="procnovedad"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="idtNovedadId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="idtNovedadId"></Parameter>
     
@@ -125,10 +125,10 @@ IDT_novedad.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO IDT_novedad 
-        (AD_Org_ID, Cedula, Isactive, NO_Tipo_Ingreso_Egreso_ID, C_Period_ID, Valor, C_Bpartner_ID, I_Errormsg, I_Isimported, Novprocesada, Procnovedad, IDT_Novedad_ID, AD_Client_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+        (I_Errormsg, C_Bpartner_ID, AD_Org_ID, Cedula, Isactive, NO_Tipo_Ingreso_Egreso_ID, C_Period_ID, Valor, I_Isimported, Novprocesada, Procnovedad, AD_Client_ID, IDT_Novedad_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cedula"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="iErrormsg"></Parameter> <Parameter name="iIsimported"></Parameter> <Parameter name="novprocesada"></Parameter> <Parameter name="procnovedad"></Parameter> <Parameter name="idtNovedadId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="iErrormsg"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cedula"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="iIsimported"></Parameter> <Parameter name="novprocesada"></Parameter> <Parameter name="procnovedad"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="idtNovedadId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

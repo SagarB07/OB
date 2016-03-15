@@ -239,7 +239,16 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
                 "Error while inserting data. Please check if the CSV file contains a header", vars
                     .getLanguage()));
           } else {
-            myMessage.setTitle(Utility.messageBD(this, ex.toString(), vars.getLanguage()));
+        	  String mensajeError = "";
+        	  ex.toString().indexOf("no_tipo_ingreso_egreso_id");
+        	  if (ex.toString().indexOf("no_tipo_ingreso_egreso_id")> 0){
+        		  mensajeError = "EXISTE UN ERROR EN EL CAMPO RUBRO, REVISE EL REGISTRO DESCRITO A CONTINUACIÓN ";
+        	  }
+        	  if (ex.toString().indexOf("c_period_id")> 0){
+        		  mensajeError = "EXISTE UN ERROR EN EL CAMPO PERIODO, REVISE EL REGISTRO DESCRITO A CONTINUACIÓN";
+        	  }
+        	  
+            myMessage.setTitle(Utility.messageBD(this, mensajeError, vars.getLanguage()));
           }
           String strMessage = myMessage.getMessage();
           myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
