@@ -56,27 +56,33 @@ VARVALIDADO = FALSE;
 							
 								IF (VAREXIST = 0) THEN
 								
-								UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: NO EXISTE CONTRATO PARA ACTIVO O LAS FECHAS DEL PERIODO SON INCORRECTAS: ' || ITERADOR.CEDULA  || ' NOVEDAD ID: ' || ITERADOR.idt_novedad_id
+								UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: NO EXISTE CONTRATO PARA ACTIVO O LAS FECHAS DEL PERIODO SON INCORRECTAS: ' || ITERADOR.CEDULA  
 								WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
 								ELSE
 								
-									UPDATE IDT_NOVEDAD SET i_errormsg = NULL, C_BPARTNER_ID = (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA)
-									WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-									
-									SELECT COUNT(1) INTO VAREXISTNOV FROM NO_NOVEDAD 			
-									WHERE NO_TIPO_INGRESO_EGRESO_ID = ITERADOR.no_tipo_ingreso_egreso_id AND C_PERIOD_ID = ITERADOR.c_period_id;
-									
-									IF (VAREXISTNOV = 0) THEN
-										UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: AL BUSCAR RUBRO Y SU NOVEDAD, POR LA CEDULA: ' || ITERADOR.cedula
-										WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-									ELSE 
-										UPDATE IDT_NOVEDAD SET i_errormsg = NULL
-										WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-									END IF;
 								
+								select COUNT (1) INTO VAREXIST from no_cb_empleado_acct 
+								where C_BPARTNER_ID = ITERADOR.C_BPARTNER_ID  and no_tipo_ingreso_egreso_id =ITERADOR.no_tipo_ingreso_egreso_id;
+									IF (VAREXIST = 0) THEN 
+									
+									UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: EL EMPLEADO NO SE ENCUENTRA ASIGNADO AL RUBRO AL QUE SE REFERENCIA ' 
+									WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
+									
+									ELSE 							
+										UPDATE IDT_NOVEDAD SET i_errormsg = NULL, C_BPARTNER_ID = (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA)
+										WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
+										SELECT COUNT(1) INTO VAREXISTNOV FROM NO_NOVEDAD 			
+										WHERE NO_TIPO_INGRESO_EGRESO_ID = ITERADOR.no_tipo_ingreso_egreso_id AND C_PERIOD_ID = ITERADOR.c_period_id;
+										IF (VAREXISTNOV = 0) THEN
+											UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: AL BUSCAR RUBRO Y SU NOVEDAD, POR LA CEDULA: ' || ITERADOR.cedula
+											WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
+										ELSE 
+											UPDATE IDT_NOVEDAD SET i_errormsg = NULL
+											WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
+										END IF;
+									END IF;
 								END IF ;			
 						END IF;			
-						
 				END IF;		
 	END LOOP;
 	
