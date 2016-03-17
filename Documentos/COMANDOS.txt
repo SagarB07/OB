@@ -1,4 +1,4 @@
 ant smartbuild -Dlocal=no -Dforce=yes
-
+ant compile.complete.deploy
 ant smartbuild  
 ant update.database

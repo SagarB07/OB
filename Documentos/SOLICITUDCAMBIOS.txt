@@ -1,0 +1,9 @@
+que sea empleado 
+qe tenga un contrato activo 
+que el rango de la fecha del contrato este en el periodo
+que el valor sea positivo y mayor d 0
+que el empleado tenga ese rubro 
+ 
+
+cbpid = 697224FCB31D4C379D6E773B7E76DDF3
+cbpid = 9B5C3147FBB143B090820FF4D833291C
