@@ -219,6 +219,9 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         		  strFields.append(strValues);  
         	  }
         	//  System.out.print("00");
+          }else {
+        	  strFields.append(strValues);
+        	  
           }
         	  //strFields.append(strValues);  
           

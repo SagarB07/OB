@@ -164,7 +164,7 @@ public class ImportBPartner extends ImportProcess {
       // Go through Records
       ImportBPartnerData[] data = ImportBPartnerData.select(conn, getAD_Client_ID());
       if (log4j.isDebugEnabled())
-        log4j.debug("Going through " + data.length + " records");
+        log4j.debug("Going  through " + data.length + " records");
       for (int i = 0; i < data.length; i++) {
         String I_BPartner_ID = data[i].iBpartnerId;
         String C_BPartner_ID = data[i].cBpartnerId;
@@ -307,7 +307,7 @@ public class ImportBPartner extends ImportProcess {
       }
       return myError;
     }
-    addLog(Utility.messageBD(conn, "Business partners not imported", vars.getLanguage()) + ": "
+    addLog(Utility.messageBD(conn, "Business  partners not imported", vars.getLanguage()) + ": "
         + noBPartnerError + "; ");
     addLog("Business partners inserted: " + noInsert + "; ");
     addLog("Business partners updated: " + noUpdate);
