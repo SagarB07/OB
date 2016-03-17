@@ -25,5 +25,9 @@
         <default/>
         <onCreateDefault/>
       </column>
+      <column name="EM_IDT_URL" primaryKey="false" required="false" type="VARCHAR" size="120" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
     </table>
   </database>
