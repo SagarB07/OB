@@ -18,6 +18,7 @@
 */
 package org.openbravo.model.financialmgmt.payment;
 
+import com.atrums.importaciondatos.IdtContrato;
 import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
@@ -100,6 +101,7 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_FINANCIALMGMTFINACCPAYMENTMETHODLIST = "financialMgmtFinAccPaymentMethodList";
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
     public static final String PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST = "financialMgmtPaymentTermLineList";
+    public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_INVOICELIST = "invoiceList";
     public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
     public static final String PROPERTY_ORDERLIST = "orderList";
@@ -141,6 +143,7 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
         setDefaultValue(PROPERTY_FINANCIALMGMTFINACCPAYMENTMETHODLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
@@ -538,6 +541,15 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
 
     public void setFinancialMgmtPaymentTermLineList(List<PaymentTermLine> financialMgmtPaymentTermLineList) {
         set(PROPERTY_FINANCIALMGMTPAYMENTTERMLINELIST, financialMgmtPaymentTermLineList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtContrato> getIDTContratoList() {
+      return (List<IdtContrato>) get(PROPERTY_IDTCONTRATOLIST);
+    }
+
+    public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
+        set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
     }
 
     @SuppressWarnings("unchecked")

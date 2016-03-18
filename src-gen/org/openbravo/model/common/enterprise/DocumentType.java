@@ -24,6 +24,7 @@ import com.atrums.contabilidad.data.CO_RETENCION_VENTA;
 import com.atrums.contabilidad.data.CO_Retencion_Compra;
 import com.atrums.declaraciontributaria.ecuador.data.Ats_Sustento_Doc;
 import com.atrums.declaraciontributaria.ecuador.data.atsReembolso;
+import com.atrums.importaciondatos.IdtContrato;
 import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
@@ -133,6 +134,7 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLIST = "financialMgmtGLJournalList";
     public static final String PROPERTY_FINANCIALMGMTSETTLEMENTLIST = "financialMgmtSettlementList";
     public static final String PROPERTY_FINANCIALMGMTTAXREGISTERTYPELINESLIST = "financialMgmtTaxRegisterTypeLinesList";
+    public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_INVOICELIST = "invoiceList";
     public static final String PROPERTY_INVOICETRANSACTIONDOCUMENTLIST = "invoiceTransactionDocumentList";
     public static final String PROPERTY_INVOICEV2LIST = "invoiceV2List";
@@ -192,6 +194,7 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTSETTLEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXREGISTERTYPELINESLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICETRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICEV2LIST, new ArrayList<Object>());
@@ -708,6 +711,15 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setFinancialMgmtTaxRegisterTypeLinesList(List<TaxRegisterTypeLines> financialMgmtTaxRegisterTypeLinesList) {
         set(PROPERTY_FINANCIALMGMTTAXREGISTERTYPELINESLIST, financialMgmtTaxRegisterTypeLinesList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtContrato> getIDTContratoList() {
+      return (List<IdtContrato>) get(PROPERTY_IDTCONTRATOLIST);
+    }
+
+    public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
+        set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
     }
 
     @SuppressWarnings("unchecked")
