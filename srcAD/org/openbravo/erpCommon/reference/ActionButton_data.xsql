@@ -1086,6 +1086,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process9307E4FC743144C5AEBF801DFDA096EE" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure idt_importarContrato</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL idt_importarContrato(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process951CA29589754DBCA996D47C5286EDB5" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
