@@ -63,24 +63,24 @@ alter table idt_contrato
       on delete restrict on update restrict;	  
 
 alter table idt_contrato
-   add constraint IDT_FK_idtcontrato_c_doctype foreign key (c_doctype_id)
+   add constraint IDT_FK_contrato_doctype foreign key (c_doctype_id)
       references c_doctype (c_doctype_id)
       on delete restrict on update restrict;	  
 	  
 	  
 alter table idt_contrato
-   add constraint IDT_FK_idtcontrato_currency foreign key (c_currency_id)
+   add constraint IDT_FK_contrato_currency foreign key (c_currency_id)
       references c_currency (c_currency_id)
       on delete restrict on update restrict;	  
 	  
 	  
 alter table idt_contrato
-   add constraint IDT_FK_idtcontrato_c_currency foreign key (fin_financial_account_id)
+   add constraint IDT_FK_cotrato_faccount foreign key (fin_financial_account_id)
       references fin_financial_account (fin_financial_account_id)
       on delete restrict on update restrict;		  
   
  alter table idt_contrato
-   add constraint IDT_FK_idtcontrato_fin_paymentmethod foreign key (fin_paymentmethod_id)
+   add constraint IDT_FK_cotrato_pmethod foreign key (fin_paymentmethod_id)
       references fin_paymentmethod (fin_paymentmethod_id)
       on delete restrict on update restrict;		  
 	  
