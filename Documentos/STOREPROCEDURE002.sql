@@ -1,8 +1,9 @@
---delete from idt_novedad
+-- Function: idt_importarcontrato(character varying)
 
- --NO GENERA ROL
-CREATE OR REPLACE FUNCTION idt_importarContrato(p_pinstance_id character varying)
-  RETURNS  void AS
+-- DROP FUNCTION idt_importarcontrato(character varying);
+
+CREATE OR REPLACE FUNCTION idt_importarcontrato(p_pinstance_id character varying)
+  RETURNS void AS
 $BODY$
 DECLARE
 v_Message VARCHAR(2000):='';
@@ -20,149 +21,209 @@ ITERADORVALIDA RECORD;
 
 BEGIN
 
- RAISE NOTICE '%','Updating PInstance - Processing ' || p_PInstance_ID;
-    v_ResultStr:='PInstanceNotFound';
-    PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
-VARVALIDADO = FALSE;
+ UPDATE IDT_CONTRATO SET i_errormsg = NULL;
+	
 
-	FOR ITERADOR IN 
-	(
-	select C_BPARTNER_ID, cedula,no_tipo_ingreso_egreso_id, c_period_id, idt_novedad_id, VALOR
-	from idt_novedad where novprocesada = 'N'
-	
-	)
-		
-	LOOP
-		SELECT COUNT(1) INTO  VAREXIST FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA and isemployee = 'Y';
-		
-		IF ITERADOR.VALOR <= 0 THEN 
-			UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: EL VALOR DEBE SER MAYOR A 0: ' || ITERADOR.cedula
-			WHERE idt_novedad_id = ITERADOR.idt_novedad_id;	
-						
-		ELSE
-	
-			IF (VAREXIST = 0) THEN 
-							UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: NO EXISTE LA CEDULA: ' || ITERADOR.cedula
-							WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-						
-						ELSE
-							
-							select COUNT (1) INTO VAREXIST  from no_contrato_empleado where  C_BPARTNER_ID =  (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA  )
-							and isactive = 'Y' 
-							and fecha_inicio <= (select startdate from c_period where c_period_id = (
-							select c_period_id from idt_novedad where idt_novedad_id = ITERADOR.idt_novedad_id))  
-							and fecha_fin >= (select enddate from c_period where c_period_id = (
-							select c_period_id from idt_novedad where idt_novedad_id = ITERADOR.idt_novedad_id)) ;
-							
-								IF (VAREXIST = 0) THEN
-								
-								UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: NO EXISTE CONTRATO PARA ACTIVO O LAS FECHAS DEL PERIODO SON INCORRECTAS: ' || ITERADOR.CEDULA  
-								WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
-								ELSE
-								
-								select COUNT (1) INTO VAREXIST from no_cb_empleado_acct 
-								where C_BPARTNER_ID = (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA  )
-								and no_tipo_ingreso_egreso_id = ITERADOR.no_tipo_ingreso_egreso_id;
-								
---								select COUNT (1) INTO VAREXIST from no_cb_empleado_acct 
---								where C_BPARTNER_ID = ITERADOR.C_BPARTNER_ID  and no_tipo_ingreso_egreso_id =ITERADOR.no_tipo_ingreso_egreso_id;
-									
-									IF (VAREXIST = 0) THEN 
-									
-									UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: EL EMPLEADO NO SE ENCUENTRA ASIGNADO AL RUBRO AL QUE SE REFERENCIA ' ||ITERADOR.idt_novedad_id
-									WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
-									
-									ELSE 							
-										UPDATE IDT_NOVEDAD SET i_errormsg = NULL, C_BPARTNER_ID = (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA)
-										WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-										SELECT COUNT(1) INTO VAREXISTNOV FROM NO_NOVEDAD 			
-										WHERE NO_TIPO_INGRESO_EGRESO_ID = ITERADOR.no_tipo_ingreso_egreso_id AND C_PERIOD_ID = ITERADOR.c_period_id;
-										IF (VAREXISTNOV = 0) THEN
-											UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: AL BUSCAR RUBRO Y SU NOVEDAD, POR LA CEDULA: ' || ITERADOR.cedula
-											WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-										ELSE 
-											UPDATE IDT_NOVEDAD SET i_errormsg = NULL
-											WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
-										END IF;
-									END IF;
-								END IF ;			
-						END IF;			
-				END IF;		
-	END LOOP;
-	
-	--UPDATE IDT_NOVEDAD SET i_errormsg = 'xxxx';
-	select COUNT (1) INTO VAREXIST from idt_novedad where i_errormsg like '%ERROR%';
-	
-	IF (VAREXIST = 0) THEN 
-		FOR ITERADORVALIDA IN (
-			SELECT DISTINCT ON (C_BPARTNER_ID) C_BPARTNER_ID FROM idt_novedad WHERE novprocesada = 'N'
-		)
-	
-		LOOP
-			
-			
-			SELECT C_BPARTNER_ID INTO VAR_PARTNER_ID FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID LIMIT 1;
-			
-			SELECT NO_NOVEDAD_ID INTO VAR_CABNOVEDAD FROM NO_NOVEDAD 			
-			WHERE NO_TIPO_INGRESO_EGRESO_ID = (
-			SELECT NO_TIPO_INGRESO_EGRESO_ID FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID LIMIT 1) 
-			AND C_PERIOD_ID = (
-			SELECT C_PERIOD_ID FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID LIMIT 1) ;	
-			
-			select COUNT (1) INTO VAREXIST from NO_NOVEDAD_LINEA WHERE NO_NOVEDAD_ID = VAR_CABNOVEDAD AND C_BPARTNER_ID = VAR_PARTNER_ID;
-			
-			IF (VAREXIST = 0) THEN  
-			
-				UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: NO EXISTE LA PERSONA EN EN LA TABLA DE REGISTRO DE RUBROS.: ' || VAR_CABNOVEDAD
-				WHERE idt_novedad_id = (SELECT idt_novedad_id FROM idt_novedad WHERE C_BPARTNER_ID	= ITERADORVALIDA.C_BPARTNER_ID LIMIT 1 );	
-			
-			ELSE 
-			
-				UPDATE NO_NOVEDAD_LINEA SET 
-				VALOR = (SELECT SUM (VALOR) FROM IDT_NOVEDAD WHERE C_BPARTNER_ID = ITERADORVALIDA.C_BPARTNER_ID AND novprocesada = 'N')
-				WHERE NO_NOVEDAD_ID = VAR_CABNOVEDAD AND C_BPARTNER_ID = VAR_PARTNER_ID;		
-				DELETE FROM IDT_NOVEDAD  WHERE C_BPARTNER_ID	= ITERADORVALIDA.C_BPARTNER_ID;
+  RAISE NOTICE '%','Updating PInstance - Processing ' || p_PInstance_ID;
+     v_ResultStr:='PInstanceNotFound';
+     PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+ 	VARVALIDADO = FALSE;
 
-			END IF ;
-	
-		END LOOP;
-	
-	VARVALIDADO = TRUE;
+
+ 	FOR ITERADOR IN 
+ 	(
+ 	SELECT C_DOCTYPE_ID, DOCUMENTNO, C_BPARTNER_ID, 
+ 	FECHA_INICIO, FECHA_FIN, SALARIO, C_CURRENCY_ID, 
+ 	NE_IS_JORNADA_PARCIAL, NE_NUM_HORAS_PARCIALES, NE_SISSALNET, 
+ 	PAGOFONDORESERVA, APLICA_UTILIDAD, NE_MOTIVO_SALIDA, 
+ 	NE_OBSERVACIONES, IDT_CONTRATO_ID
+ 	FROM IDT_CONTRATO 	
+ 	)
+ 		
+ 	LOOP
+
+	SELECT COUNT (DOCUMENTNO) INTO  VAREXIST from idt_contrato WHERE DOCUMENTNO = ITERADOR.DOCUMENTNO ;
+	IF VAREXIST > 1 THEN 
+		UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: REGISTRO DE NÚMERO DOCUMENTO ENCONTRADO MAS DE UNA VES EN LA TABLA TEMPORAL'
+		WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
+
 	ELSE
-	
-	VARVALIDADO = FALSE;
 
-	END IF;
-	--IDT_EjecucionError
+	SELECT COUNT (C_BPARTNER_ID) INTO  VAREXIST from idt_contrato WHERE C_BPARTNER_ID = ITERADOR.C_BPARTNER_ID;
 	
-	if VARVALIDADO = true then 
-	v_Message:='@IDT_EjecucionCorrecta@';
-	 RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
-     PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
-	  else 
-	  v_Message:='@IDT_EjecucionError@';
-	  RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
-     PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
-	 end if;
-	  
+	IF VAREXIST > 1 THEN 
+		UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: REGISTRO DE TERCERO ENCONTRADO MAS DE UNA VES EN LA TABLA TEMPORAL'
+		WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
+	
+	ELSE 
+ 
+	SELECT COUNT(1) INTO  VAREXIST FROM C_BPARTNER WHERE C_BPARTNER_id = ITERADOR.C_BPARTNER_ID and isemployee = 'Y';
+
+		IF VAREXIST =  0 THEN 
+ 			--UPDATE IDT_CONTRATO SET i_errormsg = 'PRIMER IF '|| ITERADOR.C_BPARTNER_ID  ;
+ 			UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: ESTE REGISTRO NO CORRESPONDE A NINGUN EMPLEADO ' || ITERADOR.IDT_CONTRATO_id
+ 			WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;		
+ 		ELSE 
+			
+			IF ITERADOR.FECHA_INICIO> ITERADOR.FECHA_FIN THEN
+				--UPDATE IDT_CONTRATO SET i_errormsg = 'SEGUNDO IF '|| ITERADOR.C_BPARTNER_ID;
+  				UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: LA FECHA INICIAL ES MAYOR A LA FINAL'
+  				WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;		
+  			ELSE			
+				SELECT COUNT(1) INTO  VAREXIST FROM NO_CONTRATO_EMPLEADO WHERE DOCUMENTNO = ITERADOR.DOCUMENTNO;
+				
+					IF VAREXIST >0 THEN 
+--						UPDATE IDT_CONTRATO SET i_errormsg = 'CUARTO IF '|| ITERADOR.C_BPARTNER_ID;
+  						UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: YA EXISTE EL NÚMERO DE CONTRATO'|| ITERADOR.IDT_CONTRATO_id
+  						WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;		
+  					ELSE 
+						
+  					IF ITERADOR.SALARIO <=0 THEN 
+							--UPDATE IDT_CONTRATO SET i_errormsg = 'QUINTO IF '|| ITERADOR.C_BPARTNER_ID;
+  							UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: EL VALOR DEL SUELDO INGRESADO TIENE QUE SER MAYOR A 0 '|| ITERADOR.IDT_CONTRATO_id
+  							WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;								
+  					ELSE
+	
+  						IF ITERADOR.NE_IS_JORNADA_PARCIAL = 'Y' THEN 
+
+
+							IF ITERADOR.NE_NUM_HORAS_PARCIALES <= 0 THEN
+							--UPDATE IDT_CONTRATO SET i_errormsg = 'SEXTO..0 IF '|| ITERADOR.C_BPARTNER_ID;
+								UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: EL VALOR DEL NÚMERO DE HORAS INGRESADO TIENE QUE SER MAYOR A 0 '|| ITERADOR.IDT_CONTRATO_id
+								WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;								
+
+							ELSE 
+							--UPDATE IDT_CONTRATO SET i_errormsg = 'SEXTO.. IF '|| ITERADOR.C_BPARTNER_ID;
+								IF ITERADOR.NE_NUM_HORAS_PARCIALES > 9 THEN
+									UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: EL VALOR DEL NÚMERO DE HORAS INGRESADO TIENE QUE SER MENOR A 8 '|| ITERADOR.IDT_CONTRATO_id
+  									WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
+								ELSE
+									UPDATE IDT_CONTRATO SET i_errormsg = NULL
+									WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
+								END IF;  							
+							END IF; 								
+  						ELSE 
+   						--	UPDATE IDT_CONTRATO SET i_errormsg = 'SEPTIMO IF '|| ITERADOR.C_BPARTNER_ID;
+   							UPDATE IDT_CONTRATO SET i_errormsg = NULL
+   							WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;							
+ 						END IF;						
+ 					END IF;				
+  				END IF;									
+  			END IF;			
+ 		END IF;	 	
+	END IF;	
+	END IF;
+
+ 	END LOOP;
+
+
+ --	UPDATE IDT_CONTRATO SET i_errormsg = 'NULL';	
+ 	select COUNT (1) INTO VAREXIST from idt_novedad where i_errormsg like '%ERROR%';
+ 	
+ 	
+ 	IF (VAREXIST = 0) THEN 
+ 		FOR ITERADORVALIDA IN (
+ 			SELECT *
+ 			FROM IDT_CONTRATO
+ 		)
+ 	
+ 		LOOP
+		
+		
+		SELECT COUNT (1) INTO VAREXIST FROM NO_CONTRATO_EMPLEADO WHERE DOCUMENTNO = ITERADORVALIDA.DOCUMENTNO;
+		
+		IF VAREXIST = 0 THEN 
+		
+  	 	INSERT INTO NO_CONTRATO_EMPLEADO 
+    		(NO_CONTRATO_EMPLEADO_ID,
+    		C_DOCTYPE_ID, 
+    		DOCUMENTNO, 
+    		C_BPARTNER_ID, 
+    		FECHA_INICIO, 
+    		FECHA_FIN,
+    		SALARIO, 
+    		C_CURRENCY_ID,
+    		EM_NE_IS_JORNADA_PARCIAL,
+    		EM_NE_NUM_HORAS_PARCIALES,
+			em_ne_sissalnet,
+    		PAGOFONDORESERVA,
+    		APLICA_UTILIDAD,
+    		EM_NE_MOTIVO_SALIDA,
+    		EM_NE_OBSERVACIONES,
+    		ad_client_id,
+    		ad_org_id,
+			created,
+			createdby,
+			updated,
+			updatedby,tipo_contrato )
+   		VALUES 
+    		(get_uuid(),
+    		ITERADORVALIDA.C_DOCTYPE_ID, 
+    		ITERADORVALIDA.DOCUMENTNO, 
+    		ITERADORVALIDA.C_BPARTNER_ID, 
+    		ITERADORVALIDA.FECHA_FIN,
+    		ITERADORVALIDA.FECHA_FIN,
+    		ITERADORVALIDA.SALARIO, 
+    		ITERADORVALIDA.C_CURRENCY_ID,
+    		ITERADORVALIDA.NE_IS_JORNADA_PARCIAL,
+    		ITERADORVALIDA.NE_NUM_HORAS_PARCIALES,
+    		ITERADORVALIDA.ne_sissalnet,
+    		ITERADORVALIDA.PAGOFONDORESERVA, 
+    		ITERADORVALIDA.APLICA_UTILIDAD,
+    		ITERADORVALIDA.NE_MOTIVO_SALIDA,
+			ITERADORVALIDA.NE_OBSERVACIONES,
+			ITERADORVALIDA.ad_client_id,
+			ITERADORVALIDA.ad_org_id,
+			now(),
+			ITERADORVALIDA.createdby,
+			ITERADORVALIDA.updated,
+			ITERADORVALIDA.updatedby,
+			'1'
+		);
+
+		DELETE FROM IDT_CONTRATO WHERE  IDT_CONTRATO_ID =ITERADORVALIDA.IDT_CONTRATO_ID ;	
+		ELSE 
+		
+		UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: EL NÚMERO DE CONTRATO YA SE ENCUENTRA EN LA TABLA DE CONTRATOS'
+  		WHERE IDT_CONTRATO_id = ITERADORVALIDA.IDT_CONTRATO_id;
+		
+		END IF;
+	
+ 		END LOOP;
+ 	
+ 	VARVALIDADO = TRUE;
+ 	ELSE
+ 	
+ 	VARVALIDADO = FALSE;
+ 
+ 	END IF;
+ 	
+ 	
+ 	if VARVALIDADO = true then 
+ 	 v_Message:='@IDT_EjecucionCorrecta@';
+ 	 RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+	 PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
+ 	else 
+ 	  v_Message:='@IDT_EjecucionError@';
+ 	  RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+	  PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+ 	end if;
+
+	
       
   
   RETURN;
    EXCEPTION
     WHEN OTHERS THEN
-        v_ResultStr:= '@ERROR=' || SQLERRM;
-        
-		RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
-      PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
-		
-
+        v_ResultStr:= '@ERROR=' || SQLERRM;        
+	RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+        PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
         PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
-        RETURN;
+    RETURN;
 END;
 
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-
-  
-
+ALTER FUNCTION idt_importarcontrato(character varying)
+  OWNER TO postgres;
