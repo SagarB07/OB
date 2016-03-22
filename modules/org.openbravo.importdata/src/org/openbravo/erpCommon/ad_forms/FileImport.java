@@ -537,10 +537,10 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         try {
 
             sb.append(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
-            System.out.println(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
+           // System.out.println(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
 
         }catch (Exception ex){
-        	System.out.println(data2[i]);
+        	//System.out.println(data2[i]);
   	  	}
             
           	
