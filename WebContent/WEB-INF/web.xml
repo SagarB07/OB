@@ -671,6 +671,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.importaciondatos.Importaciondecontratos.ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDF
+      </display-name>
+      <servlet-name>
+        WC6B91FD2AA954C5ABCCBE73BEC16BCDF
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.importaciondatos.Importaciondecontratos.ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDF
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.com.atrums.importaciondatos.Importaciondenovedades.Permiteimportardatosennomina4C9F5A852F1D42CFA22229A6F42483ED
       </display-name>
       <servlet-name>
@@ -8622,6 +8634,13 @@
         W315
       </servlet-name>
       <url-pattern>/org.openbravo.importdataImportLoaderFormat/ImportFormat315_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        WC6B91FD2AA954C5ABCCBE73BEC16BCDF
+      </servlet-name>
+      <url-pattern>/com.atrums.importaciondatosImportaciondecontratos/ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDF_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>

@@ -19,6 +19,7 @@
 package org.openbravo.model.common.currency;
 
 import com.atrums.depositos.data.DP_FinaccTransactionV;
+import com.atrums.importaciondatos.IdtContrato;
 import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
@@ -179,6 +180,7 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
     public static final String PROPERTY_FINANCIALMGMTJOURNALLINELIST = "financialMgmtJournalLineList";
     public static final String PROPERTY_FINANCIALMGMTSETTLEMENTLIST = "financialMgmtSettlementList";
     public static final String PROPERTY_FINANCIALMGMTTAXPAYMENTLIST = "financialMgmtTaxPaymentList";
+    public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_INVOICELIST = "invoiceList";
     public static final String PROPERTY_INVOICEV2LIST = "invoiceV2List";
     public static final String PROPERTY_MATERIALMGMTCOSTINGLIST = "materialMgmtCostingList";
@@ -267,6 +269,7 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
         setDefaultValue(PROPERTY_FINANCIALMGMTJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTSETTLEMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICEV2LIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_MATERIALMGMTCOSTINGLIST, new ArrayList<Object>());
@@ -929,6 +932,15 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
 
     public void setFinancialMgmtTaxPaymentList(List<TaxPayment> financialMgmtTaxPaymentList) {
         set(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, financialMgmtTaxPaymentList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtContrato> getIDTContratoList() {
+      return (List<IdtContrato>) get(PROPERTY_IDTCONTRATOLIST);
+    }
+
+    public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
+        set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
     }
 
     @SuppressWarnings("unchecked")

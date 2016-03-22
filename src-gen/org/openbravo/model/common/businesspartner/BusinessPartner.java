@@ -25,6 +25,7 @@ import com.atrums.contabilidad.data.CO_BpRetencionCompra;
 import com.atrums.contabilidad.data.CO_Retencion_Compra;
 import com.atrums.contabilidad.data.CoRetencionVentaView;
 import com.atrums.depositos.data.DP_FinaccTransactionV;
+import com.atrums.importaciondatos.IdtContrato;
 import com.atrums.importaciondatos.IdtImportacionDatos;
 import com.atrums.nomina.data.NO_Registro_Hora_Extra;
 import com.atrums.nomina.data.NoEmpleadoIngresoEgreso;
@@ -342,6 +343,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_FINANCIALMGMTGLJOURNALLINELIST = "financialMgmtGLJournalLineList";
     public static final String PROPERTY_FINANCIALMGMTTAXPAYMENTLIST = "financialMgmtTaxPaymentList";
     public static final String PROPERTY_FINANCIALMGMTWITHHOLDINGBENEFICIARYLIST = "financialMgmtWithholdingBeneficiaryList";
+    public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_IDTNOVEDADLIST = "iDTNovedadList";
     public static final String PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST = "inOutLineAccountingDimensionList";
     public static final String PROPERTY_INVOICELIST = "invoiceList";
@@ -499,6 +501,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_FINANCIALMGMTGLJOURNALLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTWITHHOLDINGBENEFICIARYLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_IDTNOVEDADLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INOUTLINEACCOUNTINGDIMENSIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_INVOICELIST, new ArrayList<Object>());
@@ -2119,6 +2122,15 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setFinancialMgmtWithholdingBeneficiaryList(List<org.openbravo.model.financialmgmt.tax.Withholding> financialMgmtWithholdingBeneficiaryList) {
         set(PROPERTY_FINANCIALMGMTWITHHOLDINGBENEFICIARYLIST, financialMgmtWithholdingBeneficiaryList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtContrato> getIDTContratoList() {
+      return (List<IdtContrato>) get(PROPERTY_IDTCONTRATOLIST);
+    }
+
+    public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
+        set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
     }
 
     @SuppressWarnings("unchecked")

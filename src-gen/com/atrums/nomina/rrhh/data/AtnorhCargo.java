@@ -18,6 +18,7 @@
 */
 package com.atrums.nomina.rrhh.data;
 
+import com.atrums.importaciondatos.IdtContrato;
 import com.atrums.nomina.data.noContratoEmpleado;
 
 import java.util.ArrayList;
@@ -57,11 +58,13 @@ public class AtnorhCargo extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_HABILIDAD = "habilidad";
     public static final String PROPERTY_REQ = "req";
     public static final String PROPERTY_ISPERITO = "isperito";
+    public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_NOCONTRATOEMPLEADOEMATNORHCARGOIDLIST = "noContratoEmpleadoEMAtnorhCargoIDList";
 
     public AtnorhCargo() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_ISPERITO, true);
+        setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOCONTRATOEMPLEADOEMATNORHCARGOIDLIST, new ArrayList<Object>());
     }
 
@@ -188,6 +191,15 @@ public class AtnorhCargo extends BaseOBObject implements Traceable, ClientEnable
 
     public void setPerito(Boolean isperito) {
         set(PROPERTY_ISPERITO, isperito);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtContrato> getIDTContratoList() {
+      return (List<IdtContrato>) get(PROPERTY_IDTCONTRATOLIST);
+    }
+
+    public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
+        set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
     }
 
     @SuppressWarnings("unchecked")

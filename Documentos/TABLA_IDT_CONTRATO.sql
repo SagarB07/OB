@@ -1,28 +1,31 @@
 CREATE TABLE idt_contrato
 (
-  idt_contrato_id character varying(32) NOT NULL,
+  idt_contrato_id character varying(32) ,
   atnorh_cargo_id character varying(32),
-  ad_client_id character varying(32) NOT NULL,
-  ad_org_id character varying(32) NOT NULL,
-  c_doctype_id character varying(32) NOT NULL,
-  c_bpartner_id character varying(32) NOT NULL,
+  ad_client_id character varying(32) ,
+  ad_org_id character varying(32) ,
+  c_doctype_id character varying(32) ,
+  c_bpartner_id character varying(32) ,
   c_currency_id character varying(32), 
   fin_financial_account_id character varying(32),
-  fin_paymentmethod_id character varying(32),
-  area_empresa_id character varying(32),
-  createdby character varying(32) NOT NULL,
-  updatedby character varying(32) NOT NULL,
-  isactive character(1) NOT NULL DEFAULT 'Y'::bpchar,
-  created timestamp without time zone NOT NULL DEFAULT now(),  
-  updated timestamp without time zone NOT NULL DEFAULT now(),  
-  fecha_inicio timestamp without time zone NOT NULL,
+  fin_paymentmethod_id character varying(32),  
+  createdby character varying(32) ,
+  updatedby character varying(32) ,
+  isactive character(1)  DEFAULT 'Y'::bpchar,
+  created timestamp without time zone  DEFAULT now(),  
+  updated timestamp without time zone  DEFAULT now(),  
+  fecha_inicio timestamp without time zone ,
   fecha_fin timestamp without time zone,
-  documentno character varying(40) NOT NULL,  
-  salario numeric NOT NULL,  
-  tipo_contrato character varying(60) NOT NULL,
-  pagofondoreserva character(1) NOT NULL,  
+  documentno character varying(40) ,  
+  salario numeric ,  
+  tipo_contrato character varying(60) ,
+  pagofondoreserva character(1) ,  
   is_impuesto_asumido character(1),
   aplica_utilidad character(1) DEFAULT 'Y'::bpchar,
+  i_errormsg character varying(2000),
+  i_isimported character(1) DEFAULT 'N'::bpchar,
+  procesado character(1) DEFAULT 'N'::bpchar,
+  btnproceso character varying(60),
   ne_sissalnet character varying(60),  
   ne_motivo_salida character varying(60),
   ne_is_jornada_parcial character(1) DEFAULT 'N'::bpchar,
@@ -40,7 +43,7 @@ CREATE TABLE idt_contrato
 
 	
 alter table idt_contrato
-   add constraint IDT_FK_contrato_c_bpartner foreign key (c_bpartner_id)
+   add constraint IDT_FK_idtcontrato_c_bpartner foreign key (c_bpartner_id)
       references c_bpartner (c_bpartner_id)
       on delete restrict on update restrict;
 	  
@@ -50,34 +53,34 @@ alter table idt_contrato
       on delete restrict on update restrict;
   
  alter table idt_contrato
-   add constraint IDT_FK_contrato_ad_client foreign key (ad_client_id)
+   add constraint IDT_FK_idtcontrato_ad_client foreign key (ad_client_id)
       references ad_client (ad_client_id)
       on delete restrict on update restrict;
 	  
 alter table idt_contrato
-   add constraint IDT_FK_contrato_ad_org foreign key (ad_org_id)
+   add constraint IDT_FK_idtcontrato_ad_org foreign key (ad_org_id)
       references ad_org (ad_org_id)
       on delete restrict on update restrict;	  
 
 alter table idt_contrato
-   add constraint IDT_FK_contrato_ad_org foreign key (c_doctype_id)
-      references ad_org (c_doctype_id)
+   add constraint IDT_FK_contrato_doctype foreign key (c_doctype_id)
+      references c_doctype (c_doctype_id)
       on delete restrict on update restrict;	  
 	  
 	  
 alter table idt_contrato
-   add constraint IDT_FK_contrato_c_currency foreign key (c_currency_id)
+   add constraint IDT_FK_contrato_currency foreign key (c_currency_id)
       references c_currency (c_currency_id)
       on delete restrict on update restrict;	  
 	  
 	  
 alter table idt_contrato
-   add constraint IDT_FK_contrato_c_currency foreign key (fin_financial_account_id)
+   add constraint IDT_FK_cotrato_faccount foreign key (fin_financial_account_id)
       references fin_financial_account (fin_financial_account_id)
       on delete restrict on update restrict;		  
   
  alter table idt_contrato
-   add constraint IDT_FK_contrato_fin_paymentmethod foreign key (fin_paymentmethod_id)
+   add constraint IDT_FK_cotrato_pmethod foreign key (fin_paymentmethod_id)
       references fin_paymentmethod (fin_paymentmethod_id)
       on delete restrict on update restrict;		  
 	  

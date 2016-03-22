@@ -1079,10 +1079,10 @@ String strParamGrandTotal_f = vars.getSessionValue(tabId + "|paramGrandTotal_f")
       ComboTableData comboTableData = null;
 xmlDocument.setParameter("DocAction_BTNname", Utility.getButtonName(this, vars, "FF80818130217A35013021A672400035", (dataField==null?data[0].getField("docaction"):dataField.getField("docaction")), "DocAction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocAction = org.openbravo.erpCommon.utility.Utility.isModalProcess("D3436E4900324346AC11E8CCEDDF95AB"); 
 xmlDocument.setParameter("DocAction_Modal", modalDocAction?"true":"false");
-xmlDocument.setParameter("RM_AddOrphanLine_BTNname", Utility.getButtonName(this, vars, "3059B4926EEA40D98D222B41C27336B0", "RM_AddOrphanLine_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_AddOrphanLine = org.openbravo.erpCommon.utility.Utility.isModalProcess("23D1B163EC0B41F790CE39BF01DA320E"); 
-xmlDocument.setParameter("RM_AddOrphanLine_Modal", modalRM_AddOrphanLine?"true":"false");
 xmlDocument.setParameter("RM_PickFromShipment_BTNname", Utility.getButtonName(this, vars, "AF4090093D431431E040007F010048A5", "RM_PickFromShipment_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_PickFromShipment = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
 xmlDocument.setParameter("RM_PickFromShipment_Modal", modalRM_PickFromShipment?"true":"false");
+xmlDocument.setParameter("RM_AddOrphanLine_BTNname", Utility.getButtonName(this, vars, "3059B4926EEA40D98D222B41C27336B0", "RM_AddOrphanLine_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_AddOrphanLine = org.openbravo.erpCommon.utility.Utility.isModalProcess("23D1B163EC0B41F790CE39BF01DA320E"); 
+xmlDocument.setParameter("RM_AddOrphanLine_Modal", modalRM_AddOrphanLine?"true":"false");
 xmlDocument.setParameter("RM_CreateInvoice_BTNname", Utility.getButtonName(this, vars, "AF4090093D461431E040007F010048A5", "RM_CreateInvoice_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_CreateInvoice = org.openbravo.erpCommon.utility.Utility.isModalProcess("FF80808133362F6A013336781FCE0066"); 
 xmlDocument.setParameter("RM_CreateInvoice_Modal", modalRM_CreateInvoice?"true":"false");
 String userOrgList = "";
