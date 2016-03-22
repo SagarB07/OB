@@ -28,17 +28,17 @@ IDT_contrato.C_Bpartner_ID,
 IDT_contrato.Fecha_Inicio, 
 IDT_contrato.Fecha_Fin, 
 IDT_contrato.Atnorh_Cargo_ID, 
-(CASE WHEN IDT_contrato.Atnorh_Cargo_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.Name), ''))),'') ) END) AS Atnorh_Cargo_IDR, 
 COALESCE(IDT_contrato.Isactive, 'N') AS Isactive, 
 IDT_contrato.NE_Vacacion_Prop, 
 IDT_contrato.NE_Vacacion_Tom, 
 IDT_contrato.NE_Vacacion_Res, 
 IDT_contrato.Salario, 
 IDT_contrato.C_Currency_ID, 
-(CASE WHEN IDT_contrato.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
+(CASE WHEN IDT_contrato.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
 COALESCE(IDT_contrato.NE_Is_Jornada_Parcial, 'N') AS NE_Is_Jornada_Parcial, 
 IDT_contrato.NE_Num_Horas_Parciales, 
 IDT_contrato.NE_Sissalnet, 
+(CASE WHEN IDT_contrato.NE_Sissalnet IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS NE_SissalnetR, 
 COALESCE(IDT_contrato.Pagofondoreserva, 'N') AS Pagofondoreserva, 
 COALESCE(IDT_contrato.Aplica_Utilidad, 'N') AS Aplica_Utilidad, 
 IDT_contrato.NE_Motivo_Salida, 
@@ -47,11 +47,12 @@ IDT_contrato.Btnproceso,
 COALESCE(IDT_contrato.I_Isimported, 'N') AS I_Isimported, 
 COALESCE(IDT_contrato.Procesado, 'N') AS Procesado, 
 IDT_contrato.NE_Region, 
+(CASE WHEN IDT_contrato.NE_Region IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list2.name),'') ) END) AS NE_RegionR, 
 IDT_contrato.AD_Client_ID, 
 IDT_contrato.IDT_Contrato_ID, 
  
         ? AS LANGUAGE 
-        FROM IDT_contrato left join (select AD_Org_ID, Name from AD_Org) table1 on (IDT_contrato.AD_Org_ID = table1.AD_Org_ID) left join (select FIN_Financial_Account_ID, Name, C_Currency_ID from FIN_Financial_Account) table2 on (IDT_contrato.FIN_Financial_Account_ID = table2.FIN_Financial_Account_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (table2.C_Currency_ID = table3.C_Currency_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table4 on (IDT_contrato.FIN_Paymentmethod_ID = table4.FIN_Paymentmethod_ID) left join (select C_Doctype_ID, Name from C_Doctype) table5 on (IDT_contrato.C_Doctype_ID = table5.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL5 on (table5.C_DocType_ID = tableTRL5.C_DocType_ID and tableTRL5.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table7 on (IDT_contrato.C_Bpartner_ID = table7.C_BPartner_ID) left join (select Atnorh_Cargo_ID, Name from Atnorh_Cargo) table8 on (IDT_contrato.Atnorh_Cargo_ID = table8.Atnorh_Cargo_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table9 on (IDT_contrato.C_Currency_ID = table9.C_Currency_ID)
+        FROM IDT_contrato left join (select AD_Org_ID, Name from AD_Org) table1 on (IDT_contrato.AD_Org_ID = table1.AD_Org_ID) left join (select FIN_Financial_Account_ID, Name, C_Currency_ID from FIN_Financial_Account) table2 on (IDT_contrato.FIN_Financial_Account_ID = table2.FIN_Financial_Account_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (table2.C_Currency_ID = table3.C_Currency_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table4 on (IDT_contrato.FIN_Paymentmethod_ID = table4.FIN_Paymentmethod_ID) left join (select C_Doctype_ID, Name from C_Doctype) table5 on (IDT_contrato.C_Doctype_ID = table5.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL5 on (table5.C_DocType_ID = tableTRL5.C_DocType_ID and tableTRL5.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table7 on (IDT_contrato.C_Bpartner_ID = table7.C_BPartner_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table8 on (IDT_contrato.C_Currency_ID = table8.C_Currency_ID) left join ad_ref_list_v list1 on (IDT_contrato.NE_Sissalnet = list1.value and list1.ad_reference_id = '0286D46E34EA46AF80D13D059E052DC1' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (IDT_contrato.NE_Region = list2.value and list2.ad_reference_id = '5399B74563094E35B96D005012B4A6D9' and list2.ad_language = ?) 
         WHERE 2=2 
 
         AND 1=1 
@@ -63,6 +64,8 @@ IDT_contrato.IDT_Contrato_ID,
     <Parameter name="dateTimeFormat"></Parameter>
     
     <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
 <Parameter name="paramLanguage"/>
 
 
