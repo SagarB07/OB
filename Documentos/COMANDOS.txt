@@ -2,3 +2,8 @@ ant smartbuild -Dlocal=no -Dforce=yes
 ant compile.complete.deploy
 ant smartbuild  
 ant update.database
+
+pg_dump -h localhost -p 5432 -U postgres -F c -a -v -f "E:\RESPALDOS" -t "\"public\".\"AD_ImpFormat\"" openbravo
+pg_dump -h localhost -p 5432 -U postgres -F c -a -v -f "E:\RESPALDOS" -t "\"public\".\"AD_ImpFormat_Row\"" openbravo
+
+FAC11FA2895B49119D061ACDEABDDC6A
