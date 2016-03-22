@@ -130,6 +130,121 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
     return texto.toString();
   }
   
+ private StringBuffer obtenerCodigosContrato (Connection conn, ConnectionProvider connectionProvider,StringBuffer campo, String valorCampo) throws ServletException{
+	 StringBuffer dato = new StringBuffer("");//
+	 String strSql = "";
+	 Integer campoTipoDocumento = campo.indexOf("C_Doctype_ID");
+	 Integer campoNumDocumento = campo.indexOf("Documentno");
+	 Integer campoEmpleado = campo.indexOf("C_Bpartner_ID");
+	 Integer campoFechaIni = campo.indexOf("Fecha_Inicio");
+	 Integer campoFechaFin = campo.indexOf("Fecha_Fin");
+	 Integer campoRegion = campo.indexOf("NE_Region");
+	 Integer campoCargo = campo.indexOf("Atnorh_Cargo_ID");
+	 Integer campoVActuales = campo.indexOf("NE_Vacacion_Prop");
+	 Integer campoVTomadas = campo.indexOf("NE_Vacacion_Tom");
+	 Integer campoVRestantes = campo.indexOf("NE_Vacacion_Res");
+	 Integer campoSalario = campo.indexOf("Salario");
+	 Integer campoMoneda = campo.indexOf("C_Currency_ID");
+	 Integer campoJparcial = campo.indexOf("NE_Is_Jornada_Parcial");
+	 Integer campoHorasParciales = campo.indexOf("NE_Num_Horas_Parciales");
+	 Integer campoSistemaSalario = campo.indexOf("NE_Sissalnet");
+	 Integer campoPagoFondoReserva = campo.indexOf("Pagofondoreserva");
+	 Integer campoAplicaUtilidad = campo.indexOf("Aplica_Utilidad");
+	 Integer campoMotivoSalida = campo.indexOf("NE_Motivo_Salida");
+	 Integer campoObservaciones = campo.indexOf("NE_Observaciones");
+	 
+	 //Atnorh_Cargo
+
+	 if (campoTipoDocumento>=0 && campoNumDocumento < 0  ){		 
+		 valorCampo = valorCampo.replace("'", "");
+		 strSql ="SELECT C_Doctype_ID FROM c_doctype where name like '%"+valorCampo+"%'";
+		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, campo.toString());
+		 if (valoRetorno!= null){
+			 {
+				 dato.append("'");
+				 dato.append(valoRetorno);
+				 dato.append("'");
+			 }
+		 }
+	 } else if (campoNumDocumento>=0 && campoEmpleado<0 ){		 
+		 if (valorCampo!= null){
+			 {
+				 dato.append(valorCampo);
+			 }
+		 }
+	 }else if (campoEmpleado>=0 && campoFechaIni < 0 ) {
+		 valorCampo = valorCampo.replace("'", "");
+		 strSql ="SELECT C_BPARTNER_ID FROM C_BPARTNER where taxid like '%"+valorCampo+"%'";
+		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "C_Bpartner_ID");
+		 if (valoRetorno!= null){
+			 {
+				 dato.append("'");
+				 dato.append(valoRetorno);
+				 dato.append("'");
+			 }
+		 }
+		 
+	 } else if (campoCargo>=0 && campoVActuales< 0){
+		 valorCampo = valorCampo.replace("'", "");
+		 strSql ="SELECT Atnorh_Cargo_ID FROM Atnorh_Cargo where name like '%"+valorCampo+"%'";
+		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "Atnorh_Cargo_ID");
+		 if (valoRetorno!= null){
+			 {
+				 dato.append("'");
+				 dato.append(valoRetorno);
+				 dato.append("'");
+			 }
+		 } 
+		 
+	 }else if (campoVActuales>= 0 && campoVTomadas< 0){
+		 dato.append(valorCampo);
+	 }else if (campoVTomadas>= 0&& campoVRestantes< 0){
+		 dato.append(valorCampo);
+	 }else if (campoVRestantes>= 0 && campoSalario<0){
+		 dato.append(valorCampo);
+	 }else if (campoSalario>= 0 && campoMoneda<0 ){
+		 dato.append(valorCampo);
+	 }else if (campoMoneda>= 0 && campoJparcial<0 ){
+		 //SELECT * FROM C_Currency
+		 valorCampo = valorCampo.replace("'", "");
+		 strSql ="SELECT  C_Currency_ID FROM C_Currency where iso_code like '%"+valorCampo+"%'";
+		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "C_Currency_ID");
+		 if (valoRetorno!= null){
+			 {
+				 dato.append("'");
+				 dato.append(valoRetorno);
+				 dato.append("'");
+			 }
+		 } 
+	 }else if (campoJparcial>= 0 && campoHorasParciales<0 ){
+			 dato.append(valorCampo);
+	 }else if (campoHorasParciales>= 0 && campoSistemaSalario<0 && campoRegion<0){
+		 dato.append(valorCampo);
+	 }else if (campoSistemaSalario>=0 && campoPagoFondoReserva<0){
+		 dato.append("'1'");
+	 }else if (campoPagoFondoReserva>=0 && campoAplicaUtilidad<0){
+		 dato.append(valorCampo);
+	 }else if (campoAplicaUtilidad>=0 && campoMotivoSalida<0){
+		 dato.append(valorCampo);
+	 }else if (campoMotivoSalida>=0 && campoObservaciones<0){
+		 dato.append(valorCampo);
+	 }else if (campoObservaciones>=0 && campoRegion<0 ){
+		 dato.append(valorCampo);
+	 }else if (campoRegion>=0){
+		 if(valorCampo.equals("'COSTA'")){
+		 dato.append("'2'");
+		 }else if(valorCampo.equals("'SIERRA'")){
+		  dato.append("'1'");
+		 } else {
+			 dato.append("'0'");
+		 }
+	 }
+	 
+	 campo.append(dato);
+	 //System.out.println(campo);
+	 
+	 return campo;
+  }
   private StringBuffer obtenerCodigos (Connection conn, ConnectionProvider connectionProvider,StringBuffer campo, String valorCampo){
 	  StringBuffer dato = new StringBuffer("");
 	  Integer valCampoingEgre = campo.indexOf("NO_Tipo_Ingreso_Egreso_ID");
@@ -139,7 +254,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 	  if (valCampoingEgre > 0 && valPeriodo < 0 &&  valValor < 0 ){
 		  dato.append("'");
 			try {
-					  String valoRetorno= FileImportData.obtenerIDCampoRubro(conn, connectionProvider, valorCampo);
+					  String valoRetorno= FileImportUtil.obtenerIDCampoRubro(conn, connectionProvider, valorCampo);
 					  dato.append(valoRetorno);
 				} catch (ServletException e) {
 					// TODO Auto-generated catch block
@@ -151,7 +266,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 	  if (valPeriodo > 0 &&  valValor < 0){
 		  dato.append("'");
 			try {
-					  String valoRetorno= FileImportData.obtenerIDPeriodo(conn, connectionProvider, valorCampo);
+					  String valoRetorno= FileImportUtil.obtenerIDPeriodo(conn, connectionProvider, valorCampo);
 					  dato.append(valoRetorno);
 				} catch (ServletException e) {
 					// TODO Auto-generated catch block
@@ -160,11 +275,8 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 		  dato.append("'");
 	  }
 	  if (valValor > 0){
-		  //dato.append("'");
 		  dato.append(valorCampo);
-		  //dato.append("'");
 	  }
-	  
 	  campo.append(dato);
 	  return campo;
   }
@@ -218,14 +330,15 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         	  if (strFields.toString().equals(auxStrFields.toString())){
         		  strFields.append(strValues);  
         	  }
-        	//  System.out.print("00");
+          }else if (strTable.equals("IDT_contrato")){
+        	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
+        	  strFields = obtenerCodigosContrato (con, this,strFields, valorCampoTemporal );
+        	  if (strFields.toString().equals(auxStrFields.toString())){
+        		  strFields.append(strValues);  
+        	  }
           }else {
         	  strFields.append(strValues);
-        	  
           }
-        	  //strFields.append(strValues);  
-          
-          
           strValues.delete(0, strValues.length());
         }
         constant = 0;
@@ -239,7 +352,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
           myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
           if (i == 0 && !firstRowHeaders) {
             myMessage.setTitle(Utility.messageBD(this,
-                "Error while inserting data. Please check if the CSV file contains a header", vars
+                "Error while inserting data. Please  check if the CSV file contains a header", vars
                     .getLanguage()));
           } else {
         	  String mensajeError = "";
@@ -424,9 +537,10 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         try {
 
             sb.append(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
+            System.out.println(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
 
         }catch (Exception ex){
-        	System.out.println(ex);
+        	System.out.println(data2[i]);
   	  	}
             
           	
