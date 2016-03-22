@@ -1,8 +1,9 @@
---delete from idt_novedad
+-- Function: idt_importarnovedad(character varying)
 
- --NO GENERA ROL
-CREATE OR REPLACE FUNCTION idt_importarNovedad(p_pinstance_id character varying)
-  RETURNS  void AS
+-- DROP FUNCTION idt_importarnovedad(character varying);
+
+CREATE OR REPLACE FUNCTION idt_importarnovedad(p_pinstance_id character varying)
+  RETURNS void AS
 $BODY$
 DECLARE
 v_Message VARCHAR(2000):='';
@@ -60,12 +61,16 @@ VARVALIDADO = FALSE;
 								WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
 								ELSE
 								
-								
 								select COUNT (1) INTO VAREXIST from no_cb_empleado_acct 
-								where C_BPARTNER_ID = ITERADOR.C_BPARTNER_ID  and no_tipo_ingreso_egreso_id =ITERADOR.no_tipo_ingreso_egreso_id;
+								where C_BPARTNER_ID = (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA  )
+								and no_tipo_ingreso_egreso_id = ITERADOR.no_tipo_ingreso_egreso_id;
+								
+--								select COUNT (1) INTO VAREXIST from no_cb_empleado_acct 
+--								where C_BPARTNER_ID = ITERADOR.C_BPARTNER_ID  and no_tipo_ingreso_egreso_id =ITERADOR.no_tipo_ingreso_egreso_id;
+									
 									IF (VAREXIST = 0) THEN 
 									
-									UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: EL EMPLEADO NO SE ENCUENTRA ASIGNADO AL RUBRO AL QUE SE REFERENCIA ' 
+									UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: EL EMPLEADO NO SE ENCUENTRA ASIGNADO AL RUBRO AL QUE SE REFERENCIA ' ||ITERADOR.idt_novedad_id
 									WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
 									
 									ELSE 							
@@ -159,6 +164,5 @@ END;
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-
-  
-
+ALTER FUNCTION idt_importarnovedad(character varying)
+  OWNER TO tad;
