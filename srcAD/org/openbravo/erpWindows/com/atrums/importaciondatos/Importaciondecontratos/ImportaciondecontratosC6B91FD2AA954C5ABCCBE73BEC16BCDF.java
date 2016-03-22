@@ -2,44 +2,31 @@
 package org.openbravo.erpWindows.com.atrums.importaciondatos.Importaciondecontratos;
 
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.StringTokenizer;
-import java.util.Vector;
+import org.openbravo.erpCommon.reference.*;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+
 import org.codehaus.jettison.json.JSONObject;
-import org.openbravo.base.exception.OBException;
+import org.openbravo.erpCommon.utility.*;
+import org.openbravo.data.FieldProvider;
+import org.openbravo.utils.FormatUtilities;
+import org.openbravo.utils.Replace;
 import org.openbravo.base.secureApp.HttpSecureAppServlet;
 import org.openbravo.base.secureApp.VariablesSecureApp;
-import org.openbravo.data.FieldProvider;
-import org.openbravo.database.SessionInfo;
-import org.openbravo.erpCommon.businessUtility.WindowTabs;
-import org.openbravo.erpCommon.reference.PInstanceProcessData;
-import org.openbravo.erpCommon.utility.ComboTableData;
-import org.openbravo.erpCommon.utility.ExecuteQuery;
-import org.openbravo.erpCommon.utility.FieldProviderFactory;
-import org.openbravo.erpCommon.utility.LeftTabsBar;
-import org.openbravo.erpCommon.utility.ModelSQLGeneration;
-import org.openbravo.erpCommon.utility.NavigationBar;
-import org.openbravo.erpCommon.utility.OBError;
-import org.openbravo.erpCommon.utility.PropertyException;
-import org.openbravo.erpCommon.utility.SequenceIdData;
-import org.openbravo.erpCommon.utility.TableSQLData;
-import org.openbravo.erpCommon.utility.ToolBar;
-import org.openbravo.erpCommon.utility.Utility;
+import org.openbravo.base.exception.OBException;
 import org.openbravo.scheduling.ProcessBundle;
 import org.openbravo.scheduling.ProcessRunner;
-import org.openbravo.utils.Replace;
+import org.openbravo.erpCommon.businessUtility.WindowTabs;
 import org.openbravo.xmlEngine.XmlDocument;
+import java.util.Vector;
+import java.util.StringTokenizer;
+import org.openbravo.database.SessionInfo;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.*;
+import java.sql.Connection;
+import org.apache.log4j.Logger;
 
 public class ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDF extends HttpSecureAppServlet {
   private static final long serialVersionUID = 1L;
@@ -445,7 +432,7 @@ public class ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDF extends Http
     ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDFData data = new ImportaciondecontratosC6B91FD2AA954C5ABCCBE73BEC16BCDFData();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequestGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.finFinancialAccountId = vars.getStringParameter("inpfinFinancialAccountId");     data.finFinancialAccountIdr = vars.getStringParameter("inpfinFinancialAccountId_R");     data.finPaymentmethodId = vars.getStringParameter("inpfinPaymentmethodId");     data.finPaymentmethodIdr = vars.getStringParameter("inpfinPaymentmethodId_R");     data.tipoContrato = vars.getStringParameter("inptipoContrato");     data.iErrormsg = vars.getStringParameter("inpiErrormsg");     data.isImpuestoAsumido = vars.getStringParameter("inpisImpuestoAsumido", "N");     data.cDoctypeId = vars.getStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.documentno = vars.getStringParameter("inpdocumentno");     data.cBpartnerId = vars.getStringParameter("inpcBpartnerId");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.fechaInicio = vars.getStringParameter("inpfechaInicio");     data.fechaFin = vars.getStringParameter("inpfechaFin");     data.atnorhCargoId = vars.getStringParameter("inpatnorhCargoId");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.neVacacionProp = vars.getNumericParameter("inpneVacacionProp");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.neVacacionTom = vars.getNumericParameter("inpneVacacionTom");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.neVacacionRes = vars.getNumericParameter("inpneVacacionRes");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.salario = vars.getNumericParameter("inpsalario");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.neIsJornadaParcial = vars.getStringParameter("inpneIsJornadaParcial", "N");    try {   data.neNumHorasParciales = vars.getNumericParameter("inpneNumHorasParciales");  } catch (ServletException paramEx) { ex = paramEx; }     data.neSissalnet = vars.getStringParameter("inpneSissalnet");     data.neSissalnetr = vars.getStringParameter("inpneSissalnet_R");     data.pagofondoreserva = vars.getStringParameter("inppagofondoreserva", "N");     data.aplicaUtilidad = vars.getStringParameter("inpaplicaUtilidad", "N");     data.neMotivoSalida = vars.getStringParameter("inpneMotivoSalida");     data.neObservaciones = vars.getStringParameter("inpneObservaciones");     data.btnproceso = vars.getStringParameter("inpbtnproceso");     data.iIsimported = vars.getStringParameter("inpiIsimported", "N");     data.procesado = vars.getStringParameter("inpprocesado", "N");     data.neRegion = vars.getRequiredStringParameter("inpneRegion");     data.neRegionr = vars.getStringParameter("inpneRegion_R");     data.adClientId = vars.getRequestGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.idtContratoId = vars.getRequestGlobalVariable("inpidtContratoId", windowId + "|IDT_Contrato_ID"); 
+    data.adOrgId = vars.getRequestGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.finFinancialAccountId = vars.getStringParameter("inpfinFinancialAccountId");     data.finFinancialAccountIdr = vars.getStringParameter("inpfinFinancialAccountId_R");     data.finPaymentmethodId = vars.getStringParameter("inpfinPaymentmethodId");     data.finPaymentmethodIdr = vars.getStringParameter("inpfinPaymentmethodId_R");     data.tipoContrato = vars.getStringParameter("inptipoContrato");     data.iErrormsg = vars.getStringParameter("inpiErrormsg");     data.isImpuestoAsumido = vars.getStringParameter("inpisImpuestoAsumido", "N");     data.cDoctypeId = vars.getStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.documentno = vars.getStringParameter("inpdocumentno");     data.cBpartnerId = vars.getStringParameter("inpcBpartnerId");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.fechaInicio = vars.getStringParameter("inpfechaInicio");     data.fechaFin = vars.getStringParameter("inpfechaFin");     data.atnorhCargoId = vars.getStringParameter("inpatnorhCargoId");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.neVacacionProp = vars.getNumericParameter("inpneVacacionProp");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.neVacacionTom = vars.getNumericParameter("inpneVacacionTom");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.neVacacionRes = vars.getNumericParameter("inpneVacacionRes");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.salario = vars.getNumericParameter("inpsalario");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.neIsJornadaParcial = vars.getStringParameter("inpneIsJornadaParcial", "N");    try {   data.neNumHorasParciales = vars.getNumericParameter("inpneNumHorasParciales");  } catch (ServletException paramEx) { ex = paramEx; }     data.neSissalnet = vars.getStringParameter("inpneSissalnet");     data.pagofondoreserva = vars.getStringParameter("inppagofondoreserva", "N");     data.aplicaUtilidad = vars.getStringParameter("inpaplicaUtilidad", "N");     data.neMotivoSalida = vars.getStringParameter("inpneMotivoSalida");     data.neObservaciones = vars.getStringParameter("inpneObservaciones");     data.btnproceso = vars.getStringParameter("inpbtnproceso");     data.iIsimported = vars.getStringParameter("inpiIsimported", "N");     data.procesado = vars.getStringParameter("inpprocesado", "N");     data.neRegion = vars.getRequiredStringParameter("inpneRegion");     data.neRegionr = vars.getStringParameter("inpneRegion_R");     data.adClientId = vars.getRequestGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.idtContratoId = vars.getRequestGlobalVariable("inpidtContratoId", windowId + "|IDT_Contrato_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -878,10 +865,6 @@ xmlDocument.setParameter("buttonNE_Vacacion_Res", Utility.messageBD(this, "Calc"
 comboTableData = new ComboTableData(vars, this, "19", "C_Currency_ID", "", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
 Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("cCurrencyId"):dataField.getField("cCurrencyId")));
 xmlDocument.setData("reportC_Currency_ID","liststructure", comboTableData.select(!strCommand.equals("NEW")));
-comboTableData = null;
-comboTableData = new ComboTableData(vars, this, "17", "NE_Sissalnet", "0286D46E34EA46AF80D13D059E052DC1", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
-Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("neSissalnet"):dataField.getField("neSissalnet")));
-xmlDocument.setData("reportNE_Sissalnet","liststructure", comboTableData.select(!strCommand.equals("NEW")));
 comboTableData = null;
 xmlDocument.setParameter("Btnproceso_BTNname", Utility.getButtonName(this, vars, "2C943092D38A4AAEB31D246DBDA4247C", "Btnproceso_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalBtnproceso = org.openbravo.erpCommon.utility.Utility.isModalProcess("9307E4FC743144C5AEBF801DFDA096EE"); 
 xmlDocument.setParameter("Btnproceso_Modal", modalBtnproceso?"true":"false");
