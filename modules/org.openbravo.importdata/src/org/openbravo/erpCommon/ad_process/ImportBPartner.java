@@ -23,7 +23,7 @@ import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 import org.openbravo.database.ConnectionProvider;
-import org.openbravo.erpCommon.ad_process.ImportBPartnerData;
+import org.openbravo.erpCommon.ad_forms.FileImportUtil;
 import org.openbravo.erpCommon.utility.OBError;
 import org.openbravo.erpCommon.utility.SequenceIdData;
 import org.openbravo.erpCommon.utility.Utility;
@@ -163,8 +163,9 @@ public class ImportBPartner extends ImportProcess {
     try {
       // Go through Records
       ImportBPartnerData[] data = ImportBPartnerData.select(conn, getAD_Client_ID());
+      AtrumsImportBPartnerData[] atrumsData = AtrumsImportBPartnerData.select(conn, getAD_Client_ID());
       if (log4j.isDebugEnabled())
-        log4j.debug("Going  through " + data.length + " records");
+        log4j.debug("Going  through " + data.length + "records");
       for (int i = 0; i < data.length; i++) {
         String I_BPartner_ID = data[i].iBpartnerId;
         String C_BPartner_ID = data[i].cBpartnerId;
@@ -172,7 +173,13 @@ public class ImportBPartner extends ImportProcess {
         String C_BPartner_Location_ID = data[i].cBpartnerLocationId;
         boolean newLocation = data[i].addr != null;
         String AD_User_ID = data[i].adUserId;
-        boolean newContact = data[i].contactname != null;
+        boolean newContact= data[i].contactname != null;
+        //boolean newContact = data[i].contactname != null ||atrumsData  ;
+        if (data[i].contactname == null){
+        	newContact = (atrumsData[i].em_idt_firstname  != null || atrumsData[i].em_idt_lastname != null) ? true : false;
+        }else {
+        	newContact = true;	
+        }
 
         con = conn.getTransactionConnection();
 
@@ -180,7 +187,8 @@ public class ImportBPartner extends ImportProcess {
         if (newBPartner) { // Insert new BPartner
           C_BPartner_ID = SequenceIdData.getUUID();
           try {
-            no = ImportBPartnerData.insertBPartner(con, conn, C_BPartner_ID, I_BPartner_ID);
+           // no = ImportBPartnerData.insertBPartner(con, conn, C_BPartner_ID, I_BPartner_ID);
+        	  no = FileImportUtil.insertBPartner(con, conn, C_BPartner_ID, I_BPartner_ID);
             if (log4j.isDebugEnabled())
               log4j.debug("Insert BPartner = " + no);
             noInsert++;
@@ -256,20 +264,26 @@ public class ImportBPartner extends ImportProcess {
             continue;
           }
         } else if (newContact) { // New Contact
-          AD_User_ID = SequenceIdData.getUUID();
+
+        AD_User_ID = SequenceIdData.getUUID();
           try {
             if (data[i].contactname != null && !data[i].contactname.equals("")) {
-              no = ImportBPartnerData.insertBPContact(con, conn, AD_User_ID, C_BPartner_ID,
+              //no = ImportBPartnerData.insertBPContact(con, conn, AD_User_ID, C_BPartner_ID,
+            	no = FileImportUtil.insertBPContact(con, conn, AD_User_ID, C_BPartner_ID,
                   (C_BPartner_Location_ID.equals("0")) ? "NULL" : C_BPartner_Location_ID,
                   I_BPartner_ID);
               if (log4j.isDebugEnabled())
                 log4j.debug("Insert BP Contact = " + no);
-            } else {
-              AD_User_ID = "0";
+            } else if ( atrumsData[i].em_idt_firstname!= null && !atrumsData[i].em_idt_firstname.equals("")){
+            	no = FileImportUtil.insertBPContact(con, conn, AD_User_ID, C_BPartner_ID,
+                        (C_BPartner_Location_ID.equals("0")) ? "NULL" : C_BPartner_Location_ID,
+                        I_BPartner_ID);
+            }else {
+            	AD_User_ID = "0";
             }
           } catch (ServletException ex) {
             if (log4j.isDebugEnabled())
-              log4j.debug("Insert BP Contact - " + ex.toString());
+              log4j.debug("Insert BP Contact  - " + ex.toString());
             noInsert--;
             conn.releaseRollbackConnection(con);
             no = ImportBPartnerData.insertBPContactError(conn, ex.toString(), I_BPartner_ID);
