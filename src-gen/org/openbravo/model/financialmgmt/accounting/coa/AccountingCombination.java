@@ -136,6 +136,7 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_TIPORETENCIONACCTCOCOMPRAACCTLIST = "tipoRetencionAcctCOCompraAcctList";
     public static final String PROPERTY_CUSTOMERACCOUNTSCUSTOMERRECEIVABLESNOLIST = "customerAccountsCustomerReceivablesNoList";
     public static final String PROPERTY_CUSTOMERACCOUNTSCUSTOMERPREPAYMENTLIST = "customerAccountsCustomerPrepaymentList";
+    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTPAGOACCTLIST = "dataImportBusinessPartnerEMIdtPagoAcctList";
     public static final String PROPERTY_DATAIMPORTGLJOURNALLIST = "dataImportGLJournalList";
     public static final String PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEEXPENSESLIST = "employeeAccountsEmployeeExpensesList";
     public static final String PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEPREPAYMENTSLIST = "employeeAccountsEmployeePrepaymentsList";
@@ -346,6 +347,7 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_TIPORETENCIONACCTCOCOMPRAACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CUSTOMERACCOUNTSCUSTOMERRECEIVABLESNOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CUSTOMERACCOUNTSCUSTOMERPREPAYMENTLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTPAGOACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTGLJOURNALLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEEXPENSESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_EMPLOYEEACCOUNTSEMPLOYEEPREPAYMENTSLIST, new ArrayList<Object>());
@@ -1061,6 +1063,15 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
 
     public void setCustomerAccountsCustomerPrepaymentList(List<CustomerAccounts> customerAccountsCustomerPrepaymentList) {
         set(PROPERTY_CUSTOMERACCOUNTSCUSTOMERPREPAYMENTLIST, customerAccountsCustomerPrepaymentList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEMIdtPagoAcctList() {
+      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTPAGOACCTLIST);
+    }
+
+    public void setDataImportBusinessPartnerEMIdtPagoAcctList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEMIdtPagoAcctList) {
+        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTPAGOACCTLIST, dataImportBusinessPartnerEMIdtPagoAcctList);
     }
 
     @SuppressWarnings("unchecked")

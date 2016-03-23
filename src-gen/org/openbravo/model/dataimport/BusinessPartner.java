@@ -18,6 +18,8 @@
 */
 package org.openbravo.model.dataimport;
 
+import com.atrums.nomina.empleados.data.nePerfilRubro;
+
 import java.util.Date;
 
 import org.openbravo.base.structure.ActiveEnabled;
@@ -33,6 +35,7 @@ import org.openbravo.model.common.businesspartner.Location;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.common.geography.Country;
 import org.openbravo.model.common.geography.Region;
+import org.openbravo.model.financialmgmt.accounting.coa.AccountingCombination;
 /**
  * Entity class for entity DataImportBusinessPartner (stored in table I_BPartner).
  *
@@ -95,12 +98,32 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_IDTTIPOIDENTIFICACION = "idtTipoIdentificacion";
     public static final String PROPERTY_IDTEMAIL = "idtEmail";
     public static final String PROPERTY_IDTURL = "idtUrl";
+    public static final String PROPERTY_IDTFIRSTNAME = "idtFirstname";
+    public static final String PROPERTY_IDTLASTNAME = "idtLastname";
+    public static final String PROPERTY_IDTPBEMAIL = "idtPbemail";
+    public static final String PROPERTY_IDTISVENDOR = "idtIsvendor";
+    public static final String PROPERTY_IDTISCUSTOMER = "idtIscustomer";
+    public static final String PROPERTY_IDTISEMPLOYEE = "idtIsemployee";
+    public static final String PROPERTY_IDTISSALESREP = "idtIssalesrep";
+    public static final String PROPERTY_IDTISDISCAPACITADO = "idtIsdiscapacitado";
+    public static final String PROPERTY_IDTNDISCAPACITADO = "idtNdiscapacitado";
+    public static final String PROPERTY_IDTESTADOCIVIL = "idtEstadocivil";
+    public static final String PROPERTY_IDTFECHANACIMIENTO = "idtFechanacimiento";
+    public static final String PROPERTY_IDTCREDITLIMIT = "idtCreditlimit";
+    public static final String PROPERTY_IDTPAGOACCT = "idtPagoAcct";
+    public static final String PROPERTY_IDTNEPERFILRUBRO = "idtNePerfilRubro";
 
     public BusinessPartner() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_PROCESSED, false);
         setDefaultValue(PROPERTY_IMPORTPROCESSCOMPLETE, false);
+        setDefaultValue(PROPERTY_IDTISVENDOR, false);
+        setDefaultValue(PROPERTY_IDTISCUSTOMER, false);
+        setDefaultValue(PROPERTY_IDTISEMPLOYEE, false);
+        setDefaultValue(PROPERTY_IDTISSALESREP, false);
+        setDefaultValue(PROPERTY_IDTISDISCAPACITADO, false);
+        setDefaultValue(PROPERTY_IDTCREDITLIMIT, (long) 0);
     }
 
     @Override
@@ -522,6 +545,118 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setIdtUrl(String idtUrl) {
         set(PROPERTY_IDTURL, idtUrl);
+    }
+
+    public String getIdtFirstname() {
+        return (String) get(PROPERTY_IDTFIRSTNAME);
+    }
+
+    public void setIdtFirstname(String idtFirstname) {
+        set(PROPERTY_IDTFIRSTNAME, idtFirstname);
+    }
+
+    public String getIdtLastname() {
+        return (String) get(PROPERTY_IDTLASTNAME);
+    }
+
+    public void setIdtLastname(String idtLastname) {
+        set(PROPERTY_IDTLASTNAME, idtLastname);
+    }
+
+    public String getIdtPbemail() {
+        return (String) get(PROPERTY_IDTPBEMAIL);
+    }
+
+    public void setIdtPbemail(String idtPbemail) {
+        set(PROPERTY_IDTPBEMAIL, idtPbemail);
+    }
+
+    public Boolean isIdtIsvendor() {
+        return (Boolean) get(PROPERTY_IDTISVENDOR);
+    }
+
+    public void setIdtIsvendor(Boolean idtIsvendor) {
+        set(PROPERTY_IDTISVENDOR, idtIsvendor);
+    }
+
+    public Boolean isIdtIscustomer() {
+        return (Boolean) get(PROPERTY_IDTISCUSTOMER);
+    }
+
+    public void setIdtIscustomer(Boolean idtIscustomer) {
+        set(PROPERTY_IDTISCUSTOMER, idtIscustomer);
+    }
+
+    public Boolean isIdtIsemployee() {
+        return (Boolean) get(PROPERTY_IDTISEMPLOYEE);
+    }
+
+    public void setIdtIsemployee(Boolean idtIsemployee) {
+        set(PROPERTY_IDTISEMPLOYEE, idtIsemployee);
+    }
+
+    public Boolean isIdtIssalesrep() {
+        return (Boolean) get(PROPERTY_IDTISSALESREP);
+    }
+
+    public void setIdtIssalesrep(Boolean idtIssalesrep) {
+        set(PROPERTY_IDTISSALESREP, idtIssalesrep);
+    }
+
+    public Boolean isIdtIsdiscapacitado() {
+        return (Boolean) get(PROPERTY_IDTISDISCAPACITADO);
+    }
+
+    public void setIdtIsdiscapacitado(Boolean idtIsdiscapacitado) {
+        set(PROPERTY_IDTISDISCAPACITADO, idtIsdiscapacitado);
+    }
+
+    public String getIdtNdiscapacitado() {
+        return (String) get(PROPERTY_IDTNDISCAPACITADO);
+    }
+
+    public void setIdtNdiscapacitado(String idtNdiscapacitado) {
+        set(PROPERTY_IDTNDISCAPACITADO, idtNdiscapacitado);
+    }
+
+    public String getIdtEstadocivil() {
+        return (String) get(PROPERTY_IDTESTADOCIVIL);
+    }
+
+    public void setIdtEstadocivil(String idtEstadocivil) {
+        set(PROPERTY_IDTESTADOCIVIL, idtEstadocivil);
+    }
+
+    public Date getIdtFechanacimiento() {
+        return (Date) get(PROPERTY_IDTFECHANACIMIENTO);
+    }
+
+    public void setIdtFechanacimiento(Date idtFechanacimiento) {
+        set(PROPERTY_IDTFECHANACIMIENTO, idtFechanacimiento);
+    }
+
+    public Long getIdtCreditlimit() {
+        return (Long) get(PROPERTY_IDTCREDITLIMIT);
+    }
+
+    public void setIdtCreditlimit(Long idtCreditlimit) {
+        set(PROPERTY_IDTCREDITLIMIT, idtCreditlimit);
+    }
+
+    public AccountingCombination getIdtPagoAcct() {
+        return (AccountingCombination) get(PROPERTY_IDTPAGOACCT);
+    }
+
+    public void setIdtPagoAcct(AccountingCombination idtPagoAcct) {
+        set(PROPERTY_IDTPAGOACCT, idtPagoAcct);
+    }
+
+    public nePerfilRubro getIdtNePerfilRubro() {
+        return (nePerfilRubro) get(PROPERTY_IDTNEPERFILRUBRO);
+    }
+
+    public void setIdtNePerfilRubro(nePerfilRubro idtNePerfilRubro) {
+        set(PROPERTY_IDTNEPERFILRUBRO, idtNePerfilRubro);
     }
 
 }

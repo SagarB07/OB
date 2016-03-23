@@ -52,11 +52,13 @@ public class nePerfilRubro extends BaseOBObject implements Traceable, ClientEnab
     public static final String PROPERTY_NOMBRE = "nombre";
     public static final String PROPERTY_PROCESSED = "processed";
     public static final String PROPERTY_BUSINESSPARTNEREMNEPERFILRUBROIDLIST = "businessPartnerEmNePerfilRubroIdList";
+    public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTNEPERFILRUBROIDLIST = "dataImportBusinessPartnerEMIdtNePerfilRubroIDList";
     public static final String PROPERTY_NEPERFILRUBROLINELIST = "nePerfilRubroLineList";
 
     public nePerfilRubro() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_BUSINESSPARTNEREMNEPERFILRUBROIDLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTNEPERFILRUBROIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NEPERFILRUBROLINELIST, new ArrayList<Object>());
     }
 
@@ -152,6 +154,15 @@ public class nePerfilRubro extends BaseOBObject implements Traceable, ClientEnab
 
     public void setBusinessPartnerEmNePerfilRubroIdList(List<BusinessPartner> businessPartnerEmNePerfilRubroIdList) {
         set(PROPERTY_BUSINESSPARTNEREMNEPERFILRUBROIDLIST, businessPartnerEmNePerfilRubroIdList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<org.openbravo.model.dataimport.BusinessPartner> getDataImportBusinessPartnerEMIdtNePerfilRubroIDList() {
+      return (List<org.openbravo.model.dataimport.BusinessPartner>) get(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTNEPERFILRUBROIDLIST);
+    }
+
+    public void setDataImportBusinessPartnerEMIdtNePerfilRubroIDList(List<org.openbravo.model.dataimport.BusinessPartner> dataImportBusinessPartnerEMIdtNePerfilRubroIDList) {
+        set(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTNEPERFILRUBROIDLIST, dataImportBusinessPartnerEMIdtNePerfilRubroIDList);
     }
 
     @SuppressWarnings("unchecked")
