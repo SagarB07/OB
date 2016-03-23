@@ -20,10 +20,10 @@ public class FileImportUtil {
 		    strSql = strSql + 
 		      "			  INSERT INTO C_BPartner (C_BPartner_ID, AD_Client_ID, AD_Org_ID," +
 		      "          IsActive,Created,CreatedBy,Updated,UpdatedBy,Value,Name,Name2," +
-		      "          Description,DUNS,TaxID,NAICS,C_BP_Group_ID,IsSummary,em_co_email, em_co_nombres, em_co_apellidos, em_co_tipo_identificacion,em_co_natural_juridico )" +
+		      "          Description,DUNS,TaxID,NAICS,C_BP_Group_ID,IsSummary,em_co_email, em_co_nombres, em_co_apellidos, em_co_tipo_identificacion,em_co_natural_juridico,url )" +
 		      "  				  SELECT ?, AD_Client_ID, AD_Org_ID," +
 		      "            'Y',now(),CreatedBy,now(),UpdatedBy,Value,Name,Name2," +
-		      "            Description,DUNS,TaxID,NAICS,C_BP_Group_ID,'N',em_idt_pbemail, em_idt_nombres, em_idt_apellidos, em_idt_tipo_identificacion, em_idt_natural_juridico " +
+		      "            Description,DUNS,TaxID,NAICS,C_BP_Group_ID,'N',em_idt_pbemail, em_idt_nombres, em_idt_apellidos, em_idt_tipo_identificacion, em_idt_natural_juridico,em_idt_url" +
 		      "			  	  FROM I_BPartner" +
 		      "				    WHERE I_BPartner_ID=?";
 
