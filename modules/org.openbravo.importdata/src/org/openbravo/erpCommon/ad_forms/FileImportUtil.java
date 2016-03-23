@@ -20,10 +20,12 @@ public class FileImportUtil {
 		    strSql = strSql + 
 		      "			  INSERT INTO C_BPartner (C_BPartner_ID, AD_Client_ID, AD_Org_ID," +
 		      "          IsActive,Created,CreatedBy,Updated,UpdatedBy,Value,Name,Name2," +
-		      "          Description,DUNS,TaxID,NAICS,C_BP_Group_ID,IsSummary,em_co_email, em_co_nombres, em_co_apellidos, em_co_tipo_identificacion,em_co_natural_juridico,url )" +
+		      "          Description,DUNS,TaxID,NAICS,C_BP_Group_ID,IsSummary,em_co_email, em_co_nombres, em_co_apellidos, em_co_tipo_identificacion,em_co_natural_juridico,url,"
+		      + "iscustomer,so_creditlimit, isvendor, isemployee, issalesrep, em_no_isdiscapacitado, em_ne_num_car_discapacitado, em_no_fechanacimiento,em_no_genero,em_no_estadocivil, em_ne_perfil_rubro_id,em_no_pago_acct  )" +
 		      "  				  SELECT ?, AD_Client_ID, AD_Org_ID," +
 		      "            'Y',now(),CreatedBy,now(),UpdatedBy,Value,Name,Name2," +
-		      "            Description,DUNS,TaxID,NAICS,C_BP_Group_ID,'N',em_idt_pbemail, em_idt_nombres, em_idt_apellidos, em_idt_tipo_identificacion, em_idt_natural_juridico,em_idt_url" +
+		      "            Description,DUNS,TaxID,NAICS,C_BP_Group_ID,'N',em_idt_pbemail, em_idt_nombres, em_idt_apellidos, em_idt_tipo_identificacion, em_idt_natural_juridico,em_idt_url,"
+		      + "em_idt_iscustomer ,em_idt_creditlimit, em_idt_isvendor,em_idt_isemployee, em_idt_issalesrep,em_idt_isdiscapacitado, em_idt_ndiscapacitado,em_idt_fechanacimiento, em_idt_genero, em_idt_estadocivil, em_idt_ne_perfil_rubro_id, em_idt_pago_acct " +
 		      "			  	  FROM I_BPartner" +
 		      "				    WHERE I_BPartner_ID=?";
 
