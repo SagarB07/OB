@@ -25,44 +25,28 @@ v_valor_calculo NUMBER:=0;
 v_porcentaje_calculo NUMBER:=0;
 
 BEGIN
+
     select salario 
       into v_salario
       from no_contrato_empleado
      where c_bpartner_id = p_empleado_id
-       and isactive = 'Y';
+       and isactive = 'Y' order by  fecha_fin desc  limit 1;
     
-    select sum(rh.cantida_hora), 
-           ch.porcentaje
-      into v_total_horas,
-           v_porcentaje_calculo
-      from no_registro_hora_extra rh, 
-           no_config_hora_extra ch
-     where rh.c_bpartner_id = p_empleado_id
-       and rh.no_config_hora_extra_id = ch.no_config_hora_extra_id
-       and rh.c_period_id = p_period_id
-       and rh.procesado = 'N'
-       and ch.tipo_hora = 'EO' 
-     group by 2;
+    select ch.porcentaje
+      into v_porcentaje_calculo
+      from no_config_hora_extra ch
+     where ch.tipo_hora = 'EO';
            
-    select coalesce(max_h_extra,0)
-      into v_max_horas
-      from no_tipo_ingreso_egreso
-     where no_tipo_ingreso_egreso_id = p_tipo_ingreso_egreso_id;
-
-    IF( v_max_horas <= 0) THEN
-        v_valor_calculo = v_total_horas;
-    ELSE
-        IF(v_max_horas >= v_total_horas) THEN
-            v_valor_calculo = v_total_horas;
-        ELSE
-            v_valor_calculo = v_max_horas;
-        END IF;
-    END IF;
-    
     v_salario_hora:=v_salario/240;
     v_salario_hora_extra:= v_salario_hora*(100+v_porcentaje_calculo)/100 ;
 
-    RETURN coalesce(v_salario_hora_extra * v_valor_calculo, 0);
+    select valor 
+    into v_total_horas
+    from no_novedad_linea
+    where no_novedad_id=(select no_novedad_id from no_novedad where no_tipo_ingreso_egreso_id=p_tipo_ingreso_egreso_id)
+    and c_bpartner_id=p_empleado_id;
+
+    RETURN coalesce(v_salario_hora_extra * v_total_horas, 0);
 END NO_HORAS_EXTRAS_EO
 ]]></body>
     </function>

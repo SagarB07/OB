@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_DECIMO_TERCERO_MENSUAL">
+    <function name="NO_DECIMO_TERCERO_MENSUAL" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_period_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN
+
+    if exists(select * 
+                from no_contrato_empleado 
+               where isactive ='Y' and c_bpartner_id = p_empleado_id) then
+		return round( p_valor * 0.0833, 2);
+	else
+        return 0;
+    end if;
+END NO_DECIMO_TERCERO_MENSUAL
+]]></body>
+    </function>
+  </database>

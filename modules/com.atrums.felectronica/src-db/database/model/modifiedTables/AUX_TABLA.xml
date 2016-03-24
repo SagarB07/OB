@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-  <database name="MODIFIED TABLE AUX_TABLA">
-    <table name="AUX_TABLA">
-      <column name="EM_ATECFE_FECHA_AUTORI" primaryKey="false" required="false" type="VARCHAR" size="50" autoIncrement="false">
-        <default/>
-        <onCreateDefault/>
-      </column>
-    </table>
-  </database>

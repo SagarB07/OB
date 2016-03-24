@@ -2,12 +2,12 @@
   <database name="TRIGGER NE_VACACION_VAL_TRG">
     <trigger name="NE_VACACION_VAL_TRG" table="NO_VACACION" fires="before" insert="true" update="true" delete="false" foreach="row">
       <body><![CDATA[
-
 	v_days NUMBER;
 	v_linea NUMBER;
-
 	v_fecha_inicio timestamp without time zone;
 	v_fecha_fin timestamp without time zone;
+	v_em_ne_fecha_inicio timestamp without time zone;
+	v_em_ne_fecha_fin timestamp without time zone;
 BEGIN
 	select fecha_inicio, fecha_fin
 	into v_fecha_inicio, v_fecha_fin
@@ -22,17 +22,35 @@ BEGIN
 		raise '%', '@NE_FECHA_VAC_VAL@';
 	end if;
 	
+	select em_ne_fecha_inicio, em_ne_fecha_fin
+	into v_em_ne_fecha_inicio, v_em_ne_fecha_fin
+	from no_vacacion
+	where no_vacacion_id = :new.no_vacacion_id;
+
+	if v_em_ne_fecha_inicio is not null then
+		if date(v_em_ne_fecha_inicio) <> date(:new.em_ne_fecha_inicio) then
+			raise exception '%', '@NE_VAC_FEC_INI_MOD_VAL@';
+		end if;
+	end if;
+	
+	if v_em_ne_fecha_fin is not null then
+		if date(v_em_ne_fecha_fin) <> date(:new.em_ne_fecha_fin) then
+			raise exception '%', '@NE_VAC_FEC_INI_MOD_VAL@';
+		end if;
+	end if;
+
 	if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
 		raise '%', '@NE_NO_VACACION_FECHA_VAL@';
 	else
 		select max(em_ne_linea) 
 		into v_linea
-		from no_vacacion;
+		from no_vacacion
+		where no_contrato_empleado_id = :new.no_contrato_empleado_id;
 		
 		:new.em_ne_linea := v_linea + 10;
 
 		v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :new.em_ne_fecha_inicio::timestamp);
-		:new.em_ne_total_dias=to_number(v_days);
+		:new.em_ne_total_dias=to_number(v_days + 1);
 	end if;
 	return new; 
 
