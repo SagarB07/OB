@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-  <vector>
-    <versionInfo version="3.0.21083"/>
-    <columnDataChange tablename="AD_COLUMN" columnname="AD_REFERENCE_VALUE_ID" pkRow="2959">
-      <oldValue><![CDATA[21]]></oldValue>
-      <newValue><![CDATA[542DBBA308434483B006BBE8392C1327]]></newValue>
-    </columnDataChange>
-  </vector>
