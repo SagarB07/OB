@@ -51,6 +51,8 @@
     v_date_acct DATE;
     
     v_suma_valor NUMBER:= 0;
+    v_inicio_periodo  DATE;
+    v_fin_periodo  DATE;
 
 BEGIN
 
@@ -83,6 +85,8 @@ BEGIN
 	    v_period_ID:=Cur_Parameter.P_String; 
         END LOOP;
 
+	    v_inicio_periodo  := (select date(cp.startdate) from c_period cp where cp.c_period_id = v_period_ID);
+        v_fin_periodo     := (select date(cp.enddate) from c_period cp where cp.c_period_id = v_period_ID);
 
         FOR Cur_Empleado IN
         (select bp.c_bpartner_id, 
@@ -95,12 +99,13 @@ BEGIN
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=v_Client_ID
-            and bp.em_no_fechasalida is null
+            
             and ce.isactive='Y'
             and (date_trunc('month', ce.fecha_fin::DATE) >= date_trunc('month',now()::DATE)
                 or
                 date_trunc('month', ce.fecha_fin::DATE) >= date_trunc('month',TO_DATE((now()::DATE - interval '1 month'))::DATE)
                 )
+            and date(ce.fecha_inicio) <= date(v_fin_periodo)
             )
         LOOP
             v_Org_Emp_ID:=Cur_Empleado.ad_org_id;
@@ -109,10 +114,12 @@ BEGIN
 
             select dt.c_doctype_id into v_doctype_id
               from c_doctype dt
-             where dt.docbasetype = 'NO_NRP';
+             where dt.docbasetype = 'NO_NRP'
+               and ad_client_id = v_Client_ID;  
 
 
 	    v_date_acct := (select enddate from c_period where c_period_id = v_period_id);
+
 
             IF NOT EXISTS (select * from no_rol_pago_provision where ispago='Y' and docstatus<>'AN' and c_period_id=v_period_id and c_bpartner_id=Cur_Empleado.c_bpartner_id) THEN
 
@@ -134,20 +141,24 @@ BEGIN
 
                 FOR Cur_Rubro_Rol IN
                    (select cr.no_calcula_rubro_id,
-                           eie.no_tipo_ingreso_egreso_id,
-                           tie.isavance,
-                           tie.suma_ingreso
-                      from no_empleado_ing_egr eie,
-                           no_tipo_ingreso_egreso tie,
-                           no_calcula_rubro cr
-                     where eie.c_bpartner_id = Cur_Empleado.c_bpartner_id
-                       and tie.no_tipo_ingreso_egreso_id = eie.no_tipo_ingreso_egreso_id
-                       and cr.no_calcula_rubro_id = tie.no_calcula_rubro_id
-                       and tie.isactive ='Y'
-                       and eie.isactive = 'Y'
-                       and cr.isactive = 'Y'
-                       and tie.isprovision = 'N'
-                       order by suma_ingreso desc, tie.isingreso asc)
+		           iee.no_tipo_ingreso_egreso_id,
+		           tie.isavance,
+		           tie.suma_ingreso, 
+		           iee.c_bpartner_id,
+		           iee.c_acctschema_id,
+		           iee.no_cuenta_ingreso_acct,
+		           iee.no_cuenta_egreso_acct
+		  from no_cb_empleado_acct iee,
+		       no_tipo_ingreso_egreso tie,
+		       no_calcula_rubro cr  
+		 where iee.c_bpartner_id = Cur_Empleado.c_bpartner_id
+		   and tie.no_tipo_ingreso_egreso_id = iee.no_tipo_ingreso_egreso_id
+		   and cr.no_calcula_rubro_id = tie.no_calcula_rubro_id
+		   and tie.isactive ='Y'
+		   and iee.isactive = 'Y'
+		   and cr.isactive = 'Y'
+		   and tie.isprovision = 'N'
+		 order by suma_ingreso desc, tie.isingreso asc)
                 LOOP
 
                 select get_uuid() into v_rol_pago_prov_line_id;
@@ -193,12 +204,16 @@ BEGIN
 
                         IF Cur_Calcula_Robro_L.isprocedure = 'Y' THEN
                             IF Cur_Calcula_Robro_L.procedure is null OR Cur_Calcula_Robro_L.procedure = '' THEN
-                                v_Message:='@NO_NoExistProcedure@' || Cur_Calcula_Robro_L.nombre;
-                                RAISE v_Message;
-                            END IF;
-                            v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| Cur_Empleado.c_bpartner_id ||''' ,'''||Cur_Rubro_Rol.no_tipo_ingreso_egreso_id || ''',' || v_suma_valor||','''||v_period_id || ''');';
-                            EXECUTE IMMEDIATE v_qry into v_valor_aux;
-                            v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
+                                
+                                v_Message:='No existe el procedimiento de calculo para este rubro: ' || Cur_Calcula_Robro_L.nombre;
+                                
+                                v_valor_rubro := 0;
+                            ELSE
+                                v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| Cur_Empleado.c_bpartner_id ||''' ,'''||Cur_Rubro_Rol.no_tipo_ingreso_egreso_id || ''',' || v_suma_valor||','''||v_period_id || ''');';
+                                EXECUTE IMMEDIATE v_qry into v_valor_aux;
+                                v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
+                                v_Message:='';
+                            END IF; 
                         
                         ELSE
                             IF Cur_Calcula_Robro_L.issalario = 'Y' THEN
@@ -260,12 +275,24 @@ BEGIN
                 END IF;
 
                 INSERT INTO no_rol_pago_provision_line
-                            (no_rol_pago_provision_line_id,        ad_client_id,       ad_org_id,                                  isactive,
-                             created,                              createdby,          updated,                                    updatedby,
-                             no_rol_pago_provision_id,             line,               no_tipo_ingreso_egreso_id,                  valor)
-                      VALUES(v_rol_pago_prov_line_id,              v_Client_ID,        v_Org_Emp_ID,                                   'Y',
-                             current_timestamp,                    v_User_ID,          current_timestamp,                          v_User_ID,
-                             v_rol_pago_provision_id,              v_line,             Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    round(v_valor_rubro,2));
+                            (no_rol_pago_provision_line_id,        ad_client_id,       			ad_org_id,                                  isactive,
+                             created,                              createdby,          			updated,                                    updatedby,
+                             no_rol_pago_provision_id,             line,               			no_tipo_ingreso_egreso_id,                  valor, 
+                             em_ne_observacion,                    c_acctschema_id,    			no_cuenta_ingreso_acct,                     no_cuenta_egreso_acct)
+                      VALUES(v_rol_pago_prov_line_id,              v_Client_ID,        			v_Org_Emp_ID,                                   'Y',
+                             current_timestamp,                    v_User_ID,          			current_timestamp,                          v_User_ID,
+                             v_rol_pago_provision_id,              v_line,             			Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    round(v_valor_rubro,2),
+                             v_Message,                            Cur_Rubro_Rol.c_acctschema_id,       Cur_Rubro_Rol.no_cuenta_ingreso_acct,       Cur_Rubro_Rol.no_cuenta_egreso_acct);
+
+               IF v_Message = '' THEN
+                    UPDATE no_rol_pago_provision 
+                       SET em_ne_observacion = ''
+                     WHERE no_rol_pago_provision_id = v_rol_pago_provision_id;
+               ELSE
+                    UPDATE no_rol_pago_provision 
+                       SET em_ne_observacion = 'ERROR'
+                     WHERE no_rol_pago_provision_id = v_rol_pago_provision_id;
+               END IF;
 
             IF Cur_Rubro_Rol.suma_ingreso = 'Y' THEN
                 v_suma_valor := round(v_suma_valor,2) + v_valor_rubro;

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-  <database name="FUNCTION NO_HORAS_EXTRAS_EO">
-    <function name="NO_HORAS_EXTRAS_EO" type="NUMERIC">
+  <database name="FUNCTION NO_HORAS_NOCTURNAS">
+    <function name="NO_HORAS_NOCTURNAS" type="NUMERIC">
       <parameter name="p_empleado_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
@@ -35,7 +35,7 @@ BEGIN
     select ch.porcentaje
       into v_porcentaje_calculo
       from no_config_hora_extra ch
-     where ch.tipo_hora = 'EO';
+     where ch.tipo_hora = 'JN';
            
     v_salario_hora:=v_salario/240;
     v_salario_hora_extra:= v_salario_hora*(100+v_porcentaje_calculo)/100 ;
@@ -47,7 +47,7 @@ BEGIN
     and c_bpartner_id=p_empleado_id;
 
     RETURN coalesce(v_salario_hora_extra * v_total_horas, 0);
-END NO_HORAS_EXTRAS_EO
+END NO_HORAS_NOCTURNAS
 ]]></body>
     </function>
   </database>
