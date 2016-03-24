@@ -9,7 +9,7 @@
 	v_dias NUMBER(10);
 	v_vacacion NUMBER(10, 2);
 	v_div NUMBER(10, 2);
-	v_total_dias decimal(10, 2) := 0;
+	v_total_dias decimal(10) := 0;
 BEGIN
 	for v_cursor in (
 		select ce.* 
@@ -38,17 +38,16 @@ BEGIN
 			where no_contrato_empleado_id = v_cursor.no_contrato_empleado_id
 			)
 		loop
-			if v_cursor_1.em_ne_docstatus = 'TM' and 
+			if v_cursor_1.em_ne_estado = '1' and 
 					date(v_cursor_1.em_ne_fecha_inicio) < now() then
 				v_total_dias := v_total_dias + v_cursor_1.em_ne_total_dias;
 			end if;
 		end loop;
 
--- 		raise exception '%', v_cursor.no_contrato_empleado_id;
-
 		update no_contrato_empleado
 		set em_ne_vacacion_prop = v_vacacion,
-			em_ne_vacacion_tom = v_total_dias
+			em_ne_vacacion_tom = v_total_dias,
+			em_ne_vacacion_res = v_vacacion - v_total_dias
 		where no_contrato_empleado_id = v_cursor.no_contrato_empleado_id;
 
 		v_total_dias := 0;

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NE_LINEA_TRG">
+    <function name="NE_LINEA_TRG" type="VARCHAR">
+      <body><![CDATA[v_linea NUMBER;
+BEGIN
+	select max(em_ne_linea) 
+	into v_linea
+	from no_vacacion;
+	
+	new.em_ne_linea := v_linea + 10;
+
+	return new;
+END NE_LINEA_TRG
+]]></body>
+    </function>
+  </database>

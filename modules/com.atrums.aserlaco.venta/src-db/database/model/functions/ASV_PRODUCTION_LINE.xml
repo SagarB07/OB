@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ASV_PRODUCTION_LINE">
+    <function name="ASV_PRODUCTION_LINE" type="NULL">
+      <parameter name="v_m_production_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_cursor RECORD;
+	v_cursor_1 RECORD;
+	v_line NUMBER(10,0) := 0;
+	v_c_uom_id character varying(32);
+	v_m_locator_id character varying(32);
+	v_bnd character(1) := 'Y';
+	v_movementqty NUMBER;
+BEGIN
+	FOR v_cursor IN 
+		(select pp.m_productionplan_id, 
+			p.ad_client_id, 
+			p.ad_org_id, 
+			p.createdby, 
+			p.updatedby, 
+			pp.m_product_id, 
+			pp.productionqty,
+			pp.m_locator_id
+		from m_production p, m_productionplan pp
+		where p.m_production_id = pp.m_production_id
+		and p.m_production_id = v_m_production_id)
+	loop
+		v_line := v_line + 10;
+		
+		select c_uom_id into v_c_uom_id from m_product where m_product_id = v_cursor.m_product_id;
+		
+		select m_locator_id into v_m_locator_id 
+		from m_locator
+		where ad_org_id = v_cursor.ad_org_id
+		and value = 'Transformación';
+		
+		INSERT INTO m_productionline (
+			m_productionline_id, m_productionplan_id, line, 
+			ad_client_id, ad_org_id, isactive, 
+			created, createdby, updated, 
+			updatedby, m_product_id, movementqty,
+			m_locator_id, description, c_uom_id,
+			m_attributesetinstance_id
+		) VALUES (
+			get_uuid(), v_cursor.m_productionplan_id, v_line, 
+			v_cursor.ad_client_id, v_cursor.ad_org_id, 'Y', 
+			now(), v_cursor.createdby, now(), 
+			v_cursor.updatedby, v_cursor.m_product_id, v_cursor.productionqty,
+			v_m_locator_id, null, v_c_uom_id,
+			null
+		);
+		
+		for v_cursor_1 in 
+			(select pb.m_productbom_id,
+				pb.bomqty
+			from m_product_bom pb
+			where pb.m_product_id = v_cursor.m_product_id)
+		loop
+			v_line := v_line + 10;
+			
+			select c_uom_id into v_c_uom_id from m_product where m_product_id = v_cursor_1.m_productbom_id;
+
+-- 			select l.m_locator_id into v_m_locator_id
+-- 			from m_storage_detail d, m_locator l, m_warehouse w
+-- 			where d.ad_org_id = v_cursor.AD_Org_ID
+-- 			and d.ad_org_id = l.ad_org_id
+-- 			and d.m_product_id = v_cursor_1.m_productbom_id
+-- 			and d.m_locator_id = l.m_locator_id
+-- 			and d.qtyonhand > 0
+-- 			and w.m_warehouse_id = l.m_warehouse_id;
+
+			select m_locator_id into v_m_locator_id 
+			from m_storage_detail
+			where ad_org_id = v_cursor.AD_Org_ID
+			and m_product_id = v_cursor_1.m_productbom_id
+			and qtyonhand > 0
+			limit 1;
+				
+			v_movementqty := (v_cursor.productionqty * v_cursor_1.bomqty * -1);
+			
+			INSERT INTO m_productionline (
+			  M_ProductionLine_ID, M_ProductionPlan_ID, Line, AD_Client_ID,
+			  AD_Org_ID, IsActive, Created, CreatedBy,
+			  Updated, UpdatedBy, M_Product_ID, MovementQty,
+			  M_Locator_ID, Description, C_UOM_ID,
+			  M_AttributeSetInstance_ID
+			) VALUES (
+			  get_uuid(), v_cursor.M_ProductionPlan_ID, v_Line, v_cursor.AD_Client_ID,
+			  v_cursor.AD_Org_ID, 'Y', now(), v_cursor.createdby,
+			  now(), v_cursor.updatedby, v_cursor_1.m_productbom_id, v_movementqty,
+			  v_m_locator_id, null, v_c_uom_id,
+			  null
+			);
+		end loop;
+	v_line := 0;
+    END LOOP;
+    RETURN;
+END ASV_PRODUCTION_LINE
+]]></body>
+    </function>
+  </database>

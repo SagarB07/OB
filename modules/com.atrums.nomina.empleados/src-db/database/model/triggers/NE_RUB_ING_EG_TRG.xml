@@ -34,17 +34,14 @@ BEGIN
 						get_uuid(), :new.ad_client_id, :new.ad_org_id,
 						'Y', now(), :new.createdby,
 						now(), :new.updatedby, :new.c_bpartner_id,
-						(select c_acctschema_id from c_acctschema where ad_client_id = :new.ad_client_id and ad_org_id = :new.ad_org_id), 
-						v_cursor.ne_debe_acct, v_cursor.no_tipo_ingreso_egreso_id,
+						'392B29E2D71F4D4196C1C7EE2BE86824', v_cursor.ne_debe_acct, v_cursor.no_tipo_ingreso_egreso_id,
 						v_cursor.ne_haber_acct
 					);					
 				end if;
 			end loop;
 		end if;		
 	end if;
-
 	return new;
-
 END NE_RUB_ING_EG_TRG
 ]]></body>
     </trigger>

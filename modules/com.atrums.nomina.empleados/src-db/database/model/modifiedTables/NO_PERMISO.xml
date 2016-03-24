@@ -5,13 +5,5 @@
         <default/>
         <onCreateDefault/>
       </column>
-      <column name="EM_NE_PROCESAR" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
-        <default><![CDATA[PA]]></default>
-        <onCreateDefault/>
-      </column>
-      <column name="EM_NE_ESTADO" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
-        <default><![CDATA[BR]]></default>
-        <onCreateDefault/>
-      </column>
     </table>
   </database>

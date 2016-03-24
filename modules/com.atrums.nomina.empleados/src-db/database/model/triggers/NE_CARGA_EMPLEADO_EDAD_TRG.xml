@@ -4,11 +4,11 @@
       <body><![CDATA[
 
 BEGIN
-	IF date(:NEW.fecha_nacimiento) < date(now()) THEN
+	IF date(:NEW.fecha_nacimiento) < date(NOW()) THEN
 		:new.em_ne_edad := date_part('year', age(:new.fecha_nacimiento))::numeric;
 		return new;
 	ELSE 
-	 RAISE NO_DATA_FOUND;
+		RAISE NO_DATA_FOUND;
 	END IF;
 END NE_CARGA_EMPLEADO_EDAD_TRG
 ]]></body>

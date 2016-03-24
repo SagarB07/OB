@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+  <vector>
+    <versionInfo version="3.0.20267"/>
+    <columnRequiredChange tableName="CO_RETENCION_COMPRA" columnName="NO_AUTORIZACION">
+      <required>false</required>
+    </columnRequiredChange>
+    <columnDataChange tablename="AD_MENU" columnname="NAME" pkRow="3575716B566D40C0A07D539FD9C5B3EA">
+      <oldValue><![CDATA[Estado de Resultado]]></oldValue>
+      <newValue><![CDATA[Estado de Centro de Costos]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_MENU" columnname="DESCRIPTION" pkRow="3575716B566D40C0A07D539FD9C5B3EA">
+      <oldValue><![CDATA[Estado de Resultado]]></oldValue>
+      <newValue><![CDATA[Estado de Centro de Costos]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="DEFAULTVALUE" pkRow="6AFB295FEF6B4CB6B2C538A058CE0577">
+      <oldValue><![CDATA[@SQL=SELECT Co_Nro_Aut_Sri AS DefaultValue FROM co_aut_sri WHERE isactive='Y' and c_doctype_id = (select c_doctype_id from c_doctype where ad_table_id = '5F3A4CF997BA41BFB7C547777AF7CC1C' and ad_client_id = @AD_CLIENT_ID@ and ad_org_id = @AD_ORG_ID@ )]]></oldValue>
+      <newValue><![CDATA[@SQL=SELECT Co_Nro_Aut_Sri AS DefaultValue FROM co_aut_sri WHERE isactive='Y' and c_doctype_id = (select c_doctype_id from c_doctype where ad_table_id = '5F3A4CF997BA41BFB7C547777AF7CC1C' limit 1)]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_COLUMN" columnname="ISMANDATORY" pkRow="6AFB295FEF6B4CB6B2C538A058CE0577">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_REF_TABLE" columnname="WHERECLAUSE" pkRow="22F546D49D3A48E1B2B4F50446A8DE58">
+      <oldValue><![CDATA[C_DocType.AD_Client_ID=@#AD_Client_ID@ AND (@AD_Org_ID@ <> '0' OR COALESCE(@AD_Org_ID@,'-1')='-1')]]></oldValue>
+      <newValue><![CDATA[C_DocType.AD_Client_ID=@#AD_Client_ID@ AND (@AD_Org_ID@ <> '0' OR COALESCE(@AD_Org_ID@,'-1')='-1') 
+AND  (case when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = 'CB4D46B32CE54FE68446457A02D011AB' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = 'E00B67CA25C345399639332F66FCF8D7' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = '78B09BEB68A04CF5B2D0EF35A6B3A5C9' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = '429112F6E5FC4656AF91E2ED45F2F20F' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = '7C3B64AFC355473782169E39A58693B2' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = '5A5DA6AF81914CEE8C9691E3F861DF03' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = '66EB9695DFE3469E8037ABA5F846F59E' then em_atecfe_fac_elec = 'N' 
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = '4D117E6EE259445D9D398A0D67085F7E' then em_atecfe_fac_elec = 'N'
+           when (select c_doctypetarget_id from c_invoice where c_invoice_id = @C_Invoice_ID@) = 'AFFD4594FB734E9682D5769669A9D471' then em_atecfe_fac_elec = 'N'
+     else 
+         em_atecfe_fac_elec in ('Y','N')
+     end)]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TAB" columnname="ISACTIVE" pkRow="134">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="1108">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="1109">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DISPLAYLOGIC" pkRow="2777">
+      <oldValue><![CDATA[@DocStatus@!'CL'&@DocStatus@!'VO'&@InvoiceProcessButton@='']]></oldValue>
+      <newValue><![CDATA[@#AD_User_Id@='8E466269B73F465BA81196D1E14D27E6' | @#AD_User_Id@='3C99FF3EA2AF41A99C37F4472BBB1588' |
+@#AD_User_Id@='100' ]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800003">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800004">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800005">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800006">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800023">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800024">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800025">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800026">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800157">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="800158">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DISPLAYLOGIC" pkRow="4DC26D45FC1B4588BA88C55B2B73C482">
+      <oldValue/>
+      <newValue><![CDATA[@#AD_User_Id@='8E466269B73F465BA81196D1E14D27E6' | @#AD_User_Id@='3C99FF3EA2AF41A99C37F4472BBB1588' |
+@#AD_User_Id@='100'  ]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="4DC26D45FC1B4588BA88C55B2B73C482">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="4DC26D45FC1B4588BA88C55B2B73C482">
+      <oldValue><![CDATA[0]]></oldValue>
+      <newValue><![CDATA[190]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DISPLAYLOGIC" pkRow="8B59A07EB4C2475AE040007F010031CA">
+      <oldValue><![CDATA[@DocStatus@!'CL'&@DocStatus@!'VO']]></oldValue>
+      <newValue><![CDATA[(@DocStatus@!'CL'&@DocStatus@!'VO')&(@EM_Atecfe_Docstatus@!'PD'&@Docstatus@!'DR')]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="AF5E7640E88E42FD9FBB795EE5536138">
+      <oldValue/>
+      <newValue><![CDATA[150]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="F3494DC75C9C49B1B50B7544DFBE5A02">
+      <oldValue/>
+      <newValue><![CDATA[170]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2554D84E040007F01005FEC">
+      <oldValue><![CDATA[52]]></oldValue>
+      <newValue><![CDATA[92]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A25A4D84E040007F01005FEC">
+      <oldValue><![CDATA[72]]></oldValue>
+      <newValue><![CDATA[112]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2C14D84E040007F01005FEC">
+      <oldValue><![CDATA[122]]></oldValue>
+      <newValue><![CDATA[162]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2C74D84E040007F01005FEC">
+      <oldValue><![CDATA[112]]></oldValue>
+      <newValue><![CDATA[152]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2F24D84E040007F01005FEC">
+      <oldValue><![CDATA[82]]></oldValue>
+      <newValue><![CDATA[122]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A32A4D84E040007F01005FEC">
+      <oldValue><![CDATA[102]]></oldValue>
+      <newValue><![CDATA[142]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A32C4D84E040007F01005FEC">
+      <oldValue><![CDATA[92]]></oldValue>
+      <newValue><![CDATA[132]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A3DE4D84E040007F01005FEC">
+      <oldValue><![CDATA[62]]></oldValue>
+      <newValue><![CDATA[102]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="8266E9ACD87C92BFE040007F01004ECB">
+      <oldValue><![CDATA[32]]></oldValue>
+      <newValue><![CDATA[52]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="91616B336B1743C7A948170A27438130">
+      <oldValue><![CDATA[42]]></oldValue>
+      <newValue><![CDATA[72]]></newValue>
+    </columnDataChange>
+  </vector>

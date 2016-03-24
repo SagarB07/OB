@@ -15,17 +15,6 @@ BEGIN
 		raise exception '%', '@NE_HORA_PARCIAL_EXCEPTION@';
 	end if;
 
-	select fecha_inicio
-	into v_fecha_inicio
-	from no_contrato_empleado
-	where no_contrato_empleado_id = :new.no_contrato_empleado_id;
-
-	if v_fecha_inicio is not null then
-		if date(v_fecha_inicio) <> date(:new.fecha_inicio) then
-			raise exception '%', '@NE_CON_EMP_FEC_INI_MOD_VAL@';
-		end if;
-	end if;
-
 	IF date(:NEW.fecha_fin) > date(:new.fecha_inicio) THEN
 		select fecha_inicio 
 		into v_fecha_inicio
@@ -79,7 +68,7 @@ BEGIN
 
 		return new;
 	ELSE 
-	 RAISE NO_DATA_FOUND;
+		RAISE NO_DATA_FOUND;
 	END IF;
 
 END NE_VAL_FECHA_FINAL_TRG

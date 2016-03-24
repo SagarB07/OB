@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE M_INOUT">
+    <table name="M_INOUT" primaryKey="M_INOUT_KEY">
+      <column name="EM_ATECFE_DOCSTATUS" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default><![CDATA[PD]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_ATECFE_DOCACTION" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default><![CDATA[PR]]></default>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_ATECFE_MENOBSERROR_SRI" primaryKey="false" required="false" type="VARCHAR" size="500" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_ATECFE_CODIGO_ACC" primaryKey="false" required="false" type="VARCHAR" size="49" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_ATECFE_DOCUMENTO_XML" primaryKey="false" required="false" type="BLOB" size="4000" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

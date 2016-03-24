@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION ASV_RECHAZADO_CHECK_TRG">
+    <function name="ASV_RECHAZADO_CHECK_TRG" type="VARCHAR">
+      <body><![CDATA[DECLARE
+
+BEGIN
+    if new.rechazado > 0 then
+        new.chk_rechazado = 'Y';
+    end if;
+    if new.rechazado = 0 then
+        new.chk_rechazado = 'N';
+    end if;
+    RETURN NEW;
+END ASV_RECHAZADO_CHECK_TRG
+]]></body>
+    </function>
+  </database>
