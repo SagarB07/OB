@@ -29,7 +29,7 @@ import org.openbravo.model.financialmgmt.accounting.AccountingFact;
 import org.openbravo.model.financialmgmt.accounting.FIN_FinancialAccountAccounting;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 
-import com.atrums.nomina.data.noCbEmpleadoAcct;
+//import com.atrums.nomina.data.noCbEmpleadoAcct;
 import com.atrums.nomina.data.noRolPagoProvision;
 import com.atrums.nomina.data.noRolPagoProvisionLine;
 
@@ -149,8 +149,8 @@ public class RolPagoProceso extends AcctServer {
             + noRolPago.getBusinessPartner().getId() + "'");
 
         // Desde no_cb_empleado_acc
-        OBQuery<noCbEmpleadoAcct> obqParameters = OBDal.getInstance().createQuery( //
-            noCbEmpleadoAcct.class, whereClause2.toString());
+        OBQuery<noRolPagoProvisionLine> obqParameters = OBDal.getInstance().createQuery( //
+            noRolPagoProvisionLine.class, whereClause2.toString());
 
         if (list.getRubro().isEsIngreso()) {
 
