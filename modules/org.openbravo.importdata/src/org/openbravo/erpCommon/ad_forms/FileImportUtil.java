@@ -211,5 +211,178 @@ public class FileImportUtil {
 	    return datoCampo;
 	  }  
 	
-	
+	/**
+	 * @param columnname
+	 * @param field
+	 * @return
+	 * @throws ServletException 
+	 */
+	public static String findFieldId(Connection conn, ConnectionProvider connectionProvider, String columnname, String field) throws ServletException{
+	    String strSql = "";
+	    ResultSet result = null;
+	    String strReturn = null;
+	    PreparedStatement st = null;
+	    if(columnname.equals("C_UOM_ID")){
+		    strSql = strSql + 
+		  	      "      SELECT u.c_uom_id" +
+		  	      "      FROM C_Uom u" +
+		  	      "      WHERE u.name ilike '" + field + "'";
+		    try {
+			    st = connectionProvider.getPreparedStatement(strSql);
+
+			      result = st.executeQuery();
+			      if(result.next()) {
+			        strReturn = "'" + UtilSql.getValue(result, "c_uom_id") + "'";
+			      }
+			      result.close();
+			    } catch(SQLException e){
+			      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+			      if(result==null) {
+			    	  
+			      }
+			      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+			    } catch(Exception ex){
+			      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+			      throw new ServletException("@CODE=@" + ex.getMessage());
+			    } finally {
+			      try {
+			        connectionProvider.releasePreparedStatement(st);
+			      } catch(Exception ignore){
+			        ignore.printStackTrace();
+			      }
+			    }
+	    }
+	    if(columnname.equals("M_Product_Category_ID")){
+		    strSql = strSql + 
+		  	      "      SELECT c.m_product_category_id" +
+		  	      "      FROM m_product_category c" +
+		  	      "      WHERE c.name ilike '" + field + "'";
+		    try {
+			    st = connectionProvider.getPreparedStatement(strSql);
+
+			      result = st.executeQuery();
+			      if(result.next()) {
+			        strReturn = "'" + UtilSql.getValue(result, "m_product_category_id") + "'";
+			      }
+			      result.close();
+			    } catch(SQLException e){
+			      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+			      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+			    } catch(Exception ex){
+			      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+			      throw new ServletException("@CODE=@" + ex.getMessage());
+			    } finally {
+			      try {
+			        connectionProvider.releasePreparedStatement(st);
+			      } catch(Exception ignore){
+			        ignore.printStackTrace();
+			      }
+			    }
+	    }
+	    if(columnname.equals("EM_Idt_C_Taxcategory_ID")){
+		    strSql = strSql + 
+		  	      "      SELECT C_TaxCategory_id" +
+		  	      "      FROM C_TaxCategory" +
+		  	      "      WHERE name ilike '" + field + "'";
+		    try {
+			    	st = connectionProvider.getPreparedStatement(strSql);
+					result = st.executeQuery();
+					if(result.next()) {
+						strReturn = "'" + UtilSql.getValue(result, "C_TaxCategory_id") + "'";
+					}
+					result.close();
+			    } catch(SQLException e){
+			      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+			      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+			    } catch(Exception ex){
+			      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+			      throw new ServletException("@CODE=@" + ex.getMessage());
+			    } finally {
+			      try {
+			        connectionProvider.releasePreparedStatement(st);
+			      } catch(Exception ignore){
+			        ignore.printStackTrace();
+			      }
+			    }
+	    }
+	    if(columnname.equals("EM_Idt_Generic_Product_ID")){
+		    strSql = strSql + 
+		  	      "      SELECT p.m_product_id" +
+		  	      "      FROM m_product p" +
+		  	      "      WHERE p.name ilike '" + field + "'";
+		    try {
+			    	st = connectionProvider.getPreparedStatement(strSql);
+					result = st.executeQuery();
+					if(result.next()) {
+						strReturn = "'" + UtilSql.getValue(result, "m_product_id") + "'";
+					}
+					result.close();
+			    } catch(SQLException e){
+			      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+			      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+			    } catch(Exception ex){
+			      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+			      throw new ServletException("@CODE=@" + ex.getMessage());
+			    } finally {
+			      try {
+			        connectionProvider.releasePreparedStatement(st);
+			      } catch(Exception ignore){
+			        ignore.printStackTrace();
+			      }
+			    }
+	    }
+	    if(columnname.equals("EM_Idt_C_Uom_Weight_ID")){
+		    strSql = strSql + 
+		  	      "      SELECT u.c_uom_id" +
+		  	      "      FROM C_Uom u" +
+		  	      "      WHERE u.name ilike '" + field + "'";
+		    try {
+			    	st = connectionProvider.getPreparedStatement(strSql);
+					result = st.executeQuery();
+					if(result.next()) {
+						strReturn = "'" + UtilSql.getValue(result, "c_uom_id") + "'";
+					}
+					result.close();
+			    } catch(SQLException e){
+			      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+			      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+			    } catch(Exception ex){
+			      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+			      throw new ServletException("@CODE=@" + ex.getMessage());
+			    } finally {
+			      try {
+			        connectionProvider.releasePreparedStatement(st);
+			      } catch(Exception ignore){
+			        ignore.printStackTrace();
+			      }
+			    }
+	    }
+	    if(columnname.equals("EM_Idt_M_Brand_ID")){
+		    strSql = strSql + 
+		  	      "      SELECT b.m_brand_id" +
+		  	      "      FROM m_brand b" +
+		  	      "      WHERE b.name ilike '" + field + "'";
+		    try {
+			    	st = connectionProvider.getPreparedStatement(strSql);
+					result = st.executeQuery();
+					if(result.next()) {
+						strReturn = "'" + UtilSql.getValue(result, "m_brand_id") + "'";
+					}
+					result.close();
+			    } catch(SQLException e){
+			      log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
+			      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+			    } catch(Exception ex){
+			      log4j.error("Exception in query: " + strSql + "Exception:"+ ex);
+			      throw new ServletException("@CODE=@" + ex.getMessage());
+			    } finally {
+			      try {
+			        connectionProvider.releasePreparedStatement(st);
+			      } catch(Exception ignore){
+			        ignore.printStackTrace();
+			      }
+			    }
+	    }
+	    return(strReturn);
+	}
 }

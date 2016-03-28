@@ -281,7 +281,6 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 	  return campo;
   }
   
-
   private OBError importarFichero(VariablesSecureApp vars, FieldProvider[] data2, HttpServletRequest request, HttpServletResponse response, String strAdImpformatId)    throws ServletException, IOException {
     Connection con = null;
     StringBuffer strFields = new StringBuffer("");
@@ -318,7 +317,8 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
           if ((data[j].datatype.equals("C")) && (!data[j].constantvalue.equals(""))) {
             strValues.append(data[j].constantvalue);
             constant = constant + 1;
-          } else
+          } 
+          else
           strValues.append(parseField(data2[i].getField(String.valueOf(j - constant)),data[j].fieldlength, data[j].datatype, data[j].dataformat, data[j].decimalpoint,data[j].referencename));
          //System.out.println(data2[i].getField(String.valueOf(j - constant)));
          
@@ -335,6 +335,110 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         	  strFields = obtenerCodigosContrato (con, this,strFields, valorCampoTemporal );
         	  if (strFields.toString().equals(auxStrFields.toString())){
         		  strFields.append(strValues);  
+        	  }
+          }else if (strTable.equals("I_Product")){
+        	  if(data[j].columnname.equals("C_UOM_ID")){
+        		  String strFieldId = null;
+        		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
+        		  if(strFieldId==null){
+        			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+        	              + "No se encontró la unidad de medida del producto");
+        	          releaseRollbackConnection(con);
+        	          return myMessage;
+        		  }else{
+        			  strFields.append(strFieldId);
+        		  }
+        	  }else if(data[j].columnname.equals("M_Product_Category_ID")){
+        		  String strFieldId = null;
+        		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
+        		  if(strFieldId==null){
+        			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+        	              + "No se encontró la categoría del producto");
+        	          releaseRollbackConnection(con);
+        	          return myMessage;
+        		  }else{
+        			  strFields.append(strFieldId);
+        		  }
+        	  }else if(data[j].columnname.equals("EM_Idt_C_Taxcategory_ID")){
+        		  String strFieldId = null;
+        		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
+        		  if(strFieldId==null){
+        			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+        	              + "No se encontró la categoría de impuestos del producto");
+        	          releaseRollbackConnection(con);
+        	          return myMessage;
+        		  }else{
+        			  strFields.append(strFieldId);
+        		  }
+        	  }else if(data[j].columnname.equals("EM_Idt_C_Taxcategory_ID")){
+        		  String strFieldId = null;
+        		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
+        		  if(strFieldId==null){
+        			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+        	              + "No se encontró la categoría de impuestos del producto");
+        	          releaseRollbackConnection(con);
+        	          return myMessage;
+        		  }else{
+        			  strFields.append(strFieldId);
+        		  }
+        	  }else if(data[j].columnname.equals("ProductType")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Item")){
+        			  strFields.append("'I'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Service")){
+        			  strFields.append("'S'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Resource")){
+        			  strFields.append("'R'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Expense type")){
+        			  strFields.append("'E'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Online")){
+        			  strFields.append("'O'");
+        		  }
+        	  }else if(data[j].columnname.equals("EM_Idt_C_Uom_Weight_ID")){
+        		  String strFieldId = null;
+        		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
+        		  if(strFieldId==null && !data2[i].getField(String.valueOf(j - constant)).isEmpty()){
+        			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+        	              + "No se encontró la unidad de peso del producto");
+        	          releaseRollbackConnection(con);
+        	          return myMessage;
+        		  }else{
+        			  strFields.append(strFieldId);
+        		  }
+        	  }else if(data[j].columnname.equals("EM_Idt_M_Brand_ID")){
+        		  String strFieldId = null;
+        		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
+        		  if(strFieldId==null && !data2[i].getField(String.valueOf(j - constant)).isEmpty()){
+        			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+        	              + "No se encontró la marca del producto");
+        	          releaseRollbackConnection(con);
+        	          return myMessage;
+        		  }else{
+        			  strFields.append(strFieldId);
+        		  }
+        	  }else{
+        		  strFields.append(strValues);
         	  }
           }else {
         	  strFields.append(strValues);
