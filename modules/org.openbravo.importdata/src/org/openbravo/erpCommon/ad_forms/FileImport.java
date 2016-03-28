@@ -365,7 +365,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         		  }else{
         			  strFields.append(strFieldId);
         		  }
-        	  }else if(data[j].columnname.equals("EM_Idt_C_Taxcategory_ID")){
+        	  }else if(data[j].columnname.equals("EM_Idt_Area_Empresa_ID")){
         		  String strFieldId = null;
         		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
         		  if(strFieldId==null){
@@ -373,11 +373,27 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
         	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
         	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
-        	              + "No se encontró la categoría de impuestos del producto");
+        	              + "No se encontró el área del producto");
         	          releaseRollbackConnection(con);
         	          return myMessage;
         		  }else{
         			  strFields.append(strFieldId);
+        		  }
+        	  }else if(data[j].columnname.equals("ProductType")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Articulo")){
+        			  strFields.append("'I'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Servicio")){
+        			  strFields.append("'S'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Recurso")){
+        			  strFields.append("'R'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Gasto")){
+        			  strFields.append("'E'");
+        		  }
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Online")){
+        			  strFields.append("'O'");
         		  }
         	  }else if(data[j].columnname.equals("EM_Idt_C_Taxcategory_ID")){
         		  String strFieldId = null;
@@ -394,16 +410,16 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         			  strFields.append(strFieldId);
         		  }
         	  }else if(data[j].columnname.equals("ProductType")){
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Item")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Articulo")){
         			  strFields.append("'I'");
         		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Service")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Servicio")){
         			  strFields.append("'S'");
         		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Resource")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Recurso")){
         			  strFields.append("'R'");
         		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Expense type")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Gasto")){
         			  strFields.append("'E'");
         		  }
         		  if(data2[i].getField(String.valueOf(j - constant)).equals("Online")){
