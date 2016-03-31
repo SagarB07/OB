@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="NOImportaSueldoData" package="com.atrums.nomina.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+		SELECT SALARIO 
+		FROM no_contrato_empleado 
+		WHERE ISACTIVE = 'Y' AND c_bpartner_id=?		    
+      ]]>
+    </Sql>
+    <Parameter name="cBpartnerId"/> 
+	
+  </SqlMethod>
+</SqlClass>
