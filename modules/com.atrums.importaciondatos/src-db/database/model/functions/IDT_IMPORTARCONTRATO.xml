@@ -93,8 +93,10 @@ BEGIN
 							ELSE 
 							--UPDATE IDT_CONTRATO SET i_errormsg = 'SEXTO.. IF '|| ITERADOR.C_BPARTNER_ID;
 								IF ITERADOR.NE_NUM_HORAS_PARCIALES > 9 THEN
-									UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: EL VALOR DEL NÚMERO DE HORAS INGRESADO TIENE QUE SER MENOR A 8 C_BPARTNER_ID: '|| ITERADOR.C_BPARTNER_ID
-  									WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
+									--UPDATE IDT_CONTRATO SET i_errormsg = 'ERROR: EL VALOR DEL NÚMERO DE HORAS INGRESADO TIENE QUE SER MENOR A 8 C_BPARTNER_ID: '|| ITERADOR.C_BPARTNER_ID
+  									--WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
+  									UPDATE IDT_CONTRATO SET i_errormsg = NULL
+									WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
 								ELSE
 									UPDATE IDT_CONTRATO SET i_errormsg = NULL
 									WHERE IDT_CONTRATO_id = ITERADOR.IDT_CONTRATO_id;
@@ -116,7 +118,7 @@ BEGIN
 
 
  --	UPDATE IDT_CONTRATO SET i_errormsg = 'NULL';	
- 	select COUNT (1) INTO VAREXIST from idt_novedad where i_errormsg like '%ERROR%';
+ 	select COUNT (1) INTO VAREXIST from IDT_CONTRATO where i_errormsg like '%ERROR%';
  	
  	
  	IF (VAREXIST = 0) THEN 
@@ -153,13 +155,15 @@ BEGIN
 			created,
 			createdby,
 			updated,
-			updatedby,tipo_contrato )
+			updatedby,tipo_contrato, 
+			em_ne_area_empresa_id,
+			em_atnorh_cargo_id )
    		VALUES 
     		(get_uuid(),
     		ITERADORVALIDA.C_DOCTYPE_ID, 
     		ITERADORVALIDA.DOCUMENTNO, 
     		ITERADORVALIDA.C_BPARTNER_ID, 
-    		ITERADORVALIDA.FECHA_FIN,
+    		ITERADORVALIDA.FECHA_INICIO,
     		ITERADORVALIDA.FECHA_FIN,
     		ITERADORVALIDA.SALARIO, 
     		ITERADORVALIDA.C_CURRENCY_ID,
@@ -176,7 +180,9 @@ BEGIN
 			ITERADORVALIDA.createdby,
 			ITERADORVALIDA.updated,
 			ITERADORVALIDA.updatedby,
-			'1'
+			'1',
+			ITERADORVALIDA.no_area_empresa_id,
+			ITERADORVALIDA.atnorh_cargo_id
 		);
 
 		DELETE FROM IDT_CONTRATO WHERE  IDT_CONTRATO_ID =ITERADORVALIDA.IDT_CONTRATO_ID ;	

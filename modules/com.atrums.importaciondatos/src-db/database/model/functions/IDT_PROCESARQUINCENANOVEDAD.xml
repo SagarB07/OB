@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION IDT_PROCESARQUINCENANOVEDAD">
+    <function name="IDT_PROCESARQUINCENANOVEDAD" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[ITERADORCAB  RECORD;
+ITERADORDET  RECORD;
+ITERADOR  RECORD;
+
+v_Message VARCHAR(2000):='';
+v_ResultStr VARCHAR(2000):='';
+
+BEGIN
+ FOR ITERADORCAB IN 
+ (
+	SELECT DISTINCT ON (no_registra_quincena_id) no_registra_quincena_id  FROM no_registra_quinc_line WHERE docstatus ='CO'
+ )
+ LOOP
+	
+	FOR ITERADORDET IN 
+	 (
+		SELECT DISTINCT ON (no_tipo_ingreso_egreso_id) no_tipo_ingreso_egreso_id  FROM no_registra_quinc_line WHERE docstatus ='CO' and no_registra_quincena_id = ITERADORCAB.no_registra_quincena_id
+	 )
+	 LOOP
+	
+		
+		FOR ITERADOR IN 
+		 (
+			SELECT no_registra_quincena_id, no_tipo_ingreso_egreso_id, c_bpartner_id
+			FROM no_registra_quinc_line WHERE docstatus ='CO' and no_registra_quincena_id = ITERADORCAB.no_registra_quincena_id AND no_tipo_ingreso_egreso_id = ITERADORDET.no_tipo_ingreso_egreso_id
+		 )
+		 LOOP
+		
+		SELECT * FROM NO_NOVEDAD WHERE no_tipo_ingreso_egreso_id = ITERADOR.no_tipo_ingreso_egreso_id AND c_period_id = ITERADOR.c_period_id;
+		 
+		 
+		 END LOOP;
+	 
+	 END LOOP;
+ END LOOP;
+     
+  
+RETURN;
+   EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;        
+	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+    RETURN;
+END IDT_PROCESARQUINCENANOVEDAD
+]]></body>
+    </function>
+  </database>

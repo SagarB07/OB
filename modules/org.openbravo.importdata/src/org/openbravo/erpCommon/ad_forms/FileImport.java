@@ -152,6 +152,8 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 	 Integer campoAplicaUtilidad = campo.indexOf("Aplica_Utilidad");
 	 Integer campoMotivoSalida = campo.indexOf("NE_Motivo_Salida");
 	 Integer campoObservaciones = campo.indexOf("NE_Observaciones");
+	 Integer campoArea = campo.indexOf("NO_Area_Empresa_ID");
+	 
 	 
 	 //Atnorh_Cargo
 
@@ -230,7 +232,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 		 dato.append(valorCampo);
 	 }else if (campoObservaciones>=0 && campoRegion<0 ){
 		 dato.append(valorCampo);
-	 }else if (campoRegion>=0){
+	 }else if (campoRegion>=0 && campoArea<0){
 		 if(valorCampo.equals("'COSTA'")){
 		 dato.append("'2'");
 		 }else if(valorCampo.equals("'SIERRA'")){
@@ -238,10 +240,23 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 		 } else {
 			 dato.append("'0'");
 		 }
+	 }else if (campoArea>=0){
+		 //select * from no_area_empresa where nombre like '%RECURSOS HUMANOS%';
+		 valorCampo = valorCampo.replace("'", "");
+		 strSql ="select * from no_area_empresa where nombre like '%"+valorCampo+"%'";
+		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "NO_Area_Empresa_ID");
+		 if (valoRetorno!= null){
+			 {
+				 dato.append("'");
+				 dato.append(valoRetorno);
+				 dato.append("'");
+			 }
+		 } 
+		 
 	 }
 	 
 	 campo.append(dato);
-	 //System.out.println(campo);
+	// System.out.println(campo);
 	 
 	 return campo;
   }
@@ -365,7 +380,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         		  }else{
         			  strFields.append(strFieldId);
         		  }
-        	  }else if(data[j].columnname.equals("EM_Idt_Area_Empresa_ID")){
+        	  }else if(data[j].columnname.equals("EM_Idt_C_Taxcategory_ID")){
         		  String strFieldId = null;
         		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
         		  if(strFieldId==null){
@@ -373,27 +388,11 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
         	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
         	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
-        	              + "No se encontró el área del producto");
+        	              + "No se encontró la categoría de impuestos del producto");
         	          releaseRollbackConnection(con);
         	          return myMessage;
         		  }else{
         			  strFields.append(strFieldId);
-        		  }
-        	  }else if(data[j].columnname.equals("ProductType")){
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Articulo")){
-        			  strFields.append("'I'");
-        		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Servicio")){
-        			  strFields.append("'S'");
-        		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Recurso")){
-        			  strFields.append("'R'");
-        		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Gasto")){
-        			  strFields.append("'E'");
-        		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Online")){
-        			  strFields.append("'O'");
         		  }
         	  }else if(data[j].columnname.equals("EM_Idt_C_Taxcategory_ID")){
         		  String strFieldId = null;
@@ -410,16 +409,16 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         			  strFields.append(strFieldId);
         		  }
         	  }else if(data[j].columnname.equals("ProductType")){
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Articulo")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Item")){
         			  strFields.append("'I'");
         		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Servicio")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Service")){
         			  strFields.append("'S'");
         		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Recurso")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Resource")){
         			  strFields.append("'R'");
         		  }
-        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Gasto")){
+        		  if(data2[i].getField(String.valueOf(j - constant)).equals("Expense type")){
         			  strFields.append("'E'");
         		  }
         		  if(data2[i].getField(String.valueOf(j - constant)).equals("Online")){

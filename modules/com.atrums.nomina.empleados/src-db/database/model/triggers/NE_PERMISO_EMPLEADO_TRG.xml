@@ -3,11 +3,29 @@
     <trigger name="NE_PERMISO_EMPLEADO_TRG" table="NO_PERMISO" fires="before" insert="true" update="true" delete="false" foreach="row">
       <body><![CDATA[
 	v_c_bpartner_id character varying(32);
+	v_fecha_inicio DATE;
+	v_fecha_fin DATE;
 BEGIN
-	select ce.c_bpartner_id
-	into v_c_bpartner_id
+	select ce.c_bpartner_id, ce.fecha_inicio, ce.fecha_fin
+	into v_c_bpartner_id, v_fecha_inicio, v_fecha_fin
 	from no_contrato_empleado ce
 	where ce.no_contrato_empleado_id = :new.no_contrato_empleado_id;
+
+	if date(:new.fecha_permiso) < date(v_fecha_inicio) then
+		raise '%', '@NE_NO_PER_FEC_VAL@';
+	end if;
+
+	if date(:new.fecha_permiso) > date(v_fecha_fin) then
+		raise '%', '@NE_NO_PER_FEC_VAL@';
+	end if;
+
+	if :new.dias = 0 and :new.horas = 0 then
+		raise '%', '@NE_NO_PER_DIA_HOR_VAL@';
+	end if;
+
+	if :new.dias < 0 or :new.horas < 0 then
+		raise '%', '@NE_NO_PER_DIA_HOR_VAL@';
+	end if;
 
 	:new.c_bpartner_id := v_c_bpartner_id;
 	

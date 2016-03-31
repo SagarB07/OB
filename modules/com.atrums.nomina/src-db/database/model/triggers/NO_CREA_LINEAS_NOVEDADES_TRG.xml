@@ -13,12 +13,12 @@ BEGIN
             (select bp.c_bpartner_id
            from c_bpartner bp,
                 no_contrato_empleado ce,
-                no_empleado_ing_egr tie
+                no_cb_empleado_acct tie
           where bp.c_bpartner_id = ce.c_bpartner_id
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=:new.ad_Client_ID
-            and bp.em_no_fechasalida is null
+            --and bp.em_no_fechasalida is null
             and ce.isactive='Y'
             and ce.ad_org_id = :new.ad_org_id
             and tie.c_bpartner_id = bp.c_bpartner_id
@@ -29,7 +29,7 @@ BEGIN
 
             insert into no_novedad_linea( no_novedad_linea_id,     ad_client_id,     ad_org_id,     isactive,     
                     created,     createdby,     updated,     updatedby,     
-                    c_bpartner_id,     valor,     no_novedad_id    )
+                    c_bpartner_id,     valor,     no_novedad_id)
             values (get_uuid(),     :new.ad_Client_id,   :new.ad_org_id,      'Y',
                     now(),      :new.createdby,  now(),      :new.createdby,
                     Cur_Empleados.c_bpartner_id, 0, :new.no_novedad_id);
@@ -46,12 +46,12 @@ BEGIN
             (select bp.c_bpartner_id
            from c_bpartner bp,
                 no_contrato_empleado ce,
-                no_empleado_ing_egr tie
+                no_cb_empleado_acct tie
           where bp.c_bpartner_id = ce.c_bpartner_id
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=:new.ad_Client_ID
-            and bp.em_no_fechasalida is null
+            --and bp.em_no_fechasalida is null
             and ce.isactive='Y'
             and ce.ad_org_id = :new.ad_org_id
             and tie.c_bpartner_id = bp.c_bpartner_id

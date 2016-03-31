@@ -141,6 +141,10 @@
         <default/>
         <onCreateDefault/>
       </column>
+      <column name="NO_AREA_EMPRESA_ID" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
       <foreign-key foreignTable="ATNORH_CARGO" name="IDT_FK_CONTRATO_ATNORH_CARGO" onDelete="restrict">
         <reference local="ATNORH_CARGO_ID" foreign="ATNORH_CARGO_ID"/>
       </foreign-key>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE NO_NOVEDAD_LINEA">
+    <table name="NO_NOVEDAD_LINEA" primaryKey="NO_NOVEDAD_LINEA_PKEY">
+      <column name="EM_NE_CEDULA" primaryKey="false" required="false" type="VARCHAR" size="40" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

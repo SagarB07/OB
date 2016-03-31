@@ -15,7 +15,7 @@ BEGIN
 	end if;
 
 	IF date(NEW.fecha_fin) < date(new.fecha_inicio) THEN
-		RAISE NO_DATA_FOUND;
+	 RAISE NO_DATA_FOUND;
 	END IF;
 
 	return new;

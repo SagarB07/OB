@@ -10,6 +10,7 @@ v_Message 		VARCHAR2(2000):='';
 Cur_Parameter 		RECORD;
 Cur_Parameter_Bp 	RECORD;
 
+
 BEGIN
 
 FOR Cur_Parameter IN
@@ -22,7 +23,7 @@ FOR Cur_Parameter IN
 	)
 LOOP
 
-DBMS_OUTPUT.PUT_LINE('@Procesando el siguiente anticipo: ' || Cur_Parameter.Record_ID);
+--RAISE NOTICE '%','@Procesando el siguiente anticipo: ' || Cur_Parameter.Record_ID;
 
 	FOR Cur_Parameter_Bp IN
 		(
@@ -60,14 +61,19 @@ DBMS_OUTPUT.PUT_LINE('@Procesando el siguiente anticipo: ' || Cur_Parameter.Reco
 				  upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);
 	END IF;
 	END LOOP;
+	v_Message:='@NO_EjecucionCorrecta@';
+	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+	AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
 END LOOP;
 
-DBMS_OUTPUT.PUT_LINE('@Finalizando el Proceso no_anadir_anticipo@');
-
-EXCEPTION
-WHEN OTHERS THEN
-	v_ResultStr:= '@ERROR=' || SQLERRM;
-	DBMS_OUTPUT.PUT_LINE(v_ResultStr);
+RETURN;
+   EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;        
+	--RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;	
+        --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+        --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+    RETURN;
 END NO_ANADIR_ANTICIPO
 ]]></body>
     </function>

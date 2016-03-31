@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_ACTUALIZAR_TERCERA_EDAD">
+    <function name="NO_ACTUALIZAR_TERCERA_EDAD" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_Message VARCHAR(2000):='';
+v_ResultStr VARCHAR(2000):='';
+v_Result NUMBER:=1;
+ITERADOR  RECORD;
+
+
+BEGIN
+
+	FOR ITERADOR IN 
+	(
+	 select em_no_istercera_edad, c_bpartner_id   from c_bpartner where date_part('year', age(em_no_fechanacimiento))>= 65      
+	)
+	loop
+	--UPDATE IDT_CONTRATO SET i_errormsg = ITERADOR.c_bpartner_id;
+	update c_bpartner set em_no_istercera_edad = 'Y' 
+	where c_bpartner_id = ITERADOR.c_bpartner_id;	
+	end loop;
+  
+  RETURN;
+   EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;
+        
+	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+	UPDATE IDT_CONTRATO SET i_errormsg = v_ResultStr;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        RETURN;
+END NO_ACTUALIZAR_TERCERA_EDAD
+]]></body>
+    </function>
+  </database>
