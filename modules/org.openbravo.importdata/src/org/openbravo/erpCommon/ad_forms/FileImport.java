@@ -357,10 +357,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));
         		  if(strFieldId==null){
         			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
-        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
-        	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
-        	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
-        	              + "No se encontró la unidad de medida del producto");
+        	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage()) + "&nbsp;</strong>" + (i + 1) + "<br><strong>" + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>" + "No se encontró la unidad de medida del producto");
         	          releaseRollbackConnection(con);
         	          return myMessage;
         		  }else{
@@ -563,11 +560,9 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
       xmlDocument.setParameter("parentTabContainer", tabs.parentTabs());
       xmlDocument.setParameter("mainTabContainer", tabs.mainTabs());
       xmlDocument.setParameter("childTabContainer", tabs.childTabs());
-      NavigationBar nav = new NavigationBar(this, vars.getLanguage(), "FileImport.html",
-          classInfo.id, classInfo.type, strReplaceWith, tabs.breadcrumb());
+      NavigationBar nav = new NavigationBar(this, vars.getLanguage(), "FileImport.html",classInfo.id, classInfo.type, strReplaceWith, tabs.breadcrumb());
       xmlDocument.setParameter("navigationBar", nav.toString());
-      LeftTabsBar lBar = new LeftTabsBar(this, vars.getLanguage(), "FileImport.html",
-          strReplaceWith);
+      LeftTabsBar lBar = new LeftTabsBar(this, vars.getLanguage(), "FileImport.html", strReplaceWith);
       xmlDocument.setParameter("leftTabs", lBar.manualTemplate());
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -656,10 +651,10 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         try {
 
             sb.append(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
-           // System.out.println(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
+         //   System.out.println(data2[i].getField(String.valueOf(j - constant)));
 
         }catch (Exception ex){
-        	//System.out.println(data2[i]);
+        //	System.out.println(data2[i]);
   	  	}
             
           	
@@ -699,8 +694,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
   private void printPageResult(HttpServletResponse response, VariablesSecureApp vars, String text,
       String command) throws IOException, ServletException {
     XmlDocument xmlDocument = null;
-    xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_forms/FileImport_Result")
-        .createXmlDocument();
+    xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_forms/FileImport_Result").createXmlDocument();
     response.setContentType("text/html; charset=UTF-8");
     String strJS = "\n parent.frames['appFrame'].setProcessingMode('window', false); \n"
         + "parent.frames['appFrame'].document.getElementById('buttonRefresh').onclick();\n";

@@ -11,7 +11,7 @@ v_metodo_pago VARCHAR2(2000):='';
 
 Cur_Parameter 		RECORD;
 Cur_Parameter_Bp 	RECORD;
-
+varexist NUMBER;
 
 BEGIN
 v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account limit 1);
@@ -30,22 +30,26 @@ LOOP
 
 	FOR Cur_Parameter_Bp IN
 		(
-		SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
+	SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
 		FROM no_cb_empleado_acct cea
 		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
 		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
 		     INNER JOIN no_calcula_rubro_line crl ON (cr.no_calcula_rubro_id = crl.no_calcula_rubro_id)
 		     INNER JOIN no_contrato_empleado ce ON (ce.c_bpartner_id = cea.c_bpartner_id)
-		WHERE (upper(tie.name) like '%ANTICIPO DE SUELDO%' OR 
-		      upper(tie.name) like '%ANTICIPO SUELDO%') 
-		      AND date(ce.fecha_fin) >= date(now())
+		WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(now()))
 		)
 	LOOP
 
-	IF(SELECT count(*) = 0
-	   FROM no_registra_quinc_line  rcl
-           WHERE rcl.c_bpartner_id = Cur_Parameter_Bp.c_bpartner_id 
-           AND rcl.no_registra_quincena_id = Cur_Parameter.Record_ID)THEN
+	SELECT count(*) into varexist
+		FROM no_cb_empleado_acct cea
+		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
+		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
+		     INNER JOIN no_calcula_rubro_line crl ON (cr.no_calcula_rubro_id = crl.no_calcula_rubro_id)
+		     INNER JOIN no_contrato_empleado ce ON (ce.c_bpartner_id = cea.c_bpartner_id)
+		WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(now()));
+	
+	
+	IF varexist > 0 THEN
 		   INSERT INTO no_registra_quinc_line(
 			    no_registra_quinc_line_id,
 				fin_financial_account_id,
