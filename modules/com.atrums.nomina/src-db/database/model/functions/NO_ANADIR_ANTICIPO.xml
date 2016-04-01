@@ -6,13 +6,16 @@
       </parameter>
       <body><![CDATA[v_ResultStr 		VARCHAR2(2000):='';
 v_Message 		VARCHAR2(2000):='';
+v_cuenta_financiera VARCHAR2(2000):='';
+v_metodo_pago VARCHAR2(2000):='';
 
 Cur_Parameter 		RECORD;
 Cur_Parameter_Bp 	RECORD;
 
 
 BEGIN
-
+v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account limit 1);
+v_metodo_pago = (select fin_paymentmethod_id from  fin_paymentmethod limit 1);
 FOR Cur_Parameter IN
 	(SELECT i.Record_ID, i.AD_User_ID, rq.ad_client_id, rq.ad_org_id
 	FROM AD_PInstance i
@@ -44,17 +47,52 @@ LOOP
            WHERE rcl.c_bpartner_id = Cur_Parameter_Bp.c_bpartner_id 
            AND rcl.no_registra_quincena_id = Cur_Parameter.Record_ID)THEN
 		   INSERT INTO no_registra_quinc_line(
-			    no_registra_quinc_line_id, ad_client_id, ad_org_id, isactive, 
-			    created, createdby, updated, updatedby, no_registra_quincena_id, 
-			    no_tipo_ingreso_egreso_id, c_bpartner_id, valor, 
-			    c_currency_id, processed, include_rol_pago, 
-			    docstatus, docactionno, processing, dateacct, posted, 
-			    c_doctype_id, in_payment, documentno)
-		   VALUES (get_uuid(), Cur_Parameter.ad_client_id, Cur_Parameter.ad_org_id, 'Y', 
-			   now(), Cur_Parameter.AD_User_ID, now(), Cur_Parameter.AD_User_ID, Cur_Parameter.Record_ID, 
-			   Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, Cur_Parameter_Bp.c_bpartner_id, ((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100), 
-			   '100', 'N', 'Y', 
-			   'BO', 'BO', 'N', now(), 'N',
+			    no_registra_quinc_line_id,
+				fin_financial_account_id,
+				fin_paymentmethod_id,
+				ad_client_id,
+				ad_org_id,
+				isactive, 
+			    created,
+				createdby, 
+				updated, 
+				updatedby,
+				no_registra_quincena_id, 
+			    no_tipo_ingreso_egreso_id, 
+				c_bpartner_id,
+				valor, 
+			    c_currency_id, 
+				processed, 
+				include_rol_pago, 
+			    docstatus,
+				docactionno,
+				processing, 
+				dateacct, 
+				posted, 
+			    c_doctype_id,
+				in_payment,
+				documentno)
+		   VALUES (get_uuid(), 
+		   v_cuenta_financiera,
+		   v_metodo_pago,
+		   Cur_Parameter.ad_client_id, 
+		   Cur_Parameter.ad_org_id, 
+		   'Y', 
+		   now(), 
+		   Cur_Parameter.AD_User_ID, 
+		   now(), 
+		   Cur_Parameter.AD_User_ID, 
+		   Cur_Parameter.Record_ID, 
+			Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
+			Cur_Parameter_Bp.c_bpartner_id,
+			((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100), 
+			   '100',
+			   'N',
+			   'Y', 
+			   'BO', 
+			   'BO', 
+			   'N', 
+			   now(), 'N',
 			   (SELECT d.c_doctype_id
 			    FROM c_doctype d
 			    WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 

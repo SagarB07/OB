@@ -51,6 +51,7 @@
     v_name_partner VARCHAR(60);
     v_doctype_payment_id VARCHAR(32);
     gl_category_payment_id VARCHAR(32);
+	v_c_glitem_id VARCHAR(32);
 
     v_fact_acct_id VARCHAR(32);
     v_acctschema_id VARCHAR(32);
@@ -73,8 +74,8 @@
 
 BEGIN
 
- UPDATE IDT_CONTRATO SET i_errormsg = 'XXXXXXXXX';
-
+ ---UPDATE IDT_CONTRATO SET i_errormsg = 'XXXXXXXXX';
+v_c_glitem_id = (select c_glitem_id from c_glitem where name ilike '%Sueldo por pagar%');
 select ad_table_id
           into v_table_payment_id
           from ad_table
@@ -99,22 +100,18 @@ select ad_table_id
                  a.name,
                  a.c_currency_id,
                  faa.fin_out_intransit_acct,
-                 faa.fin_withdrawal_acct,
-                 ea.em_no_pago_acct,
+                 faa.fin_withdrawal_acct,                 
 				 rq.AD_Client_ID,
                  rq.AD_Org_ID,
                  rq.createdby
             from no_registra_quincena rq,
-                 no_registra_quinc_line rql,
-                 c_bp_employee_acct ea,
+                 no_registra_quinc_line rql,             
                  fin_financial_account_acct faa,
                  c_acctschema a
-            where ea.c_bpartner_id = rql.c_bpartner_id
-             and rq.no_registra_quincena_id = rql.no_registra_quincena_id
-             and faa.fin_financial_account_id = rql.fin_financial_account_id
-             and ea.c_acctschema_id = faa.c_acctschema_id
-             and ea.c_acctschema_id = a.c_acctschema_id
+            where rq.no_registra_quincena_id = rql.no_registra_quincena_id
+             and faa.fin_financial_account_id = rql.fin_financial_account_id   
              and rql.no_registra_quinc_line_id =lineaQuincena)
+			 
         LOOP
             v_doctype_id:=Cur_AvanceSchema.c_doctype_id;
             v_bpartner_id:=Cur_AvanceSchema.c_bpartner_id;
@@ -125,7 +122,7 @@ select ad_table_id
             v_currency_orig_id:=Cur_AvanceSchema.moneda_origen;
             v_currency_id:=Cur_AvanceSchema.c_currency_id;
             v_acctschema_id:=Cur_AvanceSchema.c_acctschema_id;
-            v_cuenta_por_pagar:=Cur_AvanceSchema.em_no_pago_acct;
+            v_cuenta_por_pagar = (SELECT em_no_pago_acct FROM C_BPARTNER WHERE C_BPARTNER_ID = v_bpartner_id);
 			v_User_ID:=Cur_AvanceSchema.createdby;
 			v_Org_ID:=Cur_AvanceSchema.AD_Org_ID;
 			v_Client_ID:=Cur_AvanceSchema.AD_Client_ID;
@@ -194,7 +191,7 @@ select ad_table_id
                                            isactive,                    writeoffamt,        c_glitem_id,        isprepayment)
                                     VALUES(v_fin_payment_detail_id,     v_Client_ID,        v_Org_ID,           current_timestamp,  v_User_ID,
                                            current_timestamp,           v_User_ID,          v_fin_payment1_id,  v_valor_total,      'N',
-                                           'Y',                         0,                  null,               'N');
+                                           'Y',                         0,                  v_c_glitem_id,               'N');
 
             select get_uuid() into v_fin_payment_scheduledetail_id;
 
