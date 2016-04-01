@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACTUALIZA_TDOC_ROLPROV_TRG">
+    <trigger name="NO_ACTUALIZA_TDOC_ROLPROV_TRG" table="NO_ROL_PAGO_PROVISION" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+  v_num_provisiones NUMBER;
+BEGIN
+    
+	
+	
+--     IF TG_OP = 'INSERT' THEN
+        
+        if :new.ispago = 'Y' then
+		:new.c_doctype_id = (SELECT  dt.c_doctype_id  FROM c_doctype dt  WHERE dt.ad_table_id = 'F5057A2680BB43149D7C57B1224A7653');
+		:new.no_c_doctype_id = (SELECT  dt.c_doctype_id  FROM c_doctype dt  WHERE dt.ad_table_id = 'F5057A2680BB43149D7C57B1224A7653');		
+		else 
+		:new.c_doctype_id = (SELECT dt.c_doctype_id FROM c_doctype dt WHERE  dt.ad_table_id = 'B39EEBB236864717A9F7F6F4A11DCB9C');
+		:new.no_c_doctype_id = (SELECT dt.c_doctype_id FROM c_doctype dt WHERE  dt.ad_table_id = 'B39EEBB236864717A9F7F6F4A11DCB9C');		
+		end if;   		
+--         RETURN NEW;
+--     ELSE
+--         RETURN OLD;
+--     END IF;
+
+END NO_ACTUALIZA_TDOC_ROLPROV_TRG
+]]></body>
+    </trigger>
+  </database>

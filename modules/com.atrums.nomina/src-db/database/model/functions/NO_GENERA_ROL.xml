@@ -53,6 +53,7 @@
     v_suma_valor NUMBER:= 0;
     v_inicio_periodo  DATE;
     v_fin_periodo  DATE;
+    v_es_ing_egr VARCHAR;
 
 BEGIN
 
@@ -147,7 +148,8 @@ BEGIN
 		           iee.c_bpartner_id,
 		           iee.c_acctschema_id,
 		           iee.no_cuenta_ingreso_acct,
-		           iee.no_cuenta_egreso_acct
+		           iee.no_cuenta_egreso_acct,
+		           tie.isingreso
 		  from no_cb_empleado_acct iee,
 		       no_tipo_ingreso_egreso tie,
 		       no_calcula_rubro cr  
@@ -162,6 +164,14 @@ BEGIN
                 LOOP
 
                 select get_uuid() into v_rol_pago_prov_line_id;
+
+                CASE WHEN Cur_Rubro_Rol.isingreso = 'Y' THEN
+			v_es_ing_egr = 'IN';
+		     WHEN  Cur_Rubro_Rol.isingreso = 'N' THEN
+			v_es_ing_egr = 'EG';
+		     ELSE
+			v_es_ing_egr = NULL;
+		END CASE;
 
                 select coalesce(max(line),0)+10 into v_line
                   from no_rol_pago_provision_line
@@ -179,6 +189,7 @@ BEGIN
                        and rql.c_bpartner_id = Cur_Empleado.c_bpartner_id
                        and rql.no_tipo_ingreso_egreso_id = Cur_Rubro_Rol.no_tipo_ingreso_egreso_id
                        and rql.processed = 'Y';
+
                        
                 
                     update no_registra_quinc_line
@@ -278,11 +289,13 @@ BEGIN
                             (no_rol_pago_provision_line_id,        ad_client_id,       			ad_org_id,                                  isactive,
                              created,                              createdby,          			updated,                                    updatedby,
                              no_rol_pago_provision_id,             line,               			no_tipo_ingreso_egreso_id,                  valor, 
-                             em_ne_observacion,                    c_acctschema_id,    			no_cuenta_ingreso_acct,                     no_cuenta_egreso_acct)
+                             em_ne_observacion,                    c_acctschema_id,    			no_cuenta_ingreso_acct,                     no_cuenta_egreso_acct,
+                             em_ne_tipo_rubro)
                       VALUES(v_rol_pago_prov_line_id,              v_Client_ID,        			v_Org_Emp_ID,                                   'Y',
                              current_timestamp,                    v_User_ID,          			current_timestamp,                          v_User_ID,
                              v_rol_pago_provision_id,              v_line,             			Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    round(v_valor_rubro,2),
-                             v_Message,                            Cur_Rubro_Rol.c_acctschema_id,       Cur_Rubro_Rol.no_cuenta_ingreso_acct,       Cur_Rubro_Rol.no_cuenta_egreso_acct);
+                             v_Message,                            Cur_Rubro_Rol.c_acctschema_id,       Cur_Rubro_Rol.no_cuenta_ingreso_acct,       Cur_Rubro_Rol.no_cuenta_egreso_acct,
+                             v_es_ing_egr);
 
                IF v_Message = '' THEN
                     UPDATE no_rol_pago_provision 

@@ -75,6 +75,10 @@ BEGIN
 		
 			
 			if(v_estado = 'CO' AND v_valor <> 0) then
+			--UPDATE IDT_CONTRATO SET I_ERRORMSG = 'O000K';
+			--EXECUTE procedure no_procesa_avance_pago(p_pinstance_id);
+			--UPDATE IDT_CONTRATO SET I_ERRORMSG = '111K';
+			
 				update no_registra_quinc_line
 				   set docstatus = 'CO',
 					   processed = 'Y',

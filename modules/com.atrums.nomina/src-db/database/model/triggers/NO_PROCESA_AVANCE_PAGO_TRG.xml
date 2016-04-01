@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_PROCESA_AVANCE_PAGO_TRG">
+    <trigger name="NO_PROCESA_AVANCE_PAGO_TRG" table="NO_REGISTRA_QUINC_LINE" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+        
+BEGIN
+
+ IF :NEW.docstatus = 'CO' THEN  
+ --update idt_contrato set I_ERRORMSG  = NEW.no_registra_quinc_line_id;
+ NO_PROCESA_PAGO_QUINCENA(:NEW.no_registra_quinc_line_id);
+ :NEW.processed = 'Y';
+ 
+ END IF;   
+
+ --PERFORM no_procesarquincenanovedad('A'); 
+    IF (UPDATING OR INSERTING) THEN
+
+    END IF;
+    
+    RETURN NEW; 
+END NO_PROCESA_AVANCE_PAGO_TRG
+]]></body>
+    </trigger>
+  </database>
