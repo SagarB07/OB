@@ -2,20 +2,26 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Rol_Pagos" pageWidth="600" pageHeight="842" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="175"/>
 	<parameter name="USER_CLIENT" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="USER_ORG" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="c_period_id" class="java.lang.String"/>
 	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:/Users/ESTEBAN/Desktop/modules/com.atrums.nomina/src/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/Users/atrums_004/Videos/modules/com.atrums.nomina/src/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{BASE_DESIGN}+"/com/atrums/nomina/ad_reports/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["http://190.108.65.30/openbravo314/web"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="c_bpartner_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="aux_c_bpartner_id" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{c_bpartner_id}.equals("") ? " " : " and bp.c_bpartner_id = '" +$P{c_bpartner_id}+"'"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select upper(o.name) as org, rp.ad_client_id,
@@ -57,6 +63,7 @@
   left join c_bp_group as cbd on (cbd.c_bp_group_id = bp.c_bp_group_id)
 where rp.ispago = 'Y'
    and rp.c_period_id = $P{c_period_id}
+   $P!{aux_c_bpartner_id}
     order by 1,7]]>
 	</queryString>
 	<field name="org" class="java.lang.String"/>
@@ -287,7 +294,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
 					</box>
-					<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true">
+					<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true" onErrorType="Icon">
 						<reportElement x="26" y="14" width="122" height="48"/>
 						<box>
 							<pen lineWidth="0.0"/>
@@ -718,7 +725,7 @@ where rp.ispago = 'Y'
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true">
+				<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true" onErrorType="Icon">
 					<reportElement x="35" y="12" width="122" height="48"/>
 					<box>
 						<pen lineWidth="0.0"/>
