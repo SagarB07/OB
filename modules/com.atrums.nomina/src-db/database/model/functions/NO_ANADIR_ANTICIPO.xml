@@ -8,6 +8,12 @@
 v_Message 		VARCHAR2(2000):='';
 v_cuenta_financiera VARCHAR2(2000):='';
 v_metodo_pago VARCHAR2(2000):='';
+v_isproc CHAR(1):=''; --OBTG:VARCHAR2--
+v_stproc VARCHAR2(32) :='';
+v_period_id VARCHAR2(32) :='';
+v_qry varchar;
+v_valor_aux NUMBER:=0;
+v_valor_rubro NUMBER:=0;
 
 Cur_Parameter 		RECORD;
 Cur_Parameter_Bp 	RECORD;
@@ -30,7 +36,7 @@ LOOP
 
 	FOR Cur_Parameter_Bp IN
 		(
-	SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
+	        SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
 		FROM no_cb_empleado_acct cea
 		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
 		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
@@ -40,7 +46,7 @@ LOOP
 		)
 	LOOP
 
-	SELECT count(*) into varexist
+		SELECT count(*) into varexist
 		FROM no_cb_empleado_acct cea
 		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
 		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
@@ -48,60 +54,153 @@ LOOP
 		     INNER JOIN no_contrato_empleado ce ON (ce.c_bpartner_id = cea.c_bpartner_id)
 		WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(now()));
 	
+	v_isproc = (select isprocedure from 
+					   no_calcula_rubro_line caldet,  
+					   no_calcula_rubro calcab, 
+					   no_tipo_ingreso_egreso rubro
+					   where caldet.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_tipo_ingreso_egreso_id = Cur_Parameter_Bp.no_tipo_ingreso_egreso_id
+				);
+
+	IF v_isproc = 'N' THEN 
 	
-	IF varexist > 0 THEN
-		   INSERT INTO no_registra_quinc_line(
-			    no_registra_quinc_line_id,
-				fin_financial_account_id,
-				fin_paymentmethod_id,
-				ad_client_id,
-				ad_org_id,
-				isactive, 
-			    created,
-				createdby, 
-				updated, 
-				updatedby,
-				no_registra_quincena_id, 
-			    no_tipo_ingreso_egreso_id, 
-				c_bpartner_id,
-				valor, 
-			    c_currency_id, 
-				processed, 
-				include_rol_pago, 
-			    docstatus,
-				docactionno,
-				processing, 
-				dateacct, 
-				posted, 
-			    c_doctype_id,
-				in_payment,
-				documentno)
-		   VALUES (get_uuid(), 
-		   v_cuenta_financiera,
-		   v_metodo_pago,
-		   Cur_Parameter.ad_client_id, 
-		   Cur_Parameter.ad_org_id, 
-		   'Y', 
-		   now(), 
-		   Cur_Parameter.AD_User_ID, 
-		   now(), 
-		   Cur_Parameter.AD_User_ID, 
-		   Cur_Parameter.Record_ID, 
-			Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
-			Cur_Parameter_Bp.c_bpartner_id,
-			((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100), 
-			   '100',
-			   'N',
-			   'Y', 
-			   'BO', 
-			   'BO', 
-			   'N', 
-			   now(), 'N',
-			   (SELECT d.c_doctype_id
-			    FROM c_doctype d
-			    WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
-				  upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);
-	END IF;
+	update idt_contrato set i_errormsg = 'no deveria entrar';
+				IF varexist > 0 THEN
+				   INSERT INTO no_registra_quinc_line(
+						no_registra_quinc_line_id,
+						fin_financial_account_id,
+						fin_paymentmethod_id,
+						ad_client_id,
+						ad_org_id,
+						isactive, 
+						created,
+						createdby, 
+						updated, 
+						updatedby,
+						no_registra_quincena_id, 
+						no_tipo_ingreso_egreso_id, 
+						c_bpartner_id,
+						valor, 
+						c_currency_id, 
+						processed, 
+						include_rol_pago, 
+						docstatus,
+						docactionno,
+						processing, 
+						dateacct, 
+						posted, 
+						c_doctype_id,
+						in_payment,
+						documentno)
+				   VALUES (get_uuid(), 
+				   v_cuenta_financiera,
+				   v_metodo_pago,
+				   Cur_Parameter.ad_client_id, 
+				   Cur_Parameter.ad_org_id, 
+				   'Y', 
+				   now(), 
+				   Cur_Parameter.AD_User_ID, 
+				   now(), 
+				   Cur_Parameter.AD_User_ID, 
+				   Cur_Parameter.Record_ID, 
+					Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
+					Cur_Parameter_Bp.c_bpartner_id,
+					((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100), 
+					   '100',
+					   'N',
+					   'Y', 
+					   'BO', 
+					   'BO', 
+					   'N', 
+					   now(), 'N',
+					   (SELECT d.c_doctype_id
+						FROM c_doctype d
+						WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
+						upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);
+			END IF;
+	ELSE
+			v_period_id = (select c_period_id from  no_registra_quincena where no_registra_quincena_id= Cur_Parameter.Record_ID);	
+			v_stproc = (select procedure from 
+									no_calcula_rubro_line caldet,  
+									no_calcula_rubro calcab, 
+									no_tipo_ingreso_egreso rubro
+									where caldet.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+									and rubro.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+									and rubro.no_tipo_ingreso_egreso_id = Cur_Parameter_Bp.no_tipo_ingreso_egreso_id
+				);
+
+			
+			
+			
+			IF v_stproc is null OR v_stproc = '' THEN
+                                v_Message:='No existe el procedimiento de calculo para este rubro: ' || Cur_Calcula_Robro_L.nombre;
+                                v_valor_rubro := 0;
+            ELSE
+			v_valor_rubro := 0;
+			v_qry := 'SELECT ' || v_stproc || '('''|| Cur_Parameter_Bp.c_bpartner_id ||''' ,'''||Cur_Parameter_Bp.no_tipo_ingreso_egreso_id || ''',' || 0||','''||v_period_id || ''');';
+			EXECUTE IMMEDIATE v_qry into v_valor_aux;
+            v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
+            v_Message:='';
+			update idt_contrato set i_errormsg = v_qry;
+			
+			INSERT INTO no_registra_quinc_line(
+						no_registra_quinc_line_id,
+						fin_financial_account_id,
+						fin_paymentmethod_id,
+						ad_client_id,
+						ad_org_id,
+						isactive, 
+						created,
+						createdby, 
+						updated, 
+						updatedby,
+						no_registra_quincena_id, 
+						no_tipo_ingreso_egreso_id, 
+						c_bpartner_id,
+						valor, 
+						c_currency_id, 
+						processed, 
+						include_rol_pago, 
+						docstatus,
+						docactionno,
+						processing, 
+						dateacct, 
+						posted, 
+						c_doctype_id,
+						in_payment,
+						documentno)
+				   VALUES (get_uuid(), 
+				   v_cuenta_financiera,
+				   v_metodo_pago,
+				   Cur_Parameter.ad_client_id, 
+				   Cur_Parameter.ad_org_id, 
+				   'Y', 
+				   now(), 
+				   Cur_Parameter.AD_User_ID, 
+				   now(), 
+				   Cur_Parameter.AD_User_ID, 
+				   Cur_Parameter.Record_ID, 
+					Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
+					Cur_Parameter_Bp.c_bpartner_id,
+					v_valor_rubro, 
+					   '100',
+					   'N',
+					   'Y', 
+					   'BO', 
+					   'BO', 
+					   'N', 
+					   now(), 'N',
+					   (SELECT d.c_doctype_id
+						FROM c_doctype d
+						WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
+						upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);	
+            END IF; 
+			
+			
+				
+	END IF; 			  
+	
 	END LOOP;
 	v_Message:='@NO_EjecucionCorrecta@';
 	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
@@ -112,9 +211,10 @@ RETURN;
    EXCEPTION
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;        
-	--RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;	
-        --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
-        --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);	
+		update idt_contrato set i_errormsg = v_ResultStr ||'***'|| v_qry;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
     RETURN;
 END NO_ANADIR_ANTICIPO
 ]]></body>

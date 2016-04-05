@@ -42,10 +42,11 @@ BEGIN
     select valor 
     into v_total_horas
     from no_novedad_linea
-    where no_novedad_id=(select no_novedad_id from no_novedad where no_tipo_ingreso_egreso_id=p_tipo_ingreso_egreso_id)
+    where no_novedad_id=(select no_novedad_id from no_novedad where no_tipo_ingreso_egreso_id=p_tipo_ingreso_egreso_id and c_period_id = p_period_id)
     and c_bpartner_id=p_empleado_id;
 
     RETURN coalesce(v_salario_hora_extra * v_total_horas, 0);
+	--RETURN 9;
 END NO_HORAS_EXTRAS_SM
 ]]></body>
     </function>

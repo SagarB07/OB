@@ -26,11 +26,11 @@ v_porcentaje_calculo NUMBER:=0;
 
 BEGIN
 
-    select salario 
-      into v_salario
-      from no_contrato_empleado
-     where c_bpartner_id = p_empleado_id
-       and isactive = 'Y' order by  fecha_fin desc  limit 1;
+		select salario 
+		  into v_salario
+		  from no_contrato_empleado
+		 where c_bpartner_id = p_empleado_id
+		   and isactive = 'Y' order by  fecha_fin desc  limit 1;
     
     select ch.porcentaje
       into v_porcentaje_calculo
@@ -43,10 +43,11 @@ BEGIN
     select valor 
     into v_total_horas
     from no_novedad_linea
-    where no_novedad_id=(select no_novedad_id from no_novedad where no_tipo_ingreso_egreso_id=p_tipo_ingreso_egreso_id)
+    where no_novedad_id=(select no_novedad_id from no_novedad where no_tipo_ingreso_egreso_id=p_tipo_ingreso_egreso_id and c_period_id = p_period_id )
     and c_bpartner_id=p_empleado_id;
 
-    RETURN coalesce(v_salario_hora_extra * v_total_horas, 0);
+	RETURN coalesce(v_salario_hora_extra * v_total_horas, 0);
+--	RETURN 3 	;
 END NO_HORAS_NOCTURNAS
 ]]></body>
     </function>
