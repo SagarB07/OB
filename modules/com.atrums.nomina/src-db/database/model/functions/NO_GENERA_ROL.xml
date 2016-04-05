@@ -284,7 +284,8 @@ BEGIN
                         
                     END LOOP;
                 END IF;
-
+				
+				IF v_valor_rubro> 0 THEN 
                 INSERT INTO no_rol_pago_provision_line
                             (no_rol_pago_provision_line_id,        ad_client_id,       			ad_org_id,                                  isactive,
                              created,                              createdby,          			updated,                                    updatedby,
@@ -296,6 +297,7 @@ BEGIN
                              v_rol_pago_provision_id,              v_line,             			Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    round(v_valor_rubro,2),
                              v_Message,                            Cur_Rubro_Rol.c_acctschema_id,       Cur_Rubro_Rol.no_cuenta_ingreso_acct,       Cur_Rubro_Rol.no_cuenta_egreso_acct,
                              v_es_ing_egr);
+				END IF;
 
                IF v_Message = '' THEN
                     UPDATE no_rol_pago_provision 

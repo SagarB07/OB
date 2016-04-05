@@ -9,7 +9,9 @@ v_Message 		VARCHAR2(2000):='';
 v_cuenta_financiera VARCHAR2(2000):='';
 v_metodo_pago VARCHAR2(2000):='';
 v_isproc CHAR(1):=''; --OBTG:VARCHAR2--
+v_isporc CHAR(1):=''; --OBTG:VARCHAR2--
 v_stproc VARCHAR2(32) :='';
+
 v_period_id VARCHAR2(32) :='';
 v_qry varchar;
 v_valor_aux NUMBER:=0;
@@ -65,6 +67,20 @@ LOOP
 
 	IF v_isproc = 'N' THEN 
 	
+	v_isporc = (select isporcentaje from 
+					   no_calcula_rubro_line caldet,  
+					   no_calcula_rubro calcab, 
+					   no_tipo_ingreso_egreso rubro
+					   where caldet.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_tipo_ingreso_egreso_id = Cur_Parameter_Bp.no_tipo_ingreso_egreso_id
+				);
+		IF  v_isporc = 'Y' THEN 
+		v_valor_rubro = ((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100);		
+		ELSE 
+		v_valor_rubro = Cur_Parameter_Bp.valor;
+		END IF;
+	
 	update idt_contrato set i_errormsg = 'no deveria entrar';
 				IF varexist > 0 THEN
 				   INSERT INTO no_registra_quinc_line(
@@ -106,7 +122,8 @@ LOOP
 				   Cur_Parameter.Record_ID, 
 					Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
 					Cur_Parameter_Bp.c_bpartner_id,
-					((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100), 
+					v_valor_rubro, 				
+					
 					   '100',
 					   'N',
 					   'Y', 
@@ -204,7 +221,7 @@ LOOP
 	END LOOP;
 	v_Message:='@NO_EjecucionCorrecta@';
 	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
-	AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
+ AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
 END LOOP;
 
 RETURN;
