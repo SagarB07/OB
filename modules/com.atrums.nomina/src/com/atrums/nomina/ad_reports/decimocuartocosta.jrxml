@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="decimotercero" pageWidth="1290" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="1250" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="4"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
@@ -17,13 +17,53 @@
 	<queryString>
 		<![CDATA[select co.ad_org_id,bp.taxid as cedula, bp.name as nombre ,co.salario,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr, c_period pe, c_year ye where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr, c_period pe, c_year ye where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
 where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y' and isactive = 'Y')
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})-1) and periodno='8')),0) as Ago,
+and (ye.year=to_char(to_number($P{year})-1) and periodno='3')),0) as Mar,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='4')),0) as Abr,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='5')) ,0)as May,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='6')),0) as Jun,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='7')),0) as Jul,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='8')) ,0)as Ago,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
 c_period pe, c_year ye
 where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
@@ -31,15 +71,15 @@ where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pa
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
 and (ye.year=to_char(to_number($P{year})-1) and periodno='9')),0) as Sep,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
 c_period pe, c_year ye
 where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
 where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})-1) and periodno='10')),0)as Oct,
+and (ye.year=to_char(to_number($P{year})-1) and periodno='10')),0) as Oct,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
 c_period pe, c_year ye
 where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
@@ -47,7 +87,7 @@ where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pa
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
 and (ye.year=to_char(to_number($P{year})-1) and periodno='11')),0) as Nov,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
 c_period pe, c_year ye
 where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
@@ -55,7 +95,7 @@ where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pa
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
 and (ye.year=to_char(to_number($P{year})-1) and periodno='12')),0) as Dic,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
 c_period pe, c_year ye
 where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
@@ -63,53 +103,13 @@ where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pa
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
 and (ye.year=to_char(to_number($P{year})) and periodno='1')),0) as Ene,
 
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
 c_period pe, c_year ye
 where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
 select no_rol_pago_provision_line_id from no_rol_pago_provision_line
 where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
 and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
 and (ye.year=to_char(to_number($P{year})) and periodno='2')),0) as Feb,
-
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
-c_period pe, c_year ye
-where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
-select no_rol_pago_provision_line_id from no_rol_pago_provision_line
-where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
-and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})) and periodno='3')),0) as Mar,
-
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
-c_period pe, c_year ye
-where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
-select no_rol_pago_provision_line_id from no_rol_pago_provision_line
-where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
-and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})) and periodno='4')),0) as Abr,
-
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
-c_period pe, c_year ye
-where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
-select no_rol_pago_provision_line_id from no_rol_pago_provision_line
-where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
-and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})) and periodno='5')),0) as May,
-
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
-c_period pe, c_year ye
-where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
-select no_rol_pago_provision_line_id from no_rol_pago_provision_line
-where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
-and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})) and periodno='6')),0) as Jun,
-
- coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
-c_period pe, c_year ye
-where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
-select no_rol_pago_provision_line_id from no_rol_pago_provision_line
-where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
-and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
-and (ye.year=to_char(to_number($P{year})) and periodno='7')),0) as Jul,
 
 (select sum (pr.valor)
 from no_rol_provision_line_mes pr,
@@ -120,7 +120,7 @@ and pr.no_rol_pago_provision_line_id = (
  select no_rol_pago_provision_line_id from no_rol_pago_provision_line
  where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
  and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
- and ((ye.year=to_char(to_number($P{year})-1) and periodno>'7') or (ye.year=to_char(to_number($P{year})) and periodno<'6'))
+ and ((ye.year=to_char(to_number($P{year})-1) and periodno>'2') or (ye.year=to_char(to_number($P{year})) and periodno<'1'))
 ) as total,
 fecha_inicio as finicio,
 fecha_fin as ffin
@@ -133,6 +133,11 @@ order by bp.name]]>
 	<field name="cedula" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="mar" class="java.math.BigDecimal"/>
+	<field name="abr" class="java.math.BigDecimal"/>
+	<field name="may" class="java.math.BigDecimal"/>
+	<field name="jun" class="java.math.BigDecimal"/>
+	<field name="jul" class="java.math.BigDecimal"/>
 	<field name="ago" class="java.math.BigDecimal"/>
 	<field name="sep" class="java.math.BigDecimal"/>
 	<field name="oct" class="java.math.BigDecimal"/>
@@ -140,15 +145,9 @@ order by bp.name]]>
 	<field name="dic" class="java.math.BigDecimal"/>
 	<field name="ene" class="java.math.BigDecimal"/>
 	<field name="feb" class="java.math.BigDecimal"/>
-	<field name="mar" class="java.math.BigDecimal"/>
-	<field name="abr" class="java.math.BigDecimal"/>
-	<field name="may" class="java.math.BigDecimal"/>
-	<field name="jun" class="java.math.BigDecimal"/>
-	<field name="jul" class="java.math.BigDecimal"/>
 	<field name="total" class="java.math.BigDecimal"/>
 	<field name="finicio" class="java.sql.Timestamp"/>
 	<field name="ffin" class="java.sql.Timestamp"/>
-	<variable name="variable1" class="java.math.BigDecimal" calculation="Sum"/>
 	<background>
 		<band height="575" splitType="Stretch">
 			<rectangle>
@@ -187,7 +186,7 @@ order by bp.name]]>
 				<textElement textAlignment="Center">
 					<font size="26"/>
 				</textElement>
-				<text><![CDATA[Decimo Cuarto]]></text>
+				<text><![CDATA[Decimo Cuarto Costa]]></text>
 			</staticText>
 			<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true" onErrorType="Icon">
 				<reportElement x="0" y="0" width="145" height="37"/>
@@ -230,84 +229,84 @@ order by bp.name]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Ago]]></text>
+				<text><![CDATA[Marzo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="590" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Sep]]></text>
+				<text><![CDATA[Abril]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="645" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Oct]]></text>
+				<text><![CDATA[Mayo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="700" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Nov]]></text>
+				<text><![CDATA[Junio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="755" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Dic]]></text>
+				<text><![CDATA[Julio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="810" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Ene]]></text>
+				<text><![CDATA[Agosto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="865" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Feb]]></text>
+				<text><![CDATA[Sep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="920" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Mar]]></text>
+				<text><![CDATA[Octubre]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="975" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Abr]]></text>
+				<text><![CDATA[Nov]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="1030" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[May]]></text>
+				<text><![CDATA[Dic]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="1085" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Jun]]></text>
+				<text><![CDATA[Enero]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="1140" y="0" width="55" height="15" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[Jul]]></text>
+				<text><![CDATA[Febrero]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="1195" y="0" width="55" height="15" forecolor="#000000"/>
@@ -353,84 +352,84 @@ order by bp.name]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ago}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mar}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="590" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sep}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{abr}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="645" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{oct}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{may}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="700" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{nov}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{jun}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="755" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dic}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{jul}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="810" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ene}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ago}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="865" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{feb}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sep}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="920" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mar}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{oct}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="975" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{abr}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{nov}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="1030" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{may}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dic}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="1085" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{jun}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ene}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="1140" y="0" width="55" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{jul}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{feb}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="Detail" x="1195" y="0" width="55" height="15"/>
