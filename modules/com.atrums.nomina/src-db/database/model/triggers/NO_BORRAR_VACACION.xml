@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_BORRAR_VACACION">
+    <trigger name="NO_BORRAR_VACACION" table="NO_VACACION" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+BEGIN
+    
+
+    IF DELETING THEN
+        select em_ne_docstatus into v_docstatus from no_vacacion
+        where no_vacacion_id = :old.no_vacacion_id;
+
+        IF(v_docstatus <> 'BR' )then
+            v_mensaje='@NO_PERMITE_BORRA_DATOS@';
+            RAISE exception '%',v_mensaje;
+
+        END IF;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_BORRAR_VACACION
+]]></body>
+    </trigger>
+  </database>

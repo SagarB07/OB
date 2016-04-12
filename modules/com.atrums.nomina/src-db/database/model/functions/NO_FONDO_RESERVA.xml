@@ -20,6 +20,7 @@
                where isactive ='Y'
                  and pagofondoreserva = 'Y'
                  and c_bpartner_id = p_empleado_id) then
+                 update idt_contrato set i_errormsg = p_valor; 
 		return round( p_valor * 0.0833, 2);
 	else
         return 0;

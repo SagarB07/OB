@@ -13,12 +13,35 @@
       <parameter name="p_period_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
-      <body><![CDATA[BEGIN
+      <body><![CDATA[v_comision NUMBER;
+v_sueldo   NUMBER;
 
+BEGIN
+	
+	
     if exists(select * 
                 from no_contrato_empleado 
                where isactive ='Y' and c_bpartner_id = p_empleado_id) then
-		return round( p_valor * 0.0833, 2);
+		--return round( p_valor * 0.0833, 2);
+
+		v_comision := (select coalesce(nvl.valor,0)
+				  from no_empleado_ing_egr em, no_tipo_ingreso_egreso tr, no_novedad nov, no_novedad_linea nvl
+				 where em.no_tipo_ingreso_egreso_id = tr.no_tipo_ingreso_egreso_id
+				   and nov.no_tipo_ingreso_egreso_id = tr.no_tipo_ingreso_egreso_id
+				   and nvl.no_novedad_id = nov.no_novedad_id
+				   and nov.c_period_id = p_period_id
+				   and nvl.c_bpartner_id = p_empleado_id
+				   and tr.suma_ingreso = 'Y'
+				   and tr.isingreso = 'Y'
+				   and tr.no_tipo_ingreso_egreso_id = '873C16B49B8C41E380C1680CAEF2DF75'
+				 limit 1);
+
+		v_sueldo := (select ce.salario 
+			       from no_contrato_empleado ce
+                              where ce.isactive ='Y' 
+                                and ce.c_bpartner_id = p_empleado_id);
+
+		RETURN ((coalesce(v_comision,0) + coalesce(v_sueldo,0))/12);
 	else
         return 0;
     end if;

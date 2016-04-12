@@ -42,12 +42,6 @@ BEGIN
 	if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
 		raise '%', '@NE_NO_VACACION_FECHA_VAL@';
 	else
-		select max(em_ne_linea) 
-		into v_linea
-		from no_vacacion
-		where no_contrato_empleado_id = :new.no_contrato_empleado_id;
-		
-		:new.em_ne_linea := v_linea + 10;
 
 		v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :new.em_ne_fecha_inicio::timestamp);
 		:new.em_ne_total_dias=to_number(v_days + 1);

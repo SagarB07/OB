@@ -56,13 +56,14 @@
     v_es_ing_egr VARCHAR;
 
 BEGIN
-
+    
+	
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';
     AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
 
     BEGIN
-
+	
 
         FOR Cur_Parameter IN
           (SELECT i.Record_ID,
@@ -86,8 +87,10 @@ BEGIN
 	    v_period_ID:=Cur_Parameter.P_String; 
         END LOOP;
 
-	    v_inicio_periodo  := (select date(cp.startdate) from c_period cp where cp.c_period_id = v_period_ID);
+	v_inicio_periodo  := (select date(cp.startdate) from c_period cp where cp.c_period_id = v_period_ID);
         v_fin_periodo     := (select date(cp.enddate) from c_period cp where cp.c_period_id = v_period_ID);
+
+        
 
         FOR Cur_Empleado IN
         (select bp.c_bpartner_id, 
@@ -109,10 +112,10 @@ BEGIN
             and date(ce.fecha_inicio) <= date(v_fin_periodo)
             )
         LOOP
+
+        
             v_Org_Emp_ID:=Cur_Empleado.ad_org_id;
-
             select get_uuid() into v_rol_pago_provision_id;
-
             select dt.c_doctype_id into v_doctype_id
               from c_doctype dt
              where dt.docbasetype = 'NO_NRP'
@@ -121,9 +124,10 @@ BEGIN
 
 	    v_date_acct := (select enddate from c_period where c_period_id = v_period_id);
 
-
+	    
             IF NOT EXISTS (select * from no_rol_pago_provision where ispago='Y' and docstatus<>'AN' and c_period_id=v_period_id and c_bpartner_id=Cur_Empleado.c_bpartner_id) THEN
 
+	    
                 ad_sequence_doctype(v_doctype_id, '', 'Y', v_documentno);
 
                 INSERT INTO no_rol_pago_provision
@@ -164,17 +168,16 @@ BEGIN
                 LOOP
 
                 select get_uuid() into v_rol_pago_prov_line_id;
-
                 CASE WHEN Cur_Rubro_Rol.isingreso = 'Y' THEN
-			v_es_ing_egr = 'IN';
-		     WHEN  Cur_Rubro_Rol.isingreso = 'N' THEN
-			v_es_ing_egr = 'EG';
-		     ELSE
-			v_es_ing_egr = NULL;
-		END CASE;
+				v_es_ing_egr = 'IN';
+				WHEN  Cur_Rubro_Rol.isingreso = 'N' THEN
+				v_es_ing_egr = 'EG';
+				ELSE
+				v_es_ing_egr = NULL;
+				END CASE;
 
                 select coalesce(max(line),0)+10 into v_line
-                  from no_rol_pago_provision_line
+                from no_rol_pago_provision_line
                  where no_rol_pago_provision_id = v_rol_pago_provision_id;
 
                 v_valor_rubro:=0;
@@ -220,7 +223,8 @@ BEGIN
                                 
                                 v_valor_rubro := 0;
                             ELSE
-                                v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| Cur_Empleado.c_bpartner_id ||''' ,'''||Cur_Rubro_Rol.no_tipo_ingreso_egreso_id || ''',' || v_suma_valor||','''||v_period_id || ''');';
+								v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| Cur_Empleado.c_bpartner_id ||''' ,'''||Cur_Rubro_Rol.no_tipo_ingreso_egreso_id || ''',' || v_suma_valor||','''||v_period_id || ''');';
+							                               
                                 EXECUTE IMMEDIATE v_qry into v_valor_aux;
                                 v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
                                 v_Message:='';
@@ -309,10 +313,12 @@ BEGIN
                      WHERE no_rol_pago_provision_id = v_rol_pago_provision_id;
                END IF;
 
+			update idt_contrato set i_errormsg = v_suma_valor ||'--'||v_valor_rubro ;
             IF Cur_Rubro_Rol.suma_ingreso = 'Y' THEN
                 v_suma_valor := round(v_suma_valor,2) + v_valor_rubro;
             END IF;
-
+					
+			
             END LOOP;
             END IF;
             v_suma_valor :=0;

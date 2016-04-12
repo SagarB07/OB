@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_GENERA_PROVICION">
+    <trigger name="NO_GENERA_PROVICION" table="NO_ROL_PAGO_PROVISION" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[  
+  v_period_id varchar(32);
+  v_User_ID varchar(32);
+  v_Client_ID varchar(32);
+  v_Org_ID varchar(32);
+  v_qry varchar;
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+  v_num_provisiones NUMBER;
+
+  p_dateacct DATE;
+
+  
+BEGIN
+    
+
+    IF UPDATING THEN        
+       if(:new.docstatus='CO' )then
+     
+			v_User_ID = (SELECT CREATEDBY FROM no_rol_pago_provision WHERE  no_rol_pago_provision_ID = :NEW.no_rol_pago_provision_ID);
+			v_Client_ID = (SELECT AD_CLIENT_ID FROM no_rol_pago_provision WHERE  no_rol_pago_provision_ID = :NEW.no_rol_pago_provision_ID);
+			v_Org_ID = (SELECT AD_ORG_ID FROM no_rol_pago_provision WHERE  no_rol_pago_provision_ID = :NEW.no_rol_pago_provision_ID);
+			p_dateacct = (select dateacct  from no_rol_pago_provision where no_rol_pago_provision_id = :NEW.no_rol_pago_provision_ID);
+			v_period_id = (select C_PERIOD_ID  from no_rol_pago_provision where no_rol_pago_provision_id = :NEW.no_rol_pago_provision_ID);
+			
+			v_qry  := 'SELECT no_genera_provicion ('''|| v_User_ID ||''','''|| v_Client_ID ||''','''|| v_Org_ID ||''');';
+
+	
+			EXECUTE IMMEDIATE v_qry;
+			--SELECT I_ERRORMSG FROM IDT_CONTRATO
+			v_qry := 'SELECT no_genera_valor_rprovision('''|| :NEW.C_BPARTNER_ID ||''', '''|| v_period_id ||''', '''|| v_Org_ID ||''', '''|| v_Client_ID ||''',  '''|| v_User_ID ||''', '''|| p_dateacct ||''');'	;				
+			IF v_qry IS NOT NULL THEN 
+				UPDATE IDT_CONTRATO SET I_ERRORMSG = v_qry  ;
+				EXECUTE IMMEDIATE v_qry;
+			END IF;
+			
+			--EXECUTE v_qry;
+      
+		end if;    
+        RETURN NEW;
+    ELSE
+        RETURN OLD;
+    END IF;
+	
+
+	END NO_GENERA_PROVICION
+]]></body>
+    </trigger>
+  </database>

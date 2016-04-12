@@ -35,8 +35,9 @@
     v_doctype_payment_id                VARCHAR(32);
     v_period_id                         VARCHAR(32);
 BEGIN   
-   
-		v_fin_payment_id := get_uuid();
+	  --select * from idt_contrato;
+	---update idt_contrato set i_errormsg = '000000yyyy'; 
+        v_fin_payment_id := get_uuid();
         v_fin_payment_detail_id := get_uuid();
         v_fin_payment_scheduledetail_id:= get_uuid();
         v_fin_finacc_transaction_id:= get_uuid();

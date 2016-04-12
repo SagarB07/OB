@@ -8,7 +8,9 @@
     v_Message VARCHAR(2000):=''; 
     v_Record_ID VARCHAR(32); 
     v_Result NUMBER:=1; 
-
+    v_qry_generarol varchar;
+    v_qry_generarol_mes varchar;
+	
     
     
     Cur_Parameter RECORD;
@@ -56,21 +58,29 @@ BEGIN
           v_Org_ID:=Cur_Parameter.AD_Org_ID;
           v_Client_ID:=Cur_Parameter.AD_Client_ID;
           v_ParameterName:=Cur_Parameter.ParameterName;
-		  v_docstatus:=Cur_Parameter.P_String;
+          v_docstatus:=Cur_Parameter.P_String;
         END LOOP;
         select posted, total_neto, ispago  
         into v_posted, v_total_neto, v_ispago 
 		from no_rol_pago_provision 
 		where no_rol_pago_provision_id= v_no_rol_pago_provision_id;
+
+     --update idt_contrato set i_errormsg = v_ispago;  	
      if(v_ispago='Y')then
+	--update idt_contrato set i_errormsg = v_docstatus;  	
             if(v_docstatus ='CO' and v_total_neto <> 0) then
+         --  update idt_contrato set i_errormsg = 'hola';  
                     update no_rol_pago_provision
                         set docstatus = 'CO',
                             Processed = 'Y',
                             docaccionno = 'RE',
                             Updated=now(),
                             UpdatedBy=v_User_ID
-                    where no_rol_pago_provision_id= v_no_rol_pago_provision_id;
+			    where no_rol_pago_provision_id= v_no_rol_pago_provision_id;
+					
+			    --v_qry_generarol := 'select no_genera_rol_provision('''|| p_PInstance_ID ||''' )';
+   			   -- update idt_contrato set i_errormsg = v_qry_generarol;  
+					
              else
                 
               if(v_docstatus='RE')then
@@ -107,6 +117,7 @@ BEGIN
                     end IF;
                 end if;
        else
+       update idt_contrato set i_errormsg = '789';  	
             if( v_docstatus='CO') then
 
                     update no_rol_pago_provision
@@ -116,6 +127,8 @@ BEGIN
                     Updated=now(),
                     UpdatedBy=v_User_ID
                     where no_rol_pago_provision_id= v_no_rol_pago_provision_id;
+
+                    
 
                     else
                         if(v_docstatus='RE') then
@@ -157,7 +170,7 @@ BEGIN
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
-        
+        update idt_contrato set i_errormsg = v_ResultStr;  	
         AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
         RETURN;
 END NO_PROCESA_ROL_PRO_CABECERA

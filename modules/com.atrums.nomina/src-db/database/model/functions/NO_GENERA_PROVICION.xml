@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
-  <database name="FUNCTION NO_GENERA_ROL_PROVISION">
-    <function name="NO_GENERA_ROL_PROVISION" type="NULL">
-      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+  <database name="FUNCTION NO_GENERA_PROVICION">
+    <function name="NO_GENERA_PROVICION" type="NULL">
+      <parameter name="v_user_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="v_client_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="v_org_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
       <body><![CDATA[v_ResultStr VARCHAR(2000):='';
@@ -14,10 +20,7 @@
     Cur_Rubro_Rol RECORD;
 
     v_co_genera_rol_id VARCHAR(32);
-    v_Client_ID VARCHAR(32);
-    v_Org_ID VARCHAR(32);
-    v_User_ID VARCHAR(32);
-
+    
     v_count NUMBER;
     v_count_rp NUMBER;
     v_count_rpl NUMBER;
@@ -38,32 +41,12 @@
 
 BEGIN
 
-    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
+    --RAISE NOTICE '%','Updating PInstance - Processing ' || p_PInstance_ID;
     v_ResultStr:='PInstanceNotFound';
-    AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+    --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
 
     BEGIN
 
-        FOR Cur_Parameter IN
-          (SELECT i.Record_ID,
-                  i.AD_User_ID,
-                  i.AD_Org_ID,
-                  i.AD_Client_ID,
-                  p.ParameterName,
-                  p.P_String,
-                  p.P_Number,
-                  p.P_Date
-             FROM AD_PInstance i
-             LEFT JOIN AD_PInstance_Para p
-               ON i.AD_PInstance_ID=p.AD_PInstance_ID
-            WHERE i.AD_PInstance_ID=p_PInstance_ID
-            ORDER BY p.SeqNo)
-        LOOP
-            v_co_genera_rol_id:=Cur_Parameter.Record_ID;
-            v_User_ID:=Cur_Parameter.AD_User_ID;
-            v_Client_ID:=Cur_Parameter.AD_Client_ID;
-            v_Org_ID:=Cur_Parameter.AD_Org_ID;
-        END LOOP;
 
         FOR Cur_Empleado IN
         (select bp.c_bpartner_id,
@@ -79,10 +62,6 @@ BEGIN
         LOOP
 		
             v_Org_ID := Cur_Empleado.ad_Org_ID;
-			
-
-
-
             select c_currency_id into v_currency_id
               from ad_client
              where ad_client_id=v_Client_ID;
@@ -278,7 +257,7 @@ BEGIN
 
         v_Message:='@NO_EjecucionCorrecta@';
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message) ;
-        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+     --   PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
         RETURN;
 
 
@@ -287,10 +266,10 @@ BEGIN
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
-
-        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+		UPDATE IDT_CONTRATO SET I_ERRORMSG = v_ResultStr;
+      --  PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
         RETURN;
-END NO_GENERA_ROL_PROVISION
+END NO_GENERA_PROVICION
 ]]></body>
     </function>
   </database>

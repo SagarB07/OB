@@ -77,7 +77,6 @@ BEGIN
                  p_usuario, now(), 0, ' ', v_client, 
                  v_org, p_usuario, p_usuario, 'Y');
 
-        NO_GENERA_ROL_PROVISION(v_pinstance_id);
 
 
                 select no_rol_pago_provision_id, ad_org_id, ad_client_id
@@ -109,12 +108,15 @@ BEGIN
                     and rpl.processed = 'Y'
                     and rp.ispago = 'N'
                     and date_trunc('Month', rpl.fechafin)::DATE - date_trunc('Month', now())::DATE >= 0
-                    and date_trunc('Month', now())::DATE - date_trunc('Month', rpl.fechainicio)::DATE >= 0)
+                    and date_trunc('Month', now())::DATE - date_trunc('Month', rpl.fechainicio)::DATE >= 0
+				)
 
  
                  LOOP
- 
-raise notice '%','Dentro del cursor provision linea';
+					
+					
+					
+					raise notice '%','Dentro del cursor provision linea';
                     v_fechafin:=Cur_Rol_Provision_L.fechafin;
                     v_tipo_ingreso_egreso_id := Cur_Rol_Provision_L.no_tipo_ingreso_egreso_id;
                     v_no_rol_pago_prov_line_id:=Cur_Rol_Provision_L.no_rol_pago_provision_line_id;
@@ -126,12 +128,13 @@ raise notice '%','Dentro del cursor provision linea';
                       into v_esMes;
     
                                      
-                    
+               --     update idt_contrato set i_errormsg = p_period_id; 
                     IF NOT EXISTS(SELECT * FROM no_rol_provision_line_mes
                                    WHERE no_rol_pago_provision_line_id=Cur_Rol_Provision_L.no_rol_pago_provision_line_id
                                      AND c_period_id=p_period_id) THEN
 
                         
+						
                         FOR Cur_Calcula_Robro_L IN
                         (select cr.nombre,
                                 crl.isprocedure,
@@ -145,6 +148,7 @@ raise notice '%','Dentro del cursor provision linea';
                             and cr.no_calcula_rubro_id = Cur_Rol_Provision_L.no_calcula_rubro_id
                           order by crl.line)
                         LOOP
+							
                             raise notice '%','Dentro del cursor calcular rubro';
                             IF Cur_Calcula_Robro_L.isprocedure = 'Y' THEN 
                                 IF Cur_Calcula_Robro_L.procedure is null OR Cur_Calcula_Robro_L.procedure = '' THEN
@@ -152,6 +156,8 @@ raise notice '%','Dentro del cursor provision linea';
                                     RAISE v_Message;
                                 END IF;
                                 v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| p_bpartner_id || ''', '''|| p_period_id ||''');';
+								
+								update idt_contrato set i_errormsg = v_qry ; 
 
                                 EXECUTE IMMEDIATE v_qry into v_valor_aux;
                                 v_valor_rubro_mes := v_valor_rubro_mes + COALESCE(v_valor_aux,0);
@@ -222,7 +228,7 @@ raise notice '%','Dentro del cursor provision linea';
                                     v_esMes,                                v_doctype_id,        v_documentno,
                                     'CO',                                   'RE',                p_dateacct,
                                     'N',                                    'N');
-                 raise notice '%','Despues de insertar';
+						raise notice '%','Despues de insertar';
                         IF (date_trunc('Month', v_fechafin)::DATE - date_trunc('Month', now())::DATE) =0 THEN
                             
                         END IF;
@@ -243,7 +249,7 @@ raise notice '%','Dentro del cursor provision linea';
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         DBMS_OUTPUT.PUT_LINE(v_ResultStr);
-
+	update idt_contrato set i_errormsg = v_ResultStr; 
         RETURN;
 END NO_GENERA_VALOR_RPROVISION
 ]]></body>

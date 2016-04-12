@@ -2,18 +2,30 @@
   <database name="TRIGGER NE_NO_CB_EMP_ING_EGR_TRG">
     <trigger name="NE_NO_CB_EMP_ING_EGR_TRG" table="NO_CB_EMPLEADO_ACCT" fires="before" insert="true" update="true" delete="false" foreach="row">
       <body><![CDATA[
-	v_no_cb_empleado_acct_id character varying(32);
+v_no_cb_empleado_acct_id character varying(32);
+v_acctschema_id varchar;
+v_n_debe_acct varchar;
+v_n_haber_acct varchar;
+
 BEGIN
-	if :new.no_cuenta_ingreso_acct is null 
-			and :new.no_cuenta_egreso_acct is null then
+
+	select c_acctschema_id,n_debe_acct,n_haber_acct
+          into v_acctschema_id, v_n_debe_acct, v_n_haber_acct   
+          from no_tipo_ing_egr_acct
+         where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id;
+
+        if v_n_debe_acct is null and v_n_haber_acct is null then
 		raise '%', '@NE_NO_CB_EMP_ING_EGR@';
 	end if;
 	
 	select no_cb_empleado_acct_id
-	into v_no_cb_empleado_acct_id
-	from no_cb_empleado_acct
-	where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id
-	and c_bpartner_id = :new.c_bpartner_id;
+	  into v_no_cb_empleado_acct_id
+	  from no_cb_empleado_acct
+	 where no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id
+	   and c_bpartner_id = :new.c_bpartner_id;
+
+	:new.no_cuenta_ingreso_acct = v_n_debe_acct;
+	:new.no_cuenta_egreso_acct  = v_n_haber_acct;
 
 	if v_no_cb_empleado_acct_id is not null then
 		raise '%', '@NE_NO_CB_EMP_ING_EGR_REP@';

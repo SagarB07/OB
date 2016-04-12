@@ -157,7 +157,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 	 
 	 //Atnorh_Cargo
 
-	 if (campoTipoDocumento>=0 && campoNumDocumento < 0  ){		 
+	 if (campoTipoDocumento>=0 && campoNumDocumento < 0 && campoEmpleado<0 && campoFechaIni < 0 && campoVActuales< 0){		 
 		 valorCampo = valorCampo.replace("'", "");
 		 strSql ="SELECT C_Doctype_ID FROM c_doctype where name like '%"+valorCampo+"%'";
 		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, campo.toString());
@@ -218,7 +218,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 				 dato.append("'");
 			 }
 		 } 
-	 }else if (campoJparcial>= 0 && campoHorasParciales<0 ){
+	 }else if (campoJparcial>= 0 && campoHorasParciales<0 && campoSistemaSalario<0 && campoPagoFondoReserva<0 && campoAplicaUtilidad<0 && campoMotivoSalida<0 && campoObservaciones<0 && campoRegion<0 && campoArea<0 && campoCargo<0){
 			 dato.append(valorCampo);
 	 }else if (campoHorasParciales>= 0 && campoSistemaSalario<0 && campoRegion<0){
 		 dato.append(valorCampo);
@@ -226,11 +226,11 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 		 dato.append("'1'");
 	 }else if (campoPagoFondoReserva>=0 && campoAplicaUtilidad<0){
 		 dato.append(valorCampo);
-	 }else if (campoAplicaUtilidad>=0 && campoMotivoSalida<0){
+	 }else if (campoAplicaUtilidad>=0 && campoMotivoSalida<0 && campoMotivoSalida<0 && campoObservaciones<0 && campoRegion<0 && campoArea<0 && campoCargo<0){
 		 dato.append(valorCampo);
-	 }else if (campoMotivoSalida>=0 && campoObservaciones<0){
+	 }else if (campoMotivoSalida>=0 && campoObservaciones<0 && campoRegion<0 && campoArea<0 && campoCargo<0){
 		 dato.append(valorCampo);
-	 }else if (campoObservaciones>=0 && campoRegion<0 ){
+	 }else if (campoObservaciones>=0 && campoRegion<0 && campoArea<0 && campoCargo<0 ){
 		 dato.append(valorCampo);
 	 }else if (campoRegion>=0 && campoArea<0){
 		 if(valorCampo.equals("'COSTA'")){
@@ -243,7 +243,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 	 }else if (campoArea>=0){
 		 //select * from no_area_empresa where nombre like '%RECURSOS HUMANOS%';
 		 valorCampo = valorCampo.replace("'", "");
-		 strSql ="select * from no_area_empresa where nombre like '%"+valorCampo+"%'";
+		 strSql ="select *  from no_area_empresa where nombre like '%"+valorCampo+"%'";
 		 String valoRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "NO_Area_Empresa_ID");
 		 if (valoRetorno!= null){
 			 {
