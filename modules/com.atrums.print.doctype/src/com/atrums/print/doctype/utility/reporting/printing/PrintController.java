@@ -102,22 +102,22 @@ public class PrintController extends HttpSecureAppServlet {
       ServletException {
     final VariablesSecureApp vars = new VariablesSecureApp(request);
 
-    DocumentType documentType = DocumentType.UNKNOWN;
+    DocumentType documentType = DocumentType.NOCONTRATO;
     String sessionValuePrefix = null;
     String strDocumentId = null;
 
     // Determine which process called the print controller
     if (log4j.isDebugEnabled())
       log4j.debug("Servletpath: " + request.getServletPath());
-    if (request.getServletPath().toLowerCase().indexOf("cotizaciones") != -1) {
+    if (request.getServletPath().toLowerCase().indexOf("contrato") != -1) {
       documentType = DocumentType.NOCONTRATO;
       // The prefix PRINTORDERS is a fixed name based on the KEY of the
       // AD_PROCESS
-      sessionValuePrefix = "PRINTCOTIZACION";
+      sessionValuePrefix = "PRINTCONTRATO";
 
-      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId_R");
+      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId_R");
       if (strDocumentId.equals(""))
-        strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId");
+        strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId");
     }
 
     post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
