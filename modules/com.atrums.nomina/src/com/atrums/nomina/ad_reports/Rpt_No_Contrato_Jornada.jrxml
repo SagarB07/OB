@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" language="groovy" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="com.atrums.nomina.report.NumerosLetras">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2675"/>
+	<import value="com.atrums.nomina.report.NumerosLetras"/>
+	<parameter name="no_contrato_empleado_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
+EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD
+FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
+atnorh_cargo AS CAR, ad_org as suc, ad_orginfo AS INFO , c_location AS LOC, c_city AS CIU
+WHERE EM.C_BPARTNER_ID = CO.C_BPARTNER_ID
+AND CO.EM_atnorh_cargo_ID = CAR.atnorh_cargo_ID
+AND CO.ad_org_id = suc.ad_org_id
+AND INFO.ad_org_id = suc.ad_org_id
+AND INFO.c_location_ID = LOC.c_location_ID
+AND CIU.c_city_ID = LOC.c_city_ID
+AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="fecha_actual" class="java.sql.Timestamp"/>
+	<field name="dia" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.Integer"/>
+	<field name="anio" class="java.lang.Integer"/>
+	<field name="nombre_empleado" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<detail>
+		<band height="1536" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="4" width="278" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO  DE TRABAJO DE JORNADA PARCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="133" width="205" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIMERA: ANTECEDENTES.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="221" width="136" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEGUNDA: OBJETO.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="357" width="146" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TERCERA: REMUNERACIÓN.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="376" width="525" height="26"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADO acepta libre, voluntaria y expresamente, que la duración del período de trabajo y descanso, podrá ser modificada de acuerdo a las necesidades y libre criterio de LA EMPRESA o Autoridades designadas por ésta.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="409" width="252" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUARTO:	OBLIGACIONES DEL EMPLEADO.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="429" width="524" height="546"/>
+				<textElement/>
+				<text><![CDATA[Son obligaciones de EL EMPLEADO, además de aquellas expresamente señaladas por sus superiores y las detalladas en el Código de Trabajo, las siguientes:
+
+a)  Cumplir y sujetarse a las normas, procedimientos, reglamentos, horarios, turnos y demás disposiciones laborales vigentes en el sitio de trabajo y las que a futuro se expidieren.
+b)  Asistir a todos los requerimientos realizados por la Gerencia General,  y demás departamentos.
+c)  Prestar sus servicios ágil e idóneamente, con una identificación plena de los objetivos que persigue LA EMPRESA.
+d)  Conservar de la manera más diligente, haciendo uso adecuado de todos los materiales, documentos útiles, máquinas, equipos de computación, etc. que le fueren entregados para la ejecución de sus actividades o que estuvieren a su cuidado, obligándose por todos los daños que se originen fuera de su uso normal y de las pérdidas o deterioros de los bienes. El valor de aquellos bienes que sean considerados por LA EMPRESA como destruidos, dañados o desaparecidos, le serán descontados a EL EMPLEADO de sus haberes, previa la correspondiente verificación y  comprobación, situación ésta que EL EMPLEADO  consiente y lo acepta expresamente;
+e)  Manejar los documentos y la información asignada siempre dentro de la ética profesional.
+f)  No ingerir bebidas alcohólicas ni substancias estupefacientes en las instalaciones de la Compañía y durante la jornada de trabajo y, en general mientras se encuentre prestando sus servicios para la compañía. La inobservancia de esta disposición, se considerará falta grave y causal suficiente para dar por terminado el presente contrato sin ninguna indemnización
+g)  EL EMPLEADO  se compromete  a cumplir  su trabajo en el  horario determinado por el empleador, horario que declara conocerlo y aceptarlo;
+h)  EL EMPLEADO prestará sus servicios lícitos y personales exclusivamente para LA EMPRESA.;
+i)  EL EMPLEADO se obliga a usar y velar por el adecuado uso de los implementos  e información que estén a su cargo;
+j)  Los demás señalados por LA EMPRESA.
+k)  Mantener siempre el grado de eficiencia necesaria para el desempeño de sus actividades.
+l)  Observar las normas éticas y morales en el desempeño de su trabajo y en sus relaciones con sus superiores y compañeros.
+m)  Cumplir sus actividades con la intensidad, esmero y cuidado que se requiere, responsabilizándose de los perjuicios que por su acción u omisión puedan causarse a EL EMPLEADOR o a terceros.
+n)  Observar buenas costumbres y guardar respeto a EL EMPLEADOR, a sus compañeros de trabajo, a los clientes de EL EMPLEADOR y, en general, a terceros.
+o)  Cuidar escrupulosamente los materiales y herramientas de trabajo, evitando en lo posible cualquier daño al que se hallen expuestos.
+p)  Guardar reserva absoluta sobre las metodologías, tecnologías utilizadas y estrategia comercial de EL EMPLEADOR, así como sobre la vida privada de EL EMPLEADOR, compañeros de trabajo y clientes, practicando la lealtad en todos sus actos.
+q)  Guardar absoluta reserva y discreción respecto de la información, de cualquier clase que fuere, y que obtuviere o llegare a ser de su conocimiento respecto a asuntos privados y confidenciales de EL EMPLEADOR y de sus clientes.
+r)  Procurar la mayor economía para EL EMPLEADOR en la ejecución del trabajo.
+s)  Informar inmediatamente al EMPLEADOR sobre cualquier asunto o acontecimiento que llegare a su conocimiento y que pudiera afectar al EMPLEADOR, a sus funcionarios o empleados.
+t)  Someterse a las medidas que para el control de la asistencia y evaluación de rendimiento ponga en vigencia EL EMPLEADOR.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="982" width="204" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUINTO:	DE LAS FALTAS GRAVES.-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="9" y="28" width="525" height="72"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["En quito "+ $F{ciudad}+" a los "+ $F{dia} +" días del mes de "+$F{mes} +" de "+$F{anio}+" comparecen a la suscripción del presente contrato: por una parte, la compañía MB MAYFLOWER BUFFALOS S.A., a través de su Apoderado Especial, señor Mauricio Germán Arrata Maldonado, a quien en adelante se le denominará EL EMPLEADOR; y, por otra parte, el (la) Sr.(a) "+$F{nombre_empleado} +" con cédula de identidad No "+$F{cedula}+" , a quien en adelante se le denominará EL EMPLEADO. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="100" width="525" height="26"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Ambas partes, hábiles para contratar y obligarse, de manera libre y voluntaria, convienen en la celebración del presente contrato de trabajo, al tenor de las siguientes clausulas:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="153" width="525" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["I.	LA EMPRESA es una compañía legalmente constituida que para la ejecución de su objeto social requiere la contratación de un "+$F{cargo}+"."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="180" width="525" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["II.	EL EMPLEADO ha manifestado su interés en prestar sus servicios lícitos y personales para la compañía. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="241" width="524" height="110"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Con los antecedentes establecidos y, con el propósito de cumplir los fines para los que  LA EMPRESA se encuentra organizada, se procede a contratar los servicios lícitos y personales de EL EMPLEADO, a el (la) Sr. (a) "+$F{nombre_empleado}+", en calidad de "+$F{cargo}+", sin perjuicio de lo cual deberá ejecutar otras tareas similares a la naturaleza de su trabajo encomendado, y desplazarse a cualquier lugar en el que se requiera su actividad de trabajo, si esto fuere ordenado por la autoridad designada por la Empresa, para lo cual se estará a lo dispuesto en el art. 42 numeral 22 del Código del Trabajo. Expresamente EL EMPLEADO libre y voluntariamente, deja constancia de su aceptación y consentimiento con el contenido de esta cláusula, declarando que la asignación de otras tareas y responsabilidades no se podrá considerar bajo ninguna circunstancia, cambio de ocupación o despido intempestivo."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="1002" width="523" height="284"/>
+				<textElement/>
+				<text><![CDATA[A más de las establecidas en el Código de Trabajo, se considerarán faltas graves y que son motivos para dar por terminado este contrato:
+
+1.  Las previstas en el Art. 172 del Código del Trabajo vigente. Dentro de ellas se entenderá como ineptitud a la negligencia, irresponsabilidad y falta de colaboración de EL EMPLEADO en el cumplimiento de sus labores, así como el manejo indebido de los equipos.
+2.  La violación o desobediencia de las órdenes de sus superiores o de las regulaciones internas de EL EMPLEADOR.
+3.  La desobediencia a las órdenes impartidas por su jefe superior.
+4.  El reclamo que formulen sus superiores o clientes de EL EMPLEADOR sobre la conducta en el servicio de EL EMPLEADO.
+5.  Presentarse en estado de ebriedad, con indicios de haber consumido drogas o sustancias estupefacientes o psicotrópicas o encontrarse bajo efectos de ellas.
+6.  La imprudencia o falta de colaboración que pongan en peligro la vida del resto de empleados, persona alguna relacionada con el trabajo, la suya misma o las instalaciones de EL EMPLEADOR.
+7.  El suministro de datos falsos para la obtención del empleo.
+8.  Utilización inadecuada de implementos y  equipos de trabajo.
+9.  Impuntualidad, por más de tres veces en un mismo mes, o más de tres veces dentro de un trimestre.
+10.  El revelar información obtenida por el hecho de su trabajo. EL EMPLEADO se encuentra debidamente informado sobre el alto nivel de confidencialidad que debe guardar y el hacer conocer a terceros, extraños o resto de empleados secretos u otra información técnica y de seguridad o la sola sospecha de EL EMPLEADOR en tal sentido, será motivo suficiente para la terminación del contrato, reservándose EL EMPLEADOR el derecho a formular acciones civiles y penales según sea el caso.]]></text>
+			</staticText>
+		</band>
+		<band height="1500">
+			<staticText>
+				<reportElement x="10" y="301" width="241" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SÉPTIMO:	REMUNERACION.- ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="321" width="544" height="27"/>
+				<textElement/>
+				<text><![CDATA[
+EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como remuneración mensual la cantidad de ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="439" width="283" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OCTAVO:	DURACIÓN.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="455" width="530" height="63"/>
+				<textElement/>
+				<text><![CDATA[El presente contrato de jornada parcial permanente a prueba tendrá una duración de noventa días, tiempo durante el cual, cualquiera de las partes lo podrá dar por terminado sin derecho a indemnización alguna conforme lo dispuesto en el artículo15 del Código de Trabajo; vencido el tiempo de prueba el contrato se convertirá inmediatamente en indefinido y para darlo por terminado las partes deberán ser notificadas con por lo menos 15 días de anticipación al Empleador conforme lo dispuesto en el Art. 184 del Código de Trabajo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="525" width="227" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOVENO:	HORARIO.- ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="545" width="530" height="14"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADO se obliga y acepta, por su parte, a laborar por jornadas de trabajo, de  ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="31" y="980" width="202" height="1"/>
+			</line>
+			<line>
+				<reportElement x="358" y="981" width="160" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="44" y="993" width="170" height="58"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mauricio Germán Arrata Maldonado
+           Apoderado Especial
+MB MAYFLOWER BUFFALOS S.A.
+              EL EMPLEADOR
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="374" y="993" width="145" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="1009" width="100" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="1025" width="82" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="16" width="204" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["SEXTO:	CONFIDENCIALIDAD Y SECRETO PROFESIONAL.- "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="348" width="524" height="29"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["USD "+$F{salario}+" ("+$P{REPORT_SCRIPTLET}.convertirLetras( (int)$F{salario} ).toUpperCase()+" 00/100DOLARES DE LOS ESTADOS UNIDOS DE AMÉRICA), "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="377" width="523" height="28"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["más los beneficios que por ley le corresponda, tomando en consideración la proporcionalidad en relación con la remuneración que corresponde a la jornada completa."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="405" width="523" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["El EMPLEADOR reconocerá también a EL EMPLEADO las obligaciones sociales y los demás beneficios establecidos en la legislación ecuatoriana."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="559" width="470" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" horas semanales; en la siguiente jornada de trabajo:"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="586" width="221" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉCIMO:	PROPIEDAD INTELECTUAL.-  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="606" width="530" height="39"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO expresamente reconoce que todo derecho de propiedad intelectual que se obtenga por los trabajos, diseños, programas, estudios o investigaciones, que realice en el desarrollo de sus labores, son de propiedad exclusiva de la compañía, por lo que renuncia a cualquier reclamo posterior por este concepto."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="36" width="523" height="247"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADO durante la vigencia de este contrato de trabajo,  y con posterioridad a su extinción, se compromete a mantener en estricta confidencialidad y no divulgar, ni utilizar, la información  de propiedad exclusiva de la Compañía, además respetar y cumplir con los procedimientos y reglas para almacenar y proteger la información que pertenece a los clientes de la compañía
+
+El término “Información de Propiedad Exclusiva” se refiere a todo conocimiento, dato o información confidencial de propiedad exclusiva, o secreto comercial/industrial de la Compañía, planes de nuevos productos,  planes de negocio, presupuestos y declaraciones financieras no publicadas, licencias, precios y costos,  proveedores y clientes, y cualquier otro conocimiento, dato o información confidencial, de propiedad exclusiva o secreto comercial, en cualquier forma o medio producido por o para la Compañía.
+De la misma manera, EL EMPLEADO declara que durante su relación laboral con la Compañía y con posterioridad a su extinción, mantendrá la información de terceros en la más estricta  confidencialidad y no divulgará  a nadie, con excepción del personal de la compañía que necesite contar con dicha información en conexión con su trabajo para con la Compañía.
+
+De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de no destruir ningún registro sin el expreso consentimiento de la Compañía. Comprende, EL EMPLEADO,  que este acuerdo restringe la divulgación y/o uso de la información confidencial y de propiedad exclusiva de la Compañía durante o con posterioridad a mi relación profesional para con la Compañía.
+"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="652" width="144" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNDÉCIMO:	LIQUIDACION.-  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="672" width="529" height="39"/>
+				<textElement/>
+				<text><![CDATA[Si a la terminación del presente Contrato, EL EMPLEADO estuviere debiendo a la Compañía una suma de dinero por cualquier concepto, ésta autoriza para que se hagan las retenciones y los descuentos correspondientes hasta cubrir la totalidad de lo adeudado.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="718" width="202" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUODÉCIMO:	LUGAR DE TRABAJO.-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="738" width="530" height="39"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO realizará sus funciones en el local de la compañía  MB MAYFLOWER BUFFALOS S.A. ubicadas en la ciudad de "+$F{ciudad}+", en la calle "+$F{direccion}+", o en las instalaciones donde EL EMPLEADOR le asigne siempre y cuando no implique disminución de la remuneración o de categoría laboral según sus necesidades."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="784" width="229" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DECIMOTERCERO:	CONTROVERSIAS.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="804" width="529" height="41"/>
+				<textElement/>
+				<text><![CDATA[Las partes incorporan a este contrato todas las disposiciones legales que son aplicables y para el caso de controversia por efectos de este contrato, renuncian fuero y domicilio y se sujetan al procedimiento oral de los jueces competentes de la ciudad de Quito.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="852" width="269" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DECIMOCUARTO:	JURISDICCIÓN Y COMPETENCIA.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="872" width="529" height="37"/>
+				<textElement/>
+				<text><![CDATA[Las partes intervinientes,  señalan como domicilio la ciudad de Quito y se someten de modo expreso a la jurisdicción y competencia de los Jueces de Trabajo de la Provincia de Pichincha y a las disposiciones del Código de Trabajo en todo lo que fuere pertinente.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="909" width="529" height="29"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["En fe de conformidad con el contenido de todas y cada una de las cláusulas del presente contrato, firman las partes en la ciudad de "+$F{ciudad}+" a los "+$F{dia}+" días del mes de "+$F{mes}+" de "+$F{anio}+"."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
