@@ -30,11 +30,11 @@ static Logger log4j = Logger.getLogger(CostingRuleData.class);
   public String mCostingAlgorithmIdr;
   public String datefrom;
   public String warehouseDimension;
-  public String adClientId;
-  public String isactive;
-  public String mCostingRuleId;
   public String isvalidated;
   public String processRule;
+  public String mCostingRuleId;
+  public String adClientId;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -72,16 +72,16 @@ static Logger log4j = Logger.getLogger(CostingRuleData.class);
       return datefrom;
     else if (fieldName.equalsIgnoreCase("warehouse_dimension") || fieldName.equals("warehouseDimension"))
       return warehouseDimension;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("m_costing_rule_id") || fieldName.equals("mCostingRuleId"))
-      return mCostingRuleId;
     else if (fieldName.equalsIgnoreCase("isvalidated"))
       return isvalidated;
     else if (fieldName.equalsIgnoreCase("process_rule") || fieldName.equals("processRule"))
       return processRule;
+    else if (fieldName.equalsIgnoreCase("m_costing_rule_id") || fieldName.equals("mCostingRuleId"))
+      return mCostingRuleId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -127,11 +127,11 @@ Select for edit
       "(CASE WHEN M_Costing_Rule.M_Costing_Algorithm_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS M_Costing_Algorithm_IDR, " +
       "TO_CHAR(M_Costing_Rule.Datefrom, ?) AS Datefrom, " +
       "COALESCE(M_Costing_Rule.Warehouse_Dimension, 'N') AS Warehouse_Dimension, " +
-      "M_Costing_Rule.AD_Client_ID, " +
-      "COALESCE(M_Costing_Rule.Isactive, 'N') AS Isactive, " +
-      "M_Costing_Rule.M_Costing_Rule_ID, " +
       "COALESCE(M_Costing_Rule.IsValidated, 'N') AS IsValidated, " +
       "M_Costing_Rule.Process_Rule, " +
+      "M_Costing_Rule.M_Costing_Rule_ID, " +
+      "M_Costing_Rule.AD_Client_ID, " +
+      "COALESCE(M_Costing_Rule.Isactive, 'N') AS Isactive, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Costing_Rule left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Costing_Rule.AD_Org_ID = table1.AD_Org_ID) left join (select M_Costing_Algorithm_ID, Name from M_Costing_Algorithm) table2 on (M_Costing_Rule.M_Costing_Algorithm_ID = table2.M_Costing_Algorithm_ID)" +
       "        WHERE 2=2 " +
@@ -186,11 +186,11 @@ Select for edit
         objectCostingRuleData.mCostingAlgorithmIdr = UtilSql.getValue(result, "m_costing_algorithm_idr");
         objectCostingRuleData.datefrom = UtilSql.getValue(result, "datefrom");
         objectCostingRuleData.warehouseDimension = UtilSql.getValue(result, "warehouse_dimension");
-        objectCostingRuleData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectCostingRuleData.isactive = UtilSql.getValue(result, "isactive");
-        objectCostingRuleData.mCostingRuleId = UtilSql.getValue(result, "m_costing_rule_id");
         objectCostingRuleData.isvalidated = UtilSql.getValue(result, "isvalidated");
         objectCostingRuleData.processRule = UtilSql.getValue(result, "process_rule");
+        objectCostingRuleData.mCostingRuleId = UtilSql.getValue(result, "m_costing_rule_id");
+        objectCostingRuleData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectCostingRuleData.isactive = UtilSql.getValue(result, "isactive");
         objectCostingRuleData.language = UtilSql.getValue(result, "language");
         objectCostingRuleData.adUserClient = "";
         objectCostingRuleData.adOrgClient = "";
@@ -240,11 +240,11 @@ Create a registry
     objectCostingRuleData[0].mCostingAlgorithmIdr = "";
     objectCostingRuleData[0].datefrom = datefrom;
     objectCostingRuleData[0].warehouseDimension = warehouseDimension;
-    objectCostingRuleData[0].adClientId = adClientId;
-    objectCostingRuleData[0].isactive = isactive;
-    objectCostingRuleData[0].mCostingRuleId = mCostingRuleId;
     objectCostingRuleData[0].isvalidated = isvalidated;
     objectCostingRuleData[0].processRule = processRule;
+    objectCostingRuleData[0].mCostingRuleId = mCostingRuleId;
+    objectCostingRuleData[0].adClientId = adClientId;
+    objectCostingRuleData[0].isactive = isactive;
     objectCostingRuleData[0].language = "";
     return objectCostingRuleData;
   }
@@ -367,7 +367,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Costing_Rule" +
-      "        SET AD_Org_ID = (?) , M_Costing_Algorithm_ID = (?) , Datefrom = TO_TIMESTAMP(?, ?) , Warehouse_Dimension = (?) , AD_Client_ID = (?) , Isactive = (?) , M_Costing_Rule_ID = (?) , IsValidated = (?) , Process_Rule = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , M_Costing_Algorithm_ID = (?) , Datefrom = TO_TIMESTAMP(?, ?) , Warehouse_Dimension = (?) , IsValidated = (?) , Process_Rule = (?) , M_Costing_Rule_ID = (?) , AD_Client_ID = (?) , Isactive = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Costing_Rule.M_Costing_Rule_ID = ? " +
       "        AND M_Costing_Rule.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -389,11 +389,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, datefrom);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, warehouseDimension);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mCostingRuleId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isvalidated);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processRule);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mCostingRuleId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mCostingRuleId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -422,7 +422,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Costing_Rule " +
-      "        (AD_Org_ID, M_Costing_Algorithm_ID, Datefrom, Warehouse_Dimension, AD_Client_ID, Isactive, M_Costing_Rule_ID, IsValidated, Process_Rule, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, M_Costing_Algorithm_ID, Datefrom, Warehouse_Dimension, IsValidated, Process_Rule, M_Costing_Rule_ID, AD_Client_ID, Isactive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -436,11 +436,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, datefrom);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, warehouseDimension);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mCostingRuleId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isvalidated);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processRule);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mCostingRuleId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

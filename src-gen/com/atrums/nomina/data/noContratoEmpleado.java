@@ -81,9 +81,16 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_NEVACACIONPROP = "neVacacionProp";
     public static final String PROPERTY_NEVACACIONRES = "neVacacionRes";
     public static final String PROPERTY_NEVACACIONTOM = "neVacacionTom";
+    public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_NOPERMISOLIST = "noPermisoList";
     public static final String PROPERTY_CCOCOSTOSNOMINALIST = "ccoCostosNominaList";
     public static final String PROPERTY_NOVACACIONLIST = "noVacacionList";
+
+
+    // Computed columns properties, these properties cannot be directly accessed, they need
+    // to be read through _commputedColumns proxy. They cannot be directly used in HQL, OBQuery
+    // nor OBCriteria. 
+    public static final String COMPUTED_COLUMN_NEDIAVACACIONRES = "neDiaVacacionRes";
 
     public noContratoEmpleado() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -288,6 +295,14 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_NEAREAEMPRESA, neAreaEmpresa);
     }
 
+    public BigDecimal getNeDiaVacacionRes() {
+        return (BigDecimal) get(COMPUTED_COLUMN_NEDIAVACACIONRES);
+    }
+
+    public void setNeDiaVacacionRes(BigDecimal neDiaVacacionRes) {
+        set(COMPUTED_COLUMN_NEDIAVACACIONRES, neDiaVacacionRes);
+    }
+
     public Boolean isNeIsJornadaParcial() {
         return (Boolean) get(PROPERTY_NEISJORNADAPARCIAL);
     }
@@ -360,6 +375,14 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_NEVACACIONTOM, neVacacionTom);
     }
 
+    public noContratoEmpleado_ComputedColumns get_computedColumns() {
+        return (noContratoEmpleado_ComputedColumns) get(PROPERTY__COMPUTEDCOLUMNS);
+    }
+
+    public void set_computedColumns(noContratoEmpleado_ComputedColumns _computedColumns) {
+        set(PROPERTY__COMPUTEDCOLUMNS, _computedColumns);
+    }
+
     @SuppressWarnings("unchecked")
     public List<NoPermiso> getNoPermisoList() {
       return (List<NoPermiso>) get(PROPERTY_NOPERMISOLIST);
@@ -387,4 +410,16 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_NOVACACIONLIST, noVacacionList);
     }
 
+
+    @Override
+    public Object get(String propName) {
+      if (COMPUTED_COLUMN_NEDIAVACACIONRES.equals(propName)) {
+        if (get_computedColumns() == null) {
+          return null;
+        }
+        return get_computedColumns().getNeDiaVacacionRes();
+      }
+    
+      return super.get(propName);
+    }
 }

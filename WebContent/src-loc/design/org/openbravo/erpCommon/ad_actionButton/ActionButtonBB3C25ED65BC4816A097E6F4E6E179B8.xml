@@ -45,11 +45,16 @@
 <SUBREPORT id="reportoutputType" name="reportoutputType" report="org/openbravo/erpCommon/reference/List">
   <ARGUMENT name="parameterListSelected" withId="outputType"/>
 </SUBREPORT>
+<PARAMETER id="c_bpartner_id" name="c_bpartner_id" attribute="value"/>
+<SUBREPORT id="reportc_bpartner_id" name="reportc_bpartner_id" report="org/openbravo/erpCommon/reference/List">
+  <ARGUMENT name="parameterListSelected" withId="c_bpartner_id"/>
+</SUBREPORT>
 
 
 <DISCARD id="discard"></DISCARD>
 
 <LABEL id="lbl::c_period_id" name="lbl::c_period_id" replace="#c_period_id#">c_period_idlbl</LABEL>
 <LABEL id="lbl::outputType" name="lbl::outputType" replace="#outputType#">outputTypelbl</LABEL>
+<LABEL id="lbl::c_bpartner_id" name="lbl::c_bpartner_id" replace="#c_bpartner_id#">c_bpartner_idlbl</LABEL>
 
 </REPORT>

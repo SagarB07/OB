@@ -359,6 +359,42 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado.ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9
+      </display-name>
+      <servlet-name>
+        W0C51ECCEBC5F448FA60FF1A7DE775ED9
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado.ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado.Vacaciones38D375FC19E343C1AD9A1EC73AB0880E
+      </display-name>
+      <servlet-name>
+        W38D375FC19E343C1AD9A1EC73AB0880E
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado.Vacaciones38D375FC19E343C1AD9A1EC73AB0880E
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado.PermisoEmpleados742FA61199A44DD3BB60DE3AFFB7A3DA
+      </display-name>
+      <servlet-name>
+        W742FA61199A44DD3BB60DE3AFFB7A3DA
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado.PermisoEmpleados742FA61199A44DD3BB60DE3AFFB7A3DA
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.CostingRules.CostingRule
       </display-name>
       <servlet-name>
@@ -3690,6 +3726,20 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpCommon.ad_callouts.SL_Order_UpdateLinesDate
+      </servlet-class>
+      
+      
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        com.atrums.nomina.ad_callouts.NO_ImportaSueldo
+      </display-name>
+      <servlet-name>
+        CB6B5FFA134554F41B9A7C0E60B7ECB05
+      </servlet-name>
+      <servlet-class>
+        com.atrums.nomina.ad_callouts.NO_ImportaSueldo
       </servlet-class>
       
       
@@ -8456,6 +8506,27 @@
   
     <servlet-mapping>
       <servlet-name>
+        W0C51ECCEBC5F448FA60FF1A7DE775ED9
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaContratoEmpleado/ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W38D375FC19E343C1AD9A1EC73AB0880E
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaContratoEmpleado/Vacaciones38D375FC19E343C1AD9A1EC73AB0880E_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        W742FA61199A44DD3BB60DE3AFFB7A3DA
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaContratoEmpleado/PermisoEmpleados742FA61199A44DD3BB60DE3AFFB7A3DA_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W6868B706DA8340158DE353A6C252A564
       </servlet-name>
       <url-pattern>/CostingRules/CostingRule_Edition.html</url-pattern>
@@ -10229,6 +10300,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        CB6B5FFA134554F41B9A7C0E60B7ECB05
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.ad_callouts/NO_ImportaSueldo.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         CBA0440F70231438697B13A3D93920B47
       </servlet-name>
       <url-pattern>/com.atrums.remica.ad_callouts/BaseImponible.html</url-pattern>
@@ -10553,7 +10631,7 @@
       <servlet-name>
         MEF8E7CE2324E425FB840AD1DCBD8054B
       </servlet-name>
-      <url-pattern>*.jws</url-pattern>
+      <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10567,7 +10645,7 @@
       <servlet-name>
         MEF8E7CE2324E425FB840AD1DCBD8054B
       </servlet-name>
-      <url-pattern>/services/*</url-pattern>
+      <url-pattern>*.jws</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10595,14 +10673,7 @@
       <servlet-name>
         P1000500009
       </servlet-name>
-      <url-pattern>/orders/send.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P1000500009
-      </servlet-name>
-      <url-pattern>/orders/*</url-pattern>
+      <url-pattern>/orders/print.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10616,14 +10687,14 @@
       <servlet-name>
         P1000500009
       </servlet-name>
-      <url-pattern>/orders/print.html</url-pattern>
+      <url-pattern>/orders/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
-        P1000500018
+        P1000500009
       </servlet-name>
-      <url-pattern>/invoices/send.html</url-pattern>
+      <url-pattern>/orders/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10644,6 +10715,13 @@
       <servlet-name>
         P1000500018
       </servlet-name>
+      <url-pattern>/invoices/send.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P1000500018
+      </servlet-name>
       <url-pattern>/invoices/print.html</url-pattern>
     </servlet-mapping>
   
@@ -10651,14 +10729,14 @@
       <servlet-name>
         P1000500020
       </servlet-name>
-      <url-pattern>/shipments/*</url-pattern>
+      <url-pattern>/shipments/PrintOptions.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P1000500020
       </servlet-name>
-      <url-pattern>/shipments/PrintOptions.html</url-pattern>
+      <url-pattern>/shipments/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10728,13 +10806,6 @@
       <servlet-name>
         P18483FCC3E5D49EEBA529D2380129436
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad/movimientos/print.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P18483FCC3E5D49EEBA529D2380129436
-      </servlet-name>
       <url-pattern>/com.atrums.contabilidad/movimientos/*</url-pattern>
     </servlet-mapping>
   
@@ -10742,14 +10813,21 @@
       <servlet-name>
         P18483FCC3E5D49EEBA529D2380129436
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad/send.html</url-pattern>
+      <url-pattern>/com.atrums.contabilidad/PrintOptions.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P18483FCC3E5D49EEBA529D2380129436
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad/PrintOptions.html</url-pattern>
+      <url-pattern>/com.atrums.contabilidad/movimientos/print.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P18483FCC3E5D49EEBA529D2380129436
+      </servlet-name>
+      <url-pattern>/com.atrums.contabilidad/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10952,7 +11030,7 @@
       <servlet-name>
         P800737
       </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFromMultiple_F1.html</url-pattern>
+      <url-pattern>/ad_actionButton/CreateFromMultiple_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -10966,13 +11044,6 @@
       <servlet-name>
         P800737
       </servlet-name>
-      <url-pattern>/ad_ActionButton/CreateFromMultiple_Receipt.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P800737
-      </servlet-name>
       <url-pattern>/ad_ActionButton/CreateFromMultiple_Shipment.html</url-pattern>
     </servlet-mapping>
   
@@ -10980,7 +11051,14 @@
       <servlet-name>
         P800737
       </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFromMultiple_F2.html</url-pattern>
+      <url-pattern>/ad_ActionButton/CreateFromMultiple_Receipt.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P800737
+      </servlet-name>
+      <url-pattern>/ad_actionButton/CreateFromMultiple_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11036,7 +11114,7 @@
       <servlet-name>
         P801017
       </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFrom_F1.html</url-pattern>
+      <url-pattern>/ad_actionButton/CreateFrom_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11050,7 +11128,7 @@
       <servlet-name>
         P801017
       </servlet-name>
-      <url-pattern>/ad_actionButton/CreateFrom_FS.html</url-pattern>
+      <url-pattern>/ad_actionButton/CreateFrom_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11078,14 +11156,14 @@
       <servlet-name>
         P801126
       </servlet-name>
-      <url-pattern>/ad_process/CreateAccountingReportPopUp.html</url-pattern>
+      <url-pattern>/ad_process/CreateAccountingReport.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P801126
       </servlet-name>
-      <url-pattern>/ad_process/CreateAccountingReport.html</url-pattern>
+      <url-pattern>/ad_process/CreateAccountingReportPopUp.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11127,14 +11205,14 @@
       <servlet-name>
         P801418
       </servlet-name>
-      <url-pattern>/ad_process/CreateTaxReport.html</url-pattern>
+      <url-pattern>/ad_process/CreateTaxReportPopUp.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         P801418
       </servlet-name>
-      <url-pattern>/ad_process/CreateTaxReportPopUp.html</url-pattern>
+      <url-pattern>/ad_process/CreateTaxReport.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11148,14 +11226,7 @@
       <servlet-name>
         P801433
       </servlet-name>
-      <url-pattern>/utility/ExportGrid.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        P801433
-      </servlet-name>
-      <url-pattern>/utility/ExportGrid.csv</url-pattern>
+      <url-pattern>/utility/ExportGrid.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11169,7 +11240,14 @@
       <servlet-name>
         P801433
       </servlet-name>
-      <url-pattern>/utility/ExportGrid.xls</url-pattern>
+      <url-pattern>/utility/ExportGrid.csv</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        P801433
+      </servlet-name>
+      <url-pattern>/utility/ExportGrid.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11288,7 +11366,7 @@
       <servlet-name>
         PD6BA8577DEC4481D8E0D5472A51A6D84
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad/retenciones/*</url-pattern>
+      <url-pattern>/com.atrums.contabilidad/PrintOptions.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11302,14 +11380,14 @@
       <servlet-name>
         PD6BA8577DEC4481D8E0D5472A51A6D84
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad/PrintOptions.html</url-pattern>
+      <url-pattern>/com.atrums.contabilidad/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         PD6BA8577DEC4481D8E0D5472A51A6D84
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad/send.html</url-pattern>
+      <url-pattern>/com.atrums.contabilidad/retenciones/*</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11407,6 +11485,13 @@
       <servlet-name>
         R1002100043
       </servlet-name>
+      <url-pattern>/ad_reports/ReportAnnualCertification.xls</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R1002100043
+      </servlet-name>
       <url-pattern>/ad_reports/ReportAnnualCertification.pdf</url-pattern>
     </servlet-mapping>
   
@@ -11415,13 +11500,6 @@
         R1002100043
       </servlet-name>
       <url-pattern>/ad_reports/ReportAnnualCertification.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R1002100043
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportAnnualCertification.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11456,7 +11534,7 @@
       <servlet-name>
         R338B29351B1D41138A09B2103B2B07C8
       </servlet-name>
-      <url-pattern>/payments/send.html</url-pattern>
+      <url-pattern>/payments/print.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11470,21 +11548,14 @@
       <servlet-name>
         R338B29351B1D41138A09B2103B2B07C8
       </servlet-name>
-      <url-pattern>/payments/PrintOptions.html</url-pattern>
+      <url-pattern>/payments/send.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R338B29351B1D41138A09B2103B2B07C8
       </servlet-name>
-      <url-pattern>/payments/print.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800787
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportTrialBalance.html</url-pattern>
+      <url-pattern>/payments/PrintOptions.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11492,6 +11563,13 @@
         R800787
       </servlet-name>
       <url-pattern>/ad_reports/ReportTrialBalancePDF.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800787
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportTrialBalance.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11519,7 +11597,7 @@
       <servlet-name>
         R800794
       </servlet-name>
-      <url-pattern>/RptM_InoutLines.pdf</url-pattern>
+      <url-pattern>/RptM_InoutHeader.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11533,14 +11611,7 @@
       <servlet-name>
         R800794
       </servlet-name>
-      <url-pattern>/RptM_InoutHeader.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800804
-      </servlet-name>
-      <url-pattern>/RptC_Order.pdf</url-pattern>
+      <url-pattern>/RptM_InoutLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11548,6 +11619,13 @@
         R800804
       </servlet-name>
       <url-pattern>/RptC_OrderLines.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800804
+      </servlet-name>
+      <url-pattern>/RptC_Order.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11575,14 +11653,14 @@
       <servlet-name>
         R800829
       </servlet-name>
-      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800829
       </servlet-name>
-      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportToInvoiceConsignmentJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11596,21 +11674,14 @@
       <servlet-name>
         R800830
       </servlet-name>
-      <url-pattern>/RptC_Settlement.pdf</url-pattern>
+      <url-pattern>/RptC_SettlementLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800830
       </servlet-name>
-      <url-pattern>/RptC_SettlementLines.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800832
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportRefundSalesDimensionalAnalysesFilter.html</url-pattern>
+      <url-pattern>/RptC_Settlement.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11618,6 +11689,13 @@
         R800832
       </servlet-name>
       <url-pattern>/ad_reports/ReportRefundSalesDimensionalAnalysesEdition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800832
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportRefundSalesDimensionalAnalysesFilter.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11638,7 +11716,7 @@
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPODescription.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPO.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11659,7 +11737,7 @@
       <servlet-name>
         R800834
       </servlet-name>
-      <url-pattern>/RptC_OrderPO.pdf</url-pattern>
+      <url-pattern>/RptC_OrderPODescription.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11673,14 +11751,21 @@
       <servlet-name>
         R800836
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.xls</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800836
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.html</url-pattern>
+      <url-pattern>/ad_reports/ReportGeneralLedgerJournal.xls</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800848
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportMaterialTransactionEditionJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11699,13 +11784,6 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800848
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportMaterialTransactionEditionJR.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
         R800850
       </servlet-name>
       <url-pattern>/ad_reports/ReportTotalProductTemplate.html</url-pattern>
@@ -11715,14 +11793,14 @@
       <servlet-name>
         R800852
       </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800852
       </servlet-name>
-      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportProjectBuildingSiteJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11778,6 +11856,13 @@
       <servlet-name>
         R800872
       </servlet-name>
+      <url-pattern>/RptMA_CCP_Measures_Values.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800872
+      </servlet-name>
       <url-pattern>/RptMA_CCP_Measures_Hours.pdf</url-pattern>
     </servlet-mapping>
   
@@ -11786,13 +11871,6 @@
         R800872
       </servlet-name>
       <url-pattern>/RptMA_CCP_Measures.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800872
-      </servlet-name>
-      <url-pattern>/RptMA_CCP_Measures_Values.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11820,13 +11898,6 @@
       <servlet-name>
         R800874
       </servlet-name>
-      <url-pattern>/RptPromissoryNoteAfter.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800874
-      </servlet-name>
       <url-pattern>/RptPromissoryNoteHeader.pdf</url-pattern>
     </servlet-mapping>
   
@@ -11835,6 +11906,13 @@
         R800874
       </servlet-name>
       <url-pattern>/RptPromissoryNoteError.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800874
+      </servlet-name>
+      <url-pattern>/RptPromissoryNoteAfter.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11848,21 +11926,14 @@
       <servlet-name>
         R800882
       </servlet-name>
-      <url-pattern>/RptM_MovementLines.pdf</url-pattern>
+      <url-pattern>/RptM_Movement.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R800882
       </servlet-name>
-      <url-pattern>/RptM_Movement.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R800889
-      </servlet-name>
-      <url-pattern>/ad_reports/ReportShipmentDimensionalAnalyzeJREdition.html</url-pattern>
+      <url-pattern>/RptM_MovementLines.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11874,9 +11945,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800892
+        R800889
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPricelist.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportShipmentDimensionalAnalyzeJREdition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11888,9 +11959,9 @@
   
     <servlet-mapping>
       <servlet-name>
-        R800941
+        R800892
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGeneralLedgerExcel.xls</url-pattern>
+      <url-pattern>/ad_reports/ReportPricelist.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11904,6 +11975,13 @@
       <servlet-name>
         R800941
       </servlet-name>
+      <url-pattern>/ad_reports/ReportGeneralLedgerExcel.xls</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R800941
+      </servlet-name>
       <url-pattern>/ad_reports/ReportGeneralLedger.html</url-pattern>
     </servlet-mapping>
   
@@ -11911,14 +11989,14 @@
       <servlet-name>
         R801050
       </servlet-name>
-      <url-pattern>/ad_reports/ReportBudgetGenerateExcel.html</url-pattern>
+      <url-pattern>/ad_reports/ReportBudgetGenerateExcelXLS.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801050
       </servlet-name>
-      <url-pattern>/ad_reports/ReportBudgetGenerateExcelXLS.xls</url-pattern>
+      <url-pattern>/ad_reports/ReportBudgetGenerateExcel.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -11946,6 +12024,13 @@
       <servlet-name>
         R801140
       </servlet-name>
+      <url-pattern>/RptC_Remittance.pdf</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801140
+      </servlet-name>
       <url-pattern>/RptC_RemittanceLines.pdf</url-pattern>
     </servlet-mapping>
   
@@ -11954,13 +12039,6 @@
         R801140
       </servlet-name>
       <url-pattern>/RptC_RemittanceHeader.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801140
-      </servlet-name>
-      <url-pattern>/RptC_Remittance.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12016,14 +12094,14 @@
       <servlet-name>
         R801706
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderFilterJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801706
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderFilterJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12044,14 +12122,14 @@
       <servlet-name>
         R801709
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGuaranteeDateJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportGuaranteeDateJR.jrxml</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801709
       </servlet-name>
-      <url-pattern>/ad_reports/ReportGuaranteeDateJR.jrxml</url-pattern>
+      <url-pattern>/ad_reports/ReportGuaranteeDateJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12065,14 +12143,14 @@
       <servlet-name>
         R801711
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPurchaseDimensionalAnalysesFilterJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportPurchaseDimensionalJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801711
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPurchaseDimensionalJR.pdf</url-pattern>
+      <url-pattern>/ad_reports/ReportPurchaseDimensionalAnalysesFilterJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12114,14 +12192,14 @@
       <servlet-name>
         R801723
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasperPop.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasper.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801723
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasper.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderInvoicedJasperPop.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12135,14 +12213,14 @@
       <servlet-name>
         R801725
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderProvidedJR.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderProvidedJRPop.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801725
       </servlet-name>
-      <url-pattern>/ad_reports/ReportSalesOrderProvidedJRPop.html</url-pattern>
+      <url-pattern>/ad_reports/ReportSalesOrderProvidedJR.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12184,13 +12262,6 @@
       <servlet-name>
         R801735
       </servlet-name>
-      <url-pattern>/ad_reports/ReportShipmentEditionJR.pdf</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        R801735
-      </servlet-name>
       <url-pattern>/ad_reports/ReportShipmentEditionJR.html</url-pattern>
     </servlet-mapping>
   
@@ -12199,6 +12270,13 @@
         R801735
       </servlet-name>
       <url-pattern>/ad_reports/ReportShipmentFilterJR.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        R801735
+      </servlet-name>
+      <url-pattern>/ad_reports/ReportShipmentEditionJR.pdf</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12212,14 +12290,14 @@
       <servlet-name>
         R801736
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPendingProductionJr.jrxml</url-pattern>
+      <url-pattern>/ad_reports/ReportPendingProductionJr.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801736
       </servlet-name>
-      <url-pattern>/ad_reports/ReportPendingProductionJr.html</url-pattern>
+      <url-pattern>/ad_reports/ReportPendingProductionJr.jrxml</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12261,14 +12339,14 @@
       <servlet-name>
         R801969
       </servlet-name>
-      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJREdition_legacy.html</url-pattern>
+      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJRFilter_legacy.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R801969
       </servlet-name>
-      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJRFilter_legacy.html</url-pattern>
+      <url-pattern>/ad_reports/ReportInvoiceCustomerDimensionalAnalysesJREdition_legacy.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12282,14 +12360,14 @@
       <servlet-name>
         R804366
       </servlet-name>
-      <url-pattern>/ad_reports/ReportCashFlowReload.html</url-pattern>
+      <url-pattern>/ad_reports/ReportCashFlowPopUp.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         R804366
       </servlet-name>
-      <url-pattern>/ad_reports/ReportCashFlowPopUp.html</url-pattern>
+      <url-pattern>/ad_reports/ReportCashFlowReload.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12422,14 +12500,14 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_F2.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12443,7 +12521,7 @@
       <servlet-name>
         S800779
       </servlet-name>
-      <url-pattern>/info/BusinessPartnerMultiple_FS.html</url-pattern>
+      <url-pattern>/info/BusinessPartnerMultiple_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12457,14 +12535,7 @@
       <servlet-name>
         S800781
       </servlet-name>
-      <url-pattern>/info/ProductMultiple_FS.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S800781
-      </servlet-name>
-      <url-pattern>/info/ProductMultiple.html</url-pattern>
+      <url-pattern>/info/ProductMultiple_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12485,7 +12556,14 @@
       <servlet-name>
         S800781
       </servlet-name>
-      <url-pattern>/info/ProductMultiple_F2.html</url-pattern>
+      <url-pattern>/info/ProductMultiple_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S800781
+      </servlet-name>
+      <url-pattern>/info/ProductMultiple.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12548,13 +12626,6 @@
       <servlet-name>
         S801413
       </servlet-name>
-      <url-pattern>/info/Location_F2.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S801413
-      </servlet-name>
       <url-pattern>/info/Location_F1.html</url-pattern>
     </servlet-mapping>
   
@@ -12569,7 +12640,28 @@
       <servlet-name>
         S801413
       </servlet-name>
+      <url-pattern>/info/Location_F2.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S801413
+      </servlet-name>
       <url-pattern>/info/Location_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <url-pattern>/info/Location_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        S9144678E2BB847EA9A93FC2314DF0C72
+      </servlet-name>
+      <url-pattern>/info/Location_F3.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12584,20 +12676,6 @@
         S9144678E2BB847EA9A93FC2314DF0C72
       </servlet-name>
       <url-pattern>/info/Location_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S9144678E2BB847EA9A93FC2314DF0C72
-      </servlet-name>
-      <url-pattern>/info/Location_F3.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        S9144678E2BB847EA9A93FC2314DF0C72
-      </servlet-name>
-      <url-pattern>/info/Location_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12618,14 +12696,14 @@
       <servlet-name>
         SD81AD57191BF47A594E144C6ACD3807E
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_FS.html</url-pattern>
+      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_F3.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         SD81AD57191BF47A594E144C6ACD3807E
       </servlet-name>
-      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_F3.html</url-pattern>
+      <url-pattern>/com.atrums.contabilidad.erpCommon.info/Location_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12744,14 +12822,14 @@
       <servlet-name>
         X800541
       </servlet-name>
-      <url-pattern>/ad_forms/SQLExecutor_Excel.xls</url-pattern>
+      <url-pattern>/ad_forms/SQLExecutor.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X800541
       </servlet-name>
-      <url-pattern>/ad_forms/SQLExecutor.html</url-pattern>
+      <url-pattern>/ad_forms/SQLExecutor_Excel.xls</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12842,6 +12920,20 @@
       <servlet-name>
         X800665
       </servlet-name>
+      <url-pattern>/security/Login_Options_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X800665
+      </servlet-name>
+      <url-pattern>/security/Login_FS.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X800665
+      </servlet-name>
       <url-pattern>/security/Login_Logo.html</url-pattern>
     </servlet-mapping>
   
@@ -12856,13 +12948,6 @@
       <servlet-name>
         X800665
       </servlet-name>
-      <url-pattern>/security/Login_Options_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X800665
-      </servlet-name>
       <url-pattern>/security/Login_Welcome.html</url-pattern>
     </servlet-mapping>
   
@@ -12871,13 +12956,6 @@
         X800665
       </servlet-name>
       <url-pattern>/security/Login_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X800665
-      </servlet-name>
-      <url-pattern>/security/Login_FS.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12905,14 +12983,14 @@
       <servlet-name>
         X800669
       </servlet-name>
-      <url-pattern>/utility/UsedByLink.html</url-pattern>
+      <url-pattern>/utility/UsedByLink_Detail.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X800669
       </servlet-name>
-      <url-pattern>/utility/UsedByLink_Detail.html</url-pattern>
+      <url-pattern>/utility/UsedByLink.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -12996,14 +13074,14 @@
       <servlet-name>
         X801949
       </servlet-name>
-      <url-pattern>/ad_forms/CreateInvoicesfromOrders.html</url-pattern>
+      <url-pattern>/ad_forms/GenerateInvoicesmanual.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
       <servlet-name>
         X801949
       </servlet-name>
-      <url-pattern>/ad_forms/GenerateInvoicesmanual.html</url-pattern>
+      <url-pattern>/ad_forms/CreateInvoicesfromOrders.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -13038,7 +13116,7 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_F1.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F1.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -13052,21 +13130,7 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X99087891EBCFA68BE040A8C0BD063FFC
-      </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F1.html</url-pattern>
-    </servlet-mapping>
-  
-    <servlet-mapping>
-      <servlet-name>
-        X99087891EBCFA68BE040A8C0BD063FFC
-      </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_F2.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>
@@ -13087,7 +13151,21 @@
       <servlet-name>
         X99087891EBCFA68BE040A8C0BD063FFC
       </servlet-name>
-      <url-pattern>/ad_help/DisplayHelp_Edit_Element_F2.html</url-pattern>
+      <url-pattern>/ad_help/DisplayHelp_Edit_Field_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X99087891EBCFA68BE040A8C0BD063FFC
+      </servlet-name>
+      <url-pattern>/ad_help/DisplayHelp_Edit_F1.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        X99087891EBCFA68BE040A8C0BD063FFC
+      </servlet-name>
+      <url-pattern>/ad_help/DisplayHelp_Edit_F2.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>

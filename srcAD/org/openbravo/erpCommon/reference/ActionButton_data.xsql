@@ -518,6 +518,22 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process3B73C762A8B74750A3AC5BD1F1A041A8" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure ne_procesar_permiso</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL ne_procesar_permiso(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process3CA9715730B240F0A9BEBE9101F93FF6" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure ne_procesar_vacacion</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL ne_procesar_vacacion(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process42766B73BC4041F7825191B02173E175" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure co_procesa_retencion_ventas</SqlMethodComment>
       <Sql><![CDATA[
@@ -642,6 +658,14 @@
       <SqlMethodComment>procedure no_procesa_avance_pago</SqlMethodComment>
       <Sql><![CDATA[
         CALL no_procesa_avance_pago(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process6BEE1D339BBC4CA6995E79722CD7A9BF" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_actualizar_tercera_edad</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_actualizar_tercera_edad(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>

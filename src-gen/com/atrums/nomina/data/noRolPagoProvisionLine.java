@@ -33,6 +33,8 @@ import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.common.currency.Currency;
 import org.openbravo.model.common.enterprise.DocumentType;
 import org.openbravo.model.common.enterprise.Organization;
+import org.openbravo.model.financialmgmt.accounting.coa.AccountingCombination;
+import org.openbravo.model.financialmgmt.accounting.coa.AcctSchema;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 import org.openbravo.model.financialmgmt.payment.FIN_PaymentMethod;
 /**
@@ -69,8 +71,11 @@ public class noRolPagoProvisionLine extends BaseOBObject implements Traceable, C
     public static final String PROPERTY_DOCACCIONNO = "docaccionno";
     public static final String PROPERTY_PROCESARPAGO = "procesarPago";
     public static final String PROPERTY_PAYMENT = "payment";
-    public static final String PROPERTY_NEOBSERVACION = "neObservacion";
     public static final String PROPERTY_NETIPORUBRO = "neTipoRubro";
+    public static final String PROPERTY_NEOBSERVACION = "neObservacion";
+    public static final String PROPERTY_GENERALLEDGER = "generalLedger";
+    public static final String PROPERTY_CUENTADELEGRESO = "cuentaDelEgreso";
+    public static final String PROPERTY_CUENTADELINGRESO = "cuentaDelIngreso";
     public static final String PROPERTY_NOROLPROVISIONLINEMESLIST = "noRolProvisionLineMesList";
 
     public noRolPagoProvisionLine() {
@@ -281,6 +286,14 @@ public class noRolPagoProvisionLine extends BaseOBObject implements Traceable, C
         set(PROPERTY_PAYMENT, payment);
     }
 
+    public String getNeTipoRubro() {
+        return (String) get(PROPERTY_NETIPORUBRO);
+    }
+
+    public void setNeTipoRubro(String neTipoRubro) {
+        set(PROPERTY_NETIPORUBRO, neTipoRubro);
+    }
+
     public String getNeObservacion() {
         return (String) get(PROPERTY_NEOBSERVACION);
     }
@@ -289,12 +302,28 @@ public class noRolPagoProvisionLine extends BaseOBObject implements Traceable, C
         set(PROPERTY_NEOBSERVACION, neObservacion);
     }
 
-    public String getNeTipoRubro() {
-        return (String) get(PROPERTY_NETIPORUBRO);
+    public AcctSchema getGeneralLedger() {
+        return (AcctSchema) get(PROPERTY_GENERALLEDGER);
     }
 
-    public void setNeTipoRubro(String neTipoRubro) {
-        set(PROPERTY_NETIPORUBRO, neTipoRubro);
+    public void setGeneralLedger(AcctSchema generalLedger) {
+        set(PROPERTY_GENERALLEDGER, generalLedger);
+    }
+
+    public AccountingCombination getCuentaDelEgreso() {
+        return (AccountingCombination) get(PROPERTY_CUENTADELEGRESO);
+    }
+
+    public void setCuentaDelEgreso(AccountingCombination cuentaDelEgreso) {
+        set(PROPERTY_CUENTADELEGRESO, cuentaDelEgreso);
+    }
+
+    public AccountingCombination getCuentaDelIngreso() {
+        return (AccountingCombination) get(PROPERTY_CUENTADELINGRESO);
+    }
+
+    public void setCuentaDelIngreso(AccountingCombination cuentaDelIngreso) {
+        set(PROPERTY_CUENTADELINGRESO, cuentaDelIngreso);
     }
 
     @SuppressWarnings("unchecked")

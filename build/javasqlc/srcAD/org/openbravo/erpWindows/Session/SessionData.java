@@ -33,11 +33,11 @@ static Logger log4j = Logger.getLogger(SessionData.class);
   public String lastSessionPing;
   public String sessionActive;
   public String processed;
-  public String websession;
-  public String adClientId;
   public String isactive;
   public String adOrgId;
+  public String websession;
   public String adSessionId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -81,16 +81,16 @@ static Logger log4j = Logger.getLogger(SessionData.class);
       return sessionActive;
     else if (fieldName.equalsIgnoreCase("processed"))
       return processed;
-    else if (fieldName.equalsIgnoreCase("websession"))
-      return websession;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
+    else if (fieldName.equalsIgnoreCase("websession"))
+      return websession;
     else if (fieldName.equalsIgnoreCase("ad_session_id") || fieldName.equals("adSessionId"))
       return adSessionId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -139,11 +139,11 @@ Select for edit
       "TO_CHAR(AD_Session.Last_Session_Ping, ?) AS Last_Session_Ping, " +
       "AD_Session.Session_Active, " +
       "COALESCE(AD_Session.Processed, 'N') AS Processed, " +
-      "AD_Session.WebSession, " +
-      "AD_Session.AD_Client_ID, " +
       "COALESCE(AD_Session.IsActive, 'N') AS IsActive, " +
       "AD_Session.AD_Org_ID, " +
+      "AD_Session.WebSession, " +
       "AD_Session.AD_Session_ID, " +
+      "AD_Session.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM AD_Session left join ad_ref_list_v list1 on (AD_Session.Login_Status = list1.value and list1.ad_reference_id = '86086D70DDBC42B09E2BEB51D25C159F' and list1.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -202,11 +202,11 @@ Select for edit
         objectSessionData.lastSessionPing = UtilSql.getValue(result, "last_session_ping");
         objectSessionData.sessionActive = UtilSql.getValue(result, "session_active");
         objectSessionData.processed = UtilSql.getValue(result, "processed");
-        objectSessionData.websession = UtilSql.getValue(result, "websession");
-        objectSessionData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectSessionData.isactive = UtilSql.getValue(result, "isactive");
         objectSessionData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectSessionData.websession = UtilSql.getValue(result, "websession");
         objectSessionData.adSessionId = UtilSql.getValue(result, "ad_session_id");
+        objectSessionData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectSessionData.language = UtilSql.getValue(result, "language");
         objectSessionData.adUserClient = "";
         objectSessionData.adOrgClient = "";
@@ -259,11 +259,11 @@ Create a registry
     objectSessionData[0].lastSessionPing = lastSessionPing;
     objectSessionData[0].sessionActive = sessionActive;
     objectSessionData[0].processed = processed;
-    objectSessionData[0].websession = websession;
-    objectSessionData[0].adClientId = adClientId;
     objectSessionData[0].isactive = isactive;
     objectSessionData[0].adOrgId = adOrgId;
+    objectSessionData[0].websession = websession;
     objectSessionData[0].adSessionId = adSessionId;
+    objectSessionData[0].adClientId = adClientId;
     objectSessionData[0].language = "";
     return objectSessionData;
   }
@@ -348,7 +348,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE AD_Session" +
-      "        SET Username = (?) , Remote_Addr = (?) , Remote_Host = (?) , Server_Url = (?) , Login_Status = (?) , Last_Session_Ping = TO_TIMESTAMP(?, ?) , Session_Active = (?) , AD_Org_ID = (?) , WebSession = (?) , AD_Client_ID = (?) , IsActive = (?) , AD_Session_ID = (?) , Processed = (?) , updated = now(), updatedby = ? " +
+      "        SET Username = (?) , Remote_Addr = (?) , Remote_Host = (?) , Server_Url = (?) , Login_Status = (?) , Last_Session_Ping = TO_TIMESTAMP(?, ?) , Session_Active = (?) , AD_Session_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , WebSession = (?) , AD_Client_ID = (?) , Processed = (?) , updated = now(), updatedby = ? " +
       "        WHERE AD_Session.AD_Session_ID = ? " +
       "        AND AD_Session.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -373,11 +373,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lastSessionPing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sessionActive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adSessionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, websession);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adSessionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adSessionId);
@@ -407,7 +407,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO AD_Session " +
-      "        (Username, Remote_Addr, Remote_Host, Server_Url, Login_Status, Last_Session_Ping, Session_Active, Processed, WebSession, AD_Client_ID, IsActive, AD_Org_ID, AD_Session_ID, created, createdby, updated, updatedBy)" +
+      "        (Username, Remote_Addr, Remote_Host, Server_Url, Login_Status, Last_Session_Ping, Session_Active, Processed, IsActive, AD_Org_ID, WebSession, AD_Session_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -425,11 +425,11 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, sessionActive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, websession);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, websession);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adSessionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

@@ -19,7 +19,6 @@
 package com.atrums.nomina.rrhh.data;
 
 import com.atrums.importaciondatos.IdtContrato;
-import com.atrums.nomina.data.noContratoEmpleado;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,13 +58,11 @@ public class AtnorhCargo extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_REQ = "req";
     public static final String PROPERTY_ISPERITO = "isperito";
     public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
-    public static final String PROPERTY_NOCONTRATOEMPLEADOEMATNORHCARGOIDLIST = "noContratoEmpleadoEMAtnorhCargoIDList";
 
     public AtnorhCargo() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_ISPERITO, true);
         setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_NOCONTRATOEMPLEADOEMATNORHCARGOIDLIST, new ArrayList<Object>());
     }
 
     @Override
@@ -200,15 +197,6 @@ public class AtnorhCargo extends BaseOBObject implements Traceable, ClientEnable
 
     public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
         set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<noContratoEmpleado> getNoContratoEmpleadoEMAtnorhCargoIDList() {
-      return (List<noContratoEmpleado>) get(PROPERTY_NOCONTRATOEMPLEADOEMATNORHCARGOIDLIST);
-    }
-
-    public void setNoContratoEmpleadoEMAtnorhCargoIDList(List<noContratoEmpleado> noContratoEmpleadoEMAtnorhCargoIDList) {
-        set(PROPERTY_NOCONTRATOEMPLEADOEMATNORHCARGOIDLIST, noContratoEmpleadoEMAtnorhCargoIDList);
     }
 
 }

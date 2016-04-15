@@ -32,10 +32,10 @@ list3.name as Posted_BTN,
 no_registra_quinc_line.Documentno, 
 no_registra_quinc_line.C_Doctype_ID, 
 (CASE WHEN no_registra_quinc_line.C_Doctype_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
-no_registra_quinc_line.AD_Client_ID, 
-no_registra_quinc_line.NO_Registra_Quinc_Line_ID, 
 no_registra_quinc_line.NO_Registra_Quincena_ID, 
 no_registra_quinc_line.AD_Org_ID, 
+no_registra_quinc_line.NO_Registra_Quinc_Line_ID, 
+no_registra_quinc_line.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM no_registra_quinc_line left join (select C_BPartner_ID, Name from C_BPartner) table1 on (no_registra_quinc_line.C_Bpartner_ID = table1.C_BPartner_ID) left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table2 on (no_registra_quinc_line.NO_Tipo_Ingreso_Egreso_ID = table2.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (no_registra_quinc_line.C_Currency_ID = table3.C_Currency_ID) left join ad_ref_list_v list1 on (no_registra_quinc_line.docstatus = list1.value and list1.ad_reference_id = '7A4D156C7DD94868A3D05363B9EF1AB1' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (list2.ad_reference_id = '7A4D156C7DD94868A3D05363B9EF1AB1' and list2.ad_language = ?  AND no_registra_quinc_line.Docactionno = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = '234' and list3.ad_language = ?  AND no_registra_quinc_line.Posted = TO_CHAR(list3.value)) left join (select C_Doctype_ID, Name from C_Doctype) table4 on (no_registra_quinc_line.C_Doctype_ID = table4.C_Doctype_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL4 on (table4.C_DocType_ID = tableTRL4.C_DocType_ID and tableTRL4.AD_Language = ?) 
@@ -150,13 +150,13 @@ no_registra_quinc_line.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_registra_quinc_line
-        SET C_Bpartner_ID = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Processed = (?) , Include_Rol_Pago = (?) , docstatus = (?) , Docactionno = (?) , Processing = (?) , Dateacct = TO_DATE(?) , Posted = (?) , Documentno = (?) , C_Doctype_ID = (?) , AD_Client_ID = (?) , NO_Registra_Quinc_Line_ID = (?) , NO_Registra_Quincena_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET C_Bpartner_ID = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Processed = (?) , Include_Rol_Pago = (?) , docstatus = (?) , Docactionno = (?) , Processing = (?) , Dateacct = TO_DATE(?) , Posted = (?) , Documentno = (?) , C_Doctype_ID = (?) , NO_Registra_Quincena_ID = (?) , AD_Org_ID = (?) , NO_Registra_Quinc_Line_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_registra_quinc_line.NO_Registra_Quinc_Line_ID = ? 
                  AND no_registra_quinc_line.NO_Registra_Quincena_ID = ? 
         AND no_registra_quinc_line.AD_Client_ID IN ('1') 
         AND no_registra_quinc_line.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noRegistraQuincLineId"></Parameter>
     
@@ -168,10 +168,10 @@ no_registra_quinc_line.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_registra_quinc_line 
-        (C_Bpartner_ID, NO_Tipo_Ingreso_Egreso_ID, Valor, C_Currency_ID, Isactive, Processed, Include_Rol_Pago, docstatus, Docactionno, Processing, Dateacct, Posted, Documentno, C_Doctype_ID, AD_Client_ID, NO_Registra_Quinc_Line_ID, NO_Registra_Quincena_ID, AD_Org_ID, created, createdby, updated, updatedBy)
+        (C_Bpartner_ID, NO_Tipo_Ingreso_Egreso_ID, Valor, C_Currency_ID, Isactive, Processed, Include_Rol_Pago, docstatus, Docactionno, Processing, Dateacct, Posted, Documentno, C_Doctype_ID, NO_Registra_Quincena_ID, AD_Org_ID, NO_Registra_Quinc_Line_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="includeRolPago"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="docactionno"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="noRegistraQuincenaId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noRegistraQuincLineId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

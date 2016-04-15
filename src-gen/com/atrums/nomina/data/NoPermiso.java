@@ -18,6 +18,7 @@
 */
 package com.atrums.nomina.data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.openbravo.base.structure.ActiveEnabled;
@@ -56,16 +57,18 @@ public class NoPermiso extends BaseOBObject implements Traceable, ClientEnabled,
     public static final String PROPERTY_PROCESSED = "processed";
     public static final String PROPERTY_PROCESADO = "procesado";
     public static final String PROPERTY_MOTIVOPERMISO = "motivoPermiso";
+    public static final String PROPERTY_NEESTADO = "neEstado";
     public static final String PROPERTY_NEOBSERVACION = "neObservacion";
+    public static final String PROPERTY_NEPROCESAR = "neProcesar";
     public static final String PROPERTY_IDCONTRATOEMPLEADO = "iDContratoEmpleado";
 
     public NoPermiso() {
         setDefaultValue(PROPERTY_ACTIVE, true);
-        setDefaultValue(PROPERTY_DASDEPERMISO, (long) 0);
-        setDefaultValue(PROPERTY_HORASDEPERMISO, (long) 0);
         setDefaultValue(PROPERTY_ESTADO, "BR");
         setDefaultValue(PROPERTY_PROCESSED, false);
         setDefaultValue(PROPERTY_PROCESADO, false);
+        setDefaultValue(PROPERTY_NEESTADO, "BR");
+        setDefaultValue(PROPERTY_NEPROCESAR, "PA");
     }
 
     @Override
@@ -153,19 +156,19 @@ public class NoPermiso extends BaseOBObject implements Traceable, ClientEnabled,
         set(PROPERTY_TIPODEPERMISO, tipoDePermiso);
     }
 
-    public Long getDasDePermiso() {
-        return (Long) get(PROPERTY_DASDEPERMISO);
+    public BigDecimal getDasDePermiso() {
+        return (BigDecimal) get(PROPERTY_DASDEPERMISO);
     }
 
-    public void setDasDePermiso(Long dasDePermiso) {
+    public void setDasDePermiso(BigDecimal dasDePermiso) {
         set(PROPERTY_DASDEPERMISO, dasDePermiso);
     }
 
-    public Long getHorasDePermiso() {
-        return (Long) get(PROPERTY_HORASDEPERMISO);
+    public BigDecimal getHorasDePermiso() {
+        return (BigDecimal) get(PROPERTY_HORASDEPERMISO);
     }
 
-    public void setHorasDePermiso(Long horasDePermiso) {
+    public void setHorasDePermiso(BigDecimal horasDePermiso) {
         set(PROPERTY_HORASDEPERMISO, horasDePermiso);
     }
 
@@ -209,12 +212,28 @@ public class NoPermiso extends BaseOBObject implements Traceable, ClientEnabled,
         set(PROPERTY_MOTIVOPERMISO, motivoPermiso);
     }
 
+    public String getNeEstado() {
+        return (String) get(PROPERTY_NEESTADO);
+    }
+
+    public void setNeEstado(String neEstado) {
+        set(PROPERTY_NEESTADO, neEstado);
+    }
+
     public String getNeObservacion() {
         return (String) get(PROPERTY_NEOBSERVACION);
     }
 
     public void setNeObservacion(String neObservacion) {
         set(PROPERTY_NEOBSERVACION, neObservacion);
+    }
+
+    public String getNeProcesar() {
+        return (String) get(PROPERTY_NEPROCESAR);
+    }
+
+    public void setNeProcesar(String neProcesar) {
+        set(PROPERTY_NEPROCESAR, neProcesar);
     }
 
     public noContratoEmpleado getIDContratoEmpleado() {

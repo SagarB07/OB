@@ -18,6 +18,7 @@
 */
 package com.atrums.importaciondatos;
 
+import com.atrums.nomina.data.noAreaEmpresa;
 import com.atrums.nomina.rrhh.data.AtnorhCargo;
 
 import java.math.BigDecimal;
@@ -81,6 +82,7 @@ public class IdtContrato extends BaseOBObject implements Traceable, ClientEnable
     public static final String PROPERTY_VACACIONRES = "vacacionRes";
     public static final String PROPERTY_REGION = "region";
     public static final String PROPERTY_OBSERVACIONES = "observaciones";
+    public static final String PROPERTY_AREAEMPRESA = "areaEmpresa";
 
     public IdtContrato() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -376,6 +378,14 @@ public class IdtContrato extends BaseOBObject implements Traceable, ClientEnable
 
     public void setObservaciones(String observaciones) {
         set(PROPERTY_OBSERVACIONES, observaciones);
+    }
+
+    public noAreaEmpresa getAreaEmpresa() {
+        return (noAreaEmpresa) get(PROPERTY_AREAEMPRESA);
+    }
+
+    public void setAreaEmpresa(noAreaEmpresa areaEmpresa) {
+        set(PROPERTY_AREAEMPRESA, areaEmpresa);
     }
 
 }

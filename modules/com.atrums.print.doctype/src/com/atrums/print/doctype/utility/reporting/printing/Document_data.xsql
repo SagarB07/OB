@@ -21,29 +21,19 @@
 <SqlClass name="DocumentData" package="com.atrums.print.doctype.utility.reporting.printing">
 	<SqlClassComment></SqlClassComment>
 
-    <SqlMethod name="getCotizacionStatus" type="preparedStatement" return="String">
+    <SqlMethod name="getContratoStatus" type="preparedStatement" return="String">
         <SqlMethodComment></SqlMethodComment>
         <Sql>
             <![CDATA[
-           select c.estado as docstatus
-             from ldt_cotizacion c
-            where c.ldt_cotizacion_id = ?
+           select c.isactive as docstatus
+             from no_contrato_empleado c
+            where c.no_contrato_empleado_id = ?
             ]]>
         </Sql>
-        <Parameter name="ldtCotizacionId" />
+        <Parameter name="noContratoEmpleadoId" />
     </SqlMethod>
     
-        <SqlMethod name="getRoutingOrderStatus" type="preparedStatement" return="String">
-        <SqlMethodComment></SqlMethodComment>
-        <Sql>
-            <![CDATA[
-           select ro.estado as docstatus
-             from ldt_routing_order ro
-            where ro.ldt_routing_order_id = ?
-            ]]>
-        </Sql>
-        <Parameter name="ldtRoutingOrderId" />
-    </SqlMethod>
+
 
 </SqlClass>
 

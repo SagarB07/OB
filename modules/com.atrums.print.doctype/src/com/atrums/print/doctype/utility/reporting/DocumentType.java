@@ -18,8 +18,7 @@
 package com.atrums.print.doctype.utility.reporting;
 
 public enum DocumentType {
-  UNKNOWN(null, null), COTIZACION("LDT_COTIZACION", "cotizaciones/"), ROUTINGORDER(
-      "LDT_ROUTING_ORDER", "routingorder/");
+  UNKNOWN(null, null),NOCONTRATO("NO_CONTRATO_EMPLEADO","CONTRATO/") ;
 
   private String _tableName;
   private String _contextSubFolder;

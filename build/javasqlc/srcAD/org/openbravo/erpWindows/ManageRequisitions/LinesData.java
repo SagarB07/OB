@@ -60,10 +60,10 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String orderedqty;
   public String lockdate;
   public String reqstatus;
+  public String isactive;
   public String adOrgId;
   public String adClientId;
   public String mRequisitionlineId;
-  public String isactive;
   public String mRequisitionId;
   public String language;
   public String adUserClient;
@@ -162,14 +162,14 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return lockdate;
     else if (fieldName.equalsIgnoreCase("reqstatus"))
       return reqstatus;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("m_requisitionline_id") || fieldName.equals("mRequisitionlineId"))
       return mRequisitionlineId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("m_requisition_id") || fieldName.equals("mRequisitionId"))
       return mRequisitionId;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -247,10 +247,10 @@ Select for edit
       "M_RequisitionLine.Orderedqty, " +
       "M_RequisitionLine.Lockdate, " +
       "M_RequisitionLine.Reqstatus, " +
+      "COALESCE(M_RequisitionLine.IsActive, 'N') AS IsActive, " +
       "M_RequisitionLine.AD_Org_ID, " +
       "M_RequisitionLine.AD_Client_ID, " +
       "M_RequisitionLine.M_Requisitionline_ID, " +
-      "COALESCE(M_RequisitionLine.IsActive, 'N') AS IsActive, " +
       "M_RequisitionLine.M_Requisition_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_RequisitionLine left join (select M_Product_ID, Name from M_Product) table1 on (M_RequisitionLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table3 on (M_RequisitionLine.M_AttributeSetInstance_ID = table3.M_AttributeSetInstance_ID) left join (select C_UOM_ID, Name from C_UOM) table4 on (M_RequisitionLine.C_UOM_ID = table4.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL4 on (table4.C_UOM_ID = tableTRL4.C_UOM_ID and tableTRL4.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table6 on (M_RequisitionLine.C_BPartner_ID = table6.C_BPartner_ID) left join (select M_PriceList_ID, Name from M_PriceList) table7 on (M_RequisitionLine.M_PriceList_ID = table7.M_PriceList_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table8 on (M_RequisitionLine.C_Currency_ID = table8.C_Currency_ID) left join (select AD_User_ID, Name from AD_User) table9 on (M_RequisitionLine.Lockedby =  table9.AD_User_ID) left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_Uom) table10 on (M_RequisitionLine.M_Product_Uom_Id = table10.M_Product_Uom_Id) left join (select C_UOM_ID, Name from C_UOM) table11 on (table10.C_UOM_ID = table11.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL11 on (table11.C_UOM_ID = tableTRL11.C_UOM_ID and tableTRL11.AD_Language = ?) " +
@@ -343,10 +343,10 @@ Select for edit
         objectLinesData.orderedqty = UtilSql.getValue(result, "orderedqty");
         objectLinesData.lockdate = UtilSql.getDateValue(result, "lockdate", "dd-MM-yyyy");
         objectLinesData.reqstatus = UtilSql.getValue(result, "reqstatus");
+        objectLinesData.isactive = UtilSql.getValue(result, "isactive");
         objectLinesData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectLinesData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectLinesData.mRequisitionlineId = UtilSql.getValue(result, "m_requisitionline_id");
-        objectLinesData.isactive = UtilSql.getValue(result, "isactive");
         objectLinesData.mRequisitionId = UtilSql.getValue(result, "m_requisition_id");
         objectLinesData.language = UtilSql.getValue(result, "language");
         objectLinesData.adUserClient = "";
@@ -427,10 +427,10 @@ Create a registry
     objectLinesData[0].orderedqty = orderedqty;
     objectLinesData[0].lockdate = lockdate;
     objectLinesData[0].reqstatus = reqstatus;
+    objectLinesData[0].isactive = isactive;
     objectLinesData[0].adOrgId = adOrgId;
     objectLinesData[0].adClientId = adClientId;
     objectLinesData[0].mRequisitionlineId = mRequisitionlineId;
-    objectLinesData[0].isactive = isactive;
     objectLinesData[0].mRequisitionId = mRequisitionId;
     objectLinesData[0].language = "";
     return objectLinesData;
@@ -901,7 +901,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_RequisitionLine" +
-      "        SET Line = TO_NUMBER(?) , Needbydate = TO_DATE(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , Qty = TO_NUMBER(?) , C_UOM_ID = (?) , C_BPartner_ID = (?) , M_PriceList_ID = (?) , PriceActual = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , C_Currency_ID = (?) , Description = (?) , PriceList = TO_NUMBER(?) , Discount = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , Gross_Amt = TO_NUMBER(?) , Internalnotes = (?) , Suppliernotes = (?) , Lockedby = (?) , Lockqty = TO_NUMBER(?) , Lockprice = TO_NUMBER(?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Changestatus = (?) , Lockcause = (?) , Orderedqty = TO_NUMBER(?) , Lockdate = TO_DATE(?) , Reqstatus = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , M_Requisitionline_ID = (?) , IsActive = (?) , M_Requisition_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , Needbydate = TO_DATE(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , Qty = TO_NUMBER(?) , C_UOM_ID = (?) , C_BPartner_ID = (?) , M_PriceList_ID = (?) , PriceActual = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , C_Currency_ID = (?) , Description = (?) , PriceList = TO_NUMBER(?) , Discount = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , Gross_Amt = TO_NUMBER(?) , Internalnotes = (?) , Suppliernotes = (?) , Lockedby = (?) , Lockqty = TO_NUMBER(?) , Lockprice = TO_NUMBER(?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Changestatus = (?) , Lockcause = (?) , Orderedqty = TO_NUMBER(?) , Lockdate = TO_DATE(?) , Reqstatus = (?) , IsActive = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , M_Requisitionline_ID = (?) , M_Requisition_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_RequisitionLine.M_Requisitionline_ID = ? " +
       "                 AND M_RequisitionLine.M_Requisition_ID = ? " +
       "        AND M_RequisitionLine.AD_Client_ID IN (";
@@ -947,10 +947,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, orderedqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lockdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, reqstatus);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionlineId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionlineId);
@@ -981,7 +981,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_RequisitionLine " +
-      "        (Line, Needbydate, M_Product_ID, M_AttributeSetInstance_ID, Qty, C_UOM_ID, C_BPartner_ID, M_PriceList_ID, PriceActual, LineNetAmt, C_Currency_ID, Description, PriceList, Discount, Gross_Unit_Price, Gross_Amt, Internalnotes, Suppliernotes, Lockedby, Lockqty, Lockprice, QuantityOrder, M_Product_Uom_Id, Changestatus, Lockcause, Orderedqty, Lockdate, Reqstatus, AD_Org_ID, AD_Client_ID, M_Requisitionline_ID, IsActive, M_Requisition_ID, created, createdby, updated, updatedBy)" +
+      "        (Line, Needbydate, M_Product_ID, M_AttributeSetInstance_ID, Qty, C_UOM_ID, C_BPartner_ID, M_PriceList_ID, PriceActual, LineNetAmt, C_Currency_ID, Description, PriceList, Discount, Gross_Unit_Price, Gross_Amt, Internalnotes, Suppliernotes, Lockedby, Lockqty, Lockprice, QuantityOrder, M_Product_Uom_Id, Changestatus, Lockcause, Orderedqty, Lockdate, Reqstatus, IsActive, AD_Org_ID, AD_Client_ID, M_Requisitionline_ID, M_Requisition_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), TO_DATE(?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -1018,10 +1018,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, orderedqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lockdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, reqstatus);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionlineId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

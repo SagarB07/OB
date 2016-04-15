@@ -58,6 +58,8 @@ public class noVacacion extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_NEFECHAFIN = "neFechaFin";
     public static final String PROPERTY_NEFECHAINICIO = "neFechaInicio";
     public static final String PROPERTY_NELINEA = "neLinea";
+    public static final String PROPERTY_NEOBSERVACIONES = "neObservaciones";
+    public static final String PROPERTY_NEPROCESAR = "neProcesar";
     public static final String PROPERTY_NETOTALDIAS = "neTotalDias";
     public static final String PROPERTY_IDCONTRATOEMPLEADO = "iDContratoEmpleado";
     public static final String PROPERTY_SALDO = "saldo";
@@ -74,6 +76,9 @@ public class noVacacion extends BaseOBObject implements Traceable, ClientEnabled
     public noVacacion() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_BONIFICACIONES, (long) 0);
+        setDefaultValue(PROPERTY_NEDOCSTATUS, "BR");
+        setDefaultValue(PROPERTY_NEESTADO, "BR");
+        setDefaultValue(PROPERTY_NEPROCESAR, "PA");
         setDefaultValue(PROPERTY_VACACIONES, (long) 15);
         setDefaultValue(PROPERTY_NOVACACIONLINEALIST, new ArrayList<Object>());
     }
@@ -217,6 +222,22 @@ public class noVacacion extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setNeLinea(BigDecimal neLinea) {
         set(PROPERTY_NELINEA, neLinea);
+    }
+
+    public String getNeObservaciones() {
+        return (String) get(PROPERTY_NEOBSERVACIONES);
+    }
+
+    public void setNeObservaciones(String neObservaciones) {
+        set(PROPERTY_NEOBSERVACIONES, neObservaciones);
+    }
+
+    public String getNeProcesar() {
+        return (String) get(PROPERTY_NEPROCESAR);
+    }
+
+    public void setNeProcesar(String neProcesar) {
+        set(PROPERTY_NEPROCESAR, neProcesar);
     }
 
     public BigDecimal getNeTotalDias() {

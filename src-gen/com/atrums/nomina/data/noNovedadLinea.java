@@ -52,6 +52,7 @@ public class noNovedadLinea extends BaseOBObject implements Traceable, ClientEna
     public static final String PROPERTY_VALOR = "valor";
     public static final String PROPERTY_NOVEDAD = "novedad";
     public static final String PROPERTY_ISPRESTAMO = "isprestamo";
+    public static final String PROPERTY_NECEDULA = "neCedula";
 
     public noNovedadLinea() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -157,6 +158,14 @@ public class noNovedadLinea extends BaseOBObject implements Traceable, ClientEna
 
     public void setPrestamo(Boolean isprestamo) {
         set(PROPERTY_ISPRESTAMO, isprestamo);
+    }
+
+    public String getNeCedula() {
+        return (String) get(PROPERTY_NECEDULA);
+    }
+
+    public void setNeCedula(String neCedula) {
+        set(PROPERTY_NECEDULA, neCedula);
     }
 
 }

@@ -66,11 +66,12 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_GENERARPAGO = "generarPago";
     public static final String PROPERTY_PERIOD = "period";
     public static final String PROPERTY_REAEMPRESA = "reaEmpresa";
-    public static final String PROPERTY_DOCACCIONNO = "docaccionno";
     public static final String PROPERTY_PAYMENT = "payment";
+    public static final String PROPERTY_DOCACCIONNO = "docaccionno";
     public static final String PROPERTY_POSTED = "posted";
     public static final String PROPERTY_PROCESSNOW = "processNow";
     public static final String PROPERTY_DATEACCT = "dateacct";
+    public static final String PROPERTY_CDOCTYPE = "cDoctype";
     public static final String PROPERTY_NENUMCONTRATO = "neNumContrato";
     public static final String PROPERTY_NEOBSERVACION = "neObservacion";
     public static final String PROPERTY_NOROLPAGOPROVISIONLINELIST = "nORolPagoProvisionLineList";
@@ -84,8 +85,8 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_DOCSTATUS, "BR");
         setDefaultValue(PROPERTY_PROCESAR, false);
         setDefaultValue(PROPERTY_GENERARPAGO, false);
-        setDefaultValue(PROPERTY_DOCACCIONNO, "CO");
         setDefaultValue(PROPERTY_PAYMENT, false);
+        setDefaultValue(PROPERTY_DOCACCIONNO, "CO");
         setDefaultValue(PROPERTY_POSTED, "N");
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
@@ -257,20 +258,20 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_REAEMPRESA, reaEmpresa);
     }
 
-    public String getDocaccionno() {
-        return (String) get(PROPERTY_DOCACCIONNO);
-    }
-
-    public void setDocaccionno(String docaccionno) {
-        set(PROPERTY_DOCACCIONNO, docaccionno);
-    }
-
     public Boolean isPayment() {
         return (Boolean) get(PROPERTY_PAYMENT);
     }
 
     public void setPayment(Boolean payment) {
         set(PROPERTY_PAYMENT, payment);
+    }
+
+    public String getDocaccionno() {
+        return (String) get(PROPERTY_DOCACCIONNO);
+    }
+
+    public void setDocaccionno(String docaccionno) {
+        set(PROPERTY_DOCACCIONNO, docaccionno);
     }
 
     public String getPosted() {
@@ -295,6 +296,14 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
 
     public void setDateacct(Date dateacct) {
         set(PROPERTY_DATEACCT, dateacct);
+    }
+
+    public DocumentType getCDoctype() {
+        return (DocumentType) get(PROPERTY_CDOCTYPE);
+    }
+
+    public void setCDoctype(DocumentType cDoctype) {
+        set(PROPERTY_CDOCTYPE, cDoctype);
     }
 
     public String getNeNumContrato() {

@@ -20,10 +20,10 @@ COALESCE(AD_Language.IsSystemLanguage, 'N') AS IsSystemLanguage,
 AD_Language.Translatedby, 
 COALESCE(AD_Language.Isrtl, 'N') AS Isrtl, 
 AD_Language.Processing, 
-AD_Language.AD_Language_ID, 
 AD_Language.Pixelsize, 
-AD_Language.AD_Client_ID, 
+AD_Language.AD_Language_ID, 
 AD_Language.AD_Org_ID, 
+AD_Language.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM AD_Language
@@ -103,13 +103,13 @@ AD_Language.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE AD_Language
-        SET AD_Language = (?) , Name = (?) , LanguageISO = (?) , CountryCode = (?) , IsActive = (?) , IsSystemLanguage = (?) , Translatedby = (?) , Isrtl = (?) , Processing = (?) , AD_Language_ID = (?) , Pixelsize = TO_NUMBER(?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Language = (?) , Name = (?) , LanguageISO = (?) , CountryCode = (?) , IsActive = (?) , IsSystemLanguage = (?) , Translatedby = (?) , Isrtl = (?) , Processing = (?) , Pixelsize = TO_NUMBER(?) , AD_Language_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE AD_Language.AD_Language_ID = ? 
         
         AND AD_Language.AD_Client_ID IN ('1') 
         AND AD_Language.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adLanguage"></Parameter> <Parameter name="name"></Parameter> <Parameter name="languageiso"></Parameter> <Parameter name="countrycode"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issystemlanguage"></Parameter> <Parameter name="translatedby"></Parameter> <Parameter name="isrtl"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adLanguageId"></Parameter> <Parameter name="pixelsize"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="adLanguage"></Parameter> <Parameter name="name"></Parameter> <Parameter name="languageiso"></Parameter> <Parameter name="countrycode"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issystemlanguage"></Parameter> <Parameter name="translatedby"></Parameter> <Parameter name="isrtl"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="pixelsize"></Parameter> <Parameter name="adLanguageId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="adLanguageId"></Parameter>
     
@@ -121,10 +121,10 @@ AD_Language.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO AD_Language 
-        (AD_Language, Name, LanguageISO, CountryCode, IsActive, IsSystemLanguage, Translatedby, Isrtl, Processing, AD_Language_ID, Pixelsize, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), now(), ?, now(), ?)
+        (AD_Language, Name, LanguageISO, CountryCode, IsActive, IsSystemLanguage, Translatedby, Isrtl, Processing, Pixelsize, AD_Language_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adLanguage"></Parameter> <Parameter name="name"></Parameter> <Parameter name="languageiso"></Parameter> <Parameter name="countrycode"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issystemlanguage"></Parameter> <Parameter name="translatedby"></Parameter> <Parameter name="isrtl"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adLanguageId"></Parameter> <Parameter name="pixelsize"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="adLanguage"></Parameter> <Parameter name="name"></Parameter> <Parameter name="languageiso"></Parameter> <Parameter name="countrycode"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issystemlanguage"></Parameter> <Parameter name="translatedby"></Parameter> <Parameter name="isrtl"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="pixelsize"></Parameter> <Parameter name="adLanguageId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

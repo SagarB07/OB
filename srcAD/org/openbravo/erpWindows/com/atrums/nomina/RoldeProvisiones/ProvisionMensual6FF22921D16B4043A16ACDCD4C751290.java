@@ -517,7 +517,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "docstatus", st
     ProvisionMensual6FF22921D16B4043A16ACDCD4C751290Data data = new ProvisionMensual6FF22921D16B4043A16ACDCD4C751290Data();
     ServletException ex = null;
     try {
-    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cPeriodId = vars.getRequiredStringParameter("inpcPeriodId");     data.cPeriodIdr = vars.getStringParameter("inpcPeriodId_R");    try {   data.valor = vars.getRequiredNumericParameter("inpvalor");  } catch (ServletException paramEx) { ex = paramEx; }     data.docstatus = vars.getRequiredStringParameter("inpdocstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.pago = vars.getStringParameter("inppago", "N");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.docaccionno = vars.getRequiredGlobalVariable("inpdocaccionno", windowId + "|Docaccionno");     data.processing = vars.getRequiredStringParameter("inpprocessing");     data.posted = vars.getRequiredStringParameter("inpposted");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.noRolProvisionLineMesId = vars.getRequestGlobalVariable("inpnoRolProvisionLineMesId", windowId + "|NO_Rol_Provision_Line_Mes_ID");     data.noRolPagoProvisionLineId = vars.getRequiredGlobalVariable("inpnoRolPagoProvisionLineId", windowId + "|NO_Rol_Pago_Provision_Line_ID"); 
+    data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cPeriodId = vars.getRequiredStringParameter("inpcPeriodId");     data.cPeriodIdr = vars.getStringParameter("inpcPeriodId_R");    try {   data.valor = vars.getRequiredNumericParameter("inpvalor");  } catch (ServletException paramEx) { ex = paramEx; }     data.docstatus = vars.getRequiredStringParameter("inpdocstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.pago = vars.getStringParameter("inppago", "N");     data.dateacct = vars.getRequiredStringParameter("inpdateacct");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.docaccionno = vars.getRequiredGlobalVariable("inpdocaccionno", windowId + "|Docaccionno");     data.processing = vars.getRequiredStringParameter("inpprocessing");     data.posted = vars.getRequiredStringParameter("inpposted");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.noRolPagoProvisionLineId = vars.getRequiredGlobalVariable("inpnoRolPagoProvisionLineId", windowId + "|NO_Rol_Pago_Provision_Line_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.noRolProvisionLineMesId = vars.getRequestGlobalVariable("inpnoRolProvisionLineMesId", windowId + "|NO_Rol_Provision_Line_Mes_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -693,7 +693,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "docstatus", st
     ToolBar toolbar = new ToolBar(this, true, vars.getLanguage(), "ProvisionMensual6FF22921D16B4043A16ACDCD4C751290", false, "document.frmMain.inpnoRolProvisionLineMesId", "grid", "..", "".equals("Y"), "RoldeProvisiones", strReplaceWith, false, false, false, false, !hasReadOnlyAccess);
     toolbar.setTabId(tabId);
     
-    toolbar.setDeleteable(false && !hasReadOnlyAccess);
+    toolbar.setDeleteable(true && !hasReadOnlyAccess);
     toolbar.prepareRelationTemplate("N".equals("Y"), hasSearchCondition, !vars.getSessionValue("#ShowTest", "N").equals("Y"), false, Utility.getContext(this, vars, "ShowAudit", windowId).equals("Y"));
     xmlDocument.setParameter("toolbar", toolbar.toString());
 
@@ -869,7 +869,7 @@ xmlDocument.setParameter("grid_Default", selectedRow);
     xmlDocument.setParameter("tabId", tabId);
     ToolBar toolbar = new ToolBar(this, editableTab, vars.getLanguage(), "ProvisionMensual6FF22921D16B4043A16ACDCD4C751290", (strCommand.equals("NEW") || boolNew || (dataField==null && (data==null || data.length==0))), "document.frmMain.inpnoRolProvisionLineMesId", "", "..", "".equals("Y"), "RoldeProvisiones", strReplaceWith, true, false, false, Utility.hasTabAttachments(this, vars, tabId, strNO_Rol_Provision_Line_Mes_ID), !hasReadOnlyAccess);
     toolbar.setTabId(tabId);
-    toolbar.setDeleteable(false);
+    toolbar.setDeleteable(true);
     toolbar.prepareEditionTemplate("N".equals("Y"), hasSearchCondition, vars.getSessionValue("#ShowTest", "N").equals("Y"), "STD", Utility.getContext(this, vars, "ShowAudit", windowId).equals("Y"));
     xmlDocument.setParameter("toolbar", toolbar.toString());
 

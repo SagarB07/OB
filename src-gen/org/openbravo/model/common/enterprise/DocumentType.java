@@ -25,7 +25,6 @@ import com.atrums.contabilidad.data.CO_Retencion_Compra;
 import com.atrums.declaraciontributaria.ecuador.data.Ats_Sustento_Doc;
 import com.atrums.declaraciontributaria.ecuador.data.atsReembolso;
 import com.atrums.importaciondatos.IdtContrato;
-import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
 import com.atrums.nomina.data.noPagoLine;
@@ -145,11 +144,11 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
     public static final String PROPERTY_ROLPROVISIONLINEMESLIST = "rolProvisionLineMesList";
     public static final String PROPERTY_ROLPAGOPROVISIONLIST = "rolPagoProvisionList";
+    public static final String PROPERTY_ROLPAGOPROVISIONNOCDOCTYPEIDLIST = "rolPagoProvisionNOCDoctypeIDList";
     public static final String PROPERTY_ORDERLIST = "orderList";
     public static final String PROPERTY_ORDERTRANSACTIONDOCUMENTLIST = "orderTransactionDocumentList";
     public static final String PROPERTY_ATSSUSTENTODOCLIST = "atsSustentoDocList";
     public static final String PROPERTY_SUSTENTODOCLIST = "sustentoDocList";
-    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
     public static final String PROPERTY_PAGOCABECERATIPODOCUMENTOPAGOLIST = "pagoCabeceraTipoDocumentoPagoList";
@@ -205,11 +204,11 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPROVISIONLINEMESLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONNOCDOCTYPEIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORDERTRANSACTIONDOCUMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ATSSUSTENTODOCLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SUSTENTODOCLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERATIPODOCUMENTOPAGOLIST, new ArrayList<Object>());
@@ -813,6 +812,15 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
     }
 
     @SuppressWarnings("unchecked")
+    public List<noRolPagoProvision> getRolPagoProvisionNOCDoctypeIDList() {
+      return (List<noRolPagoProvision>) get(PROPERTY_ROLPAGOPROVISIONNOCDOCTYPEIDLIST);
+    }
+
+    public void setRolPagoProvisionNOCDoctypeIDList(List<noRolPagoProvision> rolPagoProvisionNOCDoctypeIDList) {
+        set(PROPERTY_ROLPAGOPROVISIONNOCDOCTYPEIDLIST, rolPagoProvisionNOCDoctypeIDList);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<org.openbravo.model.common.order.Order> getOrderList() {
       return (List<org.openbravo.model.common.order.Order>) get(PROPERTY_ORDERLIST);
     }
@@ -846,15 +854,6 @@ public class DocumentType extends BaseOBObject implements Traceable, ClientEnabl
 
     public void setSustentoDocList(List<Co_Sustento_Doc> sustentoDocList) {
         set(PROPERTY_SUSTENTODOCLIST, sustentoDocList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<noContratoEmpleado> getContratoEmpleadoList() {
-      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
-    }
-
-    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
-        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
     }
 
     @SuppressWarnings("unchecked")

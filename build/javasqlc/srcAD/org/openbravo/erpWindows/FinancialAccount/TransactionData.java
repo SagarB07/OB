@@ -46,11 +46,11 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
   public String cCurrencyIdr;
   public String depositamt;
   public String paymentamt;
-  public String processed;
   public String foreignCurrencyId;
   public String foreignCurrencyIdr;
-  public String processing;
+  public String processed;
   public String foreignAmount;
+  public String processing;
   public String posted;
   public String postedBtn;
   public String emAprmDelete;
@@ -141,16 +141,16 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
       return depositamt;
     else if (fieldName.equalsIgnoreCase("paymentamt"))
       return paymentamt;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
     else if (fieldName.equalsIgnoreCase("foreign_currency_id") || fieldName.equals("foreignCurrencyId"))
       return foreignCurrencyId;
     else if (fieldName.equalsIgnoreCase("foreign_currency_idr") || fieldName.equals("foreignCurrencyIdr"))
       return foreignCurrencyIdr;
-    else if (fieldName.equalsIgnoreCase("processing"))
-      return processing;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
     else if (fieldName.equalsIgnoreCase("foreign_amount") || fieldName.equals("foreignAmount"))
       return foreignAmount;
+    else if (fieldName.equalsIgnoreCase("processing"))
+      return processing;
     else if (fieldName.equalsIgnoreCase("posted"))
       return posted;
     else if (fieldName.equalsIgnoreCase("posted_btn") || fieldName.equals("postedBtn"))
@@ -254,11 +254,11 @@ Select for edit
       "(CASE WHEN FIN_Finacc_Transaction.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, " +
       "FIN_Finacc_Transaction.Depositamt, " +
       "FIN_Finacc_Transaction.Paymentamt, " +
-      "COALESCE(FIN_Finacc_Transaction.Processed, 'N') AS Processed, " +
       "FIN_Finacc_Transaction.Foreign_Currency_ID, " +
       "(CASE WHEN FIN_Finacc_Transaction.Foreign_Currency_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.ISO_Code), ''))),'') ) END) AS Foreign_Currency_IDR, " +
-      "COALESCE(FIN_Finacc_Transaction.Processing, 'N') AS Processing, " +
+      "COALESCE(FIN_Finacc_Transaction.Processed, 'N') AS Processed, " +
       "FIN_Finacc_Transaction.Foreign_Amount, " +
+      "COALESCE(FIN_Finacc_Transaction.Processing, 'N') AS Processing, " +
       "FIN_Finacc_Transaction.Posted, " +
       "list3.name as Posted_BTN, " +
       "FIN_Finacc_Transaction.EM_APRM_Delete, " +
@@ -358,11 +358,11 @@ Select for edit
         objectTransactionData.cCurrencyIdr = UtilSql.getValue(result, "c_currency_idr");
         objectTransactionData.depositamt = UtilSql.getValue(result, "depositamt");
         objectTransactionData.paymentamt = UtilSql.getValue(result, "paymentamt");
-        objectTransactionData.processed = UtilSql.getValue(result, "processed");
         objectTransactionData.foreignCurrencyId = UtilSql.getValue(result, "foreign_currency_id");
         objectTransactionData.foreignCurrencyIdr = UtilSql.getValue(result, "foreign_currency_idr");
-        objectTransactionData.processing = UtilSql.getValue(result, "processing");
+        objectTransactionData.processed = UtilSql.getValue(result, "processed");
         objectTransactionData.foreignAmount = UtilSql.getValue(result, "foreign_amount");
+        objectTransactionData.processing = UtilSql.getValue(result, "processing");
         objectTransactionData.posted = UtilSql.getValue(result, "posted");
         objectTransactionData.postedBtn = UtilSql.getValue(result, "posted_btn");
         objectTransactionData.emAprmDelete = UtilSql.getValue(result, "em_aprm_delete");
@@ -449,11 +449,11 @@ Create a registry
     objectTransactionData[0].cCurrencyIdr = "";
     objectTransactionData[0].depositamt = depositamt;
     objectTransactionData[0].paymentamt = paymentamt;
-    objectTransactionData[0].processed = processed;
     objectTransactionData[0].foreignCurrencyId = foreignCurrencyId;
     objectTransactionData[0].foreignCurrencyIdr = "";
-    objectTransactionData[0].processing = processing;
+    objectTransactionData[0].processed = processed;
     objectTransactionData[0].foreignAmount = foreignAmount;
+    objectTransactionData[0].processing = processing;
     objectTransactionData[0].posted = posted;
     objectTransactionData[0].postedBtn = postedBtn;
     objectTransactionData[0].emAprmDelete = emAprmDelete;
@@ -866,7 +866,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Finacc_Transaction" +
-      "        SET Line = TO_NUMBER(?) , Trxtype = (?) , AD_Org_ID = (?) , Status = (?) , CreatedByAlgorithm = (?) , Statementdate = TO_DATE(?) , Isactive = (?) , EM_APRM_Modify = (?) , DateAcct = TO_DATE(?) , Fin_Financial_Account_ID = (?) , FIN_Reconciliation_ID = (?) , Fin_Payment_ID = (?) , Description = (?) , C_Glitem_ID = (?) , C_Currency_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Processed = (?) , Foreign_Currency_ID = (?) , Processing = (?) , Foreign_Amount = TO_NUMBER(?) , Posted = (?) , EM_APRM_Delete = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , C_Salesregion_ID = (?) , User1_ID = (?) , User2_ID = (?) , Fin_Finacc_Transaction_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , Trxtype = (?) , AD_Org_ID = (?) , Status = (?) , CreatedByAlgorithm = (?) , Statementdate = TO_DATE(?) , Isactive = (?) , EM_APRM_Modify = (?) , DateAcct = TO_DATE(?) , Fin_Financial_Account_ID = (?) , FIN_Reconciliation_ID = (?) , Fin_Payment_ID = (?) , Description = (?) , C_Glitem_ID = (?) , C_Currency_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Foreign_Currency_ID = (?) , Processed = (?) , Foreign_Amount = TO_NUMBER(?) , Processing = (?) , Posted = (?) , EM_APRM_Delete = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , C_Salesregion_ID = (?) , User1_ID = (?) , User2_ID = (?) , Fin_Finacc_Transaction_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Finacc_Transaction.Fin_Finacc_Transaction_ID = ? " +
       "                 AND FIN_Finacc_Transaction.Fin_Financial_Account_ID = ? " +
       "        AND FIN_Finacc_Transaction.AD_Client_ID IN (";
@@ -901,10 +901,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, depositamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignCurrencyId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignAmount);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmDelete);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignConvertRate);
@@ -948,8 +948,8 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Finacc_Transaction " +
-      "        (Line, Trxtype, AD_Org_ID, Status, CreatedByAlgorithm, Statementdate, Isactive, EM_APRM_Modify, DateAcct, Fin_Financial_Account_ID, FIN_Reconciliation_ID, Fin_Payment_ID, Description, C_Glitem_ID, C_Currency_ID, Depositamt, Paymentamt, Processed, Foreign_Currency_ID, Processing, Foreign_Amount, Posted, EM_APRM_Delete, Foreign_Convert_Rate, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, C_Salesregion_ID, User1_ID, User2_ID, Fin_Finacc_Transaction_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (Line, Trxtype, AD_Org_ID, Status, CreatedByAlgorithm, Statementdate, Isactive, EM_APRM_Modify, DateAcct, Fin_Financial_Account_ID, FIN_Reconciliation_ID, Fin_Payment_ID, Description, C_Glitem_ID, C_Currency_ID, Depositamt, Paymentamt, Foreign_Currency_ID, Processed, Foreign_Amount, Processing, Posted, EM_APRM_Delete, Foreign_Convert_Rate, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, C_Salesregion_ID, User1_ID, User2_ID, Fin_Finacc_Transaction_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -974,10 +974,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, depositamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignCurrencyId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignAmount);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmDelete);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, foreignConvertRate);

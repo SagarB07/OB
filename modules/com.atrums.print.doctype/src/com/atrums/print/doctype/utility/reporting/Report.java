@@ -82,15 +82,14 @@ public class Report {
     ReportData[] reportData = null;
 
     switch (_DocumentType) {
-    case COTIZACION: // Retrieve quotation information
-      reportData = ReportData.getCotizacionInfo(connectionProvider, documentId);
+    case NOCONTRATO: // Retrieve quotation information
+      reportData = ReportData.getContratoInfo(connectionProvider, documentId);
       break;
-    case ROUTINGORDER: // Retrieve quotation information
-      reportData = ReportData.getRoutingOrderInfo(connectionProvider, documentId);
-      break;
+//    case ROUTINGORDER: // Retrieve quotation information
+//      reportData = ReportData.getRoutingOrderInfo(connectionProvider, documentId);
+//      break;
     default:
-      throw new ReportingException(Utility.messageBD(connectionProvider, "UnknownDocumentType",
-          strLanguage) + _DocumentType);
+      throw new ReportingException(Utility.messageBD(connectionProvider, "UnknownDocumentType",strLanguage) + _DocumentType);
     }
 
     multiReports = multiReport;

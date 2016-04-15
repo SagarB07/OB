@@ -47,7 +47,7 @@ public class PrintInvoices extends PrintController {
       ServletException {
     VariablesSecureApp vars = new VariablesSecureApp(request);
 
-    DocumentType documentType = DocumentType.COTIZACION;
+    DocumentType documentType = DocumentType.NOCONTRATO;
     // The prefix PRINTINVOICES is a fixed name based on the KEY of the
     // AD_PROCESS
     String sessionValuePrefix = "PRINTCOTIZACION";

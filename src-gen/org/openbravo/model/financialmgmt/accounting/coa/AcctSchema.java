@@ -20,6 +20,7 @@ package org.openbravo.model.financialmgmt.accounting.coa;
 
 import com.atrums.contabilidad.data.CO_TipoRetencionAcct;
 import com.atrums.nomina.data.noCbEmpleadoAcct;
+import com.atrums.nomina.data.noRolPagoProvisionLine;
 import com.atrums.nomina.data.noTipoIngEgrAcct;
 import com.atrums.nomina.data.no_tipo_rub_liqu_emp_acct;
 import com.atrums.nomina.empleados.data.nePerfilRubroLine;
@@ -141,6 +142,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_FINANCIALMGMTTAXPAYMENTLIST = "financialMgmtTaxPaymentList";
     public static final String PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSLIST = "financialMgmtTaxRateAccountsList";
     public static final String PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSLIST = "financialMgmtWithholdingAccountsList";
+    public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
     public static final String PROPERTY_CBEMPLEADOACCTLIST = "cbEmpleadoAcctList";
     public static final String PROPERTY_ORGANIZATIONLIST = "organizationList";
     public static final String PROPERTY_ORGANIZATIONACCTSCHEMALIST = "organizationAcctSchemaList";
@@ -204,6 +206,7 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXPAYMENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTTAXRATEACCOUNTSLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CBEMPLEADOACCTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORGANIZATIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ORGANIZATIONACCTSCHEMALIST, new ArrayList<Object>());
@@ -766,6 +769,15 @@ public class AcctSchema extends BaseOBObject implements Traceable, ClientEnabled
 
     public void setFinancialMgmtWithholdingAccountsList(List<WithholdingAccounts> financialMgmtWithholdingAccountsList) {
         set(PROPERTY_FINANCIALMGMTWITHHOLDINGACCOUNTSLIST, financialMgmtWithholdingAccountsList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolPagoProvisionLine> getRolPagoProvisionLineList() {
+      return (List<noRolPagoProvisionLine>) get(PROPERTY_ROLPAGOPROVISIONLINELIST);
+    }
+
+    public void setRolPagoProvisionLineList(List<noRolPagoProvisionLine> rolPagoProvisionLineList) {
+        set(PROPERTY_ROLPAGOPROVISIONLINELIST, rolPagoProvisionLineList);
     }
 
     @SuppressWarnings("unchecked")

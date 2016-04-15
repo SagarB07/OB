@@ -467,7 +467,7 @@ vars.getRequestGlobalVariable("inpParamCreated_f", tabId + "|paramCreated_f");
     SessionData data = new SessionData();
     ServletException ex = null;
     try {
-    data.username = vars.getStringParameter("inpusername");     data.remoteAddr = vars.getStringParameter("inpremoteAddr");     data.remoteHost = vars.getStringParameter("inpremoteHost");     data.serverUrl = vars.getStringParameter("inpserverUrl");     data.loginStatus = vars.getStringParameter("inploginStatus");     data.loginStatusr = vars.getStringParameter("inploginStatus_R");     data.lastSessionPing = vars.getStringParameter("inplastSessionPing");     data.sessionActive = vars.getRequiredStringParameter("inpsessionActive");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.websession = vars.getStringParameter("inpwebsession");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adSessionId = vars.getRequestGlobalVariable("inpadSessionId", windowId + "|AD_Session_ID"); 
+    data.username = vars.getStringParameter("inpusername");     data.remoteAddr = vars.getStringParameter("inpremoteAddr");     data.remoteHost = vars.getStringParameter("inpremoteHost");     data.serverUrl = vars.getStringParameter("inpserverUrl");     data.loginStatus = vars.getStringParameter("inploginStatus");     data.loginStatusr = vars.getStringParameter("inploginStatus_R");     data.lastSessionPing = vars.getStringParameter("inplastSessionPing");     data.sessionActive = vars.getRequiredStringParameter("inpsessionActive");     data.processed = vars.getStringParameter("inpprocessed", "N");     data.isactive = vars.getStringParameter("inpisactive", "N");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.websession = vars.getStringParameter("inpwebsession");     data.adSessionId = vars.getRequestGlobalVariable("inpadSessionId", windowId + "|AD_Session_ID");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -498,7 +498,7 @@ vars.getRequestGlobalVariable("inpParamCreated_f", tabId + "|paramCreated_f");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Session_ID", data[0].getField("adSessionId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));
+          vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Session_ID", data[0].getField("adSessionId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

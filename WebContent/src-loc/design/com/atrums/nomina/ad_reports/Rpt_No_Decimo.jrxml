@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:/_Desarrollo/OpenBravo/remica_prod/OpenBravoERP/modules/com.atrums.nomina/src"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/Users/atrums_004/git/openbravo/modules/com.atrums.nomina/src"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="year" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -54,6 +54,12 @@
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="1290" height="5">
 					<printWhenExpression><![CDATA[$P{ad_ref}.equals(new String("C"))]]></printWhenExpression>
 				</reportElement>
+				<subreportParameter name="BASE_WEB">
+					<subreportParameterExpression><![CDATA[$P{BASE_WEB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BASE_DESIGN">
+					<subreportParameterExpression><![CDATA[$P{BASE_DESIGN}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="year">
 					<subreportParameterExpression><![CDATA[$F{year}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -66,11 +72,35 @@
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="1290" height="5">
 					<printWhenExpression><![CDATA[$P{ad_ref}.equals(new String("T"))]]></printWhenExpression>
 				</reportElement>
+				<subreportParameter name="BASE_WEB">
+					<subreportParameterExpression><![CDATA[$P{BASE_WEB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BASE_DESIGN">
+					<subreportParameterExpression><![CDATA[$P{BASE_DESIGN}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="year">
 					<subreportParameterExpression><![CDATA[$F{year}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/decimotercero.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="5">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="1290" height="5">
+					<printWhenExpression><![CDATA[$P{ad_ref}.equals(new String("DC"))]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="BASE_WEB">
+					<subreportParameterExpression><![CDATA[$P{BASE_WEB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$F{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BASE_DESIGN">
+					<subreportParameterExpression><![CDATA[$P{BASE_DESIGN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/decimocuartocosta.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

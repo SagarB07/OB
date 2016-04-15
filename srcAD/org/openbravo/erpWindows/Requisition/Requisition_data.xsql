@@ -26,12 +26,12 @@ M_Requisition.C_Currency_ID,
 M_Requisition.DocAction, 
 list1.name as DocAction_BTN, 
 M_Requisition.DocStatus, 
-COALESCE(M_Requisition.Processing, 'N') AS Processing, 
-M_Requisition.AD_Client_ID, 
-COALESCE(M_Requisition.IsActive, 'N') AS IsActive, 
-M_Requisition.Createpo, 
 COALESCE(M_Requisition.Processed, 'N') AS Processed, 
 M_Requisition.M_Requisition_ID, 
+COALESCE(M_Requisition.IsActive, 'N') AS IsActive, 
+COALESCE(M_Requisition.Processing, 'N') AS Processing, 
+M_Requisition.AD_Client_ID, 
+M_Requisition.Createpo, 
  
         ? AS LANGUAGE 
         FROM M_Requisition left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Requisition.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (M_Requisition.C_BPartner_ID = table2.C_BPartner_ID) left join (select AD_User_ID, Name from AD_User) table3 on (M_Requisition.AD_User_ID = table3.AD_User_ID) left join (select M_PriceList_ID, Name from M_PriceList) table4 on (M_Requisition.M_PriceList_ID = table4.M_PriceList_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table5 on (M_Requisition.C_Currency_ID = table5.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND (CASE M_Requisition.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(M_Requisition.DocAction) END) = list1.value)
@@ -153,13 +153,13 @@ M_Requisition.M_Requisition_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Requisition
-        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , DocAction = (?) , DocStatus = (?) , Processing = (?) , AD_Client_ID = (?) , IsActive = (?) , Createpo = (?) , Processed = (?) , M_Requisition_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , DocAction = (?) , DocStatus = (?) , Processed = (?) , M_Requisition_ID = (?) , IsActive = (?) , Processing = (?) , AD_Client_ID = (?) , Createpo = (?) , updated = now(), updatedby = ? 
         WHERE M_Requisition.M_Requisition_ID = ? 
         
         AND M_Requisition.AD_Client_ID IN ('1') 
         AND M_Requisition.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="createpo"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mRequisitionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mRequisitionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="createpo"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mRequisitionId"></Parameter>
     
@@ -171,10 +171,10 @@ M_Requisition.M_Requisition_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Requisition 
-        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, DocAction, DocStatus, Processing, AD_Client_ID, IsActive, Createpo, Processed, M_Requisition_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, DocAction, DocStatus, Processed, M_Requisition_ID, IsActive, Processing, AD_Client_ID, Createpo, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="createpo"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mRequisitionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="adUserId"></Parameter> <Parameter name="mPricelistId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="docaction"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="mRequisitionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="createpo"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -52,9 +52,12 @@ public class noRptCargasFamiliaresV extends BaseOBObject implements Traceable, C
     public static final String PROPERTY_TIPOCARGA = "tipoCarga";
     public static final String PROPERTY_GENERO = "genero";
     public static final String PROPERTY_EDAD = "edad";
+    public static final String PROPERTY_DISCAPACITADO = "discapacitado";
+    public static final String PROPERTY_NMEROCARN = "nmeroCarn";
 
     public noRptCargasFamiliaresV() {
         setDefaultValue(PROPERTY_ACTIVE, true);
+        setDefaultValue(PROPERTY_DISCAPACITADO, false);
     }
 
     @Override
@@ -164,6 +167,22 @@ public class noRptCargasFamiliaresV extends BaseOBObject implements Traceable, C
 
     public void setEdad(Long edad) {
         set(PROPERTY_EDAD, edad);
+    }
+
+    public Boolean isDiscapacitado() {
+        return (Boolean) get(PROPERTY_DISCAPACITADO);
+    }
+
+    public void setDiscapacitado(Boolean discapacitado) {
+        set(PROPERTY_DISCAPACITADO, discapacitado);
+    }
+
+    public String getNmeroCarn() {
+        return (String) get(PROPERTY_NMEROCARN);
+    }
+
+    public void setNmeroCarn(String nmeroCarn) {
+        set(PROPERTY_NMEROCARN, nmeroCarn);
     }
 
 }

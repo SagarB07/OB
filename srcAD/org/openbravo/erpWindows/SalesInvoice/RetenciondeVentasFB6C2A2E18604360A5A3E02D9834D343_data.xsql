@@ -33,9 +33,9 @@ list3.name as Docactionre_BTN,
 CO_RETENCION_VENTA.Processing, 
 CO_RETENCION_VENTA.Docstatus, 
 CO_RETENCION_VENTA.C_Doctypetarget_ID, 
-CO_RETENCION_VENTA.CO_Retencion_Venta_ID, 
 CO_RETENCION_VENTA.AD_Client_ID, 
 CO_RETENCION_VENTA.C_Invoice_ID, 
+CO_RETENCION_VENTA.CO_Retencion_Venta_ID, 
  
         ? AS LANGUAGE 
         FROM CO_RETENCION_VENTA left join (select C_DocType_ID, Name from C_DocType) table1 on (CO_RETENCION_VENTA.C_Doctype_ID =  table1.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL1 on (table1.C_DocType_ID = tableTRL1.C_DocType_ID and tableTRL1.AD_Language = ?)  left join ad_ref_list_v list1 on (CO_RETENCION_VENTA.Tipo_Comprobante_Venta = list1.value and list1.ad_reference_id = '94DD3D9C266148BEAE4E201BD84F8F76' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND CO_RETENCION_VENTA.Posted = TO_CHAR(list2.value)) left join ad_ref_list_v list3 on (list3.ad_reference_id = 'CB29EF103ACC49108693B711ACEF6261' and list3.ad_language = ?  AND CO_RETENCION_VENTA.Docactionre = TO_CHAR(list3.value))
@@ -179,13 +179,13 @@ CO_RETENCION_VENTA.C_Invoice_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE CO_RETENCION_VENTA
-        SET AD_Org_ID = (?) , CO_No_Establecimiento = (?) , CO_Pto_Emision = (?) , NO_Autorizacion = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , Fecha_Emision = TO_DATE(?) , Tipo_Comprobante_Venta = (?) , NO_Comprobante_Venta = (?) , Dateacct = TO_DATE(?) , Total_Retencion = TO_NUMBER(?) , Processed = (?) , Isactive = (?) , Posted = (?) , Docactionre = (?) , Processing = (?) , Docstatus = (?) , C_Doctypetarget_ID = (?) , CO_Retencion_Venta_ID = (?) , AD_Client_ID = (?) , C_Invoice_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , CO_No_Establecimiento = (?) , CO_Pto_Emision = (?) , NO_Autorizacion = (?) , C_Doctype_ID = (?) , DocumentNo = (?) , Fecha_Emision = TO_DATE(?) , Tipo_Comprobante_Venta = (?) , NO_Comprobante_Venta = (?) , Dateacct = TO_DATE(?) , Total_Retencion = TO_NUMBER(?) , Processed = (?) , Isactive = (?) , Posted = (?) , Docactionre = (?) , Processing = (?) , Docstatus = (?) , C_Doctypetarget_ID = (?) , AD_Client_ID = (?) , C_Invoice_ID = (?) , CO_Retencion_Venta_ID = (?) , updated = now(), updatedby = ? 
         WHERE CO_RETENCION_VENTA.CO_Retencion_Venta_ID = ? 
                  AND CO_RETENCION_VENTA.C_Invoice_ID = ? 
         AND CO_RETENCION_VENTA.AD_Client_ID IN ('1') 
         AND CO_RETENCION_VENTA.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="coNoEstablecimiento"></Parameter> <Parameter name="coPtoEmision"></Parameter> <Parameter name="noAutorizacion"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="fechaEmision"></Parameter> <Parameter name="tipoComprobanteVenta"></Parameter> <Parameter name="noComprobanteVenta"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="totalRetencion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="docactionre"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypetargetId"></Parameter> <Parameter name="coRetencionVentaId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cInvoiceId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="coNoEstablecimiento"></Parameter> <Parameter name="coPtoEmision"></Parameter> <Parameter name="noAutorizacion"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="fechaEmision"></Parameter> <Parameter name="tipoComprobanteVenta"></Parameter> <Parameter name="noComprobanteVenta"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="totalRetencion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="docactionre"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypetargetId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cInvoiceId"></Parameter> <Parameter name="coRetencionVentaId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="coRetencionVentaId"></Parameter>
     
@@ -197,10 +197,10 @@ CO_RETENCION_VENTA.C_Invoice_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO CO_RETENCION_VENTA 
-        (AD_Org_ID, CO_No_Establecimiento, CO_Pto_Emision, NO_Autorizacion, C_Doctype_ID, DocumentNo, Fecha_Emision, Tipo_Comprobante_Venta, NO_Comprobante_Venta, Dateacct, Total_Retencion, Processed, Isactive, Posted, Docactionre, Processing, Docstatus, C_Doctypetarget_ID, CO_Retencion_Venta_ID, AD_Client_ID, C_Invoice_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, CO_No_Establecimiento, CO_Pto_Emision, NO_Autorizacion, C_Doctype_ID, DocumentNo, Fecha_Emision, Tipo_Comprobante_Venta, NO_Comprobante_Venta, Dateacct, Total_Retencion, Processed, Isactive, Posted, Docactionre, Processing, Docstatus, C_Doctypetarget_ID, AD_Client_ID, C_Invoice_ID, CO_Retencion_Venta_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="coNoEstablecimiento"></Parameter> <Parameter name="coPtoEmision"></Parameter> <Parameter name="noAutorizacion"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="fechaEmision"></Parameter> <Parameter name="tipoComprobanteVenta"></Parameter> <Parameter name="noComprobanteVenta"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="totalRetencion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="docactionre"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypetargetId"></Parameter> <Parameter name="coRetencionVentaId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cInvoiceId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="coNoEstablecimiento"></Parameter> <Parameter name="coPtoEmision"></Parameter> <Parameter name="noAutorizacion"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="fechaEmision"></Parameter> <Parameter name="tipoComprobanteVenta"></Parameter> <Parameter name="noComprobanteVenta"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="totalRetencion"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="docactionre"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypetargetId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cInvoiceId"></Parameter> <Parameter name="coRetencionVentaId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

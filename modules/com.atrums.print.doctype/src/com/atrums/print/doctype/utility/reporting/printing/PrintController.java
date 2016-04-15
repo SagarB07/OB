@@ -110,7 +110,7 @@ public class PrintController extends HttpSecureAppServlet {
     if (log4j.isDebugEnabled())
       log4j.debug("Servletpath: " + request.getServletPath());
     if (request.getServletPath().toLowerCase().indexOf("cotizaciones") != -1) {
-      documentType = DocumentType.COTIZACION;
+      documentType = DocumentType.NOCONTRATO;
       // The prefix PRINTORDERS is a fixed name based on the KEY of the
       // AD_PROCESS
       sessionValuePrefix = "PRINTCOTIZACION";
@@ -228,25 +228,24 @@ public class PrintController extends HttpSecureAppServlet {
                 "default", multiReports, OutputTypeEnum.DEFAULT);
             reports.put(documentId, report);
 
-            final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),
-                report.getOrgId());
+            //final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),report.getOrgId());
             boolean moreThanOnesalesRep = checks.get("moreThanOnesalesRep").booleanValue();
 
-            if (request.getServletPath().toLowerCase().indexOf("print.html") == -1) {
-              if ("".equals(senderAddress) || senderAddress == null) {
-                final OBError on = new OBError();
-                on.setMessage(Utility.messageBD(this, "No sender defined: Please go to client "
-                    + "configuration to complete the email configuration", vars.getLanguage()));
-                on.setTitle(Utility.messageBD(this, "Email Configuration Error", vars.getLanguage()));
-                on.setType("Error");
-                final String tabId = vars.getSessionValue("inpTabId");
-                vars.getStringParameter("tab");
-                vars.setMessage(tabId, on);
-                vars.getRequestGlobalVariable("inpTabId", "AttributeSetInstance.tabId");
-                printPageClosePopUpAndRefreshParent(response, vars);
-                throw new ServletException("Configuration Error no sender defined");
-              }
-            }
+//            if (request.getServletPath().toLowerCase().indexOf("print.html") == -1) {
+//              if ("".equals(senderAddress) || senderAddress == null) {
+//                final OBError on = new OBError();
+//                on.setMessage(Utility.messageBD(this, "No sender defined: Please go to client "
+//                    + "configuration to complete the email configuration", vars.getLanguage()));
+//                on.setTitle(Utility.messageBD(this, "Email Configuration Error", vars.getLanguage()));
+//                on.setType("Error");
+//                final String tabId = vars.getSessionValue("inpTabId");
+//                vars.getStringParameter("tab");
+//                vars.setMessage(tabId, on);
+//                vars.getRequestGlobalVariable("inpTabId", "AttributeSetInstance.tabId");
+//                printPageClosePopUpAndRefreshParent(response, vars);
+//                throw new ServletException("Configuration Error no sender defined");
+//              }
+//            }
 
             // check the different doc typeId's if all the
             // selected
@@ -356,12 +355,12 @@ public class PrintController extends HttpSecureAppServlet {
               if (log4j.isDebugEnabled())
                 log4j.debug("Document is not attached.");
             }
-            final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),
-                report.getOrgId());
-            sendDocumentEmail(report, vars,
-                (Vector<Object>) request.getSession().getAttribute("files"), documentData,
-                senderAddress, checks);
-            nrOfEmailsSend++;
+//            final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),
+//                report.getOrgId());
+//            sendDocumentEmail(report, vars,
+//                (Vector<Object>) request.getSession().getAttribute("files"), documentData,
+//                senderAddress, checks);
+//            nrOfEmailsSend++;
           }
         }
         request.getSession().removeAttribute("files");
@@ -594,18 +593,18 @@ public class PrintController extends HttpSecureAppServlet {
 
   }
 
-  PocData[] getContactDetails(DocumentType documentType, String strDocumentId)
-      throws ServletException {
-    switch (documentType) {
-    case COTIZACION:
-      return PocData.getContactDetailsForCotizacion(this, strDocumentId);
-    case ROUTINGORDER:
-      return PocData.getContactDetailsForRoutingOrder(this, strDocumentId);
+  @SuppressWarnings("incomplete-switch")
+PocData[] getContactDetails(DocumentType documentType, String strDocumentId) throws ServletException {
+ switch (documentType) {
+    case NOCONTRATO:
+      return PocData.getContratoForId(this, strDocumentId);
+    
     }
     return null;
   }
 
-  void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> object,
+  @SuppressWarnings("unused")
+void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> object,
       PocData documentData, String senderAddess, HashMap<String, Boolean> checks)
       throws IOException, ServletException {
     final String documentId = report.getDocumentId();
@@ -749,32 +748,31 @@ public class PrintController extends HttpSecureAppServlet {
 
       // Store the email in the database
       Connection conn = null;
-      try {
-        conn = this.getTransactionConnection();
-
-        // First store the email message
-        final String newEmailId = SequenceIdData.getUUID();
-        if (log4j.isDebugEnabled())
-          log4j.debug("New email id: " + newEmailId);
-
-        EmailData.insertEmail(conn, this, newEmailId, clientId, organizationId, userId,
-            EmailType.OUTGOING.getStringValue(), from, to, cc, bcc, dateOfEmail, subject, body,
-            bPartnerId, ToolsData.getTableId(this, report.getDocumentType().getTableName()),
-            documentData.documentId);
-
-        releaseCommitConnection(conn);
-      } catch (final NoConnectionAvailableException exception) {
-        log4j.error(exception);
-        throw new ServletException(exception);
-      } catch (final SQLException exception) {
-        log4j.error(exception);
-        try {
-          releaseRollbackConnection(conn);
-        } catch (final Exception ignored) {
-        }
-
-        throw new ServletException(exception);
-      }
+//      try {
+//        conn = this.getTransactionConnection();
+//
+//        // First store the email message
+//        final String newEmailId = SequenceIdData.getUUID();
+//        if (log4j.isDebugEnabled())
+//        log4j.debug("New email id: " + newEmailId);
+//        EmailData.insertEmail(conn, this, newEmailId, clientId, organizationId, userId,
+//            EmailType.OUTGOING.getStringValue(), from, to, cc, bcc, dateOfEmail, subject, body,
+//            bPartnerId, ToolsData.getTableId(this, report.getDocumentType().getTableName()),
+//            documentData.documentId);
+//
+//        releaseCommitConnection(conn);
+//      } catch (final NoConnectionAvailableException exception) {
+//        log4j.error(exception);
+//        throw new ServletException(exception);
+//      } catch (final SQLException exception) {
+//        log4j.error(exception);
+//        try {
+//          releaseRollbackConnection(conn);
+//        } catch (final Exception ignored) {
+//        }
+//
+//        throw new ServletException(exception);
+//      }
 
     } catch (final PocException exception) {
       log4j.error(exception);
@@ -1275,19 +1273,14 @@ public class PrintController extends HttpSecureAppServlet {
     PrintControllerData[] printControllerData;
     String documentIdsOrdered[] = new String[documentIds.length];
     int i = 0;
-    if (strTable.equals("LDT_COTIZACION")) {
-      printControllerData = PrintControllerData.selectCotizacion(this, strIds.toString());
+    if (strTable.equals("NO_CONTRATO_EMPLEADO")) {
+      printControllerData = PrintControllerData.selectContrato(this, strIds.toString());
       for (PrintControllerData docID : printControllerData) {
         documentIdsOrdered[i++] = docID.getField("Id");
       }
     }
 
-    if (strTable.equals("LDT_ROUTING_ORDER")) {
-      printControllerData = PrintControllerData.selectRoutingOrder(this, strIds.toString());
-      for (PrintControllerData docID : printControllerData) {
-        documentIdsOrdered[i++] = docID.getField("Id");
-      }
-    }
+    
     return documentIdsOrdered;
   }
 

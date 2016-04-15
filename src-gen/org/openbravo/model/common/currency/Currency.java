@@ -20,7 +20,6 @@ package org.openbravo.model.common.currency;
 
 import com.atrums.depositos.data.DP_FinaccTransactionV;
 import com.atrums.importaciondatos.IdtContrato;
-import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
 import com.atrums.nomina.data.noRegistraQuincLine;
@@ -201,7 +200,6 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
     public static final String PROPERTY_TIMEANDEXPENSESHEETLINELIST = "timeAndExpenseSheetLineList";
     public static final String PROPERTY_TIMEANDEXPENSESHEETLINEVLIST = "timeAndExpenseSheetLineVList";
     public static final String PROPERTY_TRANSACTIONCOSTLIST = "transactionCostList";
-    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
     public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
@@ -290,7 +288,6 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TIMEANDEXPENSESHEETLINEVLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_TRANSACTIONCOSTLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
@@ -1121,15 +1118,6 @@ public class Currency extends BaseOBObject implements Traceable, ClientEnabled, 
 
     public void setTransactionCostList(List<TransactionCost> transactionCostList) {
         set(PROPERTY_TRANSACTIONCOSTLIST, transactionCostList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<noContratoEmpleado> getContratoEmpleadoList() {
-      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
-    }
-
-    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
-        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
     }
 
     @SuppressWarnings("unchecked")

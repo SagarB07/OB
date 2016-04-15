@@ -19,6 +19,7 @@
 package com.atrums.nomina.data;
 
 import com.atrums.aserlaco.venta.data.asvPedidoInventario;
+import com.atrums.importaciondatos.IdtContrato;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,21 +56,23 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
     public static final String PROPERTY_NOMBRE = "nombre";
     public static final String PROPERTY_DESCRIPCIN = "descripcin";
     public static final String PROPERTY_ASVMOSTRAR = "asvMostrar";
+    public static final String PROPERTY_NEMOSTRAR = "neMostrar";
     public static final String PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST = "businessPartnerEmNoAreaEmpresaIdList";
+    public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_NOROLPAGOPROVISIONLIST = "noRolPagoProvisionList";
     public static final String PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST = "productEmAsvAreaEmpresaIdList";
     public static final String PROPERTY_ASVPEDIDOINVENTARIOLIST = "asvPedidoInventarioList";
-    public static final String PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST = "noContratoEmpleadoEmNeAreaEmpresaIdList";
     public static final String PROPERTY_NOPAGOCABECERALIST = "noPagoCabeceraList";
 
     public noAreaEmpresa() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_ASVMOSTRAR, false);
+        setDefaultValue(PROPERTY_NEMOSTRAR, false);
         setDefaultValue(PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ASVPEDIDOINVENTARIOLIST, new ArrayList<Object>());
-        setDefaultValue(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOPAGOCABECERALIST, new ArrayList<Object>());
     }
 
@@ -166,6 +169,14 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
         set(PROPERTY_ASVMOSTRAR, asvMostrar);
     }
 
+    public Boolean isNeMostrar() {
+        return (Boolean) get(PROPERTY_NEMOSTRAR);
+    }
+
+    public void setNeMostrar(Boolean neMostrar) {
+        set(PROPERTY_NEMOSTRAR, neMostrar);
+    }
+
     @SuppressWarnings("unchecked")
     public List<BusinessPartner> getBusinessPartnerEmNoAreaEmpresaIdList() {
       return (List<BusinessPartner>) get(PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST);
@@ -173,6 +184,15 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
 
     public void setBusinessPartnerEmNoAreaEmpresaIdList(List<BusinessPartner> businessPartnerEmNoAreaEmpresaIdList) {
         set(PROPERTY_BUSINESSPARTNEREMNOAREAEMPRESAIDLIST, businessPartnerEmNoAreaEmpresaIdList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<IdtContrato> getIDTContratoList() {
+      return (List<IdtContrato>) get(PROPERTY_IDTCONTRATOLIST);
+    }
+
+    public void setIDTContratoList(List<IdtContrato> iDTContratoList) {
+        set(PROPERTY_IDTCONTRATOLIST, iDTContratoList);
     }
 
     @SuppressWarnings("unchecked")
@@ -200,15 +220,6 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
 
     public void setAsvPedidoInventarioList(List<asvPedidoInventario> asvPedidoInventarioList) {
         set(PROPERTY_ASVPEDIDOINVENTARIOLIST, asvPedidoInventarioList);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<noContratoEmpleado> getNoContratoEmpleadoEmNeAreaEmpresaIdList() {
-      return (List<noContratoEmpleado>) get(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST);
-    }
-
-    public void setNoContratoEmpleadoEmNeAreaEmpresaIdList(List<noContratoEmpleado> noContratoEmpleadoEmNeAreaEmpresaIdList) {
-        set(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST, noContratoEmpleadoEmNeAreaEmpresaIdList);
     }
 
     @SuppressWarnings("unchecked")

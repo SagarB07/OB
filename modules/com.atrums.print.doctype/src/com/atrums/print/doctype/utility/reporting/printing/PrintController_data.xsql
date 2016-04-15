@@ -21,30 +21,19 @@
 <SqlClass name="PrintControllerData" package="com.atrums.print.doctype.utility.reporting.printing">
     <SqlClassComment></SqlClassComment>
     
-    <SqlMethod name="selectCotizacion" type="preparedStatement" return="multiple">
+    <SqlMethod name="selectContrato" type="preparedStatement" return="multiple">
         <SqlMethodComment></SqlMethodComment>
         <Sql>
             <![CDATA[
-            SELECT ldt_cotizacion_id as ID
-            FROM ldt_cotizacion
-            WHERE ldt_cotizacion_id IN ('1')
-            ORDER BY documentno ASC
+            SELECT no_contrato_empleado_id as ID
+            FROM no_contrato_empleado
+            WHERE no_contrato_empleado_id IN ('1')
+            ORDER BY no_contrato_empleado_id ASC
             ]]>
         </Sql>
-        <Parameter name="Id" optional="true" type="replace" after="WHERE ldt_cotizacion_id IN (" text="'1'"/>
+        <Parameter name="Id" optional="true" type="replace" after="WHERE no_contrato_empleado_id IN (" text="'1'"/>
     </SqlMethod>
 
-    <SqlMethod name="selectRoutingOrder" type="preparedStatement" return="multiple">
-        <SqlMethodComment></SqlMethodComment>
-        <Sql>
-            <![CDATA[
-            SELECT ldt_routing_order_id as ID
-            FROM ldt_routing_order
-            WHERE ldt_routing_order_id IN ('1')
-            ORDER BY documentno ASC
-            ]]>
-        </Sql>
-        <Parameter name="Id" optional="true" type="replace" after="WHERE ldt_routing_order_id IN (" text="'1'"/>
-    </SqlMethod>
+    
 
 </SqlClass>

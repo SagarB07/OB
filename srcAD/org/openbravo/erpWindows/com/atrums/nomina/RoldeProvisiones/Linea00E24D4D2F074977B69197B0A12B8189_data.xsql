@@ -25,10 +25,10 @@ no_rol_pago_provision_line.C_Doctype_ID,
 no_rol_pago_provision_line.Documentno, 
 no_rol_pago_provision_line.Docaccionno, 
 list1.name as Docaccionno_BTN, 
-no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID, 
 no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID, 
 no_rol_pago_provision_line.AD_Org_ID, 
 no_rol_pago_provision_line.AD_Client_ID, 
+no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID, 
  
         ? AS LANGUAGE 
         FROM no_rol_pago_provision_line left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table1 on (no_rol_pago_provision_line.NO_Tipo_Ingreso_Egreso_ID = table1.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (no_rol_pago_provision_line.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '31D050E5C2D843B99AD7E9470D9E8579' and list1.ad_language = ?  AND no_rol_pago_provision_line.Docaccionno = TO_CHAR(list1.value))
@@ -141,13 +141,13 @@ no_rol_pago_provision_line.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_rol_pago_provision_line
-        SET Line = TO_NUMBER(?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Fechainicio = TO_DATE(?) , Fechafin = TO_DATE(?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Docstatus = (?) , C_Doctype_ID = (?) , Documentno = (?) , Docaccionno = (?) , NO_Rol_Pago_Provision_ID = (?) , NO_Rol_Pago_Provision_Line_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET Line = TO_NUMBER(?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Fechainicio = TO_DATE(?) , Fechafin = TO_DATE(?) , Valor = TO_NUMBER(?) , C_Currency_ID = (?) , Isactive = (?) , Docstatus = (?) , C_Doctype_ID = (?) , Documentno = (?) , Docaccionno = (?) , NO_Rol_Pago_Provision_Line_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , NO_Rol_Pago_Provision_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_rol_pago_provision_line.NO_Rol_Pago_Provision_Line_ID = ? 
                  AND no_rol_pago_provision_line.NO_Rol_Pago_Provision_ID = ? 
         AND no_rol_pago_provision_line.AD_Client_ID IN ('1') 
         AND no_rol_pago_provision_line.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="fechainicio"></Parameter> <Parameter name="fechafin"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="line"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="fechainicio"></Parameter> <Parameter name="fechafin"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noRolPagoProvisionLineId"></Parameter>
     
@@ -159,10 +159,10 @@ no_rol_pago_provision_line.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_rol_pago_provision_line 
-        (Line, NO_Tipo_Ingreso_Egreso_ID, Fechainicio, Fechafin, Valor, C_Currency_ID, Isactive, Docstatus, C_Doctype_ID, Documentno, Docaccionno, NO_Rol_Pago_Provision_ID, NO_Rol_Pago_Provision_Line_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (Line, NO_Tipo_Ingreso_Egreso_ID, Fechainicio, Fechafin, Valor, C_Currency_ID, Isactive, Docstatus, C_Doctype_ID, Documentno, Docaccionno, NO_Rol_Pago_Provision_Line_ID, AD_Org_ID, AD_Client_ID, NO_Rol_Pago_Provision_ID, created, createdby, updated, updatedBy)
         VALUES (TO_NUMBER(?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="fechainicio"></Parameter> <Parameter name="fechafin"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="line"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="fechainicio"></Parameter> <Parameter name="fechafin"></Parameter> <Parameter name="valor"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="docstatus"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="documentno"></Parameter> <Parameter name="docaccionno"></Parameter> <Parameter name="noRolPagoProvisionLineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noRolPagoProvisionId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -98,6 +98,11 @@ public class ComboReloadsProcessHelper extends CalloutHelper {
        return;
      }
     
+     if (strProcessId.equals("3B73C762A8B74750A3AC5BD1F1A041A8")) {
+       process3B73C762A8B74750A3AC5BD1F1A041A8(response, vars, strTabId, windowId);
+       return;
+     }
+    
      if (strProcessId.equals("220")) {
        process220(response, vars, strTabId, windowId);
        return;
@@ -210,6 +215,11 @@ public class ComboReloadsProcessHelper extends CalloutHelper {
     
      if (strProcessId.equals("A164779BCCA640BC9D5B201574C8B8D2")) {
        processA164779BCCA640BC9D5B201574C8B8D2(response, vars, strTabId, windowId);
+       return;
+     }
+    
+     if (strProcessId.equals("3CA9715730B240F0A9BEBE9101F93FF6")) {
+       process3CA9715730B240F0A9BEBE9101F93FF6(response, vars, strTabId, windowId);
        return;
      }
     
@@ -1020,6 +1030,55 @@ public class ComboReloadsProcessHelper extends CalloutHelper {
         comboTableData = new ComboTableData(vars, this, "19", "M_Warehouse_ID", "", "A3DCDE5EDD4A4403AC205B131F10F84D", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
         comboTableData.fillParameters(null, windowId, "");
         resultField = "inpmWarehouseId";
+
+        resultado.append("new Array(\"" + resultField + "\", ");
+        resultado.append(generateArray(comboTableData.select(false), vars.getStringParameter(resultField)));
+        comboTableData = null;
+        resultado.append(")");
+        isFirst=false;
+      }
+    
+        } catch (ServletException ex) {
+          OBError myError = Utility.translateError(this, vars, vars.getLanguage(), ex.toString());
+          bdErrorHidden(response, myError.getType(), myError.getTitle(), myError.getMessage());
+          return;
+        } catch (Exception ex1) {
+          OBError myError = Utility.translateError(this, vars, vars.getLanguage(), ex1.toString());
+          bdErrorHidden(response, myError.getType(), myError.getTitle(), myError.getMessage());
+          return;
+        }
+    
+        resultado.append("\n);");
+    
+        xmlDocument.setParameter("array", resultado.toString());
+        xmlDocument.setParameter("frameName", "mainframe");
+        xmlDocument.setParameter("frameName1", "mainframe");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println(xmlDocument.print());
+        out.close();
+ 
+       return;
+     }
+    
+    private void process3B73C762A8B74750A3AC5BD1F1A041A8(HttpServletResponse response, VariablesSecureApp vars, String strTabId, String windowId) throws IOException, ServletException {
+        String resultField;
+        String command = vars.getStringParameter("Command", "DEFAULT");
+        XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_callouts/CallOut").createXmlDocument();
+        
+        StringBuffer resultado = new StringBuffer();
+        boolean isFirst=true;
+        ComboTableData comboTableData = null;
+        resultado.append("var calloutName='ComboReloads3B73C762A8B74750A3AC5BD1F1A041A8';\n\n");
+        resultado.append("var respuesta = new Array(\n");
+    
+        try {
+          
+      if (CalloutHelper.commandInCommandList(command, "inpemNeProcesar", "inpemNeProcesar", "inpemNeProcesar", "inpemNeProcesar", "inpemNeProcesar")) {
+        if (!isFirst) resultado.append(", \n");
+        comboTableData = new ComboTableData(vars, this, "17", "AccionPermiso", "8C83DEB7CA664B359FD14679B64236A0", "584A5CA440A84F7DA70E0A97286CBC33", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+        comboTableData.fillParameters(null, windowId, "");
+        resultField = "inpaccionpermiso";
 
         resultado.append("new Array(\"" + resultField + "\", ");
         resultado.append(generateArray(comboTableData.select(false), vars.getStringParameter(resultField)));
@@ -2160,6 +2219,55 @@ public class ComboReloadsProcessHelper extends CalloutHelper {
         comboTableData = new ComboTableData(vars, this, "17", "Estado", "31D050E5C2D843B99AD7E9470D9E8579", "7160D57388BB4E8C812A53B4634D00DD", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
         comboTableData.fillParameters(null, windowId, "");
         resultField = "inpestado";
+
+        resultado.append("new Array(\"" + resultField + "\", ");
+        resultado.append(generateArray(comboTableData.select(false), vars.getStringParameter(resultField)));
+        comboTableData = null;
+        resultado.append(")");
+        isFirst=false;
+      }
+    
+        } catch (ServletException ex) {
+          OBError myError = Utility.translateError(this, vars, vars.getLanguage(), ex.toString());
+          bdErrorHidden(response, myError.getType(), myError.getTitle(), myError.getMessage());
+          return;
+        } catch (Exception ex1) {
+          OBError myError = Utility.translateError(this, vars, vars.getLanguage(), ex1.toString());
+          bdErrorHidden(response, myError.getType(), myError.getTitle(), myError.getMessage());
+          return;
+        }
+    
+        resultado.append("\n);");
+    
+        xmlDocument.setParameter("array", resultado.toString());
+        xmlDocument.setParameter("frameName", "mainframe");
+        xmlDocument.setParameter("frameName1", "mainframe");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println(xmlDocument.print());
+        out.close();
+ 
+       return;
+     }
+    
+    private void process3CA9715730B240F0A9BEBE9101F93FF6(HttpServletResponse response, VariablesSecureApp vars, String strTabId, String windowId) throws IOException, ServletException {
+        String resultField;
+        String command = vars.getStringParameter("Command", "DEFAULT");
+        XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_callouts/CallOut").createXmlDocument();
+        
+        StringBuffer resultado = new StringBuffer();
+        boolean isFirst=true;
+        ComboTableData comboTableData = null;
+        resultado.append("var calloutName='ComboReloads3CA9715730B240F0A9BEBE9101F93FF6';\n\n");
+        resultado.append("var respuesta = new Array(\n");
+    
+        try {
+          
+      if (CalloutHelper.commandInCommandList(command, "inpemNeProcesar", "inpemNeProcesar", "inpemNeProcesar", "inpemNeProcesar")) {
+        if (!isFirst) resultado.append(", \n");
+        comboTableData = new ComboTableData(vars, this, "17", "AccionVacacion", "D90979EA306F493EBD3EF5D201355C56", "69D9808AB1164161B5A9B0CB7EFB54EF", Utility.getReferenceableOrg(vars, vars.getStringParameter("inpadOrgId")), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+        comboTableData.fillParameters(null, windowId, "");
+        resultField = "inpaccionvacacion";
 
         resultado.append("new Array(\"" + resultField + "\", ");
         resultado.append(generateArray(comboTableData.select(false), vars.getStringParameter(resultField)));

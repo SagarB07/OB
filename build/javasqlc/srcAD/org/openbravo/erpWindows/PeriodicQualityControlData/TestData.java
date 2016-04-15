@@ -37,8 +37,8 @@ static Logger log4j = Logger.getLogger(TestData.class);
   public String mAttributesetinstanceId;
   public String mAttributesetinstanceIdr;
   public String launched;
-  public String maPcCaseId;
   public String adClientId;
+  public String maPcCaseId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -90,10 +90,10 @@ static Logger log4j = Logger.getLogger(TestData.class);
       return mAttributesetinstanceIdr;
     else if (fieldName.equalsIgnoreCase("launched"))
       return launched;
-    else if (fieldName.equalsIgnoreCase("ma_pc_case_id") || fieldName.equals("maPcCaseId"))
-      return maPcCaseId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("ma_pc_case_id") || fieldName.equals("maPcCaseId"))
+      return maPcCaseId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -146,8 +146,8 @@ Select for edit
       "MA_PC_Case.M_AttributeSetInstance_ID, " +
       "(CASE WHEN MA_PC_Case.M_AttributeSetInstance_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.Description), ''))),'') ) END) AS M_AttributeSetInstance_IDR, " +
       "MA_PC_Case.Launched, " +
-      "MA_PC_Case.MA_Pc_Case_ID, " +
       "MA_PC_Case.AD_Client_ID, " +
+      "MA_PC_Case.MA_Pc_Case_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_PC_Case left join (select AD_Org_ID, Name from AD_Org) table1 on (MA_PC_Case.AD_Org_ID = table1.AD_Org_ID) left join (select MA_Periodic_Control_ID, Name from MA_Periodic_Control) table2 on (MA_PC_Case.MA_Periodic_Control_ID = table2.MA_Periodic_Control_ID) left join (select M_Product_ID, Name from M_Product) table3 on (MA_PC_Case.M_Product_ID = table3.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL3 on (table3.M_Product_ID = tableTRL3.M_Product_ID and tableTRL3.AD_Language = ?)  left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table5 on (MA_PC_Case.M_AttributeSetInstance_ID = table5.M_AttributeSetInstance_ID)" +
       "        WHERE 2=2 " +
@@ -209,8 +209,8 @@ Select for edit
         objectTestData.mAttributesetinstanceId = UtilSql.getValue(result, "m_attributesetinstance_id");
         objectTestData.mAttributesetinstanceIdr = UtilSql.getValue(result, "m_attributesetinstance_idr");
         objectTestData.launched = UtilSql.getValue(result, "launched");
-        objectTestData.maPcCaseId = UtilSql.getValue(result, "ma_pc_case_id");
         objectTestData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectTestData.maPcCaseId = UtilSql.getValue(result, "ma_pc_case_id");
         objectTestData.language = UtilSql.getValue(result, "language");
         objectTestData.adUserClient = "";
         objectTestData.adOrgClient = "";
@@ -267,8 +267,8 @@ Create a registry
     objectTestData[0].mAttributesetinstanceId = mAttributesetinstanceId;
     objectTestData[0].mAttributesetinstanceIdr = mAttributesetinstanceIdr;
     objectTestData[0].launched = launched;
-    objectTestData[0].maPcCaseId = maPcCaseId;
     objectTestData[0].adClientId = adClientId;
+    objectTestData[0].maPcCaseId = maPcCaseId;
     objectTestData[0].language = "";
     return objectTestData;
   }
@@ -506,7 +506,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_PC_Case" +
-      "        SET AD_Org_ID = (?) , IsActive = (?) , Name = (?) , MA_Periodic_Control_ID = (?) , StartDate = TO_DATE(?) , EndDate = TO_DATE(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , Launched = (?) , MA_Pc_Case_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , IsActive = (?) , Name = (?) , MA_Periodic_Control_ID = (?) , StartDate = TO_DATE(?) , EndDate = TO_DATE(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , Launched = (?) , AD_Client_ID = (?) , MA_Pc_Case_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_PC_Case.MA_Pc_Case_ID = ? " +
       "        AND MA_PC_Case.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -532,8 +532,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mAttributesetinstanceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, launched);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maPcCaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maPcCaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maPcCaseId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -562,7 +562,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_PC_Case " +
-      "        (AD_Org_ID, IsActive, Name, MA_Periodic_Control_ID, StartDate, EndDate, M_Product_ID, M_AttributeSetInstance_ID, Launched, MA_Pc_Case_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, IsActive, Name, MA_Periodic_Control_ID, StartDate, EndDate, M_Product_ID, M_AttributeSetInstance_ID, Launched, AD_Client_ID, MA_Pc_Case_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -580,8 +580,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mAttributesetinstanceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, launched);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maPcCaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maPcCaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

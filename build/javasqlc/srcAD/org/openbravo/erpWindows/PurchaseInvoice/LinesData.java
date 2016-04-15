@@ -29,8 +29,8 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String mProductId;
   public String accountId;
   public String accountIdr;
-  public String qtyinvoiced;
   public String emReValueProducto;
+  public String qtyinvoiced;
   public String cUomId;
   public String cUomIdr;
   public String priceactual;
@@ -40,8 +40,8 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String description;
   public String cTaxId;
   public String cTaxIdr;
-  public String pricelist;
   public String grosspricelist;
+  public String pricelist;
   public String mAttributesetinstanceId;
   public String mAttributesetinstanceIdr;
   public String cOrderlineId;
@@ -122,10 +122,10 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return accountId;
     else if (fieldName.equalsIgnoreCase("account_idr") || fieldName.equals("accountIdr"))
       return accountIdr;
-    else if (fieldName.equalsIgnoreCase("qtyinvoiced"))
-      return qtyinvoiced;
     else if (fieldName.equalsIgnoreCase("em_re_value_producto") || fieldName.equals("emReValueProducto"))
       return emReValueProducto;
+    else if (fieldName.equalsIgnoreCase("qtyinvoiced"))
+      return qtyinvoiced;
     else if (fieldName.equalsIgnoreCase("c_uom_id") || fieldName.equals("cUomId"))
       return cUomId;
     else if (fieldName.equalsIgnoreCase("c_uom_idr") || fieldName.equals("cUomIdr"))
@@ -144,10 +144,10 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return cTaxId;
     else if (fieldName.equalsIgnoreCase("c_tax_idr") || fieldName.equals("cTaxIdr"))
       return cTaxIdr;
-    else if (fieldName.equalsIgnoreCase("pricelist"))
-      return pricelist;
     else if (fieldName.equalsIgnoreCase("grosspricelist"))
       return grosspricelist;
+    else if (fieldName.equalsIgnoreCase("pricelist"))
+      return pricelist;
     else if (fieldName.equalsIgnoreCase("m_attributesetinstance_id") || fieldName.equals("mAttributesetinstanceId"))
       return mAttributesetinstanceId;
     else if (fieldName.equalsIgnoreCase("m_attributesetinstance_idr") || fieldName.equals("mAttributesetinstanceIdr"))
@@ -282,8 +282,8 @@ Select for edit
       "C_InvoiceLine.M_Product_ID, " +
       "C_InvoiceLine.Account_ID, " +
       "(CASE WHEN C_InvoiceLine.Account_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS Account_IDR, " +
-      "C_InvoiceLine.QtyInvoiced, " +
       "C_InvoiceLine.EM_RE_Value_Producto, " +
+      "C_InvoiceLine.QtyInvoiced, " +
       "C_InvoiceLine.C_UOM_ID, " +
       "(CASE WHEN C_InvoiceLine.C_UOM_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_UOM_IDR, " +
       "C_InvoiceLine.PriceActual, " +
@@ -293,8 +293,8 @@ Select for edit
       "C_InvoiceLine.Description, " +
       "C_InvoiceLine.C_Tax_ID, " +
       "(CASE WHEN C_InvoiceLine.C_Tax_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_Tax_IDR, " +
-      "C_InvoiceLine.PriceList, " +
       "C_InvoiceLine.Grosspricelist, " +
+      "C_InvoiceLine.PriceList, " +
       "C_InvoiceLine.M_AttributeSetInstance_ID, " +
       "(CASE WHEN C_InvoiceLine.M_AttributeSetInstance_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Description), ''))),'') ) END) AS M_AttributeSetInstance_IDR, " +
       "C_InvoiceLine.C_OrderLine_ID, " +
@@ -402,8 +402,8 @@ Select for edit
         objectLinesData.mProductId = UtilSql.getValue(result, "m_product_id");
         objectLinesData.accountId = UtilSql.getValue(result, "account_id");
         objectLinesData.accountIdr = UtilSql.getValue(result, "account_idr");
-        objectLinesData.qtyinvoiced = UtilSql.getValue(result, "qtyinvoiced");
         objectLinesData.emReValueProducto = UtilSql.getValue(result, "em_re_value_producto");
+        objectLinesData.qtyinvoiced = UtilSql.getValue(result, "qtyinvoiced");
         objectLinesData.cUomId = UtilSql.getValue(result, "c_uom_id");
         objectLinesData.cUomIdr = UtilSql.getValue(result, "c_uom_idr");
         objectLinesData.priceactual = UtilSql.getValue(result, "priceactual");
@@ -413,8 +413,8 @@ Select for edit
         objectLinesData.description = UtilSql.getValue(result, "description");
         objectLinesData.cTaxId = UtilSql.getValue(result, "c_tax_id");
         objectLinesData.cTaxIdr = UtilSql.getValue(result, "c_tax_idr");
-        objectLinesData.pricelist = UtilSql.getValue(result, "pricelist");
         objectLinesData.grosspricelist = UtilSql.getValue(result, "grosspricelist");
+        objectLinesData.pricelist = UtilSql.getValue(result, "pricelist");
         objectLinesData.mAttributesetinstanceId = UtilSql.getValue(result, "m_attributesetinstance_id");
         objectLinesData.mAttributesetinstanceIdr = UtilSql.getValue(result, "m_attributesetinstance_idr");
         objectLinesData.cOrderlineId = UtilSql.getValue(result, "c_orderline_id");
@@ -508,8 +508,8 @@ Create a registry
     objectLinesData[0].mProductId = mProductId;
     objectLinesData[0].accountId = accountId;
     objectLinesData[0].accountIdr = "";
-    objectLinesData[0].qtyinvoiced = qtyinvoiced;
     objectLinesData[0].emReValueProducto = emReValueProducto;
+    objectLinesData[0].qtyinvoiced = qtyinvoiced;
     objectLinesData[0].cUomId = cUomId;
     objectLinesData[0].cUomIdr = "";
     objectLinesData[0].priceactual = priceactual;
@@ -519,8 +519,8 @@ Create a registry
     objectLinesData[0].description = description;
     objectLinesData[0].cTaxId = cTaxId;
     objectLinesData[0].cTaxIdr = "";
-    objectLinesData[0].pricelist = pricelist;
     objectLinesData[0].grosspricelist = grosspricelist;
+    objectLinesData[0].pricelist = pricelist;
     objectLinesData[0].mAttributesetinstanceId = mAttributesetinstanceId;
     objectLinesData[0].mAttributesetinstanceIdr = mAttributesetinstanceIdr;
     objectLinesData[0].cOrderlineId = cOrderlineId;
@@ -1416,7 +1416,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_InvoiceLine" +
-      "        SET Line = TO_NUMBER(?) , Financial_Invoice_Line = (?) , M_Product_ID = (?) , Account_ID = (?) , EM_RE_Value_Producto = (?) , QtyInvoiced = TO_NUMBER(?) , C_UOM_ID = (?) , PriceActual = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , Line_Gross_Amount = TO_NUMBER(?) , Description = (?) , C_Tax_ID = (?) , Grosspricelist = TO_NUMBER(?) , PriceList = TO_NUMBER(?) , M_AttributeSetInstance_ID = (?) , C_OrderLine_ID = (?) , M_InOutLine_ID = (?) , IsDeferred = (?) , Taxbaseamt = TO_NUMBER(?) , Excludeforwithholding = (?) , C_Charge_ID = (?) , TaxAmt = TO_NUMBER(?) , Iseditlinenetamt = (?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , grosspricestd = TO_NUMBER(?) , PriceStd = TO_NUMBER(?) , DefPlanType = (?) , Periodnumber = TO_NUMBER(?) , C_Period_ID = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , C_Projectline_ID = (?) , C_Invoice_Discount_ID = (?) , IsDescription = (?) , S_ResourceAssignment_ID = (?) , PriceLimit = TO_NUMBER(?) , ChargeAmt = TO_NUMBER(?) , IsActive = (?) , C_Invoice_ID = (?) , C_InvoiceLine_ID = (?) , AD_Client_ID = (?) , M_Offer_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , Financial_Invoice_Line = (?) , M_Product_ID = (?) , Account_ID = (?) , QtyInvoiced = TO_NUMBER(?) , EM_RE_Value_Producto = (?) , C_UOM_ID = (?) , PriceActual = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , Line_Gross_Amount = TO_NUMBER(?) , Description = (?) , C_Tax_ID = (?) , Grosspricelist = TO_NUMBER(?) , PriceList = TO_NUMBER(?) , M_AttributeSetInstance_ID = (?) , C_OrderLine_ID = (?) , M_InOutLine_ID = (?) , IsDeferred = (?) , Taxbaseamt = TO_NUMBER(?) , Excludeforwithholding = (?) , C_Charge_ID = (?) , TaxAmt = TO_NUMBER(?) , Iseditlinenetamt = (?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , grosspricestd = TO_NUMBER(?) , PriceStd = TO_NUMBER(?) , DefPlanType = (?) , Periodnumber = TO_NUMBER(?) , C_Period_ID = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , C_Projectline_ID = (?) , C_Invoice_Discount_ID = (?) , IsDescription = (?) , S_ResourceAssignment_ID = (?) , PriceLimit = TO_NUMBER(?) , ChargeAmt = TO_NUMBER(?) , IsActive = (?) , C_Invoice_ID = (?) , C_InvoiceLine_ID = (?) , AD_Client_ID = (?) , M_Offer_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_InvoiceLine.C_InvoiceLine_ID = ? " +
       "                 AND C_InvoiceLine.C_Invoice_ID = ? " +
       "        AND C_InvoiceLine.AD_Client_ID IN (";
@@ -1438,8 +1438,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, financialInvoiceLine);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReValueProducto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, qtyinvoiced);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReValueProducto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cUomId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, priceactual);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, grossUnitPrice);
@@ -1514,8 +1514,8 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_InvoiceLine " +
-      "        (Line, Financial_Invoice_Line, M_Product_ID, Account_ID, QtyInvoiced, EM_RE_Value_Producto, C_UOM_ID, PriceActual, Gross_Unit_Price, LineNetAmt, Line_Gross_Amount, Description, C_Tax_ID, PriceList, Grosspricelist, M_AttributeSetInstance_ID, C_OrderLine_ID, M_InOutLine_ID, IsDeferred, Taxbaseamt, Excludeforwithholding, C_Charge_ID, TaxAmt, Iseditlinenetamt, QuantityOrder, M_Product_Uom_Id, PriceStd, grosspricestd, DefPlanType, Periodnumber, C_Period_ID, AD_Org_ID, C_Bpartner_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, C_Projectline_ID, C_Invoice_Discount_ID, IsDescription, AD_Client_ID, S_ResourceAssignment_ID, PriceLimit, ChargeAmt, IsActive, C_Invoice_ID, C_InvoiceLine_ID, M_Offer_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (Line, Financial_Invoice_Line, M_Product_ID, Account_ID, EM_RE_Value_Producto, QtyInvoiced, C_UOM_ID, PriceActual, Gross_Unit_Price, LineNetAmt, Line_Gross_Amount, Description, C_Tax_ID, Grosspricelist, PriceList, M_AttributeSetInstance_ID, C_OrderLine_ID, M_InOutLine_ID, IsDeferred, Taxbaseamt, Excludeforwithholding, C_Charge_ID, TaxAmt, Iseditlinenetamt, QuantityOrder, M_Product_Uom_Id, PriceStd, grosspricestd, DefPlanType, Periodnumber, C_Period_ID, AD_Org_ID, C_Bpartner_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, C_Projectline_ID, C_Invoice_Discount_ID, IsDescription, AD_Client_ID, S_ResourceAssignment_ID, PriceLimit, ChargeAmt, IsActive, C_Invoice_ID, C_InvoiceLine_ID, M_Offer_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1527,8 +1527,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, financialInvoiceLine);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, qtyinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReValueProducto);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, qtyinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cUomId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, priceactual);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, grossUnitPrice);
@@ -1536,8 +1536,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lineGrossAmount);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cTaxId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, pricelist);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, grosspricelist);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, pricelist);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mAttributesetinstanceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutlineId);

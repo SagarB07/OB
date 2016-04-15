@@ -17,11 +17,11 @@ M_Costing_Rule.M_Costing_Algorithm_ID,
 (CASE WHEN M_Costing_Rule.M_Costing_Algorithm_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS M_Costing_Algorithm_IDR, 
 TO_CHAR(M_Costing_Rule.Datefrom, ?) AS Datefrom, 
 COALESCE(M_Costing_Rule.Warehouse_Dimension, 'N') AS Warehouse_Dimension, 
-M_Costing_Rule.AD_Client_ID, 
-COALESCE(M_Costing_Rule.Isactive, 'N') AS Isactive, 
-M_Costing_Rule.M_Costing_Rule_ID, 
 COALESCE(M_Costing_Rule.IsValidated, 'N') AS IsValidated, 
 M_Costing_Rule.Process_Rule, 
+M_Costing_Rule.M_Costing_Rule_ID, 
+M_Costing_Rule.AD_Client_ID, 
+COALESCE(M_Costing_Rule.Isactive, 'N') AS Isactive, 
  
         ? AS LANGUAGE 
         FROM M_Costing_Rule left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Costing_Rule.AD_Org_ID = table1.AD_Org_ID) left join (select M_Costing_Algorithm_ID, Name from M_Costing_Algorithm) table2 on (M_Costing_Rule.M_Costing_Algorithm_ID = table2.M_Costing_Algorithm_ID)
@@ -102,13 +102,13 @@ M_Costing_Rule.Process_Rule,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_Costing_Rule
-        SET AD_Org_ID = (?) , M_Costing_Algorithm_ID = (?) , Datefrom = TO_TIMESTAMP(?, ?) , Warehouse_Dimension = (?) , AD_Client_ID = (?) , Isactive = (?) , M_Costing_Rule_ID = (?) , IsValidated = (?) , Process_Rule = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , M_Costing_Algorithm_ID = (?) , Datefrom = TO_TIMESTAMP(?, ?) , Warehouse_Dimension = (?) , IsValidated = (?) , Process_Rule = (?) , M_Costing_Rule_ID = (?) , AD_Client_ID = (?) , Isactive = (?) , updated = now(), updatedby = ? 
         WHERE M_Costing_Rule.M_Costing_Rule_ID = ? 
         
         AND M_Costing_Rule.AD_Client_ID IN ('1') 
         AND M_Costing_Rule.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="mCostingAlgorithmId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="warehouseDimension"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mCostingRuleId"></Parameter> <Parameter name="isvalidated"></Parameter> <Parameter name="processRule"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="mCostingAlgorithmId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="warehouseDimension"></Parameter> <Parameter name="isvalidated"></Parameter> <Parameter name="processRule"></Parameter> <Parameter name="mCostingRuleId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mCostingRuleId"></Parameter>
     
@@ -120,10 +120,10 @@ M_Costing_Rule.Process_Rule,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_Costing_Rule 
-        (AD_Org_ID, M_Costing_Algorithm_ID, Datefrom, Warehouse_Dimension, AD_Client_ID, Isactive, M_Costing_Rule_ID, IsValidated, Process_Rule, created, createdby, updated, updatedBy)
+        (AD_Org_ID, M_Costing_Algorithm_ID, Datefrom, Warehouse_Dimension, IsValidated, Process_Rule, M_Costing_Rule_ID, AD_Client_ID, Isactive, created, createdby, updated, updatedBy)
         VALUES ((?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="mCostingAlgorithmId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="warehouseDimension"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mCostingRuleId"></Parameter> <Parameter name="isvalidated"></Parameter> <Parameter name="processRule"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="mCostingAlgorithmId"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="warehouseDimension"></Parameter> <Parameter name="isvalidated"></Parameter> <Parameter name="processRule"></Parameter> <Parameter name="mCostingRuleId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

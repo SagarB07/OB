@@ -33,10 +33,10 @@ static Logger log4j = Logger.getLogger(LanguageData.class);
   public String translatedby;
   public String isrtl;
   public String processing;
-  public String adLanguageId;
   public String pixelsize;
-  public String adClientId;
+  public String adLanguageId;
   public String adOrgId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -80,14 +80,14 @@ static Logger log4j = Logger.getLogger(LanguageData.class);
       return isrtl;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
-    else if (fieldName.equalsIgnoreCase("ad_language_id") || fieldName.equals("adLanguageId"))
-      return adLanguageId;
     else if (fieldName.equalsIgnoreCase("pixelsize"))
       return pixelsize;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
+    else if (fieldName.equalsIgnoreCase("ad_language_id") || fieldName.equals("adLanguageId"))
+      return adLanguageId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -136,10 +136,10 @@ Select for edit
       "AD_Language.Translatedby, " +
       "COALESCE(AD_Language.Isrtl, 'N') AS Isrtl, " +
       "AD_Language.Processing, " +
-      "AD_Language.AD_Language_ID, " +
       "AD_Language.Pixelsize, " +
-      "AD_Language.AD_Client_ID, " +
+      "AD_Language.AD_Language_ID, " +
       "AD_Language.AD_Org_ID, " +
+      "AD_Language.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM AD_Language" +
       "        WHERE 2=2 " +
@@ -196,10 +196,10 @@ Select for edit
         objectLanguageData.translatedby = UtilSql.getValue(result, "translatedby");
         objectLanguageData.isrtl = UtilSql.getValue(result, "isrtl");
         objectLanguageData.processing = UtilSql.getValue(result, "processing");
-        objectLanguageData.adLanguageId = UtilSql.getValue(result, "ad_language_id");
         objectLanguageData.pixelsize = UtilSql.getValue(result, "pixelsize");
-        objectLanguageData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectLanguageData.adLanguageId = UtilSql.getValue(result, "ad_language_id");
         objectLanguageData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectLanguageData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectLanguageData.language = UtilSql.getValue(result, "language");
         objectLanguageData.adUserClient = "";
         objectLanguageData.adOrgClient = "";
@@ -252,10 +252,10 @@ Create a registry
     objectLanguageData[0].translatedby = translatedby;
     objectLanguageData[0].isrtl = isrtl;
     objectLanguageData[0].processing = processing;
-    objectLanguageData[0].adLanguageId = adLanguageId;
     objectLanguageData[0].pixelsize = pixelsize;
-    objectLanguageData[0].adClientId = adClientId;
+    objectLanguageData[0].adLanguageId = adLanguageId;
     objectLanguageData[0].adOrgId = adOrgId;
+    objectLanguageData[0].adClientId = adClientId;
     objectLanguageData[0].language = "";
     return objectLanguageData;
   }
@@ -376,7 +376,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE AD_Language" +
-      "        SET AD_Language = (?) , Name = (?) , LanguageISO = (?) , CountryCode = (?) , IsActive = (?) , IsSystemLanguage = (?) , Translatedby = (?) , Isrtl = (?) , Processing = (?) , AD_Language_ID = (?) , Pixelsize = TO_NUMBER(?) , AD_Client_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Language = (?) , Name = (?) , LanguageISO = (?) , CountryCode = (?) , IsActive = (?) , IsSystemLanguage = (?) , Translatedby = (?) , Isrtl = (?) , Processing = (?) , Pixelsize = TO_NUMBER(?) , AD_Language_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE AD_Language.AD_Language_ID = ? " +
       "        AND AD_Language.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -402,10 +402,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, translatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isrtl);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adLanguageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pixelsize);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adLanguageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adLanguageId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -434,8 +434,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO AD_Language " +
-      "        (AD_Language, Name, LanguageISO, CountryCode, IsActive, IsSystemLanguage, Translatedby, Isrtl, Processing, AD_Language_ID, Pixelsize, AD_Client_ID, AD_Org_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Language, Name, LanguageISO, CountryCode, IsActive, IsSystemLanguage, Translatedby, Isrtl, Processing, Pixelsize, AD_Language_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -452,10 +452,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, translatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isrtl);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adLanguageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pixelsize);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adLanguageId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

@@ -1958,9 +1958,14 @@ comboTableData = null;
     xmlDocument.setData("reportc_period_id", "liststructure", comboTableData.select(false));
 comboTableData = null;
     xmlDocument.setParameter("outputType", "pdf");
-    comboTableData = new ComboTableData(vars, this, "17", "outputType", "800104", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    comboTableData = new ComboTableData(vars, this, "17", "outputType", "B80E53C3F99349B69AE340818093FC5A", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
     Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "pdf");
     xmlDocument.setData("reportoutputType", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    xmlDocument.setParameter("c_bpartner_id", "");
+    comboTableData = new ComboTableData(vars, this, "18", "c_bpartner_id", "252", "", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, null, comboTableData, windowId, "");
+    xmlDocument.setData("reportc_bpartner_id", "liststructure", comboTableData.select(false));
 comboTableData = null;
     } catch (Exception ex) {
       throw new ServletException(ex);
@@ -2943,6 +2948,8 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "outputType", s
 PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "c_period_id", strcPeriodId, vars.getClient(), vars.getOrg(), vars.getUser());
 String stroutputtype = vars.getStringParameter("inpoutputtype");
 PInstanceProcessData.insertPInstanceParam(this, pinstance, "20", "outputType", stroutputtype, vars.getClient(), vars.getOrg(), vars.getUser());
+String strcBpartnerId = vars.getStringParameter("inpcBpartnerId");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "30", "c_bpartner_id", strcBpartnerId, vars.getClient(), vars.getOrg(), vars.getUser());
 
         
         ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
