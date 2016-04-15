@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	*************************************************************************
+	* The contents of this file are subject to the Openbravo  Public  License
+	* Version  1.1  (the  "License"),  being   the  Mozilla   Public  License
+	* Version 1.1  with a permitted attribution clause; you may not  use this
+	* file except in compliance with the License. You  may  obtain  a copy of
+	* the License at http://www.openbravo.com/legal/license.html 
+	* Software distributed under the License  is  distributed  on  an "AS IS"
+	* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+	* License for the specific  language  governing  rights  and  limitations
+	* under the License. 
+	* The Original Code is Openbravo ERP. 
+	* The Initial Developer of the Original Code is Openbravo SLU 
+	* All portions are Copyright (C) 2001-2008 Openbravo SLU 
+	* All Rights Reserved. 
+	* Contributor(s):  ______________________________________.
+	************************************************************************
+-->
+
+<SqlClass name="ReportData" package="com.atrums.print.doctype.utility.reporting">
+	<SqlClassComment></SqlClassComment>
+
+	<!-- 
+		This definition exists only to define all the fields used in all the queries.
+		This is needed because all the variables in the generated class are based upon
+		all the fields in the first query of the xsql.
+	-->
+	<SqlMethod name="dummy" type="preparedStatement"
+		return="multiple">
+		<SqlMethodComment></SqlMethodComment>
+		<Sql>
+			<![CDATA[
+			select
+				'' as ad_Org_Id,
+				'' as document_id,
+				'' as docstatus,
+				'' as docTypeTargetId,
+				'' as ourreference,
+				'' as cusreference,
+				'' as bpartner_id,
+				'' as bpartner_language,
+				'' as isSalesOrderTransaction
+			from
+				c_order
+			where
+				1=1 
+	        ]]>
+		</Sql>
+		<Parameter name="cOrderId" optional="false" type="argument"
+			after="1=1">
+			<![CDATA[ and c_order.c_order_id in ]]>
+		</Parameter>
+
+	</SqlMethod>
+
+	<SqlMethod name="getCotizacionInfo" type="preparedStatement" return="multiple">
+		<SqlMethodComment></SqlMethodComment>
+		<Sql>
+			<![CDATA[
+                select c.ad_org_id,
+                       c.ldt_cotizacion_id as document_id,
+                       c.estado as docstatus,
+                       c.c_doctype_id as docTypeTargetId,
+                       c.documentno as ourreference,
+                       null as cusreference,
+                       c.c_bpartner_id as bpartner_id,
+                       'Y' as isSalesOrderTransaction,
+                       c_bpartner.ad_language as bpartner_language
+                  from ldt_cotizacion c 
+                  left join c_doctype on c.c_doctype_id = c_doctype.c_doctype_id
+                  left join c_bpartner on c.c_bpartner_id = c_bpartner.c_bpartner_id
+                 where c.ldt_cotizacion_id = ?
+	        ]]>
+		</Sql>
+		<Parameter name="ldtCotizacionId" />
+	</SqlMethod>
+	
+    <SqlMethod name="getRoutingOrderInfo" type="preparedStatement" return="multiple">
+        <SqlMethodComment></SqlMethodComment>
+        <Sql>
+            <![CDATA[
+                select ro.ad_org_id,
+                       ro.ldt_routing_order_id as document_id,
+                       ro.estado as docstatus,
+                       ro.c_doctype_id as docTypeTargetId,
+                       ro.documentno as ourreference,
+                       null as cusreference,
+                       ro.cliente_id as bpartner_id,
+                       'Y' as isSalesOrderTransaction,
+                       c_bpartner.ad_language as bpartner_language
+                  from ldt_routing_order ro 
+                  left join c_doctype on ro.c_doctype_id = c_doctype.c_doctype_id
+                  left join c_bpartner on ro.c_bpartner_id = c_bpartner.c_bpartner_id
+                 where ro.ldt_routing_order_id = ?
+            ]]>
+        </Sql>
+        <Parameter name="ldtRoutingOrderId" />
+    </SqlMethod>
+
+
+ 
+</SqlClass>
