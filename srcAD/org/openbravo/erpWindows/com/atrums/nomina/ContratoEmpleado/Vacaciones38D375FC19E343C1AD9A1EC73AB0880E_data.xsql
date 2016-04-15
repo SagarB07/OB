@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="Vacaciones38D375FC19E343C1AD9A1EC73AB0880EData" package="org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(no_vacacion.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_vacacion.CreatedBy) as CreatedByR, 
+        to_char(no_vacacion.Updated, ?) as updated, 
+        to_char(no_vacacion.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        no_vacacion.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_vacacion.UpdatedBy) as UpdatedByR,
+        no_vacacion.em_ne_linea, 
+no_vacacion.em_ne_fecha_inicio, 
+no_vacacion.em_ne_fecha_fin, 
+no_vacacion.em_ne_total_dias, 
+no_vacacion.em_ne_observaciones, 
+no_vacacion.em_ne_procesar, 
+list1.name as em_ne_procesar_BTN, 
+COALESCE(no_vacacion.Isactive, 'N') AS Isactive, 
+no_vacacion.AD_Org_ID, 
+no_vacacion.NO_Vacacion_ID, 
+no_vacacion.no_contrato_empleado_id, 
+no_vacacion.Anio, 
+no_vacacion.saldo, 
+no_vacacion.bonificaciones, 
+no_vacacion.vacaciones, 
+no_vacacion.C_Bpartner_ID, 
+no_vacacion.em_ne_estado, 
+no_vacacion.AD_Client_ID, 
+no_vacacion.em_ne_docstatus, 
+ 
+        ? AS LANGUAGE 
+        FROM no_vacacion left join ad_ref_list_v list1 on (list1.ad_reference_id = 'D90979EA306F493EBD3EF5D201355C56' and list1.ad_language = ?  AND no_vacacion.em_ne_procesar = TO_CHAR(list1.value))
+        WHERE 2=2 
+
+        AND 1=1 
+        AND no_vacacion.NO_Vacacion_ID = ? 
+        AND no_vacacion.AD_Client_ID IN ('1') 
+           AND no_vacacion.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+
+    <Parameter name="noContratoEmpleadoId" optional="true" after="AND 1=1 " id="paramKeyParent"> AND no_vacacion.no_contrato_empleado_id = ? </Parameter>
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_vacacion.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_vacacion.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+    <Parameter name="noContratoEmpleadoId" id="paramKeyParent"></Parameter>
+<Parameter name="anio"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="bonificaciones"></Parameter><Parameter name="vacaciones"></Parameter><Parameter name="emNeDocstatus"></Parameter><Parameter name="emNeLinea"></Parameter><Parameter name="emNeFechaInicio"></Parameter><Parameter name="emNeEstado"></Parameter><Parameter name="isactive"></Parameter><Parameter name="noVacacionId"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="emNeFechaFin"></Parameter><Parameter name="emNeProcesar"></Parameter><Parameter name="emNeProcesarBtn"></Parameter><Parameter name="emNeObservaciones"></Parameter><Parameter name="saldo"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="cBpartnerId"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="emNeTotalDias"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDef0909E63254424FA5A6B97C8E9E701409_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDef44713C42126B4362A7D9F8040A9124DE" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT COALESCE(MAX(em_ne_linea),0)+10 AS DefaultValue FROM no_vacacion 
+    ]]></Sql>
+
+  </SqlMethod>
+
+   <SqlMethod name="selectDefDE5682896BC94605947571648B7782BF_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+
+
+  <SqlMethod name="selectParentID" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>return the parent ID</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT no_vacacion.no_contrato_empleado_id AS NAME
+        FROM no_vacacion
+        WHERE no_vacacion.NO_Vacacion_ID = ?
+    ]]></Sql>
+    <Parameter name="key"></Parameter>
+  </SqlMethod>
+
+   <SqlMethod name="selectParent" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.Documentno), ''))) AS NAME FROM no_contrato_empleado left join (select no_contrato_empleado_id, Documentno from no_contrato_empleado) table1 on (no_contrato_empleado.no_contrato_empleado_id = table1.no_contrato_empleado_id) WHERE no_contrato_empleado.no_contrato_empleado_id = ?  
+    ]]></Sql>
+<Parameter name="noContratoEmpleadoId"/>
+
+  </SqlMethod>
+
+
+
+
+   <SqlMethod name="selectParentTrl" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for parent field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT (TO_CHAR(COALESCE(TO_CHAR(table1.Documentno), ''))) AS NAME FROM no_contrato_empleado left join (select no_contrato_empleado_id, Documentno from no_contrato_empleado) table1 on (no_contrato_empleado.no_contrato_empleado_id = table1.no_contrato_empleado_id) WHERE no_contrato_empleado.no_contrato_empleado_id = ?  
+    ]]></Sql>
+<Parameter name="noContratoEmpleadoId"/>
+
+  </SqlMethod>
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE no_vacacion
+        SET em_ne_linea = TO_NUMBER(?) , em_ne_fecha_inicio = TO_DATE(?) , em_ne_fecha_fin = TO_DATE(?) , em_ne_total_dias = TO_NUMBER(?) , em_ne_observaciones = (?) , em_ne_procesar = (?) , Isactive = (?) , AD_Org_ID = (?) , NO_Vacacion_ID = (?) , no_contrato_empleado_id = (?) , Anio = (?) , saldo = TO_NUMBER(?) , bonificaciones = TO_NUMBER(?) , vacaciones = TO_NUMBER(?) , C_Bpartner_ID = (?) , em_ne_estado = (?) , AD_Client_ID = (?) , em_ne_docstatus = (?) , updated = now(), updatedby = ? 
+        WHERE no_vacacion.NO_Vacacion_ID = ? 
+                 AND no_vacacion.no_contrato_empleado_id = ? 
+        AND no_vacacion.AD_Client_ID IN ('1') 
+        AND no_vacacion.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="emNeLinea"></Parameter> <Parameter name="emNeFechaInicio"></Parameter> <Parameter name="emNeFechaFin"></Parameter> <Parameter name="emNeTotalDias"></Parameter> <Parameter name="emNeObservaciones"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="noContratoEmpleadoId"></Parameter> <Parameter name="anio"></Parameter> <Parameter name="saldo"></Parameter> <Parameter name="bonificaciones"></Parameter> <Parameter name="vacaciones"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="emNeDocstatus"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="noVacacionId"></Parameter>
+    
+    <Parameter name="noContratoEmpleadoId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_vacacion.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_vacacion.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO no_vacacion 
+        (em_ne_linea, em_ne_fecha_inicio, em_ne_fecha_fin, em_ne_total_dias, em_ne_observaciones, em_ne_procesar, Isactive, AD_Org_ID, NO_Vacacion_ID, no_contrato_empleado_id, Anio, saldo, bonificaciones, vacaciones, C_Bpartner_ID, em_ne_estado, AD_Client_ID, em_ne_docstatus, created, createdby, updated, updatedBy)
+        VALUES (TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="emNeLinea"></Parameter> <Parameter name="emNeFechaInicio"></Parameter> <Parameter name="emNeFechaFin"></Parameter> <Parameter name="emNeTotalDias"></Parameter> <Parameter name="emNeObservaciones"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="noContratoEmpleadoId"></Parameter> <Parameter name="anio"></Parameter> <Parameter name="saldo"></Parameter> <Parameter name="bonificaciones"></Parameter> <Parameter name="vacaciones"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="emNeDocstatus"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM no_vacacion
+        WHERE no_vacacion.NO_Vacacion_ID = ? 
+                 AND no_vacacion.no_contrato_empleado_id = ? 
+        AND no_vacacion.AD_Client_ID IN ('1') 
+        AND no_vacacion.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+        <Parameter name="noContratoEmpleadoId" id="paramKeyParent"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_vacacion.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_vacacion.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM no_vacacion
+         WHERE no_vacacion.NO_Vacacion_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM no_vacacion
+         WHERE no_vacacion.NO_Vacacion_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>
