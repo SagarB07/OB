@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="decimotercero" pageWidth="1290" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="1250" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="year" class="java.math.BigDecimal"/>
+	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/_Desarrollo/OpenBravo/remica_prod/OpenBravoERP/modules/com.atrums.nomina/src"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["http://190.108.65.30/openbravo/web"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select co.ad_org_id,bp.taxid as cedula, bp.name as nombre ,co.salario,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr, c_period pe, c_year ye where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='3')),0) as Mar,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='4')),0) as Abr,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='5')) ,0)as May,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='6')),0) as Jun,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='7')),0) as Jul,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='8')) ,0)as Ago,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='9')),0) as Sep,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='10')),0) as Oct,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='11')),0) as Nov,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})-1) and periodno='12')),0) as Dic,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})) and periodno='1')),0) as Ene,
+
+coalesce((select coalesce(pr.valor,0) from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id and pe.c_year_id = ye.c_year_id and pr.no_rol_pago_provision_line_id = (
+select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+and (ye.year=to_char(to_number($P{year})) and periodno='2')),0) as Feb,
+
+(select sum (pr.valor)
+from no_rol_provision_line_mes pr,
+c_period pe, c_year ye
+where pe.c_period_id = pr.c_period_id
+and pe.c_year_id = ye.c_year_id
+and pr.no_rol_pago_provision_line_id = (
+ select no_rol_pago_provision_line_id from no_rol_pago_provision_line
+ where no_rol_pago_provision_id = (select no_rol_pago_provision_id from no_rol_pago_provision where c_bpartner_id=co.c_bpartner_id and ispago='N' and isactive = 'Y')
+ and no_tipo_ingreso_egreso_id in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where no_calcula_rubro_id = (select no_calcula_rubro_id from no_calcula_rubro where nombre like '%Provisión Décimo Cuarto%')))
+ and ((ye.year=to_char(to_number($P{year})-1) and periodno>'2') or (ye.year=to_char(to_number($P{year})) and periodno<'1'))
+) as total,
+fecha_inicio as finicio,
+fecha_fin as ffin
+from no_contrato_empleado co, c_bpartner bp
+where co.c_bpartner_id=bp.c_bpartner_id
+and to_date(co.fecha_fin) > (select startdate from c_period where c_year_id = ( select c_year_id from c_year where year=to_char(to_number($P{year}))) and periodno='12')
+order by bp.name]]>
+	</queryString>
+	<field name="ad_org_id" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="mar" class="java.math.BigDecimal"/>
+	<field name="abr" class="java.math.BigDecimal"/>
+	<field name="may" class="java.math.BigDecimal"/>
+	<field name="jun" class="java.math.BigDecimal"/>
+	<field name="jul" class="java.math.BigDecimal"/>
+	<field name="ago" class="java.math.BigDecimal"/>
+	<field name="sep" class="java.math.BigDecimal"/>
+	<field name="oct" class="java.math.BigDecimal"/>
+	<field name="nov" class="java.math.BigDecimal"/>
+	<field name="dic" class="java.math.BigDecimal"/>
+	<field name="ene" class="java.math.BigDecimal"/>
+	<field name="feb" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="finicio" class="java.sql.Timestamp"/>
+	<field name="ffin" class="java.sql.Timestamp"/>
+	<background>
+		<band height="575" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="234" width="20" height="241" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="475" width="62" height="100" backcolor="#666666"/>
+				<textField>
+					<reportElement style="Column header" x="0" y="0" width="62" height="73" forecolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="46" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="0" y="77" width="62" height="20" forecolor="#000000"/>
+					<box leftPadding="4" rightPadding="4"/>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement mode="Transparent" x="42" y="73" width="20" height="1" backcolor="#FFFFFF"/>
+				</line>
+			</frame>
+		</band>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="145" y="0" width="995" height="37"/>
+				<textElement textAlignment="Center">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Decimo Cuarto Costa]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true" onErrorType="Icon">
+				<reportElement x="0" y="0" width="145" height="37"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<imageExpression class="java.net.URL"><![CDATA[new java.net.URL($P{BASE_WEB}+"/../utility/ShowImageLogo?logo=yourcompanydoc&orgId="+$F{ad_org_id})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="65" y="0" width="80" height="30" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="145" y="0" width="270" height="30" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="415" y="0" width="60" height="30" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Fecha Ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="535" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Marzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="590" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Abril]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="645" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Mayo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="700" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Junio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="755" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Julio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="810" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Agosto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="865" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Sep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="920" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Octubre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="975" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Nov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="1030" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Dic]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="1085" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Enero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="1140" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Febrero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="1195" y="0" width="55" height="15" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="475" y="0" width="60" height="30" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Fecha Salida]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="65" y="0" width="80" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="145" y="0" width="270" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="Detail" x="415" y="0" width="60" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{finicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="535" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="590" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{abr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="645" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{may}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="700" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{jun}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="755" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{jul}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="810" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="865" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sep}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="920" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{oct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="975" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{nov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="1030" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dic}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="1085" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ene}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="1140" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{feb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="Detail" x="1195" y="0" width="55" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ago}.add($F{sep}).add($F{oct}).add($F{nov}).add($F{dic}).add($F{ene}).add($F{feb}).add($F{mar}).add($F{abr}).add($F{may}).add($F{jun}).add($F{jul})]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="Detail" x="475" y="0" width="60" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{ffin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="65" y="0" width="350" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Reporte - Decimo Cuarto]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="1085" y="0" width="165" height="20" forecolor="#000000"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

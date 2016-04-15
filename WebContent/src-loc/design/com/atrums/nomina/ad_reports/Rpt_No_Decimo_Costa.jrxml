@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Decimo" pageWidth="1290" pageHeight="842" columnWidth="1250" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/_Desarrollo/OpenBravo/remica_prod/OpenBravoERP/modules/com.atrums.nomina/src"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\_Desarrollo\\OpenBravo\\remica_prod\\OpenBravoERP\\modules\\com.atrums.nomina\\src\\com\\atrums\\nomina\\ad_reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ad_ref" class="java.lang.String"/>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["http://localhost/openbravo/web"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select to_number(year) as year, ad_org_id as ad_org_id from c_year where c_year_id = $P{year}]]>
+	</queryString>
+	<field name="year" class="java.math.BigDecimal"/>
+	<field name="ad_org_id" class="java.lang.String"/>
+	<columnHeader>
+		<band height="32">
+			<textField>
+				<reportElement x="85" y="0" width="216" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="85" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AÑO:]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true" onErrorType="Icon">
+				<reportElement x="314" y="0" width="145" height="0"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<imageExpression class="java.net.URL"><![CDATA[new java.net.URL($P{BASE_WEB}+"/../utility/ShowImageLogo?logo=yourcompanydoc&orgId="+$F{ad_org_id})]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="5" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="1290" height="5">
+					<printWhenExpression><![CDATA[$P{ad_ref}.equals(new String("C"))]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$F{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/decimocuarto.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="5">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="1290" height="5">
+					<printWhenExpression><![CDATA[$P{ad_ref}.equals(new String("T"))]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$F{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/decimotercero.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
