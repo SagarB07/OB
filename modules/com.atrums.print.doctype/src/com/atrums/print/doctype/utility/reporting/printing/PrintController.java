@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -51,10 +50,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
-
 import org.apache.commons.fileupload.FileItem;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -62,13 +57,10 @@ import org.openbravo.base.exception.OBException;
 import org.openbravo.base.secureApp.HttpSecureAppServlet;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 import org.openbravo.erpCommon.utility.OBError;
-import org.openbravo.erpCommon.utility.SequenceIdData;
 import org.openbravo.erpCommon.utility.Utility;
 import org.openbravo.erpCommon.utility.poc.EmailManager;
-import org.openbravo.erpCommon.utility.poc.EmailType;
 import org.openbravo.erpCommon.utility.poc.PocException;
 import org.openbravo.erpCommon.utility.reporting.ReportingException;
-import org.openbravo.exception.NoConnectionAvailableException;
 import org.openbravo.xmlEngine.XmlDocument;
 
 import com.atrums.print.doctype.utility.reporting.DocumentType;
@@ -82,6 +74,10 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfCopy;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @SuppressWarnings("serial")
 public class PrintController extends HttpSecureAppServlet {
@@ -109,7 +105,7 @@ public class PrintController extends HttpSecureAppServlet {
     // Determine which process called the print controller
     if (log4j.isDebugEnabled())
       log4j.debug("Servletpath: " + request.getServletPath());
-    if (request.getServletPath().toLowerCase().indexOf("contrato") != -1) {
+    if (request.getServletPath().toLowerCase().indexOf("CONTRATO") != -1) {
       documentType = DocumentType.NOCONTRATO;
       // The prefix PRINTORDERS is a fixed name based on the KEY of the
       // AD_PROCESS

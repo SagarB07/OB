@@ -119,11 +119,9 @@ public class PrintController extends HttpSecureAppServlet
 	    // AD_PROCESS
 	    sessionValuePrefix = "PRINTRETENCIONES";
 
-	    strDocumentId = vars.getSessionValue(sessionValuePrefix
-		    + ".inpcId_R");
+	    strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId_R");
 	    if (strDocumentId.equals(""))
-		strDocumentId = vars.getSessionValue(sessionValuePrefix
-			+ ".inpcId");
+		strDocumentId = vars.getSessionValue(sessionValuePrefix+ ".inpcId");
 	}
 
 	post(request, response, vars, documentType, sessionValuePrefix,

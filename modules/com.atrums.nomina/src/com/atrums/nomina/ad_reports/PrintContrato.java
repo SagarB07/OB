@@ -49,14 +49,14 @@ public class PrintContrato extends PrintController {
     String sessionValuePrefix = "PRINTCONTRATO";
     String strDocumentId = null;
 
-    strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoId_R");
+    strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId_R");
     if (strDocumentId.equals(""))
-      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoId");
+      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".nocontratoempleadoId");
       post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
   }
 
   public String getServletInfo() {
-    return "Servlet that processes the print action";
+    return "Servlet that processes the print 0action";
   } // End of getServletInfo() method
 
 }
