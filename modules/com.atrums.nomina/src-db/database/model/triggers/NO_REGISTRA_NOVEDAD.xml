@@ -6,7 +6,9 @@
 BEGIN
 
  IF :NEW.docstatus = 'CO' THEN  
- NO_PROCESARQUINCENANOVEDAD('A');
+ ALTER TABLE no_novedad DISABLE TRIGGER no_crea_lineas_novedades_trg;
+ NO_PROCESARQUINCENANOVEDAD(:NEW.no_registra_quinc_line_id);
+ ALTER TABLE no_novedad ENABLE TRIGGER no_crea_lineas_novedades_trg;
  END IF;   
 
  --PERFORM no_procesarquincenanovedad('A'); 

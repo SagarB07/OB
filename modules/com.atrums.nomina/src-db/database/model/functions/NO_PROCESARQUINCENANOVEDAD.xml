@@ -18,18 +18,18 @@ v_Rubro VARCHAR(32):='';
 
 BEGIN
 --RAISE NO_DATA_FOUND;
- --UPDATE IDT_CONTRATO SET i_errormsg = 'INICIO';
+ UPDATE IDT_CONTRATO SET i_errormsg = p_pinstance_id;
  
  FOR ITERADORCAB IN 
  (	
 	
-	SELECT DISTINCT ON (no_registra_quincena_id) no_registra_quincena_id  FROM no_registra_quinc_line WHERE docstatus ='CO'
+	SELECT DISTINCT ON (no_registra_quincena_id) no_registra_quincena_id  FROM no_registra_quinc_line WHERE docstatus ='CO' AND no_registra_quinc_line_ID = p_pinstance_id
  )
  LOOP
 	--UPDATE IDT_CONTRATO SET i_errormsg = '1 ITERADOR';
 	FOR ITERADORDET IN 
 	 (	
-		SELECT DISTINCT ON (no_tipo_ingreso_egreso_id) no_tipo_ingreso_egreso_id  FROM no_registra_quinc_line WHERE docstatus ='CO' and no_registra_quincena_id = ITERADORCAB.no_registra_quincena_id
+		SELECT DISTINCT ON (no_tipo_ingreso_egreso_id) no_tipo_ingreso_egreso_id  FROM no_registra_quinc_line WHERE  no_registra_quinc_line_ID = p_pinstance_id AND docstatus ='CO' and no_registra_quincena_id = ITERADORCAB.no_registra_quincena_id
 	 )
 	 LOOP
 	--	UPDATE IDT_CONTRATO SET i_errormsg = '2 ITERADOR';
@@ -37,9 +37,14 @@ BEGIN
 		FOR ITERADOR IN 
 		 (	
 			SELECT no_registra_quincena_id, no_tipo_ingreso_egreso_id, c_bpartner_id, ad_client_id, ad_org_id, createdby, updatedby, valor
-			FROM no_registra_quinc_line WHERE docstatus ='CO' and no_registra_quincena_id = ITERADORCAB.no_registra_quincena_id AND no_tipo_ingreso_egreso_id = ITERADORDET.no_tipo_ingreso_egreso_id
+			FROM no_registra_quinc_line 
+			WHERE docstatus ='CO' 
+			and no_registra_quincena_id = ITERADORCAB.no_registra_quincena_id 
+			AND no_registra_quinc_line_ID = p_pinstance_id
+			AND no_tipo_ingreso_egreso_id = ITERADORDET.no_tipo_ingreso_egreso_id
 		 )
 		 LOOP
+
 		--- UPDATE IDT_CONTRATO SET i_errormsg = '3 ITERADOR.';
 		 v_Periodo = ( SELECT c_period_id  FROM no_registra_quincena WHERE no_registra_quincena_id = ITERADOR.no_registra_quincena_id );
 		
@@ -49,6 +54,7 @@ BEGIN
 		 		
 		 --UPDATE IDT_CONTRATO SET i_errormsg = v_Periodo;
 		 v_Rubro = ITERADOR.no_tipo_ingreso_egreso_id;
+		 
 		 IF VAREXIST = 0 THEN
 			--	 UPDATE IDT_CONTRATO SET i_errormsg = '000000';
 				 INSERT INTO NO_NOVEDAD 
@@ -73,7 +79,7 @@ BEGIN
 					now(),
 					ITERADOR.updatedby,
 					v_Rubro,
-				v_Periodo
+				    v_Periodo
 					);
 
 				SELECT COUNT (*) INTO VAREXIST FROM NO_NOVEDAD WHERE no_tipo_ingreso_egreso_id = v_Rubro  and c_period_id = v_Periodo;
@@ -114,12 +120,17 @@ BEGIN
 		 
 		 ELSE
 		 
-		 
-		 v_Novedad =   (SELECT NO_NOVEDAD_ID FROM NO_NOVEDAD WHERE no_tipo_ingreso_egreso_id = v_Rubro  and c_period_id = v_Periodo);
+		--UPDATE IDT_CONTRATO SET i_errormsg = '1xxxxxxxxxx' ;
 
-		 SELECT COUNT (*) INTO VAREXIST  FROM no_novedad_linea WHERE NO_NOVEDAD_ID = v_Novedad AND c_bpartner_id = ITERADOR.c_bpartner_id;
+		v_Novedad =   (SELECT NO_NOVEDAD_ID FROM NO_NOVEDAD WHERE no_tipo_ingreso_egreso_id = v_Rubro  and c_period_id = v_Periodo);
+
+
+		SELECT COUNT (*) INTO VAREXIST  FROM no_novedad_linea WHERE NO_NOVEDAD_ID = v_Novedad AND c_bpartner_id = ITERADOR.c_bpartner_id;
 		
-			 IF VAREXIST = 0 THEN 
+		--UPDATE IDT_CONTRATO SET i_errormsg =  VAREXIST ;
+			 
+
+		IF VAREXIST = 0 THEN 			
 			--UPDATE IDT_CONTRATO SET i_errormsg = '1xxxxxxxxxx' ;
 			    INSERT INTO no_novedad_linea 
 					(no_novedad_linea_id,
@@ -147,6 +158,9 @@ BEGIN
 					ITERADOR.valor,
 					v_Novedad
 					);
+
+--		        DELETE FROM no_novedad_linea  WHERE no_novedad_id = v_Novedad AND ITERADOR.valor = 0.99;
+
 			ELSE 
 			--UPDATE IDT_CONTRATO SET i_errormsg = 'YYYYYY' ;
 			v_Novedad_Linea = (SELECT no_novedad_linea_id FROM no_novedad_linea WHERE NO_NOVEDAD_ID = v_Novedad AND c_bpartner_id = ITERADOR.c_bpartner_id);

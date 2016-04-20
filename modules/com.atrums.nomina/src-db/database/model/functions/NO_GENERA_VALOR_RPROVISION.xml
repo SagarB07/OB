@@ -158,8 +158,8 @@ BEGIN
                                 v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| p_bpartner_id || ''', '''|| p_period_id ||''');';
 								
 								update idt_contrato set i_errormsg = v_qry ; 
-
-                                EXECUTE IMMEDIATE v_qry into v_valor_aux;
+								--update idt_contrato set i_errormsg = p_period_id ;
+                            --    EXECUTE v_qry into v_valor_aux;
                                 v_valor_rubro_mes := v_valor_rubro_mes + COALESCE(v_valor_aux,0);
                             
                             ELSIF Cur_Calcula_Robro_L.issalario = 'Y' THEN 

@@ -22,7 +22,7 @@ Cur_Parameter_Bp 	RECORD;
 varexist NUMBER;
 
 BEGIN
-v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account limit 1);
+v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account  WHERE  fin_financial_account_ID = 'F27069227AB242B8ACA82A42817607AF');
 v_metodo_pago = (select fin_paymentmethod_id from  fin_paymentmethod limit 1);
 FOR Cur_Parameter IN
 	(SELECT i.Record_ID, i.AD_User_ID, rq.ad_client_id, rq.ad_org_id
@@ -39,7 +39,7 @@ LOOP
 	FOR Cur_Parameter_Bp IN
 		(
 	        SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
-		FROM no_cb_empleado_acct cea
+		     FROM no_cb_empleado_acct cea
 		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
 		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
 		     INNER JOIN no_calcula_rubro_line crl ON (cr.no_calcula_rubro_id = crl.no_calcula_rubro_id)
@@ -81,7 +81,7 @@ LOOP
 		v_valor_rubro = Cur_Parameter_Bp.valor;
 		END IF;
 	
-	update idt_contrato set i_errormsg = 'no deveria entrar';
+	    --update idt_contrato set i_errormsg = 'no deveria entrar';
 				IF varexist > 0 THEN
 				   INSERT INTO no_registra_quinc_line(
 						no_registra_quinc_line_id,
@@ -136,7 +136,7 @@ LOOP
 						WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
 						upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);
 			END IF;
-	ELSE
+			ELSE
 			v_period_id = (select c_period_id from  no_registra_quincena where no_registra_quincena_id= Cur_Parameter.Record_ID);	
 			v_stproc = (select procedure from 
 									no_calcula_rubro_line caldet,  
@@ -156,6 +156,7 @@ LOOP
             ELSE
 			v_valor_rubro := 0;
 			v_qry := 'SELECT ' || v_stproc || '('''|| Cur_Parameter_Bp.c_bpartner_id ||''' ,'''||Cur_Parameter_Bp.no_tipo_ingreso_egreso_id || ''',' || 0||','''||v_period_id || ''');';
+			UPDATE IDT_CONTRATO  SET I_ERRORMSG = '879779';
 			EXECUTE IMMEDIATE v_qry into v_valor_aux;
             v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
             v_Message:='';
@@ -213,9 +214,6 @@ LOOP
 						WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
 						upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);	
             END IF; 
-			
-			
-				
 	END IF; 			  
 	
 	END LOOP;

@@ -34,7 +34,7 @@ BEGIN
 			v_qry := 'SELECT no_genera_valor_rprovision('''|| :NEW.C_BPARTNER_ID ||''', '''|| v_period_id ||''', '''|| v_Org_ID ||''', '''|| v_Client_ID ||''',  '''|| v_User_ID ||''', '''|| p_dateacct ||''');'	;				
 			IF v_qry IS NOT NULL THEN 
 				UPDATE IDT_CONTRATO SET I_ERRORMSG = v_qry  ;
-				EXECUTE IMMEDIATE v_qry;
+		        EXECUTE IMMEDIATE v_qry;
 			END IF;
 			
 			--EXECUTE v_qry;
