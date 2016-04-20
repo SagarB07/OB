@@ -94,5 +94,4 @@ class AttachContent implements FieldProvider {
       return null;
     }
   }
-
 }

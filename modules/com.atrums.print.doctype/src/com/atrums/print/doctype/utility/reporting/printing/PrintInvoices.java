@@ -47,10 +47,10 @@ public class PrintInvoices extends PrintController {
       ServletException {
     VariablesSecureApp vars = new VariablesSecureApp(request);
 
-    DocumentType documentType = DocumentType.NOCONTRATO;
+    DocumentType documentType = DocumentType.CONTRATO;
     // The prefix PRINTINVOICES is a fixed name based on the KEY of the
     // AD_PROCESS
-    String sessionValuePrefix = "PRINTCOTIZACION";
+    String sessionValuePrefix = "PRINTCONTRATO";
     String strDocumentId = null;
 
     strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcInvoiceId_R");
@@ -63,5 +63,4 @@ public class PrintInvoices extends PrintController {
   public String getServletInfo() {
     return "Servlet that processes the print action";
   } // End of getServletInfo() method
-
 }

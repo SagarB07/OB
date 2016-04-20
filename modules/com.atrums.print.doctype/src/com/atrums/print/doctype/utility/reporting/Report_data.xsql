@@ -54,30 +54,26 @@
 
 	</SqlMethod>
 
-  
-    
 	<SqlMethod name="getContratoInfo" type="preparedStatement" return="multiple">
 		<SqlMethodComment></SqlMethodComment>
 		<Sql>
 			<![CDATA[
-                select c.ad_org_id,
-                       c.no_contrato_empleado_id as document_id,
-                       null as docstatus,
-                       c.c_doctype_id as docTypeTargetId,
-                       c.documentno as ourreference,
-                       null as cusreference,
-                       c.c_bpartner_id as bpartner_id,
-                       'Y' as isSalesOrderTransaction,
-                       c_bpartner.ad_language as bpartner_language
-                  from no_contrato_empleado c 
-                  left join c_doctype on c.c_doctype_id = c_doctype.c_doctype_id
-                  left join c_bpartner on c.c_bpartner_id = c_bpartner.c_bpartner_id
-                 where c.no_contrato_empleado_id = ?
+                    select ce.ad_org_id,
+						   ce.no_contrato_empleado_id as document_id,
+						   ce.isactive as docstatus,
+						   ce.c_doctype_id as docTypeTargetId,
+						   ce.documentno as ourreference,
+						   null as cusreference,
+						   ce.c_bpartner_id as bpartner_id,
+						   'Y' as isSalesOrderTransaction,
+						   bp.ad_language as bpartner_language 
+					  from no_contrato_empleado ce
+					  left join c_doctype dt on ce.c_doctype_id = dt.c_doctype_id
+					  left join c_bpartner bp on ce.c_bpartner_id = bp.c_bpartner_id
+					 where ce.no_contrato_empleado_id = ?
 	        ]]>
 		</Sql>
-		<Parameter name="noContratoEmpleadoId" />
+		<Parameter name="strContratoId" />
 	</SqlMethod>
-    
-	
- 
+
 </SqlClass>

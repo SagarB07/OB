@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -50,6 +51,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
 import org.apache.commons.fileupload.FileItem;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -57,10 +62,13 @@ import org.openbravo.base.exception.OBException;
 import org.openbravo.base.secureApp.HttpSecureAppServlet;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 import org.openbravo.erpCommon.utility.OBError;
+import org.openbravo.erpCommon.utility.SequenceIdData;
 import org.openbravo.erpCommon.utility.Utility;
 import org.openbravo.erpCommon.utility.poc.EmailManager;
+import org.openbravo.erpCommon.utility.poc.EmailType;
 import org.openbravo.erpCommon.utility.poc.PocException;
 import org.openbravo.erpCommon.utility.reporting.ReportingException;
+import org.openbravo.exception.NoConnectionAvailableException;
 import org.openbravo.xmlEngine.XmlDocument;
 
 import com.atrums.print.doctype.utility.reporting.DocumentType;
@@ -74,10 +82,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfCopy;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
 
 @SuppressWarnings("serial")
 public class PrintController extends HttpSecureAppServlet {
@@ -98,22 +102,22 @@ public class PrintController extends HttpSecureAppServlet {
       ServletException {
     final VariablesSecureApp vars = new VariablesSecureApp(request);
 
-    DocumentType documentType = DocumentType.NOCONTRATO;
+    DocumentType documentType = DocumentType.UNKNOWN;
     String sessionValuePrefix = null;
     String strDocumentId = null;
 
     // Determine which process called the print controller
     if (log4j.isDebugEnabled())
       log4j.debug("Servletpath: " + request.getServletPath());
-    if (request.getServletPath().toLowerCase().indexOf("CONTRATO") != -1) {
-      documentType = DocumentType.NOCONTRATO;
+    if (request.getServletPath().toLowerCase().indexOf("contrato") != -1) {
+      documentType = DocumentType.CONTRATO;
       // The prefix PRINTORDERS is a fixed name based on the KEY of the
       // AD_PROCESS
       sessionValuePrefix = "PRINTCONTRATO";
 
-      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId_R");
+      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId_R");
       if (strDocumentId.equals(""))
-        strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId");
+        strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId");
     }
 
     post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
@@ -224,24 +228,25 @@ public class PrintController extends HttpSecureAppServlet {
                 "default", multiReports, OutputTypeEnum.DEFAULT);
             reports.put(documentId, report);
 
-            //final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),report.getOrgId());
+            final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),
+                report.getOrgId());
             boolean moreThanOnesalesRep = checks.get("moreThanOnesalesRep").booleanValue();
 
-//            if (request.getServletPath().toLowerCase().indexOf("print.html") == -1) {
-//              if ("".equals(senderAddress) || senderAddress == null) {
-//                final OBError on = new OBError();
-//                on.setMessage(Utility.messageBD(this, "No sender defined: Please go to client "
-//                    + "configuration to complete the email configuration", vars.getLanguage()));
-//                on.setTitle(Utility.messageBD(this, "Email Configuration Error", vars.getLanguage()));
-//                on.setType("Error");
-//                final String tabId = vars.getSessionValue("inpTabId");
-//                vars.getStringParameter("tab");
-//                vars.setMessage(tabId, on);
-//                vars.getRequestGlobalVariable("inpTabId", "AttributeSetInstance.tabId");
-//                printPageClosePopUpAndRefreshParent(response, vars);
-//                throw new ServletException("Configuration Error no sender defined");
-//              }
-//            }
+            if (request.getServletPath().toLowerCase().indexOf("print.html") == -1) {
+              if ("".equals(senderAddress) || senderAddress == null) {
+                final OBError on = new OBError();
+                on.setMessage(Utility.messageBD(this, "No sender defined: Please go to client "
+                    + "configuration to complete the email configuration", vars.getLanguage()));
+                on.setTitle(Utility.messageBD(this, "Email Configuration Error", vars.getLanguage()));
+                on.setType("Error");
+                final String tabId = vars.getSessionValue("inpTabId");
+                vars.getStringParameter("tab");
+                vars.setMessage(tabId, on);
+                vars.getRequestGlobalVariable("inpTabId", "AttributeSetInstance.tabId");
+                printPageClosePopUpAndRefreshParent(response, vars);
+                throw new ServletException("Configuration Error no sender defined");
+              }
+            }
 
             // check the different doc typeId's if all the
             // selected
@@ -351,12 +356,12 @@ public class PrintController extends HttpSecureAppServlet {
               if (log4j.isDebugEnabled())
                 log4j.debug("Document is not attached.");
             }
-//            final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),
-//                report.getOrgId());
-//            sendDocumentEmail(report, vars,
-//                (Vector<Object>) request.getSession().getAttribute("files"), documentData,
-//                senderAddress, checks);
-//            nrOfEmailsSend++;
+            final String senderAddress = EmailData.getSenderAddress(this, vars.getClient(),
+                report.getOrgId());
+            sendDocumentEmail(report, vars,
+                (Vector<Object>) request.getSession().getAttribute("files"), documentData,
+                senderAddress, checks);
+            nrOfEmailsSend++;
           }
         }
         request.getSession().removeAttribute("files");
@@ -398,6 +403,7 @@ public class PrintController extends HttpSecureAppServlet {
 
       pageError(response);
     }
+
   }
 
   private void printReports(HttpServletResponse response, Collection<JasperPrint> jrPrintReports,
@@ -589,18 +595,16 @@ public class PrintController extends HttpSecureAppServlet {
 
   }
 
-  @SuppressWarnings("incomplete-switch")
-PocData[] getContactDetails(DocumentType documentType, String strDocumentId) throws ServletException {
- switch (documentType) {
-    case NOCONTRATO:
-      return PocData.getContratoForId(this, strDocumentId);
-    
+  PocData[] getContactDetails(DocumentType documentType, String strDocumentId)
+      throws ServletException {
+    switch (documentType) {
+    case CONTRATO:
+      return PocData.getContactDetailsForContrato(this, strDocumentId);
     }
     return null;
   }
 
-  @SuppressWarnings("unused")
-void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> object,
+  void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> object,
       PocData documentData, String senderAddess, HashMap<String, Boolean> checks)
       throws IOException, ServletException {
     final String documentId = report.getDocumentId();
@@ -744,31 +748,32 @@ void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> ob
 
       // Store the email in the database
       Connection conn = null;
-//      try {
-//        conn = this.getTransactionConnection();
-//
-//        // First store the email message
-//        final String newEmailId = SequenceIdData.getUUID();
-//        if (log4j.isDebugEnabled())
-//        log4j.debug("New email id: " + newEmailId);
-//        EmailData.insertEmail(conn, this, newEmailId, clientId, organizationId, userId,
-//            EmailType.OUTGOING.getStringValue(), from, to, cc, bcc, dateOfEmail, subject, body,
-//            bPartnerId, ToolsData.getTableId(this, report.getDocumentType().getTableName()),
-//            documentData.documentId);
-//
-//        releaseCommitConnection(conn);
-//      } catch (final NoConnectionAvailableException exception) {
-//        log4j.error(exception);
-//        throw new ServletException(exception);
-//      } catch (final SQLException exception) {
-//        log4j.error(exception);
-//        try {
-//          releaseRollbackConnection(conn);
-//        } catch (final Exception ignored) {
-//        }
-//
-//        throw new ServletException(exception);
-//      }
+      try {
+        conn = this.getTransactionConnection();
+
+        // First store the email message
+        final String newEmailId = SequenceIdData.getUUID();
+        if (log4j.isDebugEnabled())
+          log4j.debug("New email id: " + newEmailId);
+
+        EmailData.insertEmail(conn, this, newEmailId, clientId, organizationId, userId,
+            EmailType.OUTGOING.getStringValue(), from, to, cc, bcc, dateOfEmail, subject, body,
+            bPartnerId, ToolsData.getTableId(this, report.getDocumentType().getTableName()),
+            documentData.documentId);
+
+        releaseCommitConnection(conn);
+      } catch (final NoConnectionAvailableException exception) {
+        log4j.error(exception);
+        throw new ServletException(exception);
+      } catch (final SQLException exception) {
+        log4j.error(exception);
+        try {
+          releaseRollbackConnection(conn);
+        } catch (final Exception ignored) {
+        }
+
+        throw new ServletException(exception);
+      }
 
     } catch (final PocException exception) {
       log4j.error(exception);
@@ -973,7 +978,7 @@ void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> ob
         if (draftDocumentIds.length() > 0)
           draftDocumentIds += ",";
         draftDocumentIds += report.getDocumentId();
-        allTheDocsCompleted = true;
+        allTheDocsCompleted = false;
       }
 
       // Fill the report location
@@ -1269,6 +1274,7 @@ void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> ob
     PrintControllerData[] printControllerData;
     String documentIdsOrdered[] = new String[documentIds.length];
     int i = 0;
+
     if (strTable.equals("NO_CONTRATO_EMPLEADO")) {
       printControllerData = PrintControllerData.selectContrato(this, strIds.toString());
       for (PrintControllerData docID : printControllerData) {
@@ -1276,7 +1282,6 @@ void sendDocumentEmail(Report report, VariablesSecureApp vars, Vector<Object> ob
       }
     }
 
-    
     return documentIdsOrdered;
   }
 

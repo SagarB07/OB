@@ -321,5 +321,4 @@ public class ReportManager {
 
     return designParameters;
   }
-
 }

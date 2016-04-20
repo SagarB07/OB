@@ -25,15 +25,13 @@
         <SqlMethodComment></SqlMethodComment>
         <Sql>
             <![CDATA[
-            SELECT no_contrato_empleado_id as ID
-            FROM no_contrato_empleado
-            WHERE no_contrato_empleado_id IN ('1')
-            ORDER BY no_contrato_empleado_id ASC
+	            SELECT no_contrato_empleado_id as ID
+				  FROM no_contrato_empleado
+				 WHERE no_contrato_empleado_id IN ('1')
+				 ORDER BY documentno ASC
             ]]>
         </Sql>
         <Parameter name="Id" optional="true" type="replace" after="WHERE no_contrato_empleado_id IN (" text="'1'"/>
     </SqlMethod>
-
-    
 
 </SqlClass>

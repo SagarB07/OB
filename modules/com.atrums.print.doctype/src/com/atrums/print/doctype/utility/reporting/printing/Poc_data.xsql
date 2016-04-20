@@ -52,37 +52,34 @@
         ]]>
         </Sql>
    </SqlMethod>
-
-
-   <SqlMethod name="getContratoForId" type="preparedStatement" return="multiple">
+   
+   <SqlMethod name="getContactDetailsForContrato" type="preparedStatement" return="multiple">
       <SqlMethodComment></SqlMethodComment>
       <Sql>
       <![CDATA[
-        select  
-		coemp.no_contrato_empleado_id as document_id,
-        doct.isactive as docstatus,
-        null as ourreference,
-        null as yourreference,
-        null as salesrep_user_id,
-        null as salesrep_email,
-        null as salesrep_name,
-		coemp.c_bpartner_id as bpartner_id,
-        par.name as bpartner_name,
-        null as contact_user_id,
-        null as contact_email,
-        null as contact_name
- 		from  no_contrato_empleado coemp
-                  left join c_bpartner par on par.c_bpartner_id = coemp.c_bpartner_id
-				  left join c_doctype doct on coemp.c_doctype_id = doct.c_doctype_id    
-                 where 1=1
+                select ce.no_contrato_empleado_id as document_id,
+					   ce.isactive as docstatus,
+					   ce.documentno as ourreference,
+					   null as yourreference,
+					   ce.createdby as salesrep_user_id,
+					   '' as salesrep_email,
+					   '' as salesrep_name,
+					   ce.c_bpartner_id as bpartner_id,
+					   bp.name as bpartner_name,
+					   u.ad_user_id as contact_user_id,
+					   u.email as contact_email,
+					   u.name as contact_name
+				  from no_contrato_empleado ce
+				  left join c_bpartner bp on ce.c_bpartner_id = bp.c_bpartner_id
+				  left join ad_user u on u.c_bpartner_id = bp.c_bpartner_id
+				 where 1=1
                 ]]>
         </Sql>
-        <Parameter name="noContratoEmpleadoId" optional="false" type="argument" after="1=1">
-           <![CDATA[ coemp.no_contrato_empleado_id in ]]>
+        <Parameter name="strContratoEmpleadoId" optional="false" type="argument" after="1=1">
+           <![CDATA[ and ce.no_contrato_empleado_id in ]]>
         </Parameter>
    </SqlMethod>
 
-   
    <SqlMethod name="getContactDetailsForUser" type="preparedStatement" return="multiple">
       <SqlMethodComment></SqlMethodComment>
       <Sql>

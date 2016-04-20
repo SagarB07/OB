@@ -14,7 +14,7 @@
  * Contributor(s): ______________________________________.
  * ***********************************************************************
  */
-package com.atrums.nomina.ad_reports;
+package com.atrums.nomina.empleados.ad_reports;
 
 import java.io.IOException;
 
@@ -43,20 +43,26 @@ public class PrintContrato extends PrintController {
     boolHist = false;
   }
 
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  @SuppressWarnings("unchecked")
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
     VariablesSecureApp vars = new VariablesSecureApp(request);
-    DocumentType documentType = DocumentType.NOCONTRATO;
+
+    DocumentType documentType = DocumentType.CONTRATO;
+    // The prefix PRINTINVOICES is a fixed name based on the KEY of the
+    // AD_PROCESS
     String sessionValuePrefix = "PRINTCONTRATO";
     String strDocumentId = null;
 
     strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId_R");
     if (strDocumentId.equals(""))
-      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".nocontratoempleadoId");
-      post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
+      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId");
+
+    post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
   }
 
   public String getServletInfo() {
-    return "Servlet that processes the print 0action";
+    return "Servlet that processes the print action";
   } // End of getServletInfo() method
 
 }

@@ -25,15 +25,13 @@
         <SqlMethodComment></SqlMethodComment>
         <Sql>
             <![CDATA[
-           select c.isactive as docstatus
-             from no_contrato_empleado c
-            where c.no_contrato_empleado_id = ?
+	           select isactive as docstatus 
+				 from no_contrato_empleado
+			    where no_contrato_empleado_id = ?
             ]]>
         </Sql>
-        <Parameter name="noContratoEmpleadoId" />
+        <Parameter name="strContratoEmpleadoId" />
     </SqlMethod>
-    
-
 
 </SqlClass>
 

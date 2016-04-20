@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="504"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
+EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD,
+ne_conv_numero_letras(CO.SALARIO) as valor_letras
+FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
+atnorh_cargo AS CAR, ad_org as suc, ad_orginfo AS INFO , c_location AS LOC, c_city AS CIU
+WHERE EM.C_BPARTNER_ID = CO.C_BPARTNER_ID
+AND CO.EM_atnorh_cargo_ID = CAR.atnorh_cargo_ID
+AND CO.ad_org_id = suc.ad_org_id
+AND INFO.ad_org_id = suc.ad_org_id
+AND INFO.c_location_ID = LOC.c_location_ID
+AND CIU.c_city_ID = LOC.c_city_ID
+AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="fecha_actual" class="java.sql.Timestamp"/>
+	<field name="dia" class="java.lang.Double"/>
+	<field name="mes" class="java.lang.Double"/>
+	<field name="anio" class="java.lang.Double"/>
+	<field name="nombre_empleado" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="valor_letras" class="java.lang.String"/>
+	<detail>
+		<band height="1536" splitType="Stretch">
+			<staticText>
+				<reportElement x="164" y="0" width="193" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO DE TRABAJO EVENTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="133" width="205" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIMERA: ANTECEDENTES.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="152" width="312" height="23"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADOR, para satisfacer exigencias circunstanciales como ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="175" width="530" height="42"/>
+				<textElement/>
+				<text><![CDATA[, requiere contratar los servicios eventuales, personales de EL EMPLEADO que los desempeñará en conformidad con la Ley, los reglamentos internos, las disposiciones generales, órdenes e instrucciones que imparta el empleador, la empleadora o sus representantes. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="227" width="136" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEGUNDA: OBJETO.-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="247" width="530" height="31"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO se compromete a prestar sus servicios lícitos y personales a EL EMPLEADOR, en la clase de trabajo acordado que consiste en "+$F{cargo}+" para lo cual declara tener los conocimientos y capacidades necesarias."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="286" width="146" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TERCERA: REMUNERACIÓN.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="361" width="535" height="20"/>
+				<textElement/>
+				<text><![CDATA[valor en el que se encuentra incluido el incremento señalado en el artículo 17 del Código del Trabajo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="381" width="535" height="26"/>
+				<textElement/>
+				<text><![CDATA[ El EMPLEADOR reconocerá también a EL EMPLEADO las obligaciones sociales y los demás beneficios establecidos en la legislación ecuatoriana. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="417" width="117" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUARTA: DURACIÓN.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="437" width="228" height="20"/>
+				<textElement/>
+				<text><![CDATA[Por tratarse de servicios eventuales en atención al]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="457" width="531" height="76"/>
+				<textElement/>
+				<text><![CDATA[El presente contrato por su naturaleza no está sujeto a la estabilidad mínima conforme lo establecido en el artículo 14 del Código de Trabajo;la relación laboral concluirá a la finalización del plazo sin necesidad de notificación o cualquier otra formalidad.
+
+Sin embargo este contrato podrá terminar anticipadamente  por voluntad de las partes, o por las causales establecidas en el Código de Trabajo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="533" width="156" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUINTA: LUGAR DE TRABAJO.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="576" width="164" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXTA: JORNADA DE TRABAJO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="597" width="530" height="80"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADO se obliga a efectuar su labor por jornadas de trabajo que no podrán superar la máxima duración diaria y semanal permitida por la ley, de conformidad con el siguiente horario de 8:00 a 17:00, de lunes a viernes con una hora de almuerzo .
+
+EL EMPLEADO acepta libre, voluntaria y expresamente, que la duración del período de trabajo y descanso, podrá ser modificada de acuerdo a las necesidades y libre criterio de LA EMPRESA o Autoridades designadas por ésta.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="685" width="223" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SÉPTIMA: OBLIGACIONES DE EL EMPLEADO.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="699" width="530" height="527"/>
+				<textElement/>
+				<text><![CDATA[A más de las establecidas en las leyes correspondientes, son obligaciones específicas de EL EMPLEADO las siguientes:
+
+a)  Cumplir y sujetarse a las normas, procedimientos, reglamentos, horarios, turnos y demás disposiciones laborales vigentes en el sitio de trabajo y las que a futuro se expidieren.
+b)  Asistir a todos los requerimientos realizados por la Gerencia General,  y demás departamentos.
+c)  Prestar sus servicios ágil e idóneamente, con una identificación plena de los objetivos que persigue LA EMPRESA.
+d)  Conservar de la manera más diligente, haciendo uso adecuado de todos los materiales, documentos útiles, máquinas, equipos de computación, etc. que le fueren entregados para la ejecución de sus actividades o que estuvieren a su cuidado, obligándose por todos los daños que se originen fuera de su uso normal y de las pérdidas o deterioros de los bienes. El valor de aquellos bienes que sean considerados por LA EMPRESA como destruidos, dañados o desaparecidos, le serán descontados a EL EMPLEADO de sus haberes, previa la correspondiente verificación y  comprobación, situación ésta que EL EMPLEADO  consiente y lo acepta expresamente;
+e)  Manejar los documentos y la información asignada siempre dentro de la ética profesional.
+f)  No ingerir bebidas alcohólicas ni substancias estupefacientes en las instalaciones de la Compañía y durante la jornada de trabajo y, en general mientras se encuentre prestando sus servicios para la compañía. La inobservancia de esta disposición, se considerará falta grave y causal suficiente para dar por terminado el presente contrato sin ninguna indemnización
+g)  EL EMPLEADO  se compromete  a cumplir  su trabajo en el  horario determinado por el empleador, horario que declara conocerlo y aceptarlo;
+h)  EL EMPLEADO prestará sus servicios lícitos y personales exclusivamente para LA EMPRESA.;
+i)  EL EMPLEADO se obliga a usar y velar por el adecuado uso de los implementos  e información que estén a su cargo;
+j)  Los demás señalados por LA EMPRESA.
+k)  Mantener siempre el grado de eficiencia necesaria para el desempeño de sus actividades.
+l)  Observar las normas éticas y morales en el desempeño de su trabajo y en sus relaciones con sus superiores y compañeros.
+m)  Cumplir sus actividades con la intensidad, esmero y cuidado que se requiere, responsabilizándose de los perjuicios que por su acción u omisión puedan causarse a EL EMPLEADOR o a terceros.
+n)  Observar buenas costumbres y guardar respeto a EL EMPLEADOR, a sus compañeros de trabajo, a los clientes de EL EMPLEADOR y, en general, a terceros.
+o)  Cuidar escrupulosamente los materiales y herramientas de trabajo, evitando en lo posible cualquier daño al que se hallen expuestos.
+p)  Guardar reserva absoluta sobre las metodologías, tecnologías utilizadas y estrategia comercial de EL EMPLEADOR, así como sobre la vida privada de EL EMPLEADOR, compañeros de trabajo y clientes, practicando la lealtad en todos sus actos.
+q)  Guardar absoluta reserva y discreción respecto de la información, de cualquier clase que fuere, y que obtuviere o llegare a ser de su conocimiento respecto a asuntos privados y confidenciales de EL EMPLEADOR y de sus clientes.
+r)  Procurar la mayor economía para EL EMPLEADOR en la ejecución del trabajo.
+s)  Informar inmediatamente al EMPLEADOR sobre cualquier asunto o acontecimiento que llegare a su conocimiento y que pudiera afectar al EMPLEADOR, a sus funcionarios o empleados.
+t)  Someterse a las medidas que para el control de la asistencia y evaluación de rendimiento ponga en vigencia EL EMPLEADOR.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="1239" width="174" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OCTAVA: FALTAS GRAVES.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="1253" width="530" height="283"/>
+				<textElement/>
+				<text><![CDATA[Se considerarán como faltas graves el incumplimiento de las obligaciones antes indicadas, lo dispuesto en el Código del Trabajo vigente y, las siguientes:
+
+1.  Las previstas en el Art. 172 del Código del Trabajo vigente. Dentro de ellas se entenderá como ineptitud a la negligencia, irresponsabilidad y falta de colaboración de EL EMPLEADO en el cumplimiento de sus labores, así como el manejo indebido de los equipos.
+2.  La violación o desobediencia de las órdenes de sus superiores o de las regulaciones internas de EL EMPLEADOR.
+3.  La desobediencia a las órdenes impartidas por su jefe superior.
+4.  El reclamo que formulen sus superiores o clientes de EL EMPLEADOR sobre la conducta en el servicio de EL EMPLEADO.
+5.  Presentarse en estado de ebriedad, con indicios de haber consumido drogas o sustancias estupefacientes o psicotrópicas o encontrarse bajo efectos de ellas.
+6.  La imprudencia o falta de colaboración que pongan en peligro la vida del resto de empleados, persona alguna relacionada con el trabajo, la suya misma o las instalaciones de EL EMPLEADOR.
+7.  El suministro de datos falsos para la obtención del empleo.
+8.  Utilización inadecuada de implementos y  equipos de trabajo.
+9.  Impuntualidad, por más de tres veces en un mismo mes, o más de tres veces dentro de un trimestre.
+10.  El revelar información obtenida por el hecho de su trabajo. EL EMPLEADO se encuentra debidamente informado sobre el alto nivel de confidencialidad que debe guardar y el hacer conocer a terceros, extraños o resto de empleados secretos u otra información técnica y de seguridad o la sola sospecha de EL EMPLEADOR en tal sentido, será motivo suficiente para la terminación del contrato, reservándose EL EMPLEADOR el derecho a formular acciones civiles y penales según sea el caso.
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="9" y="20" width="529" height="70"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["En "+$F{ciudad}+", a los "+$F{dia}.toString()+ " días del mes de "+$F{mes}+" de "+$F{anio}+" comparecen a la suscripción del presente contrato: por una parte, la compañía MB MAYFLOWER BUFFALOS S.A., a través de su Apoderado Especial, señor Mauricio Germán Arrata Maldonado, a quien en adelante se le denominará EL EMPLEADOR; y, por otra parte, el (la) Sr. (a) " + $F{nombre_empleado}+" , con cédula de identidad No. " +$F{cedula} +", a quien en adelante se le denominará EL EMPLEADO."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="92" width="527" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Ambas partes, hábiles para contratar y obligarse, de manera libre y voluntaria, convienen en la celebración del presente contrato de trabajo, al tenor de las siguientes clausulas:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="306" width="536" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["El EMPLEADOR pagará a EL EMPLEADO por la ejecución de la obra contratada la remuneración convenida de mutuo acuerdo en la suma de "+$F{valor_letras}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="341" width="536" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["DOLARES DE LOS ESTADOS UNIDOS DE AMERICANOS (USD "+$F{salario}+",00), "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="553" width="531" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO (a) desempeñará las funciones para las cuales ha sido contratado en ,  en la ciudad de " +$F{ciudad}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="1500">
+			<staticText>
+				<reportElement x="5" y="11" width="251" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOVENA: COMPROMISO DE CONFIDENCIALIDAD.-
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="31" width="530" height="245"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADO durante la vigencia de este contrato de trabajo,  y con posterioridad a su extinción, se compromete a mantener en estricta confidencialidad y no divulgar, ni utilizar, la información  de propiedad exclusiva de la Compañía, además respetar y cumplir con los procedimientos y reglas para almacenar y proteger la información que pertenece a los clientes de la compañía.
+El término “Información de Propiedad Exclusiva” se refiere a todo conocimiento, dato o información confidencial de propiedad exclusiva, o secreto comercial/industrial de la Compañía, planes de nuevos productos,  planes de negocio, presupuestos y declaraciones financieras no publicadas, licencias, precios y costos,  proveedores y clientes, y cualquier otro conocimiento, dato o información confidencial, de propiedad exclusiva o secreto comercial, en cualquier forma o medio producido por o para la Compañía.
+De la misma manera, EL EMPLEADO declara que durante su relación laboral con la Compañía y con posterioridad a su extinción, mantendrá la información de terceros en la más estricta  confidencialidad y no divulgará  a nadie, con excepción del personal de la compañía que necesite contar con dicha información en conexión con su trabajo para con la Compañía.
+
+De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de no destruir ningún registro sin el expreso consentimiento de la Compañía. Comprende, EL EMPLEADO,  que este acuerdo restringe la divulgación y/o uso de la información confidencial y de propiedad exclusiva de la Compañía durante o con posterioridad a mi relación profesional para con la Compañía.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="291" width="190" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉCIMA:PROPIEDAD INTELECTUAL.-  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="311" width="550" height="43"/>
+				<textElement/>
+				<text><![CDATA[EL EMPLEADO expresamente reconoce que todo derecho de propiedad intelectual que se obtenga por los trabajos, diseños, programas, estudios o investigaciones, que realice en el desarrollo de sus labores, son de propiedad exclusiva de la compañía, por lo que renuncia a cualquier reclamo posterior por este concepto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="360" width="142" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNDÉCIMA: LIQUIDACION.-  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="381" width="550" height="39"/>
+				<textElement/>
+				<text><![CDATA[Si a la terminación del presente Contrato, EL EMPLEADO estuviere debiendo a la Compañía una suma de dinero por cualquier concepto, ésta autoriza para que se hagan las retenciones y los descuentos correspondientes hasta cubrir la totalidad de lo adeudado.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="427" width="241" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉCIMO SEGUNDA: LEGISLACIÓN APLICABLE.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="446" width="530" height="29"/>
+				<textElement/>
+				<text><![CDATA[En todo lo no previsto en este Contrato, cuyas modalidades especiales las reconocen y aceptan las partes, éstas se sujetan al Código del Trabajo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="482" width="283" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉCIMO TERCERA: JURISDICCIÓN Y COMPETENCIA.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="498" width="530" height="46"/>
+				<textElement/>
+				<text><![CDATA[En caso de suscitarse discrepancias en la interpretación, cumplimiento y ejecución del presente Contrato y cuando no fuere posible llegar a un acuerdo amistoso entre las Partes, estas se someterán a los jueces competentes del lugar  en que este contrato ha sido celebrado, así como a los procedimientos laborales determinados por la Ley.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="551" width="227" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉCIMO CUARTA:ACEPTACION EXPRESA.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="571" width="530" height="56"/>
+				<textElement/>
+				<text><![CDATA[Las partes aceptan y ratifican en su integridad el contrato contenido en las cláusulas que anteceden, sin reserva de ninguna clase y por convenir a sus intereses, para constancia de lo cual lo firman en tres ejemplares de los extractos del presente contrato de igual tenor y valor en el lugar y fecha indicados al inicio del presente documento y autorizan su registro de conformidad con la ley.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="30" y="709" width="202" height="1"/>
+			</line>
+			<line>
+				<reportElement x="357" y="710" width="160" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="43" y="722" width="170" height="58"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mauricio Germán Arrata Maldonado
+           Apoderado Especial
+MB MAYFLOWER BUFFALOS S.A.
+              EL EMPLEADOR
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="373" y="722" width="145" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="741" width="100" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="760" width="82" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
