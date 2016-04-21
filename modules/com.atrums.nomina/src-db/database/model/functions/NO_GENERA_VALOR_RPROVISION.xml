@@ -148,18 +148,23 @@ BEGIN
                             and cr.no_calcula_rubro_id = Cur_Rol_Provision_L.no_calcula_rubro_id
                           order by crl.line)
                         LOOP
-							
+					
+					
                             raise notice '%','Dentro del cursor calcular rubro';
                             IF Cur_Calcula_Robro_L.isprocedure = 'Y' THEN 
                                 IF Cur_Calcula_Robro_L.procedure is null OR Cur_Calcula_Robro_L.procedure = '' THEN
                                     v_Message:='@NO_NoExistProcedure@' || Cur_Calcula_Robro_L.nombre;
                                     RAISE v_Message;
                                 END IF;
-                                v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| p_bpartner_id || ''', '''|| p_period_id ||''');';
+								
+								v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| p_bpartner_id ||''' ,'''||v_tipo_ingreso_egreso_id || ''',' || 0||','''||p_period_id || ''');';
+                                --v_qry := 'SELECT ' || Cur_Calcula_Robro_L.procedure || '('''|| p_bpartner_id || ''', '''|| p_period_id ||''');';
 								
 								update idt_contrato set i_errormsg = v_qry ; 
-								--update idt_contrato set i_errormsg = p_period_id ;
-                            --    EXECUTE v_qry into v_valor_aux;
+						    -- update idt_contrato set i_errormsg = p_period_id ;
+							
+								EXECUTE IMMEDIATE v_qry into v_valor_aux;
+							
                                 v_valor_rubro_mes := v_valor_rubro_mes + COALESCE(v_valor_aux,0);
                             
                             ELSIF Cur_Calcula_Robro_L.issalario = 'Y' THEN 

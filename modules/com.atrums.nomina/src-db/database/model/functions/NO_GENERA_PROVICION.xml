@@ -49,12 +49,16 @@ BEGIN
 
 
         FOR Cur_Empleado IN
-        (select bp.c_bpartner_id,
+        (
+			select bp.c_bpartner_id,
                 ce.ad_org_id,
                 ce.fecha_inicio
            from c_bpartner bp,
-                no_contrato_empleado ce
-          where bp.c_bpartner_id = ce.c_bpartner_id
+                no_contrato_empleado ce            
+			where bp.c_bpartner_id = ce.c_bpartner_id
+            and bp.c_bpartner_id 
+			in  (select c_bpartner_id from no_cb_empleado_acct  re where re.no_tipo_ingreso_egreso_id 
+			in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where isprovision = 'Y'))
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=v_Client_ID)

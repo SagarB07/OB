@@ -33,7 +33,7 @@ BEGIN
 				   and nvl.c_bpartner_id = p_empleado_id
 				   and tr.suma_ingreso = 'Y'
 				   and tr.isingreso = 'Y'
-				   and tr.no_tipo_ingreso_egreso_id = '873C16B49B8C41E380C1680CAEF2DF75'
+				   and tr.no_tipo_ingreso_egreso_id = p_tipo_ingreso_egreso_id
 				 limit 1);
 
 		v_sueldo := (select ce.salario 

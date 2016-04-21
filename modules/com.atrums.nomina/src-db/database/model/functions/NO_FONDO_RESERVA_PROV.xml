@@ -4,6 +4,12 @@
       <parameter name="p_empleado_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
       <parameter name="p_period_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
