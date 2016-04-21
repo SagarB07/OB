@@ -4,8 +4,9 @@
       <body><![CDATA[
 	v_edad NUMBER;
 BEGIN
-	:new.em_ne_c_acctschema_id := (select c_acctschema_id from c_acctschema where ad_client_id = :new.ad_client_id
-		and ad_org_id = :new.ad_org_id);
+	:new.em_ne_c_acctschema_id := (select c_acctschema_id 
+	                                from c_acctschema where ad_client_id = :new.ad_client_id
+		                         and ad_client_id = :new.ad_client_id);
 
 	if date(:new.em_no_fechanacimiento) >= date(now()) then
 		raise EXCEPTION '%','@NE_C_BPA_FEC_NAC_VAL@';

@@ -1,47 +1,53 @@
 <?xml version="1.0"?>
   <database name="TRIGGER NE_RUB_ING_EG_TRG">
     <trigger name="NE_RUB_ING_EG_TRG" table="C_BPARTNER" fires="before" insert="false" update="true" delete="false" foreach="row">
-      <body><![CDATA[
-	v_cursor record;
+      <body><![CDATA[	v_cursor record;
 	v_no_tipo_ing_egr_acct_id character varying(32);
 	v_no_cb_empleado_acct_id character varying(32);
 	v_n_debe_acct character varying(32);
 	v_n_haber_acct character varying(32);
+	v_acct_schema character varying(32);
 BEGIN
-	if :new.isemployee = 'Y' then
-		select no_cb_empleado_acct_id
-		into v_no_cb_empleado_acct_id
-		from no_cb_empleado_acct
-		where c_bpartner_id = :new.c_bpartner_id
-		limit 1;
 
-		if v_no_cb_empleado_acct_id is null then
-			for v_cursor in (
-				select *
-				from ne_perfil_rubro_line
-				where ne_perfil_rubro_id = :new.em_ne_perfil_rubro_id
-			)
-			loop
-				if v_cursor.ne_debe_acct is not null or v_cursor.ne_haber_acct is not null then
-					insert into no_cb_empleado_acct(
-						no_cb_empleado_acct_id, ad_client_id, ad_org_id,
-						isactive, created, createdby,
-						updated, updatedby, c_bpartner_id,
-						c_acctschema_id, no_cuenta_ingreso_acct, no_tipo_ingreso_egreso_id,
-						no_cuenta_egreso_acct
-						)
-					values(
-						get_uuid(), :new.ad_client_id, :new.ad_org_id,
-						'Y', now(), :new.createdby,
-						now(), :new.updatedby, :new.c_bpartner_id,
-						(select c_acctschema_id from c_acctschema where ad_client_id = :new.ad_client_id and ad_org_id = :new.ad_org_id), 
-						v_cursor.ne_debe_acct, v_cursor.no_tipo_ingreso_egreso_id,
-						v_cursor.ne_haber_acct
-					);					
-				end if;
-			end loop;
-		end if;		
-	end if;
+    IF UPDATING THEN
+
+        if :new.isemployee = 'Y' then
+
+            if COALESCE(:new.em_ne_perfil_rubro_id,'') <> COALESCE(:old.em_ne_perfil_rubro_id,'') then
+
+            delete from no_cb_empleado_acct where c_bpartner_id = :old.c_bpartner_id;
+
+            v_acct_schema := (select bp.em_ne_c_acctschema_id from c_bpartner bp where bp.c_bpartner_id = :old.c_bpartner_id);
+
+            if v_no_cb_empleado_acct_id is null then
+                for v_cursor in (
+                    select *
+                    from ne_perfil_rubro_line
+                    where ne_perfil_rubro_id = :new.em_ne_perfil_rubro_id
+                )
+                loop
+                    if v_cursor.ne_debe_acct is not null or v_cursor.ne_haber_acct is not null then
+                        insert into no_cb_empleado_acct(
+                            no_cb_empleado_acct_id, ad_client_id, ad_org_id,
+                            isactive, created, createdby,
+                            updated, updatedby, c_bpartner_id,
+                            c_acctschema_id, no_cuenta_ingreso_acct, no_tipo_ingreso_egreso_id,
+                            no_cuenta_egreso_acct
+                            )
+                        values(
+                            get_uuid(), :new.ad_client_id, :new.ad_org_id,
+                            'Y', now(), :new.createdby,
+                            now(), :new.updatedby, :new.c_bpartner_id,
+                            v_acct_schema, 
+                            v_cursor.ne_debe_acct, v_cursor.no_tipo_ingreso_egreso_id,
+                            v_cursor.ne_haber_acct
+                        );					
+                    end if;
+                end loop;
+            end if;		
+        end if;
+      end if;
+    END IF;
 
 	return new;
 
