@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_CONTRATO_ACTIVO_TRG">
+    <trigger name="NO_CONTRATO_ACTIVO_TRG" table="NO_REGISTRA_QUINC_LINE" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje 	varchar(255);	  
+BEGIN
+    
+	---95B6603F6EAC4E75BE3439E9EA11E20C
+
+	--select count(*) > 0  from  no_contrato_empleado ce where  ce.isactive = 'Y' and ce.c_bpartner_id = '95B6603F6EAC4E75BE3439E9EA11E20C'
+
+    IF (UPDATING OR INSERTING) THEN
+ --   raise exception '%',''|| new.c_bpartner_id;
+        IF (not exists ( select *
+		from  no_contrato_empleado ce where  ce.isactive = 'Y'
+		and ce.c_bpartner_id = :new.c_bpartner_id
+		--and ce.ad_org_id = new.ad_org_id
+			)) THEN
+		v_mensaje:='@NO_UNICO_QUINCENA_EXCEPTION@';
+
+ 
+		raise exception '%', '@NO_UNICO_QUINCENA_EXCEPTION@';
+
+        ELSE
+            RETURN NEW;
+        END IF;
+    END IF;
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_CONTRATO_ACTIVO_TRG
+]]></body>
+    </trigger>
+  </database>

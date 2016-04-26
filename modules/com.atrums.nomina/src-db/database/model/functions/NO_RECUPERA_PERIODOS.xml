@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_RECUPERA_PERIODOS">
+    <function name="NO_RECUPERA_PERIODOS" type="VARCHAR">
+      <parameter name="p_opcion" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fcontrato" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_FECHAINCIAL VARCHAR(20);
+v_FECHAFINAL VARCHAR(20);
+v_ResultStr VARCHAR(2000):='';
+v_Message VARCHAR(2000):='';
+    --ids INTEGER[];
+    
+BEGIN
+	
+ 	IF p_opcion = 1 THEN 
+ 	SELECT  CAST(CAST(substring( CAST(p_fecha_fcontrato AS character varying) FROM 1 FOR 4) AS NUMBER)-1 AS character varying ) || '-08-01'  INTO v_FECHAINCIAL  ;
+	SELECT  substring( CAST(p_fecha_fcontrato AS character varying) FROM 1 FOR 4) || '-07-01' INTO v_FECHAFINAL ;
+	
+	
+ 	ELSE
+	SELECT  CAST(CAST(substring( CAST(p_fecha_fcontrato AS character varying) FROM 1 FOR 4) AS NUMBER)-1 AS character varying ) || '-12-01'  INTO v_FECHAINCIAL  ;
+	SELECT  substring( CAST(p_fecha_fcontrato AS character varying) FROM 1 FOR 4) || '-11-01' INTO v_FECHAFINAL ;
+ 	END IF;
+	
+     --ids := ARRAY[1,2];
+	--UPDATE IDT_CONTRATO SET I_ERRORMSG = v_FECHAINCIAL||'*****'|| v_FECHAFINAL ;
+
+
+       RETURN QUERY
+  		SELECT PR.C_PERIOD_ID AS PERIODO
+  		 FROM C_PERIOD PR
+   		 WHERE PR.STARTDATE BETWEEN CAST(v_FECHAINCIAL AS TIMESTAMP) AND CAST(v_FECHAFINAL AS TIMESTAMP);
+   		 
+	--UPDATE IDT_CONTRATO SET I_ERRORMSG = v_FECHAINCIAL||'*1****'|| v_FECHAFINAL ;
+EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;        
+	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+    	UPDATE IDT_CONTRATO SET i_errormsg = v_ResultStr;
+END NO_RECUPERA_PERIODOS
+]]></body>
+    </function>
+  </database>

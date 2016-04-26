@@ -73,6 +73,17 @@
         <default/>
         <onCreateDefault/>
       </column>
+      <column name="C_YEAR_ID" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="ISPAGOPROVICION" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="C_YEAR" name="NO_FK_YEAR_NO_PAGO" onDelete="restrict">
+        <reference local="C_YEAR_ID" foreign="C_YEAR_ID"/>
+      </foreign-key>
       <foreign-key foreignTable="FIN_PAYMENTMETHOD" name="NO_PAGO_CAB_FIN_PAYMENTMETHOD">
         <reference local="FIN_PAYMENTMETHOD_ID" foreign="FIN_PAYMENTMETHOD_ID"/>
       </foreign-key>

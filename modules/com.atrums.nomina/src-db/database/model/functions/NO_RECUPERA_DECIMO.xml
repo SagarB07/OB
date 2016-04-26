@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_RECUPERA_DECIMO">
+    <function name="NO_RECUPERA_DECIMO" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_opcion" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fcontrato" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_valor NUMBER;
+BEGIN
+
+SELECT sum(provmes.valor) into v_valor FROM no_rol_provision_line_mes provmes, no_rol_pago_provision_line probline , no_rol_pago_provision provcab 
+WHERE provcab.no_rol_pago_provision_id = probline.no_rol_pago_provision_id 
+and probline.no_rol_pago_provision_line_id = provmes.no_rol_pago_provision_line_id 
+and provcab.c_bpartner_id = p_empleado_id 
+and probline.no_tipo_ingreso_egreso_id =  p_tipo_ingreso_egreso_id 
+and provmes.c_period_id in (select no_recupera_periodos (p_opcion,p_fcontrato));
+
+return round( v_valor, 2);
+END NO_RECUPERA_DECIMO
+]]></body>
+    </function>
+  </database>

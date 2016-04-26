@@ -10,8 +10,7 @@
     v_Result NUMBER:=1;
     v_msg1 VARCHAR(2000):='Prueba';
 
-    Cur_Parameter RECORD;
-	Cur_Pago RECORD;
+	
 
     v_no_pago_cabecera_id VARCHAR(32);
 	v_Client_ID VARCHAR(32);
@@ -24,16 +23,26 @@
 	v_campo_valor VARCHAR(32):='';
     v_where varchar(500);
     v_completado varchar(500);
-	qry VARCHAR(2000);
-	qry1 VARCHAR(2000);
+    qry VARCHAR(2000);
+    qry1 VARCHAR(2000);
     v_bpartner_id varchar;
     v_ParameterName VARCHAR(32);
+
+    V_PERIODO VARCHAR(32);
+    V_TIPODOC VARCHAR(32);  
+	V_TIPODOCQUIN VARCHAR(32);  
+    
+    ITERADOR RECORD;
+    Cur_Parameter RECORD;
 
 BEGIN
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';
     AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
 
+	
+	select c_doctype_ID INTO  V_TIPODOCQUIN   from c_doctype where ad_table_id  = '1895538EF5114972AC1AE7CDE5568727' and docbasetype  = 'APP';
+	
     BEGIN
         FOR Cur_Parameter IN
           (SELECT i.Record_ID,
@@ -58,92 +67,149 @@ BEGIN
         END LOOP;
 
 		
-		FOR Cur_Pago IN
-		(SELECT   pc.c_period_id,
-                  dt1.c_doctype_id,
-                  (select t.tablename from ad_table t where t.ad_table_id = dt1.ad_table_id) as tablename,
-                  dt1.ad_table_id,
-                  pc.no_area_empresa_id
-             FROM no_pago_cabecera pc, c_doctype dt1
-            WHERE pc.no_pago_cabecera_id = v_no_pago_cabecera_id
-			and dt1.c_doctype_id in
-				(SELECT dt.c_doctype_id FROM c_doctype dt WHERE dt.isActive = 'Y'
-				 and (case when pc.c_doctype_id is null then 
-					  dt.ad_table_id in ('3FB45DB988114CF8B1F85E8453DDF3A0', '793C7712020D4F629A9F2131D534700D', 'F5057A2680BB43149D7C57B1224A7653', 'DDBCCC1DA9BE4E01A31B8325706B08DB', 'B39EEBB236864717A9F7F6F4A11DCB9C', '4702AB7BE187411F95B866B39BDA8C76')
-					  else dt.c_doctype_id = pc.c_doctype_id  end)))
+		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = v_no_pago_cabecera_id;
+
+        select 
+        c_doctype_id, 
+        c_period_id 
+        INTO V_TIPODOC,
+            V_PERIODO
+        from no_pago_cabecera  
+        where no_pago_cabecera_id = v_no_pago_cabecera_id;
+        IF exists (select* from no_rol_pago_provision rocab where rocab.c_doctype_id = V_TIPODOC AND ISPAGO = 'Y' ) THEN 
+		
+		UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ;
+			FOR ITERADOR IN 
+			(
+				SELECT C_BPARTNER_ID, 
+				       (select t.tablename from ad_table t 
+				       where t.ad_table_id = (SELECT AD_TABLE_ID FROM c_doctype WHERE c_doctype_ID = V_TIPODOC )) as TABLENAME,
+				       TOTAL_NETO, 
+				       DOCUMENTNO 
+				FROM no_rol_pago_provision WHERE ISPAGO = 'Y'
+				AND DOCSTATUS = 'CO'				
+				AND C_PERIOD_ID = V_PERIODO 
+			)
+
+			LOOP
+
+			v_table_id:= ITERADOR.TABLENAME || '_id';
+			
+			INSERT 
+			INTO no_pago_line 
+				(no_pago_line_id,
+				    ad_client_id,		 
+				    ad_org_id,		
+				    isactive,		
+				    created,
+				    createdby,
+				    updated,
+				    updatedby,
+				    no_pago_cabecera_id,
+				    c_bpartner_id,
+				    c_doctype_id,
+				    documentno,
+				    valor,
+				    estado,
+				    record_id)
+			VALUES (
+			get_uuid(),
+			v_Client_ID,
+			v_Org_ID,
+			'Y',
+			now(),
+			v_User_ID,
+			now(),
+			v_User_ID,
+			v_no_pago_cabecera_id,
+			ITERADOR.C_BPARTNER_ID, 
+			V_TIPODOC,
+			ITERADOR.DOCUMENTNO,
+			ITERADOR.TOTAL_NETO,
+			'BR',
+			v_table_id
+			);
+		
+ 			END LOOP;
+        
+        END IF;
+
+	--UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_TIPODOC ; 
+	--CODIGO QUEMADO DE ROL DE PROVICIONES
+        IF V_TIPODOC = 'E7EC0B4879C04A9EA2807C3209E7363B' THEN 
+		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'ROL DE PROVICIONES';
+
+      
+        
+        END IF;
+
+	-- CODIGO QUEMADO QUINCENAS
+        IF V_TIPODOC = V_TIPODOCQUIN THEN 
+		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'QUINCENAS';
+		--SELECT * FROM no_registra_quinc_line DET
+		FOR ITERADOR IN 
+		(
+			SELECT DET.C_BPARTNER_ID,
+			(select t.tablename from ad_table t 
+				       where t.ad_table_id = (SELECT AD_TABLE_ID FROM c_doctype WHERE c_doctype_ID = V_TIPODOC )) as TABLENAME,			 
+			DET.VALOR,
+			DET.DOCUMENTNO  
+			FROM no_registra_quinc_line DET, no_registra_quincena CAB  
+			WHERE CAB.no_registra_quincena_ID = DET.no_registra_quincena_ID
+			AND DOCSTATUS = 'CO'
+			AND CAB.C_PERIOD_ID = V_PERIODO
+		)
 		LOOP
 
-            v_table_id:= Cur_Pago.tablename || '_id';
-             if( Cur_Pago.ad_table_id in ('3FB45DB988114CF8B1F85E8453DDF3A0', 'DDBCCC1DA9BE4E01A31B8325706B08DB', 'B39EEBB236864717A9F7F6F4A11DCB9C')) then 
-                    v_campo_valor:= 'valor';
-             else
-                    v_campo_valor:= 'total_neto';
-             end if;
 
-            
-            case when(Cur_Pago.ad_table_id = 'DDBCCC1DA9BE4E01A31B8325706B08DB')then
-                         
-                    v_bpartner_id:=' (select c_bpartner_id from no_rol_pago_provision rpp'||
-                    ' where rpp.no_rol_pago_provision_id = no_rol_pago_provision_line.no_rol_pago_provision_id) ';
+		v_table_id:= ITERADOR.TABLENAME || '_id';
 
-                  
-                        
+			INSERT 
+			INTO no_pago_line 
+				(no_pago_line_id,
+				    ad_client_id,		 
+				    ad_org_id,		
+				    isactive,		
+				    created,
+				    createdby,
+				    updated,
+				    updatedby,
+				    no_pago_cabecera_id,
+				    c_bpartner_id,
+				    c_doctype_id,
+				    documentno,
+				    valor,
+				    estado,
+				    record_id)
+			VALUES (
+			get_uuid(),
+			v_Client_ID,
+			v_Org_ID,
+			'Y',
+			now(),
+			v_User_ID,
+			now(),
+			v_User_ID,
+			v_no_pago_cabecera_id,
+			ITERADOR.C_BPARTNER_ID, 
+			V_TIPODOC,
+			ITERADOR.DOCUMENTNO,
+			ITERADOR.VALOR,
+			'BR',
+			v_table_id
+			);
+		
+		
+		
 
-             when(Cur_Pago.ad_table_id = 'B39EEBB236864717A9F7F6F4A11DCB9C')then
-                        
-                   
-                     v_bpartner_id:=' (select c_bpartner_id from no_rol_pago_provision rpp, no_rol_pago_provision_line rpl'||
-                    ' where rpp.no_rol_pago_provision_id = rpl.no_rol_pago_provision_id and rpl.no_rol_pago_provision_line_id = no_rol_provision_line_mes.no_rol_pago_provision_line_id) ';
-                     
-                  else
-                    v_bpartner_id='c_bpartner_id';
-             end case;
-             
-            qry:= 'insert into no_pago_line(no_pago_line_id,			ad_client_id,				ad_org_id,				isactive,						created,'||
-                                           'createdby,					updated,					updatedby,				no_pago_cabecera_id,			c_bpartner_id,'||
-                                           'c_doctype_id,				documentno,					valor,					estado,                         record_id)'||
-                ' select 		  			get_uuid(), 		  ''' ||v_Client_ID ||''',   ''' || v_Org_ID ||''', 	  	     ''Y'', 					current_timestamp,'||
-                                       ''''|| v_User_ID || ''', 		current_timestamp,  ''' || v_User_ID ||''',  '''|| v_no_pago_cabecera_id || ''', 	'|| v_bpartner_id || 
-                                        ',	c_doctype_id,  				documentno, 				'||v_campo_valor ||', 			''BR'',             ' || v_table_id || 
-                    ' from ' ;
-
-
-            case when( Cur_Pago.ad_table_id= '3FB45DB988114CF8B1F85E8453DDF3A0') then 
-                    v_where:= ' where  no_registra_quincena_id in (select rq.no_registra_quincena_id from no_registra_quincena rq where rq.c_period_id ='''|| Cur_Pago.c_period_id ||''')';
-             
-                 when ( Cur_Pago.ad_table_id= 'DDBCCC1DA9BE4E01A31B8325706B08DB') then 
-                 
-                     
-            v_where:= ' where  exists (select 1 from c_period where startdate + 0 <= no_rol_pago_provision_line.fechafin + 0  and enddate + 0 >= no_rol_pago_provision_line.fechafin + 0 and c_period_id ='''|| Cur_Pago.c_period_id ||''')'; 
-                 else
-                    v_where:= ' where c_period_id = '''|| Cur_Pago.c_period_id ||'''';
-                    
-             end case;
-
-             v_completado:= ' and docstatus = ''CO'' and in_payment = ''N'' ';
-             
-             
-
-           
-    	   case when (Cur_Pago.no_area_empresa_id is null ) then 
- 
-				qry1:= qry || Cur_Pago.tablename || v_where || v_completado;
-
-                execute qry1;
-			
-			when (Cur_Pago.no_area_empresa_id is not NULL ) then
-			
-                qry1:= qry || Cur_Pago.tablename || v_where || v_completado ||
-                ' and c_bpartner_id in  (select c_bpartner_id from c_bpartner where isemployee=''Y'' and isactive =''Y'' and em_no_area_empresa_id = ''' || Cur_Pago.no_area_empresa_id||''')';
-
-                execute qry1;
-            
-            end case;
-        
-            qry1:='';
-            qry:= '';
 		END LOOP;
-			
+		
+		--SELECT * FROM no_registra_quincena WHER C_PERIOD_ID = V_PERIODO;
+
+      
+        
+        END IF;
+        
         v_Message:='@EjecucionCorrecta@';
         
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
@@ -156,6 +222,7 @@ BEGIN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
                 AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+                 UPDATE  IDT_CONTRATO SET I_ERRORMSG = v_ResultStr;
         RETURN;
 END NO_GENERA_DATOS_PAGO
 ]]></body>

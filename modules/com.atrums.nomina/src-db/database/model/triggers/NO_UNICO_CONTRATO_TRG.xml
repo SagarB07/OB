@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_UNICO_CONTRATO_TRG">
+    <trigger name="NO_UNICO_CONTRATO_TRG" table="NO_CONTRATO_EMPLEADO" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje 	varchar(255);	  
+BEGIN
+    
+    IF (UPDATING OR INSERTING) THEN
+        IF (SELECT count(*) > 0 FROM no_CONTRATO_EMPLEADO NCE
+				WHERE NCE.C_BPARTNER_ID = :NEW.C_BPARTNER_ID
+				AND ISACTIVE = 'Y'
+			) THEN
+			v_mensaje:='@NO_UNICO_CONTRATO@';
+
+ 
+raise exception '%', '@NO_UNICO_CONTRATO@';
+
+        ELSE
+            RETURN NEW;
+        END IF;
+    END IF;
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_UNICO_CONTRATO_TRG
+]]></body>
+    </trigger>
+  </database>

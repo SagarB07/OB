@@ -22,6 +22,10 @@ Cur_Parameter_Bp 	RECORD;
 varexist NUMBER;
 
 BEGIN
+
+
+
+
 v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account  WHERE  fin_financial_account_ID = 'F27069227AB242B8ACA82A42817607AF');
 v_metodo_pago = (select fin_paymentmethod_id from  fin_paymentmethod limit 1);
 FOR Cur_Parameter IN
@@ -36,6 +40,61 @@ LOOP
 
 --RAISE NOTICE '%','@Procesando el siguiente anticipo: ' || Cur_Parameter.Record_ID;
 
+
+IF NOT exists (select * from c_doctype where c_doctype_ID  = 'C919FD1F8EA74A12B37EFC237BE05985' ) THEN
+
+INSERT INTO c_doctype 
+(C_DOCTYPE_ID,
+AD_CLIENT_ID,
+AD_ORG_ID,
+ISACTIVE,
+CREATED,
+CREATEDBY,
+UPDATED,
+UPDATEDBY,
+NAME,
+PRINTNAME,
+DOCBASETYPE,
+ISSOTRX,
+ISDOCNOCONTROLLED,
+GL_CATEGORY_ID,
+ISDEFAULT,
+DOCUMENTCOPIES,
+AD_TABLE_ID,
+ORGFILTERED,
+ISEXPENSE,
+ISREVERSAL,
+ISRETURN
+)
+VALUES
+('C919FD1F8EA74A12B37EFC237BE05985',
+Cur_Parameter.ad_client_id, 
+ad_org_id,
+'Y',
+'NOW()',
+'100',
+'NOW()',
+'100',
+'QUINCENAS',
+'QUINCENAS',
+'APP',
+'N',
+'Y',
+'FC670B83E59C4E7CBD6B999D3F28B251',
+'N',
+'1',
+'1895538EF5114972AC1AE7CDE5568727',
+'N',
+'N',
+'N',
+'N'
+);
+
+
+
+END IF;
+
+-------------------------------
 	FOR Cur_Parameter_Bp IN
 		(
 	        SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
