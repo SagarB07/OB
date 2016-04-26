@@ -9,90 +9,33 @@
 	v_em_ne_fecha_inicio timestamp without time zone;
 	v_em_ne_fecha_fin timestamp without time zone;
 BEGIN
+
+--UPDATE idt_contrato SET i_errormsg = '00***' ;
 	IF INSERTING THEN
 	
-			select fecha_inicio, fecha_fin
-			into v_fecha_inicio, v_fecha_fin
-			from no_contrato_empleado
-			where no_contrato_empleado_id = :new.no_contrato_empleado_id;
-
-			if date(:new.em_ne_fecha_inicio) < date(v_fecha_inicio) then
-				raise '%', '@NE_FECHA_VAC_VAL@';
-			end if;
-
-			if date(:new.em_ne_fecha_fin) > date(v_fecha_fin) then
-				raise '%', '@NE_FECHA_VAC_VAL@';
-			end if;
-			
-			select em_ne_fecha_inicio, em_ne_fecha_fin
-			into v_em_ne_fecha_inicio, v_em_ne_fecha_fin
-			from no_vacacion
-			where no_vacacion_id = :new.no_vacacion_id;
-
-			if v_em_ne_fecha_inicio is not null then
-				if date(v_em_ne_fecha_inicio) <> date(:new.em_ne_fecha_inicio) then
-					raise exception '%', '@NE_VAC_FEC_INI_MOD_VAL@';
-				end if;
-			end if;
-			
-			if v_em_ne_fecha_fin is not null then
-				if date(v_em_ne_fecha_fin) <> date(:new.em_ne_fecha_fin) then
-					raise exception '%', '@NE_VAC_FEC_INI_MOD_VAL@';
-				end if;
-			end if;
-
-			if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
-				raise '%', '@NE_NO_VACACION_FECHA_VAL@';
-			else
-
-				v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :new.em_ne_fecha_inicio::timestamp);
-				:new.em_ne_total_dias=to_number(v_days + 1);
-			end if;
-			return new; 
+ 	if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
+ 	raise exception '%', '@NE_NO_VACACION_FECHA_VAL@';
+ 	else
+ 	v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :new.em_ne_fecha_inicio::timestamp);
+ 	:new.em_ne_total_dias=to_number(v_days + 1);
+ 	end if;
+	return new; 
 
 	
-	   ELSIF UPDATING THEN
-	  
-	  select fecha_inicio, fecha_fin
-			into v_fecha_inicio, v_fecha_fin
-			from no_contrato_empleado
-			where no_contrato_empleado_id = :old.no_contrato_empleado_id;
+	 ELSIF UPDATING THEN
 
-			if date(:old.em_ne_fecha_inicio) < date(v_fecha_inicio) then
-				raise '%', '@NE_FECHA_VAC_VAL@';
-			end if;
+		if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
+		raise exception '%', '@NE_NO_VACACION_FECHA_VAL@';
+		
+		else
+		v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :new.em_ne_fecha_inicio::timestamp);
+		:new.em_ne_total_dias=to_number(v_days + 1);
 
-			if date(:old.em_ne_fecha_fin) > date(v_fecha_fin) then
-				raise '%', '@NE_FECHA_VAC_VAL@';
-			end if;
-			
-			select em_ne_fecha_inicio, em_ne_fecha_fin
-			into v_em_ne_fecha_inicio, v_em_ne_fecha_fin
-			from no_vacacion
-			where no_vacacion_id = :old.no_vacacion_id;
-
-			if v_em_ne_fecha_inicio is not null then
-				if date(v_em_ne_fecha_inicio) <> date(:old.em_ne_fecha_inicio) then
-					raise exception '%', '@NE_VAC_FEC_INI_MOD_VAL@';
-				end if;
-			end if;
-			
-			if v_em_ne_fecha_fin is not null then
-				if date(v_em_ne_fecha_fin) <> date(:old.em_ne_fecha_fin) then
-					raise exception '%', '@NE_VAC_FEC_INI_MOD_VAL@';
-				end if;
-			end if;
-
-			if date(:old.em_ne_fecha_fin) <= date(:old.em_ne_fecha_inicio) then
-				raise '%', '@NE_NO_VACACION_FECHA_VAL@';
-			else
-
-				v_days := DATE_PART('day', :new.em_ne_fecha_fin::timestamp - :old.em_ne_fecha_inicio::timestamp);
-				:new.em_ne_total_dias=to_number(v_days + 1);
-			end if;
-								 
+		RETURN new;
+		end if;
+	 
 	  	  --new.em_ne_total_dias=to_number(30);
-	    RETURN new;
+	
 		
 		
 	
