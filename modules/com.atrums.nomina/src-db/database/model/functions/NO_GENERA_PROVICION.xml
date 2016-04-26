@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
   <database name="FUNCTION NO_GENERA_PROVICION">
     <function name="NO_GENERA_PROVICION" type="NULL">
-      <parameter name="v_user_id" type="VARCHAR" mode="in">
+      <parameter name="p_user_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
-      <parameter name="v_client_id" type="VARCHAR" mode="in">
+      <parameter name="p_client_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
-      <parameter name="v_org_id" type="VARCHAR" mode="in">
+      <parameter name="p_org_id" type="VARCHAR" mode="in">
         <default/>
       </parameter>
       <body><![CDATA[v_ResultStr VARCHAR(2000):='';
@@ -52,23 +52,25 @@ BEGIN
         (
 			select bp.c_bpartner_id,
                 ce.ad_org_id,
-                ce.fecha_inicio
+                ce.fecha_inicio,
+				ce.documentno
            from c_bpartner bp,
                 no_contrato_empleado ce            
 			where bp.c_bpartner_id = ce.c_bpartner_id
+			and ce.isactive = 'Y'
             and bp.c_bpartner_id 
-			in  (select c_bpartner_id from no_cb_empleado_acct  re where re.no_tipo_ingreso_egreso_id 
+			in (select c_bpartner_id from no_cb_empleado_acct  re where re.no_tipo_ingreso_egreso_id 
 			in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where isprovision = 'Y'))
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
-            and bp.AD_Client_ID=v_Client_ID)
+            and bp.AD_Client_ID=p_client_id)
            
         LOOP
 		
-            v_Org_ID := Cur_Empleado.ad_Org_ID;
+            p_org_id := Cur_Empleado.ad_Org_ID;
             select c_currency_id into v_currency_id
               from ad_client
-             where ad_client_id=v_Client_ID;
+             where ad_client_id=p_client_id;
 
 			 
             SELECT COUNT(*) INTO v_count
@@ -77,7 +79,9 @@ BEGIN
                AND docstatus in('BR','CO') 
                AND isactive = 'Y'
                AND ispago = 'N';
-
+	
+			
+				UPDATE IDT_CONTRATO SET I_ERRORMSG = v_count  ;
             IF v_count = 0 THEN
 
                
@@ -87,18 +91,19 @@ BEGIN
                   FROM c_doctype dt
                  WHERE dt.ad_table_id = 'F5057A2680BB43149D7C57B1224A7653';
 
-               ad_sequence_doctype(v_doctypeprov_id, v_Client_ID, 'Y', v_documentnoprov);
+               ad_sequence_doctype(v_doctypeprov_id, p_client_id, 'Y', v_documentnoprov);
 
                INSERT INTO no_rol_pago_provision
                             (no_rol_pago_provision_id,   ad_client_id,       ad_org_id,          isactive,
                              created,                    createdby,          updated,            updatedby,
                              c_bpartner_id,              c_doctype_id,       documentno,         total_ingreso, 
-                             total_egreso,               total_neto,         docstatus,          ispago,
+                             total_egreso,               total_neto,         docstatus,          ispago,em_ne_num_contrato,
                              processed,                  docaccionno,        posted,             processing)
-                      VALUES(v_rol_pago_provision_id,    v_Client_ID,        v_Org_ID,           'Y',
-                             current_timestamp,          v_User_ID,          current_timestamp,  v_User_ID,
+                      
+					  VALUES(v_rol_pago_provision_id,    p_client_id,        p_org_id,           'Y',
+                             current_timestamp,          p_user_id,          current_timestamp,  p_user_id,
                              Cur_Empleado.c_bpartner_id, v_doctypeprov_id,    v_documentnoprov,       0,
-                             0,                          0,                  'CO',               'N',  
+                             0,                          0,                  'CO',               'N',  Cur_Empleado.documentno,
                              'Y',                        'CO',               'N',                'N');
 
                 FOR Cur_Rubro_Rol IN
@@ -141,13 +146,13 @@ BEGIN
                     into v_fecha_inicio, v_fecha_final
                     from c_year y, c_period p
                     where to_number(y.year) = DATE_part('YEAR', date(now())) 
-                    and y.ad_client_id = v_Client_ID
+                    and y.ad_client_id = p_client_id
                     and y.c_year_id = p.c_year_id;
 
                     SELECT dt.c_doctype_id INTO v_doctypeline_id
                     FROM c_doctype dt
                     WHERE dt.ad_table_id = 'DDBCCC1DA9BE4E01A31B8325706B08DB';
-                    ad_sequence_doctype(v_doctypeline_id, v_Client_ID, 'Y', v_documentnoline);
+                    ad_sequence_doctype(v_doctypeline_id, p_client_id, 'Y', v_documentnoline);
 
                      INSERT INTO no_rol_pago_provision_line
                                 (no_rol_pago_provision_line_id,        ad_client_id,                ad_org_id,                                  isactive,
@@ -155,8 +160,8 @@ BEGIN
                                  no_rol_pago_provision_id,             line,                        no_tipo_ingreso_egreso_id,                  valor,
                                  processed,                            fechainicio,                 fechafin,                                   c_currency_id,
                                  docstatus,                            c_doctype_id,                documentno,                                 docaccionno)
-                          VALUES(v_rol_pago_prov_line_id,              v_Client_ID,                 v_Org_ID,                                   'Y',
-                                 current_timestamp,                    v_User_ID,                   current_timestamp,                          v_User_ID,
+                          VALUES(v_rol_pago_prov_line_id,              p_client_id,                 p_org_id,                                   'Y',
+                                 current_timestamp,                    p_user_id,                   current_timestamp,                          p_user_id,
                                  v_rol_pago_provision_id,              v_line,                      Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    0,
                                  
                                  'Y',                                  v_fecha_inicio,              v_fecha_final,                              v_currency_id, 
@@ -168,7 +173,7 @@ BEGIN
 
                 v_rol_pago_provision_id := (select p.no_rol_pago_provision_id from no_rol_pago_provision p where ispago='N' and c_bpartner_id = Cur_Empleado.c_bpartner_id);
                 
-                ad_sequence_doctype(v_doctypeprov_id, v_Client_ID, 'Y', v_documentnoprov);
+                ad_sequence_doctype(v_doctypeprov_id, p_client_id, 'Y', v_documentnoprov);
 
                 FOR Cur_Rubro_Rol IN
                    (select cr.no_calcula_rubro_id,
@@ -212,28 +217,28 @@ BEGIN
                     into v_fecha_inicio, v_fecha_final
                     from c_year y, c_period p
                     where to_number(y.year) = DATE_part('YEAR', date(now())) 
-                    and y.ad_client_id = v_Client_ID
+                    and y.ad_client_id = p_client_id
                     and y.c_year_id = p.c_year_id;
 
 
                     SELECT dt.c_doctype_id INTO v_doctypeline_id
                     FROM c_doctype dt
                     WHERE dt.ad_table_id = 'DDBCCC1DA9BE4E01A31B8325706B08DB';
-                    ad_sequence_doctype(v_doctypeline_id, v_Client_ID, 'Y', v_documentnoline);
+                    ad_sequence_doctype(v_doctypeline_id, p_client_id, 'Y', v_documentnoline);
 					
 
 		    v_fecha_inicio = (  --select nce.fecha_inicio into v_fecha_inicio , nce.fecha_fin into v_fecha_final , nce.c_bpartner_id
 					select fecha_inicio
 					from no_contrato_empleado
 					where isactive = 'Y' 
-					and  ad_client_id=v_Client_ID 
+					and  ad_client_id=p_client_id 
 					and c_bpartner_id = Cur_Empleado.c_bpartner_id
 					);
 		   v_fecha_final = (  --select nce.fecha_inicio into v_fecha_inicio , nce.fecha_fin into v_fecha_final , nce.c_bpartner_id
 					select fecha_fin
 					from no_contrato_empleado
 					where isactive = 'Y' 
-					and  ad_client_id=v_Client_ID 
+					and  ad_client_id=p_client_id 
 					and c_bpartner_id = Cur_Empleado.c_bpartner_id
 					);
 					
@@ -245,8 +250,8 @@ BEGIN
                                      no_rol_pago_provision_id,             line,                        no_tipo_ingreso_egreso_id,                  valor,
                                      processed,                            fechainicio,                 fechafin,                                   c_currency_id,
                                      docstatus,                            c_doctype_id,                documentno,                                 docaccionno)
-                              VALUES(v_rol_pago_prov_line_id,              v_Client_ID,                 v_Org_ID,                                   'Y',
-                                     current_timestamp,                    v_User_ID,                   current_timestamp,                          v_User_ID,
+                              VALUES(v_rol_pago_prov_line_id,              p_client_id,                 p_org_id,                                   'Y',
+                                     current_timestamp,                    p_user_id,                   current_timestamp,                          p_user_id,
                                      v_rol_pago_provision_id,              v_line,                      Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    0,
                                      'Y',                                  v_fecha_inicio,              v_fecha_final,                              v_currency_id, 
                                      'CO',                                 v_doctypeline_id,            v_documentnoline,                            'RE');
@@ -261,7 +266,7 @@ BEGIN
 
         v_Message:='@NO_EjecucionCorrecta@';
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message) ;
-     --   PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+     --   PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, p_user_id, 'Y', v_Result, v_Message);
         RETURN;
 
 

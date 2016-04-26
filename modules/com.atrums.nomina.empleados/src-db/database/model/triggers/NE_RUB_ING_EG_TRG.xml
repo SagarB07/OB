@@ -7,6 +7,7 @@
 	v_n_debe_acct character varying(32);
 	v_n_haber_acct character varying(32);
 	v_acct_schema character varying(32);
+	
 BEGIN
 
     IF UPDATING THEN
@@ -36,7 +37,7 @@ BEGIN
                             )
                         values(
                             get_uuid(), :new.ad_client_id, :new.ad_org_id,
-                            'Y', now(), :new.createdby,
+                            v_cursor.isactive, now(), :new.createdby,
                             now(), :new.updatedby, :new.c_bpartner_id,
                             v_acct_schema, 
                             v_cursor.ne_debe_acct, v_cursor.no_tipo_ingreso_egreso_id,

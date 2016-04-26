@@ -11,7 +11,24 @@
 BEGIN
 
 --UPDATE idt_contrato SET i_errormsg = '00***' ;
+
+	select fecha_inicio, fecha_fin
+			into v_fecha_inicio, v_fecha_fin
+			from no_contrato_empleado
+			where no_contrato_empleado_id = :new.no_contrato_empleado_id;
+			
+			
+
 	IF INSERTING THEN
+	
+	
+		if date(:new.em_ne_fecha_inicio) < date(v_fecha_inicio) then
+				raise '%', '@NE_FECHA_VAC_VAL@';
+			end if;
+
+			if date(:new.em_ne_fecha_fin) > date(v_fecha_fin) then
+				raise '%', '@NE_FECHA_VAC_VAL@';
+			end if;
 	
  	if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
  	raise exception '%', '@NE_NO_VACACION_FECHA_VAL@';
@@ -23,6 +40,15 @@ BEGIN
 
 	
 	 ELSIF UPDATING THEN
+	 
+	 if date(:new.em_ne_fecha_inicio) < date(v_fecha_inicio) then
+				raise '%', '@NE_FECHA_VAC_VAL@';
+			end if;
+
+			if date(:new.em_ne_fecha_fin) > date(v_fecha_fin) then
+				raise '%', '@NE_FECHA_VAC_VAL@';
+			end if;
+
 
 		if date(:new.em_ne_fecha_fin) <= date(:new.em_ne_fecha_inicio) then
 		raise exception '%', '@NE_NO_VACACION_FECHA_VAL@';

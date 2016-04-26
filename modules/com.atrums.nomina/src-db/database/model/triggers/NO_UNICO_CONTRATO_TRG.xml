@@ -5,15 +5,32 @@
 v_mensaje 	varchar(255);	  
 BEGIN
     
-    IF (UPDATING OR INSERTING) THEN
+    IF ( INSERTING) THEN
         IF (SELECT count(*) > 0 FROM no_CONTRATO_EMPLEADO NCE
 				WHERE NCE.C_BPARTNER_ID = :NEW.C_BPARTNER_ID
+				AND NCE.no_CONTRATO_EMPLEADO_ID <>  :NEW.no_CONTRATO_EMPLEADO_ID
 				AND ISACTIVE = 'Y'
 			) THEN
 			v_mensaje:='@NO_UNICO_CONTRATO@';
 
  
-raise exception '%', '@NO_UNICO_CONTRATO@';
+		raise exception '%', '@NO_UNICO_CONTRATO@';
+
+        ELSE
+            RETURN NEW;
+        END IF;
+    END IF;
+	
+	IF (UPDATING ) THEN
+        IF (SELECT count(*) > 0 FROM no_CONTRATO_EMPLEADO NCE
+				WHERE NCE.C_BPARTNER_ID = :NEW.C_BPARTNER_ID
+				AND NCE.no_CONTRATO_EMPLEADO_ID <>  :OLD.no_CONTRATO_EMPLEADO_ID
+				AND ISACTIVE = 'Y'
+			) THEN
+			v_mensaje:='@NO_UNICO_CONTRATO@';
+
+ 
+		raise exception '%', '@NO_UNICO_CONTRATO@';
 
         ELSE
             RETURN NEW;

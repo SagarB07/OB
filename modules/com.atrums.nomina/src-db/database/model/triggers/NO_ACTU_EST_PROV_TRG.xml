@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACTU_EST_PROV_TRG">
+    <trigger name="NO_ACTU_EST_PROV_TRG" table="NO_CONTRATO_EMPLEADO" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje 	varchar(255);	  
+v_codigo_rprov varchar(32);	  
+v_status varchar(1);	  
+BEGIN
+    
+    IF (UPDATING) THEN
+
+		select rpro.no_rol_pago_provision_id, ce.isactive 
+		into v_codigo_rprov , v_status
+		from no_contrato_empleado ce, no_rol_pago_provision rpro 
+		where rpro.c_bpartner_id = ce.c_bpartner_id 
+		and ce.documentno = rpro.em_ne_num_contrato 
+		and ce.no_contrato_empleado_id = :NEW.no_contrato_empleado_id limit 1;
+		IF v_codigo_rprov IS NOT NULL THEN
+		UPDATE no_rol_pago_provision SET ISACTIVE =  v_status WHERE no_rol_pago_provision_ID = v_codigo_rprov;
+		END IF;
+        ELSE
+            RETURN NEW;
+        END IF;
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_ACTU_EST_PROV_TRG
+]]></body>
+    </trigger>
+  </database>

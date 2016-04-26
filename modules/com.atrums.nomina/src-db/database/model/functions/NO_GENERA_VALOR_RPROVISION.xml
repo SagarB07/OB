@@ -107,6 +107,7 @@ BEGIN
                     and rpl.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id
                     and rpl.processed = 'Y'
                     and rp.ispago = 'N'
+					and rp.isactive = 'Y'
                     and date_trunc('Month', rpl.fechafin)::DATE - date_trunc('Month', now())::DATE >= 0
                     and date_trunc('Month', now())::DATE - date_trunc('Month', rpl.fechainicio)::DATE >= 0
 				)

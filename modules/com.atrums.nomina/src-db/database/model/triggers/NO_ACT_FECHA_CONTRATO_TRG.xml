@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACT_FECHA_CONTRATO_TRG">
+    <trigger name="NO_ACT_FECHA_CONTRATO_TRG" table="NO_ROL_PROVISION_LINE_MES" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_fecha_inicio  DATE;
+v_fecha_fin DATE;
+v_codigo_cabecera VARCHAR(32); 
+BEGIN
+    IF (UPDATING OR INSERTING) THEN
+
+        select 
+		fecha_inicio, fecha_fin 
+		into v_fecha_inicio, v_fecha_fin
+		   
+		from  no_contrato_empleado where no_contrato_empleado_id in (
+		SELECT distinct (ce.no_contrato_empleado_id) FROM no_contrato_empleado ce,
+		no_rol_pago_provision_line prl,  
+		no_rol_provision_line_mes prlm, 
+		no_rol_pago_provision prc
+		where prl.no_rol_pago_provision_line_id = prlm.no_rol_pago_provision_line_id
+		and ce.c_bpartner_id =  prc.c_bpartner_id
+		and  ce.isactive = 'Y'
+		and prc.no_rol_pago_provision_id = prl.no_rol_pago_provision_id
+		and prl.no_rol_pago_provision_line_id = :NEW.no_rol_pago_provision_line_id) limit 1;
+		
+		
+		SELECT distinct (prc.no_rol_pago_provision_id) into v_codigo_cabecera FROM no_contrato_empleado ce,
+		no_rol_pago_provision_line prl,  
+		no_rol_provision_line_mes prlm, 
+		no_rol_pago_provision prc
+		where prl.no_rol_pago_provision_line_id = prlm.no_rol_pago_provision_line_id
+		and ce.c_bpartner_id =  prc.c_bpartner_id
+		and  ce.isactive = 'Y'
+		and prc.no_rol_pago_provision_id = prl.no_rol_pago_provision_id
+		and prl.no_rol_pago_provision_line_id = :NEW.no_rol_pago_provision_line_id;
+		
+		update no_rol_pago_provision_line 
+		set fechainicio = v_fecha_inicio, fechafin = v_fecha_fin 
+		where no_rol_pago_provision_id = v_codigo_cabecera;
+		
+        RETURN NEW;
+    END IF;
+
+
+	END NO_ACT_FECHA_CONTRATO_TRG
+]]></body>
+    </trigger>
+  </database>

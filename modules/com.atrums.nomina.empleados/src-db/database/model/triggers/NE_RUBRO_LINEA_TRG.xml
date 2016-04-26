@@ -3,20 +3,20 @@
     <trigger name="NE_RUBRO_LINEA_TRG" table="NE_PERFIL_RUBRO" fires="after" insert="true" update="false" delete="false" foreach="row">
       <body><![CDATA[
 
-
 DECLARE
 	v_cursor record;
 	v_no_tipo_ing_egr_acct_id character varying(32);
 	v_n_debe_acct character varying(32);
 	v_n_haber_acct character varying(32);
 	v_ad_client_id character varying(32);
+	v_isactive character varying(1);
 BEGIN
 	for v_cursor in (select * 
 		from no_tipo_ingreso_egreso tie
 		where tie.isactive = 'Y')
 	loop
-		select no_tipo_ing_egr_acct_id, n_debe_acct, n_haber_acct, ad_client_id
-		into v_no_tipo_ing_egr_acct_id, v_n_debe_acct, v_n_haber_acct, v_ad_client_id
+		select no_tipo_ing_egr_acct_id, n_debe_acct, n_haber_acct, ad_client_id, isactive
+		into v_no_tipo_ing_egr_acct_id, v_n_debe_acct, v_n_haber_acct, v_ad_client_id, v_isactive
 		from no_tipo_ing_egr_acct
 		where no_tipo_ingreso_egreso_id = v_cursor.no_tipo_ingreso_egreso_id
 		limit 1;
@@ -34,7 +34,7 @@ BEGIN
 				)
 			values (
 				get_uuid(), :new.ad_client_id,
-				:new.ad_org_id, 'Y',
+				:new.ad_org_id, v_isactive,
 				now(), :new.createdby,
 				now(), :new.updatedby,
 				:new.ne_perfil_rubro_id, v_cursor.no_tipo_ingreso_egreso_id, v_n_debe_acct,

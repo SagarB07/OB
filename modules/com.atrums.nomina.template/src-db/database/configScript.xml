@@ -97,10 +97,6 @@
       <oldValue><![CDATA[N]]></oldValue>
       <newValue><![CDATA[Y]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_COLUMN" columnname="AD_CALLOUT_ID" pkRow="4940">
-      <oldValue><![CDATA[65D62ED671824003A16B54BBE7F8354D]]></oldValue>
-      <newValue/>
-    </columnDataChange>
     <columnDataChange tablename="OBUISEL_SELECTOR_FIELD" columnname="NAME" pkRow="34940C0A024A4C438BF57B4A12E656E5">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>

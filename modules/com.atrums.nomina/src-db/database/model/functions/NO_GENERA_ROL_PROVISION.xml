@@ -68,7 +68,8 @@ BEGIN
         FOR Cur_Empleado IN
         (select bp.c_bpartner_id,
                 ce.ad_org_id,
-                ce.fecha_inicio
+                ce.fecha_inicio,
+		ce.documentno
            from c_bpartner bp,
                 no_contrato_empleado ce
           where bp.c_bpartner_id = ce.c_bpartner_id
@@ -110,12 +111,13 @@ BEGIN
                             (no_rol_pago_provision_id,   ad_client_id,       ad_org_id,          isactive,
                              created,                    createdby,          updated,            updatedby,
                              c_bpartner_id,              c_doctype_id,       documentno,         total_ingreso, 
-                             total_egreso,               total_neto,         docstatus,          ispago,
+                             total_egreso,               total_neto,         docstatus,          ispago, em_ne_num_contrato,
                              processed,                  docaccionno,        posted,             processing)
-                      VALUES(v_rol_pago_provision_id,    v_Client_ID,        v_Org_ID,           'Y',
+                     
+		      VALUES(v_rol_pago_provision_id,    v_Client_ID,        v_Org_ID,           'Y',
                              current_timestamp,          v_User_ID,          current_timestamp,  v_User_ID,
                              Cur_Empleado.c_bpartner_id, v_doctypeprov_id,    v_documentnoprov,       0,
-                             0,                          0,                  'CO',               'N',  
+                             0,                          0,                  'CO',               'N',  Cur_Empleado.documentno,
                              'Y',                        'CO',               'N',                'N');
 
                 FOR Cur_Rubro_Rol IN
