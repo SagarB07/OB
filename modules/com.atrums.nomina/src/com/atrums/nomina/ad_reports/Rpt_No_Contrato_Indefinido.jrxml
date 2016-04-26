@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Indefinido" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="com.atrums.nomina.report.NumerosLetras">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Indefinido" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="18"/>
-	<property name="ireport.y" value="2817"/>
-	<import value="com.atrums.nomina.report.NumerosLetras"/>
-	<parameter name="no_contrato_empleado_id" class="java.lang.String"/>
+	<property name="ireport.x" value="135"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
-EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD
+EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD,
+ne_conv_numero_letras(CO.SALARIO) as valor_letras
 FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
 atnorh_cargo AS CAR, ad_org as suc, ad_orginfo AS INFO , c_location AS LOC, c_city AS CIU
 WHERE EM.C_BPARTNER_ID = CO.C_BPARTNER_ID
@@ -16,19 +18,20 @@ AND CO.ad_org_id = suc.ad_org_id
 AND INFO.ad_org_id = suc.ad_org_id
 AND INFO.c_location_ID = LOC.c_location_ID
 AND CIU.c_city_ID = LOC.c_city_ID
-AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
+AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 	</queryString>
 	<field name="id" class="java.lang.String"/>
 	<field name="fecha_actual" class="java.sql.Timestamp"/>
-	<field name="dia" class="java.lang.Double"/>
-	<field name="mes" class="java.lang.Double"/>
-	<field name="anio" class="java.lang.Double"/>
+	<field name="dia" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.Integer"/>
+	<field name="anio" class="java.lang.Integer"/>
 	<field name="nombre_empleado" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
 	<field name="salario" class="java.math.BigDecimal"/>
 	<field name="cargo" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String"/>
 	<field name="ciudad" class="java.lang.String"/>
+	<field name="valor_letras" class="java.lang.String"/>
 	<detail>
 		<band height="802" splitType="Stretch">
 			<staticText>
@@ -118,7 +121,7 @@ Sobre el pago de Horas Suplementarias y Extraordinarias a EL EMPLEADO, las misma
 			<textField>
 				<reportElement x="11" y="614" width="515" height="54"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADOR se compromete a cancelar a EL EMPLEADO como remuneración mensual el valor de USD.$F{salario},  ( "+$P{REPORT_SCRIPTLET}.convertirLetras( (int)$F{salario} ).toUpperCase() +" centavos DÓLARES DE LOS ESTADOS UNIDOSDENORTEAMÉRICA) más los beneficios sociales y remuneraciones adicionales que le correspondan de acuerdo con la ley."]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADOR se compromete a cancelar a EL EMPLEADO como remuneración mensual el valor de USD.$F{salario},  ( "+$F{valor_letras}.toUpperCase() +" centavos DÓLARES DE LOS ESTADOS UNIDOSDENORTEAMÉRICA) más los beneficios sociales y remuneraciones adicionales que le correspondan de acuerdo con la ley."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="668" width="515" height="95"/>

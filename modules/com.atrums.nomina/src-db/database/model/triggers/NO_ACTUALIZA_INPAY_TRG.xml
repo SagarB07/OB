@@ -7,38 +7,41 @@ v_qry VARCHAR;
 v_tablename VARCHAR;
 v_in_payment CHAR(1);
 v_recor_id varchar;
+v_tipo_pago VARCHAR(32);
 
 BEGIN
-		IF(INSERTING)THEN
+	IF(INSERTING) THEN
+	
               select t.tablename 
                 into v_tablename
-                from ad_table t, 
-                     c_doctype dt1
-                where t.ad_table_id = dt1.ad_table_id
-                  and dt1.c_doctype_id = :new.c_doctype_id;
+                from ad_table t, c_doctype dt1
+               where t.ad_table_id = dt1.ad_table_id
+                 and dt1.c_doctype_id = :new.c_doctype_id;
 
-				v_in_payment = 'Y';
+		v_in_payment = 'Y';
                 v_recor_id:=:new.record_id;
+                v_tipo_pago := (select pc.c_doctype_id from no_pago_cabecera pc where pc.no_pago_cabecera_id = :new.no_pago_cabecera_id);
                 
-		END IF;
+	END IF;
 		
-		IF(DELETING)THEN
+	IF(DELETING)THEN
 
               select t.tablename 
                 into v_tablename
-                from ad_table t, 
-                     c_doctype dt1
-                where t.ad_table_id = dt1.ad_table_id
-                  and dt1.c_doctype_id = :old.c_doctype_id;
+                from ad_table t, c_doctype dt1
+               where t.ad_table_id = dt1.ad_table_id
+                 and dt1.c_doctype_id = :old.c_doctype_id;
 
-				v_in_payment = 'N';
+		v_in_payment = 'N';
                 v_recor_id:=:old.record_id;
-		END IF;
+                v_tipo_pago := (select pc.c_doctype_id from no_pago_cabecera pc where pc.no_pago_cabecera_id = :old.no_pago_cabecera_id);
+                
+	END IF;
 
-        v_qry:= 'update ' || v_tablename || ' set in_payment = ''' || v_in_payment || 
-                ''' where ' || v_tablename || '_id = ''' ||v_recor_id||'''';
-
-        execute v_qry;
+	IF v_tipo_pago = '042C0D9E0BEF42E7B5F2B6E122031D38' THEN
+		v_qry:= 'update ' || v_tablename || ' set in_payment = ''' || v_in_payment || ''' where ' || v_tablename || '_id = ''' ||v_recor_id||'''';
+		execute v_qry;
+	END IF;
     
 
     IF(DELETING)THEN

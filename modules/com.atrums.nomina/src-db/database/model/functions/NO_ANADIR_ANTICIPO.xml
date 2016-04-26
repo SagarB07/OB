@@ -23,11 +23,9 @@ varexist NUMBER;
 
 BEGIN
 
-
-
-
 v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account  WHERE  fin_financial_account_ID = 'F27069227AB242B8ACA82A42817607AF');
 v_metodo_pago = (select fin_paymentmethod_id from  fin_paymentmethod limit 1);
+
 FOR Cur_Parameter IN
 	(SELECT i.Record_ID, i.AD_User_ID, rq.ad_client_id, rq.ad_org_id
 	FROM AD_PInstance i
@@ -43,15 +41,11 @@ LOOP
 
 IF NOT exists (select * from c_doctype where c_doctype_ID  = 'C919FD1F8EA74A12B37EFC237BE05985' ) THEN
 
+--raise exception '%', 'QUINCENA';
+
 INSERT INTO c_doctype 
-(C_DOCTYPE_ID,
-AD_CLIENT_ID,
-AD_ORG_ID,
-ISACTIVE,
-CREATED,
-CREATEDBY,
-UPDATED,
-UPDATEDBY,
+	(C_DOCTYPE_ID,      AD_CLIENT_ID, AD_ORG_ID,ISACTIVE,CREATED,CREATEDBY,
+         UPDATED,           UPDATEDBY,
 NAME,
 PRINTNAME,
 DOCBASETYPE,
@@ -69,7 +63,7 @@ ISRETURN
 VALUES
 ('C919FD1F8EA74A12B37EFC237BE05985',
 Cur_Parameter.ad_client_id, 
-ad_org_id,
+Cur_Parameter.ad_org_id,
 'Y',
 'NOW()',
 '100',
@@ -141,6 +135,8 @@ END IF;
 		END IF;
 	
 	    --update idt_contrato set i_errormsg = 'no deveria entrar';
+
+	    
 				IF varexist > 0 THEN
 				   INSERT INTO no_registra_quinc_line(
 						no_registra_quinc_line_id,

@@ -81,7 +81,7 @@ BEGIN
                AND ispago = 'N';
 	
 			
-				UPDATE IDT_CONTRATO SET I_ERRORMSG = v_count  ;
+			--	UPDATE IDT_CONTRATO SET I_ERRORMSG = v_count  ;
             IF v_count = 0 THEN
 
                
@@ -102,7 +102,7 @@ BEGIN
                       
 					  VALUES(v_rol_pago_provision_id,    p_client_id,        p_org_id,           'Y',
                              current_timestamp,          p_user_id,          current_timestamp,  p_user_id,
-                             Cur_Empleado.c_bpartner_id, v_doctypeprov_id,    v_documentnoprov,       0,
+                             Cur_Empleado.c_bpartner_id, v_doctypeprov_id,    '123',       0,
                              0,                          0,                  'CO',               'N',  Cur_Empleado.documentno,
                              'Y',                        'CO',               'N',                'N');
 
@@ -171,7 +171,7 @@ BEGIN
 
             ELSE
 
-                v_rol_pago_provision_id := (select p.no_rol_pago_provision_id from no_rol_pago_provision p where ispago='N' and c_bpartner_id = Cur_Empleado.c_bpartner_id);
+                v_rol_pago_provision_id := (select p.no_rol_pago_provision_id from no_rol_pago_provision p where ISACTIVE = 'Y'AND ispago='N' and c_bpartner_id = Cur_Empleado.c_bpartner_id);
                 
                 ad_sequence_doctype(v_doctypeprov_id, p_client_id, 'Y', v_documentnoprov);
 

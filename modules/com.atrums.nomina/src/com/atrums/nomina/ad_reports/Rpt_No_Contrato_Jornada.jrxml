@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="com.atrums.nomina.report.NumerosLetras">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2675"/>
-	<import value="com.atrums.nomina.report.NumerosLetras"/>
-	<parameter name="no_contrato_empleado_id" class="java.lang.String"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
-EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD
+EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD,
+ne_conv_numero_letras(CO.SALARIO) as valor_letras
 FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
 atnorh_cargo AS CAR, ad_org as suc, ad_orginfo AS INFO , c_location AS LOC, c_city AS CIU
 WHERE EM.C_BPARTNER_ID = CO.C_BPARTNER_ID
@@ -16,7 +18,7 @@ AND CO.ad_org_id = suc.ad_org_id
 AND INFO.ad_org_id = suc.ad_org_id
 AND INFO.c_location_ID = LOC.c_location_ID
 AND CIU.c_city_ID = LOC.c_city_ID
-AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
+AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 	</queryString>
 	<field name="id" class="java.lang.String"/>
 	<field name="fecha_actual" class="java.sql.Timestamp"/>
@@ -29,6 +31,7 @@ AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
 	<field name="cargo" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String"/>
 	<field name="ciudad" class="java.lang.String"/>
+	<field name="valor_letras" class="java.lang.String"/>
 	<detail>
 		<band height="1536" splitType="Stretch">
 			<staticText>
@@ -233,7 +236,7 @@ MB MAYFLOWER BUFFALOS S.A.
 			<textField>
 				<reportElement x="11" y="348" width="524" height="29"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["USD "+$F{salario}+" ("+$P{REPORT_SCRIPTLET}.convertirLetras( (int)$F{salario} ).toUpperCase()+" 00/100DOLARES DE LOS ESTADOS UNIDOS DE AMÉRICA), "]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["USD "+$F{salario}+" ("+$F{valor_letras}.toUpperCase()+" 00/100DOLARES DE LOS ESTADOS UNIDOS DE AMÉRICA), "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="11" y="377" width="523" height="28"/>
