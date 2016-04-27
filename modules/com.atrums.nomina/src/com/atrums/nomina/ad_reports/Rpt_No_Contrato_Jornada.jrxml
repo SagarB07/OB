@@ -2,12 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="3216"/>
 	<parameter name="DOCUMENT_ID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
+		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,no_numeros_meses( CAST(extract(MONTH From NOW())AS INT )) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
 EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD,
 ne_conv_numero_letras(CO.SALARIO) as valor_letras
 FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
@@ -23,7 +23,7 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 	<field name="id" class="java.lang.String"/>
 	<field name="fecha_actual" class="java.sql.Timestamp"/>
 	<field name="dia" class="java.lang.Integer"/>
-	<field name="mes" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.String"/>
 	<field name="anio" class="java.lang.Integer"/>
 	<field name="nombre_empleado" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
@@ -46,21 +46,21 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[PRIMERA: ANTECEDENTES.-]]></text>
+				<text><![CDATA[1: ANTECEDENTES.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="221" width="136" height="20"/>
+				<reportElement x="11" y="213" width="136" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[SEGUNDA: OBJETO.-]]></text>
+				<text><![CDATA[2: OBJETO.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="357" width="146" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[TERCERA: REMUNERACIÓN.-]]></text>
+				<text><![CDATA[3: ACEPTACIÓN.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="376" width="525" height="26"/>
@@ -72,7 +72,7 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[CUARTO:	OBLIGACIONES DEL EMPLEADO.-]]></text>
+				<text><![CDATA[4: OBLIGACIONES DEL EMPLEADO.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="429" width="524" height="546"/>
@@ -106,7 +106,7 @@ t)  Someterse a las medidas que para el control de la asistencia y evaluación d
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[QUINTO:	DE LAS FALTAS GRAVES.-]]></text>
+				<text><![CDATA[5: DE LAS FALTAS GRAVES.-]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="9" y="28" width="525" height="72"/>
@@ -129,7 +129,7 @@ t)  Someterse a las medidas que para el control de la asistencia y evaluación d
 				<textFieldExpression class="java.lang.String"><![CDATA["II.	EL EMPLEADO ha manifestado su interés en prestar sus servicios lícitos y personales para la compañía. "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="241" width="524" height="110"/>
+				<reportElement x="11" y="233" width="524" height="110"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Con los antecedentes establecidos y, con el propósito de cumplir los fines para los que  LA EMPRESA se encuentra organizada, se procede a contratar los servicios lícitos y personales de EL EMPLEADO, a el (la) Sr. (a) "+$F{nombre_empleado}+", en calidad de "+$F{cargo}+", sin perjuicio de lo cual deberá ejecutar otras tareas similares a la naturaleza de su trabajo encomendado, y desplazarse a cualquier lugar en el que se requiera su actividad de trabajo, si esto fuere ordenado por la autoridad designada por la Empresa, para lo cual se estará a lo dispuesto en el art. 42 numeral 22 del Código del Trabajo. Expresamente EL EMPLEADO libre y voluntariamente, deja constancia de su aceptación y consentimiento con el contenido de esta cláusula, declarando que la asignación de otras tareas y responsabilidades no se podrá considerar bajo ninguna circunstancia, cambio de ocupación o despido intempestivo."]]></textFieldExpression>
 			</textField>
@@ -152,14 +152,14 @@ t)  Someterse a las medidas que para el control de la asistencia y evaluación d
 		</band>
 		<band height="1500">
 			<staticText>
-				<reportElement x="10" y="301" width="241" height="20"/>
+				<reportElement x="10" y="292" width="241" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[SÉPTIMO:	REMUNERACION.- ]]></text>
+				<text><![CDATA[7: REMUNERACION.- ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="321" width="544" height="27"/>
+				<reportElement x="11" y="312" width="544" height="27"/>
 				<textElement/>
 				<text><![CDATA[
 EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como remuneración mensual la cantidad de ]]></text>
@@ -169,7 +169,7 @@ EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como re
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[OCTAVO:	DURACIÓN.-]]></text>
+				<text><![CDATA[8: DURACIÓN.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="455" width="530" height="63"/>
@@ -181,7 +181,7 @@ EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como re
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[NOVENO:	HORARIO.- ]]></text>
+				<text><![CDATA[9: HORARIO.- ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="545" width="530" height="14"/>
@@ -227,24 +227,24 @@ MB MAYFLOWER BUFFALOS S.A.
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="9" y="16" width="204" height="20"/>
+				<reportElement x="9" y="16" width="324" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["SEXTO:	CONFIDENCIALIDAD Y SECRETO PROFESIONAL.- "]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[6: CONFIDENCIALIDAD Y SECRETO PROFESIONAL.- ]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="348" width="524" height="29"/>
+				<reportElement x="11" y="339" width="524" height="29"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["USD "+$F{salario}+" ("+$F{valor_letras}.toUpperCase()+" 00/100DOLARES DE LOS ESTADOS UNIDOS DE AMÉRICA), "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="377" width="523" height="28"/>
+				<reportElement x="11" y="368" width="523" height="28"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["más los beneficios que por ley le corresponda, tomando en consideración la proporcionalidad en relación con la remuneración que corresponde a la jornada completa."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="405" width="523" height="27"/>
+				<reportElement x="11" y="396" width="523" height="27"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["El EMPLEADOR reconocerá también a EL EMPLEADO las obligaciones sociales y los demás beneficios establecidos en la legislación ecuatoriana."]]></textFieldExpression>
 			</textField>
@@ -258,7 +258,7 @@ MB MAYFLOWER BUFFALOS S.A.
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DÉCIMO:	PROPIEDAD INTELECTUAL.-  ]]></text>
+				<text><![CDATA[10: PROPIEDAD INTELECTUAL.-  ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="606" width="530" height="39"/>
@@ -281,7 +281,7 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[UNDÉCIMO:	LIQUIDACION.-  ]]></text>
+				<text><![CDATA[11: LIQUIDACION.-  ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="672" width="529" height="39"/>
@@ -293,7 +293,7 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DUODÉCIMO:	LUGAR DE TRABAJO.-]]></text>
+				<text><![CDATA[12: LUGAR DE TRABAJO.-]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="738" width="530" height="39"/>
@@ -305,7 +305,7 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[DECIMOTERCERO:	CONTROVERSIAS.-]]></text>
+				<text><![CDATA[13: CONTROVERSIAS.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="804" width="529" height="41"/>
@@ -317,7 +317,7 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DECIMOCUARTO:	JURISDICCIÓN Y COMPETENCIA.-]]></text>
+				<text><![CDATA[14: JURISDICCIÓN Y COMPETENCIA.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="872" width="529" height="37"/>

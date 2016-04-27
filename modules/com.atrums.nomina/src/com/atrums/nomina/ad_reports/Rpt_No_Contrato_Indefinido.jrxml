@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Indefinido" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="135"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2818"/>
 	<parameter name="DOCUMENT_ID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
+		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,no_numeros_meses( CAST(extract(MONTH From NOW())AS INT )) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
 EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD,
 ne_conv_numero_letras(CO.SALARIO) as valor_letras
 FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
@@ -23,7 +23,7 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 	<field name="id" class="java.lang.String"/>
 	<field name="fecha_actual" class="java.sql.Timestamp"/>
 	<field name="dia" class="java.lang.Integer"/>
-	<field name="mes" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.String"/>
 	<field name="anio" class="java.lang.Integer"/>
 	<field name="nombre_empleado" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
@@ -95,14 +95,19 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO realizará sus actividades en el local de la Compañía MB MAYFLOWER BUFFALOS S.A. , localizada en la calle "+$F{direccion}+";  sin embargo, EL EMPLEADOR podrá asignarle cualquier otra actividad conexa en la ciudad de "+$F{ciudad}+" o en otro lugar dentro o fuera de QUITO, siempre que no implique disminución de remuneración o de categoría laboral, en este caso EL EMPLEADOR se apegará a lo establecido en el Art.42 numeral22."]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="11" y="438" width="184" height="20"/>
+				<reportElement x="11" y="607" width="163" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[PRIMERO: JORNADA DE TRABAJO.-]]></text>
+				<text><![CDATA[SEGUNDO: REMUNERACIÓN.-]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="11" y="627" width="515" height="54"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADOR se compromete a cancelar a EL EMPLEADO como remuneración mensual el valor de USD.$F{salario},  ( "+$F{valor_letras}.toUpperCase() +" centavos DÓLARES DE LOS ESTADOS UNIDOSDENORTEAMÉRICA) más los beneficios sociales y remuneraciones adicionales que le correspondan de acuerdo con la ley."]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="11" y="458" width="515" height="129"/>
+				<reportElement x="11" y="467" width="515" height="128"/>
 				<textElement/>
 				<text><![CDATA[EL EMPLEADO se obliga a efectuar su labor por jornadas de trabajo de LUNES a VIERNES, de conformidad con el siguiente horario de 11:00 a 19:00 y de 12:00 a 20:00.
 
@@ -112,19 +117,14 @@ Sobre el pago de Horas Suplementarias y Extraordinarias a EL EMPLEADO, las misma
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="594" width="163" height="20"/>
+				<reportElement x="11" y="447" width="197" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[SEGUNDO: REMUNERACIÓN.-]]></text>
+				<text><![CDATA[PRIMERO: JORNADA DE TRABAJO.-]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="11" y="614" width="515" height="54"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADOR se compromete a cancelar a EL EMPLEADO como remuneración mensual el valor de USD.$F{salario},  ( "+$F{valor_letras}.toUpperCase() +" centavos DÓLARES DE LOS ESTADOS UNIDOSDENORTEAMÉRICA) más los beneficios sociales y remuneraciones adicionales que le correspondan de acuerdo con la ley."]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="11" y="668" width="515" height="95"/>
+				<reportElement x="11" y="681" width="515" height="95"/>
 				<textElement/>
 				<text><![CDATA[Conforme lo disponen expresas disposiciones legales, de la remuneración mensual se descontará al EMPLEADO el valor correspondiente al aporte individual al Instituto Ecuatoriano de Seguridad Social, el Impuesto a la Renta y demás descuentos establecidos por la ley, por orden judicial o por autorización expresa de EL EMPLEADO.
 
@@ -134,12 +134,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 		</band>
 		<band height="802">
 			<staticText>
-				<reportElement x="11" y="5" width="515" height="39"/>
-				<textElement/>
-				<text><![CDATA[Los incrementos salariales que acordaren las partes, serán efectuados sin necesidad de que exista un nuevo contrato, sin perjuicio del aviso a ser efectuado ante el Instituto Ecuatoriano de Seguridad Social, para efectos de aportes patronales.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="11" y="128" width="515" height="307"/>
+				<reportElement x="11" y="98" width="515" height="307"/>
 				<textElement/>
 				<text><![CDATA[Amas de las establecidas en las leyes correspondientes, son obligaciones específicas de EL EMPLEADO las siguientes:
 1.  Mantener siempre el grado de eficiencia necesaria para el desempeño de sus actividades.
@@ -157,26 +152,26 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="54" width="136" height="20"/>
+				<reportElement x="11" y="24" width="136" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[TERCERO: VACACIONES.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="74" width="515" height="27"/>
+				<reportElement x="11" y="44" width="515" height="27"/>
 				<textElement/>
 				<text><![CDATA[EL EMPLEADO tendrá derecho a gozar de vacaciones de conformidad con lo dispuesto en el Art. 69  del Código del Trabajo y dentro del período acordado previamente con ELEMPLEADOR.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="108" width="228" height="20"/>
+				<reportElement x="11" y="78" width="228" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CUARTO: OBLIGACIONES DE EL EMPLEADO.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="462" width="515" height="340"/>
+				<reportElement x="11" y="442" width="515" height="246"/>
 				<textElement/>
 				<text><![CDATA[Se considerarán como faltas graves el incumplimiento de las obligaciones antes indicadas, lo dispuesto en el Código del  Trabajo vigente y, las siguientes:
 1.  Las previstas en el Art. 172 del Código del Trabajo vigente. Dentro de ellas se entenderá como ineptitud a la negligencia, irresponsabilidad y falta de colaboración de EL EMPLEADO en el cumplimiento de sus labores, así como el manejo indebido de los equipos.
@@ -190,7 +185,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="442" width="216" height="20"/>
+				<reportElement x="11" y="422" width="216" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
