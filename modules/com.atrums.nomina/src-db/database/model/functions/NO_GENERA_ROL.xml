@@ -125,7 +125,10 @@ BEGIN
 	    v_date_acct := (select enddate from c_period where c_period_id = v_period_id);
 
 	    
-            IF NOT EXISTS (select * from no_rol_pago_provision where ispago='Y' and docstatus<>'AN' and c_period_id=v_period_id and c_bpartner_id=Cur_Empleado.c_bpartner_id) THEN
+            IF NOT EXISTS (select * from no_rol_pago_provision where ispago='Y' and docstatus<>'AN' 
+							and c_period_id=v_period_id 
+							and c_bpartner_id=Cur_Empleado.c_bpartner_id   
+							and (select count (*) from no_cb_empleado_acct where isactive ='Y' and c_bpartner_id= Cur_Empleado.c_bpartner_id )> 1 ) THEN
 
 	    
                 ad_sequence_doctype(v_doctype_id, '', 'Y', v_documentno);

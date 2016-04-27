@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_UNICO_LINEA_EMPLEADO_TRG">
+    <trigger name="NO_UNICO_LINEA_EMPLEADO_TRG" table="NO_NOVEDAD_LINEA" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	v_cedula character varying(32);
+BEGIN
+
+	IF INSERTING THEN 
+	
+	IF (SELECT COUNT (*)> 0 FROM no_novedad_linea WHERE NO_NOVEDAD_ID = :new.NO_NOVEDAD_ID AND C_BPARTNER_ID = :new.C_BPARTNER_ID) THEN 
+	
+	RAISE NO_DATA_FOUND;
+	ELSE
+	return new; 
+	
+	END IF;
+	
+	END IF;
+	
+	
+	
+END NO_UNICO_LINEA_EMPLEADO_TRG
+]]></body>
+    </trigger>
+  </database>

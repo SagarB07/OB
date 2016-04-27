@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_NUMEROS_MESES">
+    <function name="NO_NUMEROS_MESES" type="VARCHAR">
+      <parameter name="p_opcion" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_mes  VARCHAR(100);
+BEGIN
+
+
+	if p_opcion = 1 then
+	v_mes = 'Enero';
+	END IF ;
+
+	if p_opcion = 2 then
+	v_mes = 'Febrero';
+	END IF ;
+
+	if p_opcion = 3 then
+	v_mes = 'Marzo';
+	END IF ;
+
+	if p_opcion = 4 then
+	v_mes = 'Abril';
+	END IF ;
+
+	if p_opcion = 5 then
+	v_mes = 'Mayo';
+	END IF ;
+
+	if p_opcion = 6 then
+	v_mes = 'Junio';
+	END IF ;
+
+	if p_opcion = 7 then
+	v_mes = 'Julio';
+	END IF ;
+
+	if p_opcion = 8 then
+	v_mes = 'Agosto';
+	END IF ;
+
+	if p_opcion = 9 then
+	v_mes = 'Septiembre';
+	END IF ;
+
+	if p_opcion = 10 then
+	v_mes = 'Octubre';
+	END IF ;
+
+	if p_opcion = 11 then
+	v_mes = 'Nobiembree';
+	END IF ;
+	if p_opcion = 12 then
+	v_mes = 'Diciembre';
+	END IF ;
+
+
+return v_mes;
+END NO_NUMEROS_MESES
+]]></body>
+    </function>
+  </database>
