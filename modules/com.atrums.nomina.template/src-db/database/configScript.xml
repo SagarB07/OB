@@ -665,14 +665,6 @@
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="8D7658E9FACD447093FBF9A1D5AC8695">
-      <oldValue><![CDATA[Tipo Pago]]></oldValue>
-      <newValue><![CDATA[Tipo Documento Pago]]></newValue>
-    </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="HELP" pkRow="8D7658E9FACD447093FBF9A1D5AC8695">
-      <oldValue><![CDATA[Tipo Pago]]></oldValue>
-      <newValue><![CDATA[Tipo Documento Pago]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="92BECAD0D4834D4B9317098BA7554F08">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
@@ -784,6 +776,10 @@
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="F903B2FEECBA4E258C5CE4E6B04D8713">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="28D0BD3B6C7F432AA9AF51DC5257A3EE">
+      <oldValue><![CDATA[80]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="52118BF1A2554D84E040007F01005FEC">
       <oldValue><![CDATA[92]]></oldValue>
