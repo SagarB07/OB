@@ -149,10 +149,6 @@
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="2156">
-      <oldValue><![CDATA[Y]]></oldValue>
-      <newValue><![CDATA[N]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="2156">
       <oldValue><![CDATA[Y]]></oldValue>
       <newValue><![CDATA[N]]></newValue>
@@ -668,6 +664,14 @@
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="89FAD90840794836B8942FF1691B50C4">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="8D7658E9FACD447093FBF9A1D5AC8695">
+      <oldValue><![CDATA[Tipo Pago]]></oldValue>
+      <newValue><![CDATA[Tipo Documento Pago]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="HELP" pkRow="8D7658E9FACD447093FBF9A1D5AC8695">
+      <oldValue><![CDATA[Tipo Pago]]></oldValue>
+      <newValue><![CDATA[Tipo Documento Pago]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="92BECAD0D4834D4B9317098BA7554F08">
       <oldValue><![CDATA[Business Partner]]></oldValue>
