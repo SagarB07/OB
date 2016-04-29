@@ -27,13 +27,14 @@
 
     V_PERIODO VARCHAR(32);
     V_TIPODOC VARCHAR(32);  
-	V_TIPODOCQUIN VARCHAR(32);  
-	V_ID_DECIMO_TERCERO VARCHAR(32);
-	V_ID_DECIMO_CUARTO VARCHAR(32);
+    V_TIPODOCQUIN VARCHAR(32);   
+    V_ID_DECIMO_TERCERO VARCHAR(32);
+    V_ID_DECIMO_CUARTO VARCHAR(32);
     
+    V_DOCUMENTNO VARCHAR(30);
     ITERADOR RECORD;
     Cur_Parameter RECORD;
-	V_VALOR   NUMBER;
+    V_VALOR   NUMBER;
 
 BEGIN
 
@@ -143,22 +144,19 @@ BEGIN
 		--CODIGO QUEMADO PAGO DECIMO CUARTO
         IF V_TIPODOC = '95F21C0F9E704ACAB95D35B387392A83' THEN 
 
-        --SELECT I_ERRORMSG FROM IDT_CONTRATO
-        --UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'PAGO78';
-	--UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'PAGO DECIMO TERCERO';
 		FOR ITERADOR IN (
 				SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID FROM no_rol_pago_provision CAB
 				WHERE CAB.no_rol_pago_provision_ID 
 				IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
 				(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
-				AND ISPAGO = 'N'
-				AND ISACTIVE = 'Y'
+					AND ISPAGO = 'N'
+					AND ISACTIVE = 'Y'
 				)
 				LOOP
 
-				UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ||'PERIODO' || ITERADOR.no_rol_pago_provision_ID ;
-				
-						SELECT VALOR INTO V_VALOR
+			--	UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ||'PERIODO' || ITERADOR.no_rol_pago_provision_ID ;
+
+						SELECT VALOR,DOCUMENTNO INTO V_VALOR, V_DOCUMENTNO
 						FROM no_rol_provision_line_mes 
 						WHERE no_rol_pago_provision_line_ID IN (SELECT no_rol_pago_provision_line_ID FROM no_rol_pago_provision_line 
 						WHERE no_rol_pago_provision_ID = ITERADOR.no_rol_pago_provision_ID
@@ -194,7 +192,7 @@ BEGIN
 						v_no_pago_cabecera_id,
 						ITERADOR.C_BPARTNER_ID, 
 						V_TIPODOC,
-						'1231',
+						V_DOCUMENTNO,
 						V_VALOR,
 						'BR',
 						v_table_id
@@ -212,19 +210,22 @@ BEGIN
         --SELECT I_ERRORMSG FROM IDT_CONTRATO
         --UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'PAGO78';
 		UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'PAGO DECIMO TERCERO';
+				
 				FOR ITERADOR IN (
-				SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID FROM no_rol_pago_provision CAB
-				WHERE CAB.no_rol_pago_provision_ID 
-				IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
-				(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
-				AND ISPAGO = 'N'
-				AND ISACTIVE = 'Y'
+					SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID FROM no_rol_pago_provision CAB
+					WHERE CAB.no_rol_pago_provision_ID 
+					IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
+					(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
+					AND ISPAGO = 'N'
+					AND ISACTIVE = 'Y'
 				)
 				LOOP
 
-				UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ||'PERIODO' || ITERADOR.no_rol_pago_provision_ID ;
-				
-						SELECT VALOR INTO V_VALOR
+														
+---- SELECT * FROM no_rol_provision_line_mes WHERE DOCUMENTNO = 
+---- SELECT DOCUMENTNO FROM no_pago_line 
+---- UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ||'PERIODO' || ITERADOR.no_rol_pago_provision_ID ;
+						SELECT VALOR,DOCUMENTNO INTO V_VALOR, V_DOCUMENTNO
 						FROM no_rol_provision_line_mes 
 						WHERE no_rol_pago_provision_line_ID IN (SELECT no_rol_pago_provision_line_ID FROM no_rol_pago_provision_line 
 						WHERE no_rol_pago_provision_ID = ITERADOR.no_rol_pago_provision_ID
@@ -260,7 +261,7 @@ BEGIN
 						v_no_pago_cabecera_id,
 						ITERADOR.C_BPARTNER_ID, 
 						V_TIPODOC,
-						'1231',
+						V_DOCUMENTNO,
 						V_VALOR,
 						'BR',
 						v_table_id

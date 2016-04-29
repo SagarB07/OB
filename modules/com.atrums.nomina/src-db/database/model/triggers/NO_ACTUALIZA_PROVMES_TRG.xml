@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACTUALIZA_PROVMES_TRG">
+    <trigger name="NO_ACTUALIZA_PROVMES_TRG" table="NO_PAGO_LINE" fires="before" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+v_mensaje VARCHAR;
+v_qry VARCHAR;
+V_DOCUMENT VARCHAR (30);
+
+BEGIN
+	IF(UPDATING) THEN
+	
+	IF EXISTS (SELECT * FROM no_rol_provision_line_mes WHERE DOCUMENTNO =  :NEW.DOCUMENTNO ) THEN 
+
+	 UPDATE no_rol_provision_line_mes SET pagado = 'Y' WHERE DOCUMENTNO = :NEW.DOCUMENTNO;		
+
+	END IF ;
+	END IF ;
+	
+          
+ 
+END NO_ACTUALIZA_PROVMES_TRG
+]]></body>
+    </trigger>
+  </database>
