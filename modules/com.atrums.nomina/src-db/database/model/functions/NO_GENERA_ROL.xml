@@ -58,6 +58,153 @@
 BEGIN
     
 	
+	
+IF NOT exists (select * from c_doctype where c_doctype_ID  = 'C919FD1F8EA74A12B37EFC237BE05985' ) THEN
+
+--raise exception '%', 'QUINCENA';
+
+INSERT INTO c_doctype 
+	(C_DOCTYPE_ID,      AD_CLIENT_ID, AD_ORG_ID,ISACTIVE,CREATED,CREATEDBY,
+         UPDATED,           UPDATEDBY,
+NAME,
+PRINTNAME,
+DOCBASETYPE,
+ISSOTRX,
+ISDOCNOCONTROLLED,
+GL_CATEGORY_ID,
+ISDEFAULT,
+DOCUMENTCOPIES,
+AD_TABLE_ID,
+ORGFILTERED,
+ISEXPENSE,
+ISREVERSAL,
+ISRETURN
+)
+VALUES
+('C919FD1F8EA74A12B37EFC237BE05985',
+Cur_Parameter.ad_client_id, 
+Cur_Parameter.ad_org_id,
+'Y',
+'NOW()',
+'100',
+'NOW()',
+'100',
+'QUINCENAS',
+'QUINCENAS',
+'APP',
+'N',
+'Y',
+'FC670B83E59C4E7CBD6B999D3F28B251',
+'N',
+'1',
+'1895538EF5114972AC1AE7CDE5568727',
+'N',
+'N',
+'N',
+'N'
+);
+
+
+
+END IF;
+IF NOT exists (select * from c_doctype where c_doctype_ID  = '95F21C0F9E704ACAB95D35B387392A83' ) THEN
+
+--raise exception '%', 'QUINCENA';
+
+INSERT INTO c_doctype 
+	(C_DOCTYPE_ID,      AD_CLIENT_ID, AD_ORG_ID,ISACTIVE,CREATED,CREATEDBY,
+         UPDATED,           UPDATEDBY,
+			NAME,
+			PRINTNAME,
+			DOCBASETYPE,
+			ISSOTRX,
+			ISDOCNOCONTROLLED,
+			GL_CATEGORY_ID,
+			ISDEFAULT,
+			DOCUMENTCOPIES,
+			AD_TABLE_ID,
+			ORGFILTERED,
+			ISEXPENSE,
+			ISREVERSAL,
+			ISRETURN
+			)
+			VALUES
+			('95F21C0F9E704ACAB95D35B387392A83',
+			Cur_Parameter.ad_client_id, 
+			Cur_Parameter.ad_org_id,
+			'Y',
+			'NOW()',
+			'100',
+			'NOW()',
+			'100',
+			'Décimo Cuarto',
+			'Décimo Cuarto',
+			'APP',
+			'N',
+			'Y',
+			'FC670B83E59C4E7CBD6B999D3F28B251',
+			'N',
+			'1',
+			'1895538EF5114972AC1AE7CDE5568727',
+			'N',
+			'N',
+			'N',
+			'N'
+			);
+
+
+
+END IF;
+
+
+IF NOT exists (select * from c_doctype where c_doctype_ID  = 'D58E93594DEC47239C0D666437AF52E6' ) THEN
+
+--raise exception '%', 'QUINCENA';
+
+INSERT INTO c_doctype 
+	(C_DOCTYPE_ID,      AD_CLIENT_ID, AD_ORG_ID,ISACTIVE,CREATED,CREATEDBY,
+         UPDATED,           UPDATEDBY,
+			NAME,
+			PRINTNAME,
+			DOCBASETYPE,
+			ISSOTRX,
+			ISDOCNOCONTROLLED,
+			GL_CATEGORY_ID,
+			ISDEFAULT,
+			DOCUMENTCOPIES,
+			AD_TABLE_ID,
+			ORGFILTERED,
+			ISEXPENSE,
+			ISREVERSAL,
+			ISRETURN
+			)
+			VALUES
+			('D58E93594DEC47239C0D666437AF52E6',
+			Cur_Parameter.ad_client_id, 
+			Cur_Parameter.ad_org_id,
+			'Y',
+			'NOW()',
+			'100',
+			'NOW()',
+			'100',
+			'Décimo Tercero',
+			'Décimo Tercero',
+			'APP',
+			'N',
+			'Y',
+			'FC670B83E59C4E7CBD6B999D3F28B251',
+			'N',
+			'1',
+			'1895538EF5114972AC1AE7CDE5568727',
+			'N',
+			'N',
+			'N',
+			'N'
+			);
+END IF;
+
+	
+	
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';
     AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);

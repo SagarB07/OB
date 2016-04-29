@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_OBTIENE_VALOR_PROV">
+    <function name="NO_OBTIENE_VALOR_PROV" type="NUMERIC">
+      <parameter name="p_empleado_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_tipo_ingreso_egreso_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_opcion" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_ref" type="TIMESTAMP" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_contrato_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_provicion NUMBER;
+BEGIN
+
+SELECT sum(provmes.valor) into v_provicion 
+FROM no_rol_provision_line_mes provmes, no_rol_pago_provision_line probline , no_rol_pago_provision provcab 
+WHERE provcab.no_rol_pago_provision_id = probline.no_rol_pago_provision_id 
+and probline.no_rol_pago_provision_line_id = provmes.no_rol_pago_provision_line_id 
+and provcab.em_ne_num_contrato = (select  documentno from no_contrato_empleado where no_contrato_empleado_id = p_contrato_id )
+and provcab.c_bpartner_id = p_empleado_id 
+and probline.no_tipo_ingreso_egreso_id =  p_tipo_ingreso_egreso_id 
+and provmes.c_period_id in (select no_recupera_periodos( p_opcion, cast (  p_fecha_ref as character varying)));
+
+return v_provicion;
+END NO_OBTIENE_VALOR_PROV
+]]></body>
+    </function>
+  </database>
