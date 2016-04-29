@@ -100,6 +100,37 @@ public class FileImportUtil {
 		    return(updateCount);
 		  }
 	
+	  public static int deleteTabla(Connection conn, ConnectionProvider connectionProvider, String strQuery)    throws ServletException {
+		  //  String strSql = "";
+		  //  strSql = strSql +  "DELETE FROM AD_ORG_CLOSING WHERE AD_ORG_CLOSING_ID = ?";
+
+		    int updateCount = 0;
+		    PreparedStatement st = null;
+
+		  //  int iParameter = 0;
+		    try {
+		    	st = connectionProvider.getPreparedStatement(conn, strQuery);
+		   	//	iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgClosingId);
+		    	updateCount = st.executeUpdate();
+
+		    } catch(SQLException e){
+		      log4j.error("SQL error in query: " + strQuery + "Exception:"+ e);
+		      throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());
+		    } catch(Exception ex){
+		      log4j.error("Exception in query: " + strQuery + "Exception:"+ ex);
+		      throw new ServletException("@CODE=@" + ex.getMessage());
+		    } finally {
+		      try {
+		        connectionProvider.releaseTransactionalPreparedStatement(st);
+		      } catch(Exception ignore){
+		        ignore.printStackTrace();
+		      }
+		    }
+		    return(updateCount);
+		  }
+	  
+	  
+	  
 	public static String obtenerIDCampo (Connection conn, ConnectionProvider connectionProvider, String strSql, String campo )    throws ServletException {
 		String datoCampo= "";
 		ResultSet result;
@@ -110,12 +141,14 @@ public class FileImportUtil {
 	    campo= campo.replace(" ", "");
 	    campo= campo.replace("=", "");
 	    boolean continueResult = true;
-	    while(continueResult && result.next()) {
-	        datoCampo = UtilSql.getValue(result, campo);
-	        if (datoCampo!= ""){
-	        	continueResult= false;
-	        }
-	      }
+	    if (campo != null && campo != ""){
+		    while(continueResult && result.next()) {
+		        datoCampo = UtilSql.getValue(result, campo);
+		        if (datoCampo!= ""){
+		        	continueResult= false;
+		        }
+		      }
+	    }
 	      result.close();
 	    } catch(SQLException e){
 	      log4j.error("SQL  error in query: " + strSql + "Exception:"+ e);

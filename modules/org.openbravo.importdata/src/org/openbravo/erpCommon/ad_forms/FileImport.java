@@ -302,11 +302,15 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
     StringBuffer strValues = new StringBuffer("");
     FileImportData[] data = null;
     int constant = 0;
+    
     OBError myMessage = null;
     int i = 0;
 
     try {
       con = getTransactionConnection();
+      FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_novedad");
+      FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_CONTRATO");
+      FileImportUtil.deleteTabla(con, this, "DELETE FROM I_Product");
       data = FileImportData.select(this, strAdImpformatId);
       String strTable = FileImportData.table(this, strAdImpformatId);
       for (i = 0; i < data2.length; i++) {
@@ -320,6 +324,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
           return myMessage;
         }
         // generate the updated row information and update the basic row already created.
+    
         int jj = 0;
         for (int j = 0; j < data.length; j++) {
           if ((data2[i].getField(String.valueOf(j - constant)) == null || data2[i].getField( String.valueOf(j - constant)).equals("")) && data[j].constantvalue.equals(""))
@@ -340,6 +345,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
           strValues.append("'");
           String valorCampoTemporal = strValues.toString();
           if (strTable.equals("IDT_novedad")){
+        	//  FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_novedad");
         	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
         	  strFields = obtenerCodigos (con, this,strFields, valorCampoTemporal );
         	  if (strFields.toString().equals(auxStrFields.toString())){
@@ -347,11 +353,13 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         	  }
           }else if (strTable.equals("IDT_contrato")){
         	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
+        	//  FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_CONTRATO");
         	  strFields = obtenerCodigosContrato (con, this,strFields, valorCampoTemporal );
         	  if (strFields.toString().equals(auxStrFields.toString())){
         		  strFields.append(strValues);  
         	  }
           }else if (strTable.equals("I_Product")){
+        	  ///FileImportUtil.deleteTabla(con, this, "DELETE FROM I_Product");
         	  if(data[j].columnname.equals("C_UOM_ID")){
         		  String strFieldId = null;
         		  strFieldId = FileImportUtil.findFieldId(con, this, data[j].columnname, data2[i].getField(String.valueOf(j - constant)));

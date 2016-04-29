@@ -218,7 +218,8 @@ public class EdiFileImport extends HttpSecureAppServlet {
     return data;
   }
 
-  private String clean(String oldstr) {
+  @SuppressWarnings("unused")
+private String clean(String oldstr) {
     String newstr = oldstr.substring(0, oldstr.length() - 1);
     return newstr;
   }
