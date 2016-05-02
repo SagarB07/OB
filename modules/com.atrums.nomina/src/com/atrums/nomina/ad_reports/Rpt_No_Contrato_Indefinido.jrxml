@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Indefinido" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2818"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="DOCUMENT_ID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -49,13 +49,13 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 				<text><![CDATA[PRIMERA: COMPARECIENTES.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="131" width="525" height="29"/>
-				<textElement/>
+				<reportElement x="11" y="131" width="515" height="29"/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Ambas partes, hábiles para contratar y obligarse, de manera libre y voluntaria, convienen en la celebración del presente contrato de trabajo, al tenor de las siguientes clausulas:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="11" y="187" width="525" height="54"/>
-				<textElement/>
+				<reportElement x="11" y="187" width="515" height="54"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO se obliga a prestar sus servicios lícitos y personales a favor de EL EMPLEADOR, en calidad de "+$F{cargo}+" , sometiéndose a las estipulaciones del presente contrato, a las disposiciones legales aplicables vigentes, a las instrucciones que reciba de sus superiores y a las modalidades, principios y disposiciones de EL EMPLEADOR, los mismos que declara conocerlos y aceptarlos."]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -78,8 +78,8 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 				<text><![CDATA[El presente contrato de trabajo es de plazo indefinido, los primeros 90 días serán considerados a prueba, tiempo durante el cual, cualquiera de las partes lo podrá dar por terminado sin derecho a indemnización alguna conforme lo dispuesto en el artículo15 del Código de Trabajo; vencido el tiempo de prueba el contrato se convertirá inmediatamente en indefinido y para darlo por terminado las partes deberán ser notificadas con por lo menos 15 días de anticipación al Empleador conforme lo dispuesto en el Art. 184 del Código de Trabajo.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="11" y="59" width="525" height="72"/>
-				<textElement/>
+				<reportElement x="11" y="59" width="515" height="72"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["En quito "+ $F{ciudad}+" a los "+ $F{dia} +" días del mes de "+$F{mes} +" de "+$F{anio}+" comparecen a la suscripción del presente contrato: por una parte, la compañía MB MAYFLOWER BUFFALOS S.A., a través de su Apoderado Especial, señor Mauricio Germán Arrata Maldonado, a quien en adelante se le denominará EL EMPLEADOR; y, por otra parte, el (la) Sr.(a) "+$F{nombre_empleado} +" con cédula de identidad No "+$F{cedula}+" , a quien en adelante se le denominará EL EMPLEADO. "]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -90,8 +90,8 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 				<text><![CDATA[SEGUNDA: ANTECEDENTES.-]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="11" y="268" width="525" height="69"/>
-				<textElement/>
+				<reportElement x="11" y="268" width="515" height="69"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO realizará sus actividades en el local de la Compañía MB MAYFLOWER BUFFALOS S.A. , localizada en la calle "+$F{direccion}+";  sin embargo, EL EMPLEADOR podrá asignarle cualquier otra actividad conexa en la ciudad de "+$F{ciudad}+" o en otro lugar dentro o fuera de QUITO, siempre que no implique disminución de remuneración o de categoría laboral, en este caso EL EMPLEADOR se apegará a lo establecido en el Art.42 numeral22."]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -103,12 +103,12 @@ AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="627" width="515" height="54"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADOR se compromete a cancelar a EL EMPLEADO como remuneración mensual el valor de USD.$F{salario},  ( "+$F{valor_letras}.toUpperCase() +" centavos DÓLARES DE LOS ESTADOS UNIDOSDENORTEAMÉRICA) más los beneficios sociales y remuneraciones adicionales que le correspondan de acuerdo con la ley."]]></textFieldExpression>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADOR se compromete a cancelar a EL EMPLEADO como remuneración mensual el valor de USD. "+$F{salario}+",  ( "+$F{valor_letras}.toUpperCase() +" centavos DÓLARES DE LOS ESTADOS UNIDOSDENORTEAMÉRICA) más los beneficios sociales y remuneraciones adicionales que le correspondan de acuerdo con la ley."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="467" width="515" height="128"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[EL EMPLEADO se obliga a efectuar su labor por jornadas de trabajo de LUNES a VIERNES, de conformidad con el siguiente horario de 11:00 a 19:00 y de 12:00 a 20:00.
 
 La jornada de trabajo en el presente contrato podrá ser modificada, conforme los horarios de trabajo, que actualmente se encuentran en proceso de aprobación por parte del Ministerio de Relaciones Laborales.
@@ -125,7 +125,7 @@ Sobre el pago de Horas Suplementarias y Extraordinarias a EL EMPLEADO, las misma
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="681" width="515" height="95"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Conforme lo disponen expresas disposiciones legales, de la remuneración mensual se descontará al EMPLEADO el valor correspondiente al aporte individual al Instituto Ecuatoriano de Seguridad Social, el Impuesto a la Renta y demás descuentos establecidos por la ley, por orden judicial o por autorización expresa de EL EMPLEADO.
 
 Los incrementos salariales que acordaren las partes, serán efectuados sin necesidad de que exista un nuevo contrato, sin perjuicio del aviso a ser efectuado ante el Instituto Ecuatoriano de Seguridad Social, para efectos de aportes patronales.
@@ -135,7 +135,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 		<band height="802">
 			<staticText>
 				<reportElement x="11" y="98" width="515" height="307"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Amas de las establecidas en las leyes correspondientes, son obligaciones específicas de EL EMPLEADO las siguientes:
 1.  Mantener siempre el grado de eficiencia necesaria para el desempeño de sus actividades.
 2.  Cumplir con las labores correspondientes a la función contratada, con absoluta responsabilidad, dedicación y honorabilidad.
@@ -160,7 +160,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="44" width="515" height="27"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[EL EMPLEADO tendrá derecho a gozar de vacaciones de conformidad con lo dispuesto en el Art. 69  del Código del Trabajo y dentro del período acordado previamente con ELEMPLEADOR.]]></text>
 			</staticText>
 			<staticText>
@@ -172,7 +172,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="442" width="515" height="246"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Se considerarán como faltas graves el incumplimiento de las obligaciones antes indicadas, lo dispuesto en el Código del  Trabajo vigente y, las siguientes:
 1.  Las previstas en el Art. 172 del Código del Trabajo vigente. Dentro de ellas se entenderá como ineptitud a la negligencia, irresponsabilidad y falta de colaboración de EL EMPLEADO en el cumplimiento de sus labores, así como el manejo indebido de los equipos.
 2.  La violación o desobediencia de las órdenes de sus superiores o de las regulaciones internas de EL EMPLEADOR.
@@ -195,7 +195,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 		<band height="559">
 			<staticText>
 				<reportElement x="11" y="330" width="515" height="58"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Las partes aceptan y ratifican en su integridad el contrato contenido en las cláusulas que anteceden, sin reserva de ninguna clase y por convenir a sus intereses, para constancia de lo cual lo firman en este ejemplar del extracto del presente contrato de igual tenor y valoren el lugar y fecha señalados inicialmente y autorizan su registro de conformidad con la ley.
 
 ]]></text>
@@ -209,7 +209,7 @@ Los incrementos salariales que acordaren las partes, serán efectuados sin neces
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="42" width="515" height="181"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[El EMPLEADO libre y voluntariamente declara haber recibido autorización para acceder a determinada información CONFIDENCIAL perteneciente a EL EMPLEADOR, con el exclusivo objeto de cumplir con las tareas que se le han asignado, en tal virtud se obliga a no divulgar a terceros, ni usar en mi propio beneficio total o parcialmente, de forma directa o indirecta la información proporcionada, así como no permitir que terceros puedan utilizarla y de ser el caso denunciarlo ante el empleador, so pena de las sanciones civiles y penales a las que haya lugar.
 
 Los descubrimientos, mejoras, inventos, derechos de autor en los procedimientos, así como en los trabajos y resultados del trabajador realizados bajo este contrato con MB MAYFLOWER BUFFALOS S.A. que darán de propiedad exclusiva de la compañía y la empleada no los utilizará en ningún momento, ni bajo ninguna circunstancia de forma personal o mediante  transferencia gratuita u onerosa a personas naturales o jurídicas.
@@ -226,7 +226,7 @@ Por este acto el trabajador renuncia de manera expresa a todo derecho de autor y
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="250" width="515" height="53"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Para todo lo que no se halla expresamente previsto en el presente contrato, las partes incorporan las disposiciones del Código del Trabajo, las mismas que declaran conocer y aceptar; y para el improbable caso de controversias que no puedan  ser solucionadas directamente en forma expresa se someten a los Jueces de Trabajo de la provincia de Pichincha y al trámite establecido en los artículos 573 y siguientes del Código del Trabajo.]]></text>
 			</staticText>
 			<staticText>
@@ -237,8 +237,8 @@ Por este acto el trabajador renuncia de manera expresa a todo derecho de autor y
 				<text><![CDATA[OCTAVO: ACEPTACIÓN EXPRESA]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="369" y="437" width="145" height="14"/>
-				<textElement>
+				<reportElement x="352" y="437" width="162" height="14"/>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
@@ -250,8 +250,8 @@ Por este acto el trabajador renuncia de manera expresa a todo derecho de autor y
 				<reportElement x="352" y="425" width="160" height="1"/>
 			</line>
 			<textField>
-				<reportElement x="394" y="456" width="100" height="15"/>
-				<textElement>
+				<reportElement x="352" y="456" width="160" height="15"/>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
@@ -268,8 +268,8 @@ MB MAYFLOWER BUFFALOS S.A.
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="394" y="475" width="82" height="20"/>
-				<textElement>
+				<reportElement x="350" y="475" width="162" height="20"/>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO"]]></textFieldExpression>
