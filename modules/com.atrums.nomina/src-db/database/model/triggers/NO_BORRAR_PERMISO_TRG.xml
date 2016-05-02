@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_BORRAR_PERMISO_TRG">
+    <trigger name="NO_BORRAR_PERMISO_TRG" table="NO_PERMISO" fires="before" insert="false" update="false" delete="true" foreach="row">
+      <body><![CDATA[
+  v_docstatus varchar(60);
+  v_mensaje varchar(60);
+BEGIN
+    
+
+    IF DELETING THEN
+       
+        SELECT EM_NE_ESTADO into v_docstatus FROM no_permiso WHERE no_permiso_id = :old.no_permiso_id ;
+        
+		IF(v_docstatus <>'BR')then
+		v_mensaje='@NO_PERMITE_BORRA_DATOS@';
+		raise exception '%', v_mensaje;
+            ---RAISE exception '%',v_mensaje;
+
+        END IF;
+
+        RETURN OLD;
+    ELSE
+        RETURN NEW;
+    END IF;
+
+END NO_BORRAR_PERMISO_TRG
+]]></body>
+    </trigger>
+  </database>

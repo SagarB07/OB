@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_CALCULA_TOTAL_IESS">
+    <trigger name="NO_CALCULA_TOTAL_IESS" table="NO_PRESTAMO" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[	
+BEGIN
+
+			
+	IF INSERTING THEN
+		:NEW.descuento_iess = :NEW.sueldo * 0.0945;
+		:NEW.total_recibir = :NEW.sueldo - :NEW.descuento_iess - :NEW.VALOR_PRESTAMO;		
+	RETURN NEW;	
+	
+	
+	ELSIF UPDATING THEN	 
+		:NEW.descuento_iess = :NEW.sueldo * 0.0945;		
+		:NEW.total_recibir = :NEW.sueldo - :NEW.descuento_iess - :NEW.VALOR_PRESTAMO;		
+	RETURN NEW;
+	END IF;
+	
+END NO_CALCULA_TOTAL_IESS
+]]></body>
+    </trigger>
+  </database>
