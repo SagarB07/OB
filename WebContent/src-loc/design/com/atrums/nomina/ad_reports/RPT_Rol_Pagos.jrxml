@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Rol_Pagos" pageWidth="600" pageHeight="842" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="175"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="USER_CLIENT" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="USER_ORG" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -93,21 +93,21 @@ where rp.ispago = 'Y'
 				<staticText>
 					<reportElement x="470" y="14" width="35" height="12"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Página: ]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="507" y="14" width="39" height="12"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement x="74" y="59" width="415" height="22"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Serif" size="14" isBold="true"/>
+						<font fontName="Arial" size="14" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
 				</textField>
@@ -127,7 +127,7 @@ where rp.ispago = 'Y'
 							<rightPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8"/>
+							<font fontName="Arial" size="8"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{area}]]></textFieldExpression>
 					</textField>
@@ -137,7 +137,7 @@ where rp.ispago = 'Y'
 							<bottomPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8" isBold="true"/>
+							<font fontName="Arial" size="8" isBold="true"/>
 						</textElement>
 						<text><![CDATA[Departamento:]]></text>
 					</staticText>
@@ -147,7 +147,7 @@ where rp.ispago = 'Y'
 							<bottomPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8" isBold="true"/>
+							<font fontName="Arial" size="8" isBold="true"/>
 						</textElement>
 						<text><![CDATA[Fecha de Emisión:]]></text>
 					</staticText>
@@ -157,7 +157,7 @@ where rp.ispago = 'Y'
 							<bottomPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8" isBold="true"/>
+							<font fontName="Arial" size="8" isBold="true"/>
 						</textElement>
 						<text><![CDATA[Días Trabajados:]]></text>
 					</staticText>
@@ -168,7 +168,7 @@ where rp.ispago = 'Y'
 							<rightPen lineWidth="0.25"/>
 						</box>
 						<textElement>
-							<font fontName="Serif" size="8"/>
+							<font fontName="Arial" size="8"/>
 						</textElement>
 						<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dias_trabajados}]]></textFieldExpression>
 					</textField>
@@ -178,7 +178,7 @@ where rp.ispago = 'Y'
 							<bottomPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8" isBold="true"/>
+							<font fontName="Arial" size="8" isBold="true"/>
 						</textElement>
 						<text><![CDATA[Sucursal:]]></text>
 					</staticText>
@@ -188,7 +188,7 @@ where rp.ispago = 'Y'
 							<bottomPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8" isBold="true"/>
+							<font fontName="Arial" size="8" isBold="true"/>
 						</textElement>
 						<text><![CDATA[Mes:]]></text>
 					</staticText>
@@ -199,7 +199,7 @@ where rp.ispago = 'Y'
 							<rightPen lineWidth="0.25"/>
 						</box>
 						<textElement>
-							<font fontName="Serif" size="8"/>
+							<font fontName="Arial" size="8"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{sucursal}]]></textFieldExpression>
 					</textField>
@@ -209,7 +209,7 @@ where rp.ispago = 'Y'
 							<bottomPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8" isBold="true"/>
+							<font fontName="Arial" size="8" isBold="true"/>
 						</textElement>
 						<text><![CDATA[Categoria:]]></text>
 					</staticText>
@@ -220,7 +220,7 @@ where rp.ispago = 'Y'
 							<rightPen lineWidth="0.25"/>
 						</box>
 						<textElement verticalAlignment="Middle">
-							<font fontName="Serif" size="8"/>
+							<font fontName="Arial" size="8"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{grupo}]]></textFieldExpression>
 					</textField>
@@ -231,7 +231,7 @@ where rp.ispago = 'Y'
 							<rightPen lineWidth="0.25"/>
 						</box>
 						<textElement>
-							<font size="8"/>
+							<font fontName="Arial" size="8"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_español}]]></textFieldExpression>
 					</textField>
@@ -239,7 +239,7 @@ where rp.ispago = 'Y'
 				<staticText>
 					<reportElement x="193" y="34" width="209" height="18"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Serif" size="13" isBold="true"/>
+						<font fontName="Arial" size="13" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ROL DE PAGOS]]></text>
 				</staticText>
@@ -250,7 +250,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement>
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_emision}]]></textFieldExpression>
 				</textField>
@@ -264,7 +264,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="1.0"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Ingreso]]></text>
 				</staticText>
@@ -278,7 +278,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="1.0"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Egresos]]></text>
 				</staticText>
@@ -316,14 +316,14 @@ where rp.ispago = 'Y'
 				<textField pattern="#,##0.00;(#,##0.00)">
 					<reportElement x="282" y="16" width="70" height="19"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Serif" size="10" isBold="true"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_neto}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="191" y="16" width="90" height="21"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="10" isBold="true"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total a Recibir:]]></text>
 				</staticText>
@@ -333,35 +333,35 @@ where rp.ispago = 'Y'
 				<staticText>
 					<reportElement x="209" y="64" width="143" height="12"/>
 					<textElement textAlignment="Center">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Entrega Conforme]]></text>
 				</staticText>
 				<textField pattern="#,##0.00;(#,##0.00)">
 					<reportElement x="473" y="6" width="65" height="12"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_egreso}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00;(#,##0.00)">
 					<reportElement x="193" y="6" width="70" height="12"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_ingreso}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="118" y="4" width="72" height="12"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total Ingresos:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="209" y="76" width="143" height="12"/>
 					<textElement textAlignment="Center" verticalAlignment="Top">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Recursos Humanos]]></text>
 				</staticText>
@@ -378,7 +378,7 @@ where rp.ispago = 'Y'
 				<staticText>
 					<reportElement x="403" y="6" width="72" height="12"/>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total Egresos:]]></text>
 				</staticText>
@@ -437,14 +437,14 @@ where rp.ispago = 'Y'
 			<staticText>
 				<reportElement x="223" y="74" width="20" height="12"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CC.]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="445" y="4" width="100" height="14"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_egreso}]]></textFieldExpression>
 			</textField>
@@ -454,7 +454,7 @@ where rp.ispago = 'Y'
 			<textField>
 				<reportElement x="158" y="4" width="100" height="14"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_ingreso}]]></textFieldExpression>
 			</textField>
@@ -464,49 +464,49 @@ where rp.ispago = 'Y'
 			<textField pattern="#,##0.00;(-#,##0.00)">
 				<reportElement x="279" y="16" width="70" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Arial" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_neto}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="122" y="4" width="72" height="12"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Ingresos:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="247" y="74" width="102" height="12"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Serif" size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{taxid}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="209" y="62" width="143" height="12"/>
 				<textElement textAlignment="Center">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Recibi Conforme]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="190" y="16" width="90" height="15"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Serif" size="10" isBold="true"/>
+					<font fontName="Arial" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total a Recibir:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00;(#,##0.00)">
 				<reportElement x="193" y="4" width="70" height="12"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_ingreso}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;(#,##0.00)">
 				<reportElement x="473" y="6" width="68" height="12"/>
 				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_egreso}]]></textFieldExpression>
 			</textField>
@@ -529,7 +529,7 @@ where rp.ispago = 'Y'
 			<staticText>
 				<reportElement x="401" y="6" width="72" height="12"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Egresos:]]></text>
 			</staticText>
@@ -538,14 +538,14 @@ where rp.ispago = 'Y'
 			<textField isBlankWhenNull="true">
 				<reportElement x="71" y="64" width="415" height="22"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Serif" size="14" isBold="true"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="194" y="46" width="209" height="18"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Serif" size="13" isBold="true"/>
+					<font fontName="Arial" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ROL DE PAGOS]]></text>
 			</staticText>
@@ -565,7 +565,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{area}]]></textFieldExpression>
 				</textField>
@@ -575,7 +575,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Departamento:]]></text>
 				</staticText>
@@ -585,7 +585,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Fecha de Emisión:]]></text>
 				</staticText>
@@ -595,7 +595,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Días Trabajados:]]></text>
 				</staticText>
@@ -606,7 +606,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement>
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dias_trabajados}]]></textFieldExpression>
 				</textField>
@@ -616,7 +616,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Sucursal:]]></text>
 				</staticText>
@@ -626,7 +626,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Mes:]]></text>
 				</staticText>
@@ -637,7 +637,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement>
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{sucursal}]]></textFieldExpression>
 				</textField>
@@ -647,7 +647,7 @@ where rp.ispago = 'Y'
 						<bottomPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8" isBold="true"/>
+						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Categoria:]]></text>
 				</staticText>
@@ -658,7 +658,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{grupo}]]></textFieldExpression>
 				</textField>
@@ -669,7 +669,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement>
-						<font fontName="Serif" size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_emision}]]></textFieldExpression>
 				</textField>
@@ -680,7 +680,7 @@ where rp.ispago = 'Y'
 						<rightPen lineWidth="0.25"/>
 					</box>
 					<textElement>
-						<font size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_español}]]></textFieldExpression>
 				</textField>
@@ -695,7 +695,7 @@ where rp.ispago = 'Y'
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ingreso]]></text>
 			</staticText>
@@ -709,7 +709,7 @@ where rp.ispago = 'Y'
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Serif" size="8" isBold="true"/>
+					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Egresos]]></text>
 			</staticText>

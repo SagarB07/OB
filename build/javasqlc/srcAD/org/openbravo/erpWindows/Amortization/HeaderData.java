@@ -45,10 +45,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cActivityIdr;
   public String user1Id;
   public String user2Id;
+  public String aAmortizationId;
   public String enddate;
   public String adClientId;
   public String processing;
-  public String aAmortizationId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -116,14 +116,14 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
+    else if (fieldName.equalsIgnoreCase("a_amortization_id") || fieldName.equals("aAmortizationId"))
+      return aAmortizationId;
     else if (fieldName.equalsIgnoreCase("enddate"))
       return enddate;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
-    else if (fieldName.equalsIgnoreCase("a_amortization_id") || fieldName.equals("aAmortizationId"))
-      return aAmortizationId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -184,10 +184,10 @@ Select for edit
       "(CASE WHEN A_Amortization.C_Activity_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Activity_IDR, " +
       "A_Amortization.User1_ID, " +
       "A_Amortization.User2_ID, " +
+      "A_Amortization.A_Amortization_ID, " +
       "A_Amortization.EndDate, " +
       "A_Amortization.AD_Client_ID, " +
       "COALESCE(A_Amortization.Processing, 'N') AS Processing, " +
-      "A_Amortization.A_Amortization_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM A_Amortization left join (select AD_Org_ID, Name from AD_Org) table1 on (A_Amortization.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (A_Amortization.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '800024' and list1.ad_language = ?  AND A_Amortization.Processed = TO_CHAR(list1.value)) left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND A_Amortization.Posted = TO_CHAR(list2.value)) left join (select C_Campaign_ID, Name from C_Campaign) table3 on (A_Amortization.C_Campaign_ID = table3.C_Campaign_ID) left join (select C_Activity_ID, Name from C_Activity) table4 on (A_Amortization.C_Activity_ID = table4.C_Activity_ID)" +
       "        WHERE 2=2 " +
@@ -258,10 +258,10 @@ Select for edit
         objectHeaderData.cActivityIdr = UtilSql.getValue(result, "c_activity_idr");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
+        objectHeaderData.aAmortizationId = UtilSql.getValue(result, "a_amortization_id");
         objectHeaderData.enddate = UtilSql.getDateValue(result, "enddate", "dd-MM-yyyy");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.processing = UtilSql.getValue(result, "processing");
-        objectHeaderData.aAmortizationId = UtilSql.getValue(result, "a_amortization_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -326,10 +326,10 @@ Create a registry
     objectHeaderData[0].cActivityIdr = "";
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
+    objectHeaderData[0].aAmortizationId = aAmortizationId;
     objectHeaderData[0].enddate = enddate;
     objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].processing = processing;
-    objectHeaderData[0].aAmortizationId = aAmortizationId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -414,7 +414,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE A_Amortization" +
-      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , DateAcct = TO_DATE(?) , StartDate = TO_DATE(?) , Totalamortization = TO_NUMBER(?) , C_Currency_ID = (?) , Processed = (?) , Posted = (?) , IsActive = (?) , C_Project_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , User2_ID = (?) , EndDate = TO_DATE(?) , AD_Client_ID = (?) , Processing = (?) , A_Amortization_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , DateAcct = TO_DATE(?) , StartDate = TO_DATE(?) , Totalamortization = TO_NUMBER(?) , C_Currency_ID = (?) , Processed = (?) , Posted = (?) , IsActive = (?) , C_Project_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , User2_ID = (?) , A_Amortization_ID = (?) , EndDate = TO_DATE(?) , AD_Client_ID = (?) , Processing = (?) , updated = now(), updatedby = ? " +
       "        WHERE A_Amortization.A_Amortization_ID = ? " +
       "        AND A_Amortization.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -446,10 +446,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cActivityId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAmortizationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, enddate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAmortizationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAmortizationId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -478,8 +478,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO A_Amortization " +
-      "        (AD_Org_ID, Name, Description, DateAcct, StartDate, Totalamortization, C_Currency_ID, Processed, Posted, IsActive, C_Project_ID, C_Campaign_ID, C_Activity_ID, User1_ID, User2_ID, EndDate, AD_Client_ID, Processing, A_Amortization_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, Name, Description, DateAcct, StartDate, Totalamortization, C_Currency_ID, Processed, Posted, IsActive, C_Project_ID, C_Campaign_ID, C_Activity_ID, User1_ID, User2_ID, A_Amortization_ID, EndDate, AD_Client_ID, Processing, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -502,10 +502,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cActivityId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAmortizationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, enddate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAmortizationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

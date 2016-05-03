@@ -13,30 +13,32 @@
         (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_pago_cabecera.UpdatedBy) as UpdatedByR,
         no_pago_cabecera.AD_Org_ID, 
 (CASE WHEN no_pago_cabecera.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
-COALESCE(no_pago_cabecera.Isactive, 'N') AS Isactive, 
 no_pago_cabecera.C_Period_ID, 
 (CASE WHEN no_pago_cabecera.C_Period_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS C_Period_IDR, 
 no_pago_cabecera.NO_Area_Empresa_ID, 
 (CASE WHEN no_pago_cabecera.NO_Area_Empresa_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Nombre), ''))),'') ) END) AS NO_Area_Empresa_IDR, 
+COALESCE(no_pago_cabecera.Isactive, 'N') AS Isactive, 
 no_pago_cabecera.C_Doctype_ID, 
 (CASE WHEN no_pago_cabecera.C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL4.Name IS NULL THEN TO_CHAR(table4.Name) ELSE TO_CHAR(tableTRL4.Name) END)), ''))),'') ) END) AS C_Doctype_IDR, 
-no_pago_cabecera.Generar_Registro, 
-no_pago_cabecera.FIN_Financial_Account_ID, 
-(CASE WHEN no_pago_cabecera.FIN_Financial_Account_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table7.ISO_Code), ''))),'') ) END) AS FIN_Financial_Account_IDR, 
-no_pago_cabecera.FIN_Paymentmethod_ID, 
-(CASE WHEN no_pago_cabecera.FIN_Paymentmethod_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table8.Name), ''))),'') ) END) AS FIN_Paymentmethod_IDR, 
-no_pago_cabecera.C_Currency_ID, 
-(CASE WHEN no_pago_cabecera.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
 no_pago_cabecera.C_Glitem_ID, 
-(CASE WHEN no_pago_cabecera.C_Glitem_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table10.Name), ''))),'') ) END) AS C_Glitem_IDR, 
-no_pago_cabecera.Fecha_Pago, 
+(CASE WHEN no_pago_cabecera.C_Glitem_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'') ) END) AS C_Glitem_IDR, 
+no_pago_cabecera.Generar_Registro, 
 no_pago_cabecera.Pago_C_Doctype_ID, 
-(CASE WHEN no_pago_cabecera.Pago_C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL11.Name IS NULL THEN TO_CHAR(table11.Name) ELSE TO_CHAR(tableTRL11.Name) END)), ''))),'') ) END) AS Pago_C_Doctype_IDR, 
-no_pago_cabecera.AD_Client_ID, 
+(CASE WHEN no_pago_cabecera.Pago_C_Doctype_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL7.Name IS NULL THEN TO_CHAR(table7.Name) ELSE TO_CHAR(tableTRL7.Name) END)), ''))),'') ) END) AS Pago_C_Doctype_IDR, 
+no_pago_cabecera.FIN_Financial_Account_ID, 
+(CASE WHEN no_pago_cabecera.FIN_Financial_Account_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table9.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table10.ISO_Code), ''))),'') ) END) AS FIN_Financial_Account_IDR, 
+no_pago_cabecera.Fecha_Pago, 
+no_pago_cabecera.FIN_Paymentmethod_ID, 
+(CASE WHEN no_pago_cabecera.FIN_Paymentmethod_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table11.Name), ''))),'') ) END) AS FIN_Paymentmethod_IDR, 
+no_pago_cabecera.C_Currency_ID, 
+(CASE WHEN no_pago_cabecera.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table12.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
+no_pago_cabecera.C_Year_ID, 
+COALESCE(no_pago_cabecera.Ispagoprovicion, 'N') AS Ispagoprovicion, 
 no_pago_cabecera.NO_Pago_Cabecera_ID, 
+no_pago_cabecera.AD_Client_ID, 
  
         ? AS LANGUAGE 
-        FROM no_pago_cabecera left join (select AD_Org_ID, Name from AD_Org) table1 on (no_pago_cabecera.AD_Org_ID = table1.AD_Org_ID) left join (select C_Period_ID, Name from C_Period) table2 on (no_pago_cabecera.C_Period_ID =  table2.C_Period_ID) left join (select NO_Area_Empresa_ID, Nombre from NO_Area_Empresa) table3 on (no_pago_cabecera.NO_Area_Empresa_ID = table3.NO_Area_Empresa_ID) left join (select C_DocType_ID, Name from C_DocType) table4 on (no_pago_cabecera.C_Doctype_ID =  table4.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL4 on (table4.C_DocType_ID = tableTRL4.C_DocType_ID and tableTRL4.AD_Language = ?)  left join (select FIN_Financial_Account_ID, Name, C_Currency_ID from FIN_Financial_Account) table6 on (no_pago_cabecera.FIN_Financial_Account_ID = table6.FIN_Financial_Account_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table7 on (table6.C_Currency_ID = table7.C_Currency_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table8 on (no_pago_cabecera.FIN_Paymentmethod_ID = table8.FIN_Paymentmethod_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table9 on (no_pago_cabecera.C_Currency_ID = table9.C_Currency_ID) left join (select C_Glitem_ID, Name from C_Glitem) table10 on (no_pago_cabecera.C_Glitem_ID =  table10.C_Glitem_ID) left join (select C_DocType_ID, Name from C_DocType) table11 on (no_pago_cabecera.Pago_C_Doctype_ID =  table11.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL11 on (table11.C_DocType_ID = tableTRL11.C_DocType_ID and tableTRL11.AD_Language = ?) 
+        FROM no_pago_cabecera left join (select AD_Org_ID, Name from AD_Org) table1 on (no_pago_cabecera.AD_Org_ID = table1.AD_Org_ID) left join (select C_Period_ID, Name from C_Period) table2 on (no_pago_cabecera.C_Period_ID =  table2.C_Period_ID) left join (select NO_Area_Empresa_ID, Nombre from NO_Area_Empresa) table3 on (no_pago_cabecera.NO_Area_Empresa_ID = table3.NO_Area_Empresa_ID) left join (select C_DocType_ID, Name from C_DocType) table4 on (no_pago_cabecera.C_Doctype_ID =  table4.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL4 on (table4.C_DocType_ID = tableTRL4.C_DocType_ID and tableTRL4.AD_Language = ?)  left join (select C_Glitem_ID, Name from C_Glitem) table6 on (no_pago_cabecera.C_Glitem_ID =  table6.C_Glitem_ID) left join (select C_DocType_ID, Name from C_DocType) table7 on (no_pago_cabecera.Pago_C_Doctype_ID =  table7.C_DocType_ID) left join (select C_DocType_ID,AD_Language, Name from C_DocType_TRL) tableTRL7 on (table7.C_DocType_ID = tableTRL7.C_DocType_ID and tableTRL7.AD_Language = ?)  left join (select FIN_Financial_Account_ID, Name, C_Currency_ID from FIN_Financial_Account) table9 on (no_pago_cabecera.FIN_Financial_Account_ID = table9.FIN_Financial_Account_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table10 on (table9.C_Currency_ID = table10.C_Currency_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table11 on (no_pago_cabecera.FIN_Paymentmethod_ID = table11.FIN_Paymentmethod_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table12 on (no_pago_cabecera.C_Currency_ID = table12.C_Currency_ID)
         WHERE 2=2 
 
         AND 1=1 
@@ -71,7 +73,7 @@ no_pago_cabecera.NO_Pago_Cabecera_ID,
       <SqlMethodComment>Create a registry</SqlMethodComment>
       <Sql></Sql>
 
-<Parameter name="adClientId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="noAreaEmpresaId"></Parameter><Parameter name="cDoctypeId"></Parameter><Parameter name="generarRegistro"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="cCurrencyId"></Parameter><Parameter name="noPagoCabeceraId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="cGlitemId"></Parameter><Parameter name="pagoCDoctypeId"></Parameter><Parameter name="cPeriodId"></Parameter><Parameter name="finPaymentmethodId"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="fechaPago"></Parameter><Parameter name="finFinancialAccountId"></Parameter>
+<Parameter name="adClientId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="noAreaEmpresaId"></Parameter><Parameter name="cDoctypeId"></Parameter><Parameter name="generarRegistro"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="ispagoprovicion"></Parameter><Parameter name="cCurrencyId"></Parameter><Parameter name="noPagoCabeceraId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="cGlitemId"></Parameter><Parameter name="cYearId"></Parameter><Parameter name="pagoCDoctypeId"></Parameter><Parameter name="cPeriodId"></Parameter><Parameter name="finPaymentmethodId"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="fechaPago"></Parameter><Parameter name="finFinancialAccountId"></Parameter>
    </SqlMethod>
 
 
@@ -118,13 +120,13 @@ no_pago_cabecera.NO_Pago_Cabecera_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_pago_cabecera
-        SET AD_Org_ID = (?) , Isactive = (?) , C_Period_ID = (?) , NO_Area_Empresa_ID = (?) , C_Doctype_ID = (?) , Generar_Registro = (?) , FIN_Financial_Account_ID = (?) , FIN_Paymentmethod_ID = (?) , C_Currency_ID = (?) , C_Glitem_ID = (?) , Fecha_Pago = TO_DATE(?) , Pago_C_Doctype_ID = (?) , AD_Client_ID = (?) , NO_Pago_Cabecera_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , C_Period_ID = (?) , NO_Area_Empresa_ID = (?) , Isactive = (?) , C_Doctype_ID = (?) , C_Glitem_ID = (?) , Generar_Registro = (?) , Pago_C_Doctype_ID = (?) , FIN_Financial_Account_ID = (?) , Fecha_Pago = TO_DATE(?) , FIN_Paymentmethod_ID = (?) , C_Currency_ID = (?) , C_Year_ID = (?) , Ispagoprovicion = (?) , NO_Pago_Cabecera_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_pago_cabecera.NO_Pago_Cabecera_ID = ? 
         
         AND no_pago_cabecera.AD_Client_ID IN ('1') 
         AND no_pago_cabecera.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="generarRegistro"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="fechaPago"></Parameter> <Parameter name="pagoCDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noPagoCabeceraId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="generarRegistro"></Parameter> <Parameter name="pagoCDoctypeId"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="fechaPago"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cYearId"></Parameter> <Parameter name="ispagoprovicion"></Parameter> <Parameter name="noPagoCabeceraId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noPagoCabeceraId"></Parameter>
     
@@ -136,10 +138,10 @@ no_pago_cabecera.NO_Pago_Cabecera_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_pago_cabecera 
-        (AD_Org_ID, Isactive, C_Period_ID, NO_Area_Empresa_ID, C_Doctype_ID, Generar_Registro, FIN_Financial_Account_ID, FIN_Paymentmethod_ID, C_Currency_ID, C_Glitem_ID, Fecha_Pago, Pago_C_Doctype_ID, AD_Client_ID, NO_Pago_Cabecera_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, C_Period_ID, NO_Area_Empresa_ID, Isactive, C_Doctype_ID, C_Glitem_ID, Generar_Registro, Pago_C_Doctype_ID, FIN_Financial_Account_ID, Fecha_Pago, FIN_Paymentmethod_ID, C_Currency_ID, C_Year_ID, Ispagoprovicion, NO_Pago_Cabecera_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="generarRegistro"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="fechaPago"></Parameter> <Parameter name="pagoCDoctypeId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noPagoCabeceraId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="noAreaEmpresaId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cDoctypeId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="generarRegistro"></Parameter> <Parameter name="pagoCDoctypeId"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="fechaPago"></Parameter> <Parameter name="finPaymentmethodId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cYearId"></Parameter> <Parameter name="ispagoprovicion"></Parameter> <Parameter name="noPagoCabeceraId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

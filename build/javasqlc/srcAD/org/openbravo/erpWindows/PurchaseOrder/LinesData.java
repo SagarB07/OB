@@ -86,8 +86,8 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String mOfferId;
   public String cOrderId;
   public String isactive;
-  public String cOrderDiscountId;
   public String adClientId;
+  public String cOrderDiscountId;
   public String cOrderlineId;
   public String cCurrencyId;
   public String mWarehouseRuleId;
@@ -243,10 +243,10 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return cOrderId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("c_order_discount_id") || fieldName.equals("cOrderDiscountId"))
-      return cOrderDiscountId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("c_order_discount_id") || fieldName.equals("cOrderDiscountId"))
+      return cOrderDiscountId;
     else if (fieldName.equalsIgnoreCase("c_orderline_id") || fieldName.equals("cOrderlineId"))
       return cOrderlineId;
     else if (fieldName.equalsIgnoreCase("c_currency_id") || fieldName.equals("cCurrencyId"))
@@ -360,8 +360,8 @@ Select for edit
       "C_OrderLine.M_Offer_ID, " +
       "C_OrderLine.C_Order_ID, " +
       "COALESCE(C_OrderLine.IsActive, 'N') AS IsActive, " +
-      "C_OrderLine.C_Order_Discount_ID, " +
       "C_OrderLine.AD_Client_ID, " +
+      "C_OrderLine.C_Order_Discount_ID, " +
       "C_OrderLine.C_OrderLine_ID, " +
       "C_OrderLine.C_Currency_ID, " +
       "C_OrderLine.M_Warehouse_Rule_ID, " +
@@ -485,8 +485,8 @@ Select for edit
         objectLinesData.mOfferId = UtilSql.getValue(result, "m_offer_id");
         objectLinesData.cOrderId = UtilSql.getValue(result, "c_order_id");
         objectLinesData.isactive = UtilSql.getValue(result, "isactive");
-        objectLinesData.cOrderDiscountId = UtilSql.getValue(result, "c_order_discount_id");
         objectLinesData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectLinesData.cOrderDiscountId = UtilSql.getValue(result, "c_order_discount_id");
         objectLinesData.cOrderlineId = UtilSql.getValue(result, "c_orderline_id");
         objectLinesData.cCurrencyId = UtilSql.getValue(result, "c_currency_id");
         objectLinesData.mWarehouseRuleId = UtilSql.getValue(result, "m_warehouse_rule_id");
@@ -598,8 +598,8 @@ Create a registry
     objectLinesData[0].mOfferId = mOfferId;
     objectLinesData[0].cOrderId = cOrderId;
     objectLinesData[0].isactive = isactive;
-    objectLinesData[0].cOrderDiscountId = cOrderDiscountId;
     objectLinesData[0].adClientId = adClientId;
+    objectLinesData[0].cOrderDiscountId = cOrderDiscountId;
     objectLinesData[0].cOrderlineId = cOrderlineId;
     objectLinesData[0].cCurrencyId = cCurrencyId;
     objectLinesData[0].mWarehouseRuleId = mWarehouseRuleId;
@@ -1418,7 +1418,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_OrderLine" +
-      "        SET Line = TO_NUMBER(?) , EM_Re_Partidaproducto = (?) , M_Product_ID = (?) , EM_RE_Value_Producto = (?) , M_Inoutline_ID = (?) , QtyOrdered = TO_NUMBER(?) , M_AttributeSetInstance_ID = (?) , C_Return_Reason_ID = (?) , C_UOM_ID = (?) , PriceActual = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , Line_Gross_Amount = TO_NUMBER(?) , C_Tax_ID = (?) , PriceList = TO_NUMBER(?) , GrossPriceList = TO_NUMBER(?) , Discount = TO_NUMBER(?) , Description = (?) , Taxbaseamt = TO_NUMBER(?) , Iseditlinenetamt = (?) , CANCELPRICEAD = (?) , PriceStd = TO_NUMBER(?) , grosspricestd = TO_NUMBER(?) , M_Warehouse_ID = (?) , QtyReserved = TO_NUMBER(?) , QtyDelivered = TO_NUMBER(?) , QtyInvoiced = TO_NUMBER(?) , M_Shipper_ID = (?) , DateOrdered = TO_DATE(?) , DatePromised = TO_DATE(?) , C_BPartner_ID = (?) , FreightAmt = TO_NUMBER(?) , C_Charge_ID = (?) , C_BPartner_Location_ID = (?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Quotationline_ID = (?) , Manage_Prereservation = (?) , AD_Org_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , SO_Res_Status = (?) , DateDelivered = TO_DATE(?) , ChargeAmt = TO_NUMBER(?) , DirectShip = (?) , PriceLimit = TO_NUMBER(?) , S_ResourceAssignment_ID = (?) , Ref_OrderLine_ID = (?) , IsDescription = (?) , M_Offer_ID = (?) , C_Order_ID = (?) , IsActive = (?) , C_Order_Discount_ID = (?) , AD_Client_ID = (?) , C_OrderLine_ID = (?) , C_Currency_ID = (?) , M_Warehouse_Rule_ID = (?) , Create_Reservation = (?) , DateInvoiced = TO_DATE(?) , Manage_Reservation = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , EM_Re_Partidaproducto = (?) , M_Product_ID = (?) , EM_RE_Value_Producto = (?) , M_Inoutline_ID = (?) , QtyOrdered = TO_NUMBER(?) , M_AttributeSetInstance_ID = (?) , C_Return_Reason_ID = (?) , C_UOM_ID = (?) , PriceActual = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , Line_Gross_Amount = TO_NUMBER(?) , C_Tax_ID = (?) , PriceList = TO_NUMBER(?) , GrossPriceList = TO_NUMBER(?) , Discount = TO_NUMBER(?) , Description = (?) , Taxbaseamt = TO_NUMBER(?) , Iseditlinenetamt = (?) , CANCELPRICEAD = (?) , PriceStd = TO_NUMBER(?) , grosspricestd = TO_NUMBER(?) , M_Warehouse_ID = (?) , QtyReserved = TO_NUMBER(?) , QtyDelivered = TO_NUMBER(?) , QtyInvoiced = TO_NUMBER(?) , M_Shipper_ID = (?) , DateOrdered = TO_DATE(?) , DatePromised = TO_DATE(?) , C_BPartner_ID = (?) , FreightAmt = TO_NUMBER(?) , C_Charge_ID = (?) , C_BPartner_Location_ID = (?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Quotationline_ID = (?) , Manage_Prereservation = (?) , AD_Org_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , SO_Res_Status = (?) , DateDelivered = TO_DATE(?) , ChargeAmt = TO_NUMBER(?) , DirectShip = (?) , PriceLimit = TO_NUMBER(?) , S_ResourceAssignment_ID = (?) , Ref_OrderLine_ID = (?) , IsDescription = (?) , M_Offer_ID = (?) , C_Order_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , C_Order_Discount_ID = (?) , C_OrderLine_ID = (?) , C_Currency_ID = (?) , M_Warehouse_Rule_ID = (?) , Create_Reservation = (?) , DateInvoiced = TO_DATE(?) , Manage_Reservation = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_OrderLine.C_OrderLine_ID = ? " +
       "                 AND C_OrderLine.C_Order_ID = ? " +
       "        AND C_OrderLine.AD_Client_ID IN (";
@@ -1493,8 +1493,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mOfferId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderDiscountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderDiscountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseRuleId);
@@ -1530,7 +1530,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_OrderLine " +
-      "        (Line, EM_Re_Partidaproducto, M_Product_ID, EM_RE_Value_Producto, M_Inoutline_ID, QtyOrdered, M_AttributeSetInstance_ID, C_Return_Reason_ID, C_UOM_ID, PriceActual, Gross_Unit_Price, LineNetAmt, Line_Gross_Amount, C_Tax_ID, PriceList, GrossPriceList, Discount, Description, Taxbaseamt, Iseditlinenetamt, CANCELPRICEAD, PriceStd, grosspricestd, M_Warehouse_ID, QtyReserved, QtyDelivered, QtyInvoiced, M_Shipper_ID, DateOrdered, DatePromised, C_BPartner_ID, FreightAmt, C_Charge_ID, C_BPartner_Location_ID, QuantityOrder, M_Product_Uom_Id, Quotationline_ID, Manage_Prereservation, AD_Org_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, SO_Res_Status, DateDelivered, ChargeAmt, DirectShip, PriceLimit, S_ResourceAssignment_ID, Ref_OrderLine_ID, IsDescription, M_Offer_ID, C_Order_ID, IsActive, C_Order_Discount_ID, AD_Client_ID, C_OrderLine_ID, C_Currency_ID, M_Warehouse_Rule_ID, Create_Reservation, DateInvoiced, Manage_Reservation, created, createdby, updated, updatedBy)" +
+      "        (Line, EM_Re_Partidaproducto, M_Product_ID, EM_RE_Value_Producto, M_Inoutline_ID, QtyOrdered, M_AttributeSetInstance_ID, C_Return_Reason_ID, C_UOM_ID, PriceActual, Gross_Unit_Price, LineNetAmt, Line_Gross_Amount, C_Tax_ID, PriceList, GrossPriceList, Discount, Description, Taxbaseamt, Iseditlinenetamt, CANCELPRICEAD, PriceStd, grosspricestd, M_Warehouse_ID, QtyReserved, QtyDelivered, QtyInvoiced, M_Shipper_ID, DateOrdered, DatePromised, C_BPartner_ID, FreightAmt, C_Charge_ID, C_BPartner_Location_ID, QuantityOrder, M_Product_Uom_Id, Quotationline_ID, Manage_Prereservation, AD_Org_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, SO_Res_Status, DateDelivered, ChargeAmt, DirectShip, PriceLimit, S_ResourceAssignment_ID, Ref_OrderLine_ID, IsDescription, M_Offer_ID, C_Order_ID, IsActive, AD_Client_ID, C_Order_Discount_ID, C_OrderLine_ID, C_Currency_ID, M_Warehouse_Rule_ID, Create_Reservation, DateInvoiced, Manage_Reservation, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_DATE(?), TO_DATE(?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -1596,8 +1596,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mOfferId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderDiscountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderDiscountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderlineId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseRuleId);

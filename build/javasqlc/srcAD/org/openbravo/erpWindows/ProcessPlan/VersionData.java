@@ -29,10 +29,10 @@ static Logger log4j = Logger.getLogger(VersionData.class);
   public String dateto;
   public String isactive;
   public String estimatedtime;
+  public String adOrgId;
   public String maProcessplanId;
   public String adClientId;
   public String maProcessplanVersionId;
-  public String adOrgId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -68,14 +68,14 @@ static Logger log4j = Logger.getLogger(VersionData.class);
       return isactive;
     else if (fieldName.equalsIgnoreCase("estimatedtime"))
       return estimatedtime;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
     else if (fieldName.equalsIgnoreCase("ma_processplan_id") || fieldName.equals("maProcessplanId"))
       return maProcessplanId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("ma_processplan_version_id") || fieldName.equals("maProcessplanVersionId"))
       return maProcessplanVersionId;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -120,10 +120,10 @@ Select for edit
       "MA_ProcessPlan_Version.DateTo, " +
       "COALESCE(MA_ProcessPlan_Version.IsActive, 'N') AS IsActive, " +
       "MA_ProcessPlan_Version.Estimatedtime, " +
+      "MA_ProcessPlan_Version.AD_Org_ID, " +
       "MA_ProcessPlan_Version.MA_Processplan_ID, " +
       "MA_ProcessPlan_Version.AD_Client_ID, " +
       "MA_ProcessPlan_Version.MA_Processplan_Version_ID, " +
-      "MA_ProcessPlan_Version.AD_Org_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_ProcessPlan_Version" +
       "        WHERE 2=2 " +
@@ -181,10 +181,10 @@ Select for edit
         objectVersionData.dateto = UtilSql.getDateValue(result, "dateto", "dd-MM-yyyy");
         objectVersionData.isactive = UtilSql.getValue(result, "isactive");
         objectVersionData.estimatedtime = UtilSql.getValue(result, "estimatedtime");
+        objectVersionData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectVersionData.maProcessplanId = UtilSql.getValue(result, "ma_processplan_id");
         objectVersionData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectVersionData.maProcessplanVersionId = UtilSql.getValue(result, "ma_processplan_version_id");
-        objectVersionData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectVersionData.language = UtilSql.getValue(result, "language");
         objectVersionData.adUserClient = "";
         objectVersionData.adOrgClient = "";
@@ -233,10 +233,10 @@ Create a registry
     objectVersionData[0].dateto = dateto;
     objectVersionData[0].isactive = isactive;
     objectVersionData[0].estimatedtime = estimatedtime;
+    objectVersionData[0].adOrgId = adOrgId;
     objectVersionData[0].maProcessplanId = maProcessplanId;
     objectVersionData[0].adClientId = adClientId;
     objectVersionData[0].maProcessplanVersionId = maProcessplanVersionId;
-    objectVersionData[0].adOrgId = adOrgId;
     objectVersionData[0].language = "";
     return objectVersionData;
   }
@@ -437,7 +437,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_ProcessPlan_Version" +
-      "        SET DocumentNo = (?) , DateFrom = TO_DATE(?) , DateTo = TO_DATE(?) , IsActive = (?) , Estimatedtime = TO_NUMBER(?) , MA_Processplan_ID = (?) , AD_Client_ID = (?) , MA_Processplan_Version_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET DocumentNo = (?) , DateFrom = TO_DATE(?) , DateTo = TO_DATE(?) , IsActive = (?) , Estimatedtime = TO_NUMBER(?) , AD_Org_ID = (?) , MA_Processplan_ID = (?) , AD_Client_ID = (?) , MA_Processplan_Version_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_ProcessPlan_Version.MA_Processplan_Version_ID = ? " +
       "                 AND MA_ProcessPlan_Version.MA_Processplan_ID = ? " +
       "        AND MA_ProcessPlan_Version.AD_Client_ID IN (";
@@ -460,10 +460,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, estimatedtime);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanId);
@@ -493,7 +493,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_ProcessPlan_Version " +
-      "        (DocumentNo, DateFrom, DateTo, IsActive, Estimatedtime, MA_Processplan_ID, AD_Client_ID, MA_Processplan_Version_ID, AD_Org_ID, created, createdby, updated, updatedBy)" +
+      "        (DocumentNo, DateFrom, DateTo, IsActive, Estimatedtime, AD_Org_ID, MA_Processplan_ID, AD_Client_ID, MA_Processplan_Version_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), TO_DATE(?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -507,10 +507,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateto);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, estimatedtime);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

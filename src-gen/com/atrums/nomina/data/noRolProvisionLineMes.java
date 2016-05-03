@@ -66,6 +66,7 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_PROCESSNOW = "processNow";
     public static final String PROPERTY_POSTED = "posted";
     public static final String PROPERTY_PAYMENT = "payment";
+    public static final String PROPERTY_PAGADO = "pagado";
     public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
     public noRolProvisionLineMes() {
@@ -78,6 +79,7 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_PROCESSNOW, false);
         setDefaultValue(PROPERTY_POSTED, "N");
         setDefaultValue(PROPERTY_PAYMENT, false);
+        setDefaultValue(PROPERTY_PAGADO, false);
         setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
 
@@ -252,6 +254,14 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
 
     public void setPayment(Boolean payment) {
         set(PROPERTY_PAYMENT, payment);
+    }
+
+    public Boolean isPagado() {
+        return (Boolean) get(PROPERTY_PAGADO);
+    }
+
+    public void setPagado(Boolean pagado) {
+        set(PROPERTY_PAGADO, pagado);
     }
 
     @SuppressWarnings("unchecked")

@@ -48,10 +48,6 @@
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="B0929F48AD3E4A91A6B6007029C28B00">
-      <oldValue/>
-      <newValue><![CDATA[N]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_MODULE" columnname="ISTRIALALLOWED" pkRow="C39AEE94DEFD40578FD6E847378E81D6">
       <oldValue/>
       <newValue><![CDATA[N]]></newValue>

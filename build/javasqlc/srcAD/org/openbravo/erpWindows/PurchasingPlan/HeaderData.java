@@ -46,8 +46,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String launchpo;
   public String isactive;
   public String createReservations;
-  public String adClientId;
   public String mrpRunPurchaseId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -117,10 +117,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return isactive;
     else if (fieldName.equalsIgnoreCase("create_reservations") || fieldName.equals("createReservations"))
       return createReservations;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("mrp_run_purchase_id") || fieldName.equals("mrpRunPurchaseId"))
       return mrpRunPurchaseId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -182,8 +182,8 @@ Select for edit
       "MRP_Run_Purchase.Launchpo, " +
       "COALESCE(MRP_Run_Purchase.IsActive, 'N') AS IsActive, " +
       "MRP_Run_Purchase.Create_Reservations, " +
-      "MRP_Run_Purchase.AD_Client_ID, " +
       "MRP_Run_Purchase.MRP_Run_Purchase_ID, " +
+      "MRP_Run_Purchase.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MRP_Run_Purchase left join (select AD_Org_ID, Name from AD_Org) table1 on (MRP_Run_Purchase.AD_Org_ID = table1.AD_Org_ID) left join (select MRP_Planner_ID, Name from MRP_Planner) table2 on (MRP_Run_Purchase.MRP_Planner_ID = table2.MRP_Planner_ID) left join (select M_Product_ID, Name from M_Product) table3 on (MRP_Run_Purchase.M_Product_ID = table3.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL3 on (table3.M_Product_ID = tableTRL3.M_Product_ID and tableTRL3.AD_Language = ?)  left join (select M_Product_Category_ID, Name from M_Product_Category) table5 on (MRP_Run_Purchase.M_Product_Category_ID = table5.M_Product_Category_ID) left join (select M_Product_Category_ID,AD_Language, Name from M_Product_Category_TRL) tableTRL5 on (table5.M_Product_Category_ID = tableTRL5.M_Product_Category_ID and tableTRL5.AD_Language = ?)  left join (select C_BPartner_ID, Name from C_BPartner) table7 on (MRP_Run_Purchase.C_BPartner_ID = table7.C_BPartner_ID) left join (select C_BP_Group_ID, Name from C_BP_Group) table8 on (MRP_Run_Purchase.C_BP_Group_ID = table8.C_BP_Group_ID)" +
       "        WHERE 2=2 " +
@@ -255,8 +255,8 @@ Select for edit
         objectHeaderData.launchpo = UtilSql.getValue(result, "launchpo");
         objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.createReservations = UtilSql.getValue(result, "create_reservations");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.mrpRunPurchaseId = UtilSql.getValue(result, "mrp_run_purchase_id");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -322,8 +322,8 @@ Create a registry
     objectHeaderData[0].launchpo = launchpo;
     objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].createReservations = createReservations;
-    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].mrpRunPurchaseId = mrpRunPurchaseId;
+    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -485,7 +485,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MRP_Run_Purchase" +
-      "        SET AD_Org_ID = (?) , DateDoc = TO_DATE(?) , Name = (?) , Timehorizon = TO_NUMBER(?) , Securitymargin = TO_NUMBER(?) , MRP_Planner_ID = (?) , Description = (?) , Vendor_ID = (?) , M_Product_ID = (?) , M_Product_Category_ID = (?) , C_BPartner_ID = (?) , C_BP_Group_ID = (?) , Simulate = (?) , Launchpo = (?) , IsActive = (?) , Create_Reservations = (?) , AD_Client_ID = (?) , MRP_Run_Purchase_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , DateDoc = TO_DATE(?) , Name = (?) , Timehorizon = TO_NUMBER(?) , Securitymargin = TO_NUMBER(?) , MRP_Planner_ID = (?) , Description = (?) , Vendor_ID = (?) , M_Product_ID = (?) , M_Product_Category_ID = (?) , C_BPartner_ID = (?) , C_BP_Group_ID = (?) , Simulate = (?) , Launchpo = (?) , IsActive = (?) , Create_Reservations = (?) , MRP_Run_Purchase_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MRP_Run_Purchase.MRP_Run_Purchase_ID = ? " +
       "        AND MRP_Run_Purchase.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -518,8 +518,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, launchpo);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createReservations);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunPurchaseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunPurchaseId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -548,7 +548,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MRP_Run_Purchase " +
-      "        (AD_Org_ID, DateDoc, Name, Timehorizon, Securitymargin, MRP_Planner_ID, Description, Vendor_ID, M_Product_ID, M_Product_Category_ID, C_BPartner_ID, C_BP_Group_ID, Simulate, Launchpo, IsActive, Create_Reservations, AD_Client_ID, MRP_Run_Purchase_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, DateDoc, Name, Timehorizon, Securitymargin, MRP_Planner_ID, Description, Vendor_ID, M_Product_ID, M_Product_Category_ID, C_BPartner_ID, C_BP_Group_ID, Simulate, Launchpo, IsActive, Create_Reservations, MRP_Run_Purchase_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -573,8 +573,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, launchpo);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createReservations);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunPurchaseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

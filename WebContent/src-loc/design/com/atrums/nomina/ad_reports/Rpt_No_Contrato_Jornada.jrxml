@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" language="groovy" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="com.atrums.nomina.report.NumerosLetras">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Contrato_Eventual" pageWidth="595" pageHeight="1600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2675"/>
-	<import value="com.atrums.nomina.report.NumerosLetras"/>
-	<parameter name="no_contrato_empleado_id" class="java.lang.String"/>
+	<property name="ireport.y" value="3840"/>
+	<parameter name="DOCUMENT_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,CAST(extract(MONTH From NOW())AS INT ) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
-EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD
+		<![CDATA[SELECT CO.C_BPARTNER_ID as id, NOW() AS FECHA_ACTUAL,CAST( extract(Day From NOW())AS INT) AS DIA,no_numeros_meses( CAST(extract(MONTH From NOW())AS INT )) AS MES,CAST( extract(YEAR From NOW())AS INT) AS ANIO,
+EM.NAME AS NOMBRE_EMPLEADO, EM.TAXID AS CEDULA, CO.SALARIO AS SALARIO, CAR.NAME AS CARGO, LOC.address1 AS DIRECCION, CIU.name AS CIUDAD,
+ne_conv_numero_letras(CO.SALARIO) as valor_letras
 FROM C_BPARTNER EM,NO_CONTRATO_EMPLEADO CO,
 atnorh_cargo AS CAR, ad_org as suc, ad_orginfo AS INFO , c_location AS LOC, c_city AS CIU
 WHERE EM.C_BPARTNER_ID = CO.C_BPARTNER_ID
@@ -16,12 +18,12 @@ AND CO.ad_org_id = suc.ad_org_id
 AND INFO.ad_org_id = suc.ad_org_id
 AND INFO.c_location_ID = LOC.c_location_ID
 AND CIU.c_city_ID = LOC.c_city_ID
-AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
+AND co.no_contrato_empleado_id = $P{DOCUMENT_ID}]]>
 	</queryString>
 	<field name="id" class="java.lang.String"/>
 	<field name="fecha_actual" class="java.sql.Timestamp"/>
 	<field name="dia" class="java.lang.Integer"/>
-	<field name="mes" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.String"/>
 	<field name="anio" class="java.lang.Integer"/>
 	<field name="nombre_empleado" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
@@ -29,6 +31,7 @@ AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
 	<field name="cargo" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String"/>
 	<field name="ciudad" class="java.lang.String"/>
+	<field name="valor_letras" class="java.lang.String"/>
 	<detail>
 		<band height="1536" splitType="Stretch">
 			<staticText>
@@ -43,25 +46,25 @@ AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[PRIMERA: ANTECEDENTES.-]]></text>
+				<text><![CDATA[1: ANTECEDENTES.-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="221" width="136" height="20"/>
+				<reportElement x="11" y="213" width="136" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[SEGUNDA: OBJETO.-]]></text>
+				<text><![CDATA[2: OBJETO.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="357" width="146" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[TERCERA: REMUNERACIÓN.-]]></text>
+				<text><![CDATA[3: ACEPTACIÓN.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="376" width="525" height="26"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[EL EMPLEADO acepta libre, voluntaria y expresamente, que la duración del período de trabajo y descanso, podrá ser modificada de acuerdo a las necesidades y libre criterio de LA EMPRESA o Autoridades designadas por ésta.]]></text>
 			</staticText>
 			<staticText>
@@ -69,11 +72,11 @@ AND co.no_contrato_empleado_id = $P{no_contrato_empleado_id}]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[CUARTO:	OBLIGACIONES DEL EMPLEADO.-]]></text>
+				<text><![CDATA[4: OBLIGACIONES DEL EMPLEADO.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="429" width="524" height="546"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Son obligaciones de EL EMPLEADO, además de aquellas expresamente señaladas por sus superiores y las detalladas en el Código de Trabajo, las siguientes:
 
 a)  Cumplir y sujetarse a las normas, procedimientos, reglamentos, horarios, turnos y demás disposiciones laborales vigentes en el sitio de trabajo y las que a futuro se expidieren.
@@ -103,36 +106,36 @@ t)  Someterse a las medidas que para el control de la asistencia y evaluación d
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[QUINTO:	DE LAS FALTAS GRAVES.-]]></text>
+				<text><![CDATA[5: DE LAS FALTAS GRAVES.-]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="9" y="28" width="525" height="72"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["En quito "+ $F{ciudad}+" a los "+ $F{dia} +" días del mes de "+$F{mes} +" de "+$F{anio}+" comparecen a la suscripción del presente contrato: por una parte, la compañía MB MAYFLOWER BUFFALOS S.A., a través de su Apoderado Especial, señor Mauricio Germán Arrata Maldonado, a quien en adelante se le denominará EL EMPLEADOR; y, por otra parte, el (la) Sr.(a) "+$F{nombre_empleado} +" con cédula de identidad No "+$F{cedula}+" , a quien en adelante se le denominará EL EMPLEADO. "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="9" y="100" width="525" height="26"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Ambas partes, hábiles para contratar y obligarse, de manera libre y voluntaria, convienen en la celebración del presente contrato de trabajo, al tenor de las siguientes clausulas:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="9" y="153" width="525" height="27"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["I.	LA EMPRESA es una compañía legalmente constituida que para la ejecución de su objeto social requiere la contratación de un "+$F{cargo}+"."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="180" width="525" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["II.	EL EMPLEADO ha manifestado su interés en prestar sus servicios lícitos y personales para la compañía. "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="241" width="524" height="110"/>
-				<textElement/>
+				<reportElement x="11" y="233" width="524" height="110"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Con los antecedentes establecidos y, con el propósito de cumplir los fines para los que  LA EMPRESA se encuentra organizada, se procede a contratar los servicios lícitos y personales de EL EMPLEADO, a el (la) Sr. (a) "+$F{nombre_empleado}+", en calidad de "+$F{cargo}+", sin perjuicio de lo cual deberá ejecutar otras tareas similares a la naturaleza de su trabajo encomendado, y desplazarse a cualquier lugar en el que se requiera su actividad de trabajo, si esto fuere ordenado por la autoridad designada por la Empresa, para lo cual se estará a lo dispuesto en el art. 42 numeral 22 del Código del Trabajo. Expresamente EL EMPLEADO libre y voluntariamente, deja constancia de su aceptación y consentimiento con el contenido de esta cláusula, declarando que la asignación de otras tareas y responsabilidades no se podrá considerar bajo ninguna circunstancia, cambio de ocupación o despido intempestivo."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="1002" width="523" height="284"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[A más de las establecidas en el Código de Trabajo, se considerarán faltas graves y que son motivos para dar por terminado este contrato:
 
 1.  Las previstas en el Art. 172 del Código del Trabajo vigente. Dentro de ellas se entenderá como ineptitud a la negligencia, irresponsabilidad y falta de colaboración de EL EMPLEADO en el cumplimiento de sus labores, así como el manejo indebido de los equipos.
@@ -149,15 +152,15 @@ t)  Someterse a las medidas que para el control de la asistencia y evaluación d
 		</band>
 		<band height="1500">
 			<staticText>
-				<reportElement x="10" y="301" width="241" height="20"/>
+				<reportElement x="10" y="292" width="241" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[SÉPTIMO:	REMUNERACION.- ]]></text>
+				<text><![CDATA[7: REMUNERACION.- ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="321" width="544" height="27"/>
-				<textElement/>
+				<reportElement x="11" y="312" width="544" height="27"/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[
 EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como remuneración mensual la cantidad de ]]></text>
 			</staticText>
@@ -166,11 +169,11 @@ EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como re
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[OCTAVO:	DURACIÓN.-]]></text>
+				<text><![CDATA[8: DURACIÓN.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="455" width="530" height="63"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[El presente contrato de jornada parcial permanente a prueba tendrá una duración de noventa días, tiempo durante el cual, cualquiera de las partes lo podrá dar por terminado sin derecho a indemnización alguna conforme lo dispuesto en el artículo15 del Código de Trabajo; vencido el tiempo de prueba el contrato se convertirá inmediatamente en indefinido y para darlo por terminado las partes deberán ser notificadas con por lo menos 15 días de anticipación al Empleador conforme lo dispuesto en el Art. 184 del Código de Trabajo.]]></text>
 			</staticText>
 			<staticText>
@@ -178,11 +181,11 @@ EL EMPLEADO, por la prestación de sus servicios a LA EMPRESA, recibirá como re
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[NOVENO:	HORARIO.- ]]></text>
+				<text><![CDATA[9: HORARIO.- ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="545" width="530" height="14"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[EL EMPLEADO se obliga y acepta, por su parte, a laborar por jornadas de trabajo, de  ]]></text>
 			</staticText>
 			<line>
@@ -203,51 +206,44 @@ MB MAYFLOWER BUFFALOS S.A.
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="374" y="993" width="145" height="14"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement mode="Transparent" x="374" y="993" width="145" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="395" y="1009" width="100" height="15"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement mode="Transparent" x="374" y="1007" width="144" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="399" y="1025" width="82" height="20"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement mode="Transparent" x="374" y="1022" width="145" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="9" y="16" width="204" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["SEXTO:	CONFIDENCIALIDAD Y SECRETO PROFESIONAL.- "]]></textFieldExpression>
+				<reportElement x="11" y="339" width="524" height="29"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["USD "+$F{salario}+" ("+$F{valor_letras}.toUpperCase()+" 00/100DOLARES DE LOS ESTADOS UNIDOS DE AMÉRICA), "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="348" width="524" height="29"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["USD "+$F{salario}+" ("+$P{REPORT_SCRIPTLET}.convertirLetras( (int)$F{salario} ).toUpperCase()+" 00/100DOLARES DE LOS ESTADOS UNIDOS DE AMÉRICA), "]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="11" y="377" width="523" height="28"/>
-				<textElement/>
+				<reportElement x="11" y="368" width="523" height="28"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["más los beneficios que por ley le corresponda, tomando en consideración la proporcionalidad en relación con la remuneración que corresponde a la jornada completa."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="405" width="523" height="27"/>
-				<textElement/>
+				<reportElement x="11" y="396" width="523" height="27"/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["El EMPLEADOR reconocerá también a EL EMPLEADO las obligaciones sociales y los demás beneficios establecidos en la legislación ecuatoriana."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="11" y="559" width="470" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[" horas semanales; en la siguiente jornada de trabajo:"]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -255,16 +251,16 @@ MB MAYFLOWER BUFFALOS S.A.
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DÉCIMO:	PROPIEDAD INTELECTUAL.-  ]]></text>
+				<text><![CDATA[10: PROPIEDAD INTELECTUAL.-  ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="606" width="530" height="39"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO expresamente reconoce que todo derecho de propiedad intelectual que se obtenga por los trabajos, diseños, programas, estudios o investigaciones, que realice en el desarrollo de sus labores, son de propiedad exclusiva de la compañía, por lo que renuncia a cualquier reclamo posterior por este concepto."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="36" width="523" height="247"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[EL EMPLEADO durante la vigencia de este contrato de trabajo,  y con posterioridad a su extinción, se compromete a mantener en estricta confidencialidad y no divulgar, ni utilizar, la información  de propiedad exclusiva de la Compañía, además respetar y cumplir con los procedimientos y reglas para almacenar y proteger la información que pertenece a los clientes de la compañía
 
 El término “Información de Propiedad Exclusiva” se refiere a todo conocimiento, dato o información confidencial de propiedad exclusiva, o secreto comercial/industrial de la Compañía, planes de nuevos productos,  planes de negocio, presupuestos y declaraciones financieras no publicadas, licencias, precios y costos,  proveedores y clientes, y cualquier otro conocimiento, dato o información confidencial, de propiedad exclusiva o secreto comercial, en cualquier forma o medio producido por o para la Compañía.
@@ -278,11 +274,11 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[UNDÉCIMO:	LIQUIDACION.-  ]]></text>
+				<text><![CDATA[11: LIQUIDACION.-  ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="672" width="529" height="39"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Si a la terminación del presente Contrato, EL EMPLEADO estuviere debiendo a la Compañía una suma de dinero por cualquier concepto, ésta autoriza para que se hagan las retenciones y los descuentos correspondientes hasta cubrir la totalidad de lo adeudado.]]></text>
 			</staticText>
 			<staticText>
@@ -290,11 +286,11 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DUODÉCIMO:	LUGAR DE TRABAJO.-]]></text>
+				<text><![CDATA[12: LUGAR DE TRABAJO.-]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="738" width="530" height="39"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["EL EMPLEADO realizará sus funciones en el local de la compañía  MB MAYFLOWER BUFFALOS S.A. ubicadas en la ciudad de "+$F{ciudad}+", en la calle "+$F{direccion}+", o en las instalaciones donde EL EMPLEADOR le asigne siempre y cuando no implique disminución de la remuneración o de categoría laboral según sus necesidades."]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -302,11 +298,11 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[DECIMOTERCERO:	CONTROVERSIAS.-]]></text>
+				<text><![CDATA[13: CONTROVERSIAS.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="804" width="529" height="41"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Las partes incorporan a este contrato todas las disposiciones legales que son aplicables y para el caso de controversia por efectos de este contrato, renuncian fuero y domicilio y se sujetan al procedimiento oral de los jueces competentes de la ciudad de Quito.]]></text>
 			</staticText>
 			<staticText>
@@ -314,17 +310,24 @@ De acuerdo con las instrucciones de la Compañía, manifiesta su obligación de 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DECIMOCUARTO:	JURISDICCIÓN Y COMPETENCIA.-]]></text>
+				<text><![CDATA[14: JURISDICCIÓN Y COMPETENCIA.-]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="11" y="872" width="529" height="37"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Las partes intervinientes,  señalan como domicilio la ciudad de Quito y se someten de modo expreso a la jurisdicción y competencia de los Jueces de Trabajo de la Provincia de Pichincha y a las disposiciones del Código de Trabajo en todo lo que fuere pertinente.]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="909" width="529" height="29"/>
-				<textElement/>
+				<textElement textAlignment="Justified"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["En fe de conformidad con el contenido de todas y cada una de las cláusulas del presente contrato, firman las partes en la ciudad de "+$F{ciudad}+" a los "+$F{dia}+" días del mes de "+$F{mes}+" de "+$F{anio}+"."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="16" width="283" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["6: CONFIDENCIALIDAD Y SECRETO PROFESIONAL.-"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

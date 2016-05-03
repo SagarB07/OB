@@ -16,10 +16,10 @@ MA_ProcessPlan_Version.DateFrom,
 MA_ProcessPlan_Version.DateTo, 
 COALESCE(MA_ProcessPlan_Version.IsActive, 'N') AS IsActive, 
 MA_ProcessPlan_Version.Estimatedtime, 
+MA_ProcessPlan_Version.AD_Org_ID, 
 MA_ProcessPlan_Version.MA_Processplan_ID, 
 MA_ProcessPlan_Version.AD_Client_ID, 
 MA_ProcessPlan_Version.MA_Processplan_Version_ID, 
-MA_ProcessPlan_Version.AD_Org_ID, 
  
         ? AS LANGUAGE 
         FROM MA_ProcessPlan_Version
@@ -122,13 +122,13 @@ MA_ProcessPlan_Version.AD_Org_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_ProcessPlan_Version
-        SET DocumentNo = (?) , DateFrom = TO_DATE(?) , DateTo = TO_DATE(?) , IsActive = (?) , Estimatedtime = TO_NUMBER(?) , MA_Processplan_ID = (?) , AD_Client_ID = (?) , MA_Processplan_Version_ID = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? 
+        SET DocumentNo = (?) , DateFrom = TO_DATE(?) , DateTo = TO_DATE(?) , IsActive = (?) , Estimatedtime = TO_NUMBER(?) , AD_Org_ID = (?) , MA_Processplan_ID = (?) , AD_Client_ID = (?) , MA_Processplan_Version_ID = (?) , updated = now(), updatedby = ? 
         WHERE MA_ProcessPlan_Version.MA_Processplan_Version_ID = ? 
                  AND MA_ProcessPlan_Version.MA_Processplan_ID = ? 
         AND MA_ProcessPlan_Version.AD_Client_ID IN ('1') 
         AND MA_ProcessPlan_Version.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="documentno"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="documentno"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maProcessplanVersionId"></Parameter>
     
@@ -140,10 +140,10 @@ MA_ProcessPlan_Version.AD_Org_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_ProcessPlan_Version 
-        (DocumentNo, DateFrom, DateTo, IsActive, Estimatedtime, MA_Processplan_ID, AD_Client_ID, MA_Processplan_Version_ID, AD_Org_ID, created, createdby, updated, updatedBy)
+        (DocumentNo, DateFrom, DateTo, IsActive, Estimatedtime, AD_Org_ID, MA_Processplan_ID, AD_Client_ID, MA_Processplan_Version_ID, created, createdby, updated, updatedBy)
         VALUES ((?), TO_DATE(?), TO_DATE(?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="documentno"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> <Parameter name="adOrgId"></Parameter> 
+    <Parameter name="documentno"></Parameter> <Parameter name="datefrom"></Parameter> <Parameter name="dateto"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="maProcessplanId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

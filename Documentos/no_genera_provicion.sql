@@ -1,8 +1,8 @@
--- Function: no_genera_rol_provision(character varying)
+-- Function: no_genera_provicion(character varying, character varying, character varying)
 
--- DROP FUNCTION no_genera_rol_provision(character varying);
+-- DROP FUNCTION no_genera_provicion(character varying, character varying, character varying);
 
-CREATE OR REPLACE FUNCTION no_genera_provicion(v_User_ID character varying, v_Client_ID character varying, v_Org_ID character varying )
+CREATE OR REPLACE FUNCTION no_genera_provicion(v_user_id character varying, v_client_id character varying, v_org_id character varying)
   RETURNS void AS
 $BODY$ DECLARE 
 v_ResultStr VARCHAR(2000):='';
@@ -36,20 +36,24 @@ v_ResultStr VARCHAR(2000):='';
 
 BEGIN
 
-    RAISE NOTICE '%','Updating PInstance - Processing ' || p_PInstance_ID;
+    --RAISE NOTICE '%','Updating PInstance - Processing ' || p_PInstance_ID;
     v_ResultStr:='PInstanceNotFound';
-    PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
+    --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
 
     BEGIN
 
 
         FOR Cur_Empleado IN
-        (select bp.c_bpartner_id,
+        (
+			select bp.c_bpartner_id,
                 ce.ad_org_id,
                 ce.fecha_inicio
            from c_bpartner bp,
-                no_contrato_empleado ce
-          where bp.c_bpartner_id = ce.c_bpartner_id
+                no_contrato_empleado ce            
+			where bp.c_bpartner_id = ce.c_bpartner_id
+            and bp.c_bpartner_id 
+			in  (select c_bpartner_id from no_cb_empleado_acct  re where re.no_tipo_ingreso_egreso_id 
+			in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where isprovision = 'Y'))
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=v_Client_ID)
@@ -252,7 +256,7 @@ BEGIN
 
         v_Message:='@NO_EjecucionCorrecta@';
         RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message ;
-        PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+     --   PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
         RETURN;
 
 
@@ -261,11 +265,11 @@ BEGIN
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         RAISE NOTICE '%',v_ResultStr ;
-
-        PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+		UPDATE IDT_CONTRATO SET I_ERRORMSG = v_ResultStr;
+      --  PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
         RETURN;
 END ; $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-ALTER FUNCTION no_genera_rol_provision(character varying)
+ALTER FUNCTION no_genera_provicion(character varying, character varying, character varying)
   OWNER TO tad;

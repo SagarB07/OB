@@ -33,6 +33,7 @@ import org.openbravo.model.common.currency.Currency;
 import org.openbravo.model.common.enterprise.DocumentType;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.financialmgmt.calendar.Period;
+import org.openbravo.model.financialmgmt.calendar.Year;
 import org.openbravo.model.financialmgmt.gl.GLItem;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 import org.openbravo.model.financialmgmt.payment.FIN_PaymentMethod;
@@ -64,11 +65,14 @@ public class noPagoCabecera extends BaseOBObject implements Traceable, ClientEna
     public static final String PROPERTY_CURRENCY = "currency";
     public static final String PROPERTY_FECHADEPAGO = "fechaDePago";
     public static final String PROPERTY_TIPODOCUMENTOPAGO = "tipoDocumentoPago";
+    public static final String PROPERTY_YEAR = "year";
+    public static final String PROPERTY_ISPAGOPROVICION = "ispagoprovicion";
     public static final String PROPERTY_NOPAGOLINELIST = "noPagoLineList";
 
     public noPagoCabecera() {
         setDefaultValue(PROPERTY_ACTIVE, true);
         setDefaultValue(PROPERTY_GENERARREGISTRO, false);
+        setDefaultValue(PROPERTY_ISPAGOPROVICION, false);
         setDefaultValue(PROPERTY_NOPAGOLINELIST, new ArrayList<Object>());
     }
 
@@ -219,6 +223,22 @@ public class noPagoCabecera extends BaseOBObject implements Traceable, ClientEna
 
     public void setTipoDocumentoPago(DocumentType tipoDocumentoPago) {
         set(PROPERTY_TIPODOCUMENTOPAGO, tipoDocumentoPago);
+    }
+
+    public Year getYear() {
+        return (Year) get(PROPERTY_YEAR);
+    }
+
+    public void setYear(Year year) {
+        set(PROPERTY_YEAR, year);
+    }
+
+    public Boolean isPagoprovicion() {
+        return (Boolean) get(PROPERTY_ISPAGOPROVICION);
+    }
+
+    public void setPagoprovicion(Boolean ispagoprovicion) {
+        set(PROPERTY_ISPAGOPROVICION, ispagoprovicion);
     }
 
     @SuppressWarnings("unchecked")

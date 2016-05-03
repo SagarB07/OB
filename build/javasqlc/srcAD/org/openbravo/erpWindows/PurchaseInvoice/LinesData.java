@@ -1416,7 +1416,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_InvoiceLine" +
-      "        SET Line = TO_NUMBER(?) , Financial_Invoice_Line = (?) , M_Product_ID = (?) , Account_ID = (?) , QtyInvoiced = TO_NUMBER(?) , EM_RE_Value_Producto = (?) , C_UOM_ID = (?) , PriceActual = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , Line_Gross_Amount = TO_NUMBER(?) , Description = (?) , C_Tax_ID = (?) , Grosspricelist = TO_NUMBER(?) , PriceList = TO_NUMBER(?) , M_AttributeSetInstance_ID = (?) , C_OrderLine_ID = (?) , M_InOutLine_ID = (?) , IsDeferred = (?) , Taxbaseamt = TO_NUMBER(?) , Excludeforwithholding = (?) , C_Charge_ID = (?) , TaxAmt = TO_NUMBER(?) , Iseditlinenetamt = (?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , grosspricestd = TO_NUMBER(?) , PriceStd = TO_NUMBER(?) , DefPlanType = (?) , Periodnumber = TO_NUMBER(?) , C_Period_ID = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , C_Projectline_ID = (?) , C_Invoice_Discount_ID = (?) , IsDescription = (?) , S_ResourceAssignment_ID = (?) , PriceLimit = TO_NUMBER(?) , ChargeAmt = TO_NUMBER(?) , IsActive = (?) , C_Invoice_ID = (?) , C_InvoiceLine_ID = (?) , AD_Client_ID = (?) , M_Offer_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , Financial_Invoice_Line = (?) , M_Product_ID = (?) , Account_ID = (?) , EM_RE_Value_Producto = (?) , QtyInvoiced = TO_NUMBER(?) , C_UOM_ID = (?) , PriceActual = TO_NUMBER(?) , Gross_Unit_Price = TO_NUMBER(?) , LineNetAmt = TO_NUMBER(?) , Line_Gross_Amount = TO_NUMBER(?) , Description = (?) , C_Tax_ID = (?) , Grosspricelist = TO_NUMBER(?) , PriceList = TO_NUMBER(?) , M_AttributeSetInstance_ID = (?) , C_OrderLine_ID = (?) , M_InOutLine_ID = (?) , IsDeferred = (?) , Taxbaseamt = TO_NUMBER(?) , Excludeforwithholding = (?) , C_Charge_ID = (?) , TaxAmt = TO_NUMBER(?) , Iseditlinenetamt = (?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , grosspricestd = TO_NUMBER(?) , PriceStd = TO_NUMBER(?) , DefPlanType = (?) , Periodnumber = TO_NUMBER(?) , C_Period_ID = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , C_Projectline_ID = (?) , C_Invoice_Discount_ID = (?) , IsDescription = (?) , S_ResourceAssignment_ID = (?) , PriceLimit = TO_NUMBER(?) , ChargeAmt = TO_NUMBER(?) , IsActive = (?) , C_Invoice_ID = (?) , C_InvoiceLine_ID = (?) , AD_Client_ID = (?) , M_Offer_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_InvoiceLine.C_InvoiceLine_ID = ? " +
       "                 AND C_InvoiceLine.C_Invoice_ID = ? " +
       "        AND C_InvoiceLine.AD_Client_ID IN (";
@@ -1438,8 +1438,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, financialInvoiceLine);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mProductId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, qtyinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emReValueProducto);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, qtyinvoiced);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cUomId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, priceactual);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, grossUnitPrice);

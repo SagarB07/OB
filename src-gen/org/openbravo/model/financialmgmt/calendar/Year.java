@@ -18,6 +18,7 @@
 */
 package org.openbravo.model.financialmgmt.calendar;
 
+import com.atrums.nomina.data.noPagoCabecera;
 import com.atrums.nomina.data.noSalarioDigno;
 import com.atrums.nomina.data.noUtilidad;
 
@@ -64,6 +65,7 @@ public class Year extends BaseOBObject implements Traceable, ClientEnabled, Orga
     public static final String PROPERTY_ORGANIZATIONCLOSINGLIST = "organizationClosingList";
     public static final String PROPERTY_PERIODCONTROLLOGLIST = "periodControlLogList";
     public static final String PROPERTY_YEARCLOSEVLIST = "yearCloseVList";
+    public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
     public static final String PROPERTY_SALARIODIGNOLIST = "salarioDignoList";
     public static final String PROPERTY_UTILIDADLIST = "utilidadList";
 
@@ -77,6 +79,7 @@ public class Year extends BaseOBObject implements Traceable, ClientEnabled, Orga
         setDefaultValue(PROPERTY_ORGANIZATIONCLOSINGLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PERIODCONTROLLOGLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_YEARCLOSEVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_SALARIODIGNOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_UTILIDADLIST, new ArrayList<Object>());
     }
@@ -241,6 +244,15 @@ public class Year extends BaseOBObject implements Traceable, ClientEnabled, Orga
 
     public void setYearCloseVList(List<YearClose> yearCloseVList) {
         set(PROPERTY_YEARCLOSEVLIST, yearCloseVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noPagoCabecera> getPagoCabeceraList() {
+      return (List<noPagoCabecera>) get(PROPERTY_PAGOCABECERALIST);
+    }
+
+    public void setPagoCabeceraList(List<noPagoCabecera> pagoCabeceraList) {
+        set(PROPERTY_PAGOCABECERALIST, pagoCabeceraList);
     }
 
     @SuppressWarnings("unchecked")

@@ -39,12 +39,12 @@ static Logger log4j = Logger.getLogger(RequisitionData.class);
   public String docaction;
   public String docactionBtn;
   public String docstatus;
-  public String processed;
-  public String mRequisitionId;
-  public String isactive;
   public String processing;
   public String adClientId;
+  public String isactive;
   public String createpo;
+  public String processed;
+  public String mRequisitionId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -100,18 +100,18 @@ static Logger log4j = Logger.getLogger(RequisitionData.class);
       return docactionBtn;
     else if (fieldName.equalsIgnoreCase("docstatus"))
       return docstatus;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
-    else if (fieldName.equalsIgnoreCase("m_requisition_id") || fieldName.equals("mRequisitionId"))
-      return mRequisitionId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("createpo"))
       return createpo;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("m_requisition_id") || fieldName.equals("mRequisitionId"))
+      return mRequisitionId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -166,12 +166,12 @@ Select for edit
       "M_Requisition.DocAction, " +
       "list1.name as DocAction_BTN, " +
       "M_Requisition.DocStatus, " +
-      "COALESCE(M_Requisition.Processed, 'N') AS Processed, " +
-      "M_Requisition.M_Requisition_ID, " +
-      "COALESCE(M_Requisition.IsActive, 'N') AS IsActive, " +
       "COALESCE(M_Requisition.Processing, 'N') AS Processing, " +
       "M_Requisition.AD_Client_ID, " +
+      "COALESCE(M_Requisition.IsActive, 'N') AS IsActive, " +
       "M_Requisition.Createpo, " +
+      "COALESCE(M_Requisition.Processed, 'N') AS Processed, " +
+      "M_Requisition.M_Requisition_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM M_Requisition left join (select AD_Org_ID, Name from AD_Org) table1 on (M_Requisition.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (M_Requisition.C_BPartner_ID = table2.C_BPartner_ID) left join (select AD_User_ID, Name from AD_User) table3 on (M_Requisition.AD_User_ID = table3.AD_User_ID) left join (select M_PriceList_ID, Name from M_PriceList) table4 on (M_Requisition.M_PriceList_ID = table4.M_PriceList_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table5 on (M_Requisition.C_Currency_ID = table5.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND (CASE M_Requisition.DocAction WHEN '--' THEN 'CL' ELSE TO_CHAR(M_Requisition.DocAction) END) = list1.value)" +
       "        WHERE 2=2 " +
@@ -237,12 +237,12 @@ Select for edit
         objectRequisitionData.docaction = UtilSql.getValue(result, "docaction");
         objectRequisitionData.docactionBtn = UtilSql.getValue(result, "docaction_btn");
         objectRequisitionData.docstatus = UtilSql.getValue(result, "docstatus");
-        objectRequisitionData.processed = UtilSql.getValue(result, "processed");
-        objectRequisitionData.mRequisitionId = UtilSql.getValue(result, "m_requisition_id");
-        objectRequisitionData.isactive = UtilSql.getValue(result, "isactive");
         objectRequisitionData.processing = UtilSql.getValue(result, "processing");
         objectRequisitionData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectRequisitionData.isactive = UtilSql.getValue(result, "isactive");
         objectRequisitionData.createpo = UtilSql.getValue(result, "createpo");
+        objectRequisitionData.processed = UtilSql.getValue(result, "processed");
+        objectRequisitionData.mRequisitionId = UtilSql.getValue(result, "m_requisition_id");
         objectRequisitionData.language = UtilSql.getValue(result, "language");
         objectRequisitionData.adUserClient = "";
         objectRequisitionData.adOrgClient = "";
@@ -301,12 +301,12 @@ Create a registry
     objectRequisitionData[0].docaction = docaction;
     objectRequisitionData[0].docactionBtn = docactionBtn;
     objectRequisitionData[0].docstatus = docstatus;
-    objectRequisitionData[0].processed = processed;
-    objectRequisitionData[0].mRequisitionId = mRequisitionId;
-    objectRequisitionData[0].isactive = isactive;
     objectRequisitionData[0].processing = processing;
     objectRequisitionData[0].adClientId = adClientId;
+    objectRequisitionData[0].isactive = isactive;
     objectRequisitionData[0].createpo = createpo;
+    objectRequisitionData[0].processed = processed;
+    objectRequisitionData[0].mRequisitionId = mRequisitionId;
     objectRequisitionData[0].language = "";
     return objectRequisitionData;
   }
@@ -580,7 +580,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_Requisition" +
-      "        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , DocAction = (?) , DocStatus = (?) , Processed = (?) , M_Requisition_ID = (?) , IsActive = (?) , Processing = (?) , AD_Client_ID = (?) , Createpo = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , DocumentNo = (?) , Description = (?) , C_BPartner_ID = (?) , AD_User_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , DocAction = (?) , DocStatus = (?) , Processing = (?) , AD_Client_ID = (?) , IsActive = (?) , Createpo = (?) , Processed = (?) , M_Requisition_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_Requisition.M_Requisition_ID = ? " +
       "        AND M_Requisition.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -606,12 +606,12 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docaction);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createpo);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -640,7 +640,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_Requisition " +
-      "        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, DocAction, DocStatus, Processed, M_Requisition_ID, IsActive, Processing, AD_Client_ID, Createpo, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, DocumentNo, Description, C_BPartner_ID, AD_User_ID, M_PriceList_ID, C_Currency_ID, DocAction, DocStatus, Processing, AD_Client_ID, IsActive, Createpo, Processed, M_Requisition_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -658,12 +658,12 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docaction);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, docstatus);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createpo);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mRequisitionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

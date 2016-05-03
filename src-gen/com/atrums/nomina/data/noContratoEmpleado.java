@@ -69,18 +69,19 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_FINANCIALACCOUNT = "financialAccount";
     public static final String PROPERTY_CURRENCY = "currency";
     public static final String PROPERTY_IMPUESTOASUMIDO = "impuestoAsumido";
-    public static final String PROPERTY_ATNORHCARGO = "atnorhCargo";
     public static final String PROPERTY_APLICAUTILIDAD = "aplicaUtilidad";
-    public static final String PROPERTY_NEAREAEMPRESA = "neAreaEmpresa";
-    public static final String PROPERTY_NEISJORNADAPARCIAL = "neIsJornadaParcial";
-    public static final String PROPERTY_NEMOTIVOSALIDA = "neMotivoSalida";
-    public static final String PROPERTY_NENUMHORASPARCIALES = "neNumHorasParciales";
-    public static final String PROPERTY_NEOBSERVACIONES = "neObservaciones";
-    public static final String PROPERTY_NEREGION = "neRegion";
+    public static final String PROPERTY_ATNORHCARGO = "atnorhCargo";
     public static final String PROPERTY_NESISSALNET = "neSissalnet";
+    public static final String PROPERTY_NEAREAEMPRESA = "neAreaEmpresa";
+    public static final String PROPERTY_NEMOTIVOSALIDA = "neMotivoSalida";
+    public static final String PROPERTY_NEISJORNADAPARCIAL = "neIsJornadaParcial";
+    public static final String PROPERTY_NENUMHORASPARCIALES = "neNumHorasParciales";
     public static final String PROPERTY_NEVACACIONPROP = "neVacacionProp";
-    public static final String PROPERTY_NEVACACIONRES = "neVacacionRes";
     public static final String PROPERTY_NEVACACIONTOM = "neVacacionTom";
+    public static final String PROPERTY_NEVACACIONRES = "neVacacionRes";
+    public static final String PROPERTY_NEREGION = "neRegion";
+    public static final String PROPERTY_NEOBSERVACIONES = "neObservaciones";
+    public static final String PROPERTY_LIQUIDACIONEMPLEADO = "liquidacionEmpleado";
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_NOPERMISOLIST = "noPermisoList";
     public static final String PROPERTY_CCOCOSTOSNOMINALIST = "ccoCostosNominaList";
@@ -98,9 +99,10 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_FONDODERESERVA, false);
         setDefaultValue(PROPERTY_IMPUESTOASUMIDO, false);
         setDefaultValue(PROPERTY_APLICAUTILIDAD, true);
+        setDefaultValue(PROPERTY_NESISSALNET, "1");
         setDefaultValue(PROPERTY_NEISJORNADAPARCIAL, false);
         setDefaultValue(PROPERTY_NEREGION, "1");
-        setDefaultValue(PROPERTY_NESISSALNET, "1");
+        setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADO, false);
         setDefaultValue(PROPERTY_NOPERMISOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CCOCOSTOSNOMINALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOVACACIONLIST, new ArrayList<Object>());
@@ -271,14 +273,6 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_IMPUESTOASUMIDO, impuestoAsumido);
     }
 
-    public AtnorhCargo getAtnorhCargo() {
-        return (AtnorhCargo) get(PROPERTY_ATNORHCARGO);
-    }
-
-    public void setAtnorhCargo(AtnorhCargo atnorhCargo) {
-        set(PROPERTY_ATNORHCARGO, atnorhCargo);
-    }
-
     public Boolean isAplicaUtilidad() {
         return (Boolean) get(PROPERTY_APLICAUTILIDAD);
     }
@@ -287,60 +281,12 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_APLICAUTILIDAD, aplicaUtilidad);
     }
 
-    public noAreaEmpresa getNeAreaEmpresa() {
-        return (noAreaEmpresa) get(PROPERTY_NEAREAEMPRESA);
+    public AtnorhCargo getAtnorhCargo() {
+        return (AtnorhCargo) get(PROPERTY_ATNORHCARGO);
     }
 
-    public void setNeAreaEmpresa(noAreaEmpresa neAreaEmpresa) {
-        set(PROPERTY_NEAREAEMPRESA, neAreaEmpresa);
-    }
-
-    public BigDecimal getNeDiaVacacionRes() {
-        return (BigDecimal) get(COMPUTED_COLUMN_NEDIAVACACIONRES);
-    }
-
-    public void setNeDiaVacacionRes(BigDecimal neDiaVacacionRes) {
-        set(COMPUTED_COLUMN_NEDIAVACACIONRES, neDiaVacacionRes);
-    }
-
-    public Boolean isNeIsJornadaParcial() {
-        return (Boolean) get(PROPERTY_NEISJORNADAPARCIAL);
-    }
-
-    public void setNeIsJornadaParcial(Boolean neIsJornadaParcial) {
-        set(PROPERTY_NEISJORNADAPARCIAL, neIsJornadaParcial);
-    }
-
-    public String getNeMotivoSalida() {
-        return (String) get(PROPERTY_NEMOTIVOSALIDA);
-    }
-
-    public void setNeMotivoSalida(String neMotivoSalida) {
-        set(PROPERTY_NEMOTIVOSALIDA, neMotivoSalida);
-    }
-
-    public BigDecimal getNeNumHorasParciales() {
-        return (BigDecimal) get(PROPERTY_NENUMHORASPARCIALES);
-    }
-
-    public void setNeNumHorasParciales(BigDecimal neNumHorasParciales) {
-        set(PROPERTY_NENUMHORASPARCIALES, neNumHorasParciales);
-    }
-
-    public String getNeObservaciones() {
-        return (String) get(PROPERTY_NEOBSERVACIONES);
-    }
-
-    public void setNeObservaciones(String neObservaciones) {
-        set(PROPERTY_NEOBSERVACIONES, neObservaciones);
-    }
-
-    public String getNeRegion() {
-        return (String) get(PROPERTY_NEREGION);
-    }
-
-    public void setNeRegion(String neRegion) {
-        set(PROPERTY_NEREGION, neRegion);
+    public void setAtnorhCargo(AtnorhCargo atnorhCargo) {
+        set(PROPERTY_ATNORHCARGO, atnorhCargo);
     }
 
     public String getNeSissalnet() {
@@ -351,12 +297,52 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_NESISSALNET, neSissalnet);
     }
 
+    public noAreaEmpresa getNeAreaEmpresa() {
+        return (noAreaEmpresa) get(PROPERTY_NEAREAEMPRESA);
+    }
+
+    public void setNeAreaEmpresa(noAreaEmpresa neAreaEmpresa) {
+        set(PROPERTY_NEAREAEMPRESA, neAreaEmpresa);
+    }
+
+    public String getNeMotivoSalida() {
+        return (String) get(PROPERTY_NEMOTIVOSALIDA);
+    }
+
+    public void setNeMotivoSalida(String neMotivoSalida) {
+        set(PROPERTY_NEMOTIVOSALIDA, neMotivoSalida);
+    }
+
+    public Boolean isNeIsJornadaParcial() {
+        return (Boolean) get(PROPERTY_NEISJORNADAPARCIAL);
+    }
+
+    public void setNeIsJornadaParcial(Boolean neIsJornadaParcial) {
+        set(PROPERTY_NEISJORNADAPARCIAL, neIsJornadaParcial);
+    }
+
+    public BigDecimal getNeNumHorasParciales() {
+        return (BigDecimal) get(PROPERTY_NENUMHORASPARCIALES);
+    }
+
+    public void setNeNumHorasParciales(BigDecimal neNumHorasParciales) {
+        set(PROPERTY_NENUMHORASPARCIALES, neNumHorasParciales);
+    }
+
     public BigDecimal getNeVacacionProp() {
         return (BigDecimal) get(PROPERTY_NEVACACIONPROP);
     }
 
     public void setNeVacacionProp(BigDecimal neVacacionProp) {
         set(PROPERTY_NEVACACIONPROP, neVacacionProp);
+    }
+
+    public BigDecimal getNeVacacionTom() {
+        return (BigDecimal) get(PROPERTY_NEVACACIONTOM);
+    }
+
+    public void setNeVacacionTom(BigDecimal neVacacionTom) {
+        set(PROPERTY_NEVACACIONTOM, neVacacionTom);
     }
 
     public BigDecimal getNeVacacionRes() {
@@ -367,12 +353,36 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_NEVACACIONRES, neVacacionRes);
     }
 
-    public BigDecimal getNeVacacionTom() {
-        return (BigDecimal) get(PROPERTY_NEVACACIONTOM);
+    public String getNeRegion() {
+        return (String) get(PROPERTY_NEREGION);
     }
 
-    public void setNeVacacionTom(BigDecimal neVacacionTom) {
-        set(PROPERTY_NEVACACIONTOM, neVacacionTom);
+    public void setNeRegion(String neRegion) {
+        set(PROPERTY_NEREGION, neRegion);
+    }
+
+    public String getNeObservaciones() {
+        return (String) get(PROPERTY_NEOBSERVACIONES);
+    }
+
+    public void setNeObservaciones(String neObservaciones) {
+        set(PROPERTY_NEOBSERVACIONES, neObservaciones);
+    }
+
+    public Boolean isLiquidacionEmpleado() {
+        return (Boolean) get(PROPERTY_LIQUIDACIONEMPLEADO);
+    }
+
+    public void setLiquidacionEmpleado(Boolean liquidacionEmpleado) {
+        set(PROPERTY_LIQUIDACIONEMPLEADO, liquidacionEmpleado);
+    }
+
+    public BigDecimal getNeDiaVacacionRes() {
+        return (BigDecimal) get(COMPUTED_COLUMN_NEDIAVACACIONRES);
+    }
+
+    public void setNeDiaVacacionRes(BigDecimal neDiaVacacionRes) {
+        set(COMPUTED_COLUMN_NEDIAVACACIONRES, neDiaVacacionRes);
     }
 
     public noContratoEmpleado_ComputedColumns get_computedColumns() {

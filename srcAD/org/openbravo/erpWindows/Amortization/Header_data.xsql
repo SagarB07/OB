@@ -32,10 +32,10 @@ A_Amortization.C_Activity_ID,
 (CASE WHEN A_Amortization.C_Activity_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Activity_IDR, 
 A_Amortization.User1_ID, 
 A_Amortization.User2_ID, 
+A_Amortization.A_Amortization_ID, 
 A_Amortization.EndDate, 
 A_Amortization.AD_Client_ID, 
 COALESCE(A_Amortization.Processing, 'N') AS Processing, 
-A_Amortization.A_Amortization_ID, 
  
         ? AS LANGUAGE 
         FROM A_Amortization left join (select AD_Org_ID, Name from AD_Org) table1 on (A_Amortization.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (A_Amortization.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '800024' and list1.ad_language = ?  AND A_Amortization.Processed = TO_CHAR(list1.value)) left join ad_ref_list_v list2 on (list2.ad_reference_id = '234' and list2.ad_language = ?  AND A_Amortization.Posted = TO_CHAR(list2.value)) left join (select C_Campaign_ID, Name from C_Campaign) table3 on (A_Amortization.C_Campaign_ID = table3.C_Campaign_ID) left join (select C_Activity_ID, Name from C_Activity) table4 on (A_Amortization.C_Activity_ID = table4.C_Activity_ID)
@@ -109,13 +109,13 @@ A_Amortization.A_Amortization_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE A_Amortization
-        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , DateAcct = TO_DATE(?) , StartDate = TO_DATE(?) , Totalamortization = TO_NUMBER(?) , C_Currency_ID = (?) , Processed = (?) , Posted = (?) , IsActive = (?) , C_Project_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , User2_ID = (?) , EndDate = TO_DATE(?) , AD_Client_ID = (?) , Processing = (?) , A_Amortization_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , DateAcct = TO_DATE(?) , StartDate = TO_DATE(?) , Totalamortization = TO_NUMBER(?) , C_Currency_ID = (?) , Processed = (?) , Posted = (?) , IsActive = (?) , C_Project_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , User1_ID = (?) , User2_ID = (?) , A_Amortization_ID = (?) , EndDate = TO_DATE(?) , AD_Client_ID = (?) , Processing = (?) , updated = now(), updatedby = ? 
         WHERE A_Amortization.A_Amortization_ID = ? 
         
         AND A_Amortization.AD_Client_ID IN ('1') 
         AND A_Amortization.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="totalamortization"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="aAmortizationId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="totalamortization"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="aAmortizationId"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="aAmortizationId"></Parameter>
     
@@ -127,10 +127,10 @@ A_Amortization.A_Amortization_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO A_Amortization 
-        (AD_Org_ID, Name, Description, DateAcct, StartDate, Totalamortization, C_Currency_ID, Processed, Posted, IsActive, C_Project_ID, C_Campaign_ID, C_Activity_ID, User1_ID, User2_ID, EndDate, AD_Client_ID, Processing, A_Amortization_ID, created, createdby, updated, updatedBy)
-        VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, Name, Description, DateAcct, StartDate, Totalamortization, C_Currency_ID, Processed, Posted, IsActive, C_Project_ID, C_Campaign_ID, C_Activity_ID, User1_ID, User2_ID, A_Amortization_ID, EndDate, AD_Client_ID, Processing, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="totalamortization"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="aAmortizationId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="totalamortization"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="posted"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="aAmortizationId"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processing"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

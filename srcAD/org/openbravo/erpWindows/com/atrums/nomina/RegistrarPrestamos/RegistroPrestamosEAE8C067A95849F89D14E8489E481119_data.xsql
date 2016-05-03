@@ -27,8 +27,8 @@ list1.name as Docaction_Pro_BTN,
 no_prestamo.AD_Client_ID, 
 COALESCE(no_prestamo.Processed, 'N') AS Processed, 
 COALESCE(no_prestamo.Isactive, 'N') AS Isactive, 
-no_prestamo.Descuento_Iess, 
 no_prestamo.Sueldo, 
+no_prestamo.Descuento_Iess, 
 no_prestamo.Total_Recibir, 
 no_prestamo.NO_Prestamo_ID, 
  
@@ -122,13 +122,13 @@ no_prestamo.NO_Prestamo_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_prestamo
-        SET AD_Org_ID = (?) , C_Bpartner_ID = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Valor_Prestamo = TO_NUMBER(?) , Meses_Cuota = TO_NUMBER(?) , C_Period_ID = (?) , Valor_Cuota = TO_NUMBER(?) , Docaction_Pro = (?) , AD_Client_ID = (?) , Processed = (?) , Isactive = (?) , Descuento_Iess = TO_NUMBER(?) , Sueldo = TO_NUMBER(?) , Total_Recibir = TO_NUMBER(?) , NO_Prestamo_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , C_Bpartner_ID = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , Valor_Prestamo = TO_NUMBER(?) , Meses_Cuota = TO_NUMBER(?) , C_Period_ID = (?) , Valor_Cuota = TO_NUMBER(?) , Docaction_Pro = (?) , AD_Client_ID = (?) , Processed = (?) , Isactive = (?) , Sueldo = TO_NUMBER(?) , Descuento_Iess = TO_NUMBER(?) , Total_Recibir = TO_NUMBER(?) , NO_Prestamo_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_prestamo.NO_Prestamo_ID = ? 
         
         AND no_prestamo.AD_Client_ID IN ('1') 
         AND no_prestamo.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valorPrestamo"></Parameter> <Parameter name="mesesCuota"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valorCuota"></Parameter> <Parameter name="docactionPro"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="descuentoIess"></Parameter> <Parameter name="sueldo"></Parameter> <Parameter name="totalRecibir"></Parameter> <Parameter name="noPrestamoId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valorPrestamo"></Parameter> <Parameter name="mesesCuota"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valorCuota"></Parameter> <Parameter name="docactionPro"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="sueldo"></Parameter> <Parameter name="descuentoIess"></Parameter> <Parameter name="totalRecibir"></Parameter> <Parameter name="noPrestamoId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noPrestamoId"></Parameter>
     
@@ -140,10 +140,10 @@ no_prestamo.NO_Prestamo_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_prestamo 
-        (AD_Org_ID, C_Bpartner_ID, NO_Tipo_Ingreso_Egreso_ID, Valor_Prestamo, Meses_Cuota, C_Period_ID, Valor_Cuota, Docaction_Pro, AD_Client_ID, Processed, Isactive, Descuento_Iess, Sueldo, Total_Recibir, NO_Prestamo_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, C_Bpartner_ID, NO_Tipo_Ingreso_Egreso_ID, Valor_Prestamo, Meses_Cuota, C_Period_ID, Valor_Cuota, Docaction_Pro, AD_Client_ID, Processed, Isactive, Sueldo, Descuento_Iess, Total_Recibir, NO_Prestamo_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valorPrestamo"></Parameter> <Parameter name="mesesCuota"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valorCuota"></Parameter> <Parameter name="docactionPro"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="descuentoIess"></Parameter> <Parameter name="sueldo"></Parameter> <Parameter name="totalRecibir"></Parameter> <Parameter name="noPrestamoId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="valorPrestamo"></Parameter> <Parameter name="mesesCuota"></Parameter> <Parameter name="cPeriodId"></Parameter> <Parameter name="valorCuota"></Parameter> <Parameter name="docactionPro"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="sueldo"></Parameter> <Parameter name="descuentoIess"></Parameter> <Parameter name="totalRecibir"></Parameter> <Parameter name="noPrestamoId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

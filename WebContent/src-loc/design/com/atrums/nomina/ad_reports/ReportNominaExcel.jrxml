@@ -91,7 +91,7 @@ and c_period_id = $P{c_period_id}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="406" y="115" width="144" height="20"/>
+				<reportElement x="443" y="101" width="148" height="34"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -124,9 +124,43 @@ and c_period_id = $P{c_period_id}]]>
 					</dataset>
 				</crosstabDataset>
 				<crosstabHeaderCell>
-					<cellContents/>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="33" width="96" height="30" backcolor="#B4C2C8"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font size="10" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Área]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="96" y="33" width="100" height="30" backcolor="#B4C2C8"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font size="10" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Cédula]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="196" y="33" width="248" height="30" backcolor="#B4C2C8"/>
+							<box>
+								<topPen lineWidth="0.5"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font size="10" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Nombre]]></text>
+						</staticText>
+					</cellContents>
 				</crosstabHeaderCell>
-				<rowGroup name="nombrearea" width="70" totalPosition="End">
+				<rowGroup name="nombrearea" width="96" totalPosition="End">
 					<bucket>
 						<bucketExpression class="java.lang.String"><![CDATA[$F{nombrearea}]]></bucketExpression>
 					</bucket>
@@ -136,7 +170,7 @@ and c_period_id = $P{c_period_id}]]>
 								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textField>
-								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25"/>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="96" height="25"/>
 								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression class="java.lang.String"><![CDATA[$V{nombrearea}]]></textFieldExpression>
 							</textField>
@@ -155,7 +189,38 @@ and c_period_id = $P{c_period_id}]]>
 						</cellContents>
 					</crosstabTotalRowHeader>
 				</rowGroup>
-				<rowGroup name="nombre" width="248" totalPosition="End">
+				<rowGroup name="cedula" width="100" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{cedula}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#B4C2C8" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="100" height="25"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{cedula}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#E6F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="348" height="25"/>
+								<textElement verticalAlignment="Middle"/>
+								<text><![CDATA[Total Área]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="nombre" width="248">
 					<bucket>
 						<bucketExpression class="java.lang.String"><![CDATA[$F{nombre}]]></bucketExpression>
 					</bucket>
@@ -167,7 +232,7 @@ and c_period_id = $P{c_period_id}]]>
 							<textField>
 								<reportElement style="Crosstab Data Text" x="0" y="0" width="248" height="25"/>
 								<textElement textAlignment="Left" verticalAlignment="Middle">
-									<font size="8"/>
+									<font size="10"/>
 								</textElement>
 								<textFieldExpression class="java.lang.String"><![CDATA[$V{nombre}]]></textFieldExpression>
 							</textField>
@@ -382,11 +447,6 @@ and c_period_id = $P{c_period_id}]]>
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField pattern="###0.00">
-							<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25"/>
-							<textElement textAlignment="Right" verticalAlignment="Middle"/>
-							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{valorMeasure}]]></textFieldExpression>
-						</textField>
 					</cellContents>
 				</crosstabCell>
 				<crosstabCell width="71" rowTotalGroup="nombre" columnTotalGroup="ingreso">
@@ -401,15 +461,40 @@ and c_period_id = $P{c_period_id}]]>
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="70" height="0" rowTotalGroup="prueba">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="prueba" columnTotalGroup="ingreso">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="144" height="0" rowTotalGroup="prueba" columnTotalGroup="rubro">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="cedula">
+					<cellContents backcolor="#E6F8FF" mode="Opaque">
 						<textField pattern="###0.00">
-							<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="24"/>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25"/>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{valorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="cedula" columnTotalGroup="ingreso">
+					<cellContents backcolor="#737C80" mode="Opaque"/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="cedula" columnTotalGroup="rubro">
+					<cellContents backcolor="#E6F8FF" mode="Opaque">
+						<textField pattern="###0.00">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25"/>
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="9"/>
 							</textElement>
 							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{valorMeasure}]]></textFieldExpression>
 						</textField>
 						<staticText>
-							<reportElement style="Crosstab Data Text" mode="Opaque" x="70" y="0" width="74" height="24" backcolor="#CCCCCC">
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="70" y="0" width="74" height="25" backcolor="#CCCCCC">
 								<printWhenExpression><![CDATA[$V{ingreso}.equals(new String("EGRESO"))]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -424,15 +509,6 @@ and c_period_id = $P{c_period_id}]]>
 							<text><![CDATA[]]></text>
 						</staticText>
 					</cellContents>
-				</crosstabCell>
-				<crosstabCell width="70" height="0" rowTotalGroup="prueba">
-					<cellContents/>
-				</crosstabCell>
-				<crosstabCell rowTotalGroup="prueba" columnTotalGroup="ingreso">
-					<cellContents/>
-				</crosstabCell>
-				<crosstabCell width="144" height="0" rowTotalGroup="prueba" columnTotalGroup="rubro">
-					<cellContents/>
 				</crosstabCell>
 			</crosstab>
 		</band>

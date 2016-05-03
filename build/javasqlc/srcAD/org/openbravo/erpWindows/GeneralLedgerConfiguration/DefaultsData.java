@@ -62,8 +62,8 @@ static Logger log4j = Logger.getLogger(DefaultsData.class);
   public String cbCashtransferAcct;
   public String cbExpenseAcct;
   public String cbReceiptAcct;
-  public String aDepreciationAcct;
   public String bPaymentselectAcct;
+  public String aDepreciationAcct;
   public String aAccumdepreciationAcct;
   public String processing;
   public String eExpenseAcct;
@@ -93,13 +93,13 @@ static Logger log4j = Logger.getLogger(DefaultsData.class);
   public String wInvactualadjustAcct;
   public String bUnallocatedcashAcct;
   public String bSettlementlossAcct;
-  public String isactive;
-  public String aDisposalLoss;
-  public String cAcctschemaId;
   public String adOrgId;
   public String adClientId;
-  public String cAcctschemaDefaultId;
+  public String isactive;
   public String aDisposalGain;
+  public String aDisposalLoss;
+  public String cAcctschemaDefaultId;
+  public String cAcctschemaId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -201,10 +201,10 @@ static Logger log4j = Logger.getLogger(DefaultsData.class);
       return cbExpenseAcct;
     else if (fieldName.equalsIgnoreCase("cb_receipt_acct") || fieldName.equals("cbReceiptAcct"))
       return cbReceiptAcct;
-    else if (fieldName.equalsIgnoreCase("a_depreciation_acct") || fieldName.equals("aDepreciationAcct"))
-      return aDepreciationAcct;
     else if (fieldName.equalsIgnoreCase("b_paymentselect_acct") || fieldName.equals("bPaymentselectAcct"))
       return bPaymentselectAcct;
+    else if (fieldName.equalsIgnoreCase("a_depreciation_acct") || fieldName.equals("aDepreciationAcct"))
+      return aDepreciationAcct;
     else if (fieldName.equalsIgnoreCase("a_accumdepreciation_acct") || fieldName.equals("aAccumdepreciationAcct"))
       return aAccumdepreciationAcct;
     else if (fieldName.equalsIgnoreCase("processing"))
@@ -263,20 +263,20 @@ static Logger log4j = Logger.getLogger(DefaultsData.class);
       return bUnallocatedcashAcct;
     else if (fieldName.equalsIgnoreCase("b_settlementloss_acct") || fieldName.equals("bSettlementlossAcct"))
       return bSettlementlossAcct;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("a_disposal_loss") || fieldName.equals("aDisposalLoss"))
-      return aDisposalLoss;
-    else if (fieldName.equalsIgnoreCase("c_acctschema_id") || fieldName.equals("cAcctschemaId"))
-      return cAcctschemaId;
     else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
       return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
-    else if (fieldName.equalsIgnoreCase("c_acctschema_default_id") || fieldName.equals("cAcctschemaDefaultId"))
-      return cAcctschemaDefaultId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("a_disposal_gain") || fieldName.equals("aDisposalGain"))
       return aDisposalGain;
+    else if (fieldName.equalsIgnoreCase("a_disposal_loss") || fieldName.equals("aDisposalLoss"))
+      return aDisposalLoss;
+    else if (fieldName.equalsIgnoreCase("c_acctschema_default_id") || fieldName.equals("cAcctschemaDefaultId"))
+      return cAcctschemaDefaultId;
+    else if (fieldName.equalsIgnoreCase("c_acctschema_id") || fieldName.equals("cAcctschemaId"))
+      return cAcctschemaId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -354,8 +354,8 @@ Select for edit
       "C_AcctSchema_Default.CB_CashTransfer_Acct, " +
       "C_AcctSchema_Default.CB_Expense_Acct, " +
       "C_AcctSchema_Default.CB_Receipt_Acct, " +
-      "C_AcctSchema_Default.A_Depreciation_Acct, " +
       "C_AcctSchema_Default.B_PaymentSelect_Acct, " +
+      "C_AcctSchema_Default.A_Depreciation_Acct, " +
       "C_AcctSchema_Default.A_Accumdepreciation_Acct, " +
       "C_AcctSchema_Default.Processing, " +
       "C_AcctSchema_Default.E_Expense_Acct, " +
@@ -385,13 +385,13 @@ Select for edit
       "C_AcctSchema_Default.W_InvActualAdjust_Acct, " +
       "C_AcctSchema_Default.B_UnallocatedCash_Acct, " +
       "C_AcctSchema_Default.B_SettlementLoss_Acct, " +
-      "COALESCE(C_AcctSchema_Default.IsActive, 'N') AS IsActive, " +
-      "C_AcctSchema_Default.A_Disposal_Loss, " +
-      "C_AcctSchema_Default.C_AcctSchema_ID, " +
       "C_AcctSchema_Default.AD_Org_ID, " +
       "C_AcctSchema_Default.AD_Client_ID, " +
-      "C_AcctSchema_Default.C_Acctschema_Default_ID, " +
+      "COALESCE(C_AcctSchema_Default.IsActive, 'N') AS IsActive, " +
       "C_AcctSchema_Default.A_Disposal_Gain, " +
+      "C_AcctSchema_Default.A_Disposal_Loss, " +
+      "C_AcctSchema_Default.C_Acctschema_Default_ID, " +
+      "C_AcctSchema_Default.C_AcctSchema_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_AcctSchema_Default" +
       "        WHERE 2=2 " +
@@ -482,8 +482,8 @@ Select for edit
         objectDefaultsData.cbCashtransferAcct = UtilSql.getValue(result, "cb_cashtransfer_acct");
         objectDefaultsData.cbExpenseAcct = UtilSql.getValue(result, "cb_expense_acct");
         objectDefaultsData.cbReceiptAcct = UtilSql.getValue(result, "cb_receipt_acct");
-        objectDefaultsData.aDepreciationAcct = UtilSql.getValue(result, "a_depreciation_acct");
         objectDefaultsData.bPaymentselectAcct = UtilSql.getValue(result, "b_paymentselect_acct");
+        objectDefaultsData.aDepreciationAcct = UtilSql.getValue(result, "a_depreciation_acct");
         objectDefaultsData.aAccumdepreciationAcct = UtilSql.getValue(result, "a_accumdepreciation_acct");
         objectDefaultsData.processing = UtilSql.getValue(result, "processing");
         objectDefaultsData.eExpenseAcct = UtilSql.getValue(result, "e_expense_acct");
@@ -513,13 +513,13 @@ Select for edit
         objectDefaultsData.wInvactualadjustAcct = UtilSql.getValue(result, "w_invactualadjust_acct");
         objectDefaultsData.bUnallocatedcashAcct = UtilSql.getValue(result, "b_unallocatedcash_acct");
         objectDefaultsData.bSettlementlossAcct = UtilSql.getValue(result, "b_settlementloss_acct");
-        objectDefaultsData.isactive = UtilSql.getValue(result, "isactive");
-        objectDefaultsData.aDisposalLoss = UtilSql.getValue(result, "a_disposal_loss");
-        objectDefaultsData.cAcctschemaId = UtilSql.getValue(result, "c_acctschema_id");
         objectDefaultsData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectDefaultsData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectDefaultsData.cAcctschemaDefaultId = UtilSql.getValue(result, "c_acctschema_default_id");
+        objectDefaultsData.isactive = UtilSql.getValue(result, "isactive");
         objectDefaultsData.aDisposalGain = UtilSql.getValue(result, "a_disposal_gain");
+        objectDefaultsData.aDisposalLoss = UtilSql.getValue(result, "a_disposal_loss");
+        objectDefaultsData.cAcctschemaDefaultId = UtilSql.getValue(result, "c_acctschema_default_id");
+        objectDefaultsData.cAcctschemaId = UtilSql.getValue(result, "c_acctschema_id");
         objectDefaultsData.language = UtilSql.getValue(result, "language");
         objectDefaultsData.adUserClient = "";
         objectDefaultsData.adOrgClient = "";
@@ -601,8 +601,8 @@ Create a registry
     objectDefaultsData[0].cbCashtransferAcct = cbCashtransferAcct;
     objectDefaultsData[0].cbExpenseAcct = cbExpenseAcct;
     objectDefaultsData[0].cbReceiptAcct = cbReceiptAcct;
-    objectDefaultsData[0].aDepreciationAcct = aDepreciationAcct;
     objectDefaultsData[0].bPaymentselectAcct = bPaymentselectAcct;
+    objectDefaultsData[0].aDepreciationAcct = aDepreciationAcct;
     objectDefaultsData[0].aAccumdepreciationAcct = aAccumdepreciationAcct;
     objectDefaultsData[0].processing = processing;
     objectDefaultsData[0].eExpenseAcct = eExpenseAcct;
@@ -632,13 +632,13 @@ Create a registry
     objectDefaultsData[0].wInvactualadjustAcct = wInvactualadjustAcct;
     objectDefaultsData[0].bUnallocatedcashAcct = bUnallocatedcashAcct;
     objectDefaultsData[0].bSettlementlossAcct = bSettlementlossAcct;
-    objectDefaultsData[0].isactive = isactive;
-    objectDefaultsData[0].aDisposalLoss = aDisposalLoss;
-    objectDefaultsData[0].cAcctschemaId = cAcctschemaId;
     objectDefaultsData[0].adOrgId = adOrgId;
     objectDefaultsData[0].adClientId = adClientId;
-    objectDefaultsData[0].cAcctschemaDefaultId = cAcctschemaDefaultId;
+    objectDefaultsData[0].isactive = isactive;
     objectDefaultsData[0].aDisposalGain = aDisposalGain;
+    objectDefaultsData[0].aDisposalLoss = aDisposalLoss;
+    objectDefaultsData[0].cAcctschemaDefaultId = cAcctschemaDefaultId;
+    objectDefaultsData[0].cAcctschemaId = cAcctschemaId;
     objectDefaultsData[0].language = "";
     return objectDefaultsData;
   }
@@ -839,7 +839,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_AcctSchema_Default" +
-      "        SET C_Receivable_Acct = (?) , C_Prepayment_Acct = (?) , WriteOff_Acct = (?) , Writeoff_Rev_Acct = (?) , V_Liability_Acct = (?) , V_Prepayment_Acct = (?) , NotInvoicedReceipts_Acct = (?) , DoubtfulDebt_Acct = (?) , Baddebtexpense_Acct = (?) , BadDebtRevenue_Acct = (?) , Allowancefordoubtful_Acct = (?) , P_Asset_Acct = (?) , P_Expense_Acct = (?) , P_Def_Expense_Acct = (?) , P_Revenue_Acct = (?) , P_Def_Revenue_Acct = (?) , P_Cogs_Acct = (?) , Withholding_Acct = (?) , P_InvoicePriceVariance_Acct = (?) , P_Revenue_Return_Acct = (?) , P_Cogs_Return_Acct = (?) , W_Inventory_Acct = (?) , W_Differences_Acct = (?) , W_Revaluation_Acct = (?) , PJ_WIP_Acct = (?) , B_Asset_Acct = (?) , B_InTransit_Acct = (?) , B_Expense_Acct = (?) , B_RevaluationGain_Acct = (?) , B_RevaluationLoss_Acct = (?) , T_Due_Acct = (?) , T_Credit_Acct = (?) , Ch_Expense_Acct = (?) , CB_Asset_Acct = (?) , CB_Differences_Acct = (?) , CB_CashTransfer_Acct = (?) , CB_Expense_Acct = (?) , CB_Receipt_Acct = (?) , A_Depreciation_Acct = (?) , B_PaymentSelect_Acct = (?) , A_Accumdepreciation_Acct = (?) , Processing = (?) , E_Expense_Acct = (?) , E_Prepayment_Acct = (?) , PJ_Asset_Acct = (?) , V_Liability_Services_Acct = (?) , NotInvoicedRevenue_Acct = (?) , P_PurchasePriceVariance_Acct = (?) , PayDiscount_Exp_Acct = (?) , PayDiscount_Rev_Acct = (?) , UnrealizedGain_Acct = (?) , UnrealizedLoss_Acct = (?) , RealizedGain_Acct = (?) , RealizedLoss_Acct = (?) , T_Expense_Acct = (?) , T_Liability_Acct = (?) , T_Receivables_Acct = (?) , B_InterestRev_Acct = (?) , B_InterestExp_Acct = (?) , B_Unidentified_Acct = (?) , B_SettlementGain_Acct = (?) , Ch_Revenue_Acct = (?) , UnEarnedRevenue_Acct = (?) , NotInvoicedReceivables_Acct = (?) , P_TradeDiscountRec_Acct = (?) , P_TradeDiscountGrant_Acct = (?) , W_InvActualAdjust_Acct = (?) , B_UnallocatedCash_Acct = (?) , B_SettlementLoss_Acct = (?) , IsActive = (?) , A_Disposal_Loss = (?) , C_Acctschema_Default_ID = (?) , C_AcctSchema_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , A_Disposal_Gain = (?) , updated = now(), updatedby = ? " +
+      "        SET C_Receivable_Acct = (?) , C_Prepayment_Acct = (?) , WriteOff_Acct = (?) , Writeoff_Rev_Acct = (?) , V_Liability_Acct = (?) , V_Prepayment_Acct = (?) , NotInvoicedReceipts_Acct = (?) , DoubtfulDebt_Acct = (?) , Baddebtexpense_Acct = (?) , BadDebtRevenue_Acct = (?) , Allowancefordoubtful_Acct = (?) , P_Asset_Acct = (?) , P_Expense_Acct = (?) , P_Def_Expense_Acct = (?) , P_Revenue_Acct = (?) , P_Def_Revenue_Acct = (?) , P_Cogs_Acct = (?) , Withholding_Acct = (?) , P_InvoicePriceVariance_Acct = (?) , P_Revenue_Return_Acct = (?) , P_Cogs_Return_Acct = (?) , W_Inventory_Acct = (?) , W_Differences_Acct = (?) , W_Revaluation_Acct = (?) , PJ_WIP_Acct = (?) , B_Asset_Acct = (?) , B_InTransit_Acct = (?) , B_Expense_Acct = (?) , B_RevaluationGain_Acct = (?) , B_RevaluationLoss_Acct = (?) , T_Due_Acct = (?) , T_Credit_Acct = (?) , Ch_Expense_Acct = (?) , CB_Asset_Acct = (?) , CB_Differences_Acct = (?) , CB_CashTransfer_Acct = (?) , CB_Expense_Acct = (?) , CB_Receipt_Acct = (?) , B_PaymentSelect_Acct = (?) , A_Depreciation_Acct = (?) , A_Accumdepreciation_Acct = (?) , Processing = (?) , E_Expense_Acct = (?) , E_Prepayment_Acct = (?) , PJ_Asset_Acct = (?) , V_Liability_Services_Acct = (?) , NotInvoicedRevenue_Acct = (?) , P_PurchasePriceVariance_Acct = (?) , PayDiscount_Exp_Acct = (?) , PayDiscount_Rev_Acct = (?) , UnrealizedGain_Acct = (?) , UnrealizedLoss_Acct = (?) , RealizedGain_Acct = (?) , RealizedLoss_Acct = (?) , T_Expense_Acct = (?) , T_Liability_Acct = (?) , T_Receivables_Acct = (?) , B_InterestRev_Acct = (?) , B_InterestExp_Acct = (?) , B_Unidentified_Acct = (?) , B_SettlementGain_Acct = (?) , Ch_Revenue_Acct = (?) , UnEarnedRevenue_Acct = (?) , NotInvoicedReceivables_Acct = (?) , P_TradeDiscountRec_Acct = (?) , P_TradeDiscountGrant_Acct = (?) , W_InvActualAdjust_Acct = (?) , B_UnallocatedCash_Acct = (?) , B_SettlementLoss_Acct = (?) , IsActive = (?) , A_Disposal_Gain = (?) , C_Acctschema_Default_ID = (?) , C_AcctSchema_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , A_Disposal_Loss = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_AcctSchema_Default.C_Acctschema_Default_ID = ? " +
       "                 AND C_AcctSchema_Default.C_AcctSchema_ID = ? " +
       "        AND C_AcctSchema_Default.AD_Client_ID IN (";
@@ -895,8 +895,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cbCashtransferAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cbExpenseAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cbReceiptAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDepreciationAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bPaymentselectAcct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDepreciationAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAccumdepreciationAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, eExpenseAcct);
@@ -927,12 +927,12 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bUnallocatedcashAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bSettlementlossAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalLoss);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalGain);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaDefaultId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalGain);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalLoss);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaDefaultId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
@@ -962,7 +962,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_AcctSchema_Default " +
-      "        (C_Receivable_Acct, C_Prepayment_Acct, WriteOff_Acct, Writeoff_Rev_Acct, V_Liability_Acct, V_Prepayment_Acct, NotInvoicedReceipts_Acct, DoubtfulDebt_Acct, Baddebtexpense_Acct, BadDebtRevenue_Acct, Allowancefordoubtful_Acct, P_Asset_Acct, P_Expense_Acct, P_Def_Expense_Acct, P_Revenue_Acct, P_Def_Revenue_Acct, P_Cogs_Acct, Withholding_Acct, P_InvoicePriceVariance_Acct, P_Revenue_Return_Acct, P_Cogs_Return_Acct, W_Inventory_Acct, W_Differences_Acct, W_Revaluation_Acct, PJ_WIP_Acct, B_Asset_Acct, B_InTransit_Acct, B_Expense_Acct, B_RevaluationGain_Acct, B_RevaluationLoss_Acct, T_Due_Acct, T_Credit_Acct, Ch_Expense_Acct, CB_Asset_Acct, CB_Differences_Acct, CB_CashTransfer_Acct, CB_Expense_Acct, CB_Receipt_Acct, A_Depreciation_Acct, B_PaymentSelect_Acct, A_Accumdepreciation_Acct, Processing, E_Expense_Acct, E_Prepayment_Acct, PJ_Asset_Acct, V_Liability_Services_Acct, NotInvoicedRevenue_Acct, P_PurchasePriceVariance_Acct, PayDiscount_Exp_Acct, PayDiscount_Rev_Acct, UnrealizedGain_Acct, UnrealizedLoss_Acct, RealizedGain_Acct, RealizedLoss_Acct, T_Expense_Acct, T_Liability_Acct, T_Receivables_Acct, B_InterestRev_Acct, B_InterestExp_Acct, B_Unidentified_Acct, B_SettlementGain_Acct, Ch_Revenue_Acct, UnEarnedRevenue_Acct, NotInvoicedReceivables_Acct, P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct, W_InvActualAdjust_Acct, B_UnallocatedCash_Acct, B_SettlementLoss_Acct, IsActive, A_Disposal_Loss, C_AcctSchema_ID, AD_Org_ID, AD_Client_ID, C_Acctschema_Default_ID, A_Disposal_Gain, created, createdby, updated, updatedBy)" +
+      "        (C_Receivable_Acct, C_Prepayment_Acct, WriteOff_Acct, Writeoff_Rev_Acct, V_Liability_Acct, V_Prepayment_Acct, NotInvoicedReceipts_Acct, DoubtfulDebt_Acct, Baddebtexpense_Acct, BadDebtRevenue_Acct, Allowancefordoubtful_Acct, P_Asset_Acct, P_Expense_Acct, P_Def_Expense_Acct, P_Revenue_Acct, P_Def_Revenue_Acct, P_Cogs_Acct, Withholding_Acct, P_InvoicePriceVariance_Acct, P_Revenue_Return_Acct, P_Cogs_Return_Acct, W_Inventory_Acct, W_Differences_Acct, W_Revaluation_Acct, PJ_WIP_Acct, B_Asset_Acct, B_InTransit_Acct, B_Expense_Acct, B_RevaluationGain_Acct, B_RevaluationLoss_Acct, T_Due_Acct, T_Credit_Acct, Ch_Expense_Acct, CB_Asset_Acct, CB_Differences_Acct, CB_CashTransfer_Acct, CB_Expense_Acct, CB_Receipt_Acct, B_PaymentSelect_Acct, A_Depreciation_Acct, A_Accumdepreciation_Acct, Processing, E_Expense_Acct, E_Prepayment_Acct, PJ_Asset_Acct, V_Liability_Services_Acct, NotInvoicedRevenue_Acct, P_PurchasePriceVariance_Acct, PayDiscount_Exp_Acct, PayDiscount_Rev_Acct, UnrealizedGain_Acct, UnrealizedLoss_Acct, RealizedGain_Acct, RealizedLoss_Acct, T_Expense_Acct, T_Liability_Acct, T_Receivables_Acct, B_InterestRev_Acct, B_InterestExp_Acct, B_Unidentified_Acct, B_SettlementGain_Acct, Ch_Revenue_Acct, UnEarnedRevenue_Acct, NotInvoicedReceivables_Acct, P_TradeDiscountRec_Acct, P_TradeDiscountGrant_Acct, W_InvActualAdjust_Acct, B_UnallocatedCash_Acct, B_SettlementLoss_Acct, AD_Org_ID, AD_Client_ID, IsActive, A_Disposal_Gain, A_Disposal_Loss, C_Acctschema_Default_ID, C_AcctSchema_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -1009,8 +1009,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cbCashtransferAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cbExpenseAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cbReceiptAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDepreciationAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bPaymentselectAcct);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDepreciationAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAccumdepreciationAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, eExpenseAcct);
@@ -1040,13 +1040,13 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, wInvactualadjustAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bUnallocatedcashAcct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, bSettlementlossAcct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalLoss);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaDefaultId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalGain);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, aDisposalLoss);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaDefaultId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cAcctschemaId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 
