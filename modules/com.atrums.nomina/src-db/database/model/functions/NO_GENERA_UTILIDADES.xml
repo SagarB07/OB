@@ -73,6 +73,13 @@ BEGIN
         and u.c_year_id = y.c_year_id;
 
         delete from no_utilidad_linea where no_utilidad_id = v_Record_ID;
+		
+	IF (SELECT  COUNT(*)>0
+		FROM C_PERIOD P , C_YEAR Y , c_year_close_v YC
+		WHERE P.C_YEAR_ID = Y.C_YEAR_ID 
+		AND YC.C_YEAR_ID =Y.C_YEAR_ID
+		AND P.OPENCLOSE = 'C' AND YC.STATUS = 'O'
+		AND P.C_YEAR_ID  = v_year_id ) THEN 
 
         FOR Cur_Empleado IN
         (select bp.c_bpartner_id, 
@@ -205,6 +212,10 @@ BEGIN
             where no_utilidad_linea_id = Cur_Utilidad.no_utilidad_linea_id;
 
         END LOOP;
+	ELSE 
+
+	raise exception '%', '@NO_PERIODO_CERRADO@';
+	END IF;
 
         v_Message:='@NO_EjecucionCorrecta@';
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);

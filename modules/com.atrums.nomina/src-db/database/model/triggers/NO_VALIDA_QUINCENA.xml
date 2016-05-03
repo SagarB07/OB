@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_VALIDA_QUINCENA">
+    <trigger name="NO_VALIDA_QUINCENA" table="NO_REGISTRA_QUINC_LINE" fires="before" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+        
+BEGIN
+---  select count(*)=1 from no_registra_quinc_line where no_registra_quincena_id = '22E47E60F8634F47B5D8CE6414996C3A' and c_bpartner_id = '15497893F5B34118A899957112C1537B'
+	 
+ 
+    IF (UPDATING) THEN
+
+	IF :NEW.docstatus = 'CO' THEN  
+		 IF (select count(*)>1 from no_registra_quinc_line where no_registra_quincena_id = :NEW.no_registra_quincena_id and c_bpartner_id = :NEW.c_bpartner_id) THEN
+			:NEW.docstatus = :OLD.docstatus;
+			RETURN NEW;
+		ELSE 
+			RETURN NEW;
+		 END IF;   
+		 
+	 END IF;
+
+	
+    END IF;
+    
+    RETURN NEW; 
+END NO_VALIDA_QUINCENA
+]]></body>
+    </trigger>
+  </database>
