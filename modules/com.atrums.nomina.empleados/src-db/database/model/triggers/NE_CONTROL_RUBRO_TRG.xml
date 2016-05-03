@@ -21,7 +21,7 @@ BEGIN
 		and no_tipo_ingreso_egreso_id = :new.no_tipo_ingreso_egreso_id;
 
 		if v_no_tipo_ingreso_egreso_id is not null then
-		 RAISE NO_DATA_FOUND;
+		 raise exception '%', '@NO_UNICO_RUB_PRUBRO@';
 		end if;		
 	end if;
 	
