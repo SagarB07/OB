@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -28,9 +28,7 @@ left  JOIN C_DOCTYPE DOC  ON  CEMP.C_DOCTYPE_ID = DOC.C_DOCTYPE_ID
 left  JOIN ATNORH_CARGO CAR  ON  CAR.ATNORH_CARGO_ID = cemp.EM_ATNORH_CARGO_ID
 WHERE
 emp.isemployee =  'Y'
-AND cemp.isactive = 'Y'
-and emp.taxid = '0105424725'
-and cemp.no_contrato_empleado_id = '961963FFCF354EA4B822177E523B3000';]]>
+and cemp.no_contrato_empleado_id =$P{DOCUMENT_ID}]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>

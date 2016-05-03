@@ -28,17 +28,15 @@ public class LDTLiquidacionEmpleado extends HttpSecureAppServlet {
     if (vars.commandIn("DEFAULT")) {
       String strProcessId = vars.getStringParameter("inpProcessId");
       String strWindow = vars.getStringParameter("inpwindowId");
-      String strKey = vars.getStringParameter("inpldtHblId");
+      String inpnoContratoEmpleadoId = vars.getStringParameter("inpnoContratoEmpleadoId");
       String strLdtFh = vars.getStringParameter("inplftFh");
       String strMessage = "";
 
-      printPage(response, vars, strKey, strWindow, strProcessId, strLdtFh, strMessage, true);
+      printPage(response, vars, inpnoContratoEmpleadoId, strWindow, strProcessId, strLdtFh, strMessage, true);
     }
   }
 
-  private void printPage(HttpServletResponse response, VariablesSecureApp vars, String strldtHblid,
-      String windowId, String strProcessId, String strLdtFh, String strMessage, boolean isDefault)
-      throws IOException, ServletException {
+  private void printPage(HttpServletResponse response, VariablesSecureApp vars, String inpnoContratoEmpleadoId, String windowId, String strProcessId, String strLdtFh, String strMessage, boolean isDefault)throws IOException, ServletException {
 
     String strMainReportName = "";
     HashMap<String, Object> parameters = new HashMap<String, Object>();
@@ -48,14 +46,14 @@ public class LDTLiquidacionEmpleado extends HttpSecureAppServlet {
 
     try {
     //  if (strLdtFh.trim().equals("Y")) {
-        strMainReportName = "@basedesign@/com/atrums/nomina/ad_reports/Rpt_No_liquidacion";
+        strMainReportName = "@basedesign@/com/atrums/nomina/ad_reports/Rpt_No_liquidacion.jrxml";
      /// } else {
         //strMainReportName = "@basedesign@/com/atrums/logisticadetransporte/parametrizacion/erpReports/Rpt_LDT_Aviso_Arribo.jrxml";
       //}
       OBContext.setAdminMode(true);
 
       // Parameters
-      parameters.put("DOCUMENT_ID", strldtHblid);
+      parameters.put("DOCUMENT_ID", inpnoContratoEmpleadoId);
 
       OBContext.setAdminMode(true);
 
