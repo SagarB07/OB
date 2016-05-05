@@ -7,13 +7,13 @@ BEGIN
 			
 	IF INSERTING THEN
 		:NEW.descuento_iess = :NEW.sueldo * 0.0945;
-		:NEW.total_recibir = :NEW.sueldo - :NEW.descuento_iess - :NEW.VALOR_PRESTAMO;		
+		:NEW.total_recibir = :NEW.sueldo - :NEW.descuento_iess;		
 	RETURN NEW;	
 	
 	
 	ELSIF UPDATING THEN	 
 		:NEW.descuento_iess = :NEW.sueldo * 0.0945;		
-		:NEW.total_recibir = :NEW.sueldo - :NEW.descuento_iess - :NEW.VALOR_PRESTAMO;		
+		:NEW.total_recibir = :NEW.sueldo - :NEW.descuento_iess ;		
 	RETURN NEW;
 	END IF;
 	

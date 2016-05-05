@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_Provisiones_Mensual" pageWidth="1130" pageHeight="900" columnWidth="1090" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="38"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/_Desarrollo/OpenBravo/munditransport/OpenBravoERP/modules/com.atrums.logisticadetransporte.parametrizacion/src/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="c_period_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct(c.name) as empleado ,ad.name as agencia, em.nombre as departamento,c.taxid as cedula, dt.name as tipo_documento,
+        ce.documentno as contrato, ce.fecha_inicio as fecha_inicio, ce.fecha_fin as fecha_fin, coalesce(ce.salario,0) as salario,
+        coalesce(rp.total_ingreso,0) as total_ingreso, coalesce(rp.total_egreso,0) as total_egreso,
+        coalesce(rp.total_neto,0) as total_neto, rp.dateacct as fecha_contable,
+        (case when em.no_area_empresa_id in ('8C2EDD6274844BEC802EF1721307190D', '0ABF48A38B3748EEBEC6D4B05CB8EC20') then
+              'Administrativo'
+         else
+              'Ventas'
+         end) as area_emp,
+        coalesce((select coalesce(cd.valor,0)
+           from no_re_comision rc, no_re_comision_detalle cd
+          where rc.no_re_comision_id = cd.no_re_comision_id
+            and rc.c_period_id = rp.c_period_id
+            and cd.c_bpartner_id = rp.c_bpartner_id),0) as comision,
+        coalesce((select coalesce(sum(round(((ce.salario/240::numeric)*(((100+ch.porcentaje)/100)::numeric))*he.cantida_hora,2)),0)
+           from no_registro_hora_extra he
+           left join no_config_hora_extra ch on (ch.no_config_hora_extra_id = he.no_config_hora_extra_id)
+          where he.c_bpartner_id = rp.c_bpartner_id
+            and he.c_period_id = rp.c_period_id),0) as horas_extra,
+        coalesce(pl.valor,0) as fondos_reserva,
+        coalesce((select coalesce(plm.valor,0)
+           from no_rol_pago_provision rpp, no_rol_pago_provision_line ppl, no_rol_provision_line_mes plm
+          where rpp.c_bpartner_id = rp.c_bpartner_id
+            and rpp.ispago = 'N'
+            and rpp.no_rol_pago_provision_id = ppl.no_rol_pago_provision_id
+            and ppl.no_tipo_ingreso_egreso_id in ('419716ABE5AE414E8577B3C26C6F823D','AC79B4EB2F5546B2895C290C21F53931')
+            and ppl.no_rol_pago_provision_line_id = plm.no_rol_pago_provision_line_id
+            and plm.c_period_id = rp.c_period_id),0) as aporte_patronal,
+         coalesce((select coalesce(plm.valor,0)
+           from no_rol_pago_provision rpp, no_rol_pago_provision_line ppl, no_rol_provision_line_mes plm
+          where rpp.c_bpartner_id = rp.c_bpartner_id
+            and rpp.ispago = 'N'
+            and rpp.no_rol_pago_provision_id = ppl.no_rol_pago_provision_id
+            and ppl.no_tipo_ingreso_egreso_id in ('B1E1B09BFBD54A99A8E1E6FF2A91DB9D')
+            and ppl.no_rol_pago_provision_line_id = plm.no_rol_pago_provision_line_id
+            and plm.c_period_id = rp.c_period_id),0) as decimo_tercero,
+        coalesce((select coalesce(plm.valor,0)
+           from no_rol_pago_provision rpp, no_rol_pago_provision_line ppl, no_rol_provision_line_mes plm
+          where rpp.c_bpartner_id = rp.c_bpartner_id
+            and rpp.ispago = 'N'
+            and rpp.no_rol_pago_provision_id = ppl.no_rol_pago_provision_id
+            and ppl.no_tipo_ingreso_egreso_id in ('73986DBC43E34F25B67766C6409E213F')
+            and ppl.no_rol_pago_provision_line_id = plm.no_rol_pago_provision_line_id
+            and plm.c_period_id = rp.c_period_id),0) as decimo_cuarto,
+         coalesce((select coalesce(plm.valor,0)
+           from no_rol_pago_provision rpp, no_rol_pago_provision_line ppl, no_rol_provision_line_mes plm
+          where rpp.c_bpartner_id = rp.c_bpartner_id
+            and rpp.ispago = 'N'
+            and rpp.no_rol_pago_provision_id = ppl.no_rol_pago_provision_id
+            and ppl.no_tipo_ingreso_egreso_id in ('DEFEED633A084DAAB2ED2FB2F8BE28A0')
+            and ppl.no_rol_pago_provision_line_id = plm.no_rol_pago_provision_line_id
+            and plm.c_period_id = rp.c_period_id),0) as vacaciones,
+      (select upper('Mes del ' || to_char(per.startdate,'DD') || ' de ' || to_char(per.startdate,'TMMonth') || ' al ' || to_char(per.enddate,'DD') || ' de ' || to_char(per.startdate,'TMMonth') || ' de ' || to_char(per.enddate,'YYYY')) from c_period per where per.c_period_id = rp.c_period_id) as fecha_periodo
+  from no_rol_pago_provision rp
+  left join c_bpartner c on (c.c_bpartner_id = rp.c_bpartner_id)
+  left join no_contrato_empleado ce on (rp.c_bpartner_id = ce.c_bpartner_id and ce.isactive = 'Y')
+  left join c_doctype dt on (rp.c_doctype_id = dt.c_doctype_id)
+  left join no_rol_pago_provision_line pl on (pl.no_rol_pago_provision_id = rp.no_rol_pago_provision_id and
+                                              pl.no_tipo_ingreso_egreso_id in ('0AC414CB9CB64B1F85EE9DFB8BF8899C'))
+  left join c_period cp on (rp.c_period_id = cp.c_period_id)
+  left join no_area_empresa em on (rp.no_area_empresa_id = em.no_area_empresa_id)
+  left join ad_org ad on (ad.ad_org_id = rp.ad_org_id)
+ where rp.ispago = 'Y'
+   and rp.c_period_id = $P{c_period_id}
+order by 2,3,1]]>
+	</queryString>
+	<field name="empleado" class="java.lang.String"/>
+	<field name="agencia" class="java.lang.String"/>
+	<field name="departamento" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="tipo_documento" class="java.lang.String"/>
+	<field name="contrato" class="java.lang.String"/>
+	<field name="fecha_inicio" class="java.sql.Timestamp"/>
+	<field name="fecha_fin" class="java.sql.Timestamp"/>
+	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="total_ingreso" class="java.math.BigDecimal"/>
+	<field name="total_egreso" class="java.math.BigDecimal"/>
+	<field name="total_neto" class="java.math.BigDecimal"/>
+	<field name="fecha_contable" class="java.sql.Timestamp"/>
+	<field name="area_emp" class="java.lang.String"/>
+	<field name="comision" class="java.math.BigDecimal"/>
+	<field name="horas_extra" class="java.math.BigDecimal"/>
+	<field name="fondos_reserva" class="java.math.BigDecimal"/>
+	<field name="aporte_patronal" class="java.math.BigDecimal"/>
+	<field name="decimo_tercero" class="java.math.BigDecimal"/>
+	<field name="decimo_cuarto" class="java.math.BigDecimal"/>
+	<field name="vacaciones" class="java.math.BigDecimal"/>
+	<field name="fecha_periodo" class="java.lang.String"/>
+	<variable name="linea" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{empleado}]]></variableExpression>
+	</variable>
+	<variable name="sum_sueldo" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{salario}]]></variableExpression>
+	</variable>
+	<variable name="sum_comision" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{comision}]]></variableExpression>
+	</variable>
+	<variable name="sum_horas_extra" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{horas_extra}]]></variableExpression>
+	</variable>
+	<variable name="sum_ingreso" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_ingreso}]]></variableExpression>
+	</variable>
+	<variable name="sum_aporte" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{aporte_patronal}]]></variableExpression>
+	</variable>
+	<variable name="sum_fondo_reserva" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{fondos_reserva}]]></variableExpression>
+	</variable>
+	<variable name="sum_decimo_tercero" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{decimo_tercero}]]></variableExpression>
+	</variable>
+	<variable name="sum_decimo_cuarto" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{decimo_cuarto}]]></variableExpression>
+	</variable>
+	<variable name="sum_vacaciones" class="java.math.BigDecimal" resetType="Group" resetGroup="Agencia" calculation="Sum">
+		<variableExpression><![CDATA[$F{vacaciones}]]></variableExpression>
+	</variable>
+	<variable name="suma_sueldo" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{salario}]]></variableExpression>
+	</variable>
+	<variable name="suma_comision" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{comision}]]></variableExpression>
+	</variable>
+	<variable name="suma_horas_extra" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{horas_extra}]]></variableExpression>
+	</variable>
+	<variable name="suma_ingreso" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_ingreso}]]></variableExpression>
+	</variable>
+	<variable name="suma_aporte" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{aporte_patronal}]]></variableExpression>
+	</variable>
+	<variable name="suma_fondo_reserva" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{fondos_reserva}]]></variableExpression>
+	</variable>
+	<variable name="suma_decimo_tercero" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{decimo_tercero}]]></variableExpression>
+	</variable>
+	<variable name="suma_decimo_cuarto" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{decimo_cuarto}]]></variableExpression>
+	</variable>
+	<variable name="suma_vacaciones" class="java.math.BigDecimal" resetType="Group" resetGroup="area" calculation="Sum">
+		<variableExpression><![CDATA[$F{vacaciones}]]></variableExpression>
+	</variable>
+	<variable name="suma_sueldo_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{salario}]]></variableExpression>
+	</variable>
+	<variable name="suma_comision_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{comision}]]></variableExpression>
+	</variable>
+	<variable name="suma_horas_extra_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{horas_extra}]]></variableExpression>
+	</variable>
+	<variable name="suma_ingreso_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_ingreso}]]></variableExpression>
+	</variable>
+	<variable name="suma_aporte_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{aporte_patronal}]]></variableExpression>
+	</variable>
+	<variable name="suma_fondo_reserva_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{fondos_reserva}]]></variableExpression>
+	</variable>
+	<variable name="suma_decimo_tercero_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{decimo_tercero}]]></variableExpression>
+	</variable>
+	<variable name="suma_decimo_cuarto_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{decimo_cuarto}]]></variableExpression>
+	</variable>
+	<variable name="suma_vacaciones_t" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vacaciones}]]></variableExpression>
+	</variable>
+	<group name="Agencia">
+		<groupExpression><![CDATA[$F{agencia}]]></groupExpression>
+		<groupHeader>
+			<band height="60">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="30" width="25" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nº]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="25" y="30" width="80" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AGENCIA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="105" y="30" width="80" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CÉDULA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="185" y="30" width="200" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TRABAJADOR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="385" y="30" width="100" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DEPARTAMENTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="485" y="30" width="70" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA DE INGRESO A LA EMPRESA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="555" y="30" width="50" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SUELDO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="605" y="30" width="50" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[COMISIÓN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="655" y="30" width="50" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[HORAS EXTRAS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="705" y="30" width="50" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL INGRESO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="755" y="30" width="80" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[APORTE PATRONAL 12.15%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="835" y="30" width="100" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FONDO DE RESERVA ACUMULADO EN EL IESS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="935" y="30" width="50" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DÉCIMO TERCERO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="985" y="30" width="50" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DÉCIMO CUARTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="1035" y="30" width="55" height="30" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VACACIONES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="555" y="10" width="200" height="20" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[INGRESOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="755" y="10" width="335" height="20" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[PROVISIONES]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="555" y="0" width="50" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_sueldo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="605" y="0" width="50" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_comision}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="655" y="0" width="50" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_horas_extra}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="705" y="0" width="50" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_ingreso}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="755" y="0" width="80" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_aporte}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="835" y="0" width="100" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_fondo_reserva}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="935" y="0" width="50" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_decimo_tercero}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="985" y="0" width="50" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_decimo_cuarto}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="1035" y="0" width="55" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{sum_vacaciones}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="385" y="0" width="170" height="15" forecolor="#000000" backcolor="#999999"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Total Rol ") + $F{agencia}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="area">
+		<groupExpression><![CDATA[$F{area_emp}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="185" y="0" width="200" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{area_emp} + new String(" ") + $F{agencia}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="25" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="0" width="80" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="105" y="0" width="80" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="385" y="0" width="100" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="485" y="0" width="70" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="555" y="0" width="50" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="605" y="0" width="50" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="655" y="0" width="50" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="705" y="0" width="50" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="755" y="0" width="80" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="835" y="0" width="100" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="935" y="0" width="50" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="985" y="0" width="50" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1035" y="0" width="55" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="555" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_sueldo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="605" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_comision}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="655" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_horas_extra}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="705" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_ingreso}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="755" y="0" width="80" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_aporte}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="835" y="0" width="100" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_fondo_reserva}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="935" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_decimo_tercero}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="985" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_decimo_cuarto}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Opaque" x="1035" y="0" width="55" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_vacaciones}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="385" y="0" width="170" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String ("Total ") + $F{area_emp} + new String(" ") + $F{agencia}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="75">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30"/>
+				<textElement>
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROL DE PROVISIONES]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="45" width="555" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="25" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{linea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="200" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="0" width="80" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{agencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="80" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="0" width="100" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{departamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="485" y="0" width="70" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="555" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{salario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="605" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{comision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="655" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{horas_extra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="705" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_ingreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="755" y="0" width="80" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{aporte_patronal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="835" y="0" width="100" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fondos_reserva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="935" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{decimo_tercero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="985" y="0" width="50" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{decimo_cuarto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1035" y="0" width="55" height="15"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{vacaciones}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="15">
+			<staticText>
+				<reportElement mode="Opaque" x="385" y="0" width="170" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Total Rol Munditransport]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="555" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_sueldo_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="605" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_comision_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="655" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_horas_extra_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="705" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_ingreso_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="755" y="0" width="80" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_aporte_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="835" y="0" width="100" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_fondo_reserva_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="935" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_decimo_tercero_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="985" y="0" width="50" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_decimo_cuarto_t}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="1035" y="0" width="55" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_vacaciones_t}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

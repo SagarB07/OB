@@ -15,7 +15,9 @@
       <![CDATA[
 		SELECT SALARIO 
 		FROM no_contrato_empleado 
-		WHERE ISACTIVE = 'Y' AND c_bpartner_id=?		    
+		WHERE ISACTIVE = 'Y'
+		AND DOCSTATUS = 'CO' 
+		AND c_bpartner_id=?		    
       ]]>
     </Sql>
     <Parameter name="cBpartnerId"/> 
