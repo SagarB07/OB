@@ -4250,7 +4250,7 @@ The distribution algorithm will be driven by this priority. The pending payments
 <!--4C8F466558334E7099E015B8163E0C62-->  <AD_CLIENT_ID><![CDATA[0]]></AD_CLIENT_ID>
 <!--4C8F466558334E7099E015B8163E0C62-->  <AD_ORG_ID><![CDATA[0]]></AD_ORG_ID>
 <!--4C8F466558334E7099E015B8163E0C62-->  <ISACTIVE><![CDATA[Y]]></ISACTIVE>
-<!--4C8F466558334E7099E015B8163E0C62-->  <NAME><![CDATA[General Ledger]]></NAME>
+<!--4C8F466558334E7099E015B8163E0C62-->  <NAME><![CDATA[accountingSchema]]></NAME>
 <!--4C8F466558334E7099E015B8163E0C62-->  <DESCRIPTION><![CDATA[The book containing all financial transactions recorded for the legal entity.]]></DESCRIPTION>
 <!--4C8F466558334E7099E015B8163E0C62-->  <HELP><![CDATA[The book containing all financial transactions recorded for the legal entity.]]></HELP>
 <!--4C8F466558334E7099E015B8163E0C62-->  <ISCENTRALLYMAINTAINED><![CDATA[Y]]></ISCENTRALLYMAINTAINED>

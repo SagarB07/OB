@@ -24,6 +24,7 @@ import org.openbravo.erpCommon.ad_forms.DocFINFinAccTransaction;
 import org.openbravo.erpCommon.ad_forms.Fact;
 import org.openbravo.erpCommon.utility.FieldProviderFactory;
 import org.openbravo.erpCommon.utility.SequenceIdData;
+import org.openbravo.model.common.businesspartner.BusinessPartner;
 import org.openbravo.model.common.businesspartner.EmployeeAccounts;
 import org.openbravo.model.financialmgmt.accounting.AccountingFact;
 import org.openbravo.model.financialmgmt.accounting.FIN_FinancialAccountAccounting;
@@ -144,9 +145,8 @@ public class RolPagoProceso extends AcctServer {
         whereClause2 = new StringBuilder();
         whereClause2.append(" as cbea where cbea.accountingSchema.id = '" + as.m_C_AcctSchema_ID
             + "'");
-        whereClause2.append(" and cbea.tipoDeIngresoEgreso.id = '" + list.getRubro().getId() + "'");
-        whereClause2.append(" and cbea.businessPartner.id = '"
-            + noRolPago.getBusinessPartner().getId() + "'");
+        whereClause2.append(" and cbea.rubro.id = '" + list.getRubro().getId() + "'");
+//        whereClause2.append(" and cbea.businessPartner.id = '" + noRolPago.getBusinessPartner().getId() + "'");
 
         // Desde no_cb_empleado_acc
         OBQuery<noRolPagoProvisionLine> obqParameters = OBDal.getInstance().createQuery( //
@@ -156,11 +156,15 @@ public class RolPagoProceso extends AcctServer {
 
           if (!list.getRubro().isAvance())
             // Cuenta de Ingreso
+        	  try{
             fact.createLine(
                 null,
                 Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelIngreso().getId()),
                 C_Currency_ID, list.getValor().abs().toString(), ZERO.toString(),
                 Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
+            }catch (Exception ex){
+            	System.out.print(ex);
+            }
           else
             // Egreso
             fact.createLine(null,
@@ -175,15 +179,15 @@ public class RolPagoProceso extends AcctServer {
               nextSeqNo(SeqNo), DocumentType, conn);
       }
 
-      whereClause3.append(" as cbp where cbp.businessPartner = '"
+      whereClause3.append(" as cbp where cbp.id = '"
           + noRolPago.getBusinessPartner().getId() + "'");
-      whereClause3.append(" and cbp.accountingSchema = '" + as.m_C_AcctSchema_ID + "'");
+      whereClause3.append(" and cbp.neCAcctschema.id = '" + as.m_C_AcctSchema_ID + "'");
 
-      final OBQuery<EmployeeAccounts> obqParamAcct = OBDal.getInstance().createQuery(
-          EmployeeAccounts.class, whereClause3.toString());
+      final OBQuery<BusinessPartner> obqParamAcct = OBDal.getInstance().createQuery(
+    		  BusinessPartner.class, whereClause3.toString());
 
       fact.createLine(null,
-          Account.getAccount(conn, obqParamAcct.list().get(0).getNoCuentaPago().getId()),
+          Account.getAccount(conn, obqParamAcct.list().get(0).getNoPagoAcct().getId()) ,
           C_Currency_ID, ZERO.toString(), noRolPago.getTotalNeto().abs().toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
 
