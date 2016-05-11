@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_OBTIENE_CUENTAS_CONTABLES">
+    <trigger name="NO_OBTIENE_CUENTAS_CONTABLES" table="NO_ROL_PROVISION_LINE_MES" fires="after" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+V_CODIGO_RUBRO  VARCHAR(32); 
+V_CODIGO_EMPLE  VARCHAR(32); 
+V_CODIGO_CINGRESO VARCHAR(32); 
+V_CODIGO_CEGRESO VARCHAR(32); 
+V_CODIGO_ESQUEMA VARCHAR(32); 
+BEGIN
+    IF ( INSERTING) THEN
+
+		
+		SELECT C_BPARTNER_ID INTO V_CODIGO_EMPLE 
+		FROM NO_ROL_PAGO_PROVISION  WHERE NO_ROL_PAGO_PROVISION_ID IN (
+		SELECT NO_ROL_PAGO_PROVISION_ID FROM no_rol_pago_provision_line WHERE no_rol_pago_provision_line_ID IN (
+		SELECT  no_rol_pago_provision_line_id FROM no_rol_provision_line_mes WHERE no_rol_pago_provision_line_id = :NEW.no_rol_pago_provision_line_id)) LIMIT 1;
+
+		SELECT NO_TIPO_INGRESO_EGRESO_ID INTO V_CODIGO_RUBRO
+		FROM no_rol_pago_provision_line WHERE no_rol_pago_provision_line_ID IN (
+		SELECT  no_rol_pago_provision_line_id FROM no_rol_provision_line_mes WHERE no_rol_pago_provision_line_id = :NEW.no_rol_pago_provision_line_id ) LIMIT 1;
+				
+				
+		SELECT C_ACCTSCHEMA_ID, NO_CUENTA_INGRESO_ACCT, NO_CUENTA_EGRESO_ACCT INTO  V_CODIGO_ESQUEMA,V_CODIGO_CINGRESO, V_CODIGO_CEGRESO   
+		FROM no_cb_empleado_acct WHERE C_BPARTNER_ID = V_CODIGO_EMPLE  AND NO_TIPO_INGRESO_EGRESO_ID = V_CODIGO_RUBRO LIMIT 1;		
+		
+		:NEW.c_acctschema_id = V_CODIGO_ESQUEMA;
+		:NEW.no_cuenta_egreso_acct = V_CODIGO_CEGRESO;
+		:NEW.no_cuenta_ingreso_acct = V_CODIGO_CINGRESO;
+      
+		--update idt_contrato  set i_errormsg = '78' 
+		
+		UPDATE no_rol_provision_line_mes SET c_acctschema_id = V_CODIGO_ESQUEMA, no_cuenta_egreso_acct = V_CODIGO_CEGRESO, no_cuenta_ingreso_acct = V_CODIGO_CINGRESO
+		WHERE no_rol_provision_line_mes_ID = :NEW.no_rol_provision_line_mes_ID;
+		
+	
+
+		
+        RETURN NEW;
+    END IF;
+
+
+	END NO_OBTIENE_CUENTAS_CONTABLES
+]]></body>
+    </trigger>
+  </database>

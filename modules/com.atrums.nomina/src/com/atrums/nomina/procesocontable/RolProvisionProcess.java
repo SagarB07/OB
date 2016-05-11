@@ -150,26 +150,27 @@ public class RolProvisionProcess extends AcctServer {
       whereClause2 = new StringBuilder();
       whereClause2.append(" as cbea where cbea.accountingSchema.id = '" + as.m_C_AcctSchema_ID
           + "'");
-      whereClause2.append(" and cbea.tipoDeIngresoEgreso.id = '"
-          + noRolPagoProvisionLine.getRubro().getId() + "'");
-      whereClause2.append(" and cbea.businessPartner.id = '"
-          + noRolProv.getBusinessPartner().getId() + "'");
+      whereClause2.append(" and cbea.rolPagoProvisionLine.rubro.id   = '"+ noRolPagoProvisionLine.getRubro().getId() + "'");
+      whereClause2.append(" and cbea.rolPagoProvisionLine.rolPagoProvisionID.businessPartner.id = '"+ noRolProv.getBusinessPartner().getId() + "'");
 
       // Desde no_cb_empleado_acc
-      OBQuery<noCbEmpleadoAcct> obqParameters = OBDal.getInstance().createQuery( //
-          noCbEmpleadoAcct.class, whereClause2.toString());
+      OBQuery<noRolProvisionLineMes > obqParameters = OBDal.getInstance().createQuery( //
+    		  noRolProvisionLineMes.class, whereClause2.toString());
 
       // Cuenta de Ingreso
+      if (obqParameters.list().get(0).getCuentaDelIngreso()!=null){
       fact.createLine(null,
           Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelIngreso().getId()),
           C_Currency_ID, noRolpMes.getValor().abs().toString(), ZERO.toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
-
+      }
       // Cuenta de Egreso
+      if (obqParameters.list().get(0).getCuentaDelEgreso()!=null){
       fact.createLine(null,
           Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelEgreso().getId()),
           C_Currency_ID, ZERO.toString(), noRolpMes.getValor().abs().toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
+      }
 
     } finally {
       OBContext.restorePreviousMode();
@@ -229,11 +230,7 @@ public class RolProvisionProcess extends AcctServer {
       OBCriteria<FIN_FinancialAccountAccounting> accounts = OBDal.getInstance().createCriteria(
           FIN_FinancialAccountAccounting.class);
       accounts.add(Restrictions.eq(FIN_FinancialAccountAccounting.PROPERTY_ACCOUNT, finAccount));
-      accounts.add(Restrictions.eq(
-          FIN_FinancialAccountAccounting.PROPERTY_ACCOUNTINGSCHEMA,
-          OBDal.getInstance().get(
-              org.openbravo.model.financialmgmt.accounting.coa.AcctSchema.class,
-              as.m_C_AcctSchema_ID)));
+      accounts.add(Restrictions.eq(FIN_FinancialAccountAccounting.PROPERTY_ACCOUNTINGSCHEMA, OBDal.getInstance().get(org.openbravo.model.financialmgmt.accounting.coa.AcctSchema.class,as.m_C_AcctSchema_ID)));
       accounts.add(Restrictions.eq(FIN_FinancialAccountAccounting.PROPERTY_ACTIVE, true));
       accounts.setFilterOnReadableClients(false);
       accounts.setFilterOnReadableOrganization(false);
