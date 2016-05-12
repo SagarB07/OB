@@ -49,6 +49,10 @@
 <SUBREPORT id="reportoutputtype" name="reportoutputtype" report="org/openbravo/erpCommon/reference/List">
   <ARGUMENT name="parameterListSelected" withId="outputtype"/>
 </SUBREPORT>
+<PARAMETER id="c_period_id" name="c_period_id" attribute="value"/>
+<SUBREPORT id="reportc_period_id" name="reportc_period_id" report="org/openbravo/erpCommon/reference/List">
+  <ARGUMENT name="parameterListSelected" withId="c_period_id"/>
+</SUBREPORT>
 
 
 <DISCARD id="discard"></DISCARD>
@@ -56,5 +60,6 @@
 <LABEL id="lbl::year" name="lbl::year" replace="#year#">yearlbl</LABEL>
 <LABEL id="lbl::ad_ref" name="lbl::ad_ref" replace="#ad_ref#">ad_reflbl</LABEL>
 <LABEL id="lbl::outputtype" name="lbl::outputtype" replace="#outputtype#">outputtypelbl</LABEL>
+<LABEL id="lbl::c_period_id" name="lbl::c_period_id" replace="#c_period_id#">c_period_idlbl</LABEL>
 
 </REPORT>

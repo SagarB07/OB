@@ -34,6 +34,8 @@ import org.openbravo.model.ad.access.User;
 import org.openbravo.model.ad.system.Client;
 import org.openbravo.model.common.enterprise.DocumentType;
 import org.openbravo.model.common.enterprise.Organization;
+import org.openbravo.model.financialmgmt.accounting.coa.AccountingCombination;
+import org.openbravo.model.financialmgmt.accounting.coa.AcctSchema;
 import org.openbravo.model.financialmgmt.calendar.Period;
 /**
  * Entity class for entity No_RolProvisionLineMes (stored in table no_rol_provision_line_mes).
@@ -67,6 +69,9 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_POSTED = "posted";
     public static final String PROPERTY_PAYMENT = "payment";
     public static final String PROPERTY_PAGADO = "pagado";
+    public static final String PROPERTY_ACCOUNTINGSCHEMA = "accountingSchema";
+    public static final String PROPERTY_CUENTADELEGRESO = "cuentaDelEgreso";
+    public static final String PROPERTY_CUENTADELINGRESO = "cuentaDelIngreso";
     public static final String PROPERTY_CCOREGISTRACOSTOSLIST = "ccoRegistraCostosList";
 
     public noRolProvisionLineMes() {
@@ -262,6 +267,30 @@ public class noRolProvisionLineMes extends BaseOBObject implements Traceable, Cl
 
     public void setPagado(Boolean pagado) {
         set(PROPERTY_PAGADO, pagado);
+    }
+
+    public AcctSchema getAccountingSchema() {
+        return (AcctSchema) get(PROPERTY_ACCOUNTINGSCHEMA);
+    }
+
+    public void setAccountingSchema(AcctSchema accountingSchema) {
+        set(PROPERTY_ACCOUNTINGSCHEMA, accountingSchema);
+    }
+
+    public AccountingCombination getCuentaDelEgreso() {
+        return (AccountingCombination) get(PROPERTY_CUENTADELEGRESO);
+    }
+
+    public void setCuentaDelEgreso(AccountingCombination cuentaDelEgreso) {
+        set(PROPERTY_CUENTADELEGRESO, cuentaDelEgreso);
+    }
+
+    public AccountingCombination getCuentaDelIngreso() {
+        return (AccountingCombination) get(PROPERTY_CUENTADELINGRESO);
+    }
+
+    public void setCuentaDelIngreso(AccountingCombination cuentaDelIngreso) {
+        set(PROPERTY_CUENTADELINGRESO, cuentaDelIngreso);
     }
 
     @SuppressWarnings("unchecked")

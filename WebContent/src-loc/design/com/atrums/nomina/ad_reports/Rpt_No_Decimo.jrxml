@@ -14,6 +14,7 @@
 	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["http://localhost/openbravo/web"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="c_period_id" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select to_number(year) as year, ad_org_id as ad_org_id from c_year where c_year_id = $P{year}]]>
 	</queryString>
@@ -101,6 +102,24 @@
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/decimocuartocosta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="10" width="1290" height="5">
+					<printWhenExpression><![CDATA[$P{ad_ref}.equals(new String("P"))]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="BASE_WEB">
+					<subreportParameterExpression><![CDATA[$P{BASE_WEB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BASE_DESIGN">
+					<subreportParameterExpression><![CDATA[$P{BASE_DESIGN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="c_period_id">
+					<subreportParameterExpression><![CDATA[$P{c_period_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/Rpt_No_Provisiones_Mensual.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

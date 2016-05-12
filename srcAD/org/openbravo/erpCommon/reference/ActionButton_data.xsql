@@ -502,6 +502,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process3198010958ED4BF5B7BB960207CCEC56" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_procesar_contrato</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_procesar_contrato(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process38854597C4824AC0A6364248D9C5530C" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
@@ -1214,6 +1222,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="processB98DC338B0CD46F9B0C1310DE8A92477" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="processBB3C25ED65BC4816A097E6F4E6E179B8" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
@@ -1375,6 +1391,14 @@
    </SqlMethod>
 
   <SqlMethod name="processF43E34AAA4BA4B0A8EB1CFD9C7DE75DF" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processF69FF1B8F38A41D7BFC95CCFDFEDD94A" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
         CALL (?)

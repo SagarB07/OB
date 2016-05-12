@@ -19,6 +19,7 @@
 package org.openbravo.model.financialmgmt.payment;
 
 import com.atrums.importaciondatos.IdtContrato;
+import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
 import com.atrums.nomina.data.noRegistraQuincLine;
@@ -106,6 +107,7 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
     public static final String PROPERTY_ORDERLIST = "orderList";
     public static final String PROPERTY_PROJECTLIST = "projectList";
     public static final String PROPERTY_PROJECTPROPOSALLIST = "projectProposalList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
     public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
@@ -147,6 +149,7 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
         setDefaultValue(PROPERTY_ORDERLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PROJECTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PROJECTPROPOSALLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
@@ -592,6 +595,15 @@ public class FIN_PaymentMethod extends BaseOBObject implements Traceable, Client
 
     public void setProjectProposalList(List<ProjectProposal> projectProposalList) {
         set(PROPERTY_PROJECTPROPOSALLIST, projectProposalList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
     }
 
     @SuppressWarnings("unchecked")

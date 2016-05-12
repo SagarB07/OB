@@ -2,6 +2,10 @@
 package org.openbravo.erpWindows.com.atrums.nomina.ContratoEmpleado;
 
 
+import org.openbravo.erpCommon.reference.*;
+
+
+import org.openbravo.erpCommon.ad_actionButton.*;
 
 
 import org.codehaus.jettison.json.JSONObject;
@@ -43,6 +47,43 @@ public class ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9 extends HttpSecure
     super.init(config);
   }
   
+  
+  @Override
+  public void service(HttpServletRequest request, HttpServletResponse response) throws IOException,
+      ServletException {
+    VariablesSecureApp vars = new VariablesSecureApp(request);
+    String command = vars.getCommand();
+    
+    boolean securedProcess = false;
+    if (command.contains("BUTTON")) {
+     SessionInfo.setUserId(vars.getSessionValue("#AD_User_ID"));
+     SessionInfo.setSessionId(vars.getSessionValue("#AD_Session_ID"));
+     
+      try {
+        securedProcess = "Y".equals(org.openbravo.erpCommon.businessUtility.Preferences
+            .getPreferenceValue("SecuredProcess", true, vars.getClient(), vars.getOrg(), vars
+                .getUser(), vars.getRole(), windowId));
+      } catch (PropertyException e) {
+      }
+     
+      if (command.contains("3198010958ED4BF5B7BB960207CCEC56")) {
+        SessionInfo.setProcessType("P");
+        SessionInfo.setProcessId("3198010958ED4BF5B7BB960207CCEC56");
+        SessionInfo.setModuleId("3F9AFF0D312A4068A3DE78EDF4326B80");
+        if (securedProcess) {
+          classInfo.type = "P";
+          classInfo.id = "3198010958ED4BF5B7BB960207CCEC56";
+        }
+      }
+     
+
+     
+    }
+    if (!securedProcess) {
+      setClassInfo("W", tabId, moduleId);
+    }
+    super.service(request, response);
+  }
   
 
   public void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
@@ -322,7 +363,68 @@ vars.getRequestGlobalVariable("inpParamDocumentno", tabId + "|paramDocumentno");
       }
       response.sendRedirect(strDireccion + request.getServletPath());
 
+     } else if (vars.commandIn("BUTTONDocactionno3198010958ED4BF5B7BB960207CCEC56")) {
+        vars.setSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strdocactionno", vars.getStringParameter("inpdocactionno"));
+        vars.setSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strProcessing", vars.getStringParameter("inpprocessing", "Y"));
+        vars.setSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strOrg", vars.getStringParameter("inpadOrgId"));
+        vars.setSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strClient", vars.getStringParameter("inpadClientId"));
+        
+        
+        HashMap<String, String> p = new HashMap<String, String>();
+        p.put("docstatus", vars.getStringParameter("inpdocstatus"));
 
+        
+        //Save in session needed params for combos if needed
+        vars.setSessionObject("button3198010958ED4BF5B7BB960207CCEC56.originalParams", FieldProviderFactory.getFieldProvider(p));
+        printPageButtonFS(response, vars, "3198010958ED4BF5B7BB960207CCEC56", request.getServletPath());    
+     } else if (vars.commandIn("BUTTON3198010958ED4BF5B7BB960207CCEC56")) {
+        String strNO_Contrato_Empleado_ID = vars.getGlobalVariable("inpnoContratoEmpleadoId", windowId + "|NO_Contrato_Empleado_ID", "");
+        String strdocactionno = vars.getSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strdocactionno");
+        String strProcessing = vars.getSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strProcessing");
+        String strOrg = vars.getSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strOrg");
+        String strClient = vars.getSessionValue("button3198010958ED4BF5B7BB960207CCEC56.strClient");
+        
+        
+        if ((org.openbravo.erpCommon.utility.WindowAccessData.hasReadOnlyAccess(this, vars.getRole(), tabId)) || !(Utility.isElementInList(Utility.getContext(this, vars, "#User_Client", windowId, accesslevel),strClient)  && Utility.isElementInList(Utility.getContext(this, vars, "#User_Org", windowId, accesslevel),strOrg))){
+          OBError myError = Utility.translateError(this, vars, vars.getLanguage(), Utility.messageBD(this, "NoWriteAccess", vars.getLanguage()));
+          vars.setMessage(tabId, myError);
+          printPageClosePopUp(response, vars);
+        }else{       
+          printPageButtonDocactionno3198010958ED4BF5B7BB960207CCEC56(response, vars, strNO_Contrato_Empleado_ID, strdocactionno, strProcessing);
+        }
+
+
+    } else if (vars.commandIn("SAVE_BUTTONDocactionno3198010958ED4BF5B7BB960207CCEC56")) {
+        String strNO_Contrato_Empleado_ID = vars.getGlobalVariable("inpKey", windowId + "|NO_Contrato_Empleado_ID", "");
+        @SuppressWarnings("unused")
+        String strdocactionno = vars.getStringParameter("inpdocactionno");
+        String strProcessing = vars.getStringParameter("inpprocessing");
+        OBError myMessage = null;
+        try {
+          String pinstance = SequenceIdData.getUUID();
+          PInstanceProcessData.insertPInstance(this, pinstance, "3198010958ED4BF5B7BB960207CCEC56", (("NO_Contrato_Empleado_ID".equalsIgnoreCase("AD_Language"))?"0":strNO_Contrato_Empleado_ID), strProcessing, vars.getUser(), vars.getClient(), vars.getOrg());
+          String strestado = vars.getStringParameter("inpestado");
+PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "Estado", strestado, vars.getClient(), vars.getOrg(), vars.getUser());
+
+          
+          ProcessBundle bundle = ProcessBundle.pinstance(pinstance, vars, this);
+          new ProcessRunner(bundle).execute(this);
+          
+          PInstanceProcessData[] pinstanceData = PInstanceProcessData.select(this, pinstance);
+          myMessage = Utility.getProcessInstanceMessage(this, vars, pinstanceData);
+        } catch (ServletException ex) {
+          myMessage = Utility.translateError(this, vars, vars.getLanguage(), ex.getMessage());
+          if (!myMessage.isConnectionAvailable()) {
+            bdErrorConnection(response);
+            return;
+          } else vars.setMessage(tabId, myMessage);
+        }
+        //close popup
+        if (myMessage!=null) {
+          if (log4j.isDebugEnabled()) log4j.debug(myMessage.getMessage());
+          vars.setMessage(tabId, myMessage);
+        }
+        printPageClosePopUp(response, vars);
 
 
 
@@ -364,7 +466,7 @@ vars.getRequestGlobalVariable("inpParamDocumentno", tabId + "|paramDocumentno");
     ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data data = new ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data();
     ServletException ex = null;
     try {
-    data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cBpartnerId = vars.getRequiredStringParameter("inpcBpartnerId");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.fechaInicio = vars.getRequiredStringParameter("inpfechaInicio");     data.fechaFin = vars.getRequiredStringParameter("inpfechaFin");     data.emNeAreaEmpresaId = vars.getStringParameter("inpemNeAreaEmpresaId");     data.emNeAreaEmpresaIdr = vars.getStringParameter("inpemNeAreaEmpresaId_R");     data.emAtnorhCargoId = vars.getStringParameter("inpemAtnorhCargoId");     data.emAtnorhCargoIdr = vars.getStringParameter("inpemAtnorhCargoId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.emNeVacacionProp = vars.getNumericParameter("inpemNeVacacionProp");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.emNeVacacionTom = vars.getNumericParameter("inpemNeVacacionTom");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.emNeVacacionRes = vars.getNumericParameter("inpemNeVacacionRes");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.salario = vars.getRequiredNumericParameter("inpsalario");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.emNeIsJornadaParcial = vars.getStringParameter("inpemNeIsJornadaParcial", "N");    try {   data.emNeNumHorasParciales = vars.getNumericParameter("inpemNeNumHorasParciales");  } catch (ServletException paramEx) { ex = paramEx; }     data.emNeSissalnet = vars.getRequiredStringParameter("inpemNeSissalnet");     data.emNeSissalnetr = vars.getStringParameter("inpemNeSissalnet_R");     data.emNeRegion = vars.getRequiredStringParameter("inpemNeRegion");     data.emNeRegionr = vars.getStringParameter("inpemNeRegion_R");     data.pagofondoreserva = vars.getStringParameter("inppagofondoreserva", "N");     data.aplicaUtilidad = vars.getStringParameter("inpaplicaUtilidad", "N");     data.emNeMotivoSalida = vars.getStringParameter("inpemNeMotivoSalida");     data.emNeMotivoSalidar = vars.getStringParameter("inpemNeMotivoSalida_R");     data.emNeObservaciones = vars.getStringParameter("inpemNeObservaciones");     data.liquidacionEmpleado = vars.getStringParameter("inpliquidacionEmpleado");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID");     data.noContratoEmpleadoId = vars.getRequestGlobalVariable("inpnoContratoEmpleadoId", windowId + "|NO_Contrato_Empleado_ID");     data.tipoContrato = vars.getRequiredStringParameter("inptipoContrato");     data.finPaymentmethodId = vars.getStringParameter("inpfinPaymentmethodId");     data.finFinancialAccountId = vars.getStringParameter("inpfinFinancialAccountId");     data.isImpuestoAsumido = vars.getStringParameter("inpisImpuestoAsumido", "N"); 
+    data.docstatus = vars.getRequiredGlobalVariable("inpdocstatus", windowId + "|Docstatus");     data.docstatusr = vars.getStringParameter("inpdocstatus_R");     data.adOrgId = vars.getRequiredGlobalVariable("inpadOrgId", windowId + "|AD_Org_ID");     data.adOrgIdr = vars.getStringParameter("inpadOrgId_R");     data.cDoctypeId = vars.getRequiredStringParameter("inpcDoctypeId");     data.cDoctypeIdr = vars.getStringParameter("inpcDoctypeId_R");     data.documentno = vars.getRequiredStringParameter("inpdocumentno");     data.cBpartnerId = vars.getRequiredStringParameter("inpcBpartnerId");     data.cBpartnerIdr = vars.getStringParameter("inpcBpartnerId_R");     data.fechaInicio = vars.getRequiredStringParameter("inpfechaInicio");     data.fechaFin = vars.getRequiredStringParameter("inpfechaFin");     data.emNeAreaEmpresaId = vars.getStringParameter("inpemNeAreaEmpresaId");     data.emNeAreaEmpresaIdr = vars.getStringParameter("inpemNeAreaEmpresaId_R");     data.emAtnorhCargoId = vars.getStringParameter("inpemAtnorhCargoId");     data.emAtnorhCargoIdr = vars.getStringParameter("inpemAtnorhCargoId_R");     data.isactive = vars.getStringParameter("inpisactive", "N");    try {   data.emNeVacacionProp = vars.getNumericParameter("inpemNeVacacionProp");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.emNeVacacionTom = vars.getNumericParameter("inpemNeVacacionTom");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.emNeVacacionRes = vars.getNumericParameter("inpemNeVacacionRes");  } catch (ServletException paramEx) { ex = paramEx; }    try {   data.salario = vars.getRequiredNumericParameter("inpsalario");  } catch (ServletException paramEx) { ex = paramEx; }     data.cCurrencyId = vars.getStringParameter("inpcCurrencyId");     data.cCurrencyIdr = vars.getStringParameter("inpcCurrencyId_R");     data.emNeIsJornadaParcial = vars.getRequiredInputGlobalVariable("inpemNeIsJornadaParcial", windowId + "|em_ne_is_jornada_parcial", "N");    try {   data.emNeNumHorasParciales = vars.getNumericParameter("inpemNeNumHorasParciales", vars.getSessionValue(windowId + "|em_ne_num_horas_parciales"));  } catch (ServletException paramEx) { ex = paramEx; }     data.emNeSissalnet = vars.getRequiredStringParameter("inpemNeSissalnet");     data.emNeSissalnetr = vars.getStringParameter("inpemNeSissalnet_R");     data.emNeRegion = vars.getRequiredStringParameter("inpemNeRegion");     data.emNeRegionr = vars.getStringParameter("inpemNeRegion_R");     data.pagofondoreserva = vars.getStringParameter("inppagofondoreserva", "N");     data.aplicaUtilidad = vars.getStringParameter("inpaplicaUtilidad", "N");     data.emNeMotivoSalida = vars.getStringParameter("inpemNeMotivoSalida");     data.emNeMotivoSalidar = vars.getStringParameter("inpemNeMotivoSalida_R");     data.emNeObservaciones = vars.getStringParameter("inpemNeObservaciones");     data.liquidacionEmpleado = vars.getStringParameter("inpliquidacionEmpleado");     data.docactionno = vars.getStringParameter("inpdocactionno");     data.finPaymentmethodId = vars.getStringParameter("inpfinPaymentmethodId");     data.noContratoEmpleadoId = vars.getRequestGlobalVariable("inpnoContratoEmpleadoId", windowId + "|NO_Contrato_Empleado_ID");     data.isImpuestoAsumido = vars.getStringParameter("inpisImpuestoAsumido", "N");     data.tipoContrato = vars.getRequiredStringParameter("inptipoContrato");     data.finFinancialAccountId = vars.getStringParameter("inpfinFinancialAccountId");     data.adClientId = vars.getRequiredGlobalVariable("inpadClientId", windowId + "|AD_Client_ID"); 
       data.createdby = vars.getUser();
       data.updatedby = vars.getUser();
       data.adUserClient = Utility.getContext(this, vars, "#User_Client", windowId, accesslevel);
@@ -395,7 +497,7 @@ vars.getRequestGlobalVariable("inpParamDocumentno", tabId + "|paramDocumentno");
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Contrato_Empleado_ID", data[0].getField("noContratoEmpleadoId"));
+          vars.setSessionValue(windowId + "|docstatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|em_ne_is_jornada_parcial", data[0].getField("emNeIsJornadaParcial"));    vars.setSessionValue(windowId + "|em_ne_num_horas_parciales", data[0].getField("emNeNumHorasParciales"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|NO_Contrato_Empleado_ID", data[0].getField("noContratoEmpleadoId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {
@@ -672,7 +774,7 @@ xmlDocument.setParameter("grid_Default", selectedRow);
     if (dataField==null) {
       if (boolNew || data==null || data.length==0) {
         refreshSessionNew(vars);
-        data = ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.set(Utility.getDefault(this, vars, "em_ne_vacacion_tom", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_motivo_salida", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "IS_Impuesto_Asumido", "N", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "Salario", "0", "49994E51AC29466FAEF2F122E3654438", "0", dataField), Utility.getDefault(this, vars, "aplica_utilidad", "Y", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "AD_Client_ID", "@AD_CLIENT_ID@", "49994E51AC29466FAEF2F122E3654438", "", dataField), "Y", Utility.getDefault(this, vars, "em_ne_vacacion_prop", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_is_jornada_parcial", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "Createdby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.selectDef51CD8EE238E246ABB405A694B4F2686B_0(this, Utility.getDefault(this, vars, "Createdby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField)), Utility.getDefault(this, vars, "em_ne_area_empresa_id", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "C_Currency_ID", "@C_Currency_ID@", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "C_Doctype_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_observaciones", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Liquidacion_Empleado", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "C_Bpartner_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.selectDef7BAFDCC2069643E18B5FB0A3A9817402_1(this, Utility.getDefault(this, vars, "C_Bpartner_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField)), Utility.getDefault(this, vars, "em_ne_region", "1", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_vacacion_res", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Documentno", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Fecha_Fin", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "EM_Atnorh_Cargo_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "FIN_Paymentmethod_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Pagofondoreserva", "N", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "Updatedby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.selectDefCB5C3B91D6FD498F98EF2B355BE07E36_2(this, Utility.getDefault(this, vars, "Updatedby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField)), Utility.getDefault(this, vars, "Fecha_Inicio", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), "", Utility.getDefault(this, vars, "Tipo_Contrato", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "AD_Org_ID", "@AD_ORG_ID@", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "FIN_Financial_Account_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_num_horas_parciales", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_sissalnet", "1", "49994E51AC29466FAEF2F122E3654438", "", dataField));
+        data = ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.set(Utility.getDefault(this, vars, "em_ne_vacacion_tom", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Docactionno", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField), (vars.getLanguage().equals("en_US")?ListData.selectName(this, "E45117AAE15841AAB98FFF75970AA6E0", Utility.getDefault(this, vars, "Docactionno", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField)):ListData.selectNameTrl(this, vars.getLanguage(), "E45117AAE15841AAB98FFF75970AA6E0", Utility.getDefault(this, vars, "Docactionno", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField))), Utility.getDefault(this, vars, "em_ne_motivo_salida", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "IS_Impuesto_Asumido", "N", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "Salario", "0", "49994E51AC29466FAEF2F122E3654438", "0", dataField), Utility.getDefault(this, vars, "aplica_utilidad", "Y", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "AD_Client_ID", "@AD_CLIENT_ID@", "49994E51AC29466FAEF2F122E3654438", "", dataField), "Y", Utility.getDefault(this, vars, "em_ne_vacacion_prop", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Docstatus", "BR", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_is_jornada_parcial", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "Createdby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.selectDef51CD8EE238E246ABB405A694B4F2686B_0(this, Utility.getDefault(this, vars, "Createdby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField)), Utility.getDefault(this, vars, "em_ne_area_empresa_id", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "C_Currency_ID", "@C_Currency_ID@", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "C_Doctype_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_observaciones", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Liquidacion_Empleado", "", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "C_Bpartner_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.selectDef7BAFDCC2069643E18B5FB0A3A9817402_1(this, Utility.getDefault(this, vars, "C_Bpartner_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField)), Utility.getDefault(this, vars, "em_ne_region", "1", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_vacacion_res", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Documentno", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Fecha_Fin", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "EM_Atnorh_Cargo_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "FIN_Paymentmethod_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "Pagofondoreserva", "N", "49994E51AC29466FAEF2F122E3654438", "N", dataField), Utility.getDefault(this, vars, "Updatedby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9Data.selectDefCB5C3B91D6FD498F98EF2B355BE07E36_2(this, Utility.getDefault(this, vars, "Updatedby", "", "49994E51AC29466FAEF2F122E3654438", "", dataField)), Utility.getDefault(this, vars, "Fecha_Inicio", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), "", Utility.getDefault(this, vars, "Tipo_Contrato", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "AD_Org_ID", "@AD_ORG_ID@", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "FIN_Financial_Account_ID", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_num_horas_parciales", "", "49994E51AC29466FAEF2F122E3654438", "", dataField), Utility.getDefault(this, vars, "em_ne_sissalnet", "1", "49994E51AC29466FAEF2F122E3654438", "", dataField));
         
       }
      }
@@ -770,6 +872,10 @@ xmlDocument.setParameter("grid_Default", selectedRow);
    
     try {
       ComboTableData comboTableData = null;
+comboTableData = new ComboTableData(vars, this, "17", "Docstatus", "E45117AAE15841AAB98FFF75970AA6E0", "", Utility.getReferenceableOrg(vars, (dataField!=null?dataField.getField("adOrgId"):data[0].getField("adOrgId").equals("")?vars.getOrg():data[0].getField("adOrgId"))), Utility.getContext(this, vars, "#User_Client", windowId), 0);
+Utility.fillSQLParameters(this, vars, (dataField==null?data[0]:dataField), comboTableData, windowId, (dataField==null?data[0].getField("docstatus"):dataField.getField("docstatus")));
+xmlDocument.setData("reportDocstatus","liststructure", comboTableData.select(!strCommand.equals("NEW")));
+comboTableData = null;
 String userOrgList = "";
 if (editableTab) 
   userOrgList=Utility.getContext(this, vars, "#User_Org", windowId, accesslevel); //editable record 
@@ -816,6 +922,8 @@ xmlDocument.setData("reportem_ne_motivo_salida","liststructure", comboTableData.
 comboTableData = null;
 xmlDocument.setParameter("Liquidacion_Empleado_BTNname", Utility.getButtonName(this, vars, "E0E43A809BA94D98BA40BF360B4C62B3", "Liquidacion_Empleado_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalLiquidacion_Empleado = org.openbravo.erpCommon.utility.Utility.isModalProcess("B4673A532D174B2487B818B879EA5967"); 
 xmlDocument.setParameter("Liquidacion_Empleado_Modal", modalLiquidacion_Empleado?"true":"false");
+xmlDocument.setParameter("Docactionno_BTNname", Utility.getButtonName(this, vars, "E45117AAE15841AAB98FFF75970AA6E0", (dataField==null?data[0].getField("docactionno"):dataField.getField("docactionno")), "Docactionno_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocactionno = org.openbravo.erpCommon.utility.Utility.isModalProcess("3198010958ED4BF5B7BB960207CCEC56"); 
+xmlDocument.setParameter("Docactionno_Modal", modalDocactionno?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
     } catch (Exception ex) {
@@ -861,6 +969,49 @@ xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTime
     out.close();
   }
 
+    private void printPageButtonDocactionno3198010958ED4BF5B7BB960207CCEC56(HttpServletResponse response, VariablesSecureApp vars, String strNO_Contrato_Empleado_ID, String strdocactionno, String strProcessing)
+    throws IOException, ServletException {
+      log4j.debug("Output: Button process 3198010958ED4BF5B7BB960207CCEC56");
+      String[] discard = {"newDiscard"};
+      response.setContentType("text/html; charset=UTF-8");
+      PrintWriter out = response.getWriter();
+      XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpCommon/ad_actionButton/Docactionno3198010958ED4BF5B7BB960207CCEC56", discard).createXmlDocument();
+      xmlDocument.setParameter("key", strNO_Contrato_Empleado_ID);
+      xmlDocument.setParameter("processing", strProcessing);
+      xmlDocument.setParameter("form", "ContratoEmpleado0C51ECCEBC5F448FA60FF1A7DE775ED9_Edition.html");
+      xmlDocument.setParameter("window", windowId);
+      xmlDocument.setParameter("css", vars.getTheme());
+      xmlDocument.setParameter("language", "defaultLang=\"" + vars.getLanguage() + "\";");
+      xmlDocument.setParameter("directory", "var baseDirectory = \"" + strReplaceWith + "/\";\n");
+      xmlDocument.setParameter("processId", "3198010958ED4BF5B7BB960207CCEC56");
+      xmlDocument.setParameter("cancel", Utility.messageBD(this, "Cancel", vars.getLanguage()));
+      xmlDocument.setParameter("ok", Utility.messageBD(this, "OK", vars.getLanguage()));
+      
+      {
+        OBError myMessage = vars.getMessage("3198010958ED4BF5B7BB960207CCEC56");
+        vars.removeMessage("3198010958ED4BF5B7BB960207CCEC56");
+        if (myMessage!=null) {
+          xmlDocument.setParameter("messageType", myMessage.getType());
+          xmlDocument.setParameter("messageTitle", myMessage.getTitle());
+          xmlDocument.setParameter("messageMessage", myMessage.getMessage());
+        }
+      }
+
+          try {
+    ComboTableData comboTableData = null;
+    xmlDocument.setParameter("Estado", "");
+    comboTableData = new ComboTableData(vars, this, "17", "Estado", "E45117AAE15841AAB98FFF75970AA6E0", "5619E2DD10E34C01A976EEB94F6734E7", Utility.getContext(this, vars, "#AccessibleOrgTree", ""), Utility.getContext(this, vars, "#User_Client", ""), 0);
+    Utility.fillSQLParameters(this, vars, (FieldProvider) vars.getSessionObject("button3198010958ED4BF5B7BB960207CCEC56.originalParams"), comboTableData, windowId, "");
+    xmlDocument.setData("reportEstado", "liststructure", comboTableData.select(false));
+comboTableData = null;
+    } catch (Exception ex) {
+      throw new ServletException(ex);
+    }
+
+      
+      out.println(xmlDocument.print());
+      out.close();
+    }
 
 
 
@@ -957,6 +1108,9 @@ xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTime
                     data.noContratoEmpleadoId = "";
                 }
                 else {                    
+                    
+                        //BUTTON TEXT FILLING
+                    data.docactionnoBtn = ActionButtonDefaultData.getText(this, vars.getLanguage(), "E45117AAE15841AAB98FFF75970AA6E0", data.getField("Docactionno"));
                     
                 }
                 vars.setEditionData(tabId, data);

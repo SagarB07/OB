@@ -35,9 +35,9 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
   public String isactive;
   public String emAprmModify;
   public String dateacct;
+  public String finFinancialAccountId;
   public String finReconciliationId;
   public String finReconciliationIdr;
-  public String finFinancialAccountId;
   public String finPaymentId;
   public String description;
   public String cGlitemId;
@@ -119,12 +119,12 @@ static Logger log4j = Logger.getLogger(TransactionData.class);
       return emAprmModify;
     else if (fieldName.equalsIgnoreCase("dateacct"))
       return dateacct;
+    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
+      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("fin_reconciliation_id") || fieldName.equals("finReconciliationId"))
       return finReconciliationId;
     else if (fieldName.equalsIgnoreCase("fin_reconciliation_idr") || fieldName.equals("finReconciliationIdr"))
       return finReconciliationIdr;
-    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
-      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("fin_payment_id") || fieldName.equals("finPaymentId"))
       return finPaymentId;
     else if (fieldName.equalsIgnoreCase("description"))
@@ -243,9 +243,9 @@ Select for edit
       "COALESCE(FIN_Finacc_Transaction.Isactive, 'N') AS Isactive, " +
       "FIN_Finacc_Transaction.EM_APRM_Modify, " +
       "FIN_Finacc_Transaction.DateAcct, " +
+      "FIN_Finacc_Transaction.Fin_Financial_Account_ID, " +
       "FIN_Finacc_Transaction.FIN_Reconciliation_ID, " +
       "(CASE WHEN FIN_Finacc_Transaction.FIN_Reconciliation_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table1.Statementdate, 'DD-MM-YYYY')),'') ) END) AS FIN_Reconciliation_IDR, " +
-      "FIN_Finacc_Transaction.Fin_Financial_Account_ID, " +
       "FIN_Finacc_Transaction.Fin_Payment_ID, " +
       "FIN_Finacc_Transaction.Description, " +
       "FIN_Finacc_Transaction.C_Glitem_ID, " +
@@ -347,9 +347,9 @@ Select for edit
         objectTransactionData.isactive = UtilSql.getValue(result, "isactive");
         objectTransactionData.emAprmModify = UtilSql.getValue(result, "em_aprm_modify");
         objectTransactionData.dateacct = UtilSql.getDateValue(result, "dateacct", "dd-MM-yyyy");
+        objectTransactionData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectTransactionData.finReconciliationId = UtilSql.getValue(result, "fin_reconciliation_id");
         objectTransactionData.finReconciliationIdr = UtilSql.getValue(result, "fin_reconciliation_idr");
-        objectTransactionData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectTransactionData.finPaymentId = UtilSql.getValue(result, "fin_payment_id");
         objectTransactionData.description = UtilSql.getValue(result, "description");
         objectTransactionData.cGlitemId = UtilSql.getValue(result, "c_glitem_id");
@@ -438,9 +438,9 @@ Create a registry
     objectTransactionData[0].isactive = isactive;
     objectTransactionData[0].emAprmModify = emAprmModify;
     objectTransactionData[0].dateacct = dateacct;
+    objectTransactionData[0].finFinancialAccountId = finFinancialAccountId;
     objectTransactionData[0].finReconciliationId = finReconciliationId;
     objectTransactionData[0].finReconciliationIdr = "";
-    objectTransactionData[0].finFinancialAccountId = finFinancialAccountId;
     objectTransactionData[0].finPaymentId = finPaymentId;
     objectTransactionData[0].description = description;
     objectTransactionData[0].cGlitemId = cGlitemId;
@@ -866,7 +866,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Finacc_Transaction" +
-      "        SET Line = TO_NUMBER(?) , Trxtype = (?) , AD_Org_ID = (?) , Status = (?) , CreatedByAlgorithm = (?) , Statementdate = TO_DATE(?) , Isactive = (?) , EM_APRM_Modify = (?) , DateAcct = TO_DATE(?) , FIN_Reconciliation_ID = (?) , Fin_Financial_Account_ID = (?) , Fin_Payment_ID = (?) , Description = (?) , C_Glitem_ID = (?) , C_Currency_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Processed = (?) , Foreign_Currency_ID = (?) , Processing = (?) , Foreign_Amount = TO_NUMBER(?) , Posted = (?) , EM_APRM_Delete = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , C_Salesregion_ID = (?) , User1_ID = (?) , User2_ID = (?) , Fin_Finacc_Transaction_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , Trxtype = (?) , AD_Org_ID = (?) , Status = (?) , CreatedByAlgorithm = (?) , Statementdate = TO_DATE(?) , Isactive = (?) , EM_APRM_Modify = (?) , DateAcct = TO_DATE(?) , Fin_Financial_Account_ID = (?) , FIN_Reconciliation_ID = (?) , Fin_Payment_ID = (?) , Description = (?) , C_Glitem_ID = (?) , C_Currency_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Processed = (?) , Foreign_Currency_ID = (?) , Processing = (?) , Foreign_Amount = TO_NUMBER(?) , Posted = (?) , EM_APRM_Delete = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , C_Bpartner_ID = (?) , M_Product_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , C_Campaign_ID = (?) , C_Activity_ID = (?) , C_Salesregion_ID = (?) , User1_ID = (?) , User2_ID = (?) , Fin_Finacc_Transaction_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Finacc_Transaction.Fin_Finacc_Transaction_ID = ? " +
       "                 AND FIN_Finacc_Transaction.Fin_Financial_Account_ID = ? " +
       "        AND FIN_Finacc_Transaction.AD_Client_ID IN (";
@@ -893,8 +893,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmModify);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cGlitemId);
@@ -948,7 +948,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Finacc_Transaction " +
-      "        (Line, Trxtype, AD_Org_ID, Status, CreatedByAlgorithm, Statementdate, Isactive, EM_APRM_Modify, DateAcct, FIN_Reconciliation_ID, Fin_Financial_Account_ID, Fin_Payment_ID, Description, C_Glitem_ID, C_Currency_ID, Depositamt, Paymentamt, Processed, Foreign_Currency_ID, Processing, Foreign_Amount, Posted, EM_APRM_Delete, Foreign_Convert_Rate, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, C_Salesregion_ID, User1_ID, User2_ID, Fin_Finacc_Transaction_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Line, Trxtype, AD_Org_ID, Status, CreatedByAlgorithm, Statementdate, Isactive, EM_APRM_Modify, DateAcct, Fin_Financial_Account_ID, FIN_Reconciliation_ID, Fin_Payment_ID, Description, C_Glitem_ID, C_Currency_ID, Depositamt, Paymentamt, Processed, Foreign_Currency_ID, Processing, Foreign_Amount, Posted, EM_APRM_Delete, Foreign_Convert_Rate, C_Bpartner_ID, M_Product_ID, C_Project_ID, C_Costcenter_ID, C_Campaign_ID, C_Activity_ID, C_Salesregion_ID, User1_ID, User2_ID, Fin_Finacc_Transaction_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -966,8 +966,8 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAprmModify);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateacct);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finReconciliationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cGlitemId);

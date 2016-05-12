@@ -24,8 +24,8 @@ no_permiso.Estado,
 no_permiso.em_ne_estado, 
 no_permiso.em_ne_procesar, 
 list3.name as em_ne_procesar_BTN, 
-no_permiso.NO_Permiso_ID, 
 no_permiso.AD_Client_ID, 
+no_permiso.NO_Permiso_ID, 
 COALESCE(no_permiso.Procesado, 'N') AS Procesado, 
 no_permiso.AD_Org_ID, 
 no_permiso.C_Bpartner_ID, 
@@ -103,13 +103,13 @@ no_permiso.C_Bpartner_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_permiso
-        SET Fecha_Permiso = TO_DATE(?) , Tipo_Permiso = (?) , Motivo_Permiso = (?) , Dias = TO_NUMBER(?) , Horas = TO_NUMBER(?) , em_ne_observacion = (?) , Isactive = (?) , Estado = (?) , em_ne_estado = (?) , em_ne_procesar = (?) , NO_Permiso_ID = (?) , AD_Client_ID = (?) , Procesado = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , updated = now(), updatedby = ? 
+        SET Fecha_Permiso = TO_DATE(?) , Tipo_Permiso = (?) , Motivo_Permiso = (?) , Dias = TO_NUMBER(?) , Horas = TO_NUMBER(?) , em_ne_observacion = (?) , Isactive = (?) , Estado = (?) , em_ne_estado = (?) , em_ne_procesar = (?) , AD_Client_ID = (?) , NO_Permiso_ID = (?) , Procesado = (?) , AD_Org_ID = (?) , C_Bpartner_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_permiso.NO_Permiso_ID = ? 
         
         AND no_permiso.AD_Client_ID IN ('1') 
         AND no_permiso.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="fechaPermiso"></Parameter> <Parameter name="tipoPermiso"></Parameter> <Parameter name="motivoPermiso"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="horas"></Parameter> <Parameter name="emNeObservacion"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="noPermisoId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> 
+    <Parameter name="fechaPermiso"></Parameter> <Parameter name="tipoPermiso"></Parameter> <Parameter name="motivoPermiso"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="horas"></Parameter> <Parameter name="emNeObservacion"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noPermisoId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noPermisoId"></Parameter>
     
@@ -121,10 +121,10 @@ no_permiso.C_Bpartner_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_permiso 
-        (Fecha_Permiso, Tipo_Permiso, Motivo_Permiso, Dias, Horas, em_ne_observacion, Isactive, Estado, em_ne_estado, em_ne_procesar, NO_Permiso_ID, AD_Client_ID, Procesado, AD_Org_ID, C_Bpartner_ID, created, createdby, updated, updatedBy)
+        (Fecha_Permiso, Tipo_Permiso, Motivo_Permiso, Dias, Horas, em_ne_observacion, Isactive, Estado, em_ne_estado, em_ne_procesar, AD_Client_ID, NO_Permiso_ID, Procesado, AD_Org_ID, C_Bpartner_ID, created, createdby, updated, updatedBy)
         VALUES (TO_DATE(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="fechaPermiso"></Parameter> <Parameter name="tipoPermiso"></Parameter> <Parameter name="motivoPermiso"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="horas"></Parameter> <Parameter name="emNeObservacion"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="noPermisoId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> 
+    <Parameter name="fechaPermiso"></Parameter> <Parameter name="tipoPermiso"></Parameter> <Parameter name="motivoPermiso"></Parameter> <Parameter name="dias"></Parameter> <Parameter name="horas"></Parameter> <Parameter name="emNeObservacion"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="estado"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="noPermisoId"></Parameter> <Parameter name="procesado"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cBpartnerId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

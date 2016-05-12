@@ -21,6 +21,7 @@ package org.openbravo.model.financialmgmt.payment;
 import com.atrums.conciliacionec.data.atecdpFinaccTransactionV;
 import com.atrums.depositos.data.DP_FinaccTransactionV;
 import com.atrums.importaciondatos.IdtContrato;
+import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noPagoCabecera;
 import com.atrums.nomina.data.noRegistraQuincLine;
@@ -126,6 +127,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
     public static final String PROPERTY_IDTCONTRATOLIST = "iDTContratoList";
     public static final String PROPERTY_ROLPAGOPROVISIONLINELIST = "rolPagoProvisionLineList";
     public static final String PROPERTY_ATECDPFINACCTRANSACTIONVLIST = "atecdpFinaccTransactionVList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_PAGOCABECERALIST = "pagoCabeceraList";
     public static final String PROPERTY_REGISTRAQUINCLINELIST = "registraQuincLineList";
@@ -175,6 +177,7 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
         setDefaultValue(PROPERTY_IDTCONTRATOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ATECDPFINACCTRANSACTIONVLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PAGOCABECERALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_REGISTRAQUINCLINELIST, new ArrayList<Object>());
@@ -756,6 +759,15 @@ public class FIN_FinancialAccount extends BaseOBObject implements Traceable, Cli
 
     public void setAtecdpFinaccTransactionVList(List<atecdpFinaccTransactionV> atecdpFinaccTransactionVList) {
         set(PROPERTY_ATECDPFINACCTRANSACTIONVLIST, atecdpFinaccTransactionVList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
     }
 
     @SuppressWarnings("unchecked")

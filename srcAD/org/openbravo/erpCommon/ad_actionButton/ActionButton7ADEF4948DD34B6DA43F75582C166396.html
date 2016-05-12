@@ -61,6 +61,7 @@ function onloadClient() {
   var key = frm.inpKey;if (inputValue(key)==null || inputValue(key)=="") updateOnChange(frm.inpyear);
 if (inputValue(key)==null || inputValue(key)=="") updateOnChange(frm.inpadRef);
 if (inputValue(key)==null || inputValue(key)=="") updateOnChange(frm.inpoutputtype);
+if (inputValue(key)==null || inputValue(key)=="") updateOnChange(frm.inpcPeriodId);
   return true;
 }
 
@@ -331,6 +332,27 @@ function submitThisPageJasper() {
   <SELECT name="inpoutputtype" onkeypress="changeToEditingMode('onkeypress');" onchange="changeToEditingMode('onchange', this);logChanges(this);return true;" class="ComboKey Combo_OneCell_width" id="reportoutputtype_S">
     
     <DIV id="reportoutputtype"></DIV>
+  </SELECT>
+</DIV>
+
+</div></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td class="TitleCell"><span class="LabelText" id="c_period_id_lbl"><span id="lbl::c_period_id">#c_period_id#</span>&nbsp;</span></td>
+<td class="Combo_ContentCell"><div id="editDiscard">
+<DIV id="c_period_id_inp">
+  <SELECT name="inpcPeriodId" onkeypress="changeToEditingMode('onkeypress');" onchange="changeToEditingMode('onchange', this);logChanges(this);return true;" class="Combo Combo_OneCell_width" id="reportc_period_id_S">
+    <OPTION value=""></OPTION>
+    <DIV id="reportc_period_id"></DIV>
+  </SELECT>
+</DIV>
+
+</div><div id="newDiscard">
+<DIV id="c_period_id_inp">
+  <SELECT name="inpcPeriodId" onkeypress="changeToEditingMode('onkeypress');" onchange="changeToEditingMode('onchange', this);logChanges(this);return true;" class="Combo Combo_OneCell_width" id="reportc_period_id_S">
+    <OPTION value=""></OPTION>
+    <DIV id="reportc_period_id"></DIV>
   </SELECT>
 </DIV>
 

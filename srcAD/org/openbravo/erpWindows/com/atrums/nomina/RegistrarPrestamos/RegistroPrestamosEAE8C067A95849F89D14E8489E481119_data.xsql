@@ -14,13 +14,12 @@
         no_prestamo.AD_Org_ID, 
 (CASE WHEN no_prestamo.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
 no_prestamo.C_Bpartner_ID, 
-(CASE WHEN no_prestamo.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS C_Bpartner_IDR, 
 no_prestamo.NO_Tipo_Ingreso_Egreso_ID, 
-(CASE WHEN no_prestamo.NO_Tipo_Ingreso_Egreso_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS NO_Tipo_Ingreso_Egreso_IDR, 
+(CASE WHEN no_prestamo.NO_Tipo_Ingreso_Egreso_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS NO_Tipo_Ingreso_Egreso_IDR, 
 no_prestamo.Valor_Prestamo, 
 no_prestamo.Meses_Cuota, 
 no_prestamo.C_Period_ID, 
-(CASE WHEN no_prestamo.C_Period_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Period_IDR, 
+(CASE WHEN no_prestamo.C_Period_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.Name), ''))),'') ) END) AS C_Period_IDR, 
 no_prestamo.Valor_Cuota, 
 no_prestamo.Docaction_Pro, 
 list1.name as Docaction_Pro_BTN, 
@@ -33,7 +32,7 @@ no_prestamo.Total_Recibir,
 no_prestamo.NO_Prestamo_ID, 
  
         ? AS LANGUAGE 
-        FROM no_prestamo left join (select AD_Org_ID, Name from AD_Org) table1 on (no_prestamo.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (no_prestamo.C_Bpartner_ID = table2.C_BPartner_ID) left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table3 on (no_prestamo.NO_Tipo_Ingreso_Egreso_ID = table3.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Period_ID, Name from C_Period) table4 on (no_prestamo.C_Period_ID = table4.C_Period_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND no_prestamo.Docaction_Pro = TO_CHAR(list1.value))
+        FROM no_prestamo left join (select AD_Org_ID, Name from AD_Org) table1 on (no_prestamo.AD_Org_ID = table1.AD_Org_ID) left join (select NO_Tipo_Ingreso_Egreso_ID, Name from NO_Tipo_Ingreso_Egreso) table2 on (no_prestamo.NO_Tipo_Ingreso_Egreso_ID = table2.NO_Tipo_Ingreso_Egreso_ID) left join (select C_Period_ID, Name from C_Period) table3 on (no_prestamo.C_Period_ID = table3.C_Period_ID) left join ad_ref_list_v list1 on (list1.ad_reference_id = '135' and list1.ad_language = ?  AND no_prestamo.Docaction_Pro = TO_CHAR(list1.value))
         WHERE 2=2 
 
         AND 1=1 
@@ -67,7 +66,7 @@ no_prestamo.NO_Prestamo_ID,
       <SqlMethodComment>Create a registry</SqlMethodComment>
       <Sql></Sql>
 
-<Parameter name="docactionPro"></Parameter><Parameter name="docactionProBtn"></Parameter><Parameter name="noPrestamoId"></Parameter><Parameter name="valorCuota"></Parameter><Parameter name="descuentoIess"></Parameter><Parameter name="processed"></Parameter><Parameter name="cBpartnerId"></Parameter><Parameter name="cBpartnerIdr"></Parameter><Parameter name="totalRecibir"></Parameter><Parameter name="valorPrestamo"></Parameter><Parameter name="mesesCuota"></Parameter><Parameter name="noTipoIngresoEgresoId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="sueldo"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="cPeriodId"></Parameter><Parameter name="adClientId"></Parameter>
+<Parameter name="docactionPro"></Parameter><Parameter name="docactionProBtn"></Parameter><Parameter name="noPrestamoId"></Parameter><Parameter name="valorCuota"></Parameter><Parameter name="descuentoIess"></Parameter><Parameter name="processed"></Parameter><Parameter name="cBpartnerId"></Parameter><Parameter name="totalRecibir"></Parameter><Parameter name="valorPrestamo"></Parameter><Parameter name="mesesCuota"></Parameter><Parameter name="noTipoIngresoEgresoId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="isactive"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="sueldo"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="cPeriodId"></Parameter><Parameter name="adClientId"></Parameter>
    </SqlMethod>
 
 
@@ -75,15 +74,7 @@ no_prestamo.NO_Prestamo_ID,
 
 
 
-   <SqlMethod name="selectDef6A2C176BFD0D460DB18BCBE46E097D40_0" type="preparedStatement" return="String" default="">
-    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
-    <Sql><![CDATA[
-        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as C_Bpartner_ID FROM C_BPartner left join (select C_BPartner_ID, Name from C_BPartner) table2 on (C_BPartner.C_BPartner_ID = table2.C_BPartner_ID) WHERE C_BPartner.isActive='Y' AND C_BPartner.C_BPartner_ID = ?  
-    ]]></Sql>
-<Parameter name="C_Bpartner_IDR"/>
-  </SqlMethod>
-
-   <SqlMethod name="selectDefADF209E56E6645F8812DDCA6EDB63F5D_1" type="preparedStatement" return="String" default="">
+   <SqlMethod name="selectDefADF209E56E6645F8812DDCA6EDB63F5D_0" type="preparedStatement" return="String" default="">
     <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
     <Sql><![CDATA[
         SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
@@ -91,7 +82,7 @@ no_prestamo.NO_Prestamo_ID,
 <Parameter name="CreatedbyR"/>
   </SqlMethod>
 
-   <SqlMethod name="selectDefDBF99FB00B87453FBCA3FCB6B49E2D69_2" type="preparedStatement" return="String" default="">
+   <SqlMethod name="selectDefDBF99FB00B87453FBCA3FCB6B49E2D69_1" type="preparedStatement" return="String" default="">
     <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
     <Sql><![CDATA[
         SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  

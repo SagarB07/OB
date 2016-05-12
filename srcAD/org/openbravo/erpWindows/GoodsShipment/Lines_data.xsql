@@ -14,8 +14,8 @@
         M_InOutLine.Line, 
 M_InOutLine.M_Product_ID, 
 (CASE WHEN M_InOutLine.M_Product_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL1.Name IS NULL THEN TO_CHAR(table1.Name) ELSE TO_CHAR(tableTRL1.Name) END)), ''))),'') ) END) AS M_Product_IDR, 
-M_InOutLine.M_Condition_Goods_ID, 
 M_InOutLine.M_AttributeSetInstance_ID, 
+M_InOutLine.M_Condition_Goods_ID, 
 M_InOutLine.MovementQty, 
 M_InOutLine.C_UOM_ID, 
 (CASE WHEN M_InOutLine.C_UOM_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL3.Name IS NULL THEN TO_CHAR(table3.Name) ELSE TO_CHAR(tableTRL3.Name) END)), ''))),'') ) END) AS C_UOM_IDR, 
@@ -40,12 +40,12 @@ M_InOutLine.User2_ID,
 M_InOutLine.Explode, 
 M_InOutLine.BOM_Parent_ID, 
 M_InOutLine.C_Bpartner_ID, 
-M_InOutLine.M_InOut_ID, 
 COALESCE(M_InOutLine.IsActive, 'N') AS IsActive, 
-M_InOutLine.Manage_Prereservation, 
-M_InOutLine.AD_Client_ID, 
+M_InOutLine.M_InOut_ID, 
 M_InOutLine.M_InOutLine_ID, 
 COALESCE(M_InOutLine.IsInvoiced, 'N') AS IsInvoiced, 
+M_InOutLine.Manage_Prereservation, 
+M_InOutLine.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM M_InOutLine left join (select M_Product_ID, Name from M_Product) table1 on (M_InOutLine.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join (select C_UOM_ID, Name from C_UOM) table3 on (M_InOutLine.C_UOM_ID = table3.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL3 on (table3.C_UOM_ID = tableTRL3.C_UOM_ID and tableTRL3.AD_Language = ?)  left join (select M_Locator_ID, Value from M_Locator) table5 on (M_InOutLine.M_Locator_ID = table5.M_Locator_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table6 on (M_InOutLine.C_OrderLine_ID = table6.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table7 on (table6.C_Order_ID = table7.C_Order_ID) left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_UOM) table8 on (M_InOutLine.M_Product_Uom_Id =  table8.M_Product_Uom_Id) left join ad_ref_list_v list1 on (table8.C_UOM_ID = list1.value and list1.ad_reference_id = '' and list1.ad_language = ?)  left join (select AD_Org_ID, Name from AD_Org) table9 on (M_InOutLine.AD_Org_ID = table9.AD_Org_ID) left join (select C_Project_ID, Value, Name from C_Project) table10 on (M_InOutLine.C_Project_ID = table10.C_Project_ID)
@@ -297,13 +297,13 @@ WHERE M_INOUT_ID = ?
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE M_InOutLine
-        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , M_Condition_Goods_ID = (?) , M_AttributeSetInstance_ID = (?) , MovementQty = TO_NUMBER(?) , C_UOM_ID = (?) , M_Locator_ID = (?) , Description = (?) , C_OrderLine_ID = (?) , M_Product_Uom_Id = (?) , QuantityOrder = TO_NUMBER(?) , IsDescription = (?) , Canceled_Inoutline_ID = (?) , AD_Org_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , C_Bpartner_ID = (?) , M_InOut_ID = (?) , IsActive = (?) , Manage_Prereservation = (?) , AD_Client_ID = (?) , M_InOutLine_ID = (?) , IsInvoiced = (?) , updated = now(), updatedby = ? 
+        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , M_AttributeSetInstance_ID = (?) , M_Condition_Goods_ID = (?) , MovementQty = TO_NUMBER(?) , C_UOM_ID = (?) , M_Locator_ID = (?) , Description = (?) , C_OrderLine_ID = (?) , M_Product_Uom_Id = (?) , QuantityOrder = TO_NUMBER(?) , IsDescription = (?) , Canceled_Inoutline_ID = (?) , AD_Org_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Explode = (?) , BOM_Parent_ID = (?) , C_Bpartner_ID = (?) , IsActive = (?) , M_InOut_ID = (?) , M_InOutLine_ID = (?) , IsInvoiced = (?) , Manage_Prereservation = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE M_InOutLine.M_InOutLine_ID = ? 
                  AND M_InOutLine.M_InOut_ID = ? 
         AND M_InOutLine.AD_Client_ID IN ('1') 
         AND M_InOutLine.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="isinvoiced"></Parameter> 
+    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="isinvoiced"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="mInoutlineId"></Parameter>
     
@@ -315,10 +315,10 @@ WHERE M_INOUT_ID = ?
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO M_InOutLine 
-        (Line, M_Product_ID, M_Condition_Goods_ID, M_AttributeSetInstance_ID, MovementQty, C_UOM_ID, M_Locator_ID, Description, C_OrderLine_ID, M_Product_Uom_Id, QuantityOrder, IsDescription, Canceled_Inoutline_ID, AD_Org_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, C_Bpartner_ID, M_InOut_ID, IsActive, Manage_Prereservation, AD_Client_ID, M_InOutLine_ID, IsInvoiced, created, createdby, updated, updatedBy)
+        (Line, M_Product_ID, M_AttributeSetInstance_ID, M_Condition_Goods_ID, MovementQty, C_UOM_ID, M_Locator_ID, Description, C_OrderLine_ID, M_Product_Uom_Id, QuantityOrder, IsDescription, Canceled_Inoutline_ID, AD_Org_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Explode, BOM_Parent_ID, C_Bpartner_ID, IsActive, M_InOut_ID, M_InOutLine_ID, IsInvoiced, Manage_Prereservation, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="isinvoiced"></Parameter> 
+    <Parameter name="line"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="mAttributesetinstanceId"></Parameter> <Parameter name="mConditionGoodsId"></Parameter> <Parameter name="movementqty"></Parameter> <Parameter name="cUomId"></Parameter> <Parameter name="mLocatorId"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cOrderlineId"></Parameter> <Parameter name="mProductUomId"></Parameter> <Parameter name="quantityorder"></Parameter> <Parameter name="isdescription"></Parameter> <Parameter name="canceledInoutlineId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cCostcenterId"></Parameter> <Parameter name="aAssetId"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="explode"></Parameter> <Parameter name="bomParentId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="mInoutId"></Parameter> <Parameter name="mInoutlineId"></Parameter> <Parameter name="isinvoiced"></Parameter> <Parameter name="managePrereservation"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

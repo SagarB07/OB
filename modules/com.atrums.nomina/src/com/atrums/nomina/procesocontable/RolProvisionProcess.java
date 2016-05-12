@@ -28,7 +28,6 @@ import org.openbravo.model.financialmgmt.accounting.AccountingFact;
 import org.openbravo.model.financialmgmt.accounting.FIN_FinancialAccountAccounting;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 
-import com.atrums.nomina.data.noCbEmpleadoAcct;
 import com.atrums.nomina.data.noRolPagoProvision;
 import com.atrums.nomina.data.noRolPagoProvisionLine;
 import com.atrums.nomina.data.noRolProvisionLineMes;
@@ -158,14 +157,14 @@ public class RolProvisionProcess extends AcctServer {
     		  noRolProvisionLineMes.class, whereClause2.toString());
 
       // Cuenta de Ingreso
-      if (obqParameters.list().get(0).getCuentaDelIngreso()!=null){
+      if (obqParameters.list().size()>=0 && obqParameters.list().get(0).getCuentaDelIngreso()!=null){
       fact.createLine(null,
           Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelIngreso().getId()),
           C_Currency_ID, noRolpMes.getValor().abs().toString(), ZERO.toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
       }
       // Cuenta de Egreso
-      if (obqParameters.list().get(0).getCuentaDelEgreso()!=null){
+      if (obqParameters.list().size()>=0 && obqParameters.list().get(0).getCuentaDelEgreso()!=null){
       fact.createLine(null,
           Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelEgreso().getId()),
           C_Currency_ID, ZERO.toString(), noRolpMes.getValor().abs().toString(),

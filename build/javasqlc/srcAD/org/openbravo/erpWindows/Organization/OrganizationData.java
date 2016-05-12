@@ -30,10 +30,10 @@ static Logger log4j = Logger.getLogger(OrganizationData.class);
   public String isactive;
   public String issummary;
   public String socialName;
-  public String adOrgtypeId;
-  public String adOrgtypeIdr;
   public String cCurrencyId;
   public String cCurrencyIdr;
+  public String adOrgtypeId;
+  public String adOrgtypeIdr;
   public String emCoPuntoEmision;
   public String emCoNroEstab;
   public String isperiodcontrolallowed;
@@ -81,14 +81,14 @@ static Logger log4j = Logger.getLogger(OrganizationData.class);
       return issummary;
     else if (fieldName.equalsIgnoreCase("social_name") || fieldName.equals("socialName"))
       return socialName;
-    else if (fieldName.equalsIgnoreCase("ad_orgtype_id") || fieldName.equals("adOrgtypeId"))
-      return adOrgtypeId;
-    else if (fieldName.equalsIgnoreCase("ad_orgtype_idr") || fieldName.equals("adOrgtypeIdr"))
-      return adOrgtypeIdr;
     else if (fieldName.equalsIgnoreCase("c_currency_id") || fieldName.equals("cCurrencyId"))
       return cCurrencyId;
     else if (fieldName.equalsIgnoreCase("c_currency_idr") || fieldName.equals("cCurrencyIdr"))
       return cCurrencyIdr;
+    else if (fieldName.equalsIgnoreCase("ad_orgtype_id") || fieldName.equals("adOrgtypeId"))
+      return adOrgtypeId;
+    else if (fieldName.equalsIgnoreCase("ad_orgtype_idr") || fieldName.equals("adOrgtypeIdr"))
+      return adOrgtypeIdr;
     else if (fieldName.equalsIgnoreCase("em_co_punto_emision") || fieldName.equals("emCoPuntoEmision"))
       return emCoPuntoEmision;
     else if (fieldName.equalsIgnoreCase("em_co_nro_estab") || fieldName.equals("emCoNroEstab"))
@@ -154,10 +154,10 @@ Select for edit
       "COALESCE(AD_Org.IsActive, 'N') AS IsActive, " +
       "COALESCE(AD_Org.IsSummary, 'N') AS IsSummary, " +
       "AD_Org.Social_Name, " +
-      "AD_Org.AD_Orgtype_ID, " +
-      "(CASE WHEN AD_Org.AD_Orgtype_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Orgtype_IDR, " +
       "AD_Org.C_Currency_ID, " +
-      "(CASE WHEN AD_Org.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, " +
+      "(CASE WHEN AD_Org.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, " +
+      "AD_Org.AD_Orgtype_ID, " +
+      "(CASE WHEN AD_Org.AD_Orgtype_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS AD_Orgtype_IDR, " +
       "AD_Org.EM_Co_Punto_Emision, " +
       "AD_Org.EM_Co_Nro_Estab, " +
       "COALESCE(AD_Org.IsPeriodControlAllowed, 'N') AS IsPeriodControlAllowed, " +
@@ -169,7 +169,7 @@ Select for edit
       "AD_Org.AD_Org_ID, " +
       "AD_Org.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
-      "        FROM AD_Org left join (select AD_Orgtype_ID, Name from AD_Orgtype) table1 on (AD_Org.AD_Orgtype_ID = table1.AD_Orgtype_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (AD_Org.C_Currency_ID = table2.C_Currency_ID) left join (select C_Calendar_ID, Name from C_Calendar) table3 on (AD_Org.C_Calendar_ID = table3.C_Calendar_ID) left join (select C_Acctschema_ID, Name from C_Acctschema) table4 on (AD_Org.C_Acctschema_ID = table4.C_Acctschema_ID)" +
+      "        FROM AD_Org left join (select C_Currency_ID, ISO_Code from C_Currency) table1 on (AD_Org.C_Currency_ID = table1.C_Currency_ID) left join (select AD_Orgtype_ID, Name from AD_Orgtype) table2 on (AD_Org.AD_Orgtype_ID = table2.AD_Orgtype_ID) left join (select C_Calendar_ID, Name from C_Calendar) table3 on (AD_Org.C_Calendar_ID = table3.C_Calendar_ID) left join (select C_Acctschema_ID, Name from C_Acctschema) table4 on (AD_Org.C_Acctschema_ID = table4.C_Acctschema_ID)" +
       "        WHERE 2=2 " +
       "        AND 1=1 " +
       "        AND AD_Org.AD_Org_ID = ? " +
@@ -221,10 +221,10 @@ Select for edit
         objectOrganizationData.isactive = UtilSql.getValue(result, "isactive");
         objectOrganizationData.issummary = UtilSql.getValue(result, "issummary");
         objectOrganizationData.socialName = UtilSql.getValue(result, "social_name");
-        objectOrganizationData.adOrgtypeId = UtilSql.getValue(result, "ad_orgtype_id");
-        objectOrganizationData.adOrgtypeIdr = UtilSql.getValue(result, "ad_orgtype_idr");
         objectOrganizationData.cCurrencyId = UtilSql.getValue(result, "c_currency_id");
         objectOrganizationData.cCurrencyIdr = UtilSql.getValue(result, "c_currency_idr");
+        objectOrganizationData.adOrgtypeId = UtilSql.getValue(result, "ad_orgtype_id");
+        objectOrganizationData.adOrgtypeIdr = UtilSql.getValue(result, "ad_orgtype_idr");
         objectOrganizationData.emCoPuntoEmision = UtilSql.getValue(result, "em_co_punto_emision");
         objectOrganizationData.emCoNroEstab = UtilSql.getValue(result, "em_co_nro_estab");
         objectOrganizationData.isperiodcontrolallowed = UtilSql.getValue(result, "isperiodcontrolallowed");
@@ -284,10 +284,10 @@ Create a registry
     objectOrganizationData[0].isactive = isactive;
     objectOrganizationData[0].issummary = issummary;
     objectOrganizationData[0].socialName = socialName;
-    objectOrganizationData[0].adOrgtypeId = adOrgtypeId;
-    objectOrganizationData[0].adOrgtypeIdr = "";
     objectOrganizationData[0].cCurrencyId = cCurrencyId;
     objectOrganizationData[0].cCurrencyIdr = "";
+    objectOrganizationData[0].adOrgtypeId = adOrgtypeId;
+    objectOrganizationData[0].adOrgtypeIdr = "";
     objectOrganizationData[0].emCoPuntoEmision = emCoPuntoEmision;
     objectOrganizationData[0].emCoNroEstab = emCoNroEstab;
     objectOrganizationData[0].isperiodcontrolallowed = isperiodcontrolallowed;
@@ -459,7 +459,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE AD_Org" +
-      "        SET Value = (?) , Name = (?) , Description = (?) , IsActive = (?) , IsSummary = (?) , Social_Name = (?) , AD_Orgtype_ID = (?) , C_Currency_ID = (?) , EM_Co_Punto_Emision = (?) , EM_Co_Nro_Estab = (?) , IsPeriodControlAllowed = (?) , C_Calendar_ID = (?) , IsReady = (?) , C_Acctschema_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Value = (?) , Name = (?) , Description = (?) , IsActive = (?) , IsSummary = (?) , Social_Name = (?) , C_Currency_ID = (?) , AD_Orgtype_ID = (?) , EM_Co_Punto_Emision = (?) , EM_Co_Nro_Estab = (?) , IsPeriodControlAllowed = (?) , C_Calendar_ID = (?) , IsReady = (?) , C_Acctschema_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE AD_Org.AD_Org_ID = ? " +
       "        AND AD_Org.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -482,8 +482,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issummary);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, socialName);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoPuntoEmision);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroEstab);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isperiodcontrolallowed);
@@ -520,7 +520,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO AD_Org " +
-      "        (Value, Name, Description, IsActive, IsSummary, Social_Name, AD_Orgtype_ID, C_Currency_ID, EM_Co_Punto_Emision, EM_Co_Nro_Estab, IsPeriodControlAllowed, C_Calendar_ID, IsReady, C_Acctschema_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Value, Name, Description, IsActive, IsSummary, Social_Name, C_Currency_ID, AD_Orgtype_ID, EM_Co_Punto_Emision, EM_Co_Nro_Estab, IsPeriodControlAllowed, C_Calendar_ID, IsReady, C_Acctschema_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -535,8 +535,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issummary);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, socialName);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCurrencyId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtypeId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoPuntoEmision);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emCoNroEstab);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isperiodcontrolallowed);

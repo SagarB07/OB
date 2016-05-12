@@ -42,10 +42,10 @@ static Logger log4j = Logger.getLogger(ProposalData.class);
   public String projectwon;
   public String paymentrule;
   public String cProjectproposalId;
-  public String adOrgId;
-  public String cProjectId;
   public String adClientId;
+  public String cProjectId;
   public String isactive;
+  public String adOrgId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -107,14 +107,14 @@ static Logger log4j = Logger.getLogger(ProposalData.class);
       return paymentrule;
     else if (fieldName.equalsIgnoreCase("c_projectproposal_id") || fieldName.equals("cProjectproposalId"))
       return cProjectproposalId;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
-      return cProjectId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
+      return cProjectId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -172,10 +172,10 @@ Select for edit
       "C_ProjectProposal.Projectwon, " +
       "C_ProjectProposal.PaymentRule, " +
       "C_ProjectProposal.C_Projectproposal_ID, " +
-      "C_ProjectProposal.AD_Org_ID, " +
-      "C_ProjectProposal.C_Project_ID, " +
       "C_ProjectProposal.AD_Client_ID, " +
+      "C_ProjectProposal.C_Project_ID, " +
       "COALESCE(C_ProjectProposal.IsActive, 'N') AS IsActive, " +
+      "C_ProjectProposal.AD_Org_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_ProjectProposal left join (select C_BPartner_ID, Name from C_BPartner) table1 on (C_ProjectProposal.C_BPartner_ID = table1.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table2 on (C_ProjectProposal.C_BPartner_Location_ID = table2.C_BPartner_Location_ID) left join (select AD_User_ID, Name from AD_User) table3 on (C_ProjectProposal.AD_User_ID = table3.AD_User_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table4 on (C_ProjectProposal.FIN_Paymentmethod_ID = table4.FIN_Paymentmethod_ID) left join (select C_PaymentTerm_ID, Name from C_PaymentTerm) table5 on (C_ProjectProposal.C_PaymentTerm_ID = table5.C_PaymentTerm_ID) left join (select C_PaymentTerm_ID,AD_Language, Name from C_PaymentTerm_TRL) tableTRL5 on (table5.C_PaymentTerm_ID = tableTRL5.C_PaymentTerm_ID and tableTRL5.AD_Language = ?) " +
       "        WHERE 2=2 " +
@@ -247,10 +247,10 @@ Select for edit
         objectProposalData.projectwon = UtilSql.getValue(result, "projectwon");
         objectProposalData.paymentrule = UtilSql.getValue(result, "paymentrule");
         objectProposalData.cProjectproposalId = UtilSql.getValue(result, "c_projectproposal_id");
-        objectProposalData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectProposalData.cProjectId = UtilSql.getValue(result, "c_project_id");
         objectProposalData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectProposalData.cProjectId = UtilSql.getValue(result, "c_project_id");
         objectProposalData.isactive = UtilSql.getValue(result, "isactive");
+        objectProposalData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectProposalData.language = UtilSql.getValue(result, "language");
         objectProposalData.adUserClient = "";
         objectProposalData.adOrgClient = "";
@@ -312,10 +312,10 @@ Create a registry
     objectProposalData[0].projectwon = projectwon;
     objectProposalData[0].paymentrule = paymentrule;
     objectProposalData[0].cProjectproposalId = cProjectproposalId;
-    objectProposalData[0].adOrgId = adOrgId;
-    objectProposalData[0].cProjectId = cProjectId;
     objectProposalData[0].adClientId = adClientId;
+    objectProposalData[0].cProjectId = cProjectId;
     objectProposalData[0].isactive = isactive;
+    objectProposalData[0].adOrgId = adOrgId;
     objectProposalData[0].language = "";
     return objectProposalData;
   }
@@ -554,7 +554,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_ProjectProposal" +
-      "        SET C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , Datesend = TO_DATE(?) , AD_User_ID = (?) , IsSOTrx = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , HeaderNote = (?) , FootNote = (?) , CopyFrom = (?) , Projectwon = (?) , PaymentRule = (?) , C_Projectproposal_ID = (?) , AD_Org_ID = (?) , C_Project_ID = (?) , AD_Client_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
+      "        SET C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , Datesend = TO_DATE(?) , AD_User_ID = (?) , IsSOTrx = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , HeaderNote = (?) , FootNote = (?) , CopyFrom = (?) , Projectwon = (?) , PaymentRule = (?) , C_Projectproposal_ID = (?) , AD_Client_ID = (?) , C_Project_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_ProjectProposal.C_Projectproposal_ID = ? " +
       "                 AND C_ProjectProposal.C_Project_ID = ? " +
       "        AND C_ProjectProposal.AD_Client_ID IN (";
@@ -585,10 +585,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectwon);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectproposalId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectproposalId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
@@ -618,7 +618,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_ProjectProposal " +
-      "        (C_BPartner_ID, C_BPartner_Location_ID, Datesend, AD_User_ID, IsSOTrx, FIN_Paymentmethod_ID, C_PaymentTerm_ID, HeaderNote, FootNote, CopyFrom, Projectwon, PaymentRule, C_Projectproposal_ID, AD_Org_ID, C_Project_ID, AD_Client_ID, IsActive, created, createdby, updated, updatedBy)" +
+      "        (C_BPartner_ID, C_BPartner_Location_ID, Datesend, AD_User_ID, IsSOTrx, FIN_Paymentmethod_ID, C_PaymentTerm_ID, HeaderNote, FootNote, CopyFrom, Projectwon, PaymentRule, C_Projectproposal_ID, AD_Client_ID, C_Project_ID, IsActive, AD_Org_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -640,10 +640,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectwon);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectproposalId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

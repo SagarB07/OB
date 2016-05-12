@@ -216,7 +216,8 @@ static Logger log4j = Logger.getLogger(DropRegFactAcctData.class);
 
   public static int deleteOrgClosing(Connection conn, ConnectionProvider connectionProvider, String adOrgClosingId)    throws ServletException {
     String strSql = "";
-    strSql = strSql +  "DELETE FROM AD_ORG_CLOSING WHERE AD_ORG_CLOSING_ID = ?";
+    strSql = strSql + 
+      "	  DELETE FROM AD_ORG_CLOSING WHERE AD_ORG_CLOSING_ID = ?";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -224,9 +225,9 @@ static Logger log4j = Logger.getLogger(DropRegFactAcctData.class);
     int iParameter = 0;
     try {
     st = connectionProvider.getPreparedStatement(conn, strSql);
-    iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgClosingId);
-    updateCount = st.executeUpdate();
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgClosingId);
 
+      updateCount = st.executeUpdate();
     } catch(SQLException e){
       log4j.error("SQL error in query: " + strSql + "Exception:"+ e);
       throw new ServletException("@CODE=" + Integer.toString(e.getErrorCode()) + "@" + e.getMessage());

@@ -31,6 +31,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.depositos/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.activos/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/com.atrums.print.doctype/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/org.openbravo.utility.hqlquerytool/src"/>
 <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/OpenbravoCore/OpenbravoCore">
 <dependency-type>uses</dependency-type>
 </dependent-module>

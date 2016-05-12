@@ -62,6 +62,7 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
     public static final String PROPERTY_NOROLPAGOPROVISIONLIST = "noRolPagoProvisionList";
     public static final String PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST = "productEmAsvAreaEmpresaIdList";
     public static final String PROPERTY_ASVPEDIDOINVENTARIOLIST = "asvPedidoInventarioList";
+    public static final String PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST = "noContratoEmpleadoEmNeAreaEmpresaIdList";
     public static final String PROPERTY_NOPAGOCABECERALIST = "noPagoCabeceraList";
 
     public noAreaEmpresa() {
@@ -73,6 +74,7 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTEMASVAREAEMPRESAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ASVPEDIDOINVENTARIOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOPAGOCABECERALIST, new ArrayList<Object>());
     }
 
@@ -220,6 +222,15 @@ public class noAreaEmpresa extends BaseOBObject implements Traceable, ClientEnab
 
     public void setAsvPedidoInventarioList(List<asvPedidoInventario> asvPedidoInventarioList) {
         set(PROPERTY_ASVPEDIDOINVENTARIOLIST, asvPedidoInventarioList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getNoContratoEmpleadoEmNeAreaEmpresaIdList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST);
+    }
+
+    public void setNoContratoEmpleadoEmNeAreaEmpresaIdList(List<noContratoEmpleado> noContratoEmpleadoEmNeAreaEmpresaIdList) {
+        set(PROPERTY_NOCONTRATOEMPLEADOEMNEAREAEMPRESAIDLIST, noContratoEmpleadoEmNeAreaEmpresaIdList);
     }
 
     @SuppressWarnings("unchecked")

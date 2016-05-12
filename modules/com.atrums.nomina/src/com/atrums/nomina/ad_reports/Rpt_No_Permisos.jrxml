@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Permisos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DATE_FROM" class="java.lang.String"/>
+	<parameter name="DATE_TO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select emp.name AS NOMBRE_EMPLEADO,
+per.fecha_permiso AS FECHA_PERMISO,
+(case when per.tipo_permiso= 'PM' THEN 'Permiso Medico'
+when per.tipo_permiso= 'CA' THEN 'Capacitación'
+when per.tipo_permiso= 'TP' THEN 'Tramites Personales'
+when per.tipo_permiso= 'CD' THEN 'Calamidad Domestica'
+ELSE 'OTROS'
+END) AS TIPO_PERMISO,
+(CASE WHEN per.motivo_permiso = '01' THEN 'Médico'
+ WHEN per.motivo_permiso = '02' THEN 'Calamidad Doméstica'
+ WHEN per.motivo_permiso = '03' THEN 'Trámites Personales'
+ WHEN per.motivo_permiso = '04' THEN 'Capacitación'
+ELSE 'OTROS'
+END) as motivo,
+per.dias AS DIAS,
+per.horas AS HORAS,
+(CASE WHEN per.em_ne_estado = 'BR' THEN 'Borrador'
+ WHEN per.em_ne_estado = 'PA' THEN 'Por Aprobar'
+ WHEN per.em_ne_estado = 'AP' THEN 'Aprobado'
+ WHEN per.em_ne_estado = 'PR' THEN 'Por Registrar'
+ WHEN per.em_ne_estado = 'CV' THEN 'Carga Vacación'
+ WHEN per.em_ne_estado = 'CN' THEN 'Cancelado'
+ WHEN per.em_ne_estado = 'SCV' THEN 'Justificado'
+ WHEN per.em_ne_estado = 'RC' THEN 'Rechazado'
+ WHEN per.em_ne_estado = 'FL' THEN 'Falta'
+ WHEN per.em_ne_estado = 'PJ' THEN 'Por Justificar'
+ WHEN per.em_ne_estado = 'JS' THEN 'Justificado'
+ WHEN per.em_ne_estado = 'NJ' THEN 'No Justificado'
+ELSE 'OTROS'
+END) AS ESTADO_PERMISO
+
+FROM no_permiso per, no_contrato_empleado con , c_bpartner emp
+WHERE per.no_contrato_empleado_id = con.no_contrato_empleado_id
+AND con.c_bpartner_id = emp.c_bpartner_id
+AND per.fecha_permiso BETWEEN date($P{DATE_FROM}) and date($P{DATE_TO})
+]]>
+	</queryString>
+	<field name="nombre_empleado" class="java.lang.String"/>
+	<field name="fecha_permiso" class="java.sql.Timestamp"/>
+	<field name="tipo_permiso" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String"/>
+	<field name="dias" class="java.math.BigDecimal"/>
+	<field name="horas" class="java.math.BigDecimal"/>
+	<field name="estado_permiso" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="393" height="44"/>
+				<textElement textAlignment="Right">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[PERMISOS DE EMPLEADO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="159" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE EMPLEADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="90" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA DEL PERMISO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOTIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="18" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="0" width="30" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="498" y="0" width="57" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="159" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_permiso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="498" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estado_permiso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="18" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="30" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{horas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement x="160" y="0" width="90" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_permiso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

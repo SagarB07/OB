@@ -33,6 +33,7 @@ import com.atrums.nomina.data.NoPermiso;
 import com.atrums.nomina.data.noAreaEmpresa;
 import com.atrums.nomina.data.noCargaEmpleado;
 import com.atrums.nomina.data.noCbEmpleadoAcct;
+import com.atrums.nomina.data.noContratoEmpleado;
 import com.atrums.nomina.data.noGastosEmpleado;
 import com.atrums.nomina.data.noLiquidacionEmpleado;
 import com.atrums.nomina.data.noNovedadLinea;
@@ -402,6 +403,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
     public static final String PROPERTY_VISTARETENCIONVENTASSALESREPIDLIST = "vistaRetencionVentasSalesrepIDList";
     public static final String PROPERTY_VISTARETENCIONVENTASLIST = "vistaRetencionVentasList";
     public static final String PROPERTY_CARGAEMPLEADOLIST = "cargaEmpleadoList";
+    public static final String PROPERTY_CONTRATOEMPLEADOLIST = "contratoEmpleadoList";
     public static final String PROPERTY_GASTOSEMPLEADOLIST = "gastosEmpleadoList";
     public static final String PROPERTY_LIQUIDACIONEMPLEADOLIST = "liquidacionEmpleadoList";
     public static final String PROPERTY_NOVEDADLINEALIST = "novedadLineaList";
@@ -559,6 +561,7 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
         setDefaultValue(PROPERTY_VISTARETENCIONVENTASSALESREPIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_VISTARETENCIONVENTASLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CARGAEMPLEADOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_CONTRATOEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_GASTOSEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOVEDADLINEALIST, new ArrayList<Object>());
@@ -2659,6 +2662,15 @@ public class BusinessPartner extends BaseOBObject implements Traceable, ClientEn
 
     public void setCargaEmpleadoList(List<noCargaEmpleado> cargaEmpleadoList) {
         set(PROPERTY_CARGAEMPLEADOLIST, cargaEmpleadoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noContratoEmpleado> getContratoEmpleadoList() {
+      return (List<noContratoEmpleado>) get(PROPERTY_CONTRATOEMPLEADOLIST);
+    }
+
+    public void setContratoEmpleadoList(List<noContratoEmpleado> contratoEmpleadoList) {
+        set(PROPERTY_CONTRATOEMPLEADOLIST, contratoEmpleadoList);
     }
 
     @SuppressWarnings("unchecked")

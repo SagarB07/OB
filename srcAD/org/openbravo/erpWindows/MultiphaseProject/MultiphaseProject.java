@@ -952,14 +952,14 @@ xmlDocument.setParameter("CopyFrom_BTNname", Utility.getButtonName(this, vars, "
 xmlDocument.setParameter("CopyFrom_Modal", modalCopyFrom?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
-xmlDocument.setParameter("buttonPlannedMarginAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttonInvoicedQty", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("buttonProjectBalanceAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
-xmlDocument.setParameter("LastPlannedProposalDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("buttonInvoicedAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonPlannedPOAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("LastPlannedProposalDate_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("buttonPlannedAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("buttonProjectBalanceAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("buttonInvoicedQty", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("buttonPlannedMarginAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("buttonPlannedQty", Utility.messageBD(this, "Calc", vars.getLanguage()));
+xmlDocument.setParameter("buttonInvoicedAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ServletException(ex);

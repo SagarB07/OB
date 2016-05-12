@@ -21,6 +21,7 @@ package org.openbravo.model.financialmgmt.accounting.coa;
 import com.atrums.contabilidad.data.CO_TipoRetencionAcct;
 import com.atrums.nomina.data.noCbEmpleadoAcct;
 import com.atrums.nomina.data.noRolPagoProvisionLine;
+import com.atrums.nomina.data.noRolProvisionLineMes;
 import com.atrums.nomina.data.noTipoIngEgrAcct;
 import com.atrums.nomina.data.no_tipo_rub_liqu_emp_acct;
 import com.atrums.nomina.empleados.data.nePerfilRubroLine;
@@ -269,6 +270,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
     public static final String PROPERTY_ROLPAGOPROVISIONLINECUENTADELINGRESOLIST = "rolPagoProvisionLineCuentaDelIngresoList";
     public static final String PROPERTY_CBEMPLEADOACCTCUENTADELINGRESOLIST = "cbEmpleadoAcctCuentaDelIngresoList";
     public static final String PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST = "cbEmpleadoAcctCuentaDelEgresoList";
+    public static final String PROPERTY_ROLPROVISIONLINEMESCUENTADELEGRESOLIST = "rolProvisionLineMesCuentaDelEgresoList";
+    public static final String PROPERTY_ROLPROVISIONLINEMESCUENTADELINGRESOLIST = "rolProvisionLineMesCuentaDelIngresoList";
     public static final String PROPERTY_PRODUCTACCOUNTSPRODUCTREVENUELIST = "productAccountsProductRevenueList";
     public static final String PROPERTY_PRODUCTACCOUNTSPRODUCTEXPENSELIST = "productAccountsProductExpenseList";
     public static final String PROPERTY_PRODUCTACCOUNTSFIXEDASSETLIST = "productAccountsFixedAssetList";
@@ -482,6 +485,8 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
         setDefaultValue(PROPERTY_ROLPAGOPROVISIONLINECUENTADELINGRESOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CBEMPLEADOACCTCUENTADELINGRESOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPROVISIONLINEMESCUENTADELEGRESOLIST, new ArrayList<Object>());
+        setDefaultValue(PROPERTY_ROLPROVISIONLINEMESCUENTADELINGRESOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSPRODUCTREVENUELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSPRODUCTEXPENSELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_PRODUCTACCOUNTSFIXEDASSETLIST, new ArrayList<Object>());
@@ -2256,6 +2261,24 @@ public class AccountingCombination extends BaseOBObject implements Traceable, Cl
 
     public void setCbEmpleadoAcctCuentaDelEgresoList(List<noCbEmpleadoAcct> cbEmpleadoAcctCuentaDelEgresoList) {
         set(PROPERTY_CBEMPLEADOACCTCUENTADELEGRESOLIST, cbEmpleadoAcctCuentaDelEgresoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolProvisionLineMes> getRolProvisionLineMesCuentaDelEgresoList() {
+      return (List<noRolProvisionLineMes>) get(PROPERTY_ROLPROVISIONLINEMESCUENTADELEGRESOLIST);
+    }
+
+    public void setRolProvisionLineMesCuentaDelEgresoList(List<noRolProvisionLineMes> rolProvisionLineMesCuentaDelEgresoList) {
+        set(PROPERTY_ROLPROVISIONLINEMESCUENTADELEGRESOLIST, rolProvisionLineMesCuentaDelEgresoList);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<noRolProvisionLineMes> getRolProvisionLineMesCuentaDelIngresoList() {
+      return (List<noRolProvisionLineMes>) get(PROPERTY_ROLPROVISIONLINEMESCUENTADELINGRESOLIST);
+    }
+
+    public void setRolProvisionLineMesCuentaDelIngresoList(List<noRolProvisionLineMes> rolProvisionLineMesCuentaDelIngresoList) {
+        set(PROPERTY_ROLPROVISIONLINEMESCUENTADELINGRESOLIST, rolProvisionLineMesCuentaDelIngresoList);
     }
 
     @SuppressWarnings("unchecked")

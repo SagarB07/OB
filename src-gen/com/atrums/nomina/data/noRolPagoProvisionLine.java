@@ -73,7 +73,7 @@ public class noRolPagoProvisionLine extends BaseOBObject implements Traceable, C
     public static final String PROPERTY_PAYMENT = "payment";
     public static final String PROPERTY_NETIPORUBRO = "neTipoRubro";
     public static final String PROPERTY_NEOBSERVACION = "neObservacion";
-    public static final String PROPERTY_GENERALLEDGER = "generalLedger";
+    public static final String PROPERTY_ACCOUNTINGSCHEMA = "accountingSchema";
     public static final String PROPERTY_CUENTADELEGRESO = "cuentaDelEgreso";
     public static final String PROPERTY_CUENTADELINGRESO = "cuentaDelIngreso";
     public static final String PROPERTY_NOROLPROVISIONLINEMESLIST = "noRolProvisionLineMesList";
@@ -302,12 +302,12 @@ public class noRolPagoProvisionLine extends BaseOBObject implements Traceable, C
         set(PROPERTY_NEOBSERVACION, neObservacion);
     }
 
-    public AcctSchema getGeneralLedger() {
-        return (AcctSchema) get(PROPERTY_GENERALLEDGER);
+    public AcctSchema getAccountingSchema() {
+        return (AcctSchema) get(PROPERTY_ACCOUNTINGSCHEMA);
     }
 
-    public void setGeneralLedger(AcctSchema generalLedger) {
-        set(PROPERTY_GENERALLEDGER, generalLedger);
+    public void setAccountingSchema(AcctSchema accountingSchema) {
+        set(PROPERTY_ACCOUNTINGSCHEMA, accountingSchema);
     }
 
     public AccountingCombination getCuentaDelEgreso() {

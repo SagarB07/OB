@@ -18,18 +18,18 @@ no_vacacion.em_ne_total_dias,
 no_vacacion.em_ne_observaciones, 
 no_vacacion.em_ne_procesar, 
 list1.name as em_ne_procesar_BTN, 
+no_vacacion.em_ne_docstatus, 
 COALESCE(no_vacacion.Isactive, 'N') AS Isactive, 
 no_vacacion.AD_Org_ID, 
 no_vacacion.NO_Vacacion_ID, 
 no_vacacion.no_contrato_empleado_id, 
 no_vacacion.Anio, 
-no_vacacion.vacaciones, 
 no_vacacion.bonificaciones, 
+no_vacacion.saldo, 
+no_vacacion.vacaciones, 
 no_vacacion.C_Bpartner_ID, 
 no_vacacion.em_ne_estado, 
-no_vacacion.saldo, 
 no_vacacion.AD_Client_ID, 
-no_vacacion.em_ne_docstatus, 
  
         ? AS LANGUAGE 
         FROM no_vacacion left join ad_ref_list_v list1 on (list1.ad_reference_id = 'D90979EA306F493EBD3EF5D201355C56' and list1.ad_language = ?  AND no_vacacion.em_ne_procesar = TO_CHAR(list1.value))
@@ -141,13 +141,13 @@ no_vacacion.em_ne_docstatus,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE no_vacacion
-        SET em_ne_linea = TO_NUMBER(?) , em_ne_fecha_inicio = TO_DATE(?) , em_ne_fecha_fin = TO_DATE(?) , em_ne_total_dias = TO_NUMBER(?) , em_ne_observaciones = (?) , em_ne_procesar = (?) , Isactive = (?) , AD_Org_ID = (?) , NO_Vacacion_ID = (?) , no_contrato_empleado_id = (?) , Anio = (?) , vacaciones = TO_NUMBER(?) , bonificaciones = TO_NUMBER(?) , C_Bpartner_ID = (?) , em_ne_estado = (?) , saldo = TO_NUMBER(?) , AD_Client_ID = (?) , em_ne_docstatus = (?) , updated = now(), updatedby = ? 
+        SET em_ne_linea = TO_NUMBER(?) , em_ne_fecha_inicio = TO_DATE(?) , em_ne_fecha_fin = TO_DATE(?) , em_ne_total_dias = TO_NUMBER(?) , em_ne_observaciones = (?) , em_ne_procesar = (?) , em_ne_docstatus = (?) , Isactive = (?) , AD_Org_ID = (?) , NO_Vacacion_ID = (?) , no_contrato_empleado_id = (?) , Anio = (?) , bonificaciones = TO_NUMBER(?) , saldo = TO_NUMBER(?) , vacaciones = TO_NUMBER(?) , C_Bpartner_ID = (?) , em_ne_estado = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE no_vacacion.NO_Vacacion_ID = ? 
                  AND no_vacacion.no_contrato_empleado_id = ? 
         AND no_vacacion.AD_Client_ID IN ('1') 
         AND no_vacacion.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="emNeLinea"></Parameter> <Parameter name="emNeFechaInicio"></Parameter> <Parameter name="emNeFechaFin"></Parameter> <Parameter name="emNeTotalDias"></Parameter> <Parameter name="emNeObservaciones"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="noContratoEmpleadoId"></Parameter> <Parameter name="anio"></Parameter> <Parameter name="vacaciones"></Parameter> <Parameter name="bonificaciones"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="saldo"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="emNeDocstatus"></Parameter> 
+    <Parameter name="emNeLinea"></Parameter> <Parameter name="emNeFechaInicio"></Parameter> <Parameter name="emNeFechaFin"></Parameter> <Parameter name="emNeTotalDias"></Parameter> <Parameter name="emNeObservaciones"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="emNeDocstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="noContratoEmpleadoId"></Parameter> <Parameter name="anio"></Parameter> <Parameter name="bonificaciones"></Parameter> <Parameter name="saldo"></Parameter> <Parameter name="vacaciones"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="noVacacionId"></Parameter>
     
@@ -159,10 +159,10 @@ no_vacacion.em_ne_docstatus,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO no_vacacion 
-        (em_ne_linea, em_ne_fecha_inicio, em_ne_fecha_fin, em_ne_total_dias, em_ne_observaciones, em_ne_procesar, Isactive, AD_Org_ID, NO_Vacacion_ID, no_contrato_empleado_id, Anio, vacaciones, bonificaciones, C_Bpartner_ID, em_ne_estado, saldo, AD_Client_ID, em_ne_docstatus, created, createdby, updated, updatedBy)
-        VALUES (TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), now(), ?, now(), ?)
+        (em_ne_linea, em_ne_fecha_inicio, em_ne_fecha_fin, em_ne_total_dias, em_ne_observaciones, em_ne_procesar, em_ne_docstatus, Isactive, AD_Org_ID, NO_Vacacion_ID, no_contrato_empleado_id, Anio, bonificaciones, saldo, vacaciones, C_Bpartner_ID, em_ne_estado, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES (TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="emNeLinea"></Parameter> <Parameter name="emNeFechaInicio"></Parameter> <Parameter name="emNeFechaFin"></Parameter> <Parameter name="emNeTotalDias"></Parameter> <Parameter name="emNeObservaciones"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="noContratoEmpleadoId"></Parameter> <Parameter name="anio"></Parameter> <Parameter name="vacaciones"></Parameter> <Parameter name="bonificaciones"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="saldo"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="emNeDocstatus"></Parameter> 
+    <Parameter name="emNeLinea"></Parameter> <Parameter name="emNeFechaInicio"></Parameter> <Parameter name="emNeFechaFin"></Parameter> <Parameter name="emNeTotalDias"></Parameter> <Parameter name="emNeObservaciones"></Parameter> <Parameter name="emNeProcesar"></Parameter> <Parameter name="emNeDocstatus"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="noVacacionId"></Parameter> <Parameter name="noContratoEmpleadoId"></Parameter> <Parameter name="anio"></Parameter> <Parameter name="bonificaciones"></Parameter> <Parameter name="saldo"></Parameter> <Parameter name="vacaciones"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="emNeEstado"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

@@ -29,10 +29,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String cDoctypetargetId;
   public String cDoctypetargetIdr;
   public String generatetemplate;
-  public String documentno;
   public String finPaymentPriorityId;
-  public String cReturnReasonId;
+  public String documentno;
   public String dateordered;
+  public String cReturnReasonId;
   public String cBpartnerId;
   public String cBpartnerIdr;
   public String cBpartnerLocationId;
@@ -147,14 +147,14 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return cDoctypetargetIdr;
     else if (fieldName.equalsIgnoreCase("generatetemplate"))
       return generatetemplate;
-    else if (fieldName.equalsIgnoreCase("documentno"))
-      return documentno;
     else if (fieldName.equalsIgnoreCase("fin_payment_priority_id") || fieldName.equals("finPaymentPriorityId"))
       return finPaymentPriorityId;
-    else if (fieldName.equalsIgnoreCase("c_return_reason_id") || fieldName.equals("cReturnReasonId"))
-      return cReturnReasonId;
+    else if (fieldName.equalsIgnoreCase("documentno"))
+      return documentno;
     else if (fieldName.equalsIgnoreCase("dateordered"))
       return dateordered;
+    else if (fieldName.equalsIgnoreCase("c_return_reason_id") || fieldName.equals("cReturnReasonId"))
+      return cReturnReasonId;
     else if (fieldName.equalsIgnoreCase("c_bpartner_id") || fieldName.equals("cBpartnerId"))
       return cBpartnerId;
     else if (fieldName.equalsIgnoreCase("c_bpartner_idr") || fieldName.equals("cBpartnerIdr"))
@@ -357,10 +357,10 @@ Select for edit
       "C_Order.C_DocTypeTarget_ID, " +
       "(CASE WHEN C_Order.C_DocTypeTarget_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR((CASE WHEN tableTRL2.Name IS NULL THEN TO_CHAR(table2.Name) ELSE TO_CHAR(tableTRL2.Name) END)), ''))),'') ) END) AS C_DocTypeTarget_IDR, " +
       "C_Order.Generatetemplate, " +
-      "C_Order.DocumentNo, " +
       "C_Order.FIN_Payment_Priority_ID, " +
-      "C_Order.C_Return_Reason_ID, " +
+      "C_Order.DocumentNo, " +
       "C_Order.DateOrdered, " +
+      "C_Order.C_Return_Reason_ID, " +
       "C_Order.C_BPartner_ID, " +
       "(CASE WHEN C_Order.C_BPartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_BPartner_IDR, " +
       "C_Order.C_BPartner_Location_ID, " +
@@ -496,10 +496,10 @@ Select for edit
         objectHeaderData.cDoctypetargetId = UtilSql.getValue(result, "c_doctypetarget_id");
         objectHeaderData.cDoctypetargetIdr = UtilSql.getValue(result, "c_doctypetarget_idr");
         objectHeaderData.generatetemplate = UtilSql.getValue(result, "generatetemplate");
-        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
         objectHeaderData.finPaymentPriorityId = UtilSql.getValue(result, "fin_payment_priority_id");
-        objectHeaderData.cReturnReasonId = UtilSql.getValue(result, "c_return_reason_id");
+        objectHeaderData.documentno = UtilSql.getValue(result, "documentno");
         objectHeaderData.dateordered = UtilSql.getDateValue(result, "dateordered", "dd-MM-yyyy");
+        objectHeaderData.cReturnReasonId = UtilSql.getValue(result, "c_return_reason_id");
         objectHeaderData.cBpartnerId = UtilSql.getValue(result, "c_bpartner_id");
         objectHeaderData.cBpartnerIdr = UtilSql.getValue(result, "c_bpartner_idr");
         objectHeaderData.cBpartnerLocationId = UtilSql.getValue(result, "c_bpartner_location_id");
@@ -627,10 +627,10 @@ Create a registry
     objectHeaderData[0].cDoctypetargetId = cDoctypetargetId;
     objectHeaderData[0].cDoctypetargetIdr = "";
     objectHeaderData[0].generatetemplate = generatetemplate;
-    objectHeaderData[0].documentno = documentno;
     objectHeaderData[0].finPaymentPriorityId = finPaymentPriorityId;
-    objectHeaderData[0].cReturnReasonId = cReturnReasonId;
+    objectHeaderData[0].documentno = documentno;
     objectHeaderData[0].dateordered = dateordered;
+    objectHeaderData[0].cReturnReasonId = cReturnReasonId;
     objectHeaderData[0].cBpartnerId = cBpartnerId;
     objectHeaderData[0].cBpartnerIdr = cBpartnerIdr;
     objectHeaderData[0].cBpartnerLocationId = cBpartnerLocationId;
@@ -1096,7 +1096,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Order" +
-      "        SET AD_Org_ID = (?) , C_DocTypeTarget_ID = (?) , Generatetemplate = (?) , DocumentNo = (?) , FIN_Payment_Priority_ID = (?) , C_Return_Reason_ID = (?) , DateOrdered = TO_DATE(?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , RM_PickFromShipment = (?) , M_Warehouse_ID = (?) , DatePromised = TO_DATE(?) , RM_ReceiveMaterials = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , RM_CreateInvoice = (?) , M_PriceList_ID = (?) , DocStatus = (?) , GrandTotal = TO_NUMBER(?) , TotalLines = TO_NUMBER(?) , C_Currency_ID = (?) , AD_User_ID = (?) , Deliverynotes = (?) , Description = (?) , POReference = (?) , SalesRep_ID = (?) , BillTo_ID = (?) , C_Incoterms_ID = (?) , Incotermsdescription = (?) , IsDiscountPrinted = (?) , C_DocType_ID = (?) , FreightAmt = TO_NUMBER(?) , DeliveryViaRule = (?) , C_Campaign_ID = (?) , M_Shipper_ID = (?) , PriorityRule = (?) , ChargeAmt = TO_NUMBER(?) , C_Charge_ID = (?) , C_Activity_ID = (?) , FreightCostRule = (?) , AD_OrgTrx_ID = (?) , DocAction = (?) , CopyFrom = (?) , CopyFromPO = (?) , IsTaxIncluded = (?) , RM_AddOrphanLine = (?) , Convertquotation = (?) , C_Reject_Reason_ID = (?) , validuntil = TO_DATE(?) , Calculate_Promotions = (?) , Quotation_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Create_POLines = (?) , DropShip_User_ID = (?) , C_Order_ID = (?) , IsSelected = (?) , Posted = (?) , PaymentRule = (?) , IsSOTrx = (?) , AD_Client_ID = (?) , IsActive = (?) , DeliveryRule = (?) , DatePrinted = TO_DATE(?) , SO_Res_Status = (?) , Processed = (?) , IsDelivered = (?) , IsInvoiced = (?) , Processing = (?) , InvoiceRule = (?) , DateAcct = TO_DATE(?) , IsSelfService = (?) , IsPrinted = (?) , DropShip_Location_ID = (?) , Delivery_Location_ID = (?) , DropShip_BPartner_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_DocTypeTarget_ID = (?) , Generatetemplate = (?) , FIN_Payment_Priority_ID = (?) , DocumentNo = (?) , DateOrdered = TO_DATE(?) , C_Return_Reason_ID = (?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , RM_PickFromShipment = (?) , M_Warehouse_ID = (?) , DatePromised = TO_DATE(?) , RM_ReceiveMaterials = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , RM_CreateInvoice = (?) , M_PriceList_ID = (?) , DocStatus = (?) , GrandTotal = TO_NUMBER(?) , TotalLines = TO_NUMBER(?) , C_Currency_ID = (?) , AD_User_ID = (?) , Deliverynotes = (?) , Description = (?) , POReference = (?) , SalesRep_ID = (?) , BillTo_ID = (?) , C_Incoterms_ID = (?) , Incotermsdescription = (?) , IsDiscountPrinted = (?) , C_DocType_ID = (?) , FreightAmt = TO_NUMBER(?) , DeliveryViaRule = (?) , C_Campaign_ID = (?) , M_Shipper_ID = (?) , PriorityRule = (?) , ChargeAmt = TO_NUMBER(?) , C_Charge_ID = (?) , C_Activity_ID = (?) , FreightCostRule = (?) , AD_OrgTrx_ID = (?) , DocAction = (?) , CopyFrom = (?) , CopyFromPO = (?) , IsTaxIncluded = (?) , RM_AddOrphanLine = (?) , Convertquotation = (?) , C_Reject_Reason_ID = (?) , validuntil = TO_DATE(?) , Calculate_Promotions = (?) , Quotation_ID = (?) , C_Project_ID = (?) , C_Costcenter_ID = (?) , A_Asset_ID = (?) , User1_ID = (?) , User2_ID = (?) , Create_POLines = (?) , DropShip_User_ID = (?) , C_Order_ID = (?) , IsSelected = (?) , Posted = (?) , PaymentRule = (?) , IsSOTrx = (?) , AD_Client_ID = (?) , IsActive = (?) , DeliveryRule = (?) , DatePrinted = TO_DATE(?) , SO_Res_Status = (?) , Processed = (?) , IsDelivered = (?) , IsInvoiced = (?) , Processing = (?) , InvoiceRule = (?) , DateAcct = TO_DATE(?) , IsSelfService = (?) , IsPrinted = (?) , DropShip_Location_ID = (?) , Delivery_Location_ID = (?) , DropShip_BPartner_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_Order.C_Order_ID = ? " +
       "        AND C_Order.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -1116,10 +1116,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypetargetId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatetemplate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentPriorityId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cReturnReasonId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cReturnReasonId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmPickfromshipment);
@@ -1220,8 +1220,8 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Order " +
-      "        (AD_Org_ID, C_DocTypeTarget_ID, Generatetemplate, DocumentNo, FIN_Payment_Priority_ID, C_Return_Reason_ID, DateOrdered, C_BPartner_ID, C_BPartner_Location_ID, RM_PickFromShipment, M_Warehouse_ID, DatePromised, RM_ReceiveMaterials, FIN_Paymentmethod_ID, C_PaymentTerm_ID, RM_CreateInvoice, M_PriceList_ID, DocStatus, GrandTotal, TotalLines, C_Currency_ID, AD_User_ID, Deliverynotes, Description, POReference, SalesRep_ID, BillTo_ID, C_Incoterms_ID, Incotermsdescription, IsDiscountPrinted, C_DocType_ID, FreightAmt, DeliveryViaRule, C_Campaign_ID, M_Shipper_ID, PriorityRule, ChargeAmt, C_Charge_ID, C_Activity_ID, FreightCostRule, AD_OrgTrx_ID, DocAction, CopyFrom, CopyFromPO, IsTaxIncluded, RM_AddOrphanLine, Convertquotation, C_Reject_Reason_ID, validuntil, Calculate_Promotions, Quotation_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Create_POLines, DropShip_User_ID, C_Order_ID, IsSelected, Posted, PaymentRule, IsSOTrx, AD_Client_ID, IsActive, DeliveryRule, DatePrinted, SO_Res_Status, Processed, IsDelivered, IsInvoiced, Processing, InvoiceRule, DateAcct, IsSelfService, IsPrinted, DropShip_Location_ID, Delivery_Location_ID, DropShip_BPartner_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, C_DocTypeTarget_ID, Generatetemplate, FIN_Payment_Priority_ID, DocumentNo, DateOrdered, C_Return_Reason_ID, C_BPartner_ID, C_BPartner_Location_ID, RM_PickFromShipment, M_Warehouse_ID, DatePromised, RM_ReceiveMaterials, FIN_Paymentmethod_ID, C_PaymentTerm_ID, RM_CreateInvoice, M_PriceList_ID, DocStatus, GrandTotal, TotalLines, C_Currency_ID, AD_User_ID, Deliverynotes, Description, POReference, SalesRep_ID, BillTo_ID, C_Incoterms_ID, Incotermsdescription, IsDiscountPrinted, C_DocType_ID, FreightAmt, DeliveryViaRule, C_Campaign_ID, M_Shipper_ID, PriorityRule, ChargeAmt, C_Charge_ID, C_Activity_ID, FreightCostRule, AD_OrgTrx_ID, DocAction, CopyFrom, CopyFromPO, IsTaxIncluded, RM_AddOrphanLine, Convertquotation, C_Reject_Reason_ID, validuntil, Calculate_Promotions, Quotation_ID, C_Project_ID, C_Costcenter_ID, A_Asset_ID, User1_ID, User2_ID, Create_POLines, DropShip_User_ID, C_Order_ID, IsSelected, Posted, PaymentRule, IsSOTrx, AD_Client_ID, IsActive, DeliveryRule, DatePrinted, SO_Res_Status, Processed, IsDelivered, IsInvoiced, Processing, InvoiceRule, DateAcct, IsSelfService, IsPrinted, DropShip_Location_ID, Delivery_Location_ID, DropShip_BPartner_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1232,10 +1232,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cDoctypetargetId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatetemplate);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finPaymentPriorityId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cReturnReasonId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateordered);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cReturnReasonId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cBpartnerLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, rmPickfromshipment);

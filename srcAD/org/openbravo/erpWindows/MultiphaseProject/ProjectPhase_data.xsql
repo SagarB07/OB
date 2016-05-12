@@ -31,11 +31,11 @@ C_ProjectPhase.C_Phase_ID,
 C_ProjectPhase.C_Order_ID, 
 (CASE WHEN C_ProjectPhase.C_Order_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table6.DateOrdered, 'DD-MM-YYYY')),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.GrandTotal), ''))),'') ) END) AS C_Order_IDR, 
 C_ProjectPhase.GenerateOrder, 
-C_ProjectPhase.AD_Client_ID, 
-C_ProjectPhase.Help, 
 COALESCE(C_ProjectPhase.IsActive, 'N') AS IsActive, 
 C_ProjectPhase.C_ProjectPhase_ID, 
 C_ProjectPhase.C_Project_ID, 
+C_ProjectPhase.Help, 
+C_ProjectPhase.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM C_ProjectPhase left join (select AD_Org_ID, Name from AD_Org) table1 on (C_ProjectPhase.AD_Org_ID = table1.AD_Org_ID) left join (select M_Product_ID, Name from M_Product) table2 on (C_ProjectPhase.M_Product_ID = table2.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL2 on (table2.M_Product_ID = tableTRL2.M_Product_ID and tableTRL2.AD_Language = ?)  left join (select C_Phase_ID, Name, C_ProjectType_ID from C_Phase) table4 on (C_ProjectPhase.C_Phase_ID = table4.C_Phase_ID) left join (select C_ProjectType_ID, Name from C_ProjectType) table5 on (table4.C_ProjectType_ID = table5.C_ProjectType_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table6 on (C_ProjectPhase.C_Order_ID = table6.C_Order_ID)
@@ -174,13 +174,13 @@ C_ProjectPhase.C_Project_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_ProjectPhase
-        SET AD_Org_ID = (?) , SeqNo = TO_NUMBER(?) , Name = (?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , PriceActual = TO_NUMBER(?) , StartDate = TO_DATE(?) , Datecontract = TO_DATE(?) , EndDate = TO_DATE(?) , IsComplete = (?) , IsCommitCeiling = (?) , CommittedAmt = TO_NUMBER(?) , Description = (?) , C_Phase_ID = (?) , C_Order_ID = (?) , GenerateOrder = (?) , AD_Client_ID = (?) , Help = (?) , IsActive = (?) , C_ProjectPhase_ID = (?) , C_Project_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , SeqNo = TO_NUMBER(?) , Name = (?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , PriceActual = TO_NUMBER(?) , StartDate = TO_DATE(?) , Datecontract = TO_DATE(?) , EndDate = TO_DATE(?) , IsComplete = (?) , IsCommitCeiling = (?) , CommittedAmt = TO_NUMBER(?) , Description = (?) , C_Phase_ID = (?) , C_Order_ID = (?) , GenerateOrder = (?) , IsActive = (?) , C_ProjectPhase_ID = (?) , C_Project_ID = (?) , Help = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE C_ProjectPhase.C_ProjectPhase_ID = ? 
                  AND C_ProjectPhase.C_Project_ID = ? 
         AND C_ProjectPhase.AD_Client_ID IN ('1') 
         AND C_ProjectPhase.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="seqno"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="qty"></Parameter> <Parameter name="priceactual"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="datecontract"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="iscomplete"></Parameter> <Parameter name="iscommitceiling"></Parameter> <Parameter name="committedamt"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cPhaseId"></Parameter> <Parameter name="cOrderId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="help"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectphaseId"></Parameter> <Parameter name="cProjectId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="seqno"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="qty"></Parameter> <Parameter name="priceactual"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="datecontract"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="iscomplete"></Parameter> <Parameter name="iscommitceiling"></Parameter> <Parameter name="committedamt"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cPhaseId"></Parameter> <Parameter name="cOrderId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectphaseId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="help"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cProjectphaseId"></Parameter>
     
@@ -192,10 +192,10 @@ C_ProjectPhase.C_Project_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_ProjectPhase 
-        (AD_Org_ID, SeqNo, Name, M_Product_ID, Qty, PriceActual, StartDate, Datecontract, EndDate, IsComplete, IsCommitCeiling, CommittedAmt, Description, C_Phase_ID, C_Order_ID, GenerateOrder, AD_Client_ID, Help, IsActive, C_ProjectPhase_ID, C_Project_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, SeqNo, Name, M_Product_ID, Qty, PriceActual, StartDate, Datecontract, EndDate, IsComplete, IsCommitCeiling, CommittedAmt, Description, C_Phase_ID, C_Order_ID, GenerateOrder, IsActive, C_ProjectPhase_ID, C_Project_ID, Help, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_DATE(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="seqno"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="qty"></Parameter> <Parameter name="priceactual"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="datecontract"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="iscomplete"></Parameter> <Parameter name="iscommitceiling"></Parameter> <Parameter name="committedamt"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cPhaseId"></Parameter> <Parameter name="cOrderId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="help"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectphaseId"></Parameter> <Parameter name="cProjectId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="seqno"></Parameter> <Parameter name="name"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="qty"></Parameter> <Parameter name="priceactual"></Parameter> <Parameter name="startdate"></Parameter> <Parameter name="datecontract"></Parameter> <Parameter name="enddate"></Parameter> <Parameter name="iscomplete"></Parameter> <Parameter name="iscommitceiling"></Parameter> <Parameter name="committedamt"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cPhaseId"></Parameter> <Parameter name="cOrderId"></Parameter> <Parameter name="generateorder"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="cProjectphaseId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="help"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

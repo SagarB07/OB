@@ -82,6 +82,8 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_NEREGION = "neRegion";
     public static final String PROPERTY_NEOBSERVACIONES = "neObservaciones";
     public static final String PROPERTY_LIQUIDACIONEMPLEADO = "liquidacionEmpleado";
+    public static final String PROPERTY_DOCACTIONNO = "docactionno";
+    public static final String PROPERTY_DOCSTATUS = "docstatus";
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_NOPERMISOLIST = "noPermisoList";
     public static final String PROPERTY_CCOCOSTOSNOMINALIST = "ccoCostosNominaList";
@@ -103,6 +105,7 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_NEISJORNADAPARCIAL, false);
         setDefaultValue(PROPERTY_NEREGION, "1");
         setDefaultValue(PROPERTY_LIQUIDACIONEMPLEADO, false);
+        setDefaultValue(PROPERTY_DOCSTATUS, "BR");
         setDefaultValue(PROPERTY_NOPERMISOLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CCOCOSTOSNOMINALIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOVACACIONLIST, new ArrayList<Object>());
@@ -375,6 +378,22 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
 
     public void setLiquidacionEmpleado(Boolean liquidacionEmpleado) {
         set(PROPERTY_LIQUIDACIONEMPLEADO, liquidacionEmpleado);
+    }
+
+    public String getDocactionno() {
+        return (String) get(PROPERTY_DOCACTIONNO);
+    }
+
+    public void setDocactionno(String docactionno) {
+        set(PROPERTY_DOCACTIONNO, docactionno);
+    }
+
+    public String getDocstatus() {
+        return (String) get(PROPERTY_DOCSTATUS);
+    }
+
+    public void setDocstatus(String docstatus) {
+        set(PROPERTY_DOCSTATUS, docstatus);
     }
 
     public BigDecimal getNeDiaVacacionRes() {
