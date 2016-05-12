@@ -1,0 +1,239 @@
+-- Function: no_anadir_anticipo(character varying)
+
+-- DROP FUNCTION no_anadir_anticipo(character varying);
+
+CREATE OR REPLACE FUNCTION no_anadir_anticipo(p_pinstance_id character varying)
+  RETURNS void AS
+$BODY$ DECLARE 
+v_ResultStr 		VARCHAR(2000):=''; --OBTG:VARCHAR2--
+v_Message 		VARCHAR(2000):=''; --OBTG:VARCHAR2--
+v_cuenta_financiera VARCHAR(2000):=''; --OBTG:VARCHAR2--
+v_metodo_pago VARCHAR(2000):=''; --OBTG:VARCHAR2--
+v_isproc CHAR(1):=''; --OBTG:VARCHAR2--
+v_isporc CHAR(1):=''; --OBTG:VARCHAR2--
+v_stproc VARCHAR(32) :=''; --OBTG:VARCHAR2--
+
+v_period_id VARCHAR(32) :=''; --OBTG:VARCHAR2--
+v_qry varchar;
+v_valor_aux NUMERIC:=0;
+v_valor_rubro NUMERIC:=0;
+
+Cur_Parameter 		RECORD;
+Cur_Parameter_Bp 	RECORD;
+varexist NUMERIC;
+
+BEGIN
+v_cuenta_financiera = (select fin_financial_account_id from fin_financial_account  WHERE  fin_financial_account_ID = 'F27069227AB242B8ACA82A42817607AF');
+v_metodo_pago = (select fin_paymentmethod_id from  fin_paymentmethod limit 1);
+FOR Cur_Parameter IN
+	(SELECT i.Record_ID, i.AD_User_ID, rq.ad_client_id, rq.ad_org_id
+	FROM AD_PInstance i
+	     LEFT JOIN AD_PInstance_Para p ON (i.AD_PInstance_ID=p.AD_PInstance_ID)
+	     INNER JOIN no_registra_quincena rq ON (i.Record_ID = rq.no_registra_quincena_id) 
+	WHERE i.AD_PInstance_ID=p_PInstance_ID
+        ORDER BY p.SeqNo
+	)
+LOOP
+
+--RAISE NOTICE '%','@Procesando el siguiente anticipo: ' || Cur_Parameter.Record_ID;
+
+	FOR Cur_Parameter_Bp IN
+		(
+	        SELECT crl.valor, tie.no_tipo_ingreso_egreso_id, cea.c_bpartner_id, ce.salario
+		     FROM no_cb_empleado_acct cea
+		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
+		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
+		     INNER JOIN no_calcula_rubro_line crl ON (cr.no_calcula_rubro_id = crl.no_calcula_rubro_id)
+		     INNER JOIN no_contrato_empleado ce ON (ce.c_bpartner_id = cea.c_bpartner_id)
+		WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(TO_DATE(NOW())))
+		)
+	LOOP
+
+		SELECT count(*) into varexist
+		FROM no_cb_empleado_acct cea
+		     INNER JOIN no_tipo_ingreso_egreso tie ON (cea.no_tipo_ingreso_egreso_id = tie.no_tipo_ingreso_egreso_id)
+		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
+		     INNER JOIN no_calcula_rubro_line crl ON (cr.no_calcula_rubro_id = crl.no_calcula_rubro_id)
+		     INNER JOIN no_contrato_empleado ce ON (ce.c_bpartner_id = cea.c_bpartner_id)
+		WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(TO_DATE(NOW())));
+	
+	v_isproc = (select isprocedure from 
+					   no_calcula_rubro_line caldet,  
+					   no_calcula_rubro calcab, 
+					   no_tipo_ingreso_egreso rubro
+					   where caldet.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_tipo_ingreso_egreso_id = Cur_Parameter_Bp.no_tipo_ingreso_egreso_id
+				);
+
+	IF v_isproc = 'N' THEN 
+	
+	v_isporc = (select isporcentaje from 
+					   no_calcula_rubro_line caldet,  
+					   no_calcula_rubro calcab, 
+					   no_tipo_ingreso_egreso rubro
+					   where caldet.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+					   and rubro.no_tipo_ingreso_egreso_id = Cur_Parameter_Bp.no_tipo_ingreso_egreso_id
+				);
+		IF  v_isporc = 'Y' THEN 
+		v_valor_rubro = ((Cur_Parameter_Bp.salario*Cur_Parameter_Bp.valor)/100);		
+		ELSE 
+		v_valor_rubro = Cur_Parameter_Bp.valor;
+		END IF;
+	
+	    --update idt_contrato set i_errormsg = 'no deveria entrar';
+				IF varexist > 0 THEN
+				   INSERT INTO no_registra_quinc_line(
+						no_registra_quinc_line_id,
+						fin_financial_account_id,
+						fin_paymentmethod_id,
+						ad_client_id,
+						ad_org_id,
+						isactive, 
+						created,
+						createdby, 
+						updated, 
+						updatedby,
+						no_registra_quincena_id, 
+						no_tipo_ingreso_egreso_id, 
+						c_bpartner_id,
+						valor, 
+						c_currency_id, 
+						processed, 
+						include_rol_pago, 
+						docstatus,
+						docactionno,
+						processing, 
+						dateacct, 
+						posted, 
+						c_doctype_id,
+						in_payment,
+						documentno)
+				   VALUES (get_uuid(), 
+				   v_cuenta_financiera,
+				   v_metodo_pago,
+				   Cur_Parameter.ad_client_id, 
+				   Cur_Parameter.ad_org_id, 
+				   'Y', 
+				   TO_DATE(NOW()), 
+				   Cur_Parameter.AD_User_ID, 
+				   TO_DATE(NOW()), 
+				   Cur_Parameter.AD_User_ID, 
+				   Cur_Parameter.Record_ID, 
+					Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
+					Cur_Parameter_Bp.c_bpartner_id,
+					v_valor_rubro, 				
+					
+					   '100',
+					   'N',
+					   'Y', 
+					   'BO', 
+					   'BO', 
+					   'N', 
+					   TO_DATE(NOW()), 'N',
+					   (SELECT d.c_doctype_id
+						FROM c_doctype d
+						WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
+						upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);
+			END IF;
+			ELSE
+			v_period_id = (select c_period_id from  no_registra_quincena where no_registra_quincena_id= Cur_Parameter.Record_ID);	
+			v_stproc = (select procedure from 
+									no_calcula_rubro_line caldet,  
+									no_calcula_rubro calcab, 
+									no_tipo_ingreso_egreso rubro
+									where caldet.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+									and rubro.no_calcula_rubro_id = calcab.no_calcula_rubro_id 
+									and rubro.no_tipo_ingreso_egreso_id = Cur_Parameter_Bp.no_tipo_ingreso_egreso_id
+				);
+
+			
+			
+			
+			IF v_stproc is null OR v_stproc = '' THEN
+                                v_Message:='No existe el procedimiento de calculo para este rubro: ' || Cur_Calcula_Robro_L.nombre;
+                                v_valor_rubro := 0;
+            ELSE
+			v_valor_rubro := 0;
+			v_qry := 'SELECT ' || v_stproc || '('''|| Cur_Parameter_Bp.c_bpartner_id ||''' ,'''||Cur_Parameter_Bp.no_tipo_ingreso_egreso_id || ''',' || 0||','''||v_period_id || ''');';
+			UPDATE IDT_CONTRATO  SET I_ERRORMSG = '879779';
+			EXECUTE v_qry into v_valor_aux;
+            v_valor_rubro := v_valor_rubro + COALESCE(v_valor_aux,0);
+            v_Message:='';
+			update idt_contrato set i_errormsg = v_qry;
+			
+			INSERT INTO no_registra_quinc_line(
+						no_registra_quinc_line_id,
+						fin_financial_account_id,
+						fin_paymentmethod_id,
+						ad_client_id,
+						ad_org_id,
+						isactive, 
+						created,
+						createdby, 
+						updated, 
+						updatedby,
+						no_registra_quincena_id, 
+						no_tipo_ingreso_egreso_id, 
+						c_bpartner_id,
+						valor, 
+						c_currency_id, 
+						processed, 
+						include_rol_pago, 
+						docstatus,
+						docactionno,
+						processing, 
+						dateacct, 
+						posted, 
+						c_doctype_id,
+						in_payment,
+						documentno)
+				   VALUES (get_uuid(), 
+				   v_cuenta_financiera,
+				   v_metodo_pago,
+				   Cur_Parameter.ad_client_id, 
+				   Cur_Parameter.ad_org_id, 
+				   'Y', 
+				   TO_DATE(NOW()), 
+				   Cur_Parameter.AD_User_ID, 
+				   TO_DATE(NOW()), 
+				   Cur_Parameter.AD_User_ID, 
+				   Cur_Parameter.Record_ID, 
+					Cur_Parameter_Bp.no_tipo_ingreso_egreso_id, 
+					Cur_Parameter_Bp.c_bpartner_id,
+					v_valor_rubro, 
+					   '100',
+					   'N',
+					   'Y', 
+					   'BO', 
+					   'BO', 
+					   'N', 
+					   TO_DATE(NOW()), 'N',
+					   (SELECT d.c_doctype_id
+						FROM c_doctype d
+						WHERE upper(d.name) like '%ANTICIPO DE SUELDO%' OR 
+						upper(d.name) like '%ANTICIPO SUELDO%' LIMIT 1), 'N', null);	
+            END IF; 
+	END IF; 			  
+	
+	END LOOP;
+	v_Message:='@NO_EjecucionCorrecta@';
+	RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+ PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 1, v_Message);
+END LOOP;
+
+RETURN;
+   EXCEPTION
+    WHEN OTHERS THEN
+        v_ResultStr:= '@ERROR=' || SQLERRM;        
+	RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;	
+		update idt_contrato set i_errormsg = v_ResultStr ||'***'|| v_qry;
+        PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
+        PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+    RETURN;
+END ; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION no_anadir_anticipo(character varying)
+  OWNER TO tad;
