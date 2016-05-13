@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Vacaciones" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DOCSTATUS" class="java.lang.String"/>
+	<parameter name="DATE_FROM" class="java.lang.String"/>
+	<parameter name="DATE_TO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT EMP.NAME AS NOMBRE_EMPLEADO,
+(case when VAC.EM_NE_DOCSTATUS= 'BR' THEN 'Borrador'
+when VAC.EM_NE_DOCSTATUS = 'PA' THEN 'Por Aprobación'
+when VAC.EM_NE_DOCSTATUS = 'RC' THEN 'Rechazada'
+when VAC.EM_NE_DOCSTATUS = 'AP' THEN 'Aprobada'
+when VAC.EM_NE_DOCSTATUS = 'PR' THEN 'Por Registrar'
+when VAC.EM_NE_DOCSTATUS = 'TM' THEN 'Tomada'
+when VAC.EM_NE_DOCSTATUS = 'CN' THEN 'Cancelada'
+ELSE 'OTROS'
+END) AS ESTADO_VACACION,
+SUM(VAC.EM_NE_TOTAL_DIAS)  AS DIAS
+FROM NO_VACACION VAC, NO_CONTRATO_EMPLEADO CEMP, C_BPARTNER EMP
+WHERE VAC.NO_CONTRATO_EMPLEADO_ID = CEMP.NO_CONTRATO_EMPLEADO_ID
+AND  CEMP.C_BPARTNER_ID = EMP.C_BPARTNER_ID
+AND  VAC.EM_NE_FECHA_INICIO > DATE($P{DATE_FROM}) AND VAC.EM_NE_FECHA_FIN < DATE ($P{DATE_TO})
+AND VAC.EM_NE_DOCSTATUS = $P{DOCSTATUS}
+GROUP BY 1,2]]>
+	</queryString>
+	<field name="nombre_empleado" class="java.lang.String"/>
+	<field name="estado_vacacion" class="java.lang.String"/>
+	<field name="dias" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="5" width="334" height="35"/>
+				<textElement textAlignment="Right">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VACACIONES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="221" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DEL EMPLEADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="0" width="74" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA INICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA FIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="221" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estado_vacacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

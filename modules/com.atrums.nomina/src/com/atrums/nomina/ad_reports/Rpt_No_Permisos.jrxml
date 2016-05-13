@@ -40,8 +40,7 @@ END) AS ESTADO_PERMISO
 FROM no_permiso per, no_contrato_empleado con , c_bpartner emp
 WHERE per.no_contrato_empleado_id = con.no_contrato_empleado_id
 AND con.c_bpartner_id = emp.c_bpartner_id
-AND per.fecha_permiso BETWEEN date($P{DATE_FROM}) and date($P{DATE_TO})
-]]>
+AND per.fecha_permiso BETWEEN date($P{DATE_FROM}) and date($P{DATE_TO})]]>
 	</queryString>
 	<field name="nombre_empleado" class="java.lang.String"/>
 	<field name="fecha_permiso" class="java.sql.Timestamp"/>
@@ -118,7 +117,7 @@ AND per.fecha_permiso BETWEEN date($P{DATE_FROM}) and date($P{DATE_TO})
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="159" height="20"/>
 				<textElement>
