@@ -32,7 +32,8 @@ import com.atrums.print.doctype.utility.reporting.printing.PrintController;
 @SuppressWarnings("serial")
 public class PrintContrato extends PrintController {
 
-  private static Logger log4j = Logger.getLogger(PrintContrato.class);
+@SuppressWarnings("unused")
+private static Logger log4j = Logger.getLogger(PrintContrato.class);
 
   // TODO: Als een email in draft staat de velden voor de email adressen
   // weghalen en melden dat het document
@@ -43,7 +44,6 @@ public class PrintContrato extends PrintController {
     boolHist = false;
   }
 
-  @SuppressWarnings("unchecked")
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
       ServletException {
     VariablesSecureApp vars = new VariablesSecureApp(request);
