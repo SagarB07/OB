@@ -710,7 +710,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "docstatus", st
     XmlDocument xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpWindows/com/atrums/nomina/RoldePagos/RoldePagos9627836015B94CF6ACD14D0E16F4627B_Relation", discard).createXmlDocument();
 
     boolean hasReadOnlyAccess = org.openbravo.erpCommon.utility.WindowAccessData.hasReadOnlyAccess(this, vars.getRole(), tabId);
-    ToolBar toolbar = new ToolBar(this, true, vars.getLanguage(), "RoldePagos9627836015B94CF6ACD14D0E16F4627B", false, "document.frmMain.inpnoRolPagoProvisionId", "grid", "..", "".equals("Y"), "RoldePagos", strReplaceWith, false, false, false, false, !hasReadOnlyAccess);
+    ToolBar toolbar = new ToolBar(this, true, vars.getLanguage(), "RoldePagos9627836015B94CF6ACD14D0E16F4627B", false, "document.frmMain.inpnoRolPagoProvisionId", "grid", "../com.atrums.nomina/roles/print.html", "N".equals("Y"), "RoldePagos", strReplaceWith, false, false, false, false, !hasReadOnlyAccess);
     toolbar.setTabId(tabId);
     
     toolbar.setDeleteable(true && !hasReadOnlyAccess);
@@ -884,7 +884,7 @@ xmlDocument.setParameter("grid_Default", selectedRow);
       xmlDocument = xmlEngine.readXmlTemplate("org/openbravo/erpWindows/com/atrums/nomina/RoldePagos/RoldePagos9627836015B94CF6ACD14D0E16F4627B_NonEditable",discard).createXmlDocument();
 
     xmlDocument.setParameter("tabId", tabId);
-    ToolBar toolbar = new ToolBar(this, editableTab, vars.getLanguage(), "RoldePagos9627836015B94CF6ACD14D0E16F4627B", (strCommand.equals("NEW") || boolNew || (dataField==null && (data==null || data.length==0))), "document.frmMain.inpnoRolPagoProvisionId", "", "..", "".equals("Y"), "RoldePagos", strReplaceWith, true, false, false, Utility.hasTabAttachments(this, vars, tabId, strNO_Rol_Pago_Provision_ID), !hasReadOnlyAccess);
+    ToolBar toolbar = new ToolBar(this, editableTab, vars.getLanguage(), "RoldePagos9627836015B94CF6ACD14D0E16F4627B", (strCommand.equals("NEW") || boolNew || (dataField==null && (data==null || data.length==0))), "document.frmMain.inpnoRolPagoProvisionId", "", "../com.atrums.nomina/roles/print.html", "N".equals("Y"), "RoldePagos", strReplaceWith, true, false, false, Utility.hasTabAttachments(this, vars, tabId, strNO_Rol_Pago_Provision_ID), !hasReadOnlyAccess);
     toolbar.setTabId(tabId);
     toolbar.setDeleteable(true);
     toolbar.prepareEditionTemplate("N".equals("Y"), hasSearchCondition, vars.getSessionValue("#ShowTest", "N").equals("Y"), "STD", Utility.getContext(this, vars, "ShowAudit", windowId).equals("Y"));

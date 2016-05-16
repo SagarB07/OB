@@ -702,6 +702,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process78612DF43CE847D0A66D90ACFC7EAAA5" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process7ADEF4948DD34B6DA43F75582C166396" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
@@ -1362,6 +1370,14 @@
       <SqlMethodComment>procedure atrdep_genera_datos_archivo</SqlMethodComment>
       <Sql><![CDATA[
         CALL atrdep_genera_datos_archivo(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="processEB4F0A2C09B94AA695FED559DED2EC50" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure </SqlMethodComment>
+      <Sql><![CDATA[
+        CALL (?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
