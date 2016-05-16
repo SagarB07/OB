@@ -18,7 +18,7 @@
 package com.atrums.print.doctype.utility.reporting;
 
 public enum DocumentType {
-  UNKNOWN(null, null), CONTRATO("NO_CONTRATO_EMPLEADO", "contrato/");
+  UNKNOWN(null, null), CONTRATO("NO_CONTRATO_EMPLEADO", "contrato/"), ROLPAGO("NO_ROL_PAGO_PROVISION","rolpago/");
 
   private String _tableName;
   private String _contextSubFolder;

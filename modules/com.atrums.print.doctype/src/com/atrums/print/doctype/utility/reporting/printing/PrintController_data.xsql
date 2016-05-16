@@ -33,5 +33,19 @@
         </Sql>
         <Parameter name="Id" optional="true" type="replace" after="WHERE no_contrato_empleado_id IN (" text="'1'"/>
     </SqlMethod>
+    
+    <SqlMethod name="selectRolPago" type="preparedStatement" return="multiple">
+        <SqlMethodComment></SqlMethodComment>
+        <Sql>
+            <![CDATA[
+	            SELECT no_rol_pago_provision_id as ID
+				  FROM no_rol_pago_provision
+				 WHERE no_rol_pago_provision_id IN ('1')
+				 ORDER BY documentno ASC
+            ]]>
+        </Sql>
+        <Parameter name="Id" optional="true" type="replace" after="WHERE no_rol_pago_provision_id IN (" text="'1'"/>
+    </SqlMethod>
+    
 
 </SqlClass>

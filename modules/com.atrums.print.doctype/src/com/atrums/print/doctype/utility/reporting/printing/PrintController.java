@@ -119,7 +119,19 @@ public class PrintController extends HttpSecureAppServlet {
       if (strDocumentId.equals(""))
         strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId");
     }
+    
+    if (request.getServletPath().toLowerCase().indexOf("rolpago") != -1) {
+        documentType = DocumentType.ROLPAGO;
+        // The prefix PRINTORDERS is a fixed name based on the KEY of the
+        // AD_PROCESS
+        sessionValuePrefix = "PRINTROLPAGO";
 
+        strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId_R");
+        if (strDocumentId.equals(""))
+          strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpcId");
+      }
+    
+    
     post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
 
   }
@@ -600,6 +612,8 @@ public class PrintController extends HttpSecureAppServlet {
     switch (documentType) {
     case CONTRATO:
       return PocData.getContactDetailsForContrato(this, strDocumentId);
+    case ROLPAGO:
+        return PocData.getContactDetailsForRolpago(this, strDocumentId);
     }
     return null;
   }

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 
-import com.atrums.nomina.empleados.ad_reports.PrintContrato;
 import com.atrums.print.doctype.utility.reporting.DocumentType;
 import com.atrums.print.doctype.utility.reporting.printing.PrintController;
 
@@ -18,7 +17,7 @@ import com.atrums.print.doctype.utility.reporting.printing.PrintController;
 public class PrintRolPago extends PrintController{
 
 	@SuppressWarnings("unused")
-	private static Logger log4j = Logger.getLogger(PrintContrato.class);
+	private static Logger log4j = Logger.getLogger(PrintRolPago.class);
 
 	  // TODO: Als een email in draft staat de velden voor de email adressen
 	  // weghalen en melden dat het document
@@ -33,15 +32,15 @@ public class PrintRolPago extends PrintController{
 	      ServletException {
 	    VariablesSecureApp vars = new VariablesSecureApp(request);
 
-	    DocumentType documentType = DocumentType.CONTRATO;
+	    DocumentType documentType = DocumentType.ROLPAGO;
 	    // The prefix PRINTINVOICES is a fixed name based on the KEY of the
 	    // AD_PROCESS
-	    String sessionValuePrefix = "PRINTCONTRATO";
+	    String sessionValuePrefix = "PRINTROLPAGO";
 	    String strDocumentId = null;
 
-	    strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId_R");
+	    strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoRolPagoProvisionId_R");
 	    if (strDocumentId.equals(""))
-	      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoContratoEmpleadoId");
+	      strDocumentId = vars.getSessionValue(sessionValuePrefix + ".inpnoRolPagoProvisionId");
 
 	    post(request, response, vars, documentType, sessionValuePrefix, strDocumentId);
 	  }

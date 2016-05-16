@@ -85,6 +85,9 @@ public class Report {
     case CONTRATO: // Retrieve quotation information
       reportData = ReportData.getContratoInfo(connectionProvider, documentId);
       break;
+    case ROLPAGO: // Retrieve quotation information
+        reportData = ReportData.getRolpagoInfo(connectionProvider, documentId);
+        break; 
     default:
       throw new ReportingException(Utility.messageBD(connectionProvider, "UnknownDocumentType",
           strLanguage) + _DocumentType);

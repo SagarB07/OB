@@ -79,6 +79,34 @@
            <![CDATA[ and ce.no_contrato_empleado_id in ]]>
         </Parameter>
    </SqlMethod>
+   
+      <SqlMethod name="getContactDetailsForRolpago" type="preparedStatement" return="multiple">
+      <SqlMethodComment></SqlMethodComment>
+      <Sql>
+      <![CDATA[
+                select rol.no_rol_pago_provision_id as document_id,
+				rol.isactive as docstatus,
+				rol.documentno as ourreference,
+				null as yourreference,
+				rol.createdby as salesrep_user_id,
+				'' as salesrep_email,
+				'' as salesrep_name,
+				rol.c_bpartner_id as bpartner_id,
+				bp.name as bpartner_name,
+				u.ad_user_id as contact_user_id,
+				u.email as contact_email,
+				u.name as contact_name				 
+				from no_rol_pago_provision rol
+				left join c_bpartner bp on rol.c_bpartner_id = bp.c_bpartner_id
+				left join ad_user u on u.c_bpartner_id = bp.c_bpartner_id
+				where 1=1
+                ]]>
+        </Sql>
+        <Parameter name="strRolPagoProvisionId" optional="false" type="argument" after="1=1">
+           <![CDATA[ and rol.no_rol_pago_provision_id in ]]>
+        </Parameter>
+   </SqlMethod>
+    
 
    <SqlMethod name="getContactDetailsForUser" type="preparedStatement" return="multiple">
       <SqlMethodComment></SqlMethodComment>
