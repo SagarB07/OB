@@ -28,10 +28,10 @@ public class PrintRolPago extends PrintController{
 	    boolHist = false;
 	  }
 
-	  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
-	      ServletException {
+	  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 	    VariablesSecureApp vars = new VariablesSecureApp(request);
-
+	    
+  
 	    DocumentType documentType = DocumentType.ROLPAGO;
 	    // The prefix PRINTINVOICES is a fixed name based on the KEY of the
 	    // AD_PROCESS
