@@ -50,8 +50,7 @@ public class EmailUtils {
     EmailServerConfiguration emailConfiguration = null;
     try {
       if (organization != null) {
-        OBCriteria<EmailServerConfiguration> mailConfigCriteria = OBDal.getInstance()
-            .createCriteria(EmailServerConfiguration.class);
+        OBCriteria<EmailServerConfiguration> mailConfigCriteria = OBDal.getInstance().createCriteria(EmailServerConfiguration.class);
         mailConfigCriteria.add(Restrictions.eq(EmailServerConfiguration.PROPERTY_ORGANIZATION,
             organization));
         mailConfigCriteria.add(Restrictions.eq(EmailServerConfiguration.PROPERTY_CLIENT, OBContext.getOBContext().getCurrentClient()));

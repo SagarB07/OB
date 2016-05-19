@@ -991,10 +991,10 @@ xmlDocument.setParameter("buttonChargeAmt", Utility.messageBD(this, "Calc", vars
 xmlDocument.setParameter("buttonFreightAmt", Utility.messageBD(this, "Calc", vars.getLanguage()));
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
-xmlDocument.setParameter("DateOrdered_Format", vars.getSessionValue("#AD_SqlDateFormat"));
-xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("PickDate_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("PickDate_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("ShipDate_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("ShipDate_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
+xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("DateOrdered_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ServletException(ex);

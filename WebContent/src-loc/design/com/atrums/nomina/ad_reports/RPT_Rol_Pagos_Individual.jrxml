@@ -8,7 +8,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="BASE_DESIGN" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:/Users/atrums_004/Videos/modules/com.atrums.nomina/src/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/Users/atrums_004/git/openbravo/modules/com.atrums.nomina/src/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{BASE_DESIGN}+"/com/atrums/nomina/ad_reports/"]]></defaultValueExpression>

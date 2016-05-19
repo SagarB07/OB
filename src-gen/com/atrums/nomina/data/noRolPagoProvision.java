@@ -72,6 +72,7 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_PROCESSNOW = "processNow";
     public static final String PROPERTY_DATEACCT = "dateacct";
     public static final String PROPERTY_CDOCTYPE = "cDoctype";
+    public static final String PROPERTY_ENVIOMAIL = "enviomail";
     public static final String PROPERTY_NENUMCONTRATO = "neNumContrato";
     public static final String PROPERTY_NEOBSERVACION = "neObservacion";
     public static final String PROPERTY_NOROLPAGOPROVISIONLINELIST = "nORolPagoProvisionLineList";
@@ -89,6 +90,7 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
         setDefaultValue(PROPERTY_DOCACCIONNO, "CO");
         setDefaultValue(PROPERTY_POSTED, "N");
         setDefaultValue(PROPERTY_PROCESSNOW, false);
+        setDefaultValue(PROPERTY_ENVIOMAIL, false);
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_CCOREGISTRACOSTOSLIST, new ArrayList<Object>());
     }
@@ -304,6 +306,14 @@ public class noRolPagoProvision extends BaseOBObject implements Traceable, Clien
 
     public void setCDoctype(DocumentType cDoctype) {
         set(PROPERTY_CDOCTYPE, cDoctype);
+    }
+
+    public Boolean isEnviomail() {
+        return (Boolean) get(PROPERTY_ENVIOMAIL);
+    }
+
+    public void setEnviomail(Boolean enviomail) {
+        set(PROPERTY_ENVIOMAIL, enviomail);
     }
 
     public String getNeNumContrato() {
