@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_NOVEDAD_FALTAS">
+    <function name="NO_NOVEDAD_FALTAS" type="NULL">
+      <parameter name="p_pinstance_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_inicial" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fecha_fin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_periodo_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[Cur_Parameter RECORD;
+	v_Client_ID VARCHAR(32); 
+        v_Org_ID VARCHAR(32); 
+        v_User_ID VARCHAR(32);
+	Cur_bpartner RECORD;
+	v_periodo VARCHAR;
+	v_bpartner_id VARCHAR;
+	v_horasInjustificadas NUMBER;
+	v_no_novedad_linea_id VARCHAR;
+	v_debe VARCHAR;
+	v_haber VARCHAR;
+	v_acctschema_id VARCHAR;
+	v_no_novedad_id VARCHAR;
+	
+BEGIN
+
+		FOR Cur_Parameter IN
+          (SELECT i.Record_ID,
+                  i.AD_User_ID,
+                  p.ParameterName,
+                  p.P_String,
+                  p.P_Number,
+                  p.P_Date,
+                  i.AD_Org_ID,
+                  i.AD_Client_ID
+             FROM AD_PInstance i
+             LEFT JOIN AD_PInstance_Para p
+               ON i.AD_PInstance_ID=p.AD_PInstance_ID
+            WHERE i.AD_PInstance_ID=p_pinstance_id
+            ORDER BY p.SeqNo)
+        LOOP
+          v_User_ID:=Cur_Parameter.AD_User_ID;
+          v_Org_ID:=Cur_Parameter.AD_Org_ID;
+          v_Client_ID:=Cur_Parameter.AD_Client_ID;
+        END LOOP;
+	
+	FOR Cur_bpartner IN
+
+		  (select ce.c_bpartner_id , COALESCE(sum(np.horas),0) as sumahoras	    
+			from no_contrato_empleado ce, no_permiso np 
+		   where ce.no_contrato_empleado_id = np.no_contrato_empleado_id
+			 and ce.isactive = 'Y' 
+			 and (date(np.fecha_permiso) >= date(p_fecha_inicial) and date(np.fecha_permiso) <= date(p_fecha_fin)) 
+			 and np.estado = 'NJ'
+		   group by ce.c_bpartner_id)
+
+	LOOP
+		
+		v_bpartner_id:=Cur_bpartner.c_bpartner_id;
+		v_horasInjustificadas:=Cur_bpartner.sumahoras;
+		
+		select no_novedad_id into v_no_novedad_id from no_novedad where c_period_id = p_periodo_id and no_tipo_ingreso_egreso_id = '629E83A5F93D4EA9885A1CB68AA83500';
+		
+		if ((v_no_novedad_id = '') or (v_no_novedad_id is null)) then 
+		
+			v_no_novedad_id = get_uuid();
+			
+			INSERT INTO NO_NOVEDAD 
+			(	no_novedad_id,		ad_client_id, 		ad_org_id, 			isactive, 								created, 
+				createdby, 			updated, 			updatedby, 			no_tipo_ingreso_egreso_id, 				c_period_id)
+			VALUES 
+			(	v_no_novedad_id, 		v_Client_ID, 		v_Org_ID, 			'Y', 									now(), 
+				v_User_ID, 			now(), 	v_User_ID, 			'629E83A5F93D4EA9885A1CB68AA83500' , 	p_periodo_id);
+			
+
+			INSERT INTO no_novedad_linea 
+			(	no_novedad_linea_id, 		ad_client_id , 		ad_org_id , 		isactive , 				created, 
+				createdby , 				updated , 			updatedby , 		c_bpartner_id , 		valor , 
+				no_novedad_id)
+			VALUES 
+			(	get_uuid(),					v_Client_ID, 		v_Org_ID, 			'Y', 					now(),	
+				v_User_ID,					now(),		v_User_ID,			v_bpartner_id,			v_horasInjustificadas ,	
+				v_no_novedad_id);	 
+		
+		else
+
+			select no_novedad_linea_id into v_no_novedad_linea_id from no_novedad_linea where c_bpartner_id = v_bpartner_id and no_novedad_id = v_no_novedad_id;
+		
+			if ((no_novedad_linea = '') or (no_novedad_linea is null)) then
+		
+					INSERT INTO no_novedad_linea 
+					(	no_novedad_linea_id, 		ad_client_id , 		ad_org_id , 		isactive , 				created, 
+						createdby , 				updated , 			updatedby , 		c_bpartner_id , 		valor , 
+						no_novedad_id)
+					VALUES 
+					(	get_uuid(),					v_Client_ID, 		v_Org_ID, 			'Y', 					now(),	
+						v_User_ID,					now(),		v_User_ID,			v_bpartner_id,			v_horasInjustificadas ,	
+						v_no_novedad_id);	 
+			else
+					
+					UPDATE 	no_novedad_linea set valor = v_horasInjustificadas where no_novedad_linea_id = v_no_novedad_linea_id;
+			
+			end if;
+		
+		END IF;
+		
+		select no_cb_empleado_acct_id
+		    from no_cb_empleado_acct 
+		   where c_bpartner_id = v_bpartner_id 
+		    and no_tipo_ingreso_egreso_id = '629E83A5F93D4EA9885A1CB68AA83500';
+		
+		if ((no_cb_empleado_acct_id = '') or (no_cb_empleado_acct_id is null)) then
+			
+			select n_debe_acct, n_haber_acct, c_acctschema_id
+				into v_debe, v_haber, v_acctschema_id
+				from no_tipo_ing_egr_acct 
+			   where no_tipo_ingreso_egreso_id = '629E83A5F93D4EA9885A1CB68AA83500';
+			
+			INSERT INTO no_cb_empleado_acct 
+					(	no_cb_empleado_acct_id, 		ad_client_id , 							ad_org_id , 		isactive , 				created, 
+						createdby , 					updated , 								updatedby , 		c_bpartner_id,			c_acctschema_id ,
+						no_cuenta_ingreso_acct ,		no_tipo_ingreso_egreso_id,				no_cuenta_egreso_acct)
+					VALUES 
+					(	get_uuid(),						v_Client_ID, 							v_Org_ID, 			'Y', 					now(),	
+						v_User_ID,						now(),							v_User_ID,			v_bpartner_id,			v_acctschema_id,	
+						v_debe,							'629E83A5F93D4EA9885A1CB68AA83500',		v_haber);
+		
+		end if;
+		
+		
+		
+	END LOOP;
+END NO_NOVEDAD_FALTAS
+]]></body>
+    </function>
+  </database>

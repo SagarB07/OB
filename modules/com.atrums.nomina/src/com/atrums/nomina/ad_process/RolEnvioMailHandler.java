@@ -4,8 +4,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.openbravo.client.kernel.BaseActionHandler;
+import org.openbravo.dal.service.OBDal;
+import org.openbravo.erpCommon.utility.OBMessageUtils;
+import org.openbravo.service.db.DbUtility;
 
 public class RolEnvioMailHandler extends BaseActionHandler {
 	static Logger log4j = Logger.getLogger(RolEnvioMailHandler.class);
@@ -29,9 +33,34 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 
 				}
 			}
-		} catch (Exception e) {
+			String mensaje = "Se envió " + rolesIds.length() + " correos";
+		    //  mensaje = errores != null ? mensaje + ", " + errores : mensaje;
 
-		}
+		      JSONObject message = new JSONObject();
+		      message.put("severity", "success");
+		      message.put("text", mensaje);
+		      result.put("message", message);
+			
+		} catch (Exception e) {
+		      e.printStackTrace();
+		      OBDal.getInstance().rollbackAndClose();
+		      log4j.error("BaseInvoiceProcess error: " + e.getMessage(), e);
+
+		      Throwable ex = DbUtility.getUnderlyingSQLException(e);
+		      String message = OBMessageUtils.translateError(ex.getMessage()).getMessage();
+
+		      try {
+		    	  result.put("retryExecution", true);
+		        JSONObject errorMessage = new JSONObject();
+		        errorMessage.put("severity", "error");
+		        errorMessage.put("text", message);
+		        result.put("message", errorMessage);
+		        e.printStackTrace();
+		      } catch (JSONException e1) {
+		        // TODO Auto-generated catch block
+		        e1.printStackTrace();
+		      }
+		    }
 		return result;
 
 	}

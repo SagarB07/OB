@@ -62,7 +62,7 @@ public class NOCBPartner {
 					datosEmail[i].getField("rolpago"));
 			lisdoc.add(flPdf);
 			EmailManager.sendEmail(host, auth, username, password, connSecurity, port, senderAddress, recipient, null,
-					null, null, "PRUEBAS HILOS", "ESTO ES UN EMAIL ENVIADO POR UN HILO", null, lisdoc, null, null);
+					null, null, "ROL DE PAGOS", "ADJUNTO ROL DE PAGOS, ATENTAMENTE RECURSOS HUMANOS", null, lisdoc, null, null);
 		}
 
 	}
