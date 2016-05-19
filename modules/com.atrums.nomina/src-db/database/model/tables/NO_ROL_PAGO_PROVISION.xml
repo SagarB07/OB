@@ -105,6 +105,10 @@
         <default/>
         <onCreateDefault/>
       </column>
+      <column name="ENVIOMAIL" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
       <foreign-key foreignTable="C_DOCTYPE" name="IDT_FK_RPAGOPROV_DOCTYPE" onDelete="restrict">
         <reference local="NO_C_DOCTYPE_ID" foreign="C_DOCTYPE_ID"/>
       </foreign-key>
