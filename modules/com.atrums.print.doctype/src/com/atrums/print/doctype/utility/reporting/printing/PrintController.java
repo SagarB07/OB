@@ -607,7 +607,8 @@ public class PrintController extends HttpSecureAppServlet {
 
   }
 
-  PocData[] getContactDetails(DocumentType documentType, String strDocumentId)
+  @SuppressWarnings("incomplete-switch")
+PocData[] getContactDetails(DocumentType documentType, String strDocumentId)
       throws ServletException {
     switch (documentType) {
     case CONTRATO:
