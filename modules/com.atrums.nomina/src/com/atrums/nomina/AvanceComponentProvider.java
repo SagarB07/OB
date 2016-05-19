@@ -38,6 +38,9 @@ public class AvanceComponentProvider extends BaseComponentProvider {
     globalResources.add(createStyleSheetResource(
         "web/org.openbravo.userinterface.smartclient/openbravo/skins/"
             + KernelConstants.SKIN_PARAMETER + "/com.atrums.nomina/avance-styles.css", false));
+    
+    globalResources.add(createStaticResource(
+            "web/com.atrums.nomina/js/email-toolbar-button.js", false));
 
     return globalResources;
   }
