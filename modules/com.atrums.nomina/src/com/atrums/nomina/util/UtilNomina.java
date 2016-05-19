@@ -29,8 +29,14 @@ public class UtilNomina {
 	public static String basedesign(String strReporte) {
 		
 		String strDirectorio = UtilNomina.class.getResource("/").getPath();
-		Integer value = strDirectorio.indexOf("/build/classes/");
-		strDirectorio = strDirectorio.substring(1, value+1);
+		Integer value = strDirectorio.indexOf("/src-core/build/classes/");
+		
+		if (value>0){
+			strDirectorio = strDirectorio.substring(1, value+1);	
+		}else{
+			value = strDirectorio.indexOf("/build/classes/");
+			strDirectorio = strDirectorio.substring(1, value+1);	
+		}
 		String strBaseDesign = strReporte.replaceAll("@basedesign@", (strDirectorio + "WebContent/src-loc/design"));
 
 		File flRep = new File(strBaseDesign);

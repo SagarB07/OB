@@ -10,11 +10,11 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.openbravo.dal.core.SessionHandler;
 import org.openbravo.database.ConnectionProvider;
-import org.openbravo.erpCommon.utility.poc.EmailManager;
 import org.openbravo.model.common.enterprise.EmailServerConfiguration;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.utils.FormatUtilities;
 
+import com.atrums.nomina.util.EmailManager;
 import com.atrums.nomina.util.UtilNomina;
 
 public class NOCBPartner {
