@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Rol_Pagos" pageWidth="600" pageHeight="842" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="0.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="292"/>
 	<parameter name="USER_CLIENT" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="USER_ORG" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -303,80 +303,7 @@ where rp.ispago = 'Y'
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="93">
-				<rectangle radius="0">
-					<reportElement x="1" y="2" width="556" height="33"/>
-				</rectangle>
-				<textField pattern="#,##0.00;(#,##0.00)">
-					<reportElement x="282" y="16" width="70" height="19"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_neto}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="191" y="16" width="90" height="21"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total a Recibir:]]></text>
-				</staticText>
-				<line>
-					<reportElement x="151" y="63" width="251" height="1"/>
-				</line>
-				<staticText>
-					<reportElement x="209" y="64" width="143" height="12"/>
-					<textElement textAlignment="Center">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Entrega Conforme]]></text>
-				</staticText>
-				<textField pattern="#,##0.00;(#,##0.00)">
-					<reportElement x="473" y="6" width="65" height="12"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_egreso}]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00;(#,##0.00)">
-					<reportElement x="193" y="6" width="70" height="12"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_ingreso}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="118" y="4" width="72" height="12"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total Ingresos:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="209" y="76" width="143" height="12"/>
-					<textElement textAlignment="Center" verticalAlignment="Top">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Recursos Humanos]]></text>
-				</staticText>
-				<frame>
-					<reportElement x="1" y="35" width="556" height="58"/>
-					<box>
-						<pen lineWidth="1.0"/>
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="1.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-				</frame>
-				<staticText>
-					<reportElement x="403" y="6" width="72" height="12"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total Egresos:]]></text>
-				</staticText>
-			</band>
+			<band height="1"/>
 		</groupFooter>
 	</group>
 	<group name="name">
@@ -428,13 +355,6 @@ where rp.ispago = 'Y'
 			</frame>
 		</band>
 		<band height="100">
-			<staticText>
-				<reportElement x="223" y="74" width="20" height="12"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CC.]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="445" y="4" width="100" height="14"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -469,20 +389,6 @@ where rp.ispago = 'Y'
 				</textElement>
 				<text><![CDATA[Total Ingresos:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="247" y="74" width="102" height="12"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{taxid}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="209" y="62" width="143" height="12"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Recibi Conforme]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="190" y="16" width="90" height="15"/>
 				<textElement verticalAlignment="Middle">
@@ -504,22 +410,6 @@ where rp.ispago = 'Y'
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_egreso}]]></textFieldExpression>
 			</textField>
-			<frame>
-				<reportElement x="1" y="31" width="556" height="58"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-			</frame>
-			<line>
-				<reportElement x="0" y="94" width="557" height="1"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
 			<staticText>
 				<reportElement x="401" y="6" width="72" height="12"/>
 				<textElement verticalAlignment="Middle">
@@ -527,246 +417,24 @@ where rp.ispago = 'Y'
 				</textElement>
 				<text><![CDATA[Total Egresos:]]></text>
 			</staticText>
-		</band>
-		<band height="168">
-			<textField isBlankWhenNull="true">
-				<reportElement x="71" y="64" width="415" height="22"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="14" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="194" y="46" width="209" height="18"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ROL DE PAGOS]]></text>
-			</staticText>
-			<frame>
-				<reportElement mode="Transparent" x="1" y="102" width="556" height="51"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textField isBlankWhenNull="true">
-					<reportElement x="84" y="21" width="246" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-						<rightPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{area}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="7" y="21" width="66" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Departamento:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="341" y="21" width="112" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Fecha de Emisión:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="341" y="35" width="112" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Días Trabajados:]]></text>
-				</staticText>
-				<textField>
-					<reportElement x="456" y="35" width="88" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-						<rightPen lineWidth="0.25"/>
-					</box>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dias_trabajados}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="7" y="35" width="66" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Sucursal:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="341" y="6" width="112" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Mes:]]></text>
-				</staticText>
-				<textField>
-					<reportElement x="84" y="35" width="246" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-						<rightPen lineWidth="0.25"/>
-					</box>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{sucursal}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="7" y="7" width="66" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Categoria:]]></text>
-				</staticText>
-				<textField isBlankWhenNull="true">
-					<reportElement x="84" y="7" width="246" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-						<rightPen lineWidth="0.25"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{grupo}]]></textFieldExpression>
-				</textField>
-				<textField pattern="dd/MM/yyyy">
-					<reportElement x="456" y="21" width="88" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-						<rightPen lineWidth="0.25"/>
-					</box>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_emision}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="456" y="6" width="88" height="12"/>
-					<box>
-						<bottomPen lineWidth="0.25"/>
-						<rightPen lineWidth="0.25"/>
-					</box>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{fecha_español}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<staticText>
-				<reportElement x="1" y="153" width="276" height="14"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="209" y="62" width="143" height="12"/>
+				<textElement textAlignment="Center">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Ingreso]]></text>
+				<text><![CDATA[Entrega Conforme]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="153" width="280" height="14"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="209" y="74" width="143" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Egresos]]></text>
+				<text><![CDATA[Recursos Humanos]]></text>
 			</staticText>
-			<line>
-				<reportElement x="1" y="167" width="556" height="1"/>
-			</line>
 			<frame>
-				<reportElement x="1" y="0" width="556" height="102"/>
+				<reportElement x="1" y="33" width="556" height="58"/>
 				<box>
 					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<image scaleImage="RetainShape" hAlign="Left" isUsingCache="true" onErrorType="Icon">
-					<reportElement x="35" y="12" width="122" height="48"/>
-					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
-					</box>
-					<imageExpression class="java.net.URL"><![CDATA[new java.net.URL($P{BASE_WEB}+"/../utility/ShowImageLogo?logo=yourcompanydoc&orgId="+$F{ad_org_id})]]></imageExpression>
-				</image>
-			</frame>
-		</band>
-		<band height="90">
-			<subreport runToBottom="false">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="277" height="19" backcolor="#FFFFFF"/>
-				<subreportParameter name="total_ingreso">
-					<subreportParameterExpression><![CDATA[$F{total_ingreso}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="no_rol_pago_provision_id">
-					<subreportParameterExpression><![CDATA[$F{no_rol_pago_provision_id}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/RPT_Rol_Pagos_ing_subreport.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement key="" x="279" y="0" width="278" height="19"/>
-				<subreportParameter name="total_egreso">
-					<subreportParameterExpression><![CDATA[$F{total_egreso}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="no_rol_pago_provision_id">
-					<subreportParameterExpression><![CDATA[$F{no_rol_pago_provision_id}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{BASE_DESIGN} + "/com/atrums/nomina/ad_reports/RPT_Rol_Pagos_egresos_subreport.jasper"]]></subreportExpression>
-			</subreport>
-			<frame>
-				<reportElement x="1" y="0" width="276" height="90"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-			</frame>
-			<frame>
-				<reportElement x="277" y="0" width="280" height="90"/>
-				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
