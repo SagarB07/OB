@@ -1430,6 +1430,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="processF81B27B293604CA38B736422855300F1" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_novedad_faltas</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_novedad_faltas(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="processF9AE3E9FC50A4669AF6D2C7129AACAC3" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure no_procesa_rol_pro_cabecera</SqlMethodComment>
       <Sql><![CDATA[

@@ -24,6 +24,9 @@ public class CryptoUtility {
   public CryptoUtility() {
   }
 
+  
+  
+  
   public static void main(String argv[]) throws Exception {
     System.out.println("Enter encryption password:  ");
     System.out.flush();
