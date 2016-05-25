@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
+import org.apache.log4j.Logger;
 import org.openbravo.database.ConnectionProvider;
 import org.openbravo.exception.NoConnectionAvailableException;
 
@@ -25,10 +26,14 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
 public class UtilNomina {
-
+	private static final Logger log = Logger.getLogger(UtilNomina.class);
 	public static String basedesign(String strReporte) {
-		
 		String strDirectorio = UtilNomina.class.getResource("/").getPath();
+		try{
+	
+		System.out.println(strDirectorio);
+		log.error("mostrat linea--------------------------******************************************");
+		log.error(strDirectorio);
 		Integer value = strDirectorio.indexOf("/src-core/build/classes/");
 		
 		if (value>0){
@@ -37,8 +42,13 @@ public class UtilNomina {
 			value = strDirectorio.indexOf("/build/classes/");
 			strDirectorio = strDirectorio.substring(1, value+1);	
 		}
-		String strBaseDesign = strReporte.replaceAll("@basedesign@", (strDirectorio + "WebContent/src-loc/design"));
+		
 
+		}catch (Exception x ){
+			log.error(x);
+		}
+		
+		String strBaseDesign = strReporte.replaceAll("@basedesign@", (strDirectorio + "WebContent/src-loc/design"));
 		File flRep = new File(strBaseDesign);
 
 		if (flRep.exists()) {
@@ -51,6 +61,7 @@ public class UtilNomina {
 				return "";
 			}
 		}
+		
 	}
 
 	public static File generarPDF(ConnectionProvider conn, String strBaseDesin, String strNombre, String strEntiID)	throws ServletException {

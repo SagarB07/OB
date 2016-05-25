@@ -3,6 +3,7 @@
     <trigger name="NO_CREA_LINEAS_NOVEDADES_TRG" table="NO_NOVEDAD" fires="after" insert="true" update="true" delete="false" foreach="row">
       <body><![CDATA[
 Cur_Empleados RECORD;
+v_count NUMBER;
 
 BEGIN
     
@@ -27,13 +28,16 @@ BEGIN
 
         LOOP
 
+	select COUNT(*) into v_count from no_novedad_linea where no_novedad_id = :new.no_novedad_id and c_bpartner_id = Cur_Empleados.c_bpartner_id;
+
+if v_count = 0 then
             insert into no_novedad_linea( no_novedad_linea_id,     ad_client_id,     ad_org_id,     isactive,     
                     created,     createdby,     updated,     updatedby,     
                     c_bpartner_id,     valor,     no_novedad_id)
             values (get_uuid(),     :new.ad_Client_id,   :new.ad_org_id,      'Y',
                     now(),      :new.createdby,  now(),      :new.createdby,
                     Cur_Empleados.c_bpartner_id, 0, :new.no_novedad_id);
-
+end if;
         END LOOP;
 
         RETURN NEW;
@@ -59,7 +63,7 @@ BEGIN
             )
 
         LOOP
-
+            
             insert into no_novedad_linea( no_novedad_linea_id,     ad_client_id,     ad_org_id,     isactive,     
                     created,     createdby,     updated,     updatedby,     
                     c_bpartner_id,     valor,     no_novedad_id    )

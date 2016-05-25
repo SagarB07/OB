@@ -801,10 +801,6 @@
       <oldValue><![CDATA[163]]></oldValue>
       <newValue><![CDATA[CA95CED9CB6B4742A43E110A78BB3B98]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="28D0BD3B6C7F432AA9AF51DC5257A3EE">
-      <oldValue><![CDATA[80]]></oldValue>
-      <newValue><![CDATA[20]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="3BE39D6C2F4644F3838327D3DC311FC1">
       <oldValue><![CDATA[90]]></oldValue>
       <newValue><![CDATA[100]]></newValue>
