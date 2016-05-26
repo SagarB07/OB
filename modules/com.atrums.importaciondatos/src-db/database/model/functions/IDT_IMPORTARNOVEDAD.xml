@@ -18,7 +18,7 @@ ITERADOR  RECORD;
 ITERADORVALIDA RECORD; 
 
 BEGIN
-
+---Modificacioon sp 25/05/2015
  DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';
     AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
@@ -45,17 +45,19 @@ VARVALIDADO = FALSE;
 							WHERE idt_novedad_id = ITERADOR.idt_novedad_id;
 						
 						ELSE
-							
-							select COUNT (1) INTO VAREXIST  from no_contrato_empleado where  C_BPARTNER_ID =  (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA  )
-							and isactive = 'Y' 
-							and fecha_inicio <= (select startdate from c_period where c_period_id = (
-							select c_period_id from idt_novedad where idt_novedad_id = ITERADOR.idt_novedad_id))  
-							and fecha_fin >= (select enddate from c_period where c_period_id = (
-							select c_period_id from idt_novedad where idt_novedad_id = ITERADOR.idt_novedad_id)) ;
+	---SELECT COUNT (1) from no_contrato_empleado limit 1
+SELECT COUNT (1) INTO VAREXIST from no_contrato_empleado 
+where C_BPARTNER_ID =  (SELECT C_BPARTNER_ID FROM C_BPARTNER WHERE TAXID = ITERADOR.CEDULA  )and 
+isactive = 'Y' 
+and cast ((substring(cast(fecha_inicio as varchar) from 0 for 8)|| '-01') as timestamp ) <= 
+(select startdate from c_period where c_period_id in (select c_period_id from idt_novedad where idt_novedad_id =  ITERADOR.idt_novedad_id))  
+and cast ((substring(cast(fecha_fin as varchar) from 0 for 8)|| '-01') as timestamp ) 	>= 
+(select enddate from c_period where c_period_id = (select c_period_id from idt_novedad where idt_novedad_id =  ITERADOR.idt_novedad_id)); 				  
+											  
 							
 								IF (VAREXIST = 0) THEN
 								
-								UPDATE IDT_NOVEDAD SET i_errormsg = 'ERROR: NO EXISTE CONTRATO PARA ACTIVO O LAS FECHAS DEL PERIODO SON INCORRECTAS: ' || ITERADOR.CEDULA  
+								UPDATE IDT_NOVEDAD SET i_errormsg = VAREXIST ||'ERROR:- NO EXISTE CONTRATO PARA ACTIVO O LAS FECHAS DEL PERIODO SON INCORRECTAS: ' || ITERADOR.CEDULA  
 								WHERE idt_novedad_id = ITERADOR.idt_novedad_id;						
 								ELSE
 								

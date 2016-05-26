@@ -28,19 +28,40 @@ import net.sf.jasperreports.engine.JasperReport;
 public class UtilNomina {
 	private static final Logger log = Logger.getLogger(UtilNomina.class);
 	public static String basedesign(String strReporte) {
+		File flRep = null;
+		String strBaseDesign = "";
 		String strDirectorio = UtilNomina.class.getResource("/").getPath();
 		try{
 	
-		System.out.println(strDirectorio);
-		log.error("mostrat linea--------------------------******************************************");
-		log.error(strDirectorio);
-		Integer value = strDirectorio.indexOf("/src-core/build/classes/");
+			Integer value = strDirectorio.indexOf("/src-core/build/classes/");
+			log.info("Valor: strDirectorio  "+value);
 		
 		if (value>0){
+			log.info("Valor: strDirectorio  "+value);
 			strDirectorio = strDirectorio.substring(1, value+1);	
 		}else{
+
 			value = strDirectorio.indexOf("/build/classes/");
-			strDirectorio = strDirectorio.substring(1, value+1);	
+			log.info("Valor: strDirectorio  "+value);
+			if (value>0){
+				strDirectorio = strDirectorio.substring(1, value+1);
+				 strBaseDesign = strReporte.replaceAll("@basedesign@", (strDirectorio + "WebContent/src-loc/design"));
+			 } else{
+				 value = strDirectorio.indexOf("/WEB-INF/classes/");
+				 log.info("Valor: strDirectorio  "+value);
+				 strDirectorio = strDirectorio.substring(1, value+1);
+				// strDirectorio = "/var/lib/tomcat6/webapps/openbravo/WEB-INF/";
+				 strBaseDesign = strReporte.replaceAll("@basedesign@", ("/"+strDirectorio + "src-loc/design"));
+				 flRep = new File(strBaseDesign);
+				 if (flRep.exists()){
+					 log.info("Existe el Archivo: " +flRep );
+					 return "/"+strDirectorio + "src-loc/design";
+				 }else{
+					 log.info("NO Existe el Archio: " +flRep );
+				 }
+				 
+				 log.info("Valor: strBaseDesign  "+strBaseDesign);
+			 }
 		}
 		
 
@@ -48,8 +69,8 @@ public class UtilNomina {
 			log.error(x);
 		}
 		
-		String strBaseDesign = strReporte.replaceAll("@basedesign@", (strDirectorio + "WebContent/src-loc/design"));
-		File flRep = new File(strBaseDesign);
+		
+		flRep = new File(strBaseDesign);
 
 		if (flRep.exists()) {
 			return strDirectorio + "WebContent/src-loc/design";
@@ -73,6 +94,7 @@ public class UtilNomina {
 				   parameters.put("DOCUMENT_ID", strEntiID);
 			        parameters.put("BASE_DESIGN", basedesign(strBaseDesign));
 			        strBaseDesign = strBaseDesign.replaceAll("@basedesign@", basedesign(strBaseDesign));
+			        log.info("funion generarPDF "+strBaseDesign);
 			        JasperReport jasperRepo = JasperCompileManager.compileReport(strBaseDesign);
 			        Connection con = conn.getTransactionConnection();
 			        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperRepo, parameters, con);
@@ -92,18 +114,23 @@ public class UtilNomina {
 
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.toString());
+			//e.printStackTrace();
 		} catch (NoConnectionAvailableException e) {
 			// TODO Auto-generated catch block
+			log.error(e.toString());
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			log.error(e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
+			log.error(e.toString());
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: handle exception
+			log.error(e.toString());
 			e.printStackTrace();
 		}
 		return flTemp;

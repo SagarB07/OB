@@ -45,32 +45,42 @@ public class NOCBPartner {
 	@SuppressWarnings("unused")
 	public static void enviarMail(NOCBPartnerData[] datosEmail)throws Exception {
 		String strBaseDesin = "@basedesign@/com/atrums/nomina/ad_reports/RPT_Rol_Pagos_Individual.jrxml";
+		try{
 		for (int i = 0; datosEmail.length > i; i++) {
+			Thread.sleep(4000);
 			String idOrg = datosEmail[i].getField("organizacion");
 			String recipient = datosEmail[i].getField("email");
 			Organization currenctOrg = obtenerOrganizacion(idOrg);
 			EmailServerConfiguration mailConfig = obtenerConfiguracionesMail(idOrg);
+			log.info(mailConfig);
 			String username = mailConfig.getSmtpServerAccount();
+			//log.info(username);
 			String password = FormatUtilities.encryptDecrypt(mailConfig.getSmtpServerPassword(), false);
+			//log.info(password);
 			String connSecurity = mailConfig.getSmtpConnectionSecurity();
+			log.info(connSecurity);
 			int port = mailConfig.getSmtpPort().intValue();
+			log.info(port);
 			String senderAddress = mailConfig.getSmtpServerSenderAddress();
 			String host = "smtp.gmail.com";
 			boolean auth = mailConfig.isSMTPAuthentification();
 			List<File> lisdoc = new ArrayList<File>();
+			log.info( "Fin de configuraciones");
 			File flPdf = UtilNomina.generarPDF(connectionProvider, strBaseDesin, "rolpago",
 					datosEmail[i].getField("rolpago"));
 			lisdoc.add(flPdf);
 			EmailManager.sendEmail(host, auth, username, password, connSecurity, port, senderAddress, recipient, null,
-					null, null, "ROL DE PAGOS", "ADJUNTO ROL DE PAGOS, ATENTAMENTE RECURSOS HUMANOS", null, lisdoc, null, null);
+					null, null, "Rol de pagos", "Adjunto rol de pagos, Atentamente Recursos Humanos", null, lisdoc, null, null);
+		}
+		}catch (Exception e){
+			log.error(e.toString());
 		}
 
 	}
 
 	private static EmailServerConfiguration obtenerConfiguracionesMail(String organizacionId) {
 		final EmailServerConfiguration o = getOne(EmailServerConfiguration.class,
-				"select r from " + EmailServerConfiguration.class.getName() + " r where " + " r."
-						+ EmailServerConfiguration.PROPERTY_ID + "='FB244E75DAA849598CCFA8051E958664'");
+				"select r from " + EmailServerConfiguration.class.getName() + " r");
 		return o;
 	}
 

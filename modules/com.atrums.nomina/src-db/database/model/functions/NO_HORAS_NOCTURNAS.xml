@@ -25,20 +25,20 @@ v_valor_calculo NUMBER:=0;
 v_porcentaje_calculo NUMBER:=0;
 
 BEGIN
-
+---MODIFICACION SP 25-05-2016
 		select salario 
 		  into v_salario
 		  from no_contrato_empleado
 		 where c_bpartner_id = p_empleado_id
 		   and isactive = 'Y' order by  fecha_fin desc  limit 1;
     
-    select ch.porcentaje
+    select round((ch.porcentaje/100),2)
       into v_porcentaje_calculo
       from no_config_hora_extra ch
      where ch.tipo_hora = 'JN';
            
     v_salario_hora:=v_salario/240;
-    v_salario_hora_extra:= v_salario_hora*(100+v_porcentaje_calculo)/100 ;
+    v_salario_hora_extra:= v_salario_hora*(v_porcentaje_calculo) ;
 
     select valor 
     into v_total_horas

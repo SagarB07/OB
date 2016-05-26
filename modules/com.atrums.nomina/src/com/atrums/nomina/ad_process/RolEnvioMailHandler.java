@@ -19,7 +19,14 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 		// TODO Auto-generated method stub
 		
 		JSONObject result = new JSONObject();
+		
+		
 		try {
+			JSONObject message = new JSONObject();
+			String mensaje = "El sistema se encuentra enviando los roles seleccionados, este proceso no interrumpira otras tareas que se puedan hacer en este momento";
+			message.put("severity", "success");
+			message.put("text", mensaje);
+			result.put("message", message);
 			CapaIntermedia capaIntermedia = new CapaIntermedia();
 			final JSONObject jsonData = new JSONObject(content);
 			final JSONArray rolesIds = jsonData.getJSONArray("rolpago");
@@ -33,10 +40,7 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 
 				}
 			}
-			String mensaje = "Se envió " + rolesIds.length() + " correos";
-		    //  mensaje = errores != null ? mensaje + ", " + errores : mensaje;
-
-		      JSONObject message = new JSONObject();
+			  mensaje = "Se envió " + rolesIds.length() + " correos";
 		      message.put("severity", "success");
 		      message.put("text", mensaje);
 		      result.put("message", message);
