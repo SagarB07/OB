@@ -27,6 +27,7 @@
 		rp.ad_org_id as organizacion  
 		from no_rol_pago_provision rp, ad_user us			
 		where us.c_bpartner_id = rp.c_bpartner_id
+		and us.em_no_rol_mail = 'Y'
 		and rp.ispago='Y'
 		and rp.isactive = 'Y' 
 		and rp.no_rol_pago_provision_id = ?

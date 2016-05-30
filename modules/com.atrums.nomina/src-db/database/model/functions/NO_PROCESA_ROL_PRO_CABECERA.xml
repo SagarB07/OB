@@ -30,6 +30,8 @@
     v_MessageAnular VARCHAR(2000):='';
 
 BEGIN
+   --  RAISE NO_DATA_FOUND;
+
    
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';

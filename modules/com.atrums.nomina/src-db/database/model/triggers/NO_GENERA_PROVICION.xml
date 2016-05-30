@@ -18,7 +18,7 @@ BEGIN
     
 
     IF UPDATING THEN        
-       if(:new.docstatus='CO' )then
+       if(:new.docstatus='CO' and :new.ispago= 'Y' )then
      
 			v_User_ID = (SELECT CREATEDBY FROM no_rol_pago_provision WHERE  no_rol_pago_provision_ID = :NEW.no_rol_pago_provision_ID);
 			v_Client_ID = (SELECT AD_CLIENT_ID FROM no_rol_pago_provision WHERE  no_rol_pago_provision_ID = :NEW.no_rol_pago_provision_ID);
@@ -27,7 +27,7 @@ BEGIN
 			v_period_id = (select C_PERIOD_ID  from no_rol_pago_provision where no_rol_pago_provision_id = :NEW.no_rol_pago_provision_ID);
 			
 			v_qry  := 'SELECT no_genera_provicion ('''|| v_User_ID ||''','''|| v_Client_ID ||''','''|| v_Org_ID ||''');';
-			UPDATE IDT_CONTRATO SET I_ERRORMSG = v_qry  ;
+			--UPDATE IDT_CONTRATO SET I_ERRORMSG = v_qry  ;
 
 	
 			EXECUTE IMMEDIATE v_qry;
