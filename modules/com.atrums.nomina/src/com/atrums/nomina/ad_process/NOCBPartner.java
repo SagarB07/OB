@@ -48,6 +48,7 @@ public class NOCBPartner {
 		try{
 		for (int i = 0; datosEmail.length > i; i++) {
 			Thread.sleep(4000);
+		//	System.out.println("A************************************");
 			String idOrg = datosEmail[i].getField("organizacion");
 			String recipient = datosEmail[i].getField("email");
 			Organization currenctOrg = obtenerOrganizacion(idOrg);
@@ -70,7 +71,7 @@ public class NOCBPartner {
 					datosEmail[i].getField("rolpago"));
 			lisdoc.add(flPdf);
 			EmailManager.sendEmail(host, auth, username, password, connSecurity, port, senderAddress, recipient, null,
-					null, null, "Rol de pagos", "Adjunto rol de pagos, Atentamente Recursos Humanos", null, lisdoc, null, null);
+					null, null, "Rol de pagos", "Estimado Colaborador buen día\n\n Adjunto su rol de pagos.\n\n Atentamente,\n\n Recursos Humanos", null, lisdoc, null, null);
 		}
 		}catch (Exception e){
 			log.error(e.toString());

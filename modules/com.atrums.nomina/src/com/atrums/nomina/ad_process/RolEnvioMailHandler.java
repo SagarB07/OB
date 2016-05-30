@@ -9,11 +9,25 @@ import org.codehaus.jettison.json.JSONObject;
 import org.openbravo.client.kernel.BaseActionHandler;
 import org.openbravo.dal.service.OBDal;
 import org.openbravo.erpCommon.utility.OBMessageUtils;
+import org.openbravo.exception.PoolNotFoundException;
 import org.openbravo.service.db.DbUtility;
 
 public class RolEnvioMailHandler extends BaseActionHandler {
 	static Logger log4j = Logger.getLogger(RolEnvioMailHandler.class);
 
+	public void hiloEnvioMail( JSONArray rolesIds) throws PoolNotFoundException, JSONException{
+		
+		if (rolesIds.length() > 0) {
+			for (int i = 0; i < rolesIds.length(); i++) {
+				final String rolId = rolesIds.getString(i);
+				CapaIntermedia capaIntermedia = new CapaIntermedia();
+				capaIntermedia.setIdRolPago(rolId);
+				capaIntermedia.start();
+			}
+		}
+		
+	}
+	
 	@Override
 	protected JSONObject execute(Map<String, Object> parameters, String content) {
 		// TODO Auto-generated method stub
@@ -27,23 +41,22 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 			message.put("severity", "success");
 			message.put("text", mensaje);
 			result.put("message", message);
-			CapaIntermedia capaIntermedia = new CapaIntermedia();
+		//	CapaIntermedia capaIntermedia = new CapaIntermedia();
 			final JSONObject jsonData = new JSONObject(content);
 			final JSONArray rolesIds = jsonData.getJSONArray("rolpago");
-
-			if (rolesIds.length() > 0) {
-
-				for (int i = 0; i < rolesIds.length(); i++) {
-					final String rolId = rolesIds.getString(i);
-
-					capaIntermedia.enviarMails(rolId);
-
-				}
-			}
-			  mensaje = "Se envió " + rolesIds.length() + " correos";
-		      message.put("severity", "success");
-		      message.put("text", mensaje);
-		      result.put("message", message);
+			
+			hiloEnvioMail(rolesIds);
+			
+//			if (rolesIds.length() > 0) {
+//				for (int i = 0; i < rolesIds.length(); i++) {
+//					final String rolId = rolesIds.getString(i);
+//					capaIntermedia.enviarMails(rolId);
+//				}
+//			}
+//			  mensaje = "Se envió " + rolesIds.length() + " correos";
+//		      message.put("severity", "success");
+//		      message.put("text", mensaje);
+//		      result.put("message", message);
 			
 		} catch (Exception e) {
 		      e.printStackTrace();
