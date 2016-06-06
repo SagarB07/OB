@@ -113,7 +113,6 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         else
           texto.append("<td class=\"DataGrid_Body_Cell\">");
         if (!data[j].constantvalue.equals("")) {
-          texto.append(data[j].constantvalue);
           constant = constant + 1;
         } else
           texto.append(parseField(data2[i].getField(String.valueOf(j - constant)),
@@ -129,6 +128,270 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
     texto.append("</td></table>");
     return texto.toString();
   }
+  
+  private String obtenerTipoIdentificacion (String codigo){
+		 String valorRetorno = "";
+		 if (codigo.toString().equals("'RUC'")){
+			 valorRetorno = "01";
+		 }
+		 if (codigo.toString().equals("'Cedula'")){
+			 valorRetorno = "02";
+		 }
+		 if (codigo.toString().equals("'Pasaporte'")){
+			 valorRetorno = "03";
+		 }
+		 if (codigo.toString().equals("'Consumidor Final'")){
+			 valorRetorno = "07";
+		 }
+		 
+		 return valorRetorno;
+	 }
+  
+ private String obtenerTiporPersona (String codigo){
+	 String parametro= "'Persona Natural'";
+	 String valorRetorno = "";
+	 if (parametro.toString().equals(codigo.toString())){
+		 valorRetorno = "PN";
+	 }else if (codigo.toString().equals("'Persona Juridica'")){
+		 valorRetorno = "PJ";
+	 }else {
+		 valorRetorno = "ERROR en la Obtención del tipo persona";
+	 }
+	 return valorRetorno;
+ }
+
+ private String obtenerEstadoCivil (String codigo){
+	 String valorRetorno = "";
+	 if (codigo.toString().equals("'Soltero(a)'")){
+		 valorRetorno = "SO";
+	 } else if (codigo.toString().equals("'Casado(a)'")){
+		 valorRetorno = "CA";
+	 }else 	 if (codigo.toString().equals("'Divorciado(a)'")){
+		 valorRetorno = "DI";
+	 }else 	 if (codigo.toString().equals("'Union Libre'")){
+		 valorRetorno = "UL";
+	 }else 	 if (codigo.toString().equals("'Viudo(a)'")){
+		 valorRetorno = "VI";
+	 }else {
+		 valorRetorno = "ERROR en la obtención del estado civil";
+	 }
+	 return valorRetorno;
+ }
+ 
+ private String obtenerGenero (String codigo){
+	 String valorRetorno = "";
+	 if (codigo.toString().equals("'Masculino'")){
+		 valorRetorno = "M";
+	 }else if (codigo.toString().equals("'Femenino'")){
+		 valorRetorno = "F";
+	 }else{
+		 valorRetorno = "ERROR en la obtención del género";
+	 }
+	 return valorRetorno;
+ }
+
+ 
+ private String obtenerBoleano (String codigo){
+	 String valorRetorno = "";
+	 if (codigo.toString().equals("Si")||codigo.toString().equals("'S'")){
+		 valorRetorno = "Y";
+	 }else if (codigo.toString().equals("No")||codigo.toString().equals("'N'")){
+		 valorRetorno = "N";
+	 }else{
+		 valorRetorno = "ERROR en la obtención de valores booleanos (Si/NO)";
+	 }
+	 return valorRetorno;
+ }
+ 
+ 
+ public String obtenerUltimoCampo (String sTexto){
+	 Integer contador=0;
+	 String sTextoBuscado = ",";
+	 while (sTexto.indexOf(sTextoBuscado) > -1) {
+	      sTexto = sTexto.substring(sTexto.indexOf(sTextoBuscado)+sTextoBuscado.length(),sTexto.length());
+	      contador++; 
+	}
+	 Integer value =sTexto.indexOf("=");
+	 if (value> 0){
+	 sTexto= sTexto.substring(0, value-1);
+	 }
+	 return sTexto;
+ }
+ 
+ public String obtenerNombrePersona (String nombre){
+	 Integer valor = nombre.indexOf(",");
+	 if (valor>0){
+	 nombre = nombre.substring(0,valor);
+	 }
+	 valor = nombre.indexOf("=");
+	 if (valor>0){
+	 nombre = nombre.substring(valor + 1, nombre.length());
+	 }
+	 return nombre;	 
+ }
+ /**
+  * Esta funcion permite obtener el Id del perfil
+  * enviando como parámetros la conexión, y el valor 
+  * del campo nombre del perfil.
+ * @param connectionProvider
+ * @param valorCampo  
+ * @return
+ * @throws ServletException 
+ */
+public String obtenerGrupoTercero (ConnectionProvider connectionProvider,String filtro) throws ServletException{
+	 String strSql ="SELECT c_bp_group_id FROM c_bp_group where name like '%"+quitarComillas(filtro)+"%'";
+	 Connection conn = null;
+	 String valorRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "c_bp_group_id");
+	 return valorRetorno;
+ }
+ 
+
+/**
+ * Esta funcion permite obtener el Id del parfil
+ * enviando como parametros la conexion, y el valor 
+ * del campo nombre del perfil.
+* @param conn
+* @param connectionProvider
+* @param valorCampo  
+* @return
+* @throws ServletException 
+*/
+@SuppressWarnings("unused")
+public String obtenerPerfil (Connection conn, ConnectionProvider connectionProvider,String filtro) throws ServletException{
+	 String strSql ="SELECT ne_perfil_rubro_id FROM ne_perfil_rubro where nombre like '%"+quitarComillas(filtro)+"%' limit 1";
+	 String valorRetorno= FileImportUtil.obtenerIDCampo(conn, connectionProvider, strSql, "ne_perfil_rubro_id");
+	 String comilla= "";
+	 if (valorRetorno.toString().equals(comilla.toString()) || valorRetorno== null){
+		 valorRetorno = "ERROR: No se encuetra perfil con el valor " +filtro;
+	 }else {
+		 System.out.println("1");
+	 }
+	 return valorRetorno;
+}
+
+ 
+ public StringBuffer obtenerCodigoTercero (Connection conn, ConnectionProvider connectionProvider,StringBuffer campo, String valorCampo) throws ServletException{
+	  StringBuffer dato = new StringBuffer("");
+	  String personalJuridico = "EM_Idt_Natural_Juridico";
+	  String tipoIdentificacion = "EM_Idt_Tipo_Identificacion";
+	  String isCliente = "EM_Idt_Iscustomer";
+	  String isProveedor = "EM_Idt_Isvendor";
+	  String isAgenteComer = "EM_Idt_Issalesrep";
+	  String isEmpleado = "EM_Idt_Isemployee";
+	  String isDiscapacitado = "EM_Idt_Isdiscapacitado";
+	  String isGenero = "EM_Idt_Genero";
+	  String isEstadoCivil = "EM_Idt_Estadocivil";
+	  String isPerfilRubro = "EM_Idt_Ne_Perfil_Rubro_ID";
+	  String grupoTerceros = "C_BP_Group_ID";
+	  String taxId = "TaxID";
+	  
+	  String compara  = obtenerUltimoCampo(campo.toString());
+	  	
+	  if (grupoTerceros.equals(compara)&& valorCampo!= null && valorCampo!= "" ){
+		  	 
+		  	dato.append("'");
+		  	String valor = obtenerGrupoTercero(connectionProvider, quitarComillas(valorCampo));
+		  	if (valor == ""){
+		  		dato.append("ERROR : No se encuentra el grupo del tercero con valor "+ valorCampo);	
+		  	}else {
+		  		dato.append(valor);	
+		  	}
+			 dato.append("'");
+	  		
+	  	}else if (personalJuridico.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerTiporPersona(valorCampo));
+			 dato.append("'");
+		}else 
+		if (tipoIdentificacion.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerTipoIdentificacion(valorCampo));
+			 dato.append("'");
+		}else
+		if (isCliente.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerBoleano(valorCampo));
+			 dato.append("'");
+		}else
+
+		if (isProveedor.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerBoleano(valorCampo));
+			 dato.append("'");
+		}else
+		if (isAgenteComer.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerBoleano(valorCampo));
+			 dato.append("'");
+		}else
+		if (isEmpleado.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerBoleano(valorCampo));
+			 dato.append("'");
+		}else
+		if (isDiscapacitado.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerBoleano(valorCampo));
+			 dato.append("'");
+		}else
+		if (isGenero.equals(compara)) {
+			 dato.append("'");
+			 dato.append(obtenerGenero(valorCampo));
+			 dato.append("'");
+		}else
+		if (isEstadoCivil.equals(compara)) {
+			dato.append("'");
+			 dato.append(obtenerEstadoCivil(valorCampo));
+			 dato.append("'");
+		}else
+		if (isPerfilRubro.equals(compara)&& valorCampo!= null && valorCampo!= "" ) {
+			dato.append("'");
+			dato.append (obtenerPerfil(conn, connectionProvider, quitarComillas(valorCampo)));
+			dato.append("'");
+		}else 
+		if (taxId.equals(compara) && valorCampo!= null && valorCampo!= "" ) {
+			dato.append("'");
+			
+			if (valorCampo.indexOf("'")>=0){
+			valorCampo = valorCampo.substring(valorCampo.indexOf("'")+ 1 ,valorCampo.length());
+			valorCampo = valorCampo.substring(0 ,valorCampo.length()-1);
+			}
+			String mensaje = FileImportUtil.obtenerTipoIdentificador(valorCampo);
+			mensaje = FileImportUtil.validarCedula(valorCampo, mensaje);
+			if (mensaje==""){
+				dato.append(valorCampo);	
+			}else {
+				dato.append("ERROR : "+mensaje);
+			}
+			 dato.append("'");
+		}else{
+			
+			
+		}
+		
+	  String personaValidada= obtenerNombrePersona(campo.toString());
+	  String trimCampo= campo.toString().trim();
+	  if (trimCampo.equals("TaxID =" )&& dato.toString().indexOf("ERROR")>0){
+		  dato.append( "  en la persona con número de identificación " +valorCampo );
+		  //System.out.println("1");
+	  }else{
+		if(dato.toString().indexOf("ERROR")>0){
+			dato.append( " en la persona con número de identificación " +personaValidada );
+		}
+	  }
+	 
+		 campo.append(dato);
+		 return campo;
+ }
+ 
+  private String quitarComillas (String campo){
+	  if (campo.indexOf("'")>=0){
+	  campo = campo.substring(campo.indexOf("'")+1, campo.length());
+	  campo = campo.substring(0,campo.length()-1 );
+	  }
+	  return campo;
+  }
+
   
  private StringBuffer obtenerCodigosContrato (Connection conn, ConnectionProvider connectionProvider,StringBuffer campo, String valorCampo) throws ServletException{
 	 StringBuffer dato = new StringBuffer("");//
@@ -308,6 +571,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
 
     try {
       con = getTransactionConnection();
+      FileImportUtil.deleteTabla(con, this, "DELETE FROM i_bpartner");
       FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_novedad");
       FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_CONTRATO");
       FileImportUtil.deleteTabla(con, this, "DELETE FROM I_Product");
@@ -344,14 +608,34 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
          
           strValues.append("'");
           String valorCampoTemporal = strValues.toString();
-          if (strTable.equals("IDT_novedad")){
-        	//  FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_novedad");
+          if (strTable.equals("I_BPartner")){
+        	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
+        	  strFields = obtenerCodigoTercero (con, this,strFields, valorCampoTemporal );
+        
+        	  System.out.println(strFields);
+        	  if(strFields.indexOf("ERROR")>0){
+        		  String valorError = strFields.substring(strFields.indexOf("ERROR"),strFields.length() );
+    			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");
+    	          myMessage.setMessage("<strong>" + Utility.messageBD(this, "Line", vars.getLanguage())
+    	              + "&nbsp;</strong>" + (i + 1) + "<br><strong>"
+    	              + Utility.messageBD(this, "Error", vars.getLanguage()) + "&nbsp;&nbsp;</strong>"
+    	              + valorError);
+    	          releaseRollbackConnection(con);
+    	          return myMessage;
+    		  }else{
+    			  if (strFields.toString().equals(auxStrFields.toString())){
+            		  strFields.append(strValues);  
+            	  }
+    		  }
+        	  
+        	  
+          }else if (strTable.equals("IDT_novedad")){
         	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
         	  strFields = obtenerCodigos (con, this,strFields, valorCampoTemporal );
         	  if (strFields.toString().equals(auxStrFields.toString())){
         		  strFields.append(strValues);  
         	  }
-          }else if (strTable.equals("IDT_contrato")){
+        	  }else if (strTable.equals("IDT_contrato")){
         	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
         	//  FileImportUtil.deleteTabla(con, this, "DELETE FROM IDT_CONTRATO");
         	  strFields = obtenerCodigosContrato (con, this,strFields, valorCampoTemporal );
@@ -659,7 +943,7 @@ private String procesarFichero(VariablesSecureApp vars, FieldProvider[] data2, H
         try {
 
             sb.append(parseField(data2[i].getField(String.valueOf(j - constant)), data[j].fieldlength, data[j].datatype, data[j].dataformat,  data[j].decimalpoint, ""));
-         //   System.out.println(data2[i].getField(String.valueOf(j - constant)));
+           System.out.println(data2[i].getField(String.valueOf(j - constant)));
 
         }catch (Exception ex){
         //	System.out.println(data2[i]);
