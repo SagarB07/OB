@@ -101,6 +101,10 @@
         <default/>
         <onCreateDefault/>
       </column>
+      <column name="COPIARUBRO" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
       <foreign-key foreignTable="NO_CALCULA_RUBRO" name="NO_T_ING_EGR_NO_CALCULA_RUBRO">
         <reference local="NO_CALCULA_RUBRO_ID" foreign="NO_CALCULA_RUBRO_ID"/>
       </foreign-key>

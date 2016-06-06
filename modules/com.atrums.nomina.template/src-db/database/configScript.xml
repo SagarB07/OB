@@ -149,10 +149,6 @@
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="2156">
-      <oldValue><![CDATA[Y]]></oldValue>
-      <newValue><![CDATA[N]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="2156">
       <oldValue><![CDATA[Y]]></oldValue>
       <newValue><![CDATA[N]]></newValue>
@@ -276,6 +272,414 @@
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5731">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5918">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5918">
+      <oldValue><![CDATA[240]]></oldValue>
+      <newValue><![CDATA[10240]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5918">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5919">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5919">
+      <oldValue><![CDATA[370]]></oldValue>
+      <newValue><![CDATA[10370]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5919">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5920">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5920">
+      <oldValue><![CDATA[300]]></oldValue>
+      <newValue><![CDATA[10300]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5920">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5921">
+      <oldValue><![CDATA[Phone]]></oldValue>
+      <newValue><![CDATA[Teléfono]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5921">
+      <oldValue><![CDATA[310]]></oldValue>
+      <newValue><![CDATA[130]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5922">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5922">
+      <oldValue><![CDATA[260]]></oldValue>
+      <newValue><![CDATA[10260]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5922">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5923">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5923">
+      <oldValue><![CDATA[320]]></oldValue>
+      <newValue><![CDATA[10320]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5923">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5924">
+      <oldValue><![CDATA[400]]></oldValue>
+      <newValue><![CDATA[310]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5924">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5925">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5925">
+      <oldValue><![CDATA[110]]></oldValue>
+      <newValue><![CDATA[10110]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5925">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5926">
+      <oldValue><![CDATA[10]]></oldValue>
+      <newValue><![CDATA[1010]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5927">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5927">
+      <oldValue><![CDATA[190]]></oldValue>
+      <newValue><![CDATA[10190]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5927">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5928">
+      <oldValue><![CDATA[Name 2]]></oldValue>
+      <newValue><![CDATA[Nombre Comercial]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5928">
+      <oldValue><![CDATA[90]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5929">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5929">
+      <oldValue><![CDATA[270]]></oldValue>
+      <newValue><![CDATA[10270]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5929">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5930">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5930">
+      <oldValue><![CDATA[360]]></oldValue>
+      <newValue><![CDATA[10360]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5930">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5931">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5931">
+      <oldValue><![CDATA[120]]></oldValue>
+      <newValue><![CDATA[10120]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5931">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5932">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5933">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5933">
+      <oldValue><![CDATA[200]]></oldValue>
+      <newValue><![CDATA[10200]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5933">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5934">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5934">
+      <oldValue><![CDATA[380]]></oldValue>
+      <newValue><![CDATA[10380]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5934">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5935">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5935">
+      <oldValue><![CDATA[100]]></oldValue>
+      <newValue><![CDATA[2010]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5935">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5936">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5936">
+      <oldValue><![CDATA[70]]></oldValue>
+      <newValue><![CDATA[80]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5936">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5937">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[300]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5938">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[1]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5939">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5939">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[1050]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5940">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5940">
+      <oldValue><![CDATA[350]]></oldValue>
+      <newValue><![CDATA[10350]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5940">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISREADONLY" pkRow="5941">
+      <oldValue><![CDATA[N]]></oldValue>
+      <newValue><![CDATA[Y]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5941">
+      <oldValue><![CDATA[390]]></oldValue>
+      <newValue><![CDATA[320]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5942">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5942">
+      <oldValue><![CDATA[60]]></oldValue>
+      <newValue><![CDATA[1060]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5943">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5943">
+      <oldValue><![CDATA[160]]></oldValue>
+      <newValue><![CDATA[10160]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5943">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5944">
+      <oldValue><![CDATA[Email]]></oldValue>
+      <newValue><![CDATA[Email de Contacto]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5944">
+      <oldValue><![CDATA[340]]></oldValue>
+      <newValue><![CDATA[120]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5945">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5945">
+      <oldValue><![CDATA[210]]></oldValue>
+      <newValue><![CDATA[10210]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5945">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5946">
+      <oldValue><![CDATA[Contact Description]]></oldValue>
+      <newValue><![CDATA[Descripción de contacto]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5946">
+      <oldValue><![CDATA[290]]></oldValue>
+      <newValue><![CDATA[140]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5947">
+      <oldValue><![CDATA[Address Line 2]]></oldValue>
+      <newValue><![CDATA[Sector]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DISPLAYLENGTH" pkRow="5947">
+      <oldValue><![CDATA[60]]></oldValue>
+      <newValue><![CDATA[120]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5947">
+      <oldValue><![CDATA[180]]></oldValue>
+      <newValue><![CDATA[106]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5948">
+      <oldValue><![CDATA[Address Line 1]]></oldValue>
+      <newValue><![CDATA[Calle]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DISPLAYLENGTH" pkRow="5948">
+      <oldValue><![CDATA[60]]></oldValue>
+      <newValue><![CDATA[110]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5948">
+      <oldValue><![CDATA[170]]></oldValue>
+      <newValue><![CDATA[105]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5949">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5949">
+      <oldValue><![CDATA[250]]></oldValue>
+      <newValue><![CDATA[10250]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5949">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5950">
+      <oldValue><![CDATA[Name]]></oldValue>
+      <newValue><![CDATA[Razón Social]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5950">
+      <oldValue><![CDATA[80]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5951">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5951">
+      <oldValue><![CDATA[220]]></oldValue>
+      <newValue><![CDATA[10220]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5951">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5952">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5952">
+      <oldValue><![CDATA[330]]></oldValue>
+      <newValue><![CDATA[10330]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5952">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5953">
+      <oldValue><![CDATA[Tax ID]]></oldValue>
+      <newValue><![CDATA[CI/RUC/PASS]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5953">
+      <oldValue><![CDATA[130]]></oldValue>
+      <newValue><![CDATA[70]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5954">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5954">
+      <oldValue><![CDATA[230]]></oldValue>
+      <newValue><![CDATA[10230]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5954">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="5955">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5955">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[1030]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="5955">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="5956">
+      <oldValue><![CDATA[Contact Name]]></oldValue>
+      <newValue><![CDATA[Nombre de Contacto]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="5956">
+      <oldValue><![CDATA[280]]></oldValue>
+      <newValue><![CDATA[110]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="6050">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="6050">
+      <oldValue><![CDATA[140]]></oldValue>
+      <newValue><![CDATA[10140]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SHOWINRELATION" pkRow="6050">
+      <oldValue><![CDATA[Y]]></oldValue>
+      <newValue><![CDATA[N]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="6051">
+      <oldValue><![CDATA[150]]></oldValue>
+      <newValue><![CDATA[400]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="6289">
       <oldValue><![CDATA[Business Partner]]></oldValue>
@@ -517,10 +921,6 @@
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1155249F8E934CD7BF3ED9F37D28C5EA">
-      <oldValue><![CDATA[NO_Tipo_Ingreso_Egreso_ID]]></oldValue>
-      <newValue><![CDATA[Tipo de Ingreso  y Egreso]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1D0AFB268D0546329CC96D964D9284E5">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
@@ -733,10 +1133,6 @@
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="C3A05D6F7E9B49B4BC699520A7BED210">
-      <oldValue><![CDATA[Import Error Message]]></oldValue>
-      <newValue><![CDATA[Mensaje de Error]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="CE8D28F94E0D460AE040007F01000DA6">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
@@ -796,10 +1192,6 @@
     <columnDataChange tablename="AD_TEXTINTERFACES" columnname="TEXT" pkRow="8108FB25E5CE4B7DA7E1E184691F3906">
       <oldValue><![CDATA[Formato de archivo]]></oldValue>
       <newValue><![CDATA[Format file]]></newValue>
-    </columnDataChange>
-    <columnDataChange tablename="AD_TREENODE" columnname="PARENT_ID" pkRow="1D92B642491940F7B0B11F647016403A">
-      <oldValue><![CDATA[163]]></oldValue>
-      <newValue><![CDATA[CA95CED9CB6B4742A43E110A78BB3B98]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="3BE39D6C2F4644F3838327D3DC311FC1">
       <oldValue><![CDATA[90]]></oldValue>
@@ -937,14 +1329,6 @@
       <oldValue><![CDATA[102]]></oldValue>
       <newValue><![CDATA[62]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_TREENODE" columnname="PARENT_ID" pkRow="539BF66028EB4FE68B638657CC055495">
-      <oldValue><![CDATA[163]]></oldValue>
-      <newValue><![CDATA[CA95CED9CB6B4742A43E110A78BB3B98]]></newValue>
-    </columnDataChange>
-    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="539BF66028EB4FE68B638657CC055495">
-      <oldValue><![CDATA[40]]></oldValue>
-      <newValue><![CDATA[10]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="8266E9ACD87C92BFE040007F01004ECB">
       <oldValue><![CDATA[52]]></oldValue>
       <newValue><![CDATA[32]]></newValue>
@@ -956,9 +1340,5 @@
     <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="CEE858E2E5C74BA082ABCAA9A700C1BA">
       <oldValue><![CDATA[80]]></oldValue>
       <newValue><![CDATA[90]]></newValue>
-    </columnDataChange>
-    <columnDataChange tablename="AD_TREENODE" columnname="SEQNO" pkRow="D52782DA7B21413087BA3B8437BA624C">
-      <oldValue><![CDATA[20]]></oldValue>
-      <newValue><![CDATA[10]]></newValue>
     </columnDataChange>
   </vector>

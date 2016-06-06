@@ -41,6 +41,10 @@
         <default/>
         <onCreateDefault/>
       </column>
+      <column name="COPIARUBRO" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
       <foreign-key foreignTable="AD_ORG" name="NO_TIPO_RUB_LI_EM_AD_ORG">
         <reference local="AD_ORG_ID" foreign="AD_ORG_ID"/>
       </foreign-key>
