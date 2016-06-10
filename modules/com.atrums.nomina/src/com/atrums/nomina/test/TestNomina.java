@@ -1,5 +1,7 @@
 package com.atrums.nomina.test;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -9,7 +11,27 @@ import org.openbravo.erpCommon.ad_forms.FileImportUtil;
 import org.openbravo.exception.PoolNotFoundException;
 
 import com.atrums.nomina.ad_process.CapaIntermedia;
+import com.atrums.nomina.ad_process.ContratoProceso;
 public class TestNomina {
+	
+	@Test
+	public void testActualizacionContrato () throws PoolNotFoundException, ServletException{
+		Integer filas= 0;
+		TestConnectionDB conn= new TestConnectionDB();
+		ContratoProceso contratoProceso = new ContratoProceso();
+		List<String> idContrato = new ArrayList<String>();
+		idContrato.add("71026F9E9CD74733B1FFA624EE9D5C04");
+		idContrato.add("69BF81B784DF46BEBD112B57B852CB31");
+		idContrato.add("B74048E354A24D8D910A013F4ED9208B");
+		idContrato.add("7E59FEAAEF7C482189FC794387E4E257");
+		for (String iterador :idContrato){
+			filas = contratoProceso.actulizarContrato(conn.conn, iterador);
+		}
+		filas = contratoProceso.actulizarContrato(conn.conn, "71026F9E9CD74733B1FFA624EE9D5C04");
+		System.out.print("Se han actualizado: " +idContrato.size() +" filas");
+		
+		
+	}
 	
 	@Test 
 	public void testObtenerGterceros () throws PoolNotFoundException, ServletException{

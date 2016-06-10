@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_NOVEDAD_FALTAS_PROCESO">
+    <function name="NO_NOVEDAD_FALTAS_PROCESO" type="VARCHAR">
+      <parameter name="p_fechaini" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_fechafin" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_periodo" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_user" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_org" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_ad_client" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR;
+	v_Message VARCHAR;
+	v_resultado VARCHAR;
+	V_SUMADESCUENTO NUMBER;
+	V_VALORPROCESO VARCHAR;
+	V_QUERY VARCHAR;
+	V_NOVEDADID VARCHAR;
+	V_NOVEDADLINEAID VARCHAR;
+	ITERADOR_TERCERO RECORD;
+	ITERADOR_REGLA RECORD;
+	ITERADOR_SUMA RECORD;
+BEGIN
+ 
+	FOR ITERADOR_TERCERO IN
+			   SELECT   ce.c_bpartner_id AS TERCERO 
+			   FROM no_contrato_empleado ce, no_permiso np
+			   WHERE ce.no_contrato_empleado_id = np.no_contrato_empleado_id
+			   AND ce.isactive = 'Y'
+			   AND (date(np.fecha_permiso) >= date(p_fechaIni) AND date(np.fecha_permiso) <= date(p_fechaFin))
+			   AND np.em_ne_estado = 'NJ'           
+			   GROUP BY TERCERO
+			   ORDER BY TERCERO DESC
+
+	LOOP
+					FOR ITERADOR_REGLA IN
+						  SELECT   no_descuento_reglas(np.horas) AS REGLA
+						   FROM no_contrato_empleado ce, no_permiso np
+						   WHERE ce.no_contrato_empleado_id = np.no_contrato_empleado_id
+						   AND ce.isactive = 'Y'
+						   AND (date(np.fecha_permiso) >= date(p_fechaIni) AND date(np.fecha_permiso) <= date(p_fechaFin))
+						   AND np.em_ne_estado = 'NJ'
+						   AND ce.c_bpartner_id = ITERADOR_TERCERO.TERCERO
+
+					LOOP
+							v_resultado = ITERADOR_TERCERO.TERCERO;
+							V_SUMADESCUENTO = 0;
+							FOR ITERADOR_SUMA IN 
+								SELECT  no_descuento_reglas(ce.c_bpartner_id, np.horas) as VALORDESCUENTO 								 
+								   FROM no_contrato_empleado ce, no_permiso np
+								   WHERE ce.no_contrato_empleado_id = np.no_contrato_empleado_id					   
+								   AND np.no_permiso_ID IN (							   
+																SELECT B.ID
+																FROM(
+																	   SELECT np.no_permiso_ID AS ID, no_descuento_reglas(np.horas) AS REGLA
+																	   FROM no_contrato_empleado ce, no_permiso np
+																	   WHERE ce.no_contrato_empleado_id = np.no_contrato_empleado_id
+																	   AND ce.isactive = 'Y'
+																	   AND (date(np.fecha_permiso) >= date(p_fechaIni) AND date(np.fecha_permiso) <= date(p_fechaFin))
+																	   AND np.em_ne_estado = 'NJ'						
+																	   AND ce.c_bpartner_id = ITERADOR_TERCERO.TERCERO
+																	   ) AS B
+																	   WHERE B.REGLA = ITERADOR_REGLA.REGLA
+															)
+							LOOP
+
+							--v_resultado = '00002';
+							V_SUMADESCUENTO = V_SUMADESCUENTO + ITERADOR_SUMA.VALORDESCUENTO;
+						--	v_resultado = V_SUMADESCUENTO;
+							
+							END LOOP;
+							V_QUERY =  null;	
+							IF V_SUMADESCUENTO>0 AND ITERADOR_REGLA.REGLA = 'A' THEN 
+							V_QUERY := 'SELECT no_obtener_novedad ( '''|| p_periodo||''',''629E83A5F93D4EA9885A1CB68AA83500'','''|| P_USER||''','''|| p_org||''','''|| p_ad_client||''' )';
+								
+							END IF;		
+
+							IF V_SUMADESCUENTO>0 AND ITERADOR_REGLA.REGLA = 'B' THEN 
+							V_QUERY := 'SELECT no_obtener_novedad ( '''|| p_periodo||''',''7617C5FF7283452886DA3014C3B9D880'','''|| P_USER||''','''|| p_org||''','''|| p_ad_client||''')';
+							END IF;	
+							if V_QUERY is not null  THEN
+							EXECUTE IMMEDIATE V_QUERY INTO V_NOVEDADID;			
+							v_resultado = V_NOVEDADID;
+
+								
+								
+
+								IF EXISTS ( SELECT no_novedad_linea_id 
+										FROM no_novedad_linea 
+											WHERE c_bpartner_id = ITERADOR_TERCERO.TERCERO 
+												AND no_novedad_id = V_NOVEDADID
+									  ) 	THEN
+
+								SELECT no_novedad_linea_id INTO V_NOVEDADLINEAID
+								FROM no_novedad_linea 
+								WHERE c_bpartner_id = ITERADOR_TERCERO.TERCERO 
+								AND no_novedad_id = V_NOVEDADID;
+
+								UPDATE   no_novedad_linea 
+								SET valor = V_SUMADESCUENTO 
+								WHERE no_novedad_linea_id = V_NOVEDADLINEAID;
+								--v_resultado = 'EXISTE';
+								
+								ELSE
+								ALTER TABLE no_novedad_linea DISABLE TRIGGER no_unico_linea_empleado_trg;
+								INSERT INTO no_novedad_linea
+								(    
+								no_novedad_linea_id,         
+								ad_client_id ,         
+								ad_org_id ,         
+								isactive ,                 
+								created,
+								createdby ,                 
+								updated ,             
+								updatedby ,         
+								c_bpartner_id ,         
+								valor ,
+								no_novedad_id)
+								VALUES
+								(   
+								 get_uuid(),                    
+								 p_ad_client,	
+								 p_org,
+								'Y',
+								 now(),
+								P_USER,
+								 now(),
+								P_USER,           
+								ITERADOR_TERCERO.TERCERO ,            
+								V_SUMADESCUENTO ,    
+								V_NOVEDADID);    
+								
+								ALTER TABLE no_novedad_linea ENABLE TRIGGER no_unico_linea_empleado_trg; 
+	
+
+										
+								END IF ;	
+							
+									
+							END IF ;		
+					
+					
+					END LOOP;			
+			
+	END LOOP;	
+    v_resultado = 'Proceso generado correctamente';
+  --  v_Message:='Proceso generado correctamente';
+    RETURN v_resultado;
+
+EXCEPTION
+WHEN OTHERS THEN
+  v_ResultStr:= '@ERROR=' || SQLERRM;
+  RETURN v_ResultStr;
+END NO_NOVEDAD_FALTAS_PROCESO
+]]></body>
+    </function>
+  </database>

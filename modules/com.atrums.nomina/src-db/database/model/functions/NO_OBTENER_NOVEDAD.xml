@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_OBTENER_NOVEDAD">
+    <function name="NO_OBTENER_NOVEDAD" type="VARCHAR">
+      <parameter name="p_periodo" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_rubro" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_user" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_org" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_ad_client" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+V_VALOR_RETORNO VARCHAR;
+V_NOMBRE_RUBRO VARCHAR;
+v_no_novedad_id VARCHAR;
+V_EXISTE BOOLEAN;
+BEGIN
+	SELECT COUNT(*)> 0 INTO V_EXISTE 
+	FROM no_novedad
+	where c_period_id = p_periodo 
+	AND no_tipo_ingreso_egreso_id = p_rubro;
+
+	
+	IF V_EXISTE THEN 
+		SELECT no_novedad_ID INTO V_VALOR_RETORNO 
+		FROM no_novedad
+		where c_period_id = p_periodo 
+		AND no_tipo_ingreso_egreso_id = p_rubro;	
+	ELSE
+	v_no_novedad_id = get_uuid();
+	INSERT INTO NO_NOVEDAD
+            (    
+		        no_novedad_id,        
+		        ad_client_id ,         
+			ad_org_id ,         
+			isactive ,                 
+			created,
+			createdby ,                  
+			updated,               
+			updatedby ,           
+		        no_tipo_ingreso_egreso_id,                 
+		        c_period_id)
+		    VALUES
+		    (   
+		    v_no_novedad_id,    
+				p_ad_client,	
+		    p_org,
+		    'Y',
+		    now(),
+		    (SELECT createdby FROM AD_USER WHERE AD_USER_ID = P_USER),
+		    now(),
+		    (SELECT updatedby FROM AD_USER WHERE AD_USER_ID = P_USER),     
+            p_rubro,     
+            p_periodo
+            );
+	V_VALOR_RETORNO= v_no_novedad_id;
+	
+	
+	END IF;
+	
+	
+	
+	RETURN V_VALOR_RETORNO;
+	
+	
+  EXCEPTION
+    WHEN OTHERS THEN
+         v_ResultStr:= 'ERROR=' || SQLERRM;
+         V_VALOR_RETORNO = v_ResultStr;
+	 return V_VALOR_RETORNO;
+END NO_OBTENER_NOVEDAD
+]]></body>
+    </function>
+  </database>

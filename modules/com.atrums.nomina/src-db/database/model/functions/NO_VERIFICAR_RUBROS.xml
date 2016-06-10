@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_VERIFICAR_RUBROS">
+    <function name="NO_VERIFICAR_RUBROS" type="VARCHAR">
+      <parameter name="p_valor" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_user" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_org" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_ad_client" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_ResultStr VARCHAR(2000):='';
+V_VALOR_RETORNO VARCHAR;
+V_NOMBRE_RUBRO VARCHAR;
+V_EXISTE BOOLEAN;
+BEGIN
+
+	SELECT COUNT (*)> 0  INTO V_EXISTE 
+	FROM NO_TIPO_INGRESO_EGRESO 
+	WHERE  NO_TIPO_INGRESO_EGRESO_ID = p_valor;
+	
+	IF V_EXISTE  THEN 
+	V_VALOR_RETORNO = 'SIN INSERCIONES';
+	ELSE 
+		IF p_valor = '629E83A5F93D4EA9885A1CB68AA83500' THEN 
+		V_NOMBRE_RUBRO = 'Faltas Injustificadas media Jornada';
+		
+		ELSE
+			IF p_valor = '7617C5FF7283452886DA3014C3B9D880' THEN 
+			V_NOMBRE_RUBRO = 'Faltas injustificadas Jornada Completa';
+			END IF;
+		END IF;
+		INSERT INTO NO_TIPO_INGRESO_EGRESO 
+		(
+			NO_TIPO_INGRESO_EGRESO_ID,   
+			ad_client_id ,         
+			ad_org_id ,         
+			isactive ,                 
+			created,
+			createdby ,                  
+			updated ,               
+			updatedby ,
+			isprovmes,
+			isavance,
+			isprovision,
+			suma_ingreso,
+			isingreso,
+			isdecimotercero,
+			isdecimocuarto,
+			isvariable,
+			isfondoreserva,
+			issueldo,
+			NAME,
+			NO_CALCULA_RUBRO_ID
+		
+		)VALUES(
+			p_valor, 
+			p_ad_client,	
+			p_org,
+			'Y',
+			'now()',
+			(SELECT createdby FROM AD_USER WHERE AD_USER_ID = P_USER),
+			'now()',
+			(SELECT updatedby FROM AD_USER WHERE AD_USER_ID = P_USER),
+			'N',
+			'N',
+			'N',
+			'N',
+			'N',
+			'N',
+			'N',
+			'N',
+			'N',
+			'N',
+			V_NOMBRE_RUBRO, 	
+			'4996D08CB7A74873B4EEB0A1E35C4DA5'
+		);
+		V_VALOR_RETORNO = 'CON INSERCIONES';
+		END IF;
+	return V_VALOR_RETORNO;
+	
+	
+  EXCEPTION
+    WHEN OTHERS THEN
+         v_ResultStr:= 'ERROR=' || SQLERRM;
+         V_VALOR_RETORNO = v_ResultStr;
+	 return V_VALOR_RETORNO;
+END NO_VERIFICAR_RUBROS
+]]></body>
+    </function>
+  </database>

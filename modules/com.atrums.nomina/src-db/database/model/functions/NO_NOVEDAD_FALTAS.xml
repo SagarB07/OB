@@ -7,23 +7,13 @@
       <body><![CDATA[Cur_Parameter RECORD;
     v_Client_ID VARCHAR(32);
     v_Org_ID VARCHAR(32);
-    v_User_ID VARCHAR(32);
-    
-    Cur_bpartner RECORD;
-    v_periodo VARCHAR;
-    v_bpartner_id VARCHAR;
-    v_horasInjustificadas NUMBER;
-    v_no_novedad_linea_id VARCHAR;
-    v_debe VARCHAR;
-    v_haber VARCHAR;
-    v_acctschema_id VARCHAR;
-    v_no_novedad_id VARCHAR;
-    v_no_cb_empleado_acct_id VARCHAR;
+    v_User_ID VARCHAR(32); 
+   
     
     v_fecha_inicial DATE;
     v_fecha_fin DATE;
     v_c_periodo_id VARCHAR;
-
+    V_QUERY VARCHAR;
     v_ResultStr VARCHAR;
     v_Message VARCHAR;
 BEGIN
@@ -31,9 +21,6 @@ BEGIN
     v_ResultStr:='PInstanceNotFound';
     AD_UPDATE_PINSTANCE(pinstance_id, NULL, 'Y', NULL, NULL) ;
 BEGIN
-
-
-
         FOR Cur_Parameter IN
           (SELECT i.Record_ID,
                   i.AD_User_ID,
@@ -49,7 +36,6 @@ BEGIN
             WHERE i.AD_PInstance_ID=PInstance_ID
             ORDER BY p.SeqNo)
         LOOP
-
         
           v_User_ID:=Cur_Parameter.AD_User_ID;
           v_Org_ID:=Cur_Parameter.AD_Org_ID;
@@ -66,103 +52,17 @@ BEGIN
         END IF;
 
  END LOOP;
-
-FOR Cur_bpartner IN
-
-          (select ce.c_bpartner_id , COALESCE(sum(np.horas),0) as sumahoras        
-            from no_contrato_empleado ce, no_permiso np
-           where ce.no_contrato_empleado_id = np.no_contrato_empleado_id
-             and ce.isactive = 'Y'
-             and (date(np.fecha_permiso) >= date(v_fecha_inicial) and date(np.fecha_permiso) <= date(v_fecha_fin))
-             and np.em_ne_estado = 'NJ'
-           group by ce.c_bpartner_id)
-
-    LOOP
-
-	v_bpartner_id:=Cur_bpartner.c_bpartner_id;
-        v_horasInjustificadas:=Cur_bpartner.sumahoras;
-        
-        select no_novedad_id into v_no_novedad_id from no_novedad where c_period_id = v_c_periodo_id and no_tipo_ingreso_egreso_id = '629E83A5F93D4EA9885A1CB68AA83500';
-        
-       
-        if ((v_no_novedad_id = '') or (v_no_novedad_id is null)) then
-        
-            v_no_novedad_id = get_uuid();
-
-            
-            
-            INSERT INTO NO_NOVEDAD
-            (    no_novedad_id,        ad_client_id,         ad_org_id,             isactive,                                 created,
-                createdby,             updated,             updatedby,             no_tipo_ingreso_egreso_id,                 c_period_id)
-            VALUES
-            (    v_no_novedad_id,         v_Client_ID,         v_Org_ID,             'Y',                                     now(),
-                v_User_ID,             now(),     v_User_ID,             '629E83A5F93D4EA9885A1CB68AA83500' ,     v_c_periodo_id);
-            
-
-		ALTER TABLE no_novedad_linea DISABLE TRIGGER no_unico_linea_empleado_trg;
-
-            INSERT INTO no_novedad_linea
-            (    no_novedad_linea_id,         ad_client_id ,         ad_org_id ,         isactive ,                 created,
-                createdby ,                 updated ,             updatedby ,         c_bpartner_id ,         valor ,
-                no_novedad_id)
-            VALUES
-            (    get_uuid(),                    v_Client_ID,         v_Org_ID,             'Y',                     now(),    
-                v_User_ID,                    now(),        v_User_ID,            v_bpartner_id,            v_horasInjustificadas ,    
-                v_no_novedad_id);    
-
-		ALTER TABLE no_novedad_linea ENABLE TRIGGER no_unico_linea_empleado_trg;            
-        
-        else
-		select no_novedad_linea_id into v_no_novedad_linea_id from no_novedad_linea where c_bpartner_id = v_bpartner_id and no_novedad_id = v_no_novedad_id;
-
-       
-            if ((v_no_novedad_linea_id = '') or (v_no_novedad_linea_id is null)) then
-         ALTER TABLE no_novedad_linea DISABLE TRIGGER no_unico_linea_empleado_trg;
-                    INSERT INTO no_novedad_linea
-                    (    no_novedad_linea_id,         ad_client_id ,         ad_org_id ,         isactive ,                 created,
-                        createdby ,                 updated ,             updatedby ,         c_bpartner_id ,         valor ,
-                        no_novedad_id)
-                    VALUES
-                    (    get_uuid(),                    v_Client_ID,         v_Org_ID,             'Y',                     now(),    
-                        v_User_ID,                    now(),        v_User_ID,            v_bpartner_id,            v_horasInjustificadas ,    
-                        v_no_novedad_id);    
-                        ALTER TABLE no_novedad_linea ENABLE TRIGGER no_unico_linea_empleado_trg;   
-            else
-                    
-                    UPDATE     no_novedad_linea set valor = v_horasInjustificadas where no_novedad_linea_id = v_no_novedad_linea_id;
-            
-            end if;
-END IF;
-        
-        select no_cb_empleado_acct_id
-          into v_no_cb_empleado_acct_id
-            from no_cb_empleado_acct
-           where c_bpartner_id = v_bpartner_id
-            and no_tipo_ingreso_egreso_id = '629E83A5F93D4EA9885A1CB68AA83500';
-        
-        if ((v_no_cb_empleado_acct_id = '') or (v_no_cb_empleado_acct_id is null)) then
-            
-            select n_debe_acct, n_haber_acct, c_acctschema_id
-                into v_debe, v_haber, v_acctschema_id
-                from no_tipo_ing_egr_acct
-               where no_tipo_ingreso_egreso_id = '629E83A5F93D4EA9885A1CB68AA83500';
-            
-            INSERT INTO no_cb_empleado_acct
-                    (    no_cb_empleado_acct_id,         ad_client_id ,                             ad_org_id ,         isactive ,                 created,
-                        createdby ,                     updated ,                                 updatedby ,         c_bpartner_id,            c_acctschema_id ,
-                        no_cuenta_ingreso_acct ,        no_tipo_ingreso_egreso_id,                no_cuenta_egreso_acct)
-                    VALUES
-                    (    get_uuid(),                        v_Client_ID,                             v_Org_ID,             'Y',                     now(),    
-                        v_User_ID,                        now(),                            v_User_ID,            v_bpartner_id,            v_acctschema_id,    
-                        v_debe,                            '629E83A5F93D4EA9885A1CB68AA83500',        v_haber);
-        
-        end if;
-END LOOP;
-
-
-        v_Message:='Proceso generado correctamentre';
-    --<<FINISH_PROCESS>>
-    --  Update AD_PInstance
+	V_QUERY := 'select no_verificar_rubros(''629E83A5F93D4EA9885A1CB68AA83500'', '''||v_User_ID||''' , '''||v_Org_ID||''','''||v_Client_ID ||''' )';
+	EXECUTE IMMEDIATE V_QUERY INTO v_Message;
+	V_QUERY := 'select no_verificar_rubros(''7617C5FF7283452886DA3014C3B9D880'', '''||v_User_ID||''' , '''||v_Org_ID||''','''||v_Client_ID ||''' )';
+	EXECUTE IMMEDIATE V_QUERY INTO v_Message;
+ 
+	V_QUERY := 'SELECT no_novedad_faltas_proceso('''|| v_fecha_inicial||''','''|| v_fecha_fin||''','''|| v_c_periodo_id||''', '''|| v_User_ID||''','''|| v_Org_ID||''','''||v_Client_ID ||''')';
+		--v_Message = V_QUERY;
+     EXECUTE IMMEDIATE V_QUERY INTO v_Message;
+	
+	--v_Message = v_Org_ID;
+	
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished ' || v_Message) ;
     AD_UPDATE_PINSTANCE(pinstance_id, NULL, 'N', 1, v_Message) ;
     RETURN;

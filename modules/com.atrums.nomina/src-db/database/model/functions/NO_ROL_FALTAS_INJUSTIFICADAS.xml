@@ -19,7 +19,7 @@
 
 BEGIN
 
-	select salario 
+	select salario into v_salario
 	    from no_contrato_empleado ce
 	  where ce.isactive = 'Y' and ce.c_bpartner_id = p_bpartner_id;
 	
@@ -30,7 +30,7 @@ BEGIN
 	
 	end if;
 	
-	if (p_valor == 4.5) then
+	if (p_valor = 4.5) then
 	
 		v_descuento = ROUND(((v_salario/30)/9) * 9,2);
 	

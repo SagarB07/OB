@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_DESCUENTO_REGLAS">
+    <function name="NO_DESCUENTO_REGLAS" type="NUMERIC">
+      <parameter name="p_bpartner_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_descuento varchar;
+v_salario NUMBER:=0;
+
+BEGIN
+
+	SELECT salario INTO V_SALARIO
+	FROM  no_contrato_empleado ce
+	WHERE ce.isactive = 'Y' AND ce.c_bpartner_id = p_bpartner_id;
+	
+	
+	if ((p_valor >= 0.5) AND (p_valor <= 4)) then		
+		v_descuento = ROUND(((V_SALARIO/30)/9) * p_valor,2);
+	
+	end if;
+	
+	if (p_valor = 4.5) then
+	
+		v_descuento = ROUND(((V_SALARIO/30)/9) * 9,2);
+	
+	end if;
+	
+	if ((p_valor >= 5) and (p_valor <= 9)) then
+	
+		v_descuento = ROUND(((V_SALARIO/30)/9) * 18,2);
+	
+	end if;
+	
+	
+	return v_descuento;
+END NO_DESCUENTO_REGLAS
+]]></body>
+    </function>
+  </database>
