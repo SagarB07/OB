@@ -22,7 +22,7 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 				final String rolId = rolesIds.getString(i);
 				CapaIntermedia capaIntermedia = new CapaIntermedia();
 				capaIntermedia.setIdRolPago(rolId);
-				//capaIntermedia.start();
+				capaIntermedia.start();
 			}
 		}
 		
@@ -31,10 +31,7 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 	@Override
 	protected JSONObject execute(Map<String, Object> parameters, String content) {
 		// TODO Auto-generated method stub
-		
 		JSONObject result = new JSONObject();
-		
-		
 		try {
 			JSONObject message = new JSONObject();
 			String mensaje = "El sistema se encuentra enviando los roles seleccionados, este proceso no interrumpira otras tareas que se puedan hacer en este momento";

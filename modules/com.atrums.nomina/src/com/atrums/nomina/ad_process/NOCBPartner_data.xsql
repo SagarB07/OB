@@ -23,15 +23,18 @@
     <SqlMethodComment></SqlMethodComment>
     <Sql>
       <![CDATA[
-      	select rp.no_rol_pago_provision_id as rolpago, rp.c_bpartner_id as tercero,  us.email as email,
+		select  no_numeros_meses (cast (pe.periodno as int))AS MES, 
+		CAST( extract(YEAR From NOW())AS INT) AS ANIO, 
+		rp.no_rol_pago_provision_id as rolpago, 
+		rp.c_bpartner_id as tercero,  us.email as email,
 		rp.ad_org_id as organizacion  
-		from no_rol_pago_provision rp, ad_user us			
+		from no_rol_pago_provision rp, ad_user us, c_period pe			
 		where us.c_bpartner_id = rp.c_bpartner_id
+		and pe.c_period_id = rp.c_period_id
 		and us.em_no_rol_mail = 'Y'
 		and rp.ispago='Y'
 		and rp.isactive = 'Y' 
 		and rp.no_rol_pago_provision_id = ?
-		     
       ]]>
     </Sql>
     <Parameter name="rolpagoId"/>

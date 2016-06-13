@@ -37,14 +37,11 @@ public class CapaIntermedia extends  Thread  {
 					 log.info("Problema en el Path " + value);
 					 strDirectorio = "/var/lib/tomcat6/webapps/openbravo/WEB-INF/";
 				 }
-				
 			 }
-				
 		}
 		}catch (Exception e){
 			log.error(e.toString() +" --------------"+strDirectorio );
 		}
-		
 		final ConnectionProvider conn = new ConnectionProviderImpl(strDirectorio + "/Openbravo.properties");
 		partner = new NOCBPartner(conn);
 	}
@@ -85,8 +82,5 @@ public class CapaIntermedia extends  Thread  {
 	public void setIdRolPago(String idRolPago) {
 		this.idRolPago = idRolPago;
 	};
-	
-	
-	
 	
 }

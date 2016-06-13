@@ -85,7 +85,7 @@ public class TestNomina {
 	public void testEmvioMails() throws Exception {
 		CapaIntermedia capa = new CapaIntermedia();
 		capa.setIdRolPago("6094096A51B64765AD71EF9940D47BC7");
-		//capa.start();
+		capa.start();
 		System.out.println("Si paso significa que funcionó");
 	 }
 }
