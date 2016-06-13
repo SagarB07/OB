@@ -22,7 +22,7 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 				final String rolId = rolesIds.getString(i);
 				CapaIntermedia capaIntermedia = new CapaIntermedia();
 				capaIntermedia.setIdRolPago(rolId);
-				capaIntermedia.start();
+				//capaIntermedia.start();
 			}
 		}
 		

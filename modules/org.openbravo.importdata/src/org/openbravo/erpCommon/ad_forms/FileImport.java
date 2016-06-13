@@ -559,7 +559,8 @@ public String obtenerPerfil (Connection conn, ConnectionProvider connectionProvi
 	  return campo;
   }
   
-  private OBError importarFichero(VariablesSecureApp vars, FieldProvider[] data2, HttpServletRequest request, HttpServletResponse response, String strAdImpformatId)    throws ServletException, IOException {
+  @SuppressWarnings("unused")
+private OBError importarFichero(VariablesSecureApp vars, FieldProvider[] data2, HttpServletRequest request, HttpServletResponse response, String strAdImpformatId)    throws ServletException, IOException {
     Connection con = null;
     StringBuffer strFields = new StringBuffer("");
     StringBuffer strValues = new StringBuffer("");
@@ -608,11 +609,11 @@ public String obtenerPerfil (Connection conn, ConnectionProvider connectionProvi
          
           strValues.append("'");
           String valorCampoTemporal = strValues.toString();
-          if (strTable.equals("I_BPartner")){
+          if (strTable.equals("I_BPartner")&& 1<0){
         	  StringBuffer auxStrFields = new StringBuffer(strFields.toString());
         	  strFields = obtenerCodigoTercero (con, this,strFields, valorCampoTemporal );
         
-        	  System.out.println(strFields);
+        	  
         	  if(strFields.indexOf("ERROR")>0){
         		  String valorError = strFields.substring(strFields.indexOf("ERROR"),strFields.length() );
     			  myMessage = Utility.translateError(this, vars, vars.getLanguage(), "Error");

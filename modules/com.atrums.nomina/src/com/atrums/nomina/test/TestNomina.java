@@ -25,9 +25,9 @@ public class TestNomina {
 		idContrato.add("B74048E354A24D8D910A013F4ED9208B");
 		idContrato.add("7E59FEAAEF7C482189FC794387E4E257");
 		for (String iterador :idContrato){
-			filas = contratoProceso.actulizarContrato(conn.conn, iterador);
+			filas = contratoProceso.actualizarContrato(conn.conn, iterador);
 		}
-		filas = contratoProceso.actulizarContrato(conn.conn, "71026F9E9CD74733B1FFA624EE9D5C04");
+		filas = contratoProceso.actualizarContrato(conn.conn, "71026F9E9CD74733B1FFA624EE9D5C04");
 		System.out.print("Se han actualizado: " +idContrato.size() +" filas");
 		
 		

@@ -41,6 +41,8 @@ public class AvanceComponentProvider extends BaseComponentProvider {
     
     globalResources.add(createStaticResource(
             "web/com.atrums.nomina/js/email-toolbar-button.js", false));
+	  globalResources.add(createStaticResource(
+            "web/com.atrums.nomina/js/contrato-empleado-toolbar-button.js", false));
 
     return globalResources;
   }
