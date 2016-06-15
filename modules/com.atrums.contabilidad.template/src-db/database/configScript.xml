@@ -129,14 +129,6 @@ where @additional_filters@
       <oldValue><![CDATA[Y]]></oldValue>
       <newValue><![CDATA[N]]></newValue>
     </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="ISDISPLAYED" pkRow="2156">
-      <oldValue><![CDATA[Y]]></oldValue>
-      <newValue><![CDATA[N]]></newValue>
-    </columnDataChange>
-    <columnDataChange tablename="AD_FIELD" columnname="ISREADONLY" pkRow="2156">
-      <oldValue><![CDATA[N]]></oldValue>
-      <newValue><![CDATA[Y]]></newValue>
-    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="2191">
       <oldValue><![CDATA[Phone]]></oldValue>
       <newValue><![CDATA[Teléfono Convencional]]></newValue>

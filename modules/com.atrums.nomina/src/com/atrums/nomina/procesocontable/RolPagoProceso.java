@@ -25,12 +25,10 @@ import org.openbravo.erpCommon.ad_forms.Fact;
 import org.openbravo.erpCommon.utility.FieldProviderFactory;
 import org.openbravo.erpCommon.utility.SequenceIdData;
 import org.openbravo.model.common.businesspartner.BusinessPartner;
-import org.openbravo.model.common.businesspartner.EmployeeAccounts;
 import org.openbravo.model.financialmgmt.accounting.AccountingFact;
 import org.openbravo.model.financialmgmt.accounting.FIN_FinancialAccountAccounting;
 import org.openbravo.model.financialmgmt.payment.FIN_FinancialAccount;
 
-import com.atrums.nomina.data.noCbEmpleadoAcct;
 import com.atrums.nomina.data.noRolPagoProvision;
 import com.atrums.nomina.data.noRolPagoProvisionLine;
 
@@ -186,10 +184,12 @@ public class RolPagoProceso extends AcctServer {
       final OBQuery<BusinessPartner> obqParamAcct = OBDal.getInstance().createQuery(
     		  BusinessPartner.class, whereClause3.toString());
 
+      if (obqParamAcct.list().get(0).getNoPagoAcct() != null){
       fact.createLine(null,
           Account.getAccount(conn, obqParamAcct.list().get(0).getNoPagoAcct().getId()) ,
           C_Currency_ID, ZERO.toString(), noRolPago.getTotalNeto().abs().toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
+      }
 
     } finally {
       OBContext.restorePreviousMode();

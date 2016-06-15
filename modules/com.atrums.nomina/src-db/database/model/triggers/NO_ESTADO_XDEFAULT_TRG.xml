@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ESTADO_XDEFAULT_TRG">
+    <trigger name="NO_ESTADO_XDEFAULT_TRG" table="NO_CONTRATO_EMPLEADO" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+
+v_val_ingreso NUMBER;
+v_val_egreso NUMBER;
+
+BEGIN
+    IF (INSERTING) THEN
+
+		:NEW.DOCSTATUS= 'BR';
+
+        RETURN NEW;
+    ELSE
+        RETURN NEW;
+    END IF;
+END NO_ESTADO_XDEFAULT_TRG
+]]></body>
+    </trigger>
+  </database>

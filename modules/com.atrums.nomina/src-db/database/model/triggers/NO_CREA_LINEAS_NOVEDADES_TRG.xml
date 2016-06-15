@@ -17,6 +17,7 @@ BEGIN
                 no_cb_empleado_acct tie
           where bp.c_bpartner_id = ce.c_bpartner_id
             and bp.isemployee = 'Y'
+            and ce.docstatus= 'CO'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=:new.ad_Client_ID
             --and bp.em_no_fechasalida is null
@@ -54,6 +55,7 @@ end if;
           where bp.c_bpartner_id = ce.c_bpartner_id
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
+            and ce.docstatus= 'CO'
             and bp.AD_Client_ID=:new.ad_Client_ID
             --and bp.em_no_fechasalida is null
             and ce.isactive='Y'

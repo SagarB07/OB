@@ -194,7 +194,7 @@ END IF;
 		     INNER JOIN no_calcula_rubro cr ON (tie.no_calcula_rubro_id = cr.no_calcula_rubro_id)
 		     INNER JOIN no_calcula_rubro_line crl ON (cr.no_calcula_rubro_id = crl.no_calcula_rubro_id)
 		     INNER JOIN no_contrato_empleado ce ON (ce.c_bpartner_id = cea.c_bpartner_id)
-			 WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(now()) and ce.isactive = 'Y')
+			 WHERE (tie.isavance = 'Y' AND date(ce.fecha_fin) >= date(now()) and ce.docstatus= 'CO' and ce.isactive = 'Y')
 		
 		)
 	LOOP

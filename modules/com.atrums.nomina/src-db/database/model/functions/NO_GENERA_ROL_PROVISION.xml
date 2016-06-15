@@ -69,10 +69,11 @@ BEGIN
         (select bp.c_bpartner_id,
                 ce.ad_org_id,
                 ce.fecha_inicio,
-		ce.documentno
+				ce.documentno
            from c_bpartner bp,
                 no_contrato_empleado ce
           where bp.c_bpartner_id = ce.c_bpartner_id
+		and ce.docstatus='CO'
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=v_Client_ID)
@@ -80,9 +81,6 @@ BEGIN
         LOOP
 		
             v_Org_ID := Cur_Empleado.ad_Org_ID;
-			
-
-
 
             select c_currency_id into v_currency_id
               from ad_client
@@ -107,7 +105,7 @@ BEGIN
 
                ad_sequence_doctype(v_doctypeprov_id, v_Client_ID, 'Y', v_documentnoprov);
 
-               INSERT INTO no_rol_pago_provision
+             INSERT INTO no_rol_pago_provision
                             (no_rol_pago_provision_id,   ad_client_id,       ad_org_id,          isactive,
                              created,                    createdby,          updated,            updatedby,
                              c_bpartner_id,              c_doctype_id,       documentno,         total_ingreso, 
@@ -153,7 +151,9 @@ BEGIN
 
                     v_calc_moth:= Cur_Rubro_Rol.mes_calculo || ' MONTH';
                     v_qry:= 'select (DATE_TRUNC(''YEAR'', date( now()::varchar)) + interval '''||v_calc_moth||''' )::TIMESTAMP';
-
+					
+					
+					
                     execute v_qry into v_fecha_inicio;
                     v_fecha_final:= (DATE(v_fecha_inicio::varchar) + interval '11 MONTH')::TIMESTAMP;
                     select min(p.startdate), max(p.enddate)

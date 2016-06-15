@@ -65,9 +65,6 @@
         <default/>
         <onCreateDefault/>
       </column>
-      <foreign-key foreignTable="C_BPARTNER" name="NO_SDIGNO_LINE_PARTNER">
-        <reference local="C_BPARTNER_ID" foreign="C_BPARTNER_ID"/>
-      </foreign-key>
       <foreign-key foreignTable="NO_UTILIDAD" name="NO_UTIL_LINE_NO_UTILIDAD">
         <reference local="NO_UTILIDAD_ID" foreign="NO_UTILIDAD_ID"/>
       </foreign-key>

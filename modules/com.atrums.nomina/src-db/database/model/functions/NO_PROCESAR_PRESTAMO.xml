@@ -35,6 +35,7 @@ v_count_month:=(Cur_Parameter.meses_cuota-1) || ' month';
 
 DBMS_OUTPUT.PUT_LINE('@meses: ' || v_count_month);
 
+
 IF(Cur_Parameter.valor_cuota>0)THEN
 
 	IF(SELECT count(*) > 0 
@@ -69,23 +70,42 @@ IF(Cur_Parameter.valor_cuota>0)THEN
 			AND n.no_tipo_ingreso_egreso_id = Cur_Parameter.no_tipo_ingreso_egreso_id;
 
 			DBMS_OUTPUT.PUT_LINE('@id_novedad: ' || v_id_novedad);
-
+			
 			IF(v_id_novedad is null)THEN
+			
 			   v_id_novedad:=get_uuid(); 
-			   
+			   ALTER TABLE no_novedad DISABLE TRIGGER no_crea_lineas_novedades_trg;
 			   INSERT INTO no_novedad(no_novedad_id, ad_client_id, ad_org_id, isactive, created, createdby, 
 					      updated, updatedby, no_tipo_ingreso_egreso_id, c_period_id, name)
 			      VALUES (v_id_novedad, Cur_Parameter.ad_client_id , Cur_Parameter.ad_org_id, 'Y', now(), Cur_Parameter.AD_User_ID, 
 				      now(), Cur_Parameter.AD_User_ID, Cur_Parameter.no_tipo_ingreso_egreso_id, v_id_period, null);
+			ALTER TABLE no_novedad ENABLE TRIGGER no_crea_lineas_novedades_trg;
+			--raise exception '%', '*****f********';	      
 			END IF;
+			ALTER TABLE no_novedad_linea DISABLE TRIGGER no_unico_linea_empleado_trg;
 
+			
+
+			IF (SELECT COUNT (*)> 0 FROM no_novedad_linea WHERE NO_NOVEDAD_ID = v_id_novedad AND C_BPARTNER_ID = Cur_Parameter.c_bpartner_id) THEN 
+
+			UPDATE no_novedad_linea SET VALOR = Cur_Parameter.valor_cuota 
+			WHERE NO_NOVEDAD_ID = v_id_novedad AND C_BPARTNER_ID = Cur_Parameter.c_bpartner_id;
+			--raise exception '%', '@NO_UNICO_EMP_NOVEDAD@';
+			ELSE
+			--return new; 
 			INSERT INTO no_novedad_linea(no_novedad_linea_id, ad_client_id, ad_org_id, isactive, created, 
 					             createdby, updated, updatedby, c_bpartner_id, valor, no_novedad_id, 
 					             isprestamo)
 			VALUES (get_uuid(), Cur_Parameter.ad_client_id , Cur_Parameter.ad_org_id, 'Y', now(), Cur_Parameter.AD_User_ID, 
 				now(), Cur_Parameter.AD_User_ID, Cur_Parameter.c_bpartner_id, Cur_Parameter.valor_cuota, v_id_novedad, 
 			        'Y');
+			
+			END IF;
 
+			
+		
+			        
+			ALTER TABLE no_novedad_linea ENABLE TRIGGER no_unico_linea_empleado_trg;
 			v_id_period:=null;
 			v_id_novedad:=null;
 			v_aux_meses:=v_aux_meses+1;
@@ -93,17 +113,15 @@ IF(Cur_Parameter.valor_cuota>0)THEN
 		END LOOP;
 
 		UPDATE no_prestamo SET docaction_pro='CO', processed='Y' WHERE no_prestamo_id = Cur_Parameter.Record_ID;
-
 		v_ResultStr:='Prestamo procesado';
-
-	 AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 1, v_ResultStr);
+		AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 1, v_ResultStr);
+		
 		RETURN;
 	ELSE
 		DBMS_OUTPUT.PUT_LINE( '@No existen periodos suficientes para el prestamo');
-
-		v_ResultStr:='No existen periodos suficientes para el prestamo';
+		v_ResultStr:='No existen periodos suficientes para el prestamo';		
+		AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 0, v_ResultStr);
 		
-	 AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 0, v_ResultStr);
 		RETURN;
 	END IF;
 ELSE
@@ -124,6 +142,7 @@ DBMS_OUTPUT.PUT_LINE('@Finalizando el Proceso no_procesar_prestamo');
 EXCEPTION
 WHEN OTHERS THEN
 	v_ResultStr:= '@ERROR=' || SQLERRM;
+	raise exception '%', v_ResultStr;
 	DBMS_OUTPUT.PUT_LINE(v_ResultStr);
 END NO_PROCESAR_PRESTAMO
 ]]></body>

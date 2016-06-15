@@ -58,6 +58,7 @@ BEGIN
                 no_contrato_empleado ce            
 			where bp.c_bpartner_id = ce.c_bpartner_id
 			and ce.isactive = 'Y'
+			and ce.docstatus = 'CO'
             and bp.c_bpartner_id 
 			in (select c_bpartner_id from no_cb_empleado_acct  re where re.no_tipo_ingreso_egreso_id 
 			in (select no_tipo_ingreso_egreso_id from no_tipo_ingreso_egreso where isprovision = 'Y'))
@@ -142,31 +143,36 @@ BEGIN
 
                     execute v_qry into v_fecha_inicio;
                     v_fecha_final:= (DATE(v_fecha_inicio::varchar) + interval '11 MONTH')::TIMESTAMP;
-                    select min(p.startdate), max(p.enddate)
-                    into v_fecha_inicio, v_fecha_final
-                    from c_year y, c_period p
-                    where to_number(y.year) = DATE_part('YEAR', date(now())) 
-                    and y.ad_client_id = p_client_id
-                    and y.c_year_id = p.c_year_id;
+  					
+					
+					SELECT FECHA_INICIO , FECHA_FIN   into v_fecha_inicio, v_fecha_final
+					FROM NO_CONTRATO_EMPLEADO 
+					WHERE C_BPARTNER_ID IN (
+											SELECT C_BPARTNER_ID FROM no_rol_pago_provision 
+											WHERE no_rol_pago_provision_ID = v_rol_pago_provision_id
+											) AND DOCSTATUS= 'CO';
+					
 
-                    SELECT dt.c_doctype_id INTO v_doctypeline_id
-                    FROM c_doctype dt
-                    WHERE dt.ad_table_id = 'DDBCCC1DA9BE4E01A31B8325706B08DB';
-                    ad_sequence_doctype(v_doctypeline_id, p_client_id, 'Y', v_documentnoline);
+					IF v_fecha_inicio IS NOT NULL THEN 
+						SELECT dt.c_doctype_id INTO v_doctypeline_id
+						FROM c_doctype dt
+						WHERE dt.ad_table_id = 'DDBCCC1DA9BE4E01A31B8325706B08DB';
+						ad_sequence_doctype(v_doctypeline_id, p_client_id, 'Y', v_documentnoline);
 
-                     INSERT INTO no_rol_pago_provision_line
-                                (no_rol_pago_provision_line_id,        ad_client_id,                ad_org_id,                                  isactive,
-                                 created,                              createdby,                   updated,                                    updatedby,
-                                 no_rol_pago_provision_id,             line,                        no_tipo_ingreso_egreso_id,                  valor,
-                                 processed,                            fechainicio,                 fechafin,                                   c_currency_id,
-                                 docstatus,                            c_doctype_id,                documentno,                                 docaccionno)
-                          VALUES(v_rol_pago_prov_line_id,              p_client_id,                 p_org_id,                                   'Y',
-                                 current_timestamp,                    p_user_id,                   current_timestamp,                          p_user_id,
-                                 v_rol_pago_provision_id,              v_line,                      Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    0,
-                                 
-                                 'Y',                                  v_fecha_inicio,              v_fecha_final,                              v_currency_id, 
-                                 
-                                 'CO',                                 v_doctypeline_id,            v_documentnoline,                            'RE');
+						 INSERT INTO no_rol_pago_provision_line
+									(no_rol_pago_provision_line_id,        ad_client_id,                ad_org_id,                                  isactive,
+									 created,                              createdby,                   updated,                                    updatedby,
+									 no_rol_pago_provision_id,             line,                        no_tipo_ingreso_egreso_id,                  valor,
+									 processed,                            fechainicio,                 fechafin,                                   c_currency_id,
+									 docstatus,                            c_doctype_id,                documentno,                                 docaccionno)
+							  VALUES(v_rol_pago_prov_line_id,              p_client_id,                 p_org_id,                                   'Y',
+									 current_timestamp,                    p_user_id,                   current_timestamp,                          p_user_id,
+									 v_rol_pago_provision_id,              v_line,                      Cur_Rubro_Rol.no_tipo_ingreso_egreso_id,    0,
+									 
+									 'Y',                                  v_fecha_inicio,              v_fecha_final,                              v_currency_id, 
+									 
+									 'CO',                                 v_doctypeline_id,            v_documentnoline,                            'RE');
+					END IF;
                 END LOOP;
 
             ELSE
@@ -231,14 +237,16 @@ BEGIN
 					select fecha_inicio
 					from no_contrato_empleado
 					where isactive = 'Y' 
-					and  ad_client_id=p_client_id 
+					and ad_client_id=p_client_id 
+					AND DOCSTATUS= 'CO'
 					and c_bpartner_id = Cur_Empleado.c_bpartner_id
 					);
 		   v_fecha_final = (  --select nce.fecha_inicio into v_fecha_inicio , nce.fecha_fin into v_fecha_final , nce.c_bpartner_id
 					select fecha_fin
 					from no_contrato_empleado
 					where isactive = 'Y' 
-					and  ad_client_id=p_client_id 
+					AND DOCSTATUS= 'CO'
+					and ad_client_id=p_client_id 
 					and c_bpartner_id = Cur_Empleado.c_bpartner_id
 					);
 					
@@ -276,6 +284,7 @@ BEGIN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
 		UPDATE IDT_CONTRATO SET I_ERRORMSG = v_ResultStr;
+		raise exception '%', v_ResultStr;
       --  PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
         RETURN;
 END NO_GENERA_PROVICION

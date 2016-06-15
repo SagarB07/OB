@@ -247,6 +247,7 @@ END IF;
            from c_bpartner bp,
                 no_contrato_empleado ce
           where bp.c_bpartner_id = ce.c_bpartner_id
+	    and ce.docstatus= 'CO'
             and bp.isemployee = 'Y'
             and bp.isactive = 'Y'
             and bp.AD_Client_ID=v_Client_ID

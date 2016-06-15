@@ -157,7 +157,7 @@ public class RolProvisionProcess extends AcctServer {
     		  noRolProvisionLineMes.class, whereClause2.toString());
 
       // Cuenta de Ingreso
-      if (obqParameters.list().size()>=0 && obqParameters.list().get(0).getCuentaDelIngreso()!=null){
+      if (obqParameters.list().size()>=0 && obqParameters != null && obqParameters.list() != null && obqParameters.list().get(0).getCuentaDelIngreso()!=null){
       fact.createLine(null,
           Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelIngreso().getId()),
           C_Currency_ID, noRolpMes.getValor().abs().toString(), ZERO.toString(),
