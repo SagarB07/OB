@@ -14,7 +14,7 @@ BEGIN
 
         IF(v_docstatus='CO' OR v_docstatus='AN')then
             v_mensaje='@NO_PERMITE_BORRA_DATOS@';
-            RAISE exception '%',v_mensaje;
+            RAISE v_mensaje;
 
         END IF;
 

@@ -138,10 +138,12 @@ public class AvanceProceso extends AcctServer {
       final OBQuery<noCbEmpleadoAcct> obqParameters = OBDal.getInstance().createQuery(
           noCbEmpleadoAcct.class, whereClause.toString());
 
+      if (obqParameters.list().size()>0){
       fact.createLine(null,
           Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelIngreso().getId()),
           C_Currency_ID, ZERO.toString(), noRegQuincLine.getValor().abs().toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
+      }
 
       // Inicio: Esto es sin se necesita que el asiento contable sea con la cuenta del Egreso del
       // rubro
@@ -160,11 +162,13 @@ public class AvanceProceso extends AcctServer {
 
       final OBQuery<EmployeeAccounts> obqParamAcct = OBDal.getInstance().createQuery(
           EmployeeAccounts.class, whereClause2.toString());
-
+      if (obqParamAcct.list() != null && obqParamAcct.list().size()>0 && obqParamAcct.list().get(0) != null && 
+    		  obqParamAcct.list().get(0).getNoCuentaPago() != null && obqParamAcct.list().get(0).getNoCuentaPago().getId() != null){
       fact.createLine(null,
           Account.getAccount(conn, obqParamAcct.list().get(0).getNoCuentaPago().getId()),
           C_Currency_ID, noRegQuincLine.getValor().abs().toString(), ZERO.toString(),
           Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
+      }
       // Fin: Cuenta de egreso, aqui esta con la cuenta del pago del empleado
     } finally {
       OBContext.restorePreviousMode();

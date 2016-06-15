@@ -296,7 +296,7 @@ END IF;
 									   'N',
 									   'Y', 
 									   'BO', 
-									   'BO', 
+									   'CO', 
 									   'N', 
 									   now(), 'N',
 									   (SELECT d.c_doctype_id
@@ -374,7 +374,7 @@ END IF;
 									   'N',
 									   'Y', 
 									   'BO', 
-									   'BO', 
+									   'CO', 
 									   'N', 
 									   now(), 'N',
 									   (SELECT d.c_doctype_id
