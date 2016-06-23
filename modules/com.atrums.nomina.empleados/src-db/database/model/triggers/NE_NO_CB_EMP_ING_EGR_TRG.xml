@@ -27,7 +27,7 @@ BEGIN
 	:new.no_cuenta_ingreso_acct = v_n_debe_acct;
 	:new.no_cuenta_egreso_acct  = v_n_haber_acct;
 
-	if v_no_cb_empleado_acct_id is not null then
+	IF UPDATING and  v_no_cb_empleado_acct_id is not null then
 		raise '%', '@NE_NO_CB_EMP_ING_EGR_REP@';
 	end if;
 	

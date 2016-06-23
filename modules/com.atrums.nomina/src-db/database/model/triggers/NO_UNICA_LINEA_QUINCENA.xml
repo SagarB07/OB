@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_UNICA_LINEA_QUINCENA">
+    <trigger name="NO_UNICA_LINEA_QUINCENA" table="NO_REGISTRA_QUINC_LINE" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+v_mensaje 	varchar(255);	  
+BEGIN
+    	
+    IF (UPDATING OR INSERTING) THEN
+        IF (SELECT  COUNT(*)>0 FROM no_registra_quinc_line 
+		WHERE c_bpartner_id = :new.c_bpartner_id 
+		AND no_registra_quincena_id = :new.no_registra_quincena_id 
+		--AND no_tipo_ingreso_egreso_id = NEW.no_tipo_ingreso_egreso_id
+		) THEN
+	 
+		raise exception '%', '@NO_UNICA_LINEA_QUINCENA@';
+
+        ELSE
+            RETURN NEW;
+        END IF;
+    END IF;
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_UNICA_LINEA_QUINCENA
+]]></body>
+    </trigger>
+  </database>
