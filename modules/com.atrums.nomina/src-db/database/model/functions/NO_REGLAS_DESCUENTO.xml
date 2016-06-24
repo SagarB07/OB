@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_REGLAS_DESCUENTO">
+    <function name="NO_REGLAS_DESCUENTO" type="VARCHAR">
+      <parameter name="p_valor" type="NUMERIC" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[v_descuento varchar;
+v_salario NUMBER:=0;
+
+BEGIN
+
+	
+	if ((p_valor >= 0.5) AND (p_valor <= 4)) then		
+		v_descuento = 'A';
+	
+	end if;
+	
+	if (p_valor = 4.5) then
+	
+		v_descuento = 'B';
+	
+	end if;
+	
+	if ((p_valor >= 5) and (p_valor <= 9)) then
+	
+		v_descuento = 'B';
+	
+	end if;
+	
+	
+	return v_descuento;
+END NO_REGLAS_DESCUENTO
+]]></body>
+    </function>
+  </database>

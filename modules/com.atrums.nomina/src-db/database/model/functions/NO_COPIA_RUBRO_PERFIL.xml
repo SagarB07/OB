@@ -17,7 +17,7 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
   v_ResultStr:='PInstanceNotFound';
   AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
- 
+  ALTER TABLE ne_perfil_rubro_line DISABLE TRIGGER ne_debe_haber_trg;
   FOR ITERADOR_RUBRO IN
 			SELECT  cab.no_tipo_ingreso_egreso_id, det.n_debe_acct, det.n_haber_acct
 			FROM no_tipo_ingreso_egreso cab,no_tipo_ing_egr_acct det  
@@ -28,31 +28,15 @@ BEGIN
 				FROM ne_perfil_rubro_line WHERE NO_TIPO_INGRESO_EGRESO_ID = ITERADOR_RUBRO.NO_TIPO_INGRESO_EGRESO_ID			
 			LOOP
 			
-			IF ITERADOR_PERFIL.NE_DEBE_ACCT<>ITERADOR_RUBRO.n_debe_acct  THEN
+---			IF ITERADOR_PERFIL.NE_DEBE_ACCT<> ITERADOR_RUBRO.n_debe_acct THEN
 			UPDATE NE_PERFIL_RUBRO_LINE  SET NE_DEBE_ACCT = ITERADOR_RUBRO.n_debe_acct, NE_HABER_ACCT=ITERADOR_RUBRO.n_haber_acct  
 			WHERE NE_PERFIL_RUBRO_LINE_ID = ITERADOR_PERFIL.NE_PERFIL_RUBRO_LINE_ID ;
-			END IF;
-		
-			IF ITERADOR_PERFIL.NE_HABER_ACCT<> ITERADOR_RUBRO.n_haber_acct  THEN
-			UPDATE NE_PERFIL_RUBRO_LINE  SET NE_DEBE_ACCT = ITERADOR_RUBRO.n_debe_acct, NE_HABER_ACCT=ITERADOR_RUBRO.n_haber_acct  
-			WHERE NE_PERFIL_RUBRO_LINE_ID = ITERADOR_PERFIL.NE_PERFIL_RUBRO_LINE_ID ;
-			END IF;
-			
-			IF ITERADOR_RUBRO.n_haber_acct IS NULL THEN
-			UPDATE NE_PERFIL_RUBRO_LINE  SET NE_HABER_ACCT=ITERADOR_RUBRO.n_haber_acct  
-			WHERE NE_PERFIL_RUBRO_LINE_ID = ITERADOR_PERFIL.NE_PERFIL_RUBRO_LINE_ID ;
-			END IF;
-			
-			IF ITERADOR_RUBRO.n_debe_acct IS NULL THEN
-			UPDATE NE_PERFIL_RUBRO_LINE  SET NE_DEBE_ACCT=ITERADOR_RUBRO.n_debe_acct  
-			WHERE NE_PERFIL_RUBRO_LINE_ID = ITERADOR_PERFIL.NE_PERFIL_RUBRO_LINE_ID ;
-			END IF;
 			
 			END LOOP;	
 		
         END LOOP;
  	
-	
+		ALTER TABLE ne_perfil_rubro_line ENABLE TRIGGER ne_debe_haber_trg;
          v_Message:='@NO_EjecucionCorrecta@';
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', null, v_Message);
@@ -65,6 +49,7 @@ BEGIN
 	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+		raise exception '%', v_ResultStr;
     RETURN;
 END NO_COPIA_RUBRO_PERFIL
 ]]></body>

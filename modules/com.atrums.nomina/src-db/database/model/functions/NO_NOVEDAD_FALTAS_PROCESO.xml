@@ -44,7 +44,7 @@ BEGIN
 
 	LOOP
 					FOR ITERADOR_REGLA IN
-						  SELECT   no_descuento_reglas(np.horas) AS REGLA
+						  SELECT   no_reglas_descuento(np.horas) AS REGLA
 						   FROM no_contrato_empleado ce, no_permiso np
 						   WHERE ce.no_contrato_empleado_id = np.no_contrato_empleado_id
 						   AND ce.isactive = 'Y'
@@ -74,10 +74,8 @@ BEGIN
 															)
 							LOOP
 
-							--v_resultado = '00002';
 							V_SUMADESCUENTO = V_SUMADESCUENTO + ITERADOR_SUMA.VALORDESCUENTO;
-						--	v_resultado = V_SUMADESCUENTO;
-							
+						
 							END LOOP;
 							V_QUERY =  null;	
 							IF V_SUMADESCUENTO>0 AND ITERADOR_REGLA.REGLA = 'A' THEN 
