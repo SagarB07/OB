@@ -114,13 +114,13 @@ IF(Cur_Parameter.valor_cuota>0)THEN
 
 		UPDATE no_prestamo SET docaction_pro='CO', processed='Y' WHERE no_prestamo_id = Cur_Parameter.Record_ID;
 		v_ResultStr:='Prestamo procesado';
-		AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 1, v_ResultStr);
+	 AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 1, v_ResultStr);
 		
 		RETURN;
 	ELSE
 		DBMS_OUTPUT.PUT_LINE( '@No existen periodos suficientes para el prestamo');
 		v_ResultStr:='No existen periodos suficientes para el prestamo';		
-		AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 0, v_ResultStr);
+	 AD_UPDATE_PINSTANCE(p_pinstance_id, NULL, 'N', 0, v_ResultStr);
 		
 		RETURN;
 	END IF;

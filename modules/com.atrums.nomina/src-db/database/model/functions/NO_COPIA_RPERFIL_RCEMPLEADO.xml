@@ -8,80 +8,75 @@
 v_Message VARCHAR(2000):=''; 
 ITERADOR_RCUENTA RECORD;
 ITERADOR_PERFIL RECORD;
+v_acct_schema character varying(32);
 
-BEGIN
+BEGIN	
    
    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
   v_ResultStr:='PInstanceNotFound';
   AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
          
    FOR ITERADOR_PERFIL IN
-					
-			SELECT ne_perfil_rubro_id AS ID,
-			NO_TIPO_INGRESO_EGRESO_ID AS RUBRO, 
-			ne_debe_acct AS HABER, 
-			ne_haber_acct  AS DEBE
-			FROM NE_PERFIL_RUBRO_LINE 
-			WHERE ISACTIVE = 'Y'          
-			AND NE_PERFIL_RUBRO_LINE_ID IN (
-				SELECT NE_PERFIL_RUBRO_LINE_ID FROM NE_PERFIL_RUBRO_LINE WHERE NE_PERFIL_RUBRO_ID IN (
-							SELECT EM_NE_PERFIL_RUBRO_ID FROM C_BPARTNER WHERE C_BPARTNER_ID IN (
-							SELECT C_BPARTNER_ID FROM no_cb_empleado_acct WHERE CREATED <> UPDATED 
-							)
-							)
-			)
+		
+		SELECT C_BPARTNER_ID AS IDPARTNER, em_ne_perfil_rubro_id AS IDPERFIL
+		FROM C_BPARTNER 
+		WHERE em_ne_perfil_rubro_id IN (
+										SELECT NE_PERFIL_RUBRO_ID 
+										FROM NE_PERFIL_RUBRO 
+										WHERE NE_PERFIL_RUBRO_ID IN (
+																	SELECT NE_PERFIL_RUBRO_ID FROM NE_PERFIL_RUBRO_LINE  
+																	WHERE CREATED<>UPDATED AND ISACTIVE = 'Y'
+																	)
+						)AND  C_BPARTNER_ID IN (
+						SELECT C_BPARTNER_ID FROM NO_CONTRATO_EMPLEADO WHERE DOCSTATUS= 'CO'
+						)
 			
         LOOP
-
-
-			FOR ITERADOR_RCUENTA IN
-				SELECT 
-				no_cb_empleado_acct_ID AS ID, 
-				NO_CUENTA_EGRESO_ACCT AS HABER,
-				NO_CUENTA_INGRESO_ACCT AS DEBE 
-				FROM no_cb_empleado_acct 
-				WHERE CREATED <> UPDATED 
-				AND NO_TIPO_INGRESO_EGRESO_ID = ITERADOR_PERFIL.RUBRO
-			LOOP
 			
-			IF ITERADOR_PERFIL.DEBE<>ITERADOR_RCUENTA.DEBE  THEN
-			UPDATE IDT_CONTRATO SET I_ERRORMSG = '1';
-			UPDATE no_cb_empleado_acct  SET NO_CUENTA_EGRESO_ACCT = ITERADOR_PERFIL.DEBE, 
-			UPDATED = CREATED,
-			NO_CUENTA_INGRESO_ACCT=ITERADOR_PERFIL.HABER  
-			WHERE no_cb_empleado_acct_ID = ITERADOR_RCUENTA.ID ;
-			END IF;
-		
-			IF ITERADOR_PERFIL.HABER<> ITERADOR_RCUENTA.HABER  THEN
-			UPDATE IDT_CONTRATO SET I_ERRORMSG = '2';
-			UPDATE no_cb_empleado_acct  SET NO_CUENTA_EGRESO_ACCT = ITERADOR_PERFIL.DEBE,
-			NO_CUENTA_INGRESO_ACCT=ITERADOR_PERFIL.HABER,  
-			UPDATED = CREATED
-			WHERE no_cb_empleado_acct_ID = ITERADOR_RCUENTA.ID ;
-			END IF;
+			delete from no_cb_empleado_acct where c_bpartner_id = ITERADOR_PERFIL.IDPARTNER;
 			
-			IF ITERADOR_PERFIL.HABER IS NULL THEN
-			UPDATE IDT_CONTRATO SET I_ERRORMSG = '3';
-			UPDATE no_cb_empleado_acct  SET NO_CUENTA_EGRESO_ACCT = ITERADOR_PERFIL.DEBE,
-			NO_CUENTA_INGRESO_ACCT=ITERADOR_PERFIL.HABER,  
-			UPDATED = CREATED
-			WHERE no_cb_empleado_acct_ID = ITERADOR_RCUENTA.ID ;
-			END IF;
+			v_acct_schema := (select bp.em_ne_c_acctschema_id from c_bpartner bp where bp.c_bpartner_id = ITERADOR_PERFIL.IDPARTNER); 
 			
-			IF ITERADOR_PERFIL.DEBE IS NULL THEN
-			UPDATE IDT_CONTRATO SET I_ERRORMSG = '4';
-			UPDATE no_cb_empleado_acct  SET NO_CUENTA_EGRESO_ACCT = ITERADOR_PERFIL.DEBE, 
-			NO_CUENTA_INGRESO_ACCT=ITERADOR_PERFIL.HABER,  
-			UPDATED = CREATED
-			WHERE no_cb_empleado_acct_ID = ITERADOR_RCUENTA.ID ;
-			END IF;
+           FOR ITERADOR_RCUENTA IN 
+			select ad_client_id AS CLIENTE,ad_org_id AS SUC,
+			createdby AS CREADOPOR, updatedby AS ACTUALIZADOPOR, 
+			ne_debe_acct, ne_haber_acct, no_tipo_ingreso_egreso_id
+                        from ne_perfil_rubro_line
+                        where ne_perfil_rubro_id = (
+			select  em_ne_perfil_rubro_id from c_bpartner where c_bpartner_id = ITERADOR_PERFIL.IDPARTNER
+                        )
+                
+            LOOP
+                    if ITERADOR_RCUENTA.ne_debe_acct is not null or ITERADOR_RCUENTA.ne_haber_acct is not null then
+                        insert into no_cb_empleado_acct(
+                            no_cb_empleado_acct_id, ad_client_id, ad_org_id,
+                            isactive, created, createdby,
+                            updated, updatedby, c_bpartner_id,
+                            c_acctschema_id, no_cuenta_ingreso_acct, no_tipo_ingreso_egreso_id,
+                            no_cuenta_egreso_acct
+                            )
+                        values(
+                            get_uuid(), 
+			    ITERADOR_RCUENTA.CLIENTE, 
+			    ITERADOR_RCUENTA.SUC,
+                            'Y', now(), 
+			    ITERADOR_RCUENTA.CREADOPOR,
+                            now(), 
+			    ITERADOR_RCUENTA.ACTUALIZADOPOR, 
+			    ITERADOR_PERFIL.IDPARTNER,
+                            v_acct_schema, 
+                            ITERADOR_RCUENTA.ne_debe_acct, 
+			    ITERADOR_RCUENTA.no_tipo_ingreso_egreso_id,
+                            ITERADOR_RCUENTA.ne_haber_acct
+                        );					
+                    end if;
+					
+            END LOOP;
 			
-			END LOOP;	
-		
+			
+			
        END LOOP;
- 	
-	
-         v_Message:='@NO_EjecucionCorrecta@';
+        v_Message:='@NO_EjecucionCorrecta@';
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', null, v_Message);
         RETURN;
@@ -93,6 +88,7 @@ BEGIN
 	DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', 0, v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        raise EXCEPTION '%',v_ResultStr;
     RETURN;
 END NO_COPIA_RPERFIL_RCEMPLEADO
 ]]></body>

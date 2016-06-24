@@ -12,7 +12,7 @@ BEGIN
 		--AND no_tipo_ingreso_egreso_id = NEW.no_tipo_ingreso_egreso_id
 		) THEN
 	 
-		raise exception '%', '@NO_UNICA_LINEA_QUINCENA@';
+		raise exception '%', '@NE_UNICA_LINEA_QUINCENA@';
 
         ELSE
             RETURN NEW;
