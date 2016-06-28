@@ -5,19 +5,35 @@
 v_mensaje 	varchar(255);	  
 BEGIN
     	
-    IF (UPDATING OR INSERTING) THEN
+    IF (UPDATING AND :NEW.c_bpartner_id <> :OLD.c_bpartner_id ) THEN
+		
+        IF (SELECT  COUNT(*)>0 FROM no_registra_quinc_line 
+		WHERE c_bpartner_id = :new.c_bpartner_id 
+		AND no_registra_quincena_id = :new.no_registra_quincena_id 
+		--AND no_tipo_ingreso_egreso_id = NEW.no_tipo_ingreso_egreso_id
+		) AND :NEW.DOCSTATUS= 'BO' THEN
+	 
+		raise exception '%', '@NO_UNICA_LINEA_QUINCENA@';
+
+        ELSE
+            RETURN NEW;
+        END IF;
+    END IF;
+	
+	IF (INSERTING) THEN
         IF (SELECT  COUNT(*)>0 FROM no_registra_quinc_line 
 		WHERE c_bpartner_id = :new.c_bpartner_id 
 		AND no_registra_quincena_id = :new.no_registra_quincena_id 
 		--AND no_tipo_ingreso_egreso_id = NEW.no_tipo_ingreso_egreso_id
 		) THEN
 	 
-		raise exception '%', '@NE_UNICA_LINEA_QUINCENA@';
+		raise exception '%', '@NO_UNICA_LINEA_QUINCENA@';
 
         ELSE
             RETURN NEW;
         END IF;
     END IF;
+	
 
     IF DELETING THEN 
         RETURN OLD; 

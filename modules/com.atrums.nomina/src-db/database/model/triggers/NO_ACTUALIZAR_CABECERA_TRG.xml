@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACTUALIZAR_CABECERA_TRG">
+    <trigger name="NO_ACTUALIZAR_CABECERA_TRG" table="NE_PERFIL_RUBRO_LINE" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+
+	
+BEGIN
+	
+	IF UPDATING OR INSERTING  THEN 
+	--NEW.ne_perfil_rubro_id
+	
+	UPDATE ne_perfil_rubro SET updated = NOW() WHERE ne_perfil_rubro_ID = :NEW.ne_perfil_rubro_id;
+	
+	END IF;
+	
+	if :new.ne_debe_acct is null and
+			:new.ne_haber_acct is null then
+		raise '%', '@NE_RUB_LIN_DEB_HAB_VAL@';
+	end if;
+	
+	return new;
+END NO_ACTUALIZAR_CABECERA_TRG
+]]></body>
+    </trigger>
+  </database>

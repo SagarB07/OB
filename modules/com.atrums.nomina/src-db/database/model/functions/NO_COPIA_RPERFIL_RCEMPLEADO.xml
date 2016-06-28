@@ -15,7 +15,7 @@ BEGIN
    DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
   v_ResultStr:='PInstanceNotFound';
   AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
-         
+  ALTER TABLE ne_perfil_rubro_line DISABLE TRIGGER ne_control_rubro_trg;  
    FOR ITERADOR_PERFIL IN
 		
 		SELECT C_BPARTNER_ID AS IDPARTNER, em_ne_perfil_rubro_id AS IDPERFIL
@@ -76,6 +76,8 @@ BEGIN
 			
 			
        END LOOP;
+	
+	ALTER TABLE ne_perfil_rubro_line ENABLE TRIGGER ne_control_rubro_trg;
         v_Message:='@NO_EjecucionCorrecta@';
         DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
         AD_UPDATE_PINSTANCE(p_PInstance_ID, '100', 'Y', null, v_Message);
