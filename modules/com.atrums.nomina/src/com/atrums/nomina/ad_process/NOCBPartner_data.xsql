@@ -19,6 +19,7 @@
 
 
 <SqlClass name="NOCBPartnerData" package="com.atrums.nomina.ad_process">
+ 
   <SqlMethod name="select" type="preparedStatement" return="multiple">
     <SqlMethodComment></SqlMethodComment>
     <Sql>
@@ -28,9 +29,10 @@
 		rp.no_rol_pago_provision_id as rolpago, 
 		rp.c_bpartner_id as tercero,  us.email as email,
 		rp.ad_org_id as organizacion  
-		from no_rol_pago_provision rp, ad_user us, c_period pe			
+		from no_rol_pago_provision rp, ad_user us, c_period pe, c_bpartner em				
 		where us.c_bpartner_id = rp.c_bpartner_id
 		and pe.c_period_id = rp.c_period_id
+		and rp.c_bpartner_id = em.c_bpartner_id
 		and us.em_no_rol_mail = 'Y'
 		and rp.ispago='Y'
 		and rp.isactive = 'Y' 
@@ -38,6 +40,20 @@
       ]]>
     </Sql>
     <Parameter name="rolpagoId"/>
+  </SqlMethod>
+  
+  
+  <SqlMethod name="selectEmployee" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+      
+      	SELECT part.c_bpartner_id as tercero FROM C_BPARTNER part
+		LEFT OUTER JOIN AD_USER  ON part.c_bpartner_id = AD_USER.c_bpartner_id
+		WHERE  AD_USER.c_bpartner_id IS NULL
+      ]]>
+    </Sql>
+    
   </SqlMethod>
   
   

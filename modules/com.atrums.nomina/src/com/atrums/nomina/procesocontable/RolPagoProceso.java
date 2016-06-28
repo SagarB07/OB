@@ -184,7 +184,7 @@ public class RolPagoProceso extends AcctServer {
       final OBQuery<BusinessPartner> obqParamAcct = OBDal.getInstance().createQuery(
     		  BusinessPartner.class, whereClause3.toString());
 
-      if (obqParamAcct.list().get(0).getNoPagoAcct() != null){
+      if (obqParamAcct.list().size()>0 && obqParamAcct.list().get(0).getNoPagoAcct() != null){
       fact.createLine(null,
           Account.getAccount(conn, obqParamAcct.list().get(0).getNoPagoAcct().getId()) ,
           C_Currency_ID, ZERO.toString(), noRolPago.getTotalNeto().abs().toString(),

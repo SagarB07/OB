@@ -17,7 +17,7 @@ import org.openbravo.utils.FormatUtilities;
 import com.atrums.nomina.util.EmailManager;
 import com.atrums.nomina.util.UtilNomina;
 
-public class NOCBPartner {
+class NOCBPartner {
 	private static final Logger log = Logger.getLogger(NOCBPartner.class);
 	public static NOCBPartnerData[] emailTercero = null;
 	private static NOCBPartnerData[] data = null;
@@ -36,12 +36,20 @@ public class NOCBPartner {
 		enviarMail(getData());
 	}
 
+		
 	public static  NOCBPartnerData[] obtenerMailTerceros( String idTercero) throws ServletException {
 		NOCBPartnerData[] datos = null;
 		datos = NOCBPartnerData.select(getConnectionProvider(), idTercero);
 		 return datos;
 	}
 
+	
+	public Integer permitirEnviarMail ()throws Exception {
+		NOCBPartnerData[] datos = null;
+		datos = NOCBPartnerData.selectEmployee(getConnectionProvider());
+		return datos.length;
+	}
+	
 	@SuppressWarnings("unused")
 	public static void enviarMail(NOCBPartnerData[] datosEmail)throws Exception {
 		String strBaseDesin = "@basedesign@/com/atrums/nomina/ad_reports/RPT_Rol_Pagos_Individual.jrxml";

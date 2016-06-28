@@ -9,22 +9,25 @@ import org.codehaus.jettison.json.JSONObject;
 import org.openbravo.client.kernel.BaseActionHandler;
 import org.openbravo.dal.service.OBDal;
 import org.openbravo.erpCommon.utility.OBMessageUtils;
-import org.openbravo.exception.PoolNotFoundException;
 import org.openbravo.service.db.DbUtility;
 
 public class RolEnvioMailHandler extends BaseActionHandler {
 	static Logger log4j = Logger.getLogger(RolEnvioMailHandler.class);
 
-	public void hiloEnvioMail( JSONArray rolesIds) throws PoolNotFoundException, JSONException{
+	public void hiloEnvioMail( JSONArray rolesIds) throws Exception{
+	
 		
-		if (rolesIds.length() > 0) {
-			for (int i = 0; i < rolesIds.length(); i++) {
-				final String rolId = rolesIds.getString(i);
-				CapaIntermedia capaIntermedia = new CapaIntermedia();
-				capaIntermedia.setIdRolPago(rolId);
-				capaIntermedia.start();
+			if (rolesIds.length() > 0) {
+				for (int i = 0; i < rolesIds.length(); i++) {
+					final String rolId = rolesIds.getString(i);
+					CapaIntermedia capaIntermedia = new CapaIntermedia();
+					capaIntermedia.setIdRolPago(rolId);
+					capaIntermedia.start();
+					capaIntermedia= null;
+				}
+				
 			}
-		}
+		
 		
 	}
 	
@@ -34,13 +37,44 @@ public class RolEnvioMailHandler extends BaseActionHandler {
 		JSONObject result = new JSONObject();
 		try {
 			JSONObject message = new JSONObject();
-			String mensaje = "El sistema se encuentra enviando los roles seleccionados, este proceso no interrumpira otras tareas que se puedan hacer en este momento";
-			message.put("severity", "success");
-			message.put("text", mensaje);
-			result.put("message", message);
+			
 			final JSONObject jsonData = new JSONObject(content);
 			final JSONArray rolesIds = jsonData.getJSONArray("rolpago");
-			hiloEnvioMail(rolesIds);
+			CapaIntermedia permite = new CapaIntermedia();
+			
+			if (rolesIds.length()== 1 ){
+				if ( permite.validaTercero(rolesIds.getString(0)))
+				{
+					hiloEnvioMail(rolesIds);
+					String mensaje = "El sistema se encuentra enviando los roles seleccionados, este proceso no interrumpira otras tareas que se puedan hacer en este momento";
+					message.put("severity", "success");
+					message.put("text", mensaje);
+					result.put("message", message);
+				}else{
+					String mensaje = "No se encuentran configurado el correo de contacto en el empleado seleccionado" ;
+					message.put("severity", "warning");
+					message.put("text", mensaje);
+					result.put("message", message);
+					
+				}
+			}else {
+				
+				if ( permite.obtenerValidacion()>0)
+				{
+					hiloEnvioMail(rolesIds);
+					String mensaje = "El sistema se encuentra enviando los roles seleccionados, este proceso no interrumpira otras tareas que se puedan hacer en este momento";
+					message.put("severity", "success");
+					message.put("text", mensaje);
+					result.put("message", message);
+				}else{
+					String mensaje = "No se encuentran configurado el o los correos en el empleado" ;
+					message.put("severity", "success");
+					message.put("text", mensaje);
+					result.put("message", message);
+					
+				}
+				
+			}
 			
 		} catch (Exception e) {
 		      e.printStackTrace();

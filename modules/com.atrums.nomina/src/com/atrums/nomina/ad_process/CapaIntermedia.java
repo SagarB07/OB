@@ -14,6 +14,20 @@ public class CapaIntermedia extends  Thread  {
 	private static final Logger log = Logger.getLogger(CapaIntermedia.class);
 	NOCBPartner partner = null;
 	private String idRolPago = "";
+	
+	public Integer obtenerValidacion () throws Exception {
+		return partner.permitirEnviarMail();
+	}
+	public boolean validaTercero (String idRolPago) throws ServletException{
+		NOCBPartnerData[] datos  = partner.obtenerMailTerceros(idRolPago);
+		if (datos == null || datos.length>=1){
+			return true;
+		}else{
+			return false;
+		}
+		
+	} 
+	
 	public CapaIntermedia ( ) throws PoolNotFoundException  {
 		String strDirectorio = UtilNomina.class.getResource("/").getPath();
 		Integer value = strDirectorio.indexOf("/src-core/build/classes/");

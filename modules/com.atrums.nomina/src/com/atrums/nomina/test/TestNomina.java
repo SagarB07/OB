@@ -12,7 +12,18 @@ import org.openbravo.exception.PoolNotFoundException;
 
 import com.atrums.nomina.ad_process.CapaIntermedia;
 import com.atrums.nomina.ad_process.ContratoProceso;
+import com.atrums.nomina.ad_process.NOCBPartnerData;
 public class TestNomina {
+	
+	@Test
+	public void obtenerTerceroSinCorreo ()throws PoolNotFoundException, ServletException{
+		TestConnectionDB conn= new TestConnectionDB();
+		
+//		NOCBPartnerData ds = new NOCBPartnerData ();
+//		NOCBPartnerData[] io=  ds.selectEmployee(conn.conn);
+		//System.out.println(x);
+		
+	}
 	
 	@Test
 	public void testActualizacionContrato () throws PoolNotFoundException, ServletException{
