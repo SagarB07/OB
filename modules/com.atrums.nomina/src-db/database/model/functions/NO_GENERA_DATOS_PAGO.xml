@@ -38,16 +38,13 @@
 
 BEGIN
 
-	V_ID_DECIMO_TERCERO = 'B1E1B09BFBD54A99A8E1E6FF2A91DB9D';
-	V_ID_DECIMO_CUARTO = '73986DBC43E34F25B67766C6409E213F';
+    V_ID_DECIMO_TERCERO = 'B1E1B09BFBD54A99A8E1E6FF2A91DB9D';
+    V_ID_DECIMO_CUARTO = '73986DBC43E34F25B67766C6409E213F';
 	
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';
     AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'Y', NULL, NULL);
 
-	
-	select c_doctype_ID INTO  V_TIPODOCQUIN   from c_doctype where ad_table_id  = '1895538EF5114972AC1AE7CDE5568727' and docbasetype  = 'APP';
-	--select c_doctype_ID INTO  V_TIPODOCQUIN   from c_doctype where ad_table_id  = '95F21C0F9E704ACAB95D35B387392A83';
 	
     BEGIN
         FOR Cur_Parameter IN
@@ -71,6 +68,51 @@ BEGIN
             v_Client_ID:=Cur_Parameter.AD_Client_ID;
             v_ParameterName:=Cur_Parameter.ParameterName;
         END LOOP;
+
+	
+
+	SELECT c_doctype_ID INTO  V_TIPODOCQUIN   from c_doctype where c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
+	--DELETE FROM c_doctype WHERE c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
+	IF V_TIPODOCQUIN IS NULL THEN
+		insert into c_doctype 
+		(c_doctype_id,
+		ad_client_id, 
+		ad_org_id, 
+		isactive, 
+		created, 
+		createdby, 
+		updated, 
+		updatedby, 
+		name,
+		printname, 
+		docbasetype,
+		gl_category_id,
+		ad_table_id,
+		DOCUMENTCOPIES, 
+		ISSOTRX,
+		ISDEFAULT 
+		) 
+		values
+		(
+		'77F21C0F9E704ACAB95D35B387392A83',
+		v_Client_ID,
+		v_Org_ID,
+		'Y',
+		'now()',
+		v_User_ID,
+		'now()',
+		v_User_ID,
+		'Pago Quincenas',
+		'Pago Quincenas',
+		'NO_AV',
+		'FC670B83E59C4E7CBD6B999D3F28B251',
+		'3FB45DB988114CF8B1F85E8453DDF3A0',
+		1,
+		'N',
+		'N'
+		);
+	END IF;
+
 
 		
 		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = v_no_pago_cabecera_id;
@@ -164,6 +206,11 @@ BEGIN
 						AND C_PERIOD_ID = V_PERIODO;
 
 						IF V_VALOR IS NOT NULL OR V_VALOR > 0 THEN 
+						if (select count(*) from no_pago_line 
+							    where no_pago_cabecera_id = v_no_pago_cabecera_id 
+							    and c_bpartner_id = ITERADOR.C_BPARTNER_ID
+
+							) = 0 then
 						INSERT INTO no_pago_line 
 						(no_pago_line_id,
 							ad_client_id,		 
@@ -197,7 +244,8 @@ BEGIN
 						'BR',
 						v_table_id
 						);
-						END IF;			
+						END IF;	
+					END IF;			
 				
 				END LOOP;     
         
@@ -233,6 +281,11 @@ BEGIN
 						AND C_PERIOD_ID = V_PERIODO;
 
 						IF V_VALOR IS NOT NULL OR V_VALOR > 0 THEN 
+							if (select count(*) from no_pago_line 
+							    where no_pago_cabecera_id = v_no_pago_cabecera_id 
+							    and c_bpartner_id = ITERADOR.C_BPARTNER_ID
+
+							) = 0 then
 						INSERT INTO no_pago_line 
 						(no_pago_line_id,
 							ad_client_id,		 
@@ -267,6 +320,8 @@ BEGIN
 						v_table_id
 						);
 						END IF;
+
+						END IF;
 				
 				
 				END LOOP;
@@ -291,6 +346,15 @@ BEGIN
 				)
 				LOOP
 				v_table_id:= ITERADOR.TABLENAME || '_id';
+
+
+				if (select count(*) from no_pago_line 
+			            where no_pago_cabecera_id = v_no_pago_cabecera_id 
+			            and c_bpartner_id = ITERADOR.C_BPARTNER_ID
+
+					) = 0 then
+
+				
 					INSERT 
 					INTO no_pago_line 
 						(no_pago_line_id,
@@ -325,6 +389,8 @@ BEGIN
 					'BR',
 					v_table_id
 					);
+
+					end if ;
 				END LOOP;
         END IF;
         v_Message:='@EjecucionCorrecta@';
