@@ -1,6 +1,30 @@
 <?xml version="1.0"?>
   <vector>
     <versionInfo version="3.0.21811"/>
+    <removeCheckChange tableName="AD_MODULE" checkName="AD_MODULE_TYPE_CHK">
+      <check name="AD_MODULE_TYPE_CHK"><![CDATA[TYPE IN ('M', 'P', 'T')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="AD_MODULE_INSTALL" checkName="AD_MODULE_INS_TYPE_CHK">
+      <check name="AD_MODULE_INS_TYPE_CHK"><![CDATA[TYPE IN ('M', 'P', 'T')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="AD_PROCESS" checkName="AD_PROCESS_UIPATTERN_CHK">
+      <check name="AD_PROCESS_UIPATTERN_CHK"><![CDATA[UIPATTERN IN ('S', 'M')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="C_BANKSTATEMENT" checkName="C_BANKSTATEMENT_ROCESSED_CHECK">
+      <check name="C_BANKSTATEMENT_ROCESSED_CHECK"><![CDATA[PROCESSED IN ('Y', 'N')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="C_CASH" checkName="C_CASH_PROCESSED_CHK">
+      <check name="C_CASH_PROCESSED_CHK"><![CDATA[PROCESSED IN ('Y', 'N')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="C_SETTLEMENT" checkName="C_SETTLEMENT_PROCESSED_CHK">
+      <check name="C_SETTLEMENT_PROCESSED_CHK"><![CDATA[PROCESSED IN ('Y', 'N')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="MA_MEASURE_SHIFT" checkName="MA_MEASURE_SHIFT_SHIFT_CHECK">
+      <check name="MA_MEASURE_SHIFT_SHIFT_CHECK"><![CDATA[SHIFT IN ('M', 'T')]]></check>
+    </removeCheckChange>
+    <removeCheckChange tableName="MA_WRPHASEPRODUCT" checkName="MA_WRPHASEPRODUCT_PRODUCTI_CHK">
+      <check name="MA_WRPHASEPRODUCT_PRODUCTI_CHK"><![CDATA[PRODUCTIONTYPE IN ('+', '-')]]></check>
+    </removeCheckChange>
     <columnDataChange tablename="AD_ELEMENT" columnname="NAME" pkRow="187">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
@@ -120,6 +144,10 @@
     <columnDataChange tablename="AD_TAB" columnname="SEQNO" pkRow="E1AEFB0AA4044AF2B28F4C5387E42379">
       <oldValue><![CDATA[20]]></oldValue>
       <newValue><![CDATA[40]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="300">
+      <oldValue><![CDATA[10]]></oldValue>
+      <newValue><![CDATA[30]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="1573">
       <oldValue><![CDATA[Business Partner]]></oldValue>
@@ -741,6 +769,22 @@
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
     </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="800181">
+      <oldValue><![CDATA[50]]></oldValue>
+      <newValue><![CDATA[25]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="800181">
+      <oldValue><![CDATA[30]]></oldValue>
+      <newValue><![CDATA[10]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="SEQNO" pkRow="800182">
+      <oldValue><![CDATA[60]]></oldValue>
+      <newValue><![CDATA[26]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="800182">
+      <oldValue><![CDATA[40]]></oldValue>
+      <newValue><![CDATA[20]]></newValue>
+    </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="800191">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
@@ -804,6 +848,10 @@
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801053">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="GRID_SEQNO" pkRow="801339">
+      <oldValue><![CDATA[20]]></oldValue>
+      <newValue><![CDATA[40]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="801434">
       <oldValue><![CDATA[Business Partner]]></oldValue>
@@ -1140,6 +1188,14 @@
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="C06730576EA3457083260A0062810EF4">
       <oldValue><![CDATA[Business Partner]]></oldValue>
       <newValue><![CDATA[Empleado]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="DESCRIPTION" pkRow="CD2BBEC9D14F4792A0AC97A1085CDAAC">
+      <oldValue><![CDATA[Process to modify transactions GL Item type once they have been created]]></oldValue>
+      <newValue><![CDATA[Proceso para modificar transacciones existentes del tipo concepto contable]]></newValue>
+    </columnDataChange>
+    <columnDataChange tablename="AD_FIELD" columnname="HELP" pkRow="CD2BBEC9D14F4792A0AC97A1085CDAAC">
+      <oldValue><![CDATA[Process to modify transactions GL Item type once they have been created]]></oldValue>
+      <newValue><![CDATA[Proceso para modificar transacciones existentes del tipo concepto contable]]></newValue>
     </columnDataChange>
     <columnDataChange tablename="AD_FIELD" columnname="NAME" pkRow="CE8D28F94E0D460AE040007F01000DA6">
       <oldValue><![CDATA[Business Partner]]></oldValue>
