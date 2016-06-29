@@ -11,7 +11,8 @@ BEGIN
             into v_estado
             from no_pago_line where no_pago_line_id=:old.no_pago_line_id;
             IF(v_estado <>'BR')THEN
-                RAISE EXCEPTION '@NO_Borra_Pago_Lineas@';
+              --  RAISE NO_DATA_FOUND;
+                RAISE NO_DATA_FOUND;
             END IF;
             RETURN OLD;
         ELSE
