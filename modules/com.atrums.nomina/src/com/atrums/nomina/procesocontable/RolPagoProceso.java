@@ -165,20 +165,23 @@ public class RolPagoProceso extends AcctServer {
             }
           else
             // Egreso
+        	  if (obqParameters.list().size()>0 && obqParameters.list().get(0).getCuentaDelEgreso()!= null ){
             fact.createLine(null,
                 Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelEgreso().getId()),
                 C_Currency_ID, ZERO.toString(), list.getValor().abs().toString(),
                 Fact_Acct_Group_ID, nextSeqNo(SeqNo), DocumentType, conn);
+        	}
         } else
           // Cuenta de Egresos
+        	if (obqParameters.list().size()>0 && obqParameters.list().get(0).getCuentaDelEgreso()!= null ){
           fact.createLine(null,
               Account.getAccount(conn, obqParameters.list().get(0).getCuentaDelEgreso().getId()),
               C_Currency_ID, ZERO.toString(), list.getValor().abs().toString(), Fact_Acct_Group_ID,
               nextSeqNo(SeqNo), DocumentType, conn);
+        	}
       }
 
-      whereClause3.append(" as cbp where cbp.id = '"
-          + noRolPago.getBusinessPartner().getId() + "'");
+      whereClause3.append(" as cbp where cbp.id = '"+ noRolPago.getBusinessPartner().getId() + "'");
       whereClause3.append(" and cbp.neCAcctschema.id = '" + as.m_C_AcctSchema_ID + "'");
 
       final OBQuery<BusinessPartner> obqParamAcct = OBDal.getInstance().createQuery(
