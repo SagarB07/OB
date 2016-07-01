@@ -20,11 +20,11 @@ AD_Session.Login_Status,
 TO_CHAR(AD_Session.Last_Session_Ping, ?) AS Last_Session_Ping, 
 AD_Session.Session_Active, 
 COALESCE(AD_Session.Processed, 'N') AS Processed, 
-COALESCE(AD_Session.IsActive, 'N') AS IsActive, 
 AD_Session.AD_Org_ID, 
 AD_Session.WebSession, 
-AD_Session.AD_Session_ID, 
 AD_Session.AD_Client_ID, 
+COALESCE(AD_Session.IsActive, 'N') AS IsActive, 
+AD_Session.AD_Session_ID, 
  
         ? AS LANGUAGE 
         FROM AD_Session left join ad_ref_list_v list1 on (AD_Session.Login_Status = list1.value and list1.ad_reference_id = '86086D70DDBC42B09E2BEB51D25C159F' and list1.ad_language = ?) 
@@ -97,13 +97,13 @@ AD_Session.AD_Client_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE AD_Session
-        SET Username = (?) , Remote_Addr = (?) , Remote_Host = (?) , Server_Url = (?) , Login_Status = (?) , Last_Session_Ping = TO_TIMESTAMP(?, ?) , Session_Active = (?) , AD_Session_ID = (?) , IsActive = (?) , AD_Org_ID = (?) , WebSession = (?) , AD_Client_ID = (?) , Processed = (?) , updated = now(), updatedby = ? 
+        SET Username = (?) , Remote_Addr = (?) , Remote_Host = (?) , Server_Url = (?) , Login_Status = (?) , Last_Session_Ping = TO_TIMESTAMP(?, ?) , Session_Active = (?) , IsActive = (?) , AD_Org_ID = (?) , WebSession = (?) , AD_Client_ID = (?) , AD_Session_ID = (?) , Processed = (?) , updated = now(), updatedby = ? 
         WHERE AD_Session.AD_Session_ID = ? 
         
         AND AD_Session.AD_Client_ID IN ('1') 
         AND AD_Session.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="username"></Parameter> <Parameter name="remoteAddr"></Parameter> <Parameter name="remoteHost"></Parameter> <Parameter name="serverUrl"></Parameter> <Parameter name="loginStatus"></Parameter> <Parameter name="lastSessionPing"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="sessionActive"></Parameter> <Parameter name="adSessionId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="websession"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="processed"></Parameter> 
+    <Parameter name="username"></Parameter> <Parameter name="remoteAddr"></Parameter> <Parameter name="remoteHost"></Parameter> <Parameter name="serverUrl"></Parameter> <Parameter name="loginStatus"></Parameter> <Parameter name="lastSessionPing"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="sessionActive"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="websession"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="adSessionId"></Parameter> <Parameter name="processed"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="adSessionId"></Parameter>
     
@@ -115,10 +115,10 @@ AD_Session.AD_Client_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO AD_Session 
-        (Username, Remote_Addr, Remote_Host, Server_Url, Login_Status, Last_Session_Ping, Session_Active, Processed, IsActive, AD_Org_ID, WebSession, AD_Session_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (Username, Remote_Addr, Remote_Host, Server_Url, Login_Status, Last_Session_Ping, Session_Active, Processed, AD_Org_ID, WebSession, AD_Client_ID, IsActive, AD_Session_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="username"></Parameter> <Parameter name="remoteAddr"></Parameter> <Parameter name="remoteHost"></Parameter> <Parameter name="serverUrl"></Parameter> <Parameter name="loginStatus"></Parameter> <Parameter name="lastSessionPing"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="sessionActive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="websession"></Parameter> <Parameter name="adSessionId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="username"></Parameter> <Parameter name="remoteAddr"></Parameter> <Parameter name="remoteHost"></Parameter> <Parameter name="serverUrl"></Parameter> <Parameter name="loginStatus"></Parameter> <Parameter name="lastSessionPing"></Parameter> <Parameter name="dateTimeFormat"></Parameter> <Parameter name="sessionActive"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="websession"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="adSessionId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

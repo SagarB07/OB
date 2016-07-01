@@ -52,7 +52,6 @@ static Logger log4j = Logger.getLogger(LinesData.class);
   public String taxbaseamt;
   public String excludeforwithholding;
   public String mProductUomId;
-  public String mProductUomIdr;
   public String isdeferred;
   public String quantityorder;
   public String pricestd;
@@ -168,8 +167,6 @@ static Logger log4j = Logger.getLogger(LinesData.class);
       return excludeforwithholding;
     else if (fieldName.equalsIgnoreCase("m_product_uom_id") || fieldName.equals("mProductUomId"))
       return mProductUomId;
-    else if (fieldName.equalsIgnoreCase("m_product_uom_idr") || fieldName.equals("mProductUomIdr"))
-      return mProductUomIdr;
     else if (fieldName.equalsIgnoreCase("isdeferred"))
       return isdeferred;
     else if (fieldName.equalsIgnoreCase("quantityorder"))
@@ -305,20 +302,19 @@ Select for edit
       "C_InvoiceLine.Taxbaseamt, " +
       "COALESCE(C_InvoiceLine.Excludeforwithholding, 'N') AS Excludeforwithholding, " +
       "C_InvoiceLine.M_Product_Uom_Id, " +
-      "(CASE WHEN C_InvoiceLine.M_Product_Uom_Id IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS M_Product_Uom_IdR, " +
       "COALESCE(C_InvoiceLine.IsDeferred, 'N') AS IsDeferred, " +
       "C_InvoiceLine.QuantityOrder, " +
       "C_InvoiceLine.PriceStd, " +
       "C_InvoiceLine.grosspricestd, " +
       "C_InvoiceLine.DefPlanType, " +
-      "(CASE WHEN C_InvoiceLine.DefPlanType IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list2.name),'') ) END) AS DefPlanTypeR, " +
+      "(CASE WHEN C_InvoiceLine.DefPlanType IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS DefPlanTypeR, " +
       "C_InvoiceLine.Periodnumber, " +
       "C_InvoiceLine.C_Period_ID, " +
-      "(CASE WHEN C_InvoiceLine.C_Period_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table14.Name), ''))),'') ) END) AS C_Period_IDR, " +
+      "(CASE WHEN C_InvoiceLine.C_Period_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table13.Name), ''))),'') ) END) AS C_Period_IDR, " +
       "C_InvoiceLine.AD_Org_ID, " +
-      "(CASE WHEN C_InvoiceLine.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table15.Name), ''))),'') ) END) AS AD_Org_IDR, " +
+      "(CASE WHEN C_InvoiceLine.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table14.Name), ''))),'') ) END) AS AD_Org_IDR, " +
       "C_InvoiceLine.C_Project_ID, " +
-      "(CASE WHEN C_InvoiceLine.C_Project_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table16.Value), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table16.Name), ''))),'') ) END) AS C_Project_IDR, " +
+      "(CASE WHEN C_InvoiceLine.C_Project_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table15.Value), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table15.Name), ''))),'') ) END) AS C_Project_IDR, " +
       "C_InvoiceLine.C_Costcenter_ID, " +
       "C_InvoiceLine.A_Asset_ID, " +
       "C_InvoiceLine.User1_ID, " +
@@ -339,9 +335,9 @@ Select for edit
       "C_InvoiceLine.C_Charge_ID, " +
       "C_InvoiceLine.AD_Client_ID, " +
       "C_InvoiceLine.C_Bpartner_ID, " +
-      "(CASE WHEN C_InvoiceLine.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table17.Name), ''))),'') ) END) AS C_Bpartner_IDR, " +
+      "(CASE WHEN C_InvoiceLine.C_Bpartner_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table16.Name), ''))),'') ) END) AS C_Bpartner_IDR, " +
       "        ? AS LANGUAGE " +
-      "        FROM C_InvoiceLine left join (select C_UOM_ID, Name from C_UOM) table1 on (C_InvoiceLine.C_UOM_ID = table1.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL1 on (table1.C_UOM_ID = tableTRL1.C_UOM_ID and tableTRL1.AD_Language = ?)  left join (select C_Tax_ID, Name from C_Tax) table3 on (C_InvoiceLine.C_Tax_ID =  table3.C_Tax_ID) left join (select C_Tax_ID,AD_Language, Name from C_Tax_TRL) tableTRL3 on (table3.C_Tax_ID = tableTRL3.C_Tax_ID and tableTRL3.AD_Language = ?)  left join (select C_Glitem_ID, Name from C_Glitem) table5 on (C_InvoiceLine.Account_ID =  table5.C_Glitem_ID) left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table6 on (C_InvoiceLine.M_AttributeSetInstance_ID = table6.M_AttributeSetInstance_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table7 on (C_InvoiceLine.C_OrderLine_ID = table7.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table8 on (table7.C_Order_ID = table8.C_Order_ID) left join (select M_InOutLine_ID, Line, MovementQty, M_InOut_ID, M_Product_ID from M_InOutLine) table9 on (C_InvoiceLine.M_InOutLine_ID = table9.M_InOutLine_ID) left join (select M_InOut_ID, DocumentNo, MovementDate from M_InOut) table10 on (table9.M_InOut_ID = table10.M_InOut_ID) left join (select M_Product_ID, Name from M_Product) table11 on (table9.M_Product_ID = table11.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL11 on (table11.M_Product_ID = tableTRL11.M_Product_ID and tableTRL11.AD_Language = ?)  left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_UOM) table13 on (C_InvoiceLine.M_Product_Uom_Id =  table13.M_Product_Uom_Id) left join ad_ref_list_v list1 on (table13.C_UOM_ID = list1.value and list1.ad_reference_id = '' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (C_InvoiceLine.DefPlanType = list2.value and list2.ad_reference_id = '73625A8F22EF4CD7808603156BA606D7' and list2.ad_language = ?)  left join (select C_Period_ID, Name from C_Period) table14 on (C_InvoiceLine.C_Period_ID =  table14.C_Period_ID) left join (select AD_Org_ID, Name from AD_Org) table15 on (C_InvoiceLine.AD_Org_ID = table15.AD_Org_ID) left join (select C_Project_ID, Value, Name from C_Project) table16 on (C_InvoiceLine.C_Project_ID = table16.C_Project_ID) left join (select C_BPartner_ID, Name from C_BPartner) table17 on (C_InvoiceLine.C_Bpartner_ID = table17.C_BPartner_ID)" +
+      "        FROM C_InvoiceLine left join (select C_UOM_ID, Name from C_UOM) table1 on (C_InvoiceLine.C_UOM_ID = table1.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL1 on (table1.C_UOM_ID = tableTRL1.C_UOM_ID and tableTRL1.AD_Language = ?)  left join (select C_Tax_ID, Name from C_Tax) table3 on (C_InvoiceLine.C_Tax_ID =  table3.C_Tax_ID) left join (select C_Tax_ID,AD_Language, Name from C_Tax_TRL) tableTRL3 on (table3.C_Tax_ID = tableTRL3.C_Tax_ID and tableTRL3.AD_Language = ?)  left join (select C_Glitem_ID, Name from C_Glitem) table5 on (C_InvoiceLine.Account_ID =  table5.C_Glitem_ID) left join (select M_AttributeSetInstance_ID, Description from M_AttributeSetInstance) table6 on (C_InvoiceLine.M_AttributeSetInstance_ID = table6.M_AttributeSetInstance_ID) left join (select C_OrderLine_ID, C_Order_ID, Line, LineNetAmt from C_OrderLine) table7 on (C_InvoiceLine.C_OrderLine_ID = table7.C_OrderLine_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table8 on (table7.C_Order_ID = table8.C_Order_ID) left join (select M_InOutLine_ID, Line, MovementQty, M_InOut_ID, M_Product_ID from M_InOutLine) table9 on (C_InvoiceLine.M_InOutLine_ID = table9.M_InOutLine_ID) left join (select M_InOut_ID, DocumentNo, MovementDate from M_InOut) table10 on (table9.M_InOut_ID = table10.M_InOut_ID) left join (select M_Product_ID, Name from M_Product) table11 on (table9.M_Product_ID = table11.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL11 on (table11.M_Product_ID = tableTRL11.M_Product_ID and tableTRL11.AD_Language = ?)  left join ad_ref_list_v list1 on (C_InvoiceLine.DefPlanType = list1.value and list1.ad_reference_id = '73625A8F22EF4CD7808603156BA606D7' and list1.ad_language = ?)  left join (select C_Period_ID, Name from C_Period) table13 on (C_InvoiceLine.C_Period_ID =  table13.C_Period_ID) left join (select AD_Org_ID, Name from AD_Org) table14 on (C_InvoiceLine.AD_Org_ID = table14.AD_Org_ID) left join (select C_Project_ID, Value, Name from C_Project) table15 on (C_InvoiceLine.C_Project_ID = table15.C_Project_ID) left join (select C_BPartner_ID, Name from C_BPartner) table16 on (C_InvoiceLine.C_Bpartner_ID = table16.C_BPartner_ID)" +
       "        WHERE 2=2 " +
       "        AND 1=1 ";
     strSql = strSql + ((cInvoiceId==null || cInvoiceId.equals(""))?"":"  AND C_InvoiceLine.C_Invoice_ID = ?  ");
@@ -365,7 +361,6 @@ Select for edit
     st = connectionProvider.getPreparedStatement(strSql);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paramLanguage);
@@ -425,7 +420,6 @@ Select for edit
         objectLinesData.taxbaseamt = UtilSql.getValue(result, "taxbaseamt");
         objectLinesData.excludeforwithholding = UtilSql.getValue(result, "excludeforwithholding");
         objectLinesData.mProductUomId = UtilSql.getValue(result, "m_product_uom_id");
-        objectLinesData.mProductUomIdr = UtilSql.getValue(result, "m_product_uom_idr");
         objectLinesData.isdeferred = UtilSql.getValue(result, "isdeferred");
         objectLinesData.quantityorder = UtilSql.getValue(result, "quantityorder");
         objectLinesData.pricestd = UtilSql.getValue(result, "pricestd");
@@ -531,7 +525,6 @@ Create a registry
     objectLinesData[0].taxbaseamt = taxbaseamt;
     objectLinesData[0].excludeforwithholding = excludeforwithholding;
     objectLinesData[0].mProductUomId = mProductUomId;
-    objectLinesData[0].mProductUomIdr = "";
     objectLinesData[0].isdeferred = isdeferred;
     objectLinesData[0].quantityorder = quantityorder;
     objectLinesData[0].pricestd = pricestd;

@@ -48,8 +48,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String isactive;
   public String listdetails;
   public String iscascade;
-  public String adClientId;
   public String cCommissionId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -123,10 +123,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return listdetails;
     else if (fieldName.equalsIgnoreCase("iscascade"))
       return iscascade;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("c_commission_id") || fieldName.equals("cCommissionId"))
       return cCommissionId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -190,8 +190,8 @@ Select for edit
       "COALESCE(C_Commission.IsActive, 'N') AS IsActive, " +
       "COALESCE(C_Commission.ListDetails, 'N') AS ListDetails, " +
       "COALESCE(C_Commission.iscascade, 'N') AS iscascade, " +
-      "C_Commission.AD_Client_ID, " +
       "C_Commission.C_Commission_ID, " +
+      "C_Commission.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_Commission left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Commission.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (C_Commission.C_BPartner_ID =  table2.C_BPartner_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (C_Commission.C_Currency_ID = table3.C_Currency_ID) left join ad_ref_list_v list1 on (C_Commission.FrequencyType = list1.value and list1.ad_reference_id = '225' and list1.ad_language = ?)  left join (select M_Product_ID, Name from M_Product) table4 on (C_Commission.M_Product_ID = table4.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL4 on (table4.M_Product_ID = tableTRL4.M_Product_ID and tableTRL4.AD_Language = ?)  left join ad_ref_list_v list2 on (C_Commission.DocBasisType = list2.value and list2.ad_reference_id = '224' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (C_Commission.Basisstatus = list3.value and list3.ad_reference_id = '9750460836504FF9ADD6A60DD871EA00' and list3.ad_language = ?)  left join ad_ref_list_v list4 on (C_Commission.Basisamt = list4.value and list4.ad_reference_id = '772B5918358B443A83F82F81A9A4BFB6' and list4.ad_language = ?) " +
       "        WHERE 2=2 " +
@@ -268,8 +268,8 @@ Select for edit
         objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.listdetails = UtilSql.getValue(result, "listdetails");
         objectHeaderData.iscascade = UtilSql.getValue(result, "iscascade");
-        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.cCommissionId = UtilSql.getValue(result, "c_commission_id");
+        objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -337,8 +337,8 @@ Create a registry
     objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].listdetails = listdetails;
     objectHeaderData[0].iscascade = iscascade;
-    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].cCommissionId = cCommissionId;
+    objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -462,7 +462,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Commission" +
-      "        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_Currency_ID = (?) , FrequencyType = (?) , M_Product_ID = (?) , DocBasisType = (?) , Description = (?) , CreateFrom = (?) , Processing = (?) , DateLastRun = TO_DATE(?) , Basisstatus = (?) , Basisamt = (?) , IsActive = (?) , ListDetails = (?) , iscascade = (?) , AD_Client_ID = (?) , C_Commission_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_Currency_ID = (?) , FrequencyType = (?) , M_Product_ID = (?) , DocBasisType = (?) , Description = (?) , CreateFrom = (?) , Processing = (?) , DateLastRun = TO_DATE(?) , Basisstatus = (?) , Basisamt = (?) , IsActive = (?) , ListDetails = (?) , iscascade = (?) , C_Commission_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_Commission.C_Commission_ID = ? " +
       "        AND C_Commission.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -495,8 +495,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, listdetails);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, iscascade);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCommissionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCommissionId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -525,7 +525,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Commission " +
-      "        (AD_Org_ID, Name, C_BPartner_ID, C_Currency_ID, FrequencyType, M_Product_ID, DocBasisType, Description, CreateFrom, Processing, DateLastRun, Basisstatus, Basisamt, IsActive, ListDetails, iscascade, AD_Client_ID, C_Commission_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, C_BPartner_ID, C_Currency_ID, FrequencyType, M_Product_ID, DocBasisType, Description, CreateFrom, Processing, DateLastRun, Basisstatus, Basisamt, IsActive, ListDetails, iscascade, C_Commission_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -550,8 +550,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, listdetails);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, iscascade);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCommissionId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

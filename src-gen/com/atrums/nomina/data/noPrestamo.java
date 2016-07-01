@@ -59,7 +59,7 @@ public class noPrestamo extends BaseOBObject implements Traceable, ClientEnabled
     public static final String PROPERTY_DOCACTIONPRO = "docactionPro";
     public static final String PROPERTY_DESCUENTOIESS = "descuentoIess";
     public static final String PROPERTY_SUELDO = "sueldo";
-    public static final String PROPERTY_TOTALRECIBIR = "totalRecibir";
+    public static final String PROPERTY_TOTALARECIBIR = "totalARecibir";
 
     public noPrestamo() {
         setDefaultValue(PROPERTY_ACTIVE, true);
@@ -216,12 +216,12 @@ public class noPrestamo extends BaseOBObject implements Traceable, ClientEnabled
         set(PROPERTY_SUELDO, sueldo);
     }
 
-    public BigDecimal getTotalRecibir() {
-        return (BigDecimal) get(PROPERTY_TOTALRECIBIR);
+    public BigDecimal getTotalARecibir() {
+        return (BigDecimal) get(PROPERTY_TOTALARECIBIR);
     }
 
-    public void setTotalRecibir(BigDecimal totalRecibir) {
-        set(PROPERTY_TOTALRECIBIR, totalRecibir);
+    public void setTotalARecibir(BigDecimal totalARecibir) {
+        set(PROPERTY_TOTALARECIBIR, totalARecibir);
     }
 
 }

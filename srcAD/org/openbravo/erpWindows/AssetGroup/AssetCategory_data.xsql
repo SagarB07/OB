@@ -28,8 +28,8 @@ A_Asset_Group.Assetschedule,
 A_Asset_Group.UseLifeYears, 
 A_Asset_Group.UseLifeMonths, 
 COALESCE(A_Asset_Group.Is30DayMonth, 'N') AS Is30DayMonth, 
-A_Asset_Group.AD_Client_ID, 
 COALESCE(A_Asset_Group.Isowned, 'N') AS Isowned, 
+A_Asset_Group.AD_Client_ID, 
 A_Asset_Group.A_Asset_Group_ID, 
  
         ? AS LANGUAGE 
@@ -105,13 +105,13 @@ A_Asset_Group.A_Asset_Group_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE A_Asset_Group
-        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , Help = (?) , IsDepreciated = (?) , Amortizationtype = (?) , Amortizationcalctype = (?) , Annualamortizationpercentage = TO_NUMBER(?) , Assetschedule = (?) , UseLifeYears = TO_NUMBER(?) , UseLifeMonths = TO_NUMBER(?) , Is30DayMonth = (?) , AD_Client_ID = (?) , Isowned = (?) , A_Asset_Group_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , Help = (?) , IsDepreciated = (?) , Amortizationtype = (?) , Amortizationcalctype = (?) , Annualamortizationpercentage = TO_NUMBER(?) , Assetschedule = (?) , UseLifeYears = TO_NUMBER(?) , UseLifeMonths = TO_NUMBER(?) , Is30DayMonth = (?) , Isowned = (?) , AD_Client_ID = (?) , A_Asset_Group_ID = (?) , updated = now(), updatedby = ? 
         WHERE A_Asset_Group.A_Asset_Group_ID = ? 
         
         AND A_Asset_Group.AD_Client_ID IN ('1') 
         AND A_Asset_Group.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="help"></Parameter> <Parameter name="isdepreciated"></Parameter> <Parameter name="amortizationtype"></Parameter> <Parameter name="amortizationcalctype"></Parameter> <Parameter name="annualamortizationpercentage"></Parameter> <Parameter name="assetschedule"></Parameter> <Parameter name="uselifeyears"></Parameter> <Parameter name="uselifemonths"></Parameter> <Parameter name="is30daymonth"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isowned"></Parameter> <Parameter name="aAssetGroupId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="help"></Parameter> <Parameter name="isdepreciated"></Parameter> <Parameter name="amortizationtype"></Parameter> <Parameter name="amortizationcalctype"></Parameter> <Parameter name="annualamortizationpercentage"></Parameter> <Parameter name="assetschedule"></Parameter> <Parameter name="uselifeyears"></Parameter> <Parameter name="uselifemonths"></Parameter> <Parameter name="is30daymonth"></Parameter> <Parameter name="isowned"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="aAssetGroupId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="aAssetGroupId"></Parameter>
     
@@ -123,10 +123,10 @@ A_Asset_Group.A_Asset_Group_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO A_Asset_Group 
-        (AD_Org_ID, Name, Description, IsActive, Help, IsDepreciated, Amortizationtype, Amortizationcalctype, Annualamortizationpercentage, Assetschedule, UseLifeYears, UseLifeMonths, Is30DayMonth, AD_Client_ID, Isowned, A_Asset_Group_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Name, Description, IsActive, Help, IsDepreciated, Amortizationtype, Amortizationcalctype, Annualamortizationpercentage, Assetschedule, UseLifeYears, UseLifeMonths, Is30DayMonth, Isowned, AD_Client_ID, A_Asset_Group_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="help"></Parameter> <Parameter name="isdepreciated"></Parameter> <Parameter name="amortizationtype"></Parameter> <Parameter name="amortizationcalctype"></Parameter> <Parameter name="annualamortizationpercentage"></Parameter> <Parameter name="assetschedule"></Parameter> <Parameter name="uselifeyears"></Parameter> <Parameter name="uselifemonths"></Parameter> <Parameter name="is30daymonth"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="isowned"></Parameter> <Parameter name="aAssetGroupId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="help"></Parameter> <Parameter name="isdepreciated"></Parameter> <Parameter name="amortizationtype"></Parameter> <Parameter name="amortizationcalctype"></Parameter> <Parameter name="annualamortizationpercentage"></Parameter> <Parameter name="assetschedule"></Parameter> <Parameter name="uselifeyears"></Parameter> <Parameter name="uselifemonths"></Parameter> <Parameter name="is30daymonth"></Parameter> <Parameter name="isowned"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="aAssetGroupId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

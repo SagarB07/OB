@@ -41,8 +41,8 @@ static Logger log4j = Logger.getLogger(AssetCategoryData.class);
   public String uselifeyears;
   public String uselifemonths;
   public String is30daymonth;
-  public String adClientId;
   public String isowned;
+  public String adClientId;
   public String aAssetGroupId;
   public String language;
   public String adUserClient;
@@ -103,10 +103,10 @@ static Logger log4j = Logger.getLogger(AssetCategoryData.class);
       return uselifemonths;
     else if (fieldName.equalsIgnoreCase("is30daymonth"))
       return is30daymonth;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("isowned"))
       return isowned;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("a_asset_group_id") || fieldName.equals("aAssetGroupId"))
       return aAssetGroupId;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -165,8 +165,8 @@ Select for edit
       "A_Asset_Group.UseLifeYears, " +
       "A_Asset_Group.UseLifeMonths, " +
       "COALESCE(A_Asset_Group.Is30DayMonth, 'N') AS Is30DayMonth, " +
-      "A_Asset_Group.AD_Client_ID, " +
       "COALESCE(A_Asset_Group.Isowned, 'N') AS Isowned, " +
+      "A_Asset_Group.AD_Client_ID, " +
       "A_Asset_Group.A_Asset_Group_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM A_Asset_Group left join (select AD_Org_ID, Name from AD_Org) table1 on (A_Asset_Group.AD_Org_ID = table1.AD_Org_ID) left join ad_ref_list_v list1 on (A_Asset_Group.Amortizationtype = list1.value and list1.ad_reference_id = '800040' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (A_Asset_Group.Amortizationcalctype = list2.value and list2.ad_reference_id = '800068' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (A_Asset_Group.Assetschedule = list3.value and list3.ad_reference_id = '800041' and list3.ad_language = ?) " +
@@ -235,8 +235,8 @@ Select for edit
         objectAssetCategoryData.uselifeyears = UtilSql.getValue(result, "uselifeyears");
         objectAssetCategoryData.uselifemonths = UtilSql.getValue(result, "uselifemonths");
         objectAssetCategoryData.is30daymonth = UtilSql.getValue(result, "is30daymonth");
-        objectAssetCategoryData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectAssetCategoryData.isowned = UtilSql.getValue(result, "isowned");
+        objectAssetCategoryData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectAssetCategoryData.aAssetGroupId = UtilSql.getValue(result, "a_asset_group_id");
         objectAssetCategoryData.language = UtilSql.getValue(result, "language");
         objectAssetCategoryData.adUserClient = "";
@@ -298,8 +298,8 @@ Create a registry
     objectAssetCategoryData[0].uselifeyears = uselifeyears;
     objectAssetCategoryData[0].uselifemonths = uselifemonths;
     objectAssetCategoryData[0].is30daymonth = is30daymonth;
-    objectAssetCategoryData[0].adClientId = adClientId;
     objectAssetCategoryData[0].isowned = isowned;
+    objectAssetCategoryData[0].adClientId = adClientId;
     objectAssetCategoryData[0].aAssetGroupId = aAssetGroupId;
     objectAssetCategoryData[0].language = "";
     return objectAssetCategoryData;
@@ -385,7 +385,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE A_Asset_Group" +
-      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , Help = (?) , IsDepreciated = (?) , Amortizationtype = (?) , Amortizationcalctype = (?) , Annualamortizationpercentage = TO_NUMBER(?) , Assetschedule = (?) , UseLifeYears = TO_NUMBER(?) , UseLifeMonths = TO_NUMBER(?) , Is30DayMonth = (?) , AD_Client_ID = (?) , Isowned = (?) , A_Asset_Group_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , Description = (?) , IsActive = (?) , Help = (?) , IsDepreciated = (?) , Amortizationtype = (?) , Amortizationcalctype = (?) , Annualamortizationpercentage = TO_NUMBER(?) , Assetschedule = (?) , UseLifeYears = TO_NUMBER(?) , UseLifeMonths = TO_NUMBER(?) , Is30DayMonth = (?) , Isowned = (?) , AD_Client_ID = (?) , A_Asset_Group_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE A_Asset_Group.A_Asset_Group_ID = ? " +
       "        AND A_Asset_Group.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -415,8 +415,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, uselifeyears);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, uselifemonths);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, is30daymonth);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isowned);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
@@ -446,7 +446,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO A_Asset_Group " +
-      "        (AD_Org_ID, Name, Description, IsActive, Help, IsDepreciated, Amortizationtype, Amortizationcalctype, Annualamortizationpercentage, Assetschedule, UseLifeYears, UseLifeMonths, Is30DayMonth, AD_Client_ID, Isowned, A_Asset_Group_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, Description, IsActive, Help, IsDepreciated, Amortizationtype, Amortizationcalctype, Annualamortizationpercentage, Assetschedule, UseLifeYears, UseLifeMonths, Is30DayMonth, Isowned, AD_Client_ID, A_Asset_Group_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -468,8 +468,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, uselifeyears);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, uselifemonths);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, is30daymonth);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isowned);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, aAssetGroupId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

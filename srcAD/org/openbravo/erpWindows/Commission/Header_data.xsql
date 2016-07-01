@@ -35,8 +35,8 @@ C_Commission.Basisamt,
 COALESCE(C_Commission.IsActive, 'N') AS IsActive, 
 COALESCE(C_Commission.ListDetails, 'N') AS ListDetails, 
 COALESCE(C_Commission.iscascade, 'N') AS iscascade, 
-C_Commission.AD_Client_ID, 
 C_Commission.C_Commission_ID, 
+C_Commission.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM C_Commission left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Commission.AD_Org_ID = table1.AD_Org_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (C_Commission.C_BPartner_ID =  table2.C_BPartner_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (C_Commission.C_Currency_ID = table3.C_Currency_ID) left join ad_ref_list_v list1 on (C_Commission.FrequencyType = list1.value and list1.ad_reference_id = '225' and list1.ad_language = ?)  left join (select M_Product_ID, Name from M_Product) table4 on (C_Commission.M_Product_ID = table4.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL4 on (table4.M_Product_ID = tableTRL4.M_Product_ID and tableTRL4.AD_Language = ?)  left join ad_ref_list_v list2 on (C_Commission.DocBasisType = list2.value and list2.ad_reference_id = '224' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (C_Commission.Basisstatus = list3.value and list3.ad_reference_id = '9750460836504FF9ADD6A60DD871EA00' and list3.ad_language = ?)  left join ad_ref_list_v list4 on (C_Commission.Basisamt = list4.value and list4.ad_reference_id = '772B5918358B443A83F82F81A9A4BFB6' and list4.ad_language = ?) 
@@ -122,13 +122,13 @@ C_Commission.C_Commission_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE C_Commission
-        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_Currency_ID = (?) , FrequencyType = (?) , M_Product_ID = (?) , DocBasisType = (?) , Description = (?) , CreateFrom = (?) , Processing = (?) , DateLastRun = TO_DATE(?) , Basisstatus = (?) , Basisamt = (?) , IsActive = (?) , ListDetails = (?) , iscascade = (?) , AD_Client_ID = (?) , C_Commission_ID = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Name = (?) , C_BPartner_ID = (?) , C_Currency_ID = (?) , FrequencyType = (?) , M_Product_ID = (?) , DocBasisType = (?) , Description = (?) , CreateFrom = (?) , Processing = (?) , DateLastRun = TO_DATE(?) , Basisstatus = (?) , Basisamt = (?) , IsActive = (?) , ListDetails = (?) , iscascade = (?) , C_Commission_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE C_Commission.C_Commission_ID = ? 
         
         AND C_Commission.AD_Client_ID IN ('1') 
         AND C_Commission.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="frequencytype"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="docbasistype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="datelastrun"></Parameter> <Parameter name="basisstatus"></Parameter> <Parameter name="basisamt"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="listdetails"></Parameter> <Parameter name="iscascade"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cCommissionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="frequencytype"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="docbasistype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="datelastrun"></Parameter> <Parameter name="basisstatus"></Parameter> <Parameter name="basisamt"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="listdetails"></Parameter> <Parameter name="iscascade"></Parameter> <Parameter name="cCommissionId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="cCommissionId"></Parameter>
     
@@ -140,10 +140,10 @@ C_Commission.C_Commission_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO C_Commission 
-        (AD_Org_ID, Name, C_BPartner_ID, C_Currency_ID, FrequencyType, M_Product_ID, DocBasisType, Description, CreateFrom, Processing, DateLastRun, Basisstatus, Basisamt, IsActive, ListDetails, iscascade, AD_Client_ID, C_Commission_ID, created, createdby, updated, updatedBy)
+        (AD_Org_ID, Name, C_BPartner_ID, C_Currency_ID, FrequencyType, M_Product_ID, DocBasisType, Description, CreateFrom, Processing, DateLastRun, Basisstatus, Basisamt, IsActive, ListDetails, iscascade, C_Commission_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="frequencytype"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="docbasistype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="datelastrun"></Parameter> <Parameter name="basisstatus"></Parameter> <Parameter name="basisamt"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="listdetails"></Parameter> <Parameter name="iscascade"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="cCommissionId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="frequencytype"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="docbasistype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="createfrom"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="datelastrun"></Parameter> <Parameter name="basisstatus"></Parameter> <Parameter name="basisamt"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="listdetails"></Parameter> <Parameter name="iscascade"></Parameter> <Parameter name="cCommissionId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

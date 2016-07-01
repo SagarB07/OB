@@ -42,11 +42,11 @@ static Logger log4j = Logger.getLogger(OperationData.class);
   public String isactive;
   public String costcentercost;
   public String usedmaterial;
-  public String adOrgId;
-  public String maProcessplanVersionId;
-  public String adClientId;
   public String calculated;
+  public String maProcessplanVersionId;
   public String maSequenceId;
+  public String adOrgId;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -108,16 +108,16 @@ static Logger log4j = Logger.getLogger(OperationData.class);
       return costcentercost;
     else if (fieldName.equalsIgnoreCase("usedmaterial"))
       return usedmaterial;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("ma_processplan_version_id") || fieldName.equals("maProcessplanVersionId"))
-      return maProcessplanVersionId;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
     else if (fieldName.equalsIgnoreCase("calculated"))
       return calculated;
+    else if (fieldName.equalsIgnoreCase("ma_processplan_version_id") || fieldName.equals("maProcessplanVersionId"))
+      return maProcessplanVersionId;
     else if (fieldName.equalsIgnoreCase("ma_sequence_id") || fieldName.equals("maSequenceId"))
       return maSequenceId;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -175,11 +175,11 @@ Select for edit
       "COALESCE(MA_Sequence.IsActive, 'N') AS IsActive, " +
       "MA_Sequence.Costcentercost, " +
       "COALESCE(MA_Sequence.Usedmaterial, 'N') AS Usedmaterial, " +
-      "MA_Sequence.AD_Org_ID, " +
-      "MA_Sequence.MA_Processplan_Version_ID, " +
-      "MA_Sequence.AD_Client_ID, " +
       "COALESCE(MA_Sequence.Calculated, 'N') AS Calculated, " +
+      "MA_Sequence.MA_Processplan_Version_ID, " +
       "MA_Sequence.MA_Sequence_ID, " +
+      "MA_Sequence.AD_Org_ID, " +
+      "MA_Sequence.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_Sequence left join (select MA_Process_ID, Name from MA_Process) table1 on (MA_Sequence.MA_Process_ID = table1.MA_Process_ID)" +
       "        WHERE 2=2 " +
@@ -250,11 +250,11 @@ Select for edit
         objectOperationData.isactive = UtilSql.getValue(result, "isactive");
         objectOperationData.costcentercost = UtilSql.getValue(result, "costcentercost");
         objectOperationData.usedmaterial = UtilSql.getValue(result, "usedmaterial");
-        objectOperationData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectOperationData.maProcessplanVersionId = UtilSql.getValue(result, "ma_processplan_version_id");
-        objectOperationData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectOperationData.calculated = UtilSql.getValue(result, "calculated");
+        objectOperationData.maProcessplanVersionId = UtilSql.getValue(result, "ma_processplan_version_id");
         objectOperationData.maSequenceId = UtilSql.getValue(result, "ma_sequence_id");
+        objectOperationData.adOrgId = UtilSql.getValue(result, "ad_org_id");
+        objectOperationData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectOperationData.language = UtilSql.getValue(result, "language");
         objectOperationData.adUserClient = "";
         objectOperationData.adOrgClient = "";
@@ -316,11 +316,11 @@ Create a registry
     objectOperationData[0].isactive = isactive;
     objectOperationData[0].costcentercost = costcentercost;
     objectOperationData[0].usedmaterial = usedmaterial;
-    objectOperationData[0].adOrgId = adOrgId;
-    objectOperationData[0].maProcessplanVersionId = maProcessplanVersionId;
-    objectOperationData[0].adClientId = adClientId;
     objectOperationData[0].calculated = calculated;
+    objectOperationData[0].maProcessplanVersionId = maProcessplanVersionId;
     objectOperationData[0].maSequenceId = maSequenceId;
+    objectOperationData[0].adOrgId = adOrgId;
+    objectOperationData[0].adClientId = adClientId;
     objectOperationData[0].language = "";
     return objectOperationData;
   }
@@ -559,7 +559,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_Sequence" +
-      "        SET SeqNo = TO_NUMBER(?) , Value = (?) , Name = (?) , MA_Process_ID = (?) , Estimatedtime = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Preptime = TO_NUMBER(?) , Description = (?) , Multiplier = TO_NUMBER(?) , Noqty = (?) , Groupuse = (?) , Outsourced = (?) , Outsourcingcost = TO_NUMBER(?) , Isdefault = (?) , IsActive = (?) , Costcentercost = TO_NUMBER(?) , Usedmaterial = (?) , AD_Org_ID = (?) , MA_Processplan_Version_ID = (?) , AD_Client_ID = (?) , Calculated = (?) , MA_Sequence_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET SeqNo = TO_NUMBER(?) , Value = (?) , Name = (?) , MA_Process_ID = (?) , Estimatedtime = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Preptime = TO_NUMBER(?) , Description = (?) , Multiplier = TO_NUMBER(?) , Noqty = (?) , Groupuse = (?) , Outsourced = (?) , Outsourcingcost = TO_NUMBER(?) , Isdefault = (?) , IsActive = (?) , Costcentercost = TO_NUMBER(?) , Usedmaterial = (?) , Calculated = (?) , MA_Processplan_Version_ID = (?) , MA_Sequence_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_Sequence.MA_Sequence_ID = ? " +
       "                 AND MA_Sequence.MA_Processplan_Version_ID = ? " +
       "        AND MA_Sequence.AD_Client_ID IN (";
@@ -594,11 +594,11 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, costcentercost);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, usedmaterial);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, calculated);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
@@ -628,7 +628,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_Sequence " +
-      "        (SeqNo, Value, Name, MA_Process_ID, Estimatedtime, CostCenterUse, Preptime, Description, Multiplier, Noqty, Groupuse, Outsourced, Outsourcingcost, Isdefault, IsActive, Costcentercost, Usedmaterial, AD_Org_ID, MA_Processplan_Version_ID, AD_Client_ID, Calculated, MA_Sequence_ID, created, createdby, updated, updatedBy)" +
+      "        (SeqNo, Value, Name, MA_Process_ID, Estimatedtime, CostCenterUse, Preptime, Description, Multiplier, Noqty, Groupuse, Outsourced, Outsourcingcost, Isdefault, IsActive, Costcentercost, Usedmaterial, Calculated, MA_Processplan_Version_ID, MA_Sequence_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -654,11 +654,11 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, costcentercost);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, usedmaterial);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, calculated);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maProcessplanVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

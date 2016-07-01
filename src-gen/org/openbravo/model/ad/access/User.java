@@ -118,6 +118,7 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
     public static final String PROPERTY_IMAGE = "image";
     public static final String PROPERTY_GRANTPORTALACCESS = "grantPortalAccess";
     public static final String PROPERTY_ATECFECHECKEMAIL = "atecfeCheckEmail";
+    public static final String PROPERTY_NOROLMAIL = "noRolMail";
     public static final String PROPERTY_ADALERTLIST = "aDAlertList";
     public static final String PROPERTY_ADALERTRECIPIENTLIST = "aDAlertRecipientList";
     public static final String PROPERTY_ADPREFERENCELIST = "aDPreferenceList";
@@ -170,6 +171,7 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
         setDefaultValue(PROPERTY_LOCKED, false);
         setDefaultValue(PROPERTY_GRANTPORTALACCESS, false);
         setDefaultValue(PROPERTY_ATECFECHECKEMAIL, false);
+        setDefaultValue(PROPERTY_NOROLMAIL, false);
         setDefaultValue(PROPERTY_ADALERTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ADALERTRECIPIENTLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_ADPREFERENCELIST, new ArrayList<Object>());
@@ -540,6 +542,14 @@ public class User extends BaseOBObject implements Traceable, ClientEnabled, Orga
 
     public void setAtecfeCheckEmail(Boolean atecfeCheckEmail) {
         set(PROPERTY_ATECFECHECKEMAIL, atecfeCheckEmail);
+    }
+
+    public Boolean isNoRolMail() {
+        return (Boolean) get(PROPERTY_NOROLMAIL);
+    }
+
+    public void setNoRolMail(Boolean noRolMail) {
+        set(PROPERTY_NOROLMAIL, noRolMail);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SqlClass id="class" name="TipodeIngresosoEgresosC44BEC2E9C3A42D095E937A9E24A587DData" package="org.openbravo.erpWindows.com.atrums.nomina.TipodeIngresosoEgresos">
+  <SqlClassComment>WAD Generated class</SqlClassComment>
+
+  <SqlMethod name="selectEdit" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Select for edit</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT to_char(no_tipo_ingreso_egreso.Created, ?) as created, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_tipo_ingreso_egreso.CreatedBy) as CreatedByR, 
+        to_char(no_tipo_ingreso_egreso.Updated, ?) as updated, 
+        to_char(no_tipo_ingreso_egreso.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
+        no_tipo_ingreso_egreso.UpdatedBy, 
+        (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = no_tipo_ingreso_egreso.UpdatedBy) as UpdatedByR,
+        no_tipo_ingreso_egreso.AD_Org_ID, 
+(CASE WHEN no_tipo_ingreso_egreso.AD_Org_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Org_IDR, 
+no_tipo_ingreso_egreso.Name, 
+no_tipo_ingreso_egreso.Tipo_Rubro, 
+no_tipo_ingreso_egreso.NO_Calcula_Rubro_ID, 
+(CASE WHEN no_tipo_ingreso_egreso.NO_Calcula_Rubro_ID IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Nombre), ''))),'') ) END) AS NO_Calcula_Rubro_IDR, 
+COALESCE(no_tipo_ingreso_egreso.Isavance, 'N') AS Isavance, 
+COALESCE(no_tipo_ingreso_egreso.Isingreso, 'N') AS Isingreso, 
+no_tipo_ingreso_egreso.MAX_H_Extra, 
+COALESCE(no_tipo_ingreso_egreso.Suma_Ingreso, 'N') AS Suma_Ingreso, 
+COALESCE(no_tipo_ingreso_egreso.Isprovision, 'N') AS Isprovision, 
+COALESCE(no_tipo_ingreso_egreso.Isprovmes, 'N') AS Isprovmes, 
+no_tipo_ingreso_egreso.MES_Calculo, 
+(CASE WHEN no_tipo_ingreso_egreso.MES_Calculo IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS MES_CalculoR, 
+no_tipo_ingreso_egreso.MES_Pago, 
+(CASE WHEN no_tipo_ingreso_egreso.MES_Pago IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list2.name),'') ) END) AS MES_PagoR, 
+COALESCE(no_tipo_ingreso_egreso.Isactive, 'N') AS Isactive, 
+COALESCE(no_tipo_ingreso_egreso.Isdecimotercero, 'N') AS Isdecimotercero, 
+COALESCE(no_tipo_ingreso_egreso.Isdecimocuarto, 'N') AS Isdecimocuarto, 
+COALESCE(no_tipo_ingreso_egreso.Isvariable, 'N') AS Isvariable, 
+COALESCE(no_tipo_ingreso_egreso.Isfondoreserva, 'N') AS Isfondoreserva, 
+no_tipo_ingreso_egreso.DIA_Pago, 
+COALESCE(no_tipo_ingreso_egreso.Issueldo, 'N') AS Issueldo, 
+no_tipo_ingreso_egreso.Copiarubro, 
+no_tipo_ingreso_egreso.NO_Tipo_Ingreso_Egreso_ID, 
+no_tipo_ingreso_egreso.AD_Client_ID, 
+ 
+        ? AS LANGUAGE 
+        FROM no_tipo_ingreso_egreso left join (select AD_Org_ID, Name from AD_Org) table1 on (no_tipo_ingreso_egreso.AD_Org_ID = table1.AD_Org_ID) left join (select NO_Calcula_Rubro_ID, Nombre from no_calcula_rubro) table2 on (no_tipo_ingreso_egreso.NO_Calcula_Rubro_ID =  table2.NO_Calcula_Rubro_ID) left join ad_ref_list_v list1 on (no_tipo_ingreso_egreso.MES_Calculo = list1.value and list1.ad_reference_id = '46C76320911F4085B2CE2E3504166517' and list1.ad_language = ?)  left join ad_ref_list_v list2 on (no_tipo_ingreso_egreso.MES_Pago = list2.value and list2.ad_reference_id = '46C76320911F4085B2CE2E3504166517' and list2.ad_language = ?) 
+        WHERE 2=2 
+
+        AND 1=1 
+        AND no_tipo_ingreso_egreso.NO_Tipo_Ingreso_Egreso_ID = ? 
+        AND no_tipo_ingreso_egreso.AD_Client_ID IN ('1') 
+           AND no_tipo_ingreso_egreso.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="dateTimeFormat"></Parameter>
+    <Parameter name="dateTimeFormat"></Parameter>
+    
+    <Parameter name="paramLanguage"></Parameter>
+<Parameter name="paramLanguage"/>
+<Parameter name="paramLanguage"/>
+
+
+    <Parameter name="key"></Parameter>
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_tipo_ingreso_egreso.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_tipo_ingreso_egreso.AD_Org_ID IN (" text="'1'"/>
+
+    <Field name="adUserClient" value="void"></Field>
+    <Field name="adOrgClient" value="void"></Field>
+    <Field name="createdby" value="void"></Field>
+    
+    <Field name="trBgcolor" value="void"></Field>
+    <Field name="totalCount" value="void"></Field>
+    <Field name="dateTimeFormat" value=""></Field>
+  </SqlMethod>
+  
+  
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Create a registry</SqlMethodComment>
+      <Sql></Sql>
+
+<Parameter name="isvariable"></Parameter><Parameter name="isactive"></Parameter><Parameter name="mesPago"></Parameter><Parameter name="noTipoIngresoEgresoId"></Parameter><Parameter name="isprovision"></Parameter><Parameter name="diaPago"></Parameter><Parameter name="issueldo"></Parameter><Parameter name="isingreso"></Parameter><Parameter name="tipoRubro"></Parameter><Parameter name="sumaIngreso"></Parameter><Parameter name="isavance"></Parameter><Parameter name="maxHExtra"></Parameter><Parameter name="name"></Parameter><Parameter name="isdecimocuarto"></Parameter><Parameter name="mesCalculo"></Parameter><Parameter name="noCalculaRubroId"></Parameter><Parameter name="copiarubro"></Parameter><Parameter name="adClientId"></Parameter><Parameter name="adOrgId"></Parameter><Parameter name="updatedby"></Parameter><Parameter name="updatedbyr"></Parameter><Parameter name="createdby"></Parameter><Parameter name="createdbyr"></Parameter><Parameter name="isdecimotercero"></Parameter><Parameter name="isfondoreserva"></Parameter><Parameter name="isprovmes"></Parameter>
+   </SqlMethod>
+
+
+
+
+
+
+   <SqlMethod name="selectDefE3657183E1AF4D9D92BE841B9D635F43_0" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Updatedby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="UpdatedbyR"/>
+  </SqlMethod>
+
+   <SqlMethod name="selectDefEF90FAC65C0C43F6BBB92A37640A08B7_1" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Select for auxiliar field</SqlMethodComment>
+    <Sql><![CDATA[
+        SELECT  ( COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))), '') ) as Createdby FROM AD_User left join (select AD_User_ID, Name from AD_User) table2 on (AD_User.AD_User_ID = table2.AD_User_ID) WHERE AD_User.isActive='Y' AND AD_User.AD_User_ID = ?  
+    ]]></Sql>
+<Parameter name="CreatedbyR"/>
+  </SqlMethod>
+
+
+
+
+
+
+
+
+
+
+  <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        UPDATE no_tipo_ingreso_egreso
+        SET AD_Org_ID = (?) , Name = (?) , Tipo_Rubro = (?) , NO_Calcula_Rubro_ID = (?) , Isavance = (?) , Isingreso = (?) , MAX_H_Extra = TO_NUMBER(?) , Suma_Ingreso = (?) , Isprovision = (?) , Isprovmes = (?) , MES_Calculo = (?) , MES_Pago = (?) , Isactive = (?) , Isdecimotercero = (?) , Isdecimocuarto = (?) , Isvariable = (?) , Isfondoreserva = (?) , DIA_Pago = TO_NUMBER(?) , Issueldo = (?) , Copiarubro = (?) , NO_Tipo_Ingreso_Egreso_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        WHERE no_tipo_ingreso_egreso.NO_Tipo_Ingreso_Egreso_ID = ? 
+        
+        AND no_tipo_ingreso_egreso.AD_Client_ID IN ('1') 
+        AND no_tipo_ingreso_egreso.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="tipoRubro"></Parameter> <Parameter name="noCalculaRubroId"></Parameter> <Parameter name="isavance"></Parameter> <Parameter name="isingreso"></Parameter> <Parameter name="maxHExtra"></Parameter> <Parameter name="sumaIngreso"></Parameter> <Parameter name="isprovision"></Parameter> <Parameter name="isprovmes"></Parameter> <Parameter name="mesCalculo"></Parameter> <Parameter name="mesPago"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="isdecimotercero"></Parameter> <Parameter name="isdecimocuarto"></Parameter> <Parameter name="isvariable"></Parameter> <Parameter name="isfondoreserva"></Parameter> <Parameter name="diaPago"></Parameter> <Parameter name="issueldo"></Parameter> <Parameter name="copiarubro"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="updatedby"></Parameter>
+    <Parameter id="paramKey" name="noTipoIngresoEgresoId"></Parameter>
+    
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_tipo_ingreso_egreso.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_tipo_ingreso_egreso.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
+    <Sql><![CDATA[
+        INSERT INTO no_tipo_ingreso_egreso 
+        (AD_Org_ID, Name, Tipo_Rubro, NO_Calcula_Rubro_ID, Isavance, Isingreso, MAX_H_Extra, Suma_Ingreso, Isprovision, Isprovmes, MES_Calculo, MES_Pago, Isactive, Isdecimotercero, Isdecimocuarto, Isvariable, Isfondoreserva, DIA_Pago, Issueldo, Copiarubro, NO_Tipo_Ingreso_Egreso_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), now(), ?, now(), ?)
+    ]]></Sql>
+    <Parameter name="adOrgId"></Parameter> <Parameter name="name"></Parameter> <Parameter name="tipoRubro"></Parameter> <Parameter name="noCalculaRubroId"></Parameter> <Parameter name="isavance"></Parameter> <Parameter name="isingreso"></Parameter> <Parameter name="maxHExtra"></Parameter> <Parameter name="sumaIngreso"></Parameter> <Parameter name="isprovision"></Parameter> <Parameter name="isprovmes"></Parameter> <Parameter name="mesCalculo"></Parameter> <Parameter name="mesPago"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="isdecimotercero"></Parameter> <Parameter name="isdecimocuarto"></Parameter> <Parameter name="isvariable"></Parameter> <Parameter name="isfondoreserva"></Parameter> <Parameter name="diaPago"></Parameter> <Parameter name="issueldo"></Parameter> <Parameter name="copiarubro"></Parameter> <Parameter name="noTipoIngresoEgresoId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="createdby"></Parameter>
+    <Parameter name="updatedby"></Parameter>
+  </SqlMethod>
+
+  <SqlMethod name="delete" type="preparedStatement" return="rowCount">
+    <Sql><![CDATA[
+        DELETE FROM no_tipo_ingreso_egreso
+        WHERE no_tipo_ingreso_egreso.NO_Tipo_Ingreso_Egreso_ID = ? 
+        
+        AND no_tipo_ingreso_egreso.AD_Client_ID IN ('1') 
+        AND no_tipo_ingreso_egreso.AD_Org_ID IN ('1') 
+    ]]></Sql>
+    <Parameter name="param1"></Parameter>
+    
+        <Parameter name="adUserClient" type="replace" optional="true" after="no_tipo_ingreso_egreso.AD_Client_ID IN (" text="'1'"/>
+        <Parameter name="adOrgClient" type="replace" optional="true" after="no_tipo_ingreso_egreso.AD_Org_ID IN (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="selectOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Select for relation</SqlMethodComment>
+    <Sql><![CDATA[ 
+        SELECT AD_ORG_ID
+          FROM no_tipo_ingreso_egreso
+         WHERE no_tipo_ingreso_egreso.NO_Tipo_Ingreso_Egreso_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+  
+  <SqlMethod name="getCurrentDBTimestamp" type="preparedStatement" return="string">
+    <Sql><![CDATA[ 
+        SELECT to_char(Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp
+          FROM no_tipo_ingreso_egreso
+         WHERE no_tipo_ingreso_egreso.NO_Tipo_Ingreso_Egreso_ID = ? 
+    ]]></Sql>
+    <Parameter name="id"></Parameter>
+  </SqlMethod>
+</SqlClass>

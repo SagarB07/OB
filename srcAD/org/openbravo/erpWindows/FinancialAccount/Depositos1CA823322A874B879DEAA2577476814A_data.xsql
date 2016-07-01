@@ -11,51 +11,51 @@
         to_char(dp_finacc_transaction_v.Updated, 'YYYYMMDDHH24MISS') as Updated_Time_Stamp,  
         dp_finacc_transaction_v.UpdatedBy, 
         (SELECT NAME FROM AD_USER u WHERE AD_USER_ID = dp_finacc_transaction_v.UpdatedBy) as UpdatedByR,
-        dp_finacc_transaction_v.Line, 
-dp_finacc_transaction_v.AD_Org_ID, 
+        dp_finacc_transaction_v.AD_Org_ID, 
+dp_finacc_transaction_v.Line, 
 dp_finacc_transaction_v.Statementdate, 
 dp_finacc_transaction_v.EM_Dp_Deposito, 
-dp_finacc_transaction_v.M_Product_ID, 
 dp_finacc_transaction_v.FIN_Payment_ID, 
 (CASE WHEN dp_finacc_transaction_v.FIN_Payment_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table1.Paymentdate, 'DD-MM-YYYY')),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Amount), ''))),'') ) END) AS FIN_Payment_IDR, 
-dp_finacc_transaction_v.FIN_Finacc_Transaction_ID, 
 dp_finacc_transaction_v.EM_Aprm_Modify, 
+dp_finacc_transaction_v.FIN_Finacc_Transaction_ID, 
+dp_finacc_transaction_v.M_Product_ID, 
 dp_finacc_transaction_v.C_Bpartner_ID, 
 COALESCE(dp_finacc_transaction_v.Isactive, 'N') AS Isactive, 
 dp_finacc_transaction_v.Status, 
 (CASE WHEN dp_finacc_transaction_v.Status IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list1.name),'') ) END) AS StatusR, 
-dp_finacc_transaction_v.Depositamt, 
 dp_finacc_transaction_v.FIN_Financial_Account_ID, 
+dp_finacc_transaction_v.Depositamt, 
 dp_finacc_transaction_v.Paymentamt, 
 COALESCE(dp_finacc_transaction_v.Processed, 'N') AS Processed, 
 COALESCE(dp_finacc_transaction_v.Cleared, 'N') AS Cleared, 
 COALESCE(dp_finacc_transaction_v.Processing, 'N') AS Processing, 
 dp_finacc_transaction_v.User1_ID, 
 COALESCE(dp_finacc_transaction_v.Reconciled, 'N') AS Reconciled, 
+dp_finacc_transaction_v.User2_ID, 
 dp_finacc_transaction_v.C_Currency_ID, 
 (CASE WHEN dp_finacc_transaction_v.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table3.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
-dp_finacc_transaction_v.User2_ID, 
 dp_finacc_transaction_v.C_Activity_ID, 
 dp_finacc_transaction_v.Trxtype, 
 (CASE WHEN dp_finacc_transaction_v.Trxtype IS NULL THEN '' ELSE  ( COALESCE(TO_CHAR(list2.name),'') ) END) AS TrxtypeR, 
 dp_finacc_transaction_v.Description, 
 dp_finacc_transaction_v.C_Campaign_ID, 
-dp_finacc_transaction_v.C_Project_ID, 
 dp_finacc_transaction_v.C_Glitem_ID, 
 (CASE WHEN dp_finacc_transaction_v.C_Glitem_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table4.Name), ''))),'') ) END) AS C_Glitem_IDR, 
+dp_finacc_transaction_v.C_Project_ID, 
 dp_finacc_transaction_v.Dateacct, 
 dp_finacc_transaction_v.Foreign_Amount, 
-dp_finacc_transaction_v.Foreign_Convert_Rate, 
 dp_finacc_transaction_v.FIN_Reconciliation_ID, 
 (CASE WHEN dp_finacc_transaction_v.FIN_Reconciliation_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table5.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table5.Statementdate, 'DD-MM-YYYY')),'') ) END) AS FIN_Reconciliation_IDR, 
+dp_finacc_transaction_v.Foreign_Convert_Rate, 
 COALESCE(dp_finacc_transaction_v.Createdbyalgorithm, 'N') AS Createdbyalgorithm, 
 dp_finacc_transaction_v.Delete_Btn, 
 dp_finacc_transaction_v.Foreign_Currency_ID, 
 dp_finacc_transaction_v.C_Salesregion_ID, 
 dp_finacc_transaction_v.Paymentdocno, 
 dp_finacc_transaction_v.Forced_Table_ID, 
-dp_finacc_transaction_v.AD_Client_ID, 
 dp_finacc_transaction_v.dp_finacc_transaction_v_id, 
+dp_finacc_transaction_v.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM dp_finacc_transaction_v left join (select FIN_Payment_ID, DocumentNo, Paymentdate, C_Bpartner_ID, Amount from FIN_Payment) table1 on (dp_finacc_transaction_v.FIN_Payment_ID = table1.FIN_Payment_ID) left join (select C_BPartner_ID, Name from C_BPartner) table2 on (table1.C_Bpartner_ID = table2.C_BPartner_ID) left join ad_ref_list_v list1 on (dp_finacc_transaction_v.Status = list1.value and list1.ad_reference_id = '575BCB88A4694C27BC013DE9C73E6FE7' and list1.ad_language = ?)  left join (select C_Currency_ID, ISO_Code from C_Currency) table3 on (dp_finacc_transaction_v.C_Currency_ID = table3.C_Currency_ID) left join ad_ref_list_v list2 on (dp_finacc_transaction_v.Trxtype = list2.value and list2.ad_reference_id = '4EFC9773F30B4ACE97D225BD13CFF8CB' and list2.ad_language = ?)  left join (select C_Glitem_ID, Name from C_Glitem) table4 on (dp_finacc_transaction_v.C_Glitem_ID = table4.C_Glitem_ID) left join (select FIN_Reconciliation_ID, DocumentNo, Statementdate from FIN_Reconciliation) table5 on (dp_finacc_transaction_v.FIN_Reconciliation_ID = table5.FIN_Reconciliation_ID)
@@ -178,13 +178,13 @@ dp_finacc_transaction_v.dp_finacc_transaction_v_id,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE dp_finacc_transaction_v
-        SET Line = TO_NUMBER(?) , AD_Org_ID = (?) , Statementdate = TO_DATE(?) , EM_Dp_Deposito = (?) , M_Product_ID = (?) , FIN_Payment_ID = (?) , FIN_Finacc_Transaction_ID = (?) , EM_Aprm_Modify = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Status = (?) , Depositamt = TO_NUMBER(?) , FIN_Financial_Account_ID = (?) , Paymentamt = TO_NUMBER(?) , Processed = (?) , Cleared = (?) , Processing = (?) , User1_ID = (?) , Reconciled = (?) , C_Currency_ID = (?) , User2_ID = (?) , C_Activity_ID = (?) , Trxtype = (?) , Description = (?) , C_Campaign_ID = (?) , C_Project_ID = (?) , C_Glitem_ID = (?) , Dateacct = TO_DATE(?) , Foreign_Amount = TO_NUMBER(?) , Foreign_Convert_Rate = TO_NUMBER(?) , FIN_Reconciliation_ID = (?) , Createdbyalgorithm = (?) , Delete_Btn = (?) , Foreign_Currency_ID = (?) , C_Salesregion_ID = (?) , Paymentdocno = (?) , Forced_Table_ID = (?) , AD_Client_ID = (?) , dp_finacc_transaction_v_id = (?) , updated = now(), updatedby = ? 
+        SET AD_Org_ID = (?) , Line = TO_NUMBER(?) , Statementdate = TO_DATE(?) , EM_Dp_Deposito = (?) , FIN_Payment_ID = (?) , EM_Aprm_Modify = (?) , FIN_Finacc_Transaction_ID = (?) , M_Product_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Status = (?) , FIN_Financial_Account_ID = (?) , Depositamt = TO_NUMBER(?) , Paymentamt = TO_NUMBER(?) , Processed = (?) , Cleared = (?) , Processing = (?) , User1_ID = (?) , Reconciled = (?) , User2_ID = (?) , C_Currency_ID = (?) , C_Activity_ID = (?) , Trxtype = (?) , Description = (?) , C_Campaign_ID = (?) , C_Glitem_ID = (?) , C_Project_ID = (?) , Dateacct = TO_DATE(?) , Foreign_Amount = TO_NUMBER(?) , FIN_Reconciliation_ID = (?) , Foreign_Convert_Rate = TO_NUMBER(?) , Createdbyalgorithm = (?) , Delete_Btn = (?) , Foreign_Currency_ID = (?) , C_Salesregion_ID = (?) , Paymentdocno = (?) , Forced_Table_ID = (?) , dp_finacc_transaction_v_id = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE dp_finacc_transaction_v.dp_finacc_transaction_v_id = ? 
                  AND dp_finacc_transaction_v.FIN_Financial_Account_ID = ? 
         AND dp_finacc_transaction_v.AD_Client_ID IN ('1') 
         AND dp_finacc_transaction_v.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="emDpDeposito"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="finPaymentId"></Parameter> <Parameter name="finFinaccTransactionId"></Parameter> <Parameter name="emAprmModify"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="status"></Parameter> <Parameter name="depositamt"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="paymentamt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="cleared"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="reconciled"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="trxtype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="foreignAmount"></Parameter> <Parameter name="foreignConvertRate"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="createdbyalgorithm"></Parameter> <Parameter name="deleteBtn"></Parameter> <Parameter name="foreignCurrencyId"></Parameter> <Parameter name="cSalesregionId"></Parameter> <Parameter name="paymentdocno"></Parameter> <Parameter name="forcedTableId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="dpFinaccTransactionVId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="line"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="emDpDeposito"></Parameter> <Parameter name="finPaymentId"></Parameter> <Parameter name="emAprmModify"></Parameter> <Parameter name="finFinaccTransactionId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="status"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="depositamt"></Parameter> <Parameter name="paymentamt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="cleared"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="reconciled"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="trxtype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="foreignAmount"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="foreignConvertRate"></Parameter> <Parameter name="createdbyalgorithm"></Parameter> <Parameter name="deleteBtn"></Parameter> <Parameter name="foreignCurrencyId"></Parameter> <Parameter name="cSalesregionId"></Parameter> <Parameter name="paymentdocno"></Parameter> <Parameter name="forcedTableId"></Parameter> <Parameter name="dpFinaccTransactionVId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="dpFinaccTransactionVId"></Parameter>
     
@@ -196,10 +196,10 @@ dp_finacc_transaction_v.dp_finacc_transaction_v_id,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO dp_finacc_transaction_v 
-        (Line, AD_Org_ID, Statementdate, EM_Dp_Deposito, M_Product_ID, FIN_Payment_ID, FIN_Finacc_Transaction_ID, EM_Aprm_Modify, C_Bpartner_ID, Isactive, Status, Depositamt, FIN_Financial_Account_ID, Paymentamt, Processed, Cleared, Processing, User1_ID, Reconciled, C_Currency_ID, User2_ID, C_Activity_ID, Trxtype, Description, C_Campaign_ID, C_Project_ID, C_Glitem_ID, Dateacct, Foreign_Amount, Foreign_Convert_Rate, FIN_Reconciliation_ID, Createdbyalgorithm, Delete_Btn, Foreign_Currency_ID, C_Salesregion_ID, Paymentdocno, Forced_Table_ID, AD_Client_ID, dp_finacc_transaction_v_id, created, createdby, updated, updatedBy)
-        VALUES (TO_NUMBER(?), (?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
+        (AD_Org_ID, Line, Statementdate, EM_Dp_Deposito, FIN_Payment_ID, EM_Aprm_Modify, FIN_Finacc_Transaction_ID, M_Product_ID, C_Bpartner_ID, Isactive, Status, FIN_Financial_Account_ID, Depositamt, Paymentamt, Processed, Cleared, Processing, User1_ID, Reconciled, User2_ID, C_Currency_ID, C_Activity_ID, Trxtype, Description, C_Campaign_ID, C_Glitem_ID, C_Project_ID, Dateacct, Foreign_Amount, FIN_Reconciliation_ID, Foreign_Convert_Rate, Createdbyalgorithm, Delete_Btn, Foreign_Currency_ID, C_Salesregion_ID, Paymentdocno, Forced_Table_ID, dp_finacc_transaction_v_id, AD_Client_ID, created, createdby, updated, updatedBy)
+        VALUES ((?), TO_NUMBER(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="line"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="emDpDeposito"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="finPaymentId"></Parameter> <Parameter name="finFinaccTransactionId"></Parameter> <Parameter name="emAprmModify"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="status"></Parameter> <Parameter name="depositamt"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="paymentamt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="cleared"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="reconciled"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="trxtype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="foreignAmount"></Parameter> <Parameter name="foreignConvertRate"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="createdbyalgorithm"></Parameter> <Parameter name="deleteBtn"></Parameter> <Parameter name="foreignCurrencyId"></Parameter> <Parameter name="cSalesregionId"></Parameter> <Parameter name="paymentdocno"></Parameter> <Parameter name="forcedTableId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="dpFinaccTransactionVId"></Parameter> 
+    <Parameter name="adOrgId"></Parameter> <Parameter name="line"></Parameter> <Parameter name="statementdate"></Parameter> <Parameter name="emDpDeposito"></Parameter> <Parameter name="finPaymentId"></Parameter> <Parameter name="emAprmModify"></Parameter> <Parameter name="finFinaccTransactionId"></Parameter> <Parameter name="mProductId"></Parameter> <Parameter name="cBpartnerId"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="status"></Parameter> <Parameter name="finFinancialAccountId"></Parameter> <Parameter name="depositamt"></Parameter> <Parameter name="paymentamt"></Parameter> <Parameter name="processed"></Parameter> <Parameter name="cleared"></Parameter> <Parameter name="processing"></Parameter> <Parameter name="user1Id"></Parameter> <Parameter name="reconciled"></Parameter> <Parameter name="user2Id"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="cActivityId"></Parameter> <Parameter name="trxtype"></Parameter> <Parameter name="description"></Parameter> <Parameter name="cCampaignId"></Parameter> <Parameter name="cGlitemId"></Parameter> <Parameter name="cProjectId"></Parameter> <Parameter name="dateacct"></Parameter> <Parameter name="foreignAmount"></Parameter> <Parameter name="finReconciliationId"></Parameter> <Parameter name="foreignConvertRate"></Parameter> <Parameter name="createdbyalgorithm"></Parameter> <Parameter name="deleteBtn"></Parameter> <Parameter name="foreignCurrencyId"></Parameter> <Parameter name="cSalesregionId"></Parameter> <Parameter name="paymentdocno"></Parameter> <Parameter name="forcedTableId"></Parameter> <Parameter name="dpFinaccTransactionVId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

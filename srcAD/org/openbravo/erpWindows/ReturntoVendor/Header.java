@@ -999,10 +999,10 @@ String strParamGrandTotal_f = vars.getSessionValue(tabId + "|paramGrandTotal_f")
    
     try {
       ComboTableData comboTableData = null;
-xmlDocument.setParameter("RM_PickFromShipment_BTNname", Utility.getButtonName(this, vars, "BC1DF2A8AEAE4BF8AADB477D13D6002F", "RM_PickFromShipment_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_PickFromShipment = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
-xmlDocument.setParameter("RM_PickFromShipment_Modal", modalRM_PickFromShipment?"true":"false");
 xmlDocument.setParameter("DocAction_BTNname", Utility.getButtonName(this, vars, "FF80818130217A35013021A672400035", (dataField==null?data[0].getField("docaction"):dataField.getField("docaction")), "DocAction_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalDocAction = org.openbravo.erpCommon.utility.Utility.isModalProcess("D3436E4900324346AC11E8CCEDDF95AB"); 
 xmlDocument.setParameter("DocAction_Modal", modalDocAction?"true":"false");
+xmlDocument.setParameter("RM_PickFromShipment_BTNname", Utility.getButtonName(this, vars, "BC1DF2A8AEAE4BF8AADB477D13D6002F", "RM_PickFromShipment_linkBTN", usedButtonShortCuts, reservedButtonShortCuts));boolean modalRM_PickFromShipment = org.openbravo.erpCommon.utility.Utility.isModalProcess(""); 
+xmlDocument.setParameter("RM_PickFromShipment_Modal", modalRM_PickFromShipment?"true":"false");
 String userOrgList = "";
 if (editableTab) 
   userOrgList=Utility.getContext(this, vars, "#User_Org", windowId, accesslevel); //editable record 
@@ -1046,8 +1046,8 @@ xmlDocument.setParameter("RM_AddOrphanLine_BTNname", Utility.getButtonName(this,
 xmlDocument.setParameter("RM_AddOrphanLine_Modal", modalRM_AddOrphanLine?"true":"false");
 xmlDocument.setParameter("Created_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Created_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
 xmlDocument.setParameter("Updated_Format", vars.getSessionValue("#AD_SqlDateTimeFormat"));xmlDocument.setParameter("Updated_Maxlength", Integer.toString(vars.getSessionValue("#AD_SqlDateTimeFormat").length()));
-xmlDocument.setParameter("DateAcct_Format", vars.getSessionValue("#AD_SqlDateFormat"));
 xmlDocument.setParameter("DatePrinted_Format", vars.getSessionValue("#AD_SqlDateFormat"));
+xmlDocument.setParameter("DateAcct_Format", vars.getSessionValue("#AD_SqlDateFormat"));
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ServletException(ex);

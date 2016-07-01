@@ -923,6 +923,18 @@
   
     <servlet>
       <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.empleados.PerfilesRubro.PerfilrubroA8659F90AD3F496C9F92FFE6B7080BE9
+      </display-name>
+      <servlet-name>
+        WA8659F90AD3F496C9F92FFE6B7080BE9
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.empleados.PerfilesRubro.PerfilrubroA8659F90AD3F496C9F92FFE6B7080BE9
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
         org.openbravo.erpWindows.PeriodicQualityControlData.Test
       </display-name>
       <servlet-name>
@@ -1518,6 +1530,18 @@
       </servlet-name>
       <servlet-class>
         org.openbravo.erpWindows.TaxPayment.Header
+      </servlet-class>
+    </servlet>
+  
+    <servlet>
+      <display-name>
+        org.openbravo.erpWindows.com.atrums.nomina.TipodeIngresosoEgresos.TipodeIngresosoEgresosC44BEC2E9C3A42D095E937A9E24A587D
+      </display-name>
+      <servlet-name>
+        WC44BEC2E9C3A42D095E937A9E24A587D
+      </servlet-name>
+      <servlet-class>
+        org.openbravo.erpWindows.com.atrums.nomina.TipodeIngresosoEgresos.TipodeIngresosoEgresosC44BEC2E9C3A42D095E937A9E24A587D
       </servlet-class>
     </servlet>
   
@@ -8877,6 +8901,13 @@
   
     <servlet-mapping>
       <servlet-name>
+        WA8659F90AD3F496C9F92FFE6B7080BE9
+      </servlet-name>
+      <url-pattern>/com.atrums.nomina.empleadosPerfilesRubro/PerfilrubroA8659F90AD3F496C9F92FFE6B7080BE9_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
         W800161
       </servlet-name>
       <url-pattern>/PeriodicQualityControlData/Test_Edition.html</url-pattern>
@@ -9223,6 +9254,13 @@
         W1002100011
       </servlet-name>
       <url-pattern>/TaxPayment/Header_Edition.html</url-pattern>
+    </servlet-mapping>
+  
+    <servlet-mapping>
+      <servlet-name>
+        WC44BEC2E9C3A42D095E937A9E24A587D
+      </servlet-name>
+      <url-pattern>/com.atrums.nominaTipodeIngresosoEgresos/TipodeIngresosoEgresosC44BEC2E9C3A42D095E937A9E24A587D_Edition.html</url-pattern>
     </servlet-mapping>
   
     <servlet-mapping>

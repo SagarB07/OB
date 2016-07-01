@@ -13,12 +13,12 @@
             this.setDisabled(true);
           } else {
             this.setDisabled(selectedRecords.length === 0);
-          }
+          } 
       }
     };
   
   // register the button for the sales order tab
   // the first parameter is a unique identification so that one button can not be registered multiple times.
-  OB.ToolbarRegistry.registerButton(buttonProps.buttonType, isc.OBToolbarIconButton, buttonProps, 100, '9627836015B94CF6ACD14D0E16F4627B');
+  OB.ToolbarRegistry.registerButton(buttonProps.buttonType, isc.OBToolbarIconButton, buttonProps, 200, '0C51ECCEBC5F448FA60FF1A7DE775ED9');
   
 }());

@@ -29,11 +29,11 @@ COALESCE(MA_Sequence.Isdefault, 'N') AS Isdefault,
 COALESCE(MA_Sequence.IsActive, 'N') AS IsActive, 
 MA_Sequence.Costcentercost, 
 COALESCE(MA_Sequence.Usedmaterial, 'N') AS Usedmaterial, 
-MA_Sequence.AD_Org_ID, 
-MA_Sequence.MA_Processplan_Version_ID, 
-MA_Sequence.AD_Client_ID, 
 COALESCE(MA_Sequence.Calculated, 'N') AS Calculated, 
+MA_Sequence.MA_Processplan_Version_ID, 
 MA_Sequence.MA_Sequence_ID, 
+MA_Sequence.AD_Org_ID, 
+MA_Sequence.AD_Client_ID, 
  
         ? AS LANGUAGE 
         FROM MA_Sequence left join (select MA_Process_ID, Name from MA_Process) table1 on (MA_Sequence.MA_Process_ID = table1.MA_Process_ID)
@@ -145,13 +145,13 @@ MA_Sequence.MA_Sequence_ID,
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE MA_Sequence
-        SET SeqNo = TO_NUMBER(?) , Value = (?) , Name = (?) , MA_Process_ID = (?) , Estimatedtime = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Preptime = TO_NUMBER(?) , Description = (?) , Multiplier = TO_NUMBER(?) , Noqty = (?) , Groupuse = (?) , Outsourced = (?) , Outsourcingcost = TO_NUMBER(?) , Isdefault = (?) , IsActive = (?) , Costcentercost = TO_NUMBER(?) , Usedmaterial = (?) , AD_Org_ID = (?) , MA_Processplan_Version_ID = (?) , AD_Client_ID = (?) , Calculated = (?) , MA_Sequence_ID = (?) , updated = now(), updatedby = ? 
+        SET SeqNo = TO_NUMBER(?) , Value = (?) , Name = (?) , MA_Process_ID = (?) , Estimatedtime = TO_NUMBER(?) , CostCenterUse = TO_NUMBER(?) , Preptime = TO_NUMBER(?) , Description = (?) , Multiplier = TO_NUMBER(?) , Noqty = (?) , Groupuse = (?) , Outsourced = (?) , Outsourcingcost = TO_NUMBER(?) , Isdefault = (?) , IsActive = (?) , Costcentercost = TO_NUMBER(?) , Usedmaterial = (?) , Calculated = (?) , MA_Processplan_Version_ID = (?) , MA_Sequence_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE MA_Sequence.MA_Sequence_ID = ? 
                  AND MA_Sequence.MA_Processplan_Version_ID = ? 
         AND MA_Sequence.AD_Client_ID IN ('1') 
         AND MA_Sequence.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="seqno"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="description"></Parameter> <Parameter name="multiplier"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="outsourcingcost"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="costcentercost"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="calculated"></Parameter> <Parameter name="maSequenceId"></Parameter> 
+    <Parameter name="seqno"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="description"></Parameter> <Parameter name="multiplier"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="outsourcingcost"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="costcentercost"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="calculated"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> <Parameter name="maSequenceId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="maSequenceId"></Parameter>
     
@@ -163,10 +163,10 @@ MA_Sequence.MA_Sequence_ID,
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO MA_Sequence 
-        (SeqNo, Value, Name, MA_Process_ID, Estimatedtime, CostCenterUse, Preptime, Description, Multiplier, Noqty, Groupuse, Outsourced, Outsourcingcost, Isdefault, IsActive, Costcentercost, Usedmaterial, AD_Org_ID, MA_Processplan_Version_ID, AD_Client_ID, Calculated, MA_Sequence_ID, created, createdby, updated, updatedBy)
+        (SeqNo, Value, Name, MA_Process_ID, Estimatedtime, CostCenterUse, Preptime, Description, Multiplier, Noqty, Groupuse, Outsourced, Outsourcingcost, Isdefault, IsActive, Costcentercost, Usedmaterial, Calculated, MA_Processplan_Version_ID, MA_Sequence_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES (TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="seqno"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="description"></Parameter> <Parameter name="multiplier"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="outsourcingcost"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="costcentercost"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> <Parameter name="adClientId"></Parameter> <Parameter name="calculated"></Parameter> <Parameter name="maSequenceId"></Parameter> 
+    <Parameter name="seqno"></Parameter> <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="maProcessId"></Parameter> <Parameter name="estimatedtime"></Parameter> <Parameter name="costcenteruse"></Parameter> <Parameter name="preptime"></Parameter> <Parameter name="description"></Parameter> <Parameter name="multiplier"></Parameter> <Parameter name="noqty"></Parameter> <Parameter name="groupuse"></Parameter> <Parameter name="outsourced"></Parameter> <Parameter name="outsourcingcost"></Parameter> <Parameter name="isdefault"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="costcentercost"></Parameter> <Parameter name="usedmaterial"></Parameter> <Parameter name="calculated"></Parameter> <Parameter name="maProcessplanVersionId"></Parameter> <Parameter name="maSequenceId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

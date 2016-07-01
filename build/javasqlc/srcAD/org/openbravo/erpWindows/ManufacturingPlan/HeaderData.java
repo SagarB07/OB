@@ -44,10 +44,10 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String launchmr;
   public String simulate;
   public String recalculatestock;
-  public String mrpRunProductionId;
-  public String isactive;
   public String adClientId;
   public String description;
+  public String isactive;
+  public String mrpRunProductionId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -113,14 +113,14 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return simulate;
     else if (fieldName.equalsIgnoreCase("recalculatestock"))
       return recalculatestock;
-    else if (fieldName.equalsIgnoreCase("mrp_run_production_id") || fieldName.equals("mrpRunProductionId"))
-      return mrpRunProductionId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("description"))
       return description;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("mrp_run_production_id") || fieldName.equals("mrpRunProductionId"))
+      return mrpRunProductionId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -180,10 +180,10 @@ Select for edit
       "MRP_Run_Production.Launchmr, " +
       "MRP_Run_Production.Simulate, " +
       "MRP_Run_Production.Recalculatestock, " +
-      "MRP_Run_Production.MRP_Run_Production_ID, " +
-      "COALESCE(MRP_Run_Production.IsActive, 'N') AS IsActive, " +
       "MRP_Run_Production.AD_Client_ID, " +
       "MRP_Run_Production.Description, " +
+      "COALESCE(MRP_Run_Production.IsActive, 'N') AS IsActive, " +
+      "MRP_Run_Production.MRP_Run_Production_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MRP_Run_Production left join (select AD_Org_ID, Name from AD_Org) table1 on (MRP_Run_Production.AD_Org_ID = table1.AD_Org_ID) left join (select MRP_Planner_ID, Name from MRP_Planner) table2 on (MRP_Run_Production.MRP_Planner_ID = table2.MRP_Planner_ID) left join (select C_BPartner_ID, Name from C_BPartner) table3 on (MRP_Run_Production.C_BPartner_ID = table3.C_BPartner_ID) left join (select C_BP_Group_ID, Name from C_BP_Group) table4 on (MRP_Run_Production.C_BP_Group_ID = table4.C_BP_Group_ID) left join (select M_Product_ID, Name from M_Product) table5 on (MRP_Run_Production.M_Product_ID = table5.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL5 on (table5.M_Product_ID = tableTRL5.M_Product_ID and tableTRL5.AD_Language = ?)  left join (select M_Product_Category_ID, Name from M_Product_Category) table7 on (MRP_Run_Production.M_Product_Category_ID = table7.M_Product_Category_ID) left join (select M_Product_Category_ID,AD_Language, Name from M_Product_Category_TRL) tableTRL7 on (table7.M_Product_Category_ID = tableTRL7.M_Product_Category_ID and tableTRL7.AD_Language = ?) " +
       "        WHERE 2=2 " +
@@ -253,10 +253,10 @@ Select for edit
         objectHeaderData.launchmr = UtilSql.getValue(result, "launchmr");
         objectHeaderData.simulate = UtilSql.getValue(result, "simulate");
         objectHeaderData.recalculatestock = UtilSql.getValue(result, "recalculatestock");
-        objectHeaderData.mrpRunProductionId = UtilSql.getValue(result, "mrp_run_production_id");
-        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.description = UtilSql.getValue(result, "description");
+        objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
+        objectHeaderData.mrpRunProductionId = UtilSql.getValue(result, "mrp_run_production_id");
         objectHeaderData.language = UtilSql.getValue(result, "language");
         objectHeaderData.adUserClient = "";
         objectHeaderData.adOrgClient = "";
@@ -320,10 +320,10 @@ Create a registry
     objectHeaderData[0].launchmr = launchmr;
     objectHeaderData[0].simulate = simulate;
     objectHeaderData[0].recalculatestock = recalculatestock;
-    objectHeaderData[0].mrpRunProductionId = mrpRunProductionId;
-    objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].description = description;
+    objectHeaderData[0].isactive = isactive;
+    objectHeaderData[0].mrpRunProductionId = mrpRunProductionId;
     objectHeaderData[0].language = "";
     return objectHeaderData;
   }
@@ -485,7 +485,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MRP_Run_Production" +
-      "        SET AD_Org_ID = (?) , DateDoc = TO_DATE(?) , Name = (?) , Timehorizon = TO_NUMBER(?) , Securitymargin = TO_NUMBER(?) , MRP_Planner_ID = (?) , C_BPartner_ID = (?) , C_BP_Group_ID = (?) , M_Product_ID = (?) , M_Product_Category_ID = (?) , Launchwr = (?) , Launchmr = (?) , Simulate = (?) , Recalculatestock = (?) , MRP_Run_Production_ID = (?) , IsActive = (?) , AD_Client_ID = (?) , Description = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , DateDoc = TO_DATE(?) , Name = (?) , Timehorizon = TO_NUMBER(?) , Securitymargin = TO_NUMBER(?) , MRP_Planner_ID = (?) , C_BPartner_ID = (?) , C_BP_Group_ID = (?) , M_Product_ID = (?) , M_Product_Category_ID = (?) , Launchwr = (?) , Launchmr = (?) , Simulate = (?) , Recalculatestock = (?) , AD_Client_ID = (?) , Description = (?) , IsActive = (?) , MRP_Run_Production_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MRP_Run_Production.MRP_Run_Production_ID = ? " +
       "        AND MRP_Run_Production.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -516,10 +516,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, launchmr);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, simulate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, recalculatestock);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -548,7 +548,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MRP_Run_Production " +
-      "        (AD_Org_ID, DateDoc, Name, Timehorizon, Securitymargin, MRP_Planner_ID, C_BPartner_ID, C_BP_Group_ID, M_Product_ID, M_Product_Category_ID, Launchwr, Launchmr, Simulate, Recalculatestock, MRP_Run_Production_ID, IsActive, AD_Client_ID, Description, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, DateDoc, Name, Timehorizon, Securitymargin, MRP_Planner_ID, C_BPartner_ID, C_BP_Group_ID, M_Product_ID, M_Product_Category_ID, Launchwr, Launchmr, Simulate, Recalculatestock, AD_Client_ID, Description, IsActive, MRP_Run_Production_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_DATE(?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -571,10 +571,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, launchmr);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, simulate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, recalculatestock);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, description);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mrpRunProductionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

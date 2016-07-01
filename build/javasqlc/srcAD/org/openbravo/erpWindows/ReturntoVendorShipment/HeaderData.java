@@ -70,7 +70,7 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String adOrgtrxId;
   public String user1Id;
   public String user2Id;
-  public String dateprinted;
+  public String mInoutId;
   public String isactive;
   public String isprinted;
   public String issotrx;
@@ -84,7 +84,7 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
   public String islogistic;
   public String pickdate;
   public String generatelines;
-  public String mInoutId;
+  public String dateprinted;
   public String adClientId;
   public String updatelines;
   public String processed;
@@ -205,8 +205,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return user1Id;
     else if (fieldName.equalsIgnoreCase("user2_id") || fieldName.equals("user2Id"))
       return user2Id;
-    else if (fieldName.equalsIgnoreCase("dateprinted"))
-      return dateprinted;
+    else if (fieldName.equalsIgnoreCase("m_inout_id") || fieldName.equals("mInoutId"))
+      return mInoutId;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
     else if (fieldName.equalsIgnoreCase("isprinted"))
@@ -233,8 +233,8 @@ static Logger log4j = Logger.getLogger(HeaderData.class);
       return pickdate;
     else if (fieldName.equalsIgnoreCase("generatelines"))
       return generatelines;
-    else if (fieldName.equalsIgnoreCase("m_inout_id") || fieldName.equals("mInoutId"))
-      return mInoutId;
+    else if (fieldName.equalsIgnoreCase("dateprinted"))
+      return dateprinted;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("updatelines"))
@@ -326,7 +326,7 @@ Select for edit
       "M_InOut.AD_OrgTrx_ID, " +
       "M_InOut.User1_ID, " +
       "M_InOut.User2_ID, " +
-      "M_InOut.DatePrinted, " +
+      "M_InOut.M_InOut_ID, " +
       "COALESCE(M_InOut.IsActive, 'N') AS IsActive, " +
       "COALESCE(M_InOut.IsPrinted, 'N') AS IsPrinted, " +
       "COALESCE(M_InOut.IsSOTrx, 'N') AS IsSOTrx, " +
@@ -340,7 +340,7 @@ Select for edit
       "COALESCE(M_InOut.Islogistic, 'N') AS Islogistic, " +
       "TO_CHAR(M_InOut.PickDate, ?) AS PickDate, " +
       "M_InOut.GenerateLines, " +
-      "M_InOut.M_InOut_ID, " +
+      "M_InOut.DatePrinted, " +
       "M_InOut.AD_Client_ID, " +
       "M_InOut.UpdateLines, " +
       "COALESCE(M_InOut.Processed, 'N') AS Processed, " +
@@ -443,7 +443,7 @@ Select for edit
         objectHeaderData.adOrgtrxId = UtilSql.getValue(result, "ad_orgtrx_id");
         objectHeaderData.user1Id = UtilSql.getValue(result, "user1_id");
         objectHeaderData.user2Id = UtilSql.getValue(result, "user2_id");
-        objectHeaderData.dateprinted = UtilSql.getDateValue(result, "dateprinted", "dd-MM-yyyy");
+        objectHeaderData.mInoutId = UtilSql.getValue(result, "m_inout_id");
         objectHeaderData.isactive = UtilSql.getValue(result, "isactive");
         objectHeaderData.isprinted = UtilSql.getValue(result, "isprinted");
         objectHeaderData.issotrx = UtilSql.getValue(result, "issotrx");
@@ -457,7 +457,7 @@ Select for edit
         objectHeaderData.islogistic = UtilSql.getValue(result, "islogistic");
         objectHeaderData.pickdate = UtilSql.getValue(result, "pickdate");
         objectHeaderData.generatelines = UtilSql.getValue(result, "generatelines");
-        objectHeaderData.mInoutId = UtilSql.getValue(result, "m_inout_id");
+        objectHeaderData.dateprinted = UtilSql.getDateValue(result, "dateprinted", "dd-MM-yyyy");
         objectHeaderData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectHeaderData.updatelines = UtilSql.getValue(result, "updatelines");
         objectHeaderData.processed = UtilSql.getValue(result, "processed");
@@ -550,7 +550,7 @@ Create a registry
     objectHeaderData[0].adOrgtrxId = adOrgtrxId;
     objectHeaderData[0].user1Id = user1Id;
     objectHeaderData[0].user2Id = user2Id;
-    objectHeaderData[0].dateprinted = dateprinted;
+    objectHeaderData[0].mInoutId = mInoutId;
     objectHeaderData[0].isactive = isactive;
     objectHeaderData[0].isprinted = isprinted;
     objectHeaderData[0].issotrx = issotrx;
@@ -564,7 +564,7 @@ Create a registry
     objectHeaderData[0].islogistic = islogistic;
     objectHeaderData[0].pickdate = pickdate;
     objectHeaderData[0].generatelines = generatelines;
-    objectHeaderData[0].mInoutId = mInoutId;
+    objectHeaderData[0].dateprinted = dateprinted;
     objectHeaderData[0].adClientId = adClientId;
     objectHeaderData[0].updatelines = updatelines;
     objectHeaderData[0].processed = processed;
@@ -878,7 +878,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_InOut" +
-      "        SET RM_Shipment_Pickedit = (?) , AD_Org_ID = (?) , C_DocType_ID = (?) , DocumentNo = (?) , M_Condition_Goods_ID = (?) , POReference = (?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , MovementDate = TO_DATE(?) , DateAcct = TO_DATE(?) , M_Warehouse_ID = (?) , C_Order_ID = (?) , Description = (?) , DocStatus = (?) , AD_User_ID = (?) , CreateFrom = (?) , GenerateTo = (?) , DocAction = (?) , Posted = (?) , SalesRep_ID = (?) , C_Charge_ID = (?) , ChargeAmt = TO_NUMBER(?) , DeliveryRule = (?) , DeliveryViaRule = (?) , FreightAmt = TO_NUMBER(?) , FreightCostRule = (?) , PriorityRule = (?) , MovementType = (?) , M_Shipper_ID = (?) , NoPackages = TO_NUMBER(?) , M_FreightCategory_ID = (?) , Calculate_Freight = (?) , Freight_Currency_ID = (?) , C_Project_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User1_ID = (?) , User2_ID = (?) , DatePrinted = TO_DATE(?) , IsActive = (?) , IsPrinted = (?) , IsSOTrx = (?) , Delivery_Location_ID = (?) , DateOrdered = TO_DATE(?) , C_Invoice_ID = (?) , ShipDate = TO_TIMESTAMP(?, ?) , RM_Receipt_PickEdit = (?) , TrackingNo = (?) , Processing = (?) , Islogistic = (?) , PickDate = TO_TIMESTAMP(?, ?) , GenerateLines = (?) , M_InOut_ID = (?) , AD_Client_ID = (?) , UpdateLines = (?) , Processed = (?) , updated = now(), updatedby = ? " +
+      "        SET RM_Shipment_Pickedit = (?) , AD_Org_ID = (?) , C_DocType_ID = (?) , DocumentNo = (?) , M_Condition_Goods_ID = (?) , POReference = (?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , MovementDate = TO_DATE(?) , DateAcct = TO_DATE(?) , M_Warehouse_ID = (?) , C_Order_ID = (?) , Description = (?) , DocStatus = (?) , AD_User_ID = (?) , CreateFrom = (?) , GenerateTo = (?) , DocAction = (?) , Posted = (?) , SalesRep_ID = (?) , C_Charge_ID = (?) , ChargeAmt = TO_NUMBER(?) , DeliveryRule = (?) , DeliveryViaRule = (?) , FreightAmt = TO_NUMBER(?) , FreightCostRule = (?) , PriorityRule = (?) , MovementType = (?) , M_Shipper_ID = (?) , NoPackages = TO_NUMBER(?) , M_FreightCategory_ID = (?) , Calculate_Freight = (?) , Freight_Currency_ID = (?) , C_Project_ID = (?) , C_Activity_ID = (?) , C_Campaign_ID = (?) , AD_OrgTrx_ID = (?) , User1_ID = (?) , User2_ID = (?) , M_InOut_ID = (?) , IsActive = (?) , IsPrinted = (?) , IsSOTrx = (?) , Delivery_Location_ID = (?) , DateOrdered = TO_DATE(?) , C_Invoice_ID = (?) , ShipDate = TO_TIMESTAMP(?, ?) , RM_Receipt_PickEdit = (?) , TrackingNo = (?) , Processing = (?) , Islogistic = (?) , PickDate = TO_TIMESTAMP(?, ?) , GenerateLines = (?) , DatePrinted = TO_DATE(?) , AD_Client_ID = (?) , UpdateLines = (?) , Processed = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_InOut.M_InOut_ID = ? " +
       "        AND M_InOut.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -934,7 +934,7 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
@@ -950,7 +950,7 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pickdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatelines);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatelines);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
@@ -982,8 +982,8 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_InOut " +
-      "        (RM_Shipment_Pickedit, AD_Org_ID, C_DocType_ID, DocumentNo, M_Condition_Goods_ID, POReference, C_BPartner_ID, C_BPartner_Location_ID, MovementDate, DateAcct, M_Warehouse_ID, C_Order_ID, Description, DocStatus, AD_User_ID, CreateFrom, GenerateTo, DocAction, Posted, SalesRep_ID, C_Charge_ID, ChargeAmt, DeliveryRule, DeliveryViaRule, FreightAmt, FreightCostRule, PriorityRule, MovementType, M_Shipper_ID, NoPackages, M_FreightCategory_ID, Calculate_Freight, Freight_Currency_ID, C_Project_ID, C_Activity_ID, C_Campaign_ID, AD_OrgTrx_ID, User1_ID, User2_ID, DatePrinted, IsActive, IsPrinted, IsSOTrx, Delivery_Location_ID, DateOrdered, C_Invoice_ID, ShipDate, RM_Receipt_PickEdit, TrackingNo, Processing, Islogistic, PickDate, GenerateLines, M_InOut_ID, AD_Client_ID, UpdateLines, Processed, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), (?), (?), (?), TO_DATE(?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
+      "        (RM_Shipment_Pickedit, AD_Org_ID, C_DocType_ID, DocumentNo, M_Condition_Goods_ID, POReference, C_BPartner_ID, C_BPartner_Location_ID, MovementDate, DateAcct, M_Warehouse_ID, C_Order_ID, Description, DocStatus, AD_User_ID, CreateFrom, GenerateTo, DocAction, Posted, SalesRep_ID, C_Charge_ID, ChargeAmt, DeliveryRule, DeliveryViaRule, FreightAmt, FreightCostRule, PriorityRule, MovementType, M_Shipper_ID, NoPackages, M_FreightCategory_ID, Calculate_Freight, Freight_Currency_ID, C_Project_ID, C_Activity_ID, C_Campaign_ID, AD_OrgTrx_ID, User1_ID, User2_ID, M_InOut_ID, IsActive, IsPrinted, IsSOTrx, Delivery_Location_ID, DateOrdered, C_Invoice_ID, ShipDate, RM_Receipt_PickEdit, TrackingNo, Processing, Islogistic, PickDate, GenerateLines, DatePrinted, AD_Client_ID, UpdateLines, Processed, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), (?), TO_TIMESTAMP(?, ?), (?), (?), (?), (?), TO_TIMESTAMP(?, ?), (?), TO_DATE(?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1030,7 +1030,7 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgtrxId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user1Id);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, user2Id);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, issotrx);
@@ -1046,7 +1046,7 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, pickdate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateTimeFormat);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generatelines);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mInoutId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, dateprinted);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatelines);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);

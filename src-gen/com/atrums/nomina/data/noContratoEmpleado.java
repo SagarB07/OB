@@ -82,7 +82,7 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
     public static final String PROPERTY_NEREGION = "neRegion";
     public static final String PROPERTY_NEOBSERVACIONES = "neObservaciones";
     public static final String PROPERTY_LIQUIDACIONEMPLEADO = "liquidacionEmpleado";
-    public static final String PROPERTY_DOCACTIONNO = "docactionno";
+    public static final String PROPERTY_PROCESARCONTRATO = "procesarContrato";
     public static final String PROPERTY_DOCSTATUS = "docstatus";
     public static final String PROPERTY__COMPUTEDCOLUMNS = "_computedColumns";
     public static final String PROPERTY_NOPERMISOLIST = "noPermisoList";
@@ -380,12 +380,12 @@ public class noContratoEmpleado extends BaseOBObject implements Traceable, Clien
         set(PROPERTY_LIQUIDACIONEMPLEADO, liquidacionEmpleado);
     }
 
-    public String getDocactionno() {
-        return (String) get(PROPERTY_DOCACTIONNO);
+    public String getProcesarContrato() {
+        return (String) get(PROPERTY_PROCESARCONTRATO);
     }
 
-    public void setDocactionno(String docactionno) {
-        set(PROPERTY_DOCACTIONNO, docactionno);
+    public void setProcesarContrato(String procesarContrato) {
+        set(PROPERTY_PROCESARCONTRATO, procesarContrato);
     }
 
     public String getDocstatus() {

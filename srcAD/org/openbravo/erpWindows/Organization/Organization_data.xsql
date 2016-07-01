@@ -17,10 +17,10 @@ AD_Org.Description,
 COALESCE(AD_Org.IsActive, 'N') AS IsActive, 
 COALESCE(AD_Org.IsSummary, 'N') AS IsSummary, 
 AD_Org.Social_Name, 
-AD_Org.C_Currency_ID, 
-(CASE WHEN AD_Org.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
 AD_Org.AD_Orgtype_ID, 
-(CASE WHEN AD_Org.AD_Orgtype_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.Name), ''))),'') ) END) AS AD_Orgtype_IDR, 
+(CASE WHEN AD_Org.AD_Orgtype_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table1.Name), ''))),'') ) END) AS AD_Orgtype_IDR, 
+AD_Org.C_Currency_ID, 
+(CASE WHEN AD_Org.C_Currency_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table2.ISO_Code), ''))),'') ) END) AS C_Currency_IDR, 
 AD_Org.EM_Co_Punto_Emision, 
 AD_Org.EM_Co_Nro_Estab, 
 COALESCE(AD_Org.IsPeriodControlAllowed, 'N') AS IsPeriodControlAllowed, 
@@ -33,7 +33,7 @@ AD_Org.AD_Org_ID,
 AD_Org.AD_Client_ID, 
  
         ? AS LANGUAGE 
-        FROM AD_Org left join (select C_Currency_ID, ISO_Code from C_Currency) table1 on (AD_Org.C_Currency_ID = table1.C_Currency_ID) left join (select AD_Orgtype_ID, Name from AD_Orgtype) table2 on (AD_Org.AD_Orgtype_ID = table2.AD_Orgtype_ID) left join (select C_Calendar_ID, Name from C_Calendar) table3 on (AD_Org.C_Calendar_ID = table3.C_Calendar_ID) left join (select C_Acctschema_ID, Name from C_Acctschema) table4 on (AD_Org.C_Acctschema_ID = table4.C_Acctschema_ID)
+        FROM AD_Org left join (select AD_Orgtype_ID, Name from AD_Orgtype) table1 on (AD_Org.AD_Orgtype_ID = table1.AD_Orgtype_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (AD_Org.C_Currency_ID = table2.C_Currency_ID) left join (select C_Calendar_ID, Name from C_Calendar) table3 on (AD_Org.C_Calendar_ID = table3.C_Calendar_ID) left join (select C_Acctschema_ID, Name from C_Acctschema) table4 on (AD_Org.C_Acctschema_ID = table4.C_Acctschema_ID)
         WHERE 2=2 
 
         AND 1=1 
@@ -121,13 +121,13 @@ WHERE ((IsAcctLegalEntity<>'N' or IsLegalEntity<>'Y') or (o.C_ACCTSCHEMA_ID is n
   <SqlMethod name="update" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         UPDATE AD_Org
-        SET Value = (?) , Name = (?) , Description = (?) , IsActive = (?) , IsSummary = (?) , Social_Name = (?) , C_Currency_ID = (?) , AD_Orgtype_ID = (?) , EM_Co_Punto_Emision = (?) , EM_Co_Nro_Estab = (?) , IsPeriodControlAllowed = (?) , C_Calendar_ID = (?) , IsReady = (?) , C_Acctschema_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
+        SET Value = (?) , Name = (?) , Description = (?) , IsActive = (?) , IsSummary = (?) , Social_Name = (?) , AD_Orgtype_ID = (?) , C_Currency_ID = (?) , EM_Co_Punto_Emision = (?) , EM_Co_Nro_Estab = (?) , IsPeriodControlAllowed = (?) , C_Calendar_ID = (?) , IsReady = (?) , C_Acctschema_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? 
         WHERE AD_Org.AD_Org_ID = ? 
         
         AND AD_Org.AD_Client_ID IN ('1') 
         AND AD_Org.AD_Org_ID IN ('1') 
     ]]></Sql>
-    <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="socialName"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="adOrgtypeId"></Parameter> <Parameter name="emCoPuntoEmision"></Parameter> <Parameter name="emCoNroEstab"></Parameter> <Parameter name="isperiodcontrolallowed"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="isready"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="socialName"></Parameter> <Parameter name="adOrgtypeId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="emCoPuntoEmision"></Parameter> <Parameter name="emCoNroEstab"></Parameter> <Parameter name="isperiodcontrolallowed"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="isready"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="updatedby"></Parameter>
     <Parameter id="paramKey" name="adOrgId"></Parameter>
     
@@ -139,10 +139,10 @@ WHERE ((IsAcctLegalEntity<>'N' or IsLegalEntity<>'Y') or (o.C_ACCTSCHEMA_ID is n
   <SqlMethod name="insert" type="preparedStatement" return="rowCount" static="false" connection="true">
     <Sql><![CDATA[
         INSERT INTO AD_Org 
-        (Value, Name, Description, IsActive, IsSummary, Social_Name, C_Currency_ID, AD_Orgtype_ID, EM_Co_Punto_Emision, EM_Co_Nro_Estab, IsPeriodControlAllowed, C_Calendar_ID, IsReady, C_Acctschema_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
+        (Value, Name, Description, IsActive, IsSummary, Social_Name, AD_Orgtype_ID, C_Currency_ID, EM_Co_Punto_Emision, EM_Co_Nro_Estab, IsPeriodControlAllowed, C_Calendar_ID, IsReady, C_Acctschema_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)
         VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)
     ]]></Sql>
-    <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="socialName"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="adOrgtypeId"></Parameter> <Parameter name="emCoPuntoEmision"></Parameter> <Parameter name="emCoNroEstab"></Parameter> <Parameter name="isperiodcontrolallowed"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="isready"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
+    <Parameter name="value"></Parameter> <Parameter name="name"></Parameter> <Parameter name="description"></Parameter> <Parameter name="isactive"></Parameter> <Parameter name="issummary"></Parameter> <Parameter name="socialName"></Parameter> <Parameter name="adOrgtypeId"></Parameter> <Parameter name="cCurrencyId"></Parameter> <Parameter name="emCoPuntoEmision"></Parameter> <Parameter name="emCoNroEstab"></Parameter> <Parameter name="isperiodcontrolallowed"></Parameter> <Parameter name="cCalendarId"></Parameter> <Parameter name="isready"></Parameter> <Parameter name="cAcctschemaId"></Parameter> <Parameter name="adOrgId"></Parameter> <Parameter name="adClientId"></Parameter> 
     <Parameter name="createdby"></Parameter>
     <Parameter name="updatedby"></Parameter>
   </SqlMethod>

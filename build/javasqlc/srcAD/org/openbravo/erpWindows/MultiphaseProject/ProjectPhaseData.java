@@ -45,10 +45,10 @@ static Logger log4j = Logger.getLogger(ProjectPhaseData.class);
   public String cOrderIdr;
   public String generateorder;
   public String isactive;
-  public String cProjectphaseId;
+  public String adClientId;
   public String cProjectId;
   public String help;
-  public String adClientId;
+  public String cProjectphaseId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -116,14 +116,14 @@ static Logger log4j = Logger.getLogger(ProjectPhaseData.class);
       return generateorder;
     else if (fieldName.equalsIgnoreCase("isactive"))
       return isactive;
-    else if (fieldName.equalsIgnoreCase("c_projectphase_id") || fieldName.equals("cProjectphaseId"))
-      return cProjectphaseId;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
       return cProjectId;
     else if (fieldName.equalsIgnoreCase("help"))
       return help;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
+    else if (fieldName.equalsIgnoreCase("c_projectphase_id") || fieldName.equals("cProjectphaseId"))
+      return cProjectphaseId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -184,10 +184,10 @@ Select for edit
       "(CASE WHEN C_ProjectPhase.C_Order_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.DocumentNo), ''))),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(table6.DateOrdered, 'DD-MM-YYYY')),'')  || ' - ' || COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.GrandTotal), ''))),'') ) END) AS C_Order_IDR, " +
       "C_ProjectPhase.GenerateOrder, " +
       "COALESCE(C_ProjectPhase.IsActive, 'N') AS IsActive, " +
-      "C_ProjectPhase.C_ProjectPhase_ID, " +
+      "C_ProjectPhase.AD_Client_ID, " +
       "C_ProjectPhase.C_Project_ID, " +
       "C_ProjectPhase.Help, " +
-      "C_ProjectPhase.AD_Client_ID, " +
+      "C_ProjectPhase.C_ProjectPhase_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_ProjectPhase left join (select AD_Org_ID, Name from AD_Org) table1 on (C_ProjectPhase.AD_Org_ID = table1.AD_Org_ID) left join (select M_Product_ID, Name from M_Product) table2 on (C_ProjectPhase.M_Product_ID = table2.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL2 on (table2.M_Product_ID = tableTRL2.M_Product_ID and tableTRL2.AD_Language = ?)  left join (select C_Phase_ID, Name, C_ProjectType_ID from C_Phase) table4 on (C_ProjectPhase.C_Phase_ID = table4.C_Phase_ID) left join (select C_ProjectType_ID, Name from C_ProjectType) table5 on (table4.C_ProjectType_ID = table5.C_ProjectType_ID) left join (select C_Order_ID, DocumentNo, DateOrdered, GrandTotal from C_Order) table6 on (C_ProjectPhase.C_Order_ID = table6.C_Order_ID)" +
       "        WHERE 2=2 " +
@@ -262,10 +262,10 @@ Select for edit
         objectProjectPhaseData.cOrderIdr = UtilSql.getValue(result, "c_order_idr");
         objectProjectPhaseData.generateorder = UtilSql.getValue(result, "generateorder");
         objectProjectPhaseData.isactive = UtilSql.getValue(result, "isactive");
-        objectProjectPhaseData.cProjectphaseId = UtilSql.getValue(result, "c_projectphase_id");
+        objectProjectPhaseData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectProjectPhaseData.cProjectId = UtilSql.getValue(result, "c_project_id");
         objectProjectPhaseData.help = UtilSql.getValue(result, "help");
-        objectProjectPhaseData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectProjectPhaseData.cProjectphaseId = UtilSql.getValue(result, "c_projectphase_id");
         objectProjectPhaseData.language = UtilSql.getValue(result, "language");
         objectProjectPhaseData.adUserClient = "";
         objectProjectPhaseData.adOrgClient = "";
@@ -330,10 +330,10 @@ Create a registry
     objectProjectPhaseData[0].cOrderIdr = cOrderIdr;
     objectProjectPhaseData[0].generateorder = generateorder;
     objectProjectPhaseData[0].isactive = isactive;
-    objectProjectPhaseData[0].cProjectphaseId = cProjectphaseId;
+    objectProjectPhaseData[0].adClientId = adClientId;
     objectProjectPhaseData[0].cProjectId = cProjectId;
     objectProjectPhaseData[0].help = help;
-    objectProjectPhaseData[0].adClientId = adClientId;
+    objectProjectPhaseData[0].cProjectphaseId = cProjectphaseId;
     objectProjectPhaseData[0].language = "";
     return objectProjectPhaseData;
   }
@@ -687,7 +687,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_ProjectPhase" +
-      "        SET AD_Org_ID = (?) , SeqNo = TO_NUMBER(?) , Name = (?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , PriceActual = TO_NUMBER(?) , StartDate = TO_DATE(?) , Datecontract = TO_DATE(?) , EndDate = TO_DATE(?) , IsComplete = (?) , IsCommitCeiling = (?) , CommittedAmt = TO_NUMBER(?) , Description = (?) , C_Phase_ID = (?) , C_Order_ID = (?) , GenerateOrder = (?) , IsActive = (?) , C_ProjectPhase_ID = (?) , C_Project_ID = (?) , Help = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , SeqNo = TO_NUMBER(?) , Name = (?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , PriceActual = TO_NUMBER(?) , StartDate = TO_DATE(?) , Datecontract = TO_DATE(?) , EndDate = TO_DATE(?) , IsComplete = (?) , IsCommitCeiling = (?) , CommittedAmt = TO_NUMBER(?) , Description = (?) , C_Phase_ID = (?) , C_Order_ID = (?) , GenerateOrder = (?) , IsActive = (?) , AD_Client_ID = (?) , C_Project_ID = (?) , Help = (?) , C_ProjectPhase_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_ProjectPhase.C_ProjectPhase_ID = ? " +
       "                 AND C_ProjectPhase.C_Project_ID = ? " +
       "        AND C_ProjectPhase.AD_Client_ID IN (";
@@ -722,10 +722,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateorder);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectphaseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, help);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectphaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectphaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
@@ -755,7 +755,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_ProjectPhase " +
-      "        (AD_Org_ID, SeqNo, Name, M_Product_ID, Qty, PriceActual, StartDate, Datecontract, EndDate, IsComplete, IsCommitCeiling, CommittedAmt, Description, C_Phase_ID, C_Order_ID, GenerateOrder, IsActive, C_ProjectPhase_ID, C_Project_ID, Help, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, SeqNo, Name, M_Product_ID, Qty, PriceActual, StartDate, Datecontract, EndDate, IsComplete, IsCommitCeiling, CommittedAmt, Description, C_Phase_ID, C_Order_ID, GenerateOrder, IsActive, AD_Client_ID, C_Project_ID, Help, C_ProjectPhase_ID, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_DATE(?), TO_DATE(?), TO_DATE(?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -781,10 +781,10 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cOrderId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateorder);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectphaseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, help);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectphaseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

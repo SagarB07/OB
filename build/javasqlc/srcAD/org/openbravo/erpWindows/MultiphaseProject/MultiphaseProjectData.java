@@ -73,36 +73,36 @@ static Logger log4j = Logger.getLogger(MultiphaseProjectData.class);
   public String mWarehouseIdr;
   public String changeprojectstatus;
   public String copyfrom;
-  public String cLocationId;
-  public String adClientId;
-  public String isactive;
-  public String generateto;
-  public String mPricelistVersionId;
-  public String note;
-  public String plannedamt;
-  public String plannedmarginamt;
-  public String plannedqty;
-  public String processed;
-  public String cCampaignId;
-  public String invoicedamt;
-  public String invoicedqty;
+  public String publicprivate;
   public String projectbalanceamt;
-  public String projectcategory;
+  public String invoicedqty;
+  public String invoicedamt;
+  public String cCampaignId;
+  public String processed;
+  public String plannedqty;
+  public String plannedmarginamt;
+  public String projectphase;
+  public String plannedamt;
   public String projectkind;
   public String generateorder;
-  public String projectphase;
-  public String publicprivate;
+  public String cProjectId;
   public String billtoId;
+  public String note;
   public String processing;
   public String accountno;
   public String documentCopies;
   public String paymentrule;
   public String invoiceToproject;
-  public String cProjectId;
+  public String cLocationId;
   public String plannedpoamt;
   public String lastplannedproposaldate;
+  public String mPricelistVersionId;
   public String createtemppricelist;
   public String cPhaseId;
+  public String generateto;
+  public String isactive;
+  public String projectcategory;
+  public String adClientId;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -226,46 +226,36 @@ static Logger log4j = Logger.getLogger(MultiphaseProjectData.class);
       return changeprojectstatus;
     else if (fieldName.equalsIgnoreCase("copyfrom"))
       return copyfrom;
-    else if (fieldName.equalsIgnoreCase("c_location_id") || fieldName.equals("cLocationId"))
-      return cLocationId;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
-    else if (fieldName.equalsIgnoreCase("generateto"))
-      return generateto;
-    else if (fieldName.equalsIgnoreCase("m_pricelist_version_id") || fieldName.equals("mPricelistVersionId"))
-      return mPricelistVersionId;
-    else if (fieldName.equalsIgnoreCase("note"))
-      return note;
-    else if (fieldName.equalsIgnoreCase("plannedamt"))
-      return plannedamt;
-    else if (fieldName.equalsIgnoreCase("plannedmarginamt"))
-      return plannedmarginamt;
-    else if (fieldName.equalsIgnoreCase("plannedqty"))
-      return plannedqty;
-    else if (fieldName.equalsIgnoreCase("processed"))
-      return processed;
-    else if (fieldName.equalsIgnoreCase("c_campaign_id") || fieldName.equals("cCampaignId"))
-      return cCampaignId;
-    else if (fieldName.equalsIgnoreCase("invoicedamt"))
-      return invoicedamt;
-    else if (fieldName.equalsIgnoreCase("invoicedqty"))
-      return invoicedqty;
+    else if (fieldName.equalsIgnoreCase("publicprivate"))
+      return publicprivate;
     else if (fieldName.equalsIgnoreCase("projectbalanceamt"))
       return projectbalanceamt;
-    else if (fieldName.equalsIgnoreCase("projectcategory"))
-      return projectcategory;
+    else if (fieldName.equalsIgnoreCase("invoicedqty"))
+      return invoicedqty;
+    else if (fieldName.equalsIgnoreCase("invoicedamt"))
+      return invoicedamt;
+    else if (fieldName.equalsIgnoreCase("c_campaign_id") || fieldName.equals("cCampaignId"))
+      return cCampaignId;
+    else if (fieldName.equalsIgnoreCase("processed"))
+      return processed;
+    else if (fieldName.equalsIgnoreCase("plannedqty"))
+      return plannedqty;
+    else if (fieldName.equalsIgnoreCase("plannedmarginamt"))
+      return plannedmarginamt;
+    else if (fieldName.equalsIgnoreCase("projectphase"))
+      return projectphase;
+    else if (fieldName.equalsIgnoreCase("plannedamt"))
+      return plannedamt;
     else if (fieldName.equalsIgnoreCase("projectkind"))
       return projectkind;
     else if (fieldName.equalsIgnoreCase("generateorder"))
       return generateorder;
-    else if (fieldName.equalsIgnoreCase("projectphase"))
-      return projectphase;
-    else if (fieldName.equalsIgnoreCase("publicprivate"))
-      return publicprivate;
+    else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
+      return cProjectId;
     else if (fieldName.equalsIgnoreCase("billto_id") || fieldName.equals("billtoId"))
       return billtoId;
+    else if (fieldName.equalsIgnoreCase("note"))
+      return note;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
     else if (fieldName.equalsIgnoreCase("accountno"))
@@ -276,16 +266,26 @@ static Logger log4j = Logger.getLogger(MultiphaseProjectData.class);
       return paymentrule;
     else if (fieldName.equalsIgnoreCase("invoice_toproject") || fieldName.equals("invoiceToproject"))
       return invoiceToproject;
-    else if (fieldName.equalsIgnoreCase("c_project_id") || fieldName.equals("cProjectId"))
-      return cProjectId;
+    else if (fieldName.equalsIgnoreCase("c_location_id") || fieldName.equals("cLocationId"))
+      return cLocationId;
     else if (fieldName.equalsIgnoreCase("plannedpoamt"))
       return plannedpoamt;
     else if (fieldName.equalsIgnoreCase("lastplannedproposaldate"))
       return lastplannedproposaldate;
+    else if (fieldName.equalsIgnoreCase("m_pricelist_version_id") || fieldName.equals("mPricelistVersionId"))
+      return mPricelistVersionId;
     else if (fieldName.equalsIgnoreCase("createtemppricelist"))
       return createtemppricelist;
     else if (fieldName.equalsIgnoreCase("c_phase_id") || fieldName.equals("cPhaseId"))
       return cPhaseId;
+    else if (fieldName.equalsIgnoreCase("generateto"))
+      return generateto;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
+    else if (fieldName.equalsIgnoreCase("projectcategory"))
+      return projectcategory;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -374,36 +374,36 @@ Select for edit
       "(CASE WHEN C_Project.M_Warehouse_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table13.Name), ''))),'') ) END) AS M_Warehouse_IDR, " +
       "C_Project.ChangeProjectStatus, " +
       "C_Project.CopyFrom, " +
-      "C_Project.C_Location_ID, " +
-      "C_Project.AD_Client_ID, " +
-      "COALESCE(C_Project.IsActive, 'N') AS IsActive, " +
-      "C_Project.GenerateTo, " +
-      "C_Project.M_PriceList_Version_ID, " +
-      "C_Project.Note, " +
-      "C_Project.PlannedAmt, " +
-      "C_Project.PlannedMarginAmt, " +
-      "C_Project.PlannedQty, " +
-      "COALESCE(C_Project.Processed, 'N') AS Processed, " +
-      "C_Project.C_Campaign_ID, " +
-      "C_Project.InvoicedAmt, " +
-      "C_Project.InvoicedQty, " +
+      "C_Project.Publicprivate, " +
       "C_Project.ProjectBalanceAmt, " +
-      "C_Project.ProjectCategory, " +
+      "C_Project.InvoicedQty, " +
+      "C_Project.InvoicedAmt, " +
+      "C_Project.C_Campaign_ID, " +
+      "COALESCE(C_Project.Processed, 'N') AS Processed, " +
+      "C_Project.PlannedQty, " +
+      "C_Project.PlannedMarginAmt, " +
+      "C_Project.Projectphase, " +
+      "C_Project.PlannedAmt, " +
       "C_Project.Projectkind, " +
       "C_Project.GenerateOrder, " +
-      "C_Project.Projectphase, " +
-      "C_Project.Publicprivate, " +
+      "C_Project.C_Project_ID, " +
       "C_Project.BillTo_ID, " +
+      "C_Project.Note, " +
       "C_Project.Processing, " +
       "C_Project.AccountNo, " +
       "C_Project.Document_Copies, " +
       "C_Project.PaymentRule, " +
       "COALESCE(C_Project.Invoice_ToProject, 'N') AS Invoice_ToProject, " +
-      "C_Project.C_Project_ID, " +
+      "C_Project.C_Location_ID, " +
       "C_Project.PlannedPOAmt, " +
       "C_Project.LastPlannedProposalDate, " +
+      "C_Project.M_PriceList_Version_ID, " +
       "COALESCE(C_Project.Createtemppricelist, 'N') AS Createtemppricelist, " +
       "C_Project.C_Phase_ID, " +
+      "C_Project.GenerateTo, " +
+      "COALESCE(C_Project.IsActive, 'N') AS IsActive, " +
+      "C_Project.ProjectCategory, " +
+      "C_Project.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM C_Project left join (select AD_Org_ID, Name from AD_Org) table1 on (C_Project.AD_Org_ID = table1.AD_Org_ID) left join (select C_ProjectPhase_ID, SeqNo, Name from C_ProjectPhase) table2 on (C_Project.C_ProjectPhase_ID = table2.C_ProjectPhase_ID) left join (select AD_User_ID, Name from AD_User) table3 on (C_Project.SalesRep_ID =  table3.AD_User_ID) left join (select C_BPartner_ID, Name from C_BPartner) table4 on (C_Project.Responsible_ID =  table4.C_BPartner_ID) left join (select C_BPartner_ID, Name from C_BPartner) table5 on (C_Project.C_BPartner_ID = table5.C_BPartner_ID) left join (select C_BPartner_Location_ID, Name from C_BPartner_Location) table6 on (C_Project.C_BPartner_Location_ID = table6.C_BPartner_Location_ID) left join (select AD_User_ID, Name from AD_User) table7 on (C_Project.AD_User_ID = table7.AD_User_ID) left join (select FIN_Paymentmethod_ID, Name from FIN_Paymentmethod) table8 on (C_Project.FIN_Paymentmethod_ID = table8.FIN_Paymentmethod_ID) left join (select C_PaymentTerm_ID, Name from C_PaymentTerm) table9 on (C_Project.C_PaymentTerm_ID = table9.C_PaymentTerm_ID) left join (select C_PaymentTerm_ID,AD_Language, Name from C_PaymentTerm_TRL) tableTRL9 on (table9.C_PaymentTerm_ID = tableTRL9.C_PaymentTerm_ID and tableTRL9.AD_Language = ?)  left join (select M_PriceList_ID, Name from M_PriceList) table11 on (C_Project.M_PriceList_ID = table11.M_PriceList_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table12 on (C_Project.C_Currency_ID = table12.C_Currency_ID) left join (select M_Warehouse_ID, Name from M_Warehouse) table13 on (C_Project.M_Warehouse_ID = table13.M_Warehouse_ID)" +
       "        WHERE 2=2 " +
@@ -502,36 +502,36 @@ Select for edit
         objectMultiphaseProjectData.mWarehouseIdr = UtilSql.getValue(result, "m_warehouse_idr");
         objectMultiphaseProjectData.changeprojectstatus = UtilSql.getValue(result, "changeprojectstatus");
         objectMultiphaseProjectData.copyfrom = UtilSql.getValue(result, "copyfrom");
-        objectMultiphaseProjectData.cLocationId = UtilSql.getValue(result, "c_location_id");
-        objectMultiphaseProjectData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectMultiphaseProjectData.isactive = UtilSql.getValue(result, "isactive");
-        objectMultiphaseProjectData.generateto = UtilSql.getValue(result, "generateto");
-        objectMultiphaseProjectData.mPricelistVersionId = UtilSql.getValue(result, "m_pricelist_version_id");
-        objectMultiphaseProjectData.note = UtilSql.getValue(result, "note");
-        objectMultiphaseProjectData.plannedamt = UtilSql.getValue(result, "plannedamt");
-        objectMultiphaseProjectData.plannedmarginamt = UtilSql.getValue(result, "plannedmarginamt");
-        objectMultiphaseProjectData.plannedqty = UtilSql.getValue(result, "plannedqty");
-        objectMultiphaseProjectData.processed = UtilSql.getValue(result, "processed");
-        objectMultiphaseProjectData.cCampaignId = UtilSql.getValue(result, "c_campaign_id");
-        objectMultiphaseProjectData.invoicedamt = UtilSql.getValue(result, "invoicedamt");
-        objectMultiphaseProjectData.invoicedqty = UtilSql.getValue(result, "invoicedqty");
+        objectMultiphaseProjectData.publicprivate = UtilSql.getValue(result, "publicprivate");
         objectMultiphaseProjectData.projectbalanceamt = UtilSql.getValue(result, "projectbalanceamt");
-        objectMultiphaseProjectData.projectcategory = UtilSql.getValue(result, "projectcategory");
+        objectMultiphaseProjectData.invoicedqty = UtilSql.getValue(result, "invoicedqty");
+        objectMultiphaseProjectData.invoicedamt = UtilSql.getValue(result, "invoicedamt");
+        objectMultiphaseProjectData.cCampaignId = UtilSql.getValue(result, "c_campaign_id");
+        objectMultiphaseProjectData.processed = UtilSql.getValue(result, "processed");
+        objectMultiphaseProjectData.plannedqty = UtilSql.getValue(result, "plannedqty");
+        objectMultiphaseProjectData.plannedmarginamt = UtilSql.getValue(result, "plannedmarginamt");
+        objectMultiphaseProjectData.projectphase = UtilSql.getValue(result, "projectphase");
+        objectMultiphaseProjectData.plannedamt = UtilSql.getValue(result, "plannedamt");
         objectMultiphaseProjectData.projectkind = UtilSql.getValue(result, "projectkind");
         objectMultiphaseProjectData.generateorder = UtilSql.getValue(result, "generateorder");
-        objectMultiphaseProjectData.projectphase = UtilSql.getValue(result, "projectphase");
-        objectMultiphaseProjectData.publicprivate = UtilSql.getValue(result, "publicprivate");
+        objectMultiphaseProjectData.cProjectId = UtilSql.getValue(result, "c_project_id");
         objectMultiphaseProjectData.billtoId = UtilSql.getValue(result, "billto_id");
+        objectMultiphaseProjectData.note = UtilSql.getValue(result, "note");
         objectMultiphaseProjectData.processing = UtilSql.getValue(result, "processing");
         objectMultiphaseProjectData.accountno = UtilSql.getValue(result, "accountno");
         objectMultiphaseProjectData.documentCopies = UtilSql.getValue(result, "document_copies");
         objectMultiphaseProjectData.paymentrule = UtilSql.getValue(result, "paymentrule");
         objectMultiphaseProjectData.invoiceToproject = UtilSql.getValue(result, "invoice_toproject");
-        objectMultiphaseProjectData.cProjectId = UtilSql.getValue(result, "c_project_id");
+        objectMultiphaseProjectData.cLocationId = UtilSql.getValue(result, "c_location_id");
         objectMultiphaseProjectData.plannedpoamt = UtilSql.getValue(result, "plannedpoamt");
         objectMultiphaseProjectData.lastplannedproposaldate = UtilSql.getDateValue(result, "lastplannedproposaldate", "dd-MM-yyyy");
+        objectMultiphaseProjectData.mPricelistVersionId = UtilSql.getValue(result, "m_pricelist_version_id");
         objectMultiphaseProjectData.createtemppricelist = UtilSql.getValue(result, "createtemppricelist");
         objectMultiphaseProjectData.cPhaseId = UtilSql.getValue(result, "c_phase_id");
+        objectMultiphaseProjectData.generateto = UtilSql.getValue(result, "generateto");
+        objectMultiphaseProjectData.isactive = UtilSql.getValue(result, "isactive");
+        objectMultiphaseProjectData.projectcategory = UtilSql.getValue(result, "projectcategory");
+        objectMultiphaseProjectData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectMultiphaseProjectData.language = UtilSql.getValue(result, "language");
         objectMultiphaseProjectData.adUserClient = "";
         objectMultiphaseProjectData.adOrgClient = "";
@@ -624,36 +624,36 @@ Create a registry
     objectMultiphaseProjectData[0].mWarehouseIdr = "";
     objectMultiphaseProjectData[0].changeprojectstatus = changeprojectstatus;
     objectMultiphaseProjectData[0].copyfrom = copyfrom;
-    objectMultiphaseProjectData[0].cLocationId = cLocationId;
-    objectMultiphaseProjectData[0].adClientId = adClientId;
-    objectMultiphaseProjectData[0].isactive = isactive;
-    objectMultiphaseProjectData[0].generateto = generateto;
-    objectMultiphaseProjectData[0].mPricelistVersionId = mPricelistVersionId;
-    objectMultiphaseProjectData[0].note = note;
-    objectMultiphaseProjectData[0].plannedamt = plannedamt;
-    objectMultiphaseProjectData[0].plannedmarginamt = plannedmarginamt;
-    objectMultiphaseProjectData[0].plannedqty = plannedqty;
-    objectMultiphaseProjectData[0].processed = processed;
-    objectMultiphaseProjectData[0].cCampaignId = cCampaignId;
-    objectMultiphaseProjectData[0].invoicedamt = invoicedamt;
-    objectMultiphaseProjectData[0].invoicedqty = invoicedqty;
+    objectMultiphaseProjectData[0].publicprivate = publicprivate;
     objectMultiphaseProjectData[0].projectbalanceamt = projectbalanceamt;
-    objectMultiphaseProjectData[0].projectcategory = projectcategory;
+    objectMultiphaseProjectData[0].invoicedqty = invoicedqty;
+    objectMultiphaseProjectData[0].invoicedamt = invoicedamt;
+    objectMultiphaseProjectData[0].cCampaignId = cCampaignId;
+    objectMultiphaseProjectData[0].processed = processed;
+    objectMultiphaseProjectData[0].plannedqty = plannedqty;
+    objectMultiphaseProjectData[0].plannedmarginamt = plannedmarginamt;
+    objectMultiphaseProjectData[0].projectphase = projectphase;
+    objectMultiphaseProjectData[0].plannedamt = plannedamt;
     objectMultiphaseProjectData[0].projectkind = projectkind;
     objectMultiphaseProjectData[0].generateorder = generateorder;
-    objectMultiphaseProjectData[0].projectphase = projectphase;
-    objectMultiphaseProjectData[0].publicprivate = publicprivate;
+    objectMultiphaseProjectData[0].cProjectId = cProjectId;
     objectMultiphaseProjectData[0].billtoId = billtoId;
+    objectMultiphaseProjectData[0].note = note;
     objectMultiphaseProjectData[0].processing = processing;
     objectMultiphaseProjectData[0].accountno = accountno;
     objectMultiphaseProjectData[0].documentCopies = documentCopies;
     objectMultiphaseProjectData[0].paymentrule = paymentrule;
     objectMultiphaseProjectData[0].invoiceToproject = invoiceToproject;
-    objectMultiphaseProjectData[0].cProjectId = cProjectId;
+    objectMultiphaseProjectData[0].cLocationId = cLocationId;
     objectMultiphaseProjectData[0].plannedpoamt = plannedpoamt;
     objectMultiphaseProjectData[0].lastplannedproposaldate = lastplannedproposaldate;
+    objectMultiphaseProjectData[0].mPricelistVersionId = mPricelistVersionId;
     objectMultiphaseProjectData[0].createtemppricelist = createtemppricelist;
     objectMultiphaseProjectData[0].cPhaseId = cPhaseId;
+    objectMultiphaseProjectData[0].generateto = generateto;
+    objectMultiphaseProjectData[0].isactive = isactive;
+    objectMultiphaseProjectData[0].projectcategory = projectcategory;
+    objectMultiphaseProjectData[0].adClientId = adClientId;
     objectMultiphaseProjectData[0].language = "";
     return objectMultiphaseProjectData;
   }
@@ -847,7 +847,7 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        UPDATE C_Project" +
-      "        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , IsSummary = (?) , Setprojecttype = (?) , Projectstatus = (?) , C_ProjectType_ID = (?) , C_ProjectPhase_ID = (?) , Startdate = TO_DATE(?) , DateContract = TO_DATE(?) , DateFinish = TO_DATE(?) , Description = (?) , SalesRep_ID = (?) , Responsible_ID = (?) , IsCommitment = (?) , IsCommitCeiling = (?) , CommittedAmt = TO_NUMBER(?) , CommittedQty = TO_NUMBER(?) , Servrevenue = TO_NUMBER(?) , Expexpenses = TO_NUMBER(?) , Servsercost = TO_NUMBER(?) , Servoutcost = TO_NUMBER(?) , Servcost = TO_NUMBER(?) , Expreinvoicing = TO_NUMBER(?) , Servmargin = TO_NUMBER(?) , Expmargin = TO_NUMBER(?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , AD_User_ID = (?) , POReference = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , M_Warehouse_ID = (?) , ChangeProjectStatus = (?) , CopyFrom = (?) , C_Location_ID = (?) , AD_Client_ID = (?) , IsActive = (?) , GenerateTo = (?) , M_PriceList_Version_ID = (?) , Note = (?) , PlannedAmt = TO_NUMBER(?) , PlannedMarginAmt = TO_NUMBER(?) , PlannedQty = TO_NUMBER(?) , Processed = (?) , C_Campaign_ID = (?) , InvoicedAmt = TO_NUMBER(?) , InvoicedQty = TO_NUMBER(?) , ProjectBalanceAmt = TO_NUMBER(?) , ProjectCategory = (?) , Projectkind = (?) , GenerateOrder = (?) , Projectphase = (?) , Publicprivate = (?) , BillTo_ID = (?) , Processing = (?) , AccountNo = (?) , Document_Copies = TO_NUMBER(?) , PaymentRule = (?) , Invoice_ToProject = (?) , C_Project_ID = (?) , PlannedPOAmt = TO_NUMBER(?) , LastPlannedProposalDate = TO_DATE(?) , Createtemppricelist = (?) , C_Phase_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Value = (?) , Name = (?) , IsSummary = (?) , Setprojecttype = (?) , Projectstatus = (?) , C_ProjectType_ID = (?) , C_ProjectPhase_ID = (?) , Startdate = TO_DATE(?) , DateContract = TO_DATE(?) , DateFinish = TO_DATE(?) , Description = (?) , SalesRep_ID = (?) , Responsible_ID = (?) , IsCommitment = (?) , IsCommitCeiling = (?) , CommittedAmt = TO_NUMBER(?) , CommittedQty = TO_NUMBER(?) , Servrevenue = TO_NUMBER(?) , Expexpenses = TO_NUMBER(?) , Servsercost = TO_NUMBER(?) , Servoutcost = TO_NUMBER(?) , Servcost = TO_NUMBER(?) , Expreinvoicing = TO_NUMBER(?) , Servmargin = TO_NUMBER(?) , Expmargin = TO_NUMBER(?) , C_BPartner_ID = (?) , C_BPartner_Location_ID = (?) , AD_User_ID = (?) , POReference = (?) , FIN_Paymentmethod_ID = (?) , C_PaymentTerm_ID = (?) , M_PriceList_ID = (?) , C_Currency_ID = (?) , M_Warehouse_ID = (?) , ChangeProjectStatus = (?) , CopyFrom = (?) , Publicprivate = (?) , ProjectBalanceAmt = TO_NUMBER(?) , InvoicedQty = TO_NUMBER(?) , InvoicedAmt = TO_NUMBER(?) , C_Campaign_ID = (?) , Processed = (?) , PlannedQty = TO_NUMBER(?) , PlannedMarginAmt = TO_NUMBER(?) , Projectphase = (?) , PlannedAmt = TO_NUMBER(?) , Projectkind = (?) , GenerateOrder = (?) , C_Project_ID = (?) , BillTo_ID = (?) , Note = (?) , Processing = (?) , AccountNo = (?) , Document_Copies = TO_NUMBER(?) , PaymentRule = (?) , Invoice_ToProject = (?) , C_Location_ID = (?) , PlannedPOAmt = TO_NUMBER(?) , LastPlannedProposalDate = TO_DATE(?) , M_PriceList_Version_ID = (?) , Createtemppricelist = (?) , C_Phase_ID = (?) , GenerateTo = (?) , IsActive = (?) , ProjectCategory = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE C_Project.C_Project_ID = ? " +
       "        AND C_Project.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -901,36 +901,36 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, changeprojectstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, copyfrom);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cLocationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedmarginamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedqty);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, publicprivate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectbalanceamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectcategory);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedmarginamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectphase);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectkind);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateorder);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectphase);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, publicprivate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, billtoId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentCopies);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoiceToproject);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedpoamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lastplannedproposaldate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createtemppricelist);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPhaseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectcategory);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -959,8 +959,8 @@ Select for action search
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO C_Project " +
-      "        (AD_Org_ID, Value, Name, IsSummary, Setprojecttype, Projectstatus, C_ProjectType_ID, C_ProjectPhase_ID, Startdate, DateContract, DateFinish, Description, SalesRep_ID, Responsible_ID, IsCommitment, IsCommitCeiling, CommittedAmt, CommittedQty, Servrevenue, Expexpenses, Servsercost, Servoutcost, Servcost, Expreinvoicing, Servmargin, Expmargin, C_BPartner_ID, C_BPartner_Location_ID, AD_User_ID, POReference, FIN_Paymentmethod_ID, C_PaymentTerm_ID, M_PriceList_ID, C_Currency_ID, M_Warehouse_ID, ChangeProjectStatus, CopyFrom, C_Location_ID, AD_Client_ID, IsActive, GenerateTo, M_PriceList_Version_ID, Note, PlannedAmt, PlannedMarginAmt, PlannedQty, Processed, C_Campaign_ID, InvoicedAmt, InvoicedQty, ProjectBalanceAmt, ProjectCategory, Projectkind, GenerateOrder, Projectphase, Publicprivate, BillTo_ID, Processing, AccountNo, Document_Copies, PaymentRule, Invoice_ToProject, C_Project_ID, PlannedPOAmt, LastPlannedProposalDate, Createtemppricelist, C_Phase_ID, created, createdby, updated, updatedBy)" +
-      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), (?), (?), now(), ?, now(), ?)";
+      "        (AD_Org_ID, Value, Name, IsSummary, Setprojecttype, Projectstatus, C_ProjectType_ID, C_ProjectPhase_ID, Startdate, DateContract, DateFinish, Description, SalesRep_ID, Responsible_ID, IsCommitment, IsCommitCeiling, CommittedAmt, CommittedQty, Servrevenue, Expexpenses, Servsercost, Servoutcost, Servcost, Expreinvoicing, Servmargin, Expmargin, C_BPartner_ID, C_BPartner_Location_ID, AD_User_ID, POReference, FIN_Paymentmethod_ID, C_PaymentTerm_ID, M_PriceList_ID, C_Currency_ID, M_Warehouse_ID, ChangeProjectStatus, CopyFrom, Publicprivate, ProjectBalanceAmt, InvoicedQty, InvoicedAmt, C_Campaign_ID, Processed, PlannedQty, PlannedMarginAmt, Projectphase, PlannedAmt, Projectkind, GenerateOrder, C_Project_ID, BillTo_ID, Note, Processing, AccountNo, Document_Copies, PaymentRule, Invoice_ToProject, C_Location_ID, PlannedPOAmt, LastPlannedProposalDate, M_PriceList_Version_ID, Createtemppricelist, C_Phase_ID, GenerateTo, IsActive, ProjectCategory, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), TO_DATE(?), TO_DATE(?), TO_DATE(?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
     PreparedStatement st = null;
@@ -1005,36 +1005,36 @@ Select for action search
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, changeprojectstatus);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, copyfrom);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cLocationId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedmarginamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedqty);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, publicprivate);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectbalanceamt);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectcategory);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoicedamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cCampaignId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedqty);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedmarginamt);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectphase);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectkind);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateorder);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectphase);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, publicprivate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, billtoId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, note);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, documentCopies);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, paymentrule);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, invoiceToproject);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cProjectId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, cLocationId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, plannedpoamt);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, lastplannedproposaldate);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, mPricelistVersionId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createtemppricelist);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, cPhaseId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, generateto);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, projectcategory);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

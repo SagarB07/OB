@@ -45,9 +45,9 @@ static Logger log4j = Logger.getLogger(IOProductsData.class);
   public String copyproduct;
   public String mWarehouseRuleId;
   public String mWarehouseRuleIdr;
-  public String adOrgId;
-  public String maSequenceId;
   public String maSequenceproductId;
+  public String maSequenceId;
+  public String adOrgId;
   public String adClientId;
   public String language;
   public String adUserClient;
@@ -116,12 +116,12 @@ static Logger log4j = Logger.getLogger(IOProductsData.class);
       return mWarehouseRuleId;
     else if (fieldName.equalsIgnoreCase("m_warehouse_rule_idr") || fieldName.equals("mWarehouseRuleIdr"))
       return mWarehouseRuleIdr;
-    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
-      return adOrgId;
-    else if (fieldName.equalsIgnoreCase("ma_sequence_id") || fieldName.equals("maSequenceId"))
-      return maSequenceId;
     else if (fieldName.equalsIgnoreCase("ma_sequenceproduct_id") || fieldName.equals("maSequenceproductId"))
       return maSequenceproductId;
+    else if (fieldName.equalsIgnoreCase("ma_sequence_id") || fieldName.equals("maSequenceId"))
+      return maSequenceId;
+    else if (fieldName.equalsIgnoreCase("ad_org_id") || fieldName.equals("adOrgId"))
+      return adOrgId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -184,9 +184,9 @@ Select for edit
       "MA_SequenceProduct.Copyproduct, " +
       "MA_SequenceProduct.M_Warehouse_Rule_ID, " +
       "(CASE WHEN MA_SequenceProduct.M_Warehouse_Rule_ID IS NULL THEN '' ELSE  (COALESCE(TO_CHAR(TO_CHAR(COALESCE(TO_CHAR(table6.Name), ''))),'') ) END) AS M_Warehouse_Rule_IDR, " +
-      "MA_SequenceProduct.AD_Org_ID, " +
-      "MA_SequenceProduct.MA_Sequence_ID, " +
       "MA_SequenceProduct.MA_Sequenceproduct_ID, " +
+      "MA_SequenceProduct.MA_Sequence_ID, " +
+      "MA_SequenceProduct.AD_Org_ID, " +
       "MA_SequenceProduct.AD_Client_ID, " +
       "        ? AS LANGUAGE " +
       "        FROM MA_SequenceProduct left join (select M_Product_ID, Name from M_Product) table1 on (MA_SequenceProduct.M_Product_ID = table1.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL1 on (table1.M_Product_ID = tableTRL1.M_Product_ID and tableTRL1.AD_Language = ?)  left join ad_ref_list_v list1 on (MA_SequenceProduct.Productiontype = list1.value and list1.ad_reference_id = '800034' and list1.ad_language = ?)  left join (select C_UOM_ID, Name from C_UOM) table3 on (MA_SequenceProduct.C_UOM_ID = table3.C_UOM_ID) left join (select C_UOM_ID,AD_Language, Name from C_UOM_TRL) tableTRL3 on (table3.C_UOM_ID = tableTRL3.C_UOM_ID and tableTRL3.AD_Language = ?)  left join (select M_Product_Uom_Id, C_UOM_ID from M_Product_UOM) table5 on (MA_SequenceProduct.M_Product_Uom_Id =  table5.M_Product_Uom_Id) left join ad_ref_list_v list2 on (table5.C_UOM_ID = list2.value and list2.ad_reference_id = '' and list2.ad_language = ?)  left join (select M_Warehouse_Rule_ID, Name from M_Warehouse_Rule) table6 on (MA_SequenceProduct.M_Warehouse_Rule_ID = table6.M_Warehouse_Rule_ID)" +
@@ -265,9 +265,9 @@ Select for edit
         objectIOProductsData.copyproduct = UtilSql.getValue(result, "copyproduct");
         objectIOProductsData.mWarehouseRuleId = UtilSql.getValue(result, "m_warehouse_rule_id");
         objectIOProductsData.mWarehouseRuleIdr = UtilSql.getValue(result, "m_warehouse_rule_idr");
-        objectIOProductsData.adOrgId = UtilSql.getValue(result, "ad_org_id");
-        objectIOProductsData.maSequenceId = UtilSql.getValue(result, "ma_sequence_id");
         objectIOProductsData.maSequenceproductId = UtilSql.getValue(result, "ma_sequenceproduct_id");
+        objectIOProductsData.maSequenceId = UtilSql.getValue(result, "ma_sequence_id");
+        objectIOProductsData.adOrgId = UtilSql.getValue(result, "ad_org_id");
         objectIOProductsData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectIOProductsData.language = UtilSql.getValue(result, "language");
         objectIOProductsData.adUserClient = "";
@@ -333,9 +333,9 @@ Create a registry
     objectIOProductsData[0].copyproduct = copyproduct;
     objectIOProductsData[0].mWarehouseRuleId = mWarehouseRuleId;
     objectIOProductsData[0].mWarehouseRuleIdr = "";
-    objectIOProductsData[0].adOrgId = adOrgId;
-    objectIOProductsData[0].maSequenceId = maSequenceId;
     objectIOProductsData[0].maSequenceproductId = maSequenceproductId;
+    objectIOProductsData[0].maSequenceId = maSequenceId;
+    objectIOProductsData[0].adOrgId = adOrgId;
     objectIOProductsData[0].adClientId = adClientId;
     objectIOProductsData[0].language = "";
     return objectIOProductsData;
@@ -728,7 +728,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE MA_SequenceProduct" +
-      "        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , Productiontype = (?) , Quantity = TO_NUMBER(?) , C_UOM_ID = (?) , Uniqueattconsum = (?) , Componentcost = TO_NUMBER(?) , Decrease = TO_NUMBER(?) , Rejected = TO_NUMBER(?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Cost = TO_NUMBER(?) , IsActive = (?) , Divisiongroupqty = TO_NUMBER(?) , Copyproduct = (?) , M_Warehouse_Rule_ID = (?) , AD_Org_ID = (?) , MA_Sequence_ID = (?) , MA_Sequenceproduct_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET Line = TO_NUMBER(?) , M_Product_ID = (?) , Productiontype = (?) , Quantity = TO_NUMBER(?) , C_UOM_ID = (?) , Uniqueattconsum = (?) , Componentcost = TO_NUMBER(?) , Decrease = TO_NUMBER(?) , Rejected = TO_NUMBER(?) , QuantityOrder = TO_NUMBER(?) , M_Product_Uom_Id = (?) , Cost = TO_NUMBER(?) , IsActive = (?) , Divisiongroupqty = TO_NUMBER(?) , Copyproduct = (?) , M_Warehouse_Rule_ID = (?) , MA_Sequenceproduct_ID = (?) , MA_Sequence_ID = (?) , AD_Org_ID = (?) , AD_Client_ID = (?) , updated = now(), updatedby = ? " +
       "        WHERE MA_SequenceProduct.MA_Sequenceproduct_ID = ? " +
       "                 AND MA_SequenceProduct.MA_Sequence_ID = ? " +
       "        AND MA_SequenceProduct.AD_Client_ID IN (";
@@ -762,9 +762,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, divisiongroupqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, copyproduct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseRuleId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceproductId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceproductId);
@@ -795,7 +795,7 @@ Select for parent field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO MA_SequenceProduct " +
-      "        (Line, M_Product_ID, Productiontype, Quantity, C_UOM_ID, Uniqueattconsum, Componentcost, Decrease, Rejected, QuantityOrder, M_Product_Uom_Id, Cost, IsActive, Divisiongroupqty, Copyproduct, M_Warehouse_Rule_ID, AD_Org_ID, MA_Sequence_ID, MA_Sequenceproduct_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
+      "        (Line, M_Product_ID, Productiontype, Quantity, C_UOM_ID, Uniqueattconsum, Componentcost, Decrease, Rejected, QuantityOrder, M_Product_Uom_Id, Cost, IsActive, Divisiongroupqty, Copyproduct, M_Warehouse_Rule_ID, MA_Sequenceproduct_ID, MA_Sequence_ID, AD_Org_ID, AD_Client_ID, created, createdby, updated, updatedBy)" +
       "        VALUES (TO_NUMBER(?), (?), (?), TO_NUMBER(?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -820,9 +820,9 @@ Select for parent field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, divisiongroupqty);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, copyproduct);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mWarehouseRuleId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceproductId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, maSequenceId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adOrgId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);

@@ -37,10 +37,10 @@ static Logger log4j = Logger.getLogger(MatchedInvoiceData.class);
   public String processed;
   public String posted;
   public String postedBtn;
-  public String adClientId;
-  public String isactive;
   public String processing;
+  public String adClientId;
   public String mMatchinvId;
+  public String isactive;
   public String language;
   public String adUserClient;
   public String adOrgClient;
@@ -92,14 +92,14 @@ static Logger log4j = Logger.getLogger(MatchedInvoiceData.class);
       return posted;
     else if (fieldName.equalsIgnoreCase("posted_btn") || fieldName.equals("postedBtn"))
       return postedBtn;
-    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
-      return adClientId;
-    else if (fieldName.equalsIgnoreCase("isactive"))
-      return isactive;
     else if (fieldName.equalsIgnoreCase("processing"))
       return processing;
+    else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
+      return adClientId;
     else if (fieldName.equalsIgnoreCase("m_matchinv_id") || fieldName.equals("mMatchinvId"))
       return mMatchinvId;
+    else if (fieldName.equalsIgnoreCase("isactive"))
+      return isactive;
     else if (fieldName.equalsIgnoreCase("language"))
       return language;
     else if (fieldName.equals("adUserClient"))
@@ -152,10 +152,10 @@ Select for edit
       "COALESCE(M_MatchInv.Processed, 'N') AS Processed, " +
       "M_MatchInv.Posted, " +
       "list1.name as Posted_BTN, " +
-      "M_MatchInv.AD_Client_ID, " +
-      "COALESCE(M_MatchInv.IsActive, 'N') AS IsActive, " +
       "COALESCE(M_MatchInv.Processing, 'N') AS Processing, " +
+      "M_MatchInv.AD_Client_ID, " +
       "M_MatchInv.M_MatchInv_ID, " +
+      "COALESCE(M_MatchInv.IsActive, 'N') AS IsActive, " +
       "        ? AS LANGUAGE " +
       "        FROM M_MatchInv left join (select AD_Org_ID, Name from AD_Org) table1 on (M_MatchInv.AD_Org_ID = table1.AD_Org_ID) left join (select C_InvoiceLine_ID, C_Invoice_ID, Line, LineNetAmt from C_InvoiceLine) table2 on (M_MatchInv.C_InvoiceLine_ID = table2.C_InvoiceLine_ID) left join (select C_Invoice_ID, DocumentNo, DateInvoiced, GrandTotal from C_Invoice) table3 on (table2.C_Invoice_ID = table3.C_Invoice_ID) left join (select M_InOutLine_ID, Line, MovementQty, M_InOut_ID, M_Product_ID from M_InOutLine) table4 on (M_MatchInv.M_InOutLine_ID = table4.M_InOutLine_ID) left join (select M_InOut_ID, DocumentNo, MovementDate from M_InOut) table5 on (table4.M_InOut_ID = table5.M_InOut_ID) left join (select M_Product_ID, Name from M_Product) table6 on (table4.M_Product_ID = table6.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL6 on (table6.M_Product_ID = tableTRL6.M_Product_ID and tableTRL6.AD_Language = ?)  left join (select M_Product_ID, Name from M_Product) table8 on (M_MatchInv.M_Product_ID = table8.M_Product_ID) left join (select M_Product_ID,AD_Language, Name from M_Product_TRL) tableTRL8 on (table8.M_Product_ID = tableTRL8.M_Product_ID and tableTRL8.AD_Language = ?)  left join ad_ref_list_v list1 on (list1.ad_reference_id = '234' and list1.ad_language = ?  AND M_MatchInv.Posted = TO_CHAR(list1.value))" +
       "        WHERE 2=2 " +
@@ -219,10 +219,10 @@ Select for edit
         objectMatchedInvoiceData.processed = UtilSql.getValue(result, "processed");
         objectMatchedInvoiceData.posted = UtilSql.getValue(result, "posted");
         objectMatchedInvoiceData.postedBtn = UtilSql.getValue(result, "posted_btn");
-        objectMatchedInvoiceData.adClientId = UtilSql.getValue(result, "ad_client_id");
-        objectMatchedInvoiceData.isactive = UtilSql.getValue(result, "isactive");
         objectMatchedInvoiceData.processing = UtilSql.getValue(result, "processing");
+        objectMatchedInvoiceData.adClientId = UtilSql.getValue(result, "ad_client_id");
         objectMatchedInvoiceData.mMatchinvId = UtilSql.getValue(result, "m_matchinv_id");
+        objectMatchedInvoiceData.isactive = UtilSql.getValue(result, "isactive");
         objectMatchedInvoiceData.language = UtilSql.getValue(result, "language");
         objectMatchedInvoiceData.adUserClient = "";
         objectMatchedInvoiceData.adOrgClient = "";
@@ -279,10 +279,10 @@ Create a registry
     objectMatchedInvoiceData[0].processed = processed;
     objectMatchedInvoiceData[0].posted = posted;
     objectMatchedInvoiceData[0].postedBtn = postedBtn;
-    objectMatchedInvoiceData[0].adClientId = adClientId;
-    objectMatchedInvoiceData[0].isactive = isactive;
     objectMatchedInvoiceData[0].processing = processing;
+    objectMatchedInvoiceData[0].adClientId = adClientId;
     objectMatchedInvoiceData[0].mMatchinvId = mMatchinvId;
+    objectMatchedInvoiceData[0].isactive = isactive;
     objectMatchedInvoiceData[0].language = "";
     return objectMatchedInvoiceData;
   }
@@ -483,7 +483,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE M_MatchInv" +
-      "        SET AD_Org_ID = (?) , C_InvoiceLine_ID = (?) , M_InOutLine_ID = (?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , DateTrx = TO_DATE(?) , Processed = (?) , Posted = (?) , AD_Client_ID = (?) , IsActive = (?) , Processing = (?) , M_MatchInv_ID = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , C_InvoiceLine_ID = (?) , M_InOutLine_ID = (?) , M_Product_ID = (?) , Qty = TO_NUMBER(?) , DateTrx = TO_DATE(?) , Processed = (?) , Posted = (?) , Processing = (?) , AD_Client_ID = (?) , M_MatchInv_ID = (?) , IsActive = (?) , updated = now(), updatedby = ? " +
       "        WHERE M_MatchInv.M_MatchInv_ID = ? " +
       "        AND M_MatchInv.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -508,10 +508,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, datetrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMatchinvId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMatchinvId);
       if (adUserClient != null && !(adUserClient.equals(""))) {
@@ -540,7 +540,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO M_MatchInv " +
-      "        (AD_Org_ID, C_InvoiceLine_ID, M_InOutLine_ID, M_Product_ID, Qty, DateTrx, Processed, Posted, AD_Client_ID, IsActive, Processing, M_MatchInv_ID, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, C_InvoiceLine_ID, M_InOutLine_ID, M_Product_ID, Qty, DateTrx, Processed, Posted, Processing, AD_Client_ID, M_MatchInv_ID, IsActive, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), TO_NUMBER(?), TO_DATE(?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -557,10 +557,10 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, datetrx);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processed);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, posted);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, processing);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, mMatchinvId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, isactive);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
 

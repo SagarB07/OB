@@ -14,6 +14,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process0558402EEE7C4708AE5C6F540971D794" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_novedad_faltas</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_novedad_faltas(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process0586F175A22647FAB964D16B85971CA7" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure asv_pedido_status</SqlMethodComment>
       <Sql><![CDATA[
@@ -23,9 +31,9 @@
    </SqlMethod>
 
   <SqlMethod name="process0C5344E0E93943CEBAC5305789B1E8F5" type="callableStatement" return="object" object="ActionButtonData">
-      <SqlMethodComment>procedure No_Procesar_Prestamo</SqlMethodComment>
+      <SqlMethodComment>procedure no_procesar_prestamo</SqlMethodComment>
       <Sql><![CDATA[
-        CALL No_Procesar_Prestamo(?)
+        CALL no_procesar_prestamo(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -546,6 +554,14 @@
       <SqlMethodComment>procedure co_procesa_retencion_ventas</SqlMethodComment>
       <Sql><![CDATA[
         CALL co_procesa_retencion_ventas(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
+  <SqlMethod name="process4381577A0E8B4A5C9737749D3D8E902F" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_copia_rubro_perfil</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_copia_rubro_perfil(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
@@ -1110,6 +1126,14 @@
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>
 
+  <SqlMethod name="process884244D657684E09899EB9F6DD3E78FF" type="callableStatement" return="object" object="ActionButtonData">
+      <SqlMethodComment>procedure no_copia_rperfil_rcempleado</SqlMethodComment>
+      <Sql><![CDATA[
+        CALL no_copia_rperfil_rcempleado(?)
+      ]]></Sql>
+      <Parameter name="adPinstanceId"></Parameter>
+   </SqlMethod>
+
   <SqlMethod name="process904509557496454CBD4C00265FBEA190" type="callableStatement" return="object" object="ActionButtonData">
       <SqlMethodComment>procedure </SqlMethodComment>
       <Sql><![CDATA[
@@ -1426,14 +1450,6 @@
       <SqlMethodComment>procedure co_ejecuta_retencion_compra</SqlMethodComment>
       <Sql><![CDATA[
         CALL co_ejecuta_retencion_compra(?)
-      ]]></Sql>
-      <Parameter name="adPinstanceId"></Parameter>
-   </SqlMethod>
-
-  <SqlMethod name="processF81B27B293604CA38B736422855300F1" type="callableStatement" return="object" object="ActionButtonData">
-      <SqlMethodComment>procedure no_novedad_faltas</SqlMethodComment>
-      <Sql><![CDATA[
-        CALL no_novedad_faltas(?)
       ]]></Sql>
       <Parameter name="adPinstanceId"></Parameter>
    </SqlMethod>

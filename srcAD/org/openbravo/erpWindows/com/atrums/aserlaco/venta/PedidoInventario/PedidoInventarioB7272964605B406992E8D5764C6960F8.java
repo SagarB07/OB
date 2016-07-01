@@ -497,7 +497,7 @@ PInstanceProcessData.insertPInstanceParam(this, pinstance, "10", "AccionPedido",
 
     private void refreshSessionEdit(VariablesSecureApp vars, FieldProvider[] data) {
       if (data==null || data.length==0) return;
-          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|DocStatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|procesar", data[0].getField("procesar"));    vars.setSessionValue(windowId + "|ASV_Pedido_Inventario_ID", data[0].getField("asvPedidoInventarioId"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));
+          vars.setSessionValue(windowId + "|AD_Org_ID", data[0].getField("adOrgId"));    vars.setSessionValue(windowId + "|DocStatus", data[0].getField("docstatus"));    vars.setSessionValue(windowId + "|procesar", data[0].getField("procesar"));    vars.setSessionValue(windowId + "|AD_Client_ID", data[0].getField("adClientId"));    vars.setSessionValue(windowId + "|ASV_Pedido_Inventario_ID", data[0].getField("asvPedidoInventarioId"));
     }
 
     private void refreshSessionNew(VariablesSecureApp vars) throws IOException,ServletException {

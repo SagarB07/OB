@@ -68,6 +68,7 @@ public class NoTipoIngresoEgreso extends BaseOBObject implements Traceable, Clie
     public static final String PROPERTY_ESINGRESOVARIABLE = "esIngresoVariable";
     public static final String PROPERTY_ESFONDORESERVA = "esFondoReserva";
     public static final String PROPERTY_ESSUELDO = "esSueldo";
+    public static final String PROPERTY_ACTUALIZARRUBRO = "actualizarRubro";
     public static final String PROPERTY_IDTNOVEDADLIST = "iDTNovedadList";
     public static final String PROPERTY_NOROLPAGOPROVISIONLINELIST = "nORolPagoProvisionLineList";
     public static final String PROPERTY_NOCBEMPLEADOACCTLIST = "noCbEmpleadoAcctList";
@@ -92,6 +93,7 @@ public class NoTipoIngresoEgreso extends BaseOBObject implements Traceable, Clie
         setDefaultValue(PROPERTY_ESINGRESOVARIABLE, false);
         setDefaultValue(PROPERTY_ESFONDORESERVA, false);
         setDefaultValue(PROPERTY_ESSUELDO, false);
+        setDefaultValue(PROPERTY_ACTUALIZARRUBRO, false);
         setDefaultValue(PROPERTY_IDTNOVEDADLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOROLPAGOPROVISIONLINELIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NOCBEMPLEADOACCTLIST, new ArrayList<Object>());
@@ -307,6 +309,14 @@ public class NoTipoIngresoEgreso extends BaseOBObject implements Traceable, Clie
 
     public void setEsSueldo(Boolean esSueldo) {
         set(PROPERTY_ESSUELDO, esSueldo);
+    }
+
+    public Boolean isActualizarRubro() {
+        return (Boolean) get(PROPERTY_ACTUALIZARRUBRO);
+    }
+
+    public void setActualizarRubro(Boolean actualizarRubro) {
+        set(PROPERTY_ACTUALIZARRUBRO, actualizarRubro);
     }
 
     @SuppressWarnings("unchecked")

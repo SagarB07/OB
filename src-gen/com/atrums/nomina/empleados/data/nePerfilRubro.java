@@ -51,12 +51,14 @@ public class nePerfilRubro extends BaseOBObject implements Traceable, ClientEnab
     public static final String PROPERTY_UPDATEDBY = "updatedBy";
     public static final String PROPERTY_NOMBRE = "nombre";
     public static final String PROPERTY_PROCESSED = "processed";
+    public static final String PROPERTY_ACTUALIZARRUBRO = "actualizarRubro";
     public static final String PROPERTY_BUSINESSPARTNEREMNEPERFILRUBROIDLIST = "businessPartnerEmNePerfilRubroIdList";
     public static final String PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTNEPERFILRUBROIDLIST = "dataImportBusinessPartnerEMIdtNePerfilRubroIDList";
     public static final String PROPERTY_NEPERFILRUBROLINELIST = "nePerfilRubroLineList";
 
     public nePerfilRubro() {
         setDefaultValue(PROPERTY_ACTIVE, true);
+        setDefaultValue(PROPERTY_ACTUALIZARRUBRO, false);
         setDefaultValue(PROPERTY_BUSINESSPARTNEREMNEPERFILRUBROIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_DATAIMPORTBUSINESSPARTNEREMIDTNEPERFILRUBROIDLIST, new ArrayList<Object>());
         setDefaultValue(PROPERTY_NEPERFILRUBROLINELIST, new ArrayList<Object>());
@@ -145,6 +147,14 @@ public class nePerfilRubro extends BaseOBObject implements Traceable, ClientEnab
 
     public void setProcessed(String processed) {
         set(PROPERTY_PROCESSED, processed);
+    }
+
+    public Boolean isActualizarRubro() {
+        return (Boolean) get(PROPERTY_ACTUALIZARRUBRO);
+    }
+
+    public void setActualizarRubro(Boolean actualizarRubro) {
+        set(PROPERTY_ACTUALIZARRUBRO, actualizarRubro);
     }
 
     @SuppressWarnings("unchecked")

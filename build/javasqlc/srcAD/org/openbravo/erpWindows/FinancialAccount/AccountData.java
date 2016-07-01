@@ -70,8 +70,8 @@ static Logger log4j = Logger.getLogger(AccountData.class);
   public String accountno;
   public String emAtecdpAddtrs;
   public String emAtecdpReconcile;
-  public String finFinancialAccountId;
   public String adClientId;
+  public String finFinancialAccountId;
   public String routingno;
   public String language;
   public String adUserClient;
@@ -190,10 +190,10 @@ static Logger log4j = Logger.getLogger(AccountData.class);
       return emAtecdpAddtrs;
     else if (fieldName.equalsIgnoreCase("em_atecdp_reconcile") || fieldName.equals("emAtecdpReconcile"))
       return emAtecdpReconcile;
-    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
-      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("ad_client_id") || fieldName.equals("adClientId"))
       return adClientId;
+    else if (fieldName.equalsIgnoreCase("fin_financial_account_id") || fieldName.equals("finFinancialAccountId"))
+      return finFinancialAccountId;
     else if (fieldName.equalsIgnoreCase("routingno"))
       return routingno;
     else if (fieldName.equalsIgnoreCase("language"))
@@ -281,8 +281,8 @@ Select for edit
       "FIN_Financial_Account.Accountno, " +
       "FIN_Financial_Account.EM_Atecdp_Addtrs, " +
       "FIN_Financial_Account.EM_Atecdp_Reconcile, " +
-      "FIN_Financial_Account.Fin_Financial_Account_ID, " +
       "FIN_Financial_Account.AD_Client_ID, " +
+      "FIN_Financial_Account.Fin_Financial_Account_ID, " +
       "FIN_Financial_Account.Routingno, " +
       "        ? AS LANGUAGE " +
       "        FROM FIN_Financial_Account left join (select AD_Org_ID, Name from AD_Org) table1 on (FIN_Financial_Account.AD_Org_ID = table1.AD_Org_ID) left join (select C_Currency_ID, ISO_Code from C_Currency) table2 on (FIN_Financial_Account.C_Currency_ID = table2.C_Currency_ID) left join ad_ref_list_v list1 on (FIN_Financial_Account.Type = list1.value and list1.ad_reference_id = 'A6BDFA712FF948CE903C4C463E832FC1' and list1.ad_language = ?)  left join (select C_Location_ID, Address1, Address2, Postal, City, C_City_ID, C_Region_ID, C_Country_ID from C_Location) table3 on (FIN_Financial_Account.C_Location_ID = table3.C_Location_ID) left join (select C_City_ID, Name from C_City) table4 on (table3.C_City_ID = table4.C_City_ID) left join (select C_Region_ID, Name from C_Region) table5 on (table3.C_Region_ID = table5.C_Region_ID) left join (select C_Country_ID, Name from C_Country) table6 on (table3.C_Country_ID = table6.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL6 on (table6.C_Country_ID = tableTRL6.C_Country_ID and tableTRL6.AD_Language = ?)  left join (select FIN_Matching_Algorithm_ID, Name from FIN_Matching_Algorithm) table8 on (FIN_Financial_Account.FIN_Matching_Algorithm_ID = table8.FIN_Matching_Algorithm_ID) left join (select C_Country_ID, Name from C_Country) table9 on (FIN_Financial_Account.C_Country_ID = table9.C_Country_ID) left join (select C_Country_ID,AD_Language, Name from C_Country_TRL) tableTRL9 on (table9.C_Country_ID = tableTRL9.C_Country_ID and tableTRL9.AD_Language = ?)  left join ad_ref_list_v list2 on (FIN_Financial_Account.BankFormat = list2.value and list2.ad_reference_id = 'C123B7BF5B2C438D84D2E509734776B5' and list2.ad_language = ?)  left join ad_ref_list_v list3 on (FIN_Financial_Account.Typewriteoff = list3.value and list3.ad_reference_id = 'C3531F85C14B4515AB7259F0D338050D' and list3.ad_language = ?) " +
@@ -382,8 +382,8 @@ Select for edit
         objectAccountData.accountno = UtilSql.getValue(result, "accountno");
         objectAccountData.emAtecdpAddtrs = UtilSql.getValue(result, "em_atecdp_addtrs");
         objectAccountData.emAtecdpReconcile = UtilSql.getValue(result, "em_atecdp_reconcile");
-        objectAccountData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectAccountData.adClientId = UtilSql.getValue(result, "ad_client_id");
+        objectAccountData.finFinancialAccountId = UtilSql.getValue(result, "fin_financial_account_id");
         objectAccountData.routingno = UtilSql.getValue(result, "routingno");
         objectAccountData.language = UtilSql.getValue(result, "language");
         objectAccountData.adUserClient = "";
@@ -474,8 +474,8 @@ Create a registry
     objectAccountData[0].accountno = accountno;
     objectAccountData[0].emAtecdpAddtrs = emAtecdpAddtrs;
     objectAccountData[0].emAtecdpReconcile = emAtecdpReconcile;
-    objectAccountData[0].finFinancialAccountId = finFinancialAccountId;
     objectAccountData[0].adClientId = adClientId;
+    objectAccountData[0].finFinancialAccountId = finFinancialAccountId;
     objectAccountData[0].routingno = routingno;
     objectAccountData[0].language = "";
     return objectAccountData;
@@ -638,7 +638,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        UPDATE FIN_Financial_Account" +
-      "        SET AD_Org_ID = (?) , Name = (?) , C_Currency_ID = (?) , Type = (?) , Description = (?) , C_Location_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Isdefault = (?) , Currentbalance = TO_NUMBER(?) , Creditlimit = TO_NUMBER(?) , InitialBalance = TO_NUMBER(?) , FIN_Matching_Algorithm_ID = (?) , EM_Co_Numero_Cheque_Desde = TO_NUMBER(?) , EM_Co_Numero_Cheque_Hasta = TO_NUMBER(?) , EM_Co_Numero_Cheque_Ahora = TO_NUMBER(?) , GenericAccountNo = (?) , Iban = (?) , Swiftcode = (?) , INE_Number = (?) , C_Country_ID = (?) , BankFormat = (?) , Typewriteoff = (?) , Writeofflimit = TO_NUMBER(?) , EM_APRM_ImportBankFile = (?) , EM_APRM_MatchTransactions = (?) , EM_APRM_Reconcile = (?) , EM_APRM_AddTransactions = (?) , EM_Re_Addtransactions = (?) , em_dp_addtransactions = (?) , Codebank = (?) , Codebranch = (?) , Bank_Digitcontrol = (?) , Account_Digitcontrol = (?) , Codeaccount = (?) , Accountno = (?) , EM_Atecdp_Addtrs = (?) , EM_Atecdp_Reconcile = (?) , Fin_Financial_Account_ID = (?) , AD_Client_ID = (?) , Routingno = (?) , updated = now(), updatedby = ? " +
+      "        SET AD_Org_ID = (?) , Name = (?) , C_Currency_ID = (?) , Type = (?) , Description = (?) , C_Location_ID = (?) , C_Bpartner_ID = (?) , Isactive = (?) , Isdefault = (?) , Currentbalance = TO_NUMBER(?) , Creditlimit = TO_NUMBER(?) , InitialBalance = TO_NUMBER(?) , FIN_Matching_Algorithm_ID = (?) , EM_Co_Numero_Cheque_Desde = TO_NUMBER(?) , EM_Co_Numero_Cheque_Hasta = TO_NUMBER(?) , EM_Co_Numero_Cheque_Ahora = TO_NUMBER(?) , GenericAccountNo = (?) , Iban = (?) , Swiftcode = (?) , INE_Number = (?) , C_Country_ID = (?) , BankFormat = (?) , Typewriteoff = (?) , Writeofflimit = TO_NUMBER(?) , EM_APRM_ImportBankFile = (?) , EM_APRM_MatchTransactions = (?) , EM_APRM_Reconcile = (?) , EM_APRM_AddTransactions = (?) , EM_Re_Addtransactions = (?) , em_dp_addtransactions = (?) , Codebank = (?) , Codebranch = (?) , Bank_Digitcontrol = (?) , Account_Digitcontrol = (?) , Codeaccount = (?) , Accountno = (?) , EM_Atecdp_Addtrs = (?) , EM_Atecdp_Reconcile = (?) , AD_Client_ID = (?) , Fin_Financial_Account_ID = (?) , Routingno = (?) , updated = now(), updatedby = ? " +
       "        WHERE FIN_Financial_Account.Fin_Financial_Account_ID = ? " +
       "        AND FIN_Financial_Account.AD_Client_ID IN (";
     strSql = strSql + ((adUserClient==null || adUserClient.equals(""))?"":adUserClient);
@@ -693,8 +693,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpAddtrs);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpReconcile);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
@@ -724,7 +724,7 @@ Select for auxiliar field
     String strSql = "";
     strSql = strSql + 
       "        INSERT INTO FIN_Financial_Account " +
-      "        (AD_Org_ID, Name, C_Currency_ID, Type, Description, C_Location_ID, C_Bpartner_ID, Isactive, Isdefault, Currentbalance, Creditlimit, InitialBalance, FIN_Matching_Algorithm_ID, EM_Co_Numero_Cheque_Desde, EM_Co_Numero_Cheque_Hasta, EM_Co_Numero_Cheque_Ahora, GenericAccountNo, Iban, Swiftcode, INE_Number, C_Country_ID, BankFormat, Typewriteoff, Writeofflimit, EM_APRM_ImportBankFile, EM_APRM_MatchTransactions, EM_APRM_Reconcile, EM_APRM_AddTransactions, EM_Re_Addtransactions, em_dp_addtransactions, Codebank, Codebranch, Bank_Digitcontrol, Account_Digitcontrol, Codeaccount, Accountno, EM_Atecdp_Addtrs, EM_Atecdp_Reconcile, Fin_Financial_Account_ID, AD_Client_ID, Routingno, created, createdby, updated, updatedBy)" +
+      "        (AD_Org_ID, Name, C_Currency_ID, Type, Description, C_Location_ID, C_Bpartner_ID, Isactive, Isdefault, Currentbalance, Creditlimit, InitialBalance, FIN_Matching_Algorithm_ID, EM_Co_Numero_Cheque_Desde, EM_Co_Numero_Cheque_Hasta, EM_Co_Numero_Cheque_Ahora, GenericAccountNo, Iban, Swiftcode, INE_Number, C_Country_ID, BankFormat, Typewriteoff, Writeofflimit, EM_APRM_ImportBankFile, EM_APRM_MatchTransactions, EM_APRM_Reconcile, EM_APRM_AddTransactions, EM_Re_Addtransactions, em_dp_addtransactions, Codebank, Codebranch, Bank_Digitcontrol, Account_Digitcontrol, Codeaccount, Accountno, EM_Atecdp_Addtrs, EM_Atecdp_Reconcile, AD_Client_ID, Fin_Financial_Account_ID, Routingno, created, createdby, updated, updatedBy)" +
       "        VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), TO_NUMBER(?), TO_NUMBER(?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), TO_NUMBER(?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), now(), ?, now(), ?)";
 
     int updateCount = 0;
@@ -771,8 +771,8 @@ Select for auxiliar field
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, accountno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpAddtrs);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, emAtecdpReconcile);
-      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, adClientId);
+      iParameter++; UtilSql.setValue(st, iParameter, 12, null, finFinancialAccountId);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, routingno);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, createdby);
       iParameter++; UtilSql.setValue(st, iParameter, 12, null, updatedby);
