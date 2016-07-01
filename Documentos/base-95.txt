@@ -1,0 +1,1 @@
+ pg_restore  -c -h localhost -p 5432 -U postgres -d openbravo -v "/opt/backup/openbravo20160628.backup"
