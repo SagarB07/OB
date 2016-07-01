@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_ACTUALIZA_CAB_RUBRO">
+    <trigger name="NO_ACTUALIZA_CAB_RUBRO" table="NO_TIPO_ING_EGR_ACCT" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+	
+BEGIN
+	
+	IF UPDATING OR INSERTING  THEN 
+	--select now()
+		UPDATE no_tipo_ingreso_egreso SET updated = (select now())
+		WHERE no_tipo_ingreso_egreso_id = :NEW.no_tipo_ingreso_egreso_id;	
+	END IF;
+	
+ 	if :new.n_debe_acct is null and
+ 			:new.n_haber_acct is null then
+ 		raise '%', '@NE_RUB_LIN_DEB_HAB_VAL@';
+ 	end if;
+	
+	return new;
+	IF DELETING THEN RETURN OLD; 
+	ELSE RETURN NEW; END IF; 
+
+EXCEPTION
+    WHEN OTHERS THEN
+	raise EXCEPTION '%', SQLERRM;	
+
+END NO_ACTUALIZA_CAB_RUBRO
+]]></body>
+    </trigger>
+  </database>
