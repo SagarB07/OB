@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION NO_SUMA_REGISTRO_VAC">
+    <function name="NO_SUMA_REGISTRO_VAC" type="NUMERIC">
+      <parameter name="p_idcontrato" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_estado" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[BEGIN
+
+RETURN (
+SELECT SUM (EM_NE_TOTAL_DIAS) 
+FROM NO_VACACION 
+WHERE EM_NE_DOCSTATUS = P_ESTADO  
+AND NO_CONTRATO_EMPLEADO_ID = P_IDCONTRATO);
+END NO_SUMA_REGISTRO_VAC
+]]></body>
+    </function>
+  </database>
