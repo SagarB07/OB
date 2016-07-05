@@ -1,33 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rpt_No_Vacaciones" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="298"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="DOCSTATUS" class="java.lang.String"/>
 	<parameter name="DATE_FROM" class="java.lang.String"/>
 	<parameter name="DATE_TO" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT EMP.NAME AS NOMBRE_EMPLEADO,
-(case when VAC.EM_NE_DOCSTATUS= 'BR' THEN 'Borrador'
-when VAC.EM_NE_DOCSTATUS = 'PA' THEN 'Por Aprobación'
-when VAC.EM_NE_DOCSTATUS = 'RC' THEN 'Rechazada'
-when VAC.EM_NE_DOCSTATUS = 'AP' THEN 'Aprobada'
-when VAC.EM_NE_DOCSTATUS = 'PR' THEN 'Por Registrar'
-when VAC.EM_NE_DOCSTATUS = 'TM' THEN 'Tomada'
-when VAC.EM_NE_DOCSTATUS = 'CN' THEN 'Cancelada'
-ELSE 'OTROS'
-END) AS ESTADO_VACACION,
-SUM(VAC.EM_NE_TOTAL_DIAS)  AS DIAS
-FROM NO_VACACION VAC, NO_CONTRATO_EMPLEADO CEMP, C_BPARTNER EMP
-WHERE VAC.NO_CONTRATO_EMPLEADO_ID = CEMP.NO_CONTRATO_EMPLEADO_ID
-AND  CEMP.C_BPARTNER_ID = EMP.C_BPARTNER_ID
-AND  VAC.EM_NE_FECHA_INICIO > DATE($P{DATE_FROM}) AND VAC.EM_NE_FECHA_FIN < DATE ($P{DATE_TO})
-AND VAC.EM_NE_DOCSTATUS = $P{DOCSTATUS}
-GROUP BY 1,2]]>
+		<![CDATA[SELECT
+CE.NO_CONTRATO_EMPLEADO_ID AS IDCONTRATO,
+EM.TAXID AS CI,
+EM.NAME AS COLABORADOR,
+AR.nombre AS AREA,
+TCON.NAME AS TIPO_CONTRATO,
+CE.DOCUMENTNO AS NUMERO_CONTRATO,
+CE.FECHA_INICIO AS FECHA_INICIO,
+CE.FECHA_FIN AS FECHA_FIN,
+NO_CONTEO_REGISTRO_VAC (CE.NO_CONTRATO_EMPLEADO_ID, 'BR') AS PREPLAN_LIN,
+NO_SUMA_REGISTRO_VAC (CE.NO_CONTRATO_EMPLEADO_ID, 'BR') AS PREPLAN_SUMA,
+NO_CONTEO_REGISTRO_VAC (CE.NO_CONTRATO_EMPLEADO_ID, 'AP') AS APRPLAN_LIN,
+NO_SUMA_REGISTRO_VAC (CE.NO_CONTRATO_EMPLEADO_ID, 'AP') AS APRPLAN_SUMA,
+NO_CONTEO_REGISTRO_VAC (CE.NO_CONTRATO_EMPLEADO_ID, 'PA') AS PAPRPLAN_LIN,
+NO_SUMA_REGISTRO_VAC (CE.NO_CONTRATO_EMPLEADO_ID, 'PA') AS PAPRLAN_SUMA,
+CE.EM_NE_VACACION_PROP AS DIAS_GANADOS,
+CE.EM_NE_VACACION_TOM AS DIAS_TOMADOS,
+CE.EM_NE_VACACION_PROP - CE.EM_NE_VACACION_TOM AS VAC_RESTANTES
+FROM C_BPARTNER EM,
+NO_VACACION VAC,
+NO_CONTRATO_EMPLEADO CE,
+NO_AREA_EMPRESA AR,
+C_DOCTYPE TCON
+WHERE
+VAC.NO_CONTRATO_EMPLEADO_ID = CE.NO_CONTRATO_EMPLEADO_ID
+AND CE.C_DOCTYPE_ID = TCON.C_DOCTYPE_ID
+AND EM.C_BPARTNER_ID = CE.C_BPARTNER_ID
+AND AR.NO_AREA_EMPRESA_ID = CE.em_ne_area_empresa_id
+AND CE.DOCSTATUS = 'CO'
+GROUP BY CI,COLABORADOR,AREA,
+NUMERO_CONTRATO, FECHA_INICIO, FECHA_FIN,
+PREPLAN_LIN, PREPLAN_SUMA,APRPLAN_LIN , APRPLAN_SUMA,
+DIAS_GANADOS,DIAS_TOMADOS, VAC_RESTANTES,TCON.NAME,ce.no_contrato_empleado_id, IDCONTRATO]]>
 	</queryString>
-	<field name="nombre_empleado" class="java.lang.String"/>
-	<field name="estado_vacacion" class="java.lang.String"/>
-	<field name="dias" class="java.math.BigDecimal"/>
+	<field name="idcontrato" class="java.lang.String"/>
+	<field name="ci" class="java.lang.String"/>
+	<field name="colaborador" class="java.lang.String"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="tipo_contrato" class="java.lang.String"/>
+	<field name="numero_contrato" class="java.lang.String"/>
+	<field name="fecha_inicio" class="java.sql.Timestamp"/>
+	<field name="fecha_fin" class="java.sql.Timestamp"/>
+	<field name="preplan_lin" class="java.math.BigDecimal"/>
+	<field name="preplan_suma" class="java.math.BigDecimal"/>
+	<field name="aprplan_lin" class="java.math.BigDecimal"/>
+	<field name="aprplan_suma" class="java.math.BigDecimal"/>
+	<field name="paprplan_lin" class="java.math.BigDecimal"/>
+	<field name="paprlan_suma" class="java.math.BigDecimal"/>
+	<field name="dias_ganados" class="java.math.BigDecimal"/>
+	<field name="dias_tomados" class="java.math.BigDecimal"/>
+	<field name="vac_restantes" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -35,79 +65,177 @@ GROUP BY 1,2]]>
 		<band height="51" splitType="Stretch">
 			<staticText>
 				<reportElement x="190" y="5" width="334" height="35"/>
-				<textElement textAlignment="Right">
-					<font size="20"/>
+				<textElement>
+					<font size="10"/>
 				</textElement>
-				<text><![CDATA[REPORTE DE VACACIONES]]></text>
+				<text><![CDATA[REPORTE RESUMIDO DE VACACIONES]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="16" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="221" height="20"/>
+				<reportElement x="0" y="0" width="42" height="10"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="5"/>
 				</textElement>
-				<text><![CDATA[NOMBRE DEL EMPLEADO]]></text>
+				<text><![CDATA[CI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="221" y="0" width="74" height="20"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
+				<reportElement x="42" y="0" width="63" height="10"/>
+				<textElement>
+					<font size="5"/>
 				</textElement>
-				<text><![CDATA[FECHA INICIO]]></text>
+				<text><![CDATA[colaborador]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="295" y="0" width="60" height="20"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
+				<reportElement x="105" y="0" width="68" height="10"/>
+				<textElement>
+					<font size="5"/>
 				</textElement>
-				<text><![CDATA[FECHA FIN]]></text>
+				<text><![CDATA[area]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
+				<reportElement x="173" y="0" width="48" height="10"/>
+				<textElement>
+					<font size="5"/>
 				</textElement>
-				<text><![CDATA[DIAS]]></text>
+				<text><![CDATA[tipo_contrato]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
+				<reportElement x="221" y="0" width="27" height="10"/>
+				<textElement>
+					<font size="5"/>
 				</textElement>
-				<text><![CDATA[ESTADO]]></text>
+				<text><![CDATA[numero_contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="0" width="52" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[fecha_inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="58" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[fecha_fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="0" width="28" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Nº REG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="0" width="28" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Nº DIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="28" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Nº REG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="0" width="28" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Nº DIAS]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="10" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="221" height="20"/>
+				<reportElement x="0" y="0" width="42" height="10"/>
 				<textElement>
-					<font size="8"/>
+					<font size="5"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_empleado}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ci}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="355" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
+				<reportElement x="42" y="0" width="63" height="10"/>
+				<textElement>
+					<font size="5"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{dias}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{colaborador}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="0" width="100" height="20"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
+				<reportElement x="105" y="0" width="68" height="10"/>
+				<textElement>
+					<font size="5"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{estado_vacacion}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="0" width="48" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_contrato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="0" width="27" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numero_contrato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="52" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="58" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="0" width="28" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{preplan_lin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="0" width="28" height="10"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{preplan_suma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="28" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{aprplan_lin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="0" width="28" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{aprplan_suma}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="40" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
