@@ -129,6 +129,13 @@ BEGIN
     --    raise exception '%', V_TIPODOC;
         IF exists (select* from no_rol_pago_provision rocab where rocab.c_doctype_id = V_TIPODOC AND ISPAGO = 'Y' ) THEN 
 
+	IF (
+	SELECT COUNT(*)> 0 
+	FROM no_rol_pago_provision WHERE ISPAGO = 'Y'
+		AND DOCSTATUS = 'CO'				
+		AND C_PERIOD_ID = V_PERIODO  
+
+	) THEN 
 		FOR ITERADOR IN 
 			(
 				SELECT C_BPARTNER_ID, 
@@ -181,34 +188,83 @@ BEGIN
 			);
 		
  			END LOOP;
+ 			v_Message:='@EjecucionCorrecta@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 1, v_Message);
+		ELSE 
+				v_Message:='@NO_ADV_GENERAROL@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 2, v_Message);
+		
+
+		END IF;
 
         
         END IF;
 
-		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_TIPODOC ; 
-		--CODIGO QUEMADO PAGO DECIMO CUARTO
+
+--CODIGO QUEMADO PAGO DECIMO CUARTO
         IF V_TIPODOC = '95F21C0F9E704ACAB95D35B387392A83' THEN 
+      
+        IF (
+		SELECT COUNT (*) > 0
+		FROM no_rol_pago_provision CAB
+		WHERE CAB.no_rol_pago_provision_ID 
+		IN (SELECT no_rol_pago_provision_ID 
+			FROM no_rol_pago_provision_line 
+				WHERE  no_rol_pago_provision_line_ID IN
+							(
+							SELECT no_rol_pago_provision_line_ID 
+							FROM no_rol_provision_line_mes 
+							WHERE VALOR >0
+							AND DOCSTATUS = 'CO'
+							AND C_PERIOD_ID = V_PERIODO
+							) 
+						AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_CUARTO	
+						) 
+				AND ISPAGO = 'N'
+				AND ISACTIVE = 'Y'
+				
+	   ) THEN 
 
 		FOR ITERADOR IN (
 				SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID FROM no_rol_pago_provision CAB
 				WHERE CAB.no_rol_pago_provision_ID 
-				IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
-				(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
-					AND ISPAGO = 'N'
-					AND ISACTIVE = 'Y'
+				IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line 
+					WHERE  no_rol_pago_provision_line_ID IN
+						(	SELECT no_rol_pago_provision_line_ID 
+							FROM no_rol_provision_line_mes 
+							WHERE VALOR >0
+							AND DOCSTATUS = 'CO'
+							AND C_PERIOD_ID = V_PERIODO
+							) 
+							AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_CUARTO
+						) 
+						AND ISPAGO = 'N'
+						AND ISACTIVE = 'Y'
+						
 				)
 				LOOP
 
 			--	UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ||'PERIODO' || ITERADOR.no_rol_pago_provision_ID ;
 
-						SELECT VALOR,DOCUMENTNO INTO V_VALOR, V_DOCUMENTNO
+						SELECT 
+						VALOR,DOCUMENTNO 
+						INTO V_VALOR, V_DOCUMENTNO
 						FROM no_rol_provision_line_mes 
-						WHERE no_rol_pago_provision_line_ID IN (SELECT no_rol_pago_provision_line_ID FROM no_rol_pago_provision_line 
+						WHERE no_rol_pago_provision_line_ID IN 
+						(
+						SELECT no_rol_pago_provision_line_ID 
+						FROM no_rol_pago_provision_line 
 						WHERE no_rol_pago_provision_ID = ITERADOR.no_rol_pago_provision_ID
-						AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_CUARTO)
+						AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_CUARTO
+						)
 						AND C_PERIOD_ID = V_PERIODO;
 
+						--raise exception '%', V_PERIODO;
+
 						IF V_VALOR IS NOT NULL OR V_VALOR > 0 THEN 
+						
 						if (select count(*) from no_pago_line 
 							    where no_pago_cabecera_id = v_no_pago_cabecera_id 
 							    and c_bpartner_id = ITERADOR.C_BPARTNER_ID
@@ -248,42 +304,77 @@ BEGIN
 						v_table_id
 						);
 						END IF;	
-					END IF;			
-				
+					END IF;					
 				END LOOP;     
+				v_Message:='@EjecucionCorrecta@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 1, v_Message);
+		ELSE 
+				v_Message:='@NO_AD_GENVALUE_DECIMOS@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 2, v_Message);
+		
+
+		END IF;
         
         END IF;
 		
 		
 		--CODIGO QUEMADO DECIMO TERCERO
-        IF V_TIPODOC = 'D58E93594DEC47239C0D666437AF52E6' THEN 
+ IF V_TIPODOC = 'D58E93594DEC47239C0D666437AF52E6' THEN 
    	IF (
+
 		SELECT COUNT (*) > 0
 		FROM no_rol_pago_provision CAB
 		WHERE CAB.no_rol_pago_provision_ID 
-		IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
-		(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
-		AND ISPAGO = 'N'
-		AND ISACTIVE = 'Y'
+		IN (SELECT no_rol_pago_provision_ID 
+			FROM no_rol_pago_provision_line 
+				WHERE  no_rol_pago_provision_line_ID IN
+							(
+							SELECT no_rol_pago_provision_line_ID 
+							FROM no_rol_provision_line_mes 
+							WHERE VALOR >0
+							AND DOCSTATUS = 'CO'
+							AND C_PERIOD_ID = V_PERIODO
+							) 
+						AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_TERCERO	
+						) 
+				AND ISPAGO = 'N'
+				AND ISACTIVE = 'Y'
+ 	
+
 	   ) THEN 
 
 		FOR ITERADOR IN (
 					SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID 
 					FROM no_rol_pago_provision CAB
 					WHERE CAB.no_rol_pago_provision_ID 
-					IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
-					(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
-					AND ISPAGO = 'N'
-					AND ISACTIVE = 'Y'
+					IN (SELECT no_rol_pago_provision_ID 
+						FROM no_rol_pago_provision_line 
+						WHERE  no_rol_pago_provision_line_ID IN
+							(
+							SELECT no_rol_pago_provision_line_ID 
+							FROM no_rol_provision_line_mes 
+							WHERE VALOR >0
+							AND DOCSTATUS = 'CO'
+							AND C_PERIOD_ID = V_PERIODO
+							) 
+						AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_TERCERO	
+						) 
+						AND ISPAGO = 'N'
+						AND ISACTIVE = 'Y'
 				)
 				LOOP
 
 
 						SELECT VALOR,DOCUMENTNO INTO V_VALOR, V_DOCUMENTNO
 						FROM no_rol_provision_line_mes 
-						WHERE no_rol_pago_provision_line_ID IN (SELECT no_rol_pago_provision_line_ID FROM no_rol_pago_provision_line 
-						WHERE no_rol_pago_provision_ID = ITERADOR.no_rol_pago_provision_ID
-						AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_TERCERO)
+						WHERE no_rol_pago_provision_line_ID IN 
+							(SELECT no_rol_pago_provision_line_ID 
+							FROM no_rol_pago_provision_line 
+							WHERE no_rol_pago_provision_ID = ITERADOR.no_rol_pago_provision_ID
+							AND NO_TIPO_INGRESO_EGRESO_ID = V_ID_DECIMO_TERCERO
+							)
 						AND C_PERIOD_ID = V_PERIODO;
 
 						IF V_VALOR IS NOT NULL OR V_VALOR > 0 THEN 
@@ -335,7 +426,7 @@ BEGIN
 				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
 				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 1, v_Message);
 		ELSE 
-				v_Message:='@NO_ADV_GENPAGONOMINA@';
+				v_Message:='@NO_AD_GENVALUE_DECIMOS@';
 				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
 				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 2, v_Message);
 		
