@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_SECUENCIAL_QUINCENA">
+    <trigger name="NO_SECUENCIAL_QUINCENA" table="NO_REGISTRA_QUINC_LINE" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[V_DOCUMENTNO varchar(32);
+
+BEGIN
+    
+
+    IF ( INSERTING) THEN
+ 
+	V_DOCUMENTNO = ad_sequence_doctype('6D499364A8AB4B6FB0FE094B3C21A3CE', '3E02303ABC1E41138D1D1C5EEE96E843', 'Y');
+        
+	:NEW.DOCUMENTNO = V_DOCUMENTNO;
+
+    
+        RETURN NEW;
+    
+    END IF;
+
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_SECUENCIAL_QUINCENA
+]]></body>
+    </trigger>
+  </database>

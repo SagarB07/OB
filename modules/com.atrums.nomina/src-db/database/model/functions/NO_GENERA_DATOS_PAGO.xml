@@ -40,6 +40,7 @@ BEGIN
 
     V_ID_DECIMO_TERCERO = 'B1E1B09BFBD54A99A8E1E6FF2A91DB9D';
     V_ID_DECIMO_CUARTO = '73986DBC43E34F25B67766C6409E213F';
+    V_TIPODOCQUIN = '6D499364A8AB4B6FB0FE094B3C21A3CE';
 	
     DBMS_OUTPUT.PUT_LINE('Updating PInstance - Processing ' || p_PInstance_ID);
     v_ResultStr:='PInstanceNotFound';
@@ -69,54 +70,54 @@ BEGIN
             v_ParameterName:=Cur_Parameter.ParameterName;
         END LOOP;
 
-	
-
-	SELECT c_doctype_ID INTO  V_TIPODOCQUIN   from c_doctype where c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
-	--DELETE FROM c_doctype WHERE c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
-	IF V_TIPODOCQUIN IS NULL THEN
-		insert into c_doctype 
-		(c_doctype_id,
-		ad_client_id, 
-		ad_org_id, 
-		isactive, 
-		created, 
-		createdby, 
-		updated, 
-		updatedby, 
-		name,
-		printname, 
-		docbasetype,
-		gl_category_id,
-		ad_table_id,
-		DOCUMENTCOPIES, 
-		ISSOTRX,
-		ISDEFAULT 
-		) 
-		values
-		(
-		'77F21C0F9E704ACAB95D35B387392A83',
-		v_Client_ID,
-		v_Org_ID,
-		'Y',
-		'now()',
-		v_User_ID,
-		'now()',
-		v_User_ID,
-		'Pago Quincenas',
-		'Pago Quincenas',
-		'NO_AV',
-		'FC670B83E59C4E7CBD6B999D3F28B251',
-		'3FB45DB988114CF8B1F85E8453DDF3A0',
-		1,
-		'N',
-		'N'
-		);
-	END IF;
+	-- delete  from c_doctype where c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
+-- 
+-- 	SELECT c_doctype_ID INTO  V_TIPODOCQUIN   from c_doctype where c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
+-- 	--DELETE FROM c_doctype WHERE c_doctype_id  = '77F21C0F9E704ACAB95D35B387392A83';
+-- 	IF V_TIPODOCQUIN IS NULL THEN
+-- 		insert into c_doctype 
+-- 		(c_doctype_id,
+-- 		ad_client_id, 
+-- 		ad_org_id, 
+-- 		isactive, 
+-- 		created, 
+-- 		createdby, 
+-- 		updated, 
+-- 		updatedby, 
+-- 		name,
+-- 		printname, 
+-- 		docbasetype,
+-- 		gl_category_id,
+-- 		ad_table_id,
+-- 		DOCUMENTCOPIES, 
+-- 		ISSOTRX,
+-- 		ISDEFAULT 
+-- 		) 
+-- 		values
+-- 		(
+-- 		'77F21C0F9E704ACAB95D35B387392A83',
+-- 		v_Client_ID,
+-- 		v_Org_ID,
+-- 		'Y',
+-- 		'now()',
+-- 		v_User_ID,
+-- 		'now()',
+-- 		v_User_ID,
+-- 		'Pago Quincenas',
+-- 		'Pago Quincenas',
+-- 		'NO_AV',
+-- 		'FC670B83E59C4E7CBD6B999D3F28B251',
+-- 		'3FB45DB988114CF8B1F85E8453DDF3A0',
+-- 		1,
+-- 		'N',
+-- 		'N'
+-- 		);
+-- 	END IF;
 
 
 		
 		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = v_no_pago_cabecera_id;
-
+	
         select 
         c_doctype_id, 
         c_period_id 
@@ -124,10 +125,11 @@ BEGIN
             V_PERIODO
         from no_pago_cabecera  
         where no_pago_cabecera_id = v_no_pago_cabecera_id;
+
+    --    raise exception '%', V_TIPODOC;
         IF exists (select* from no_rol_pago_provision rocab where rocab.c_doctype_id = V_TIPODOC AND ISPAGO = 'Y' ) THEN 
-		
-	--	UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ;
-			FOR ITERADOR IN 
+
+		FOR ITERADOR IN 
 			(
 				SELECT C_BPARTNER_ID, 
 				       (select t.tablename from ad_table t 
@@ -179,6 +181,7 @@ BEGIN
 			);
 		
  			END LOOP;
+
         
         END IF;
 
@@ -254,13 +257,19 @@ BEGIN
 		
 		--CODIGO QUEMADO DECIMO TERCERO
         IF V_TIPODOC = 'D58E93594DEC47239C0D666437AF52E6' THEN 
+   	IF (
+		SELECT COUNT (*) > 0
+		FROM no_rol_pago_provision CAB
+		WHERE CAB.no_rol_pago_provision_ID 
+		IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
+		(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
+		AND ISPAGO = 'N'
+		AND ISACTIVE = 'Y'
+	   ) THEN 
 
-        --SELECT I_ERRORMSG FROM IDT_CONTRATO
-        --UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'PAGO78';
-		UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'PAGO DECIMO TERCERO';
-				
-				FOR ITERADOR IN (
-					SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID FROM no_rol_pago_provision CAB
+		FOR ITERADOR IN (
+					SELECT CAB.no_rol_pago_provision_ID , CAB.C_BPARTNER_ID 
+					FROM no_rol_pago_provision CAB
 					WHERE CAB.no_rol_pago_provision_ID 
 					IN (SELECT no_rol_pago_provision_ID FROM no_rol_pago_provision_line WHERE  no_rol_pago_provision_line_ID IN
 					(SELECT no_rol_pago_provision_line_ID FROM no_rol_provision_line_mes WHERE VALOR >0) ) 
@@ -269,10 +278,7 @@ BEGIN
 				)
 				LOOP
 
-														
----- SELECT * FROM no_rol_provision_line_mes WHERE DOCUMENTNO = 
----- SELECT DOCUMENTNO FROM no_pago_line 
----- UPDATE  IDT_CONTRATO SET I_ERRORMSG = V_PERIODO ||'PERIODO' || ITERADOR.no_rol_pago_provision_ID ;
+
 						SELECT VALOR,DOCUMENTNO INTO V_VALOR, V_DOCUMENTNO
 						FROM no_rol_provision_line_mes 
 						WHERE no_rol_pago_provision_line_ID IN (SELECT no_rol_pago_provision_line_ID FROM no_rol_pago_provision_line 
@@ -325,13 +331,29 @@ BEGIN
 				
 				
 				END LOOP;
+				v_Message:='@EjecucionCorrecta@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 1, v_Message);
+		ELSE 
+				v_Message:='@NO_ADV_GENPAGONOMINA@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 2, v_Message);
+		
+
+		END IF;
         
         END IF;
 
-	-- CODIGO QUEMADO QUINCENAS
+
         IF V_TIPODOC = V_TIPODOCQUIN THEN 
-		--UPDATE  IDT_CONTRATO SET I_ERRORMSG = 'QUINCENAS';
-		--SELECT * FROM no_registra_quinc_line DET
+   	IF (
+		SELECT COUNT (*) > 0
+		FROM no_registra_quinc_line DET, no_registra_quincena CAB  
+		WHERE CAB.no_registra_quincena_ID = DET.no_registra_quincena_ID
+		AND DOCSTATUS = 'CO'
+		AND CAB.C_PERIOD_ID = V_PERIODO
+	   ) THEN 
+
 				FOR ITERADOR IN 
 				(
 					SELECT DET.C_BPARTNER_ID,
@@ -371,7 +393,8 @@ BEGIN
 							documentno,
 							valor,
 							estado,
-							record_id)
+							record_id
+							)
 					VALUES (
 					get_uuid(),
 					v_Client_ID,
@@ -392,10 +415,22 @@ BEGIN
 
 					end if ;
 				END LOOP;
+				v_Message:='@EjecucionCorrecta@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 1, v_Message);
+			--	raise exception '%', '44';
+		ELSE
+--raise exception '%', '44';
+				v_Message:='@NO_ADV_GENPAGONOMINA@';
+				DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
+				AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 2, v_Message);
+						
+		END IF;
         END IF;
-        v_Message:='@EjecucionCorrecta@';
-        DBMS_OUTPUT.PUT_LINE('Updating PInstance - Finished - ' || v_Message);
-        AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', v_Result, v_Message);
+        
+        
+        --RAISE NOTICE '%','Updating PInstance - Finished - ' || v_Message;
+        --PERFORM AD_UPDATE_PINSTANCE(p_PInstance_ID, v_User_ID, 'Y', 2, v_Message);
         RETURN;
 		
 	END;
@@ -403,8 +438,9 @@ BEGIN
     WHEN OTHERS THEN
         v_ResultStr:= '@ERROR=' || SQLERRM;
         DBMS_OUTPUT.PUT_LINE(v_ResultStr) ;
-                AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
-                 UPDATE  IDT_CONTRATO SET I_ERRORMSG = v_ResultStr;
+        AD_UPDATE_PINSTANCE(p_PInstance_ID, NULL, 'N', 0, v_ResultStr);
+        raise exception '%', v_ResultStr;
+                
         RETURN;
 END NO_GENERA_DATOS_PAGO
 ]]></body>
