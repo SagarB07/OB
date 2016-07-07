@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+<SqlClass name="NOObtenerCuentasData" package="com.atrums.nomina.ad_callouts">
+<!--not used anymore -->
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+		SELECT N_DEBE_ACCT, 
+		N_HABER_ACCT 
+		FROM no_tipo_ing_egr_acct
+		WHERE 
+		NO_TIPO_INGRESO_EGRESO_ID = ?		    
+      ]]>
+    </Sql>
+    <Parameter name="noTipoIngresoEgresoId"/> 
+  </SqlMethod>
+</SqlClass>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*************************************************************************
+* EL CONTENIDO DE ESTE ARCHIVO ES PROPIEDAD INTELECTUAL DE ATRUMS-IT Y ESTA
+* SUJETA A LA LICENCIA: MOZILLA   PUBLIC  LICENSE
+**************************************************************************
+-->
+
+<SqlClass name="NOImportaAreaData" package="com.atrums.nomina.ad_callouts">
+
+<!--not used anymore -->
+  <SqlMethod name="obtenerArea" type="preparedStatement" return="string">
+    <SqlMethodComment></SqlMethodComment>
+    <Sql>
+      <![CDATA[
+		SELECT em_no_area_empresa_id 
+		FROM C_BPARTNER
+		WHERE 
+		c_bpartner_id=?		    
+      ]]>
+    </Sql>
+    <Parameter name="cBpartnerId"/> 
+	
+  </SqlMethod>
+</SqlClass>

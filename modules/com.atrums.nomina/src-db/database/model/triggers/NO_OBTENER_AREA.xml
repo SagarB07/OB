@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER NO_OBTENER_AREA">
+    <trigger name="NO_OBTENER_AREA" table="NO_CONTRATO_EMPLEADO" fires="before" insert="true" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+V_AREA 	varchar(32);	  
+BEGIN
+    
+    IF ( INSERTING ) THEN
+      SELECT em_no_area_empresa_id INTO V_AREA
+      FROM C_BPARTNER
+      WHERE C_BPARTNER_ID = :NEW.C_BPARTNER_ID;
+      
+      :NEW.DOCSTATUS= 'BR';
+      :NEW.EM_NE_AREA_EMPRESA_ID = V_AREA;
+
+      RETURN NEW;
+    END IF;
+
+
+    IF ( UPDATING ) THEN
+      SELECT em_no_area_empresa_id INTO V_AREA
+      FROM C_BPARTNER
+      WHERE C_BPARTNER_ID = :NEW.C_BPARTNER_ID;      
+      :NEW.EM_NE_AREA_EMPRESA_ID = V_AREA;
+      RETURN NEW;
+    END IF;
+
+    
+    ---SELECT * FROM NO_CONTRATO_EMPLEADO
+    IF DELETING THEN 
+        RETURN OLD; 
+    ELSE 
+        RETURN NEW; 
+    END IF; 
+
+END NO_OBTENER_AREA
+]]></body>
+    </trigger>
+  </database>
